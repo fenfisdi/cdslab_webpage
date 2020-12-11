@@ -1,2 +1,2 @@
-# cdslab_desktop
-Desktop development of Contagious Disease Simulation - Laboratory
+# CDSLab
+Development of Contagious Disease Simulation - Laboratory
