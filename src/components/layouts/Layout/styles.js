@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { primary } from '../../../styles/constants'
 
 export const MainContainer = styled.div`
   max-width: 960px;

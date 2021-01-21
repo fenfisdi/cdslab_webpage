@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { MiniLoader } from '../MiniLoader'
-import { useInputValue } from '../Forms/Input/useInputValue'
-import { Input } from '../Forms/Input'
+import { MiniLoader } from '../layouts/MiniLoader'
+import { useInputValue } from '../ui/Input/useInputValue'
+import { Input } from '../ui/Input'
 import { LoginError, FormWrapper, LoginButton, Title, LoadingMessage } from './styles'
 import { VALIDATORS_LOGIN_FORM } from './validators'
 

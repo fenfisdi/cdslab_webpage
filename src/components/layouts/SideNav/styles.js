@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import { primary, secondary } from '../../styles/constants'
+import { primary, secondary } from '../../../styles/constants'
 const activeClassName = 'nav-item-active'
 export const SideNaveContainer = styled.nav`
   display: inline-block;
@@ -14,6 +14,7 @@ export const Menu = styled.div`
 export const ItemLink = styled(NavLink).attrs({ activeClassName })`
   padding: 10px 5px;
   color: ${primary};
+  font-weight: bold;
    &.${activeClassName} {
     color: white;
     background: ${primary}

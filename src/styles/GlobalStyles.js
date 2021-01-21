@@ -56,12 +56,4 @@ export const GlobalStyles = createGlobalStyle`
         .align-center{
            text-align: center;     
         }
-        .biometric-camera{
-                transform: scale(0.5);
-                position: fixed;
-                top: -80px;
-                left: -200px;
-                width: 700px;
-                height: 400px;
-        }
         `
