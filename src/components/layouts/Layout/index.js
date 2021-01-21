@@ -6,14 +6,14 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { ItemLink, Menu } from '../SideNav/styles'
-import { MainContainer } from './styles'
+import { ChildrenContainer, MainContainer } from './styles'
 import Header from '../Header'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <ChildrenContainer
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
@@ -25,7 +25,7 @@ function TabPanel(props) {
           <Typography>{children}</Typography>
         </Box>
       )}
-    </div>
+    </ChildrenContainer>
   );
 }
 

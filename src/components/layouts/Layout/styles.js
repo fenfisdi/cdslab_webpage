@@ -10,4 +10,5 @@ export const MainContainer = styled.div`
 export const ChildrenContainer = styled.div`
   display: inline-block;
   padding-left: 20px;
+  width: 100%;
 `
