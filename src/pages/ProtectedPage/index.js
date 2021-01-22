@@ -3,6 +3,7 @@ import { LoginButton } from '../../components/LoginForm/styles'
 import { useStore } from '../../store/storeContext'
 import { useAuthActions } from '../../actions/authActions'
 import { Wrapper } from './styles'
+import { Button } from '@material-ui/core'
 
 export const ProtectedPage = () => {
   const {
@@ -23,7 +24,7 @@ export const ProtectedPage = () => {
   return (
     <Wrapper>
       <p>Hi {user.username}, you are in protected Page</p>
-      <LoginButton onClick={handleClick}>Logout</LoginButton>
+      <Button onClick={handleClick}>Logout</Button>
     </Wrapper>
   )
 }

@@ -1,46 +1,25 @@
-import React, { useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { useStore } from '../../store/storeContext'
-import { useAuthActions } from '../../actions/authActions'
+import React from 'react'
+import Grid from '@material-ui/core/Grid'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Paper from '@material-ui/core/Paper'
+import { useLoginState } from './state'
+import { useLoginStyles } from './styles'
 import { LoginForm } from '../../components/LoginForm'
+import theme from '../../styles/theme'
 
 export const LoginPage = () => {
-  const {
-    state: {
-      auth: { isAuth, loading, error }
-    },
-    dispatch
-  } = useStore()
-  const { login } = useAuthActions(dispatch)
-  const history = useHistory()
-  const location = useLocation()
-  const { from } = location.state || { from: { pathname: '/protected' } }
-  const redirectLogin = () => {
-    history.replace(from)
-  }
-
-  useEffect(() => {
-    // Is authenticated redirect to /protected
-    if (isAuth) {
-      redirectLogin()
-    }
-  }, [isAuth])
-
-  const handleSubmit = (dataForm) => {
-    login({
-      username: dataForm.username,
-      password: dataForm.password
-    })
-  }
+  const { loading, error, handleSubmit, title } = useLoginState();
+  const classes = useLoginStyles(theme);
 
   return (
-    <>
-      <LoginForm
-        onSubmit={handleSubmit}
-        title='Login'
-        loading={loading}
-        error={error}
-      />
-    </>
-  )
+    <Grid container component="main" className={classes.root}>
+    <CssBaseline />
+    <Grid item xs={false} sm={4} md={7} className={classes.image} />
+    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <div className={classes.paper}>
+        <LoginForm onSubmit={handleSubmit} title={title} loading={loading} error={error} />
+      </div>
+    </Grid>
+  </Grid>
+)
 }

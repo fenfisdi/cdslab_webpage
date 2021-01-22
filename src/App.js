@@ -12,6 +12,7 @@ import InfectionDiseasesStatesPage from './pages/InfectionDiseasesStatesPage'
 import StatesTransitionsPage from './pages/StatesTransitionsPage'
 import RisksSettingsPage from './pages/RisksSettingsPage'
 import SimulationsPage from './pages/SimulationsPage'
+import Dashboard from './components/layouts/Dashboard'
 
 const App = () => {
   const {
@@ -32,7 +33,7 @@ const App = () => {
         {...rest}
         render={({ location }) =>
           isAuth ? (
-            children
+            <Dashboard> {children} </Dashboard>
           ) : (
             <Redirect
               to={{
@@ -55,9 +56,14 @@ const App = () => {
           <Route exact path='/infection_diseases_states' component={InfectionDiseasesStatesPage} />
           <Route exact path='/states_transitions' component={StatesTransitionsPage} />
           <Route exact path='/risks_settings' component={RisksSettingsPage} />
-          <Route exact path='/simulations' component={SimulationsPage} />
           <PrivateRoute path='/protected'>
             <ProtectedPage />
+          </PrivateRoute>
+          <PrivateRoute path='/protected'>
+            <ProtectedPage />
+          </PrivateRoute>
+          <PrivateRoute path='/simulations'>
+            <SimulationsPage />
           </PrivateRoute>
           <Route component={NotFoundPage} />
         </Switch>

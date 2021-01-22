@@ -1,24 +1,6 @@
 import styled from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles'
 
-export const FormWrapper = styled.div`
-  padding: 16px 0;
-  max-width: 350px;
-  width: 100%;
-  margin: 0 auto;
-`
-export const LoginButton = styled.button`
-  background: #6c9a06;
-  border-radius: 3px;
-  color: #fff;
-  height: 32px;
-  width: 100%;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  &[disabled] {
-    opacity: 0.3;
-  }
-`
 export const Title = styled.h2`
   font-size: 16px;
   font-weight: 500;
@@ -28,8 +10,7 @@ export const Title = styled.h2`
 `
 export const LoginError = styled.div`
   font-size: 0.8em;
-    color: white;
-    position: absolute;
+    color: red;
     background: #f15a5a;
     padding: 10px 20px;
     text-align: center;
@@ -47,3 +28,16 @@ export const LoadingMessage = styled.div`
    color: #ececec;
   font-style: italic;
 `
+export const useLoginFormStyles = makeStyles((theme) => ({
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
