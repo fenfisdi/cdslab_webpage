@@ -1,6 +1,6 @@
 import { useStore } from '../../store/storeContext'
 import { useAuthActions } from '../../actions/authActions'
-//import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export const useLoginState = () => {
@@ -11,18 +11,18 @@ export const useLoginState = () => {
     dispatch
   } = useStore()
   const { login } = useAuthActions(dispatch)
- // const history = useHistory()
-  //const location = useLocation()
+ const history = useHistory()
+  const location = useLocation()
   const [title, setTitle] = useState('Sign in')
-  const { from } = location.state || { from: { pathname: '/protected' } }
-  const redirectLogin = () => {
-    //history.replace(from)
+  const { from } = location.state || { from: { pathname: '/simulations' } }
+  const redirectSimulations = () => {
+    history.replace(from)
   }
 
   useEffect(() => {
-    // Is authenticated redirect to /protected
+    // Is authenticated redirect to /simulations
     if (isAuth) {
-      redirectLogin()
+      redirectSimulations()
     }
   }, [isAuth])
 

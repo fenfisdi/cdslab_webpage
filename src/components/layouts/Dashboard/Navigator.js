@@ -23,20 +23,18 @@ const categories = [
   {
     id: 'Develop',
     children: [
-      { id: 'Authentication', icon: <PeopleIcon />, active: true },
-      { id: 'Database', icon: <DnsRoundedIcon /> },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Hosting', icon: <PublicIcon /> },
-      { id: 'Functions', icon: <SettingsEthernetIcon /> },
-      { id: 'ML Kit', icon: <SettingsInputComponentIcon /> },
+      { id: 'Simulations', icon: <SettingsIcon />, active: true },
+      { id: 'Simulation Settings', icon: <DnsRoundedIcon /> },
+      { id: 'Infection Settings', icon: <PermMediaOutlinedIcon /> },
+      { id: 'Parameterization', icon: <PublicIcon /> },
     ],
   },
   {
-    id: 'Quality',
+    id: 'Profile',
     children: [
-      { id: 'Analytics', icon: <SettingsIcon /> },
-      { id: 'Performance', icon: <TimerIcon /> },
-      { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
+      { id: 'My account', icon: <PeopleIcon />},
+      { id: 'Billing', icon: <TimerIcon /> },
+      { id: 'Change password', icon: <PhonelinkSetupIcon /> },
     ],
   },
 ];
@@ -89,7 +87,7 @@ function Navigator(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-          Paperbase
+          CDSLAB
         </ListItem>
         <ListItem className={clsx(classes.item, classes.itemCategory)}>
           <ListItemIcon className={classes.itemIcon}>
