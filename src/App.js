@@ -7,6 +7,7 @@ import './styles/styles.css'
 import { LoginPage } from './pages/LoginPage'
 import { ProtectedPage } from './pages/ProtectedPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 
@@ -41,23 +42,23 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <GlobalStyles/>
-      <Layout>
-        <ErrorBoundary>
-          <Suspense fallback={<div>Loading..</div>}>
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading</div>}>
+        <Router>
+          <GlobalStyles/>
+          <Layout>
             <Switch>
               <Route exact path='/' component={LoginPage}/>
               <PrivateRoute path='/protected'>
                 <ProtectedPage/>
               </PrivateRoute>
-              <PrivateRoute exact path='/simulations' component={<SimulationsPage/>}/>
+              <PrivateRoute path='/simulations' component={<SimulationsPage/>}/>
               <Route component={NotFoundPage}/>
             </Switch>
-          </Suspense>
-        </ErrorBoundary>
-      </Layout>
-    </Router>
+          </Layout>
+        </Router>
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 
