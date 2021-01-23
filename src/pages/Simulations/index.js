@@ -1,26 +1,29 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { SimulationContainer } from './styles'
 import {
   Switch,
   Route,
   useRouteMatch
 } from "react-router-dom";
-import SimulationListPage from './SimulationListPage'
-import SimulationSettingPage from './SimulationSettingsPage'
 
 const SimulationsPage = () => {
   let match = useRouteMatch();
+  const SimulationListPage = React.lazy(() => import('./SimulationListPage'))
+  const SimulationSettingPage = React.lazy(() => import('./SimulationSettingsPage'))
 
   return (
     <SimulationContainer>
+
       <Switch>
-        <Route path={match.path} exact>
-          <SimulationListPage/>
+        <Route path={match.path} >
+          <SimulationListPage />
         </Route>
-        <Route path={`${match.path}/:id`} exact>
+
+        <Route path={`${match.path}/settings`} >
           <SimulationSettingPage />
         </Route>
       </Switch>
+
     </SimulationContainer>
   )
 }

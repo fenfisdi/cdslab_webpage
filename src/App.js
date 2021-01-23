@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { Suspense } from 'react'
 import Layout from './components/layouts/Layout'
 import { useStore } from './store/storeContext'
 import { GlobalStyles } from './styles/GlobalStyles'
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import './styles/styles.css'
 import { LoginPage } from './pages/LoginPage'
 import { ProtectedPage } from './pages/ProtectedPage'
 import { NotFoundPage } from './pages/NotFoundPage'
-import PopulationSettingsPage from './pages/Simulations/PopulattionSettingsPage'
-import InfectionDiseasesStatesPage from './pages/Simulations/InfectionDiseasesStatesPage'
-import StatesTransitionsPage from './pages/Simulations/StatesTransitionsPage'
-import RisksSettingsPage from './pages/Simulations/RisksSettingsPage'
-import SimulationsPage from './pages/Simulations'
 import Dashboard from './components/layouts/Dashboard'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const App = () => {
   const {
@@ -21,19 +17,17 @@ const App = () => {
     }
   } = useStore()
 
-  useEffect(() => {
-
-  }, [])
+  const SimulationsPage = React.lazy(() => import('./pages/Simulations'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
-  const PrivateRoute = ({ children, ...rest }) => {
+  const PrivateRoute = ({ component, ...rest }) => {
     return (
       <Route
         {...rest}
         render={({ location }) =>
           isAuth ? (
-            <Dashboard> {children} </Dashboard>
+            <Dashboard> {component} </Dashboard>
           ) : (
             <Redirect
               to={{
@@ -48,25 +42,20 @@ const App = () => {
 
   return (
     <Router>
-      <GlobalStyles />
+      <GlobalStyles/>
       <Layout>
-        <Switch>
-          <Route exact path='/' component={LoginPage} />
-          <Route exact path='/population_settings' component={PopulationSettingsPage} />
-          <Route exact path='/infection_diseases_states' component={InfectionDiseasesStatesPage} />
-          <Route exact path='/states_transitions' component={StatesTransitionsPage} />
-          <Route exact path='/risks_settings' component={RisksSettingsPage} />
-          <PrivateRoute path='/protected'>
-            <ProtectedPage />
-          </PrivateRoute>
-          <PrivateRoute path='/protected'>
-            <ProtectedPage />
-          </PrivateRoute>
-          <PrivateRoute path='/simulations'>
-            <SimulationsPage />
-          </PrivateRoute>
-          <Route component={NotFoundPage} />
-        </Switch>
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading..</div>}>
+            <Switch>
+              <Route exact path='/' component={LoginPage}/>
+              <PrivateRoute path='/protected'>
+                <ProtectedPage/>
+              </PrivateRoute>
+              <PrivateRoute exact path='/simulations' component={<SimulationsPage/>}/>
+              <Route component={NotFoundPage}/>
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </Layout>
     </Router>
   )
