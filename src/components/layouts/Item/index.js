@@ -1,27 +1,32 @@
 import React from 'react'
 import { Body, Header, ItemContainer, ItemContent } from './styles'
-import { Menu } from '@material-ui/core'
-import CustomizedMenus from '../../ui/CustomMenu'
+import ListItemMenu from '../../ui/ListMenuItem'
 
-const Item = ({ name, descripton, resume, optionMenu }) => {
+const Item = ({ id, name, customBody, optionMenu, handleClick }) => {
 
+  const fillBody = () => (
+    <Body>
+      {customBody && customBody()}
+    </Body>
+  )
 
-  const fillContent = () => {
-    return <ItemContent>
+  const fillMenu = () => (
+    <ListItemMenu options={optionMenu}/>
+  )
+
+  const fillContent = () => (
+    <ItemContent onClick={() => onClick(id)}>
       <Header>
         <h3>{name}</h3>
       </Header>
-      <Body>
-
-      </Body>
+      {fillBody()}
     </ItemContent>
+  )
+
+  const onClick = (id) => {
+    handleClick && handleClick(id)
   }
 
-  const fillMenu = () => {
-    return   <>
-     <CustomizedMenus options={optionMenu} />
-      </>
-  }
   return (
     <ItemContainer>
       {fillContent()}

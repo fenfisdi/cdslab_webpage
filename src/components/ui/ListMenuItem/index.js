@@ -9,7 +9,7 @@ import { IconButton } from '@material-ui/core'
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
+    border: '1px solid #d3d4d5'
   },
 })((props) => (
   <Menu
@@ -38,7 +38,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem)
 
-export default function CustomizedMenus ({ options }) {
+export default function ListMenuItem ({ options }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = (event) => {
@@ -66,7 +66,7 @@ export default function CustomizedMenus ({ options }) {
         onClose={handleClose}
       >
         {options.map((option) => (
-          <StyledMenuItem>
+          <StyledMenuItem key={option.name}>
             <ListItemIcon>
               {option.icon()}
             </ListItemIcon>

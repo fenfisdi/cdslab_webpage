@@ -8,13 +8,14 @@ export const ItemContainer = styled(Paper)`
   min-width: 300px;
   width: 100%;
   margin-bottom: 10px;
+  cursor: pointer;
   
 `
 
 export const ItemContent = styled.div`
   display: flex;
   flex-direction: column;
-  
+  width: 100%;
 `
 
 export const Header = styled.div`
