@@ -1,5 +1,5 @@
 import React from 'react'
-import RangeSlider from '../../components/ui/RangeSlider'
+import RangeSlider from '../../../components/ui/RangeSlider'
 
 const PopulationSettingsPage = () => {
   return (

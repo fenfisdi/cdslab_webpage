@@ -1,15 +1,12 @@
 import React from 'react'
 import { SimulationContainer } from './styles'
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  useRouteMatch
 } from "react-router-dom";
-import SimulationListPage from '../SimulationListPage'
-import SimulationSettingPage from '../SimulationSettingsPage'
+import SimulationListPage from './SimulationListPage'
+import SimulationSettingPage from './SimulationSettingsPage'
 
 const SimulationsPage = () => {
   let match = useRouteMatch();
