@@ -17,7 +17,7 @@ const SimulationListPage = () => {
 console.log(simulations)
 
   const redirectSettings = (id) => {
-    const { from } = location.state || { from: { pathname: `/simulations/${id}` } }
+    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
     history.replace(from)
   }
   const options = [

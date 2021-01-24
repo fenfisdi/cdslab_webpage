@@ -1,9 +1,11 @@
 import React from 'react'
+import SettingsForm from '../../../components/Simulations/SettingsForm'
 
-const SimulationSettingPage = () => {
+
+const SimulationSettingPage = ({ simulation, loading, error }) => {
   return (
     <div>
-      Simulation Setting
+      <SettingsForm simulation={simulation} loading={loading} error={error} />
     </div>
   )
 }

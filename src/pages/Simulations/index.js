@@ -12,7 +12,7 @@ const SimulationsPage = () => {
       <Suspense fallback={<div>Loading2</div>}>
         <Switch>
           <Route path={match.path} exact component={SimulationListPage}/>
-          <Route path={`${match.path}/:id`} exact component={SimulationSettingPage}/>
+          <Route path={`${match.path}/:id/settings`} exact component={SimulationSettingPage}/>
         </Switch>
       </Suspense>
     </SimulationContainer>
