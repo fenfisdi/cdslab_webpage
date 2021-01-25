@@ -1,21 +1,22 @@
 import React from 'react'
 import { useSettingsFormState } from './state'
 import { Input } from '../../ui/Input'
-import { Form, FormGroup } from './styles'
+import { BoxSizeTitle, Form, FormGroup } from './styles'
+import RangeSlider from '../../ui/RangeSlider'
 
 const SettingsForm = ({ simulation, loading, error }) => {
-const {
-  name,
-  iterationTime,
-  simulationDate,
-  iterationsNumber,
-  boxSizeHorizontal,
-  boxSizeVertical,
-  populationSize,
-  InputName,
-  InputIterationTime,
-  InputSimulationDate
-} = useSettingsFormState(simulation)
+  const {
+    name,
+    iterationTime,
+    simulationDate,
+    iterationsNumber,
+    boxSizeHorizontal,
+    boxSizeVertical,
+    populationSize,
+    InputName,
+    InputIterationTime,
+    InputSimulationDate
+  } = useSettingsFormState(simulation)
 
   const isValidForm = () => true
 
@@ -24,41 +25,17 @@ const {
     if (isValidForm()) {
       // TODO
     } else {
-     // TODO
+      // TODO
     }
   }
 
   return (
     <Form noValidate onSubmit={verifyForm}>
       <FormGroup>
-       <InputName  disabled={loading} />
-        <InputSimulationDate />
-
+        <InputName disabled={loading}/>
       </FormGroup>
       <FormGroup>
-        <InputIterationTime  disabled={loading} />
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...iterationsNumber} />
-      </FormGroup>
-      <FormGroup>
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...boxSizeHorizontal} />
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...boxSizeVertical} />
-      </FormGroup>
-      <FormGroup>
+        <InputSimulationDate/>
         <Input
           disabled={loading}
           required
@@ -66,6 +43,21 @@ const {
           margin="normal"
           {...populationSize} />
       </FormGroup>
+      <FormGroup>
+        <InputIterationTime disabled={loading}/>
+        <Input
+          disabled={loading}
+          required
+          color="secondary"
+          margin="normal"
+          {...iterationsNumber} />
+      </FormGroup>
+      <BoxSizeTitle>Box size</BoxSizeTitle>
+      <FormGroup>
+        <RangeSlider label='Horizontal' max='10'/>
+        <RangeSlider label='Vertical' max='10'/>
+      </FormGroup>
+
 
     </Form>
   )
