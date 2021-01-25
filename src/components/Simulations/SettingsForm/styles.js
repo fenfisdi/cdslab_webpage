@@ -11,6 +11,6 @@ export const FormGroup = styled.div`
   display: flex;
   justify-content: space-between;
   > div {
-    margin: 0 10px;
+    margin: 10px;
   }
 `

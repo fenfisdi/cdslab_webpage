@@ -3,6 +3,7 @@ import { VALIDATORS_LOGIN_FORM } from '../../LoginForm/validators'
 import { Input } from '../../ui/Input'
 import { FormGroup } from './styles'
 import React from 'react'
+import DatePicker from '../../ui/DatePicker'
 
 export const useSettingsFormState = (simulation) => {
   const name = useInputValue({
@@ -20,8 +21,8 @@ export const useSettingsFormState = (simulation) => {
   const simulationDate = useInputValue({
     value: simulation?.simulationDate,
     name: 'simulationDate',
-    type: 'text',
-    label: 'Simulation Date'
+    label: 'Simulation Date',
+    type: 'date'
   })
   const iterationsNumber = useInputValue({
     value: simulation?.iterationsNumber,
@@ -68,6 +69,19 @@ export const useSettingsFormState = (simulation) => {
     {...iterationTime} />
   )
 
+  const InputSimulationDate = (props) =>  (
+    <DatePicker
+      required
+      color="secondary"
+      margin="normal"
+      id="date-picker-dialog"
+      format="MM/dd/yyyy"
+      onChange={() => console.log('date selected')}
+      {...props}
+       />
+  )
+
+
   return {
     name,
     iterationTime,
@@ -77,7 +91,8 @@ export const useSettingsFormState = (simulation) => {
     boxSizeVertical,
     populationSize,
     InputName,
-    InputIterationTime
+    InputIterationTime,
+    InputSimulationDate
 
   }
 }

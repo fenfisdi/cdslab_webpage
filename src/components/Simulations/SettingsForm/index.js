@@ -13,7 +13,8 @@ const {
   boxSizeVertical,
   populationSize,
   InputName,
-  InputIterationTime
+  InputIterationTime,
+  InputSimulationDate
 } = useSettingsFormState(simulation)
 
   const isValidForm = () => true
@@ -31,15 +32,11 @@ const {
     <Form noValidate onSubmit={verifyForm}>
       <FormGroup>
        <InputName  disabled={loading} />
-        <InputIterationTime  disabled={loading} />
+        <InputSimulationDate />
+
       </FormGroup>
       <FormGroup>
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...simulationDate} />
+        <InputIterationTime  disabled={loading} />
         <Input
           disabled={loading}
           required
