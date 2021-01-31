@@ -9,6 +9,7 @@ import { NotFoundPage } from './pages/NotFoundPage'
 
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
+import { MiniLoader } from './components/layouts/MiniLoader'
 
 const App = () => {
   const {
@@ -42,7 +43,7 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<MiniLoader/>}>
         <Router>
           <GlobalStyles/>
           <Layout>
