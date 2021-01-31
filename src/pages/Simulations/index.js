@@ -14,6 +14,7 @@ const SimulationsPage = () => {
         <Switch>
           <Route path={match.path} exact component={SimulationListPage}/>
           <Route path={`${match.path}/:id/settings`} exact component={SimulationSettingPage}/>
+          <Route path={`${match.path}/add`} exact component={SimulationSettingPage}/>
         </Switch>
       </Suspense>
     </SimulationContainer>
