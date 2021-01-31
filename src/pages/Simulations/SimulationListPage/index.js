@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import ListItem from '../../../components/layouts/ListItem'
 import { useStore } from '../../../store/storeContext'
 import Icon from '@material-ui/core/Icon'
 import { Button } from '@material-ui/core'
 import { SimulationContainer } from './styles'
 import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useSimulationActions } from '../../../actions/simulationsActions'
+import { useSessionActions } from '../../../actions/sessionsActions'
 
 const SimulationListPage = () => {
-  const { state: { simulations: { simulations, loading, error } } } = useStore()
+  const { state: {
+    simulations: { simulations, loading, error },
+    session: { navigation }
+  },
+    dispatch } = useStore()
+  const { getSimulations, setActiveSimulation } = useSimulationActions(dispatch)
+  const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
   const location = useLocation()
 
-  const redirectSettings = (id) => {
-    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
-    history.replace(from)
-  }
+  useEffect(() => {
+    console.log(navigation)
+    updateNavigationTitle()
+    loadData()
+
+  }, [])
+
   const options = [
     {
       icon: 'send',
@@ -31,8 +42,23 @@ const SimulationListPage = () => {
 
   ]
 
-  const goToNewSimulation = () => {
+  const loadData = () => {
+    if(simulations.length === 0 && !loading)
+      getSimulations()
+  }
 
+  const updateNavigationTitle = () => {
+    if(!navigation?.current)
+      setCurrenNavigation('Simulations')
+  }
+
+
+
+  const redirectSettings = (id) => {
+    const simulation = simulations.find( s => s._id === id)
+    setActiveSimulation(simulation)
+    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
+    history.replace(from)
   }
 
   return (

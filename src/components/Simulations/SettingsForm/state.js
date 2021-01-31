@@ -13,40 +13,40 @@ export const useSettingsFormState = (simulation) => {
     label: 'Simulation Name'
   })
   const iterationTime = useInputValue({
-    value: simulation?.iterationTime,
+    value: +simulation?.iteration_time,
     name: 'iterationTime',
     type: 'number',
     label: 'Iteration Time'
   })
   const simulationDate = useInputValue({
-    value: simulation?.simulationDate,
+    value: simulation?.simulation_date,
     name: 'simulationDate',
     label: 'Simulation Date',
     type: 'date'
   })
   const iterationsNumber = useInputValue({
-    value: simulation?.iterationsNumber,
+    value: +simulation?.iteration_number,
     name: 'iterationsNumber',
     type: 'number',
     label: 'Iteration Number'
   })
 
   const boxSizeHorizontal = useInputValue({
-    value: simulation?.boxSizeHorizontal,
+    value: +simulation?.box_size[0],
     name: 'boxSizeHorizontal',
     type: 'number',
     label: 'Horizontal'
   })
 
   const boxSizeVertical = useInputValue({
-    value: simulation?.boxSizeVertical,
+    value: +simulation?.box_size[1],
     name: 'boxSizeVertical',
     type: 'number',
     label: 'Vertical'
   })
 
   const populationSize = useInputValue({
-    value: simulation?.populationSize,
+    value: +simulation?.population_size,
     name: 'populationSize',
     type: 'number',
     label: 'Population Size'

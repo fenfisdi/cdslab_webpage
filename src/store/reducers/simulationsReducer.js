@@ -5,11 +5,10 @@ import {
   SIMULATION_SELECT,
   SIMULATION_SET_LIST
 } from '../../actions/types/simulationTypes'
-import { SIMULATIONS } from '../../utils/dataTest'
 
 export const initialState = {
   simulations: {
-    simulations: SIMULATIONS ,
+    simulations: [] ,
     simulationSelected: null,
     loading: false,
     error: null

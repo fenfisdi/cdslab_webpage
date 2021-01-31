@@ -1,10 +1,10 @@
 import {
   SESSION_LOADING,
   SESSION_LOGIN,
-  SESSION_LOGOUT
+  SESSION_LOGOUT, SESSION_SET_CURRENT_NAVIGATION, SESSION_SET_CURRENT_SECTION_NAVIGATION
 } from './types/sessionTypes'
 
-export const useAuthActions = (dispatch) => {
+export const useSessionActions = (dispatch) => {
   /**
  * @param {*} loginInfo {username, password}
  */
@@ -17,5 +17,15 @@ export const useAuthActions = (dispatch) => {
     dispatch({ type: SESSION_LOGOUT })
   }
 
-  return { login, logout }
+  const setCurrenNavigation = (titleNavigation) => {
+    console.log('setCurrenNavigation ' ,titleNavigation)
+    dispatch({ type: SESSION_SET_CURRENT_NAVIGATION, payload: titleNavigation })
+  }
+
+  const setActiveSection = async (sectionTitle) => {
+    dispatch({ type: SESSION_SET_CURRENT_SECTION_NAVIGATION, payload: sectionTitle })
+  }
+
+
+  return { login, logout, setCurrenNavigation, setActiveSection }
 }
