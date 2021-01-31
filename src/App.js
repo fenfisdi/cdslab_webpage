@@ -5,7 +5,6 @@ import { GlobalStyles } from './styles/GlobalStyles'
 import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import './styles/styles.css'
 import { LoginPage } from './pages/LoginPage'
-import { ProtectedPage } from './pages/ProtectedPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 import Dashboard from './components/layouts/Dashboard'
@@ -49,9 +48,6 @@ const App = () => {
           <Layout>
             <Switch>
               <Route exact path='/' component={LoginPage}/>
-              <PrivateRoute path='/protected'>
-                <ProtectedPage/>
-              </PrivateRoute>
               <PrivateRoute path='/simulations' component={<SimulationsPage/>}/>
               <Route component={NotFoundPage}/>
             </Switch>
