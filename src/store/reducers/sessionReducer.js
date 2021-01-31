@@ -1,38 +1,38 @@
 import {
-  AUTH_LOADING,
-  AUTH_ERROR,
-  AUTH_LOGIN,
-  AUTH_LOGOUT
-} from '../../actions/types/authTypes'
+  SESSION_LOADING,
+  SESSION_ERROR,
+  SESSION_LOGIN,
+  SESSION_LOGOUT
+} from '../../actions/types/sessionTypes'
 
 export const initialState = {
-  auth: {
-    isAuth: false,
-    session: null, // { user : { username } }
+  session: {
+    isSESSION: false,
+    user: null,
     loading: false,
     error: null
   }
 }
 
-export const authReducer = (state, action) => {
+export const sessionReducer = (state, action) => {
   switch (action.type) {
-    case AUTH_LOADING:
+    case SESSION_LOADING:
       return { ...state, loading: true, error: null }
-    case AUTH_ERROR:
+    case SESSION_ERROR:
       return { ...state, loading: false, error: action.payload }
-    case AUTH_LOGIN:
+    case SESSION_LOGIN:
       return {
         ...state,
         loading: false,
         isAuth: true,
-        session: { ...state.session, user: action.payload }
+        user: action.payload
       }
-    case AUTH_LOGOUT:
+    case SESSION_LOGOUT:
       return {
         ...state,
         loading: false,
         isAuth: false,
-        session: null
+        user: null
       }
     default:
       return state

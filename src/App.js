@@ -14,7 +14,7 @@ import { MiniLoader } from './components/layouts/MiniLoader'
 const App = () => {
   const {
     state: {
-      auth: { isAuth }
+      session: { isAuth }
     }
   } = useStore()
 
