@@ -7,7 +7,7 @@ import {
 
 export const initialState = {
   session: {
-    isSESSION: false,
+    isAuth: false,
     user: null,
     loading: false,
     error: null
