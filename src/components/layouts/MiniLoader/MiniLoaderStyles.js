@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import { secondary } from '../../../styles/constants'
 
 export const animatePoints = keyframes`
    0%,
@@ -23,7 +24,7 @@ export const Point = styled.div`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #6c9a06;
+  background: ${secondary};
   animation: ${animatePoints} 1.2s linear infinite;
 
   &:nth-child(1) {

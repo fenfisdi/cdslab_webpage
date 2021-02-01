@@ -1,52 +1,81 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import ListItem from '../../../components/layouts/ListItem'
 import { useStore } from '../../../store/storeContext'
-import SendIcon from '@material-ui/icons/Send'
-import DraftsIcon from '@material-ui/icons/Drafts'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import Icon from '@material-ui/core/Icon';
+import Icon from '@material-ui/core/Icon'
 import { Button } from '@material-ui/core'
 import { SimulationContainer } from './styles'
-import { useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useSimulationActions } from '../../../actions/simulationsActions'
+import { useSessionActions } from '../../../actions/sessionsActions'
 
 const SimulationListPage = () => {
-  const { state: { simulations: { simulations, loading, error } } } = useStore()
+  const { state: {
+    simulations: { simulations, loading, error },
+    session: { navigation }
+  },
+    dispatch } = useStore()
+  const { getSimulations, setActiveSimulation } = useSimulationActions(dispatch)
+  const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
   const location = useLocation()
 
-console.log(simulations)
+  useEffect(() => {
+    console.log(navigation)
+    updateNavigationTitle()
+    loadData()
 
-  const redirectSettings = (id) => {
-    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
-    history.replace(from)
-  }
+  }, [])
+
   const options = [
     {
-      icon: () =>  <SendIcon fontSize="small"/>,
+      icon: 'send',
       name: 'Settings',
     },
     {
-      icon: () =>   <DraftsIcon fontSize="small"/>,
+      icon: 'drafts',
       name: 'Clone'
     },
     {
-      icon: () =>  <InboxIcon fontSize="small"/>,
+      icon: 'inbox',
       name: 'Delete'
     }
 
   ]
+
+  const loadData = () => {
+    if(simulations.length === 0 && !loading)
+      getSimulations()
+  }
+
+  const updateNavigationTitle = () => {
+    if(!navigation?.current)
+      setCurrenNavigation('Simulations')
+  }
+
+
+
+  const redirectSettings = (id) => {
+    const simulation = simulations.find( s => s._id === id)
+    setActiveSimulation(simulation)
+    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
+    history.replace(from)
+  }
+
   return (
     <SimulationContainer>
       <ListItem list={simulations} optionMenu={options} handleClick={redirectSettings}/>
-      <Button
-        variant="contained"
-        color="primary"
-        endIcon={<Icon>add_circle</Icon>}
-      >
-        Add New Simulation
-      </Button>
+      <Link to="simulations/add">
+        <Button
+          variant="contained"
+          color="primary"
+          endIcon={<Icon>add_circle</Icon>}
+        >
+          Add New Simulation
+        </Button>
+      </Link>
     </SimulationContainer>
-  )
+
+)
 }
 
 export default SimulationListPage

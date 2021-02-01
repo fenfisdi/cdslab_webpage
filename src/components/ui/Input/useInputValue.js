@@ -17,8 +17,9 @@ export const useInputValue = ({
   const [helperText, setHelperText] = useState(null)
 
   const onChange = e => {
-    setValue(e.target.value)
-    validateInput(e.target.value)
+    e.target ? setValue(e.target.value) : setValue(e)
+    e.target ? validateInput(e.target.value) :  validateInput(e)
+
   }
 
   /**
@@ -43,10 +44,7 @@ export const useInputValue = ({
 
   return {
     value,
-    label,
-    name,
     errors,
-    type,
     validators,
     helperText,
     onChange

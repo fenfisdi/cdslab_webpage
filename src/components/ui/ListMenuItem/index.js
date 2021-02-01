@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { IconButton } from '@material-ui/core'
+import Icon from '@material-ui/core/Icon';
 
 const StyledMenu = withStyles({
   paper: {
@@ -68,7 +69,7 @@ export default function ListMenuItem ({ options }) {
         {options.map((option) => (
           <StyledMenuItem key={option.name}>
             <ListItemIcon>
-              {option.icon()}
+              <Icon>{option.icon}</Icon>
             </ListItemIcon>
             <ListItemText primary={option.name}/>
           </StyledMenuItem>

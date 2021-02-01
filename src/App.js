@@ -5,16 +5,16 @@ import { GlobalStyles } from './styles/GlobalStyles'
 import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import './styles/styles.css'
 import { LoginPage } from './pages/LoginPage'
-import { ProtectedPage } from './pages/ProtectedPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
+import { MiniLoader } from './components/layouts/MiniLoader'
 
 const App = () => {
   const {
     state: {
-      auth: { isAuth }
+      session: { isAuth }
     }
   } = useStore()
 
@@ -43,15 +43,12 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<MiniLoader/>}>
         <Router>
           <GlobalStyles/>
           <Layout>
             <Switch>
               <Route exact path='/' component={LoginPage}/>
-              <PrivateRoute path='/protected'>
-                <ProtectedPage/>
-              </PrivateRoute>
               <PrivateRoute path='/simulations' component={<SimulationsPage/>}/>
               <Route component={NotFoundPage}/>
             </Switch>

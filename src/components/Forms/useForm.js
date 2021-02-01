@@ -1,4 +1,5 @@
 export const useForm = () => {
+
   const isFormValid = inputs => {
     let isValid = true
     for (const input of inputs) {

@@ -1,16 +1,16 @@
 import { useStore } from '../../store/storeContext'
-import { useAuthActions } from '../../actions/authActions'
+import { useSessionActions } from '../../actions/sessionsActions'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export const useLoginState = () => {
   const {
     state: {
-      auth: { isAuth, loading, error }
+      session: { isAuth, loading, error }
     },
     dispatch
   } = useStore()
-  const { login } = useAuthActions(dispatch)
+  const { login } = useSessionActions(dispatch)
  const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
