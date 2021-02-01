@@ -4,6 +4,7 @@ import { Input } from '../../ui/Input'
 import { BoxSizeTitle, Form, FormGroup } from './styles'
 import RangeSlider from '../../ui/RangeSlider'
 import { Button } from '../../ui/Buttons'
+import DynamicTable from '../../TableAddSimpleElements'
 
 const SettingsForm = ({ simulation, loading, error }) => {
   const {
@@ -27,6 +28,20 @@ const SettingsForm = ({ simulation, loading, error }) => {
     }
   }
 
+  const tableColumns = [
+    {title: 'Name', att: 'name', type: 'text'},
+    {title: 'Min Age', att: 'minAge', type: 'number'},
+    {title: 'Max Age', att: 'maxAge',  type: 'number'},
+    {title: 'Percentage', att: 'percentage',  type: 'number'}
+    ]
+const tableItems = [
+  {
+    name: '',
+    minAge: '',
+    maxAge: '',
+    percentage: ''
+  }
+]
   return (
     <Form noValidate onSubmit={verifyForm}>
       <FormGroup>
@@ -57,7 +72,7 @@ const SettingsForm = ({ simulation, loading, error }) => {
       </FormGroup>
       <BoxSizeTitle>Age groups</BoxSizeTitle>
       <FormGroup>
-
+<DynamicTable columns={tableColumns} initialItems={tableItems} />
       </FormGroup>
 
     </Form>

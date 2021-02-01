@@ -10,7 +10,7 @@ export const Form = styled.form`
 export const FormGroup = styled(Paper)`
   width: 100%;
   background: white;
-  padding: 0 10px 10px 10px;
+  padding: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
