@@ -10,16 +10,17 @@ const NavigationButtons = ({ main, back, forward }) => {
 
   const fillNavigationBack = () => (
     <NavigationBack>
-      {main && <Link to={main.path}>
+      {main && <Link to={main.path} onClick={main.handleClick}>
         <Button
           variant="contained"
           color="secondary"
           startIcon={<HomeIcon />}
+
         >
           {main.name}
         </Button>
       </Link>}
-      {back && <Link to={back.path}>{back.name}</Link>}
+      {back && <Link to={back.path} >{back.name}</Link>}
     </NavigationBack>
   )
 

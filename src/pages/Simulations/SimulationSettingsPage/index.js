@@ -3,6 +3,7 @@ import SettingsForm from '../../../components/Simulations/SettingsForm'
 import { useStore } from '../../../store/storeContext'
 import { useSessionActions } from '../../../actions/sessionsActions'
 import NavigationButtons from '../../../components/layouts/NavigationButtons'
+import { useSimulationActions } from '../../../actions/simulationsActions'
 
 
 const SimulationSettingPage = () => {
@@ -14,7 +15,8 @@ const SimulationSettingPage = () => {
     dispatch
   } = useStore()
 
-  const { setActiveSection } = useSessionActions(dispatch)
+  const { setActiveSection, setCurrenNavigation } = useSessionActions(dispatch)
+  const { setActiveSimulation } = useSimulationActions(dispatch)
   useEffect(() => {
     updateActiveSection()
   }, [])
@@ -24,8 +26,14 @@ const SimulationSettingPage = () => {
       simulationSelected ? setActiveSection('Settings') : setActiveSection('Create')
     }
   }
+  const navigationMainHandleClick = () => {
+    setActiveSection(null)
+    setCurrenNavigation('Simulations')
+    setActiveSimulation(null)
+  }
+
   const fillNavigationButtons = () => {
-    const main = { path: '/simulations', name: 'Back to Simulations' }
+    const main = { path: '/simulations', name: 'Back to Simulations', handleClick: navigationMainHandleClick }
     const forward = { path: '/simulations', name: 'Infection and Diseases' }
     return <NavigationButtons main={main} forward={forward} />
   }

@@ -18,11 +18,10 @@ export const useSessionActions = (dispatch) => {
   }
 
   const setCurrenNavigation = (titleNavigation) => {
-    console.log('setCurrenNavigation ' ,titleNavigation)
     dispatch({ type: SESSION_SET_CURRENT_NAVIGATION, payload: titleNavigation })
   }
 
-  const setActiveSection = async (sectionTitle) => {
+  const setActiveSection = (sectionTitle) => {
     dispatch({ type: SESSION_SET_CURRENT_SECTION_NAVIGATION, payload: sectionTitle })
   }
 
