@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react'
 import { SimulationContainer } from './styles'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch, useLocation  } from 'react-router-dom'
 import { MiniLoader } from '../../components/layouts/MiniLoader'
 
 const SimulationsPage = () => {
   let match = useRouteMatch()
   const SimulationListPage = React.lazy(() => import('./SimulationListPage'))
   const SimulationSettingPage = React.lazy(() => import('./SimulationSettingsPage'))
+
 
   return (
     <SimulationContainer>
