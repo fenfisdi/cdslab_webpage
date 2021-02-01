@@ -6,13 +6,10 @@ import RangeSlider from '../../ui/RangeSlider'
 
 const SettingsForm = ({ simulation, loading, error }) => {
   const {
-    name,
-    iterationTime,
-    simulationDate,
-    iterationsNumber,
-    boxSizeHorizontal,
-    boxSizeVertical,
-    populationSize,
+    InputPopulationSize,
+    InputIterationsNumber,
+    InputBoxSizeHorizontal,
+    InputBoxSizeVertical,
     InputName,
     InputIterationTime,
     InputSimulationDate
@@ -36,26 +33,16 @@ const SettingsForm = ({ simulation, loading, error }) => {
       </FormGroup>
       <FormGroup>
         <InputSimulationDate/>
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...populationSize} />
+        <InputPopulationSize />
       </FormGroup>
       <FormGroup>
         <InputIterationTime disabled={loading}/>
-        <Input
-          disabled={loading}
-          required
-          color="secondary"
-          margin="normal"
-          {...iterationsNumber} />
+        <InputIterationsNumber />
       </FormGroup>
       <BoxSizeTitle>Box size</BoxSizeTitle>
       <FormGroup>
-        <RangeSlider label='Horizontal' max='10'/>
-        <RangeSlider label='Vertical' max='10'/>
+       <InputBoxSizeHorizontal />
+        <InputBoxSizeVertical />
       </FormGroup>
 
 
