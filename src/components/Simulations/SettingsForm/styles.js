@@ -14,6 +14,7 @@ export const FormGroup = styled(Paper)`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   > div {
     margin: 10px;
     width: 100%;

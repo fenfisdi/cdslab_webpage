@@ -3,6 +3,7 @@ import { useSettingsFormState } from './state'
 import { Input } from '../../ui/Input'
 import { BoxSizeTitle, Form, FormGroup } from './styles'
 import RangeSlider from '../../ui/RangeSlider'
+import { Button } from '../../ui/Buttons'
 
 const SettingsForm = ({ simulation, loading, error }) => {
   const {
@@ -44,7 +45,20 @@ const SettingsForm = ({ simulation, loading, error }) => {
        <InputBoxSizeHorizontal />
         <InputBoxSizeVertical />
       </FormGroup>
+      <BoxSizeTitle>Agents</BoxSizeTitle>
+      <FormGroup>
+        <label htmlFor="btn-velocity">Velocity distribution</label>
+        <Button id="btn-velocity"
+                variant="contained"
+                color="primary"
+                onClick={() => console.log('Velocity distribution button clicked')}>
+          Upload file
+        </Button>
+      </FormGroup>
+      <BoxSizeTitle>Age groups</BoxSizeTitle>
+      <FormGroup>
 
+      </FormGroup>
 
     </Form>
   )
