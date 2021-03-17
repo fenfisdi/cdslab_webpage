@@ -8,7 +8,7 @@ import {
 
 export const initialState = {
   simulations: {
-    simulations: [] ,
+    simulations: [],
     simulationSelected: null,
     loading: false,
     error: null

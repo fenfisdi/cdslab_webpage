@@ -12,13 +12,13 @@ import theme from '../../../styles/theme'
 
 function Copyright () {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         CDSLab
       </Link>{' '}
       {new Date().getFullYear()}
-      {'.'}
+      .
     </Typography>
   )
 }
@@ -28,28 +28,28 @@ const drawerWidth = 256
 const styles = {
   root: {
     display: 'flex',
-    minHeight: '100vh',
+    minHeight: '100vh'
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0,
-    },
+      flexShrink: 0
+    }
   },
   app: {
     flex: 1,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   main: {
     flex: 1,
     padding: theme.spacing(6, 4),
-    background: '#eaeff1',
+    background: '#eaeff1'
   },
   footer: {
     padding: theme.spacing(2),
-    background: '#eaeff1',
-  },
+    background: '#eaeff1'
+  }
 }
 
 function Dashboard ({ classes, children }) {
@@ -61,29 +61,29 @@ function Dashboard ({ classes, children }) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline/>
+      <CssBaseline />
       <nav className={classes.drawer}>
-        <Hidden smUp implementation="js">
+        <Hidden smUp implementation='js'>
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
-            variant="temporary"
+            variant='temporary'
             open={mobileOpen}
             onClose={handleDrawerToggle}
           />
         </Hidden>
-        <Hidden xsDown implementation="css">
-          <Navigator PaperProps={{ style: { width: drawerWidth } }}/>
+        <Hidden xsDown implementation='css'>
+          <Navigator PaperProps={{ style: { width: drawerWidth } }} />
         </Hidden>
       </nav>
       <div className={classes.app}>
-        <Header onDrawerToggle={handleDrawerToggle}/>
+        <Header onDrawerToggle={handleDrawerToggle} />
         <main className={classes.main}>
           <Content>
             {children}
           </Content>
         </main>
         <footer className={classes.footer}>
-          <Copyright/>
+          <Copyright />
         </footer>
       </div>
     </div>
@@ -91,7 +91,7 @@ function Dashboard ({ classes, children }) {
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Dashboard)

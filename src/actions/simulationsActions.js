@@ -20,44 +20,40 @@ export const useSimulationActions = (dispatch) => {
   }
 
   const getSimulations = async (simulation) => {
-    dispatch({ type: SIMULATION_LOADING})
-    try{
+    dispatch({ type: SIMULATION_LOADING })
+    try {
       // TODO call api to get simulations
       const simulationsDummies = SIMULATIONS
       dispatch({ type: SIMULATION_SET_LIST, payload: simulationsDummies })
-    }catch(err) {
+    } catch (err) {
       const error = err.message
-      dispatch({ type: SIMULATION_ERROR, payload: error})
+      dispatch({ type: SIMULATION_ERROR, payload: error })
     }
-
   }
 
   const addSimulation = async (simulation) => {
-    dispatch({ type: SIMULATION_LOADING})
-    try{
+    dispatch({ type: SIMULATION_LOADING })
+    try {
       // TODO call api to save simulation
       dispatch({ type: SIMULATION_ADD, payload: simulation })
-    }catch(err) {
+    } catch (err) {
       const error = err.message
-      dispatch({ type: SIMULATION_ERROR, payload: error})
+      dispatch({ type: SIMULATION_ERROR, payload: error })
     }
-
   }
 
   const deleteSimulation = async (id) => {
-    dispatch({ type: SIMULATION_LOADING})
-    try{
+    dispatch({ type: SIMULATION_LOADING })
+    try {
       // TODO call api to delete simulation
       const idx = simulations.findIndex(s => s._id === id)
-      if(idx >= 0){
+      if (idx >= 0) {
         dispatch({ type: SIMULATION_DELETE, payload: idx })
       }
-
-    }catch(err) {
+    } catch (err) {
       const error = err.message
-      dispatch({ type: SIMULATION_ERROR, payload: error})
+      dispatch({ type: SIMULATION_ERROR, payload: error })
     }
-
   }
 
   return { setActiveSimulation, getSimulations, addSimulation, deleteSimulation }

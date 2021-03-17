@@ -8,18 +8,18 @@ import { LoginForm } from '../../components/LoginForm'
 import theme from '../../styles/theme'
 
 export const LoginPage = () => {
-  const { loading, error, handleSubmit, title } = useLoginState();
-  const classes = useLoginStyles(theme);
+  const { loading, error, handleSubmit, title } = useLoginState()
+  const classes = useLoginStyles(theme)
 
   return (
-    <Grid container component="main" className={classes.root}>
-    <CssBaseline />
-    <Grid item xs={false} sm={4} md={7} className={classes.image} />
-    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-      <div className={classes.paper}>
-        <LoginForm onSubmit={handleSubmit} title={title} loading={loading} error={error} />
-      </div>
+    <Grid container component='main' className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <LoginForm onSubmit={handleSubmit} title={title} loading={loading} error={error} />
+        </div>
+      </Grid>
     </Grid>
-  </Grid>
-)
+  )
 }

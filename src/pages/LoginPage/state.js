@@ -11,7 +11,7 @@ export const useLoginState = () => {
     dispatch
   } = useStore()
   const { login } = useSessionActions(dispatch)
- const history = useHistory()
+  const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
   const { from } = location.state || { from: { pathname: '/simulations' } }
@@ -36,6 +36,4 @@ export const useLoginState = () => {
   return {
     isAuth, loading, error, handleSubmit, title, setTitle
   }
-
 }
-

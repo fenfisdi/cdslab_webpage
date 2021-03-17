@@ -5,7 +5,6 @@ import { useSessionActions } from '../../../actions/sessionsActions'
 import NavigationButtons from '../../../components/layouts/NavigationButtons'
 import { useSimulationActions } from '../../../actions/simulationsActions'
 
-
 const SimulationSettingPage = () => {
   const {
     state: {
@@ -22,7 +21,7 @@ const SimulationSettingPage = () => {
   }, [])
 
   const updateActiveSection = () => {
-    if(!navigation?.activeSection){
+    if (!navigation?.activeSection) {
       simulationSelected ? setActiveSection('Settings') : setActiveSection('Create')
     }
   }

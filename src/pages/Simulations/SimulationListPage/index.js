@@ -9,11 +9,13 @@ import { useSimulationActions } from '../../../actions/simulationsActions'
 import { useSessionActions } from '../../../actions/sessionsActions'
 
 const SimulationListPage = () => {
-  const { state: {
-    simulations: { simulations, loading, error },
-    session: { navigation }
-  },
-    dispatch } = useStore()
+  const {
+    state: {
+      simulations: { simulations, loading, error },
+      session: { navigation }
+    },
+    dispatch
+  } = useStore()
   const { getSimulations, setActiveSimulation } = useSimulationActions(dispatch)
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
@@ -23,13 +25,12 @@ const SimulationListPage = () => {
     console.log(navigation)
     updateNavigationTitle()
     loadData()
-
   }, [])
 
   const options = [
     {
       icon: 'send',
-      name: 'Settings',
+      name: 'Settings'
     },
     {
       icon: 'drafts',
@@ -43,19 +44,15 @@ const SimulationListPage = () => {
   ]
 
   const loadData = () => {
-    if(simulations.length === 0 && !loading)
-      getSimulations()
+    if (simulations.length === 0 && !loading) { getSimulations() }
   }
 
   const updateNavigationTitle = () => {
-    if(!navigation?.current)
-      setCurrenNavigation('Simulations')
+    if (!navigation?.current) { setCurrenNavigation('Simulations') }
   }
 
-
-
   const redirectSettings = (id) => {
-    const simulation = simulations.find( s => s._id === id)
+    const simulation = simulations.find(s => s._id === id)
     setActiveSimulation(simulation)
     const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
     history.replace(from)
@@ -63,11 +60,11 @@ const SimulationListPage = () => {
 
   return (
     <SimulationContainer>
-      <ListItem list={simulations} optionMenu={options} handleClick={redirectSettings}/>
-      <Link to="simulations/add">
+      <ListItem list={simulations} optionMenu={options} handleClick={redirectSettings} />
+      <Link to='simulations/add'>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           endIcon={<Icon>add_circle</Icon>}
         >
           Add New Simulation
@@ -75,7 +72,7 @@ const SimulationListPage = () => {
       </Link>
     </SimulationContainer>
 
-)
+  )
 }
 
 export default SimulationListPage

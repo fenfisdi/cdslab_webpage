@@ -3,10 +3,7 @@ import { HomePageContainer } from './styles'
 
 const HomePage = () => {
   return (
-    <HomePageContainer>
-
-
-    </HomePageContainer>
+    <HomePageContainer />
   )
 }
 

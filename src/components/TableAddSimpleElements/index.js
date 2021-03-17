@@ -38,20 +38,19 @@ const DynamicTable = ({ initialItems, columns, callback }) => {
 
   const renderRows = () => (
     items.map((item, i) => (
-        <TableRow key={'item-' + i}>
-          {columns.map((column, j) => (
-            <TableCell key={'cell-' + j}>
-              <TextField
-                type={column.type}
-                name={column.att}
-                value={item[column.att]}
-                onChange={(event) => handleItemChanged(i, event)}
-              />
-            </TableCell>
-          ))}
+      <TableRow key={'item-' + i}>
+        {columns.map((column, j) => (
+          <TableCell key={'cell-' + j}>
+            <TextField
+              type={column.type}
+              name={column.att}
+              value={item[column.att]}
+              onChange={(event) => handleItemChanged(i, event)}
+            />
+          </TableCell>
+        ))}
 
-
-          {items.length > 1 &&
+        {items.length > 1 &&
           <TableCell>
             <button
               onClick={() => handleItemDeleted(i)}
@@ -60,8 +59,8 @@ const DynamicTable = ({ initialItems, columns, callback }) => {
             </button>
           </TableCell>}
 
-        </TableRow>
-      )
+      </TableRow>
+    )
     )
   )
 
@@ -75,8 +74,8 @@ const DynamicTable = ({ initialItems, columns, callback }) => {
           <ColumnTitle>Action</ColumnTitle>
         )}
 
-      </TableHeaderRow>)
-
+      </TableHeaderRow>
+    )
   }
 
   return (
@@ -86,11 +85,11 @@ const DynamicTable = ({ initialItems, columns, callback }) => {
         {renderRows()}
 
       </TableContainer>
-      <hr/>
+      <hr />
 
       <Button
         onClick={handleClick}
-        color="primary"
+        color='primary'
       >
         Add
       </Button>

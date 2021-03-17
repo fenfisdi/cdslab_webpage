@@ -3,7 +3,6 @@ import { Body, Header, ItemContainer, ItemContent } from './styles'
 import ListItemMenu from '../../ui/ListMenuItem'
 
 const Item = ({ id, name, customBody, optionMenu, handleClick }) => {
-
   const fillBody = () => (
     <Body>
       {customBody && customBody()}
@@ -11,7 +10,7 @@ const Item = ({ id, name, customBody, optionMenu, handleClick }) => {
   )
 
   const fillMenu = () => (
-    <ListItemMenu options={optionMenu}/>
+    <ListItemMenu options={optionMenu} />
   )
 
   const fillContent = () => (

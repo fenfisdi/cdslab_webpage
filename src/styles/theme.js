@@ -12,7 +12,7 @@ let theme = createMuiTheme({
       light: '#a79e02',
       main: '#827b00',
       dark: '#524e01',
-      contrastText: '#fff',
+      contrastText: '#fff'
     }
   },
   typography: {
@@ -35,7 +35,7 @@ let theme = createMuiTheme({
     toolbar: {
       minHeight: 48
     }
-  },
+  }
 })
 
 theme = {
@@ -59,7 +59,7 @@ theme = {
     },
     MuiTabs: {
       root: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(1)
       },
       indicator: {
         height: 3,
@@ -76,28 +76,28 @@ theme = {
         padding: 0,
         [theme.breakpoints.up('md')]: {
           padding: 0,
-          minWidth: 0,
+          minWidth: 0
         }
       }
     },
     MuiIconButton: {
       root: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(1)
       }
     },
     MuiTooltip: {
       tooltip: {
-        borderRadius: 4,
+        borderRadius: 4
       }
     },
     MuiDivider: {
       root: {
-        backgroundColor: '#404854',
+        backgroundColor: '#404854'
       }
     },
     MuiListItemText: {
       primary: {
-        fontWeight: theme.typography.fontWeightMedium,
+        fontWeight: theme.typography.fontWeightMedium
       }
     },
     MuiListItemIcon: {
@@ -105,21 +105,21 @@ theme = {
         color: 'inherit',
         marginRight: 0,
         '& svg': {
-          fontSize: 20,
+          fontSize: 20
         }
       }
     },
     MuiAvatar: {
       root: {
         width: 32,
-        height: 32,
+        height: 32
       }
     },
     MuiError: {
       root: {
         whiteSpace: 'pre-wrap'
       }
-}
+    }
   }
 }
 

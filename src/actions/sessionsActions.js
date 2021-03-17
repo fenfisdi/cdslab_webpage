@@ -25,6 +25,5 @@ export const useSessionActions = (dispatch) => {
     dispatch({ type: SESSION_SET_CURRENT_SECTION_NAVIGATION, payload: sectionTitle })
   }
 
-
   return { login, logout, setCurrenNavigation, setActiveSection }
 }

@@ -39,12 +39,12 @@ export const sessionReducer = (state, action) => {
     case SESSION_SET_CURRENT_NAVIGATION:
       return {
         ...state,
-        navigation: {...state.navigation, current: action.payload}
+        navigation: { ...state.navigation, current: action.payload }
       }
     case SESSION_SET_CURRENT_SECTION_NAVIGATION:
       return {
         ...state,
-        navigation: {...state.navigation, activeSection: action.payload}
+        navigation: { ...state.navigation, activeSection: action.payload }
       }
     default:
       return state

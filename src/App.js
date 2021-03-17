@@ -43,14 +43,14 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<MiniLoader/>}>
+      <Suspense fallback={<MiniLoader />}>
         <Router>
-          <GlobalStyles/>
+          <GlobalStyles />
           <Layout>
             <Switch>
-              <Route exact path='/' component={LoginPage}/>
-              <PrivateRoute path='/simulations' component={<SimulationsPage/>}/>
-              <Route component={NotFoundPage}/>
+              <Route exact path='/' component={LoginPage} />
+              <PrivateRoute path='/simulations' component={<SimulationsPage />} />
+              <Route component={NotFoundPage} />
             </Switch>
           </Layout>
         </Router>
