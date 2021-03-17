@@ -18,19 +18,20 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   // const [errorMessage, setErrorMessage] = useState()
   const classes = useLoginFormStyles(theme)
 
-  const password = useInputValue({
-    value: '',
-    name: 'password',
-    type: 'password',
-    label: 'Your password',
-    validators: VALIDATORS_LOGIN_FORM.password
-  })
-  const username = useInputValue({
-    value: '',
+  const password = useInputValue(
+    '',
+    VALIDATORS_LOGIN_FORM.password, {
+      name: 'password',
+      type: 'password',
+      label: 'Your password',
+    }
+  )
+  const username = useInputValue(
+    '',
+    VALIDATORS_LOGIN_FORM.username, {
     name: 'username',
     type: 'email',
-    label: 'Your Email',
-    validators: VALIDATORS_LOGIN_FORM.username,
+    label: 'Your Email', 
   })
 
   const verifyForm = async (e) => {
@@ -54,9 +55,9 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   const fillSignInHeader = () => (
     <>
       <Avatar className={classes.avatar}>
-        <LockOutlinedIcon/>
+        <LockOutlinedIcon />
       </Avatar>
-      <Typography component="h1" variant="h5">
+      <Typography component='h1' variant='h5'>
         {title}
       </Typography>
     </>
@@ -65,12 +66,12 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   const fillLoginHelpers = () => (
     <Grid container>
       <Grid item xs>
-        <Link href="#" variant="body2">
+        <Link href='#' variant='body2'>
           Forgot password?
         </Link>
       </Grid>
       <Grid item>
-        <Link href="#" variant="body2">
+        <Link href='#' variant='body2'>
           {'Don\'t have an account? Sign Up'}
         </Link>
       </Grid>
@@ -84,24 +85,26 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
           disabled={loading}
           required
           fullWidth
-          variant="outlined"
-          margin="normal"
-          autoComplete="email"
-          {...username} />
+          variant='outlined'
+          margin='normal'
+          autoComplete='email'
+          {...username}
+        />
         <Input
           disabled={loading}
           required
           fullWidth
-          variant="outlined"
-          margin="normal"
-          autoComplete="current-password"
-          {...password} />
+          variant='outlined'
+          margin='normal'
+          autoComplete='current-password'
+          {...password}
+        />
         {error && fillError()}
         <Button
-          type="submit"
+          type='submit'
           fullWidth
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           className={classes.submit}
           disabled={isInvalidForm()}
         >
@@ -109,7 +112,7 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
         </Button>
         {fillLoginHelpers()}
         <Box mt={5}>
-          <Copyright/>
+          <Copyright />
         </Box>
       </form>
     </>
@@ -118,7 +121,7 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   return (
     <>
       {fillSignInHeader()}
-      {loading && <LoadingMessage><p>Logging in</p><MiniLoader/></LoadingMessage>}
+      {loading && <LoadingMessage><p>Logging in</p><MiniLoader /></LoadingMessage>}
       {!loading && fillForm()}
 
     </>
