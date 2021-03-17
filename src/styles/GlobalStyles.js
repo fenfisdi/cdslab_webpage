@@ -5,7 +5,6 @@ export const GlobalStyles = createGlobalStyle`
         html {
                 box-sizing: border-box;
                 font-family: 'Montserrat', sans-serif;
-                font-size: 62.5%; /* with this we achive 1rem == 10 px*/
         }
         
         *, *::before, *::after {
@@ -13,10 +12,6 @@ export const GlobalStyles = createGlobalStyle`
 	        margin: 0;
 	        padding: 0;
         }
-        p {
-                font-size: 1.6rem; /* 1rem == 10 px, in this case, font size of p = 16px */
-        }
-        
         ul, li, h1, h2, h3, p, button {
                 margin: 0;
         }
