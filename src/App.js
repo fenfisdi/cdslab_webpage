@@ -10,6 +10,7 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
+import RegisterPage from './pages/RegisterPage'
 
 const App = () => {
   const {
@@ -50,6 +51,7 @@ const App = () => {
             <Switch>
               <Route exact path='/' component={LoginPage} />
               <PrivateRoute path='/simulations' component={<SimulationsPage />} />
+              <PrivateRoute path='/register' component={<RegisterPage />} />
               <Route component={NotFoundPage} />
             </Switch>
           </Layout>
