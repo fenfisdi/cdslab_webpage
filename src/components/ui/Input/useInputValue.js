@@ -1,25 +1,17 @@
 import { useState } from 'react'
 
-export const useInputValue = ({
-  name: nameP = '',
-  value: valueP = '',
-  label: placeholderP = '',
-  validators: validatorsParam = [],
-  errors: errorsP = [],
-  type: typeP = 'text'
-}) => {
-  const [value, setValue] = useState(valueP)
-  const [label, setLabel] = useState(placeholderP)
-  const [name, setName] = useState(nameP)
-  const [errors, setErrors] = useState(errorsP)
-  const [validators, setValidators] = useState(validatorsParam)
-  const [type, setType] = useState(typeP)
+export const useInputValue = (
+  val,
+  validators = [],
+  extras
+) => {
+  const [value, setValue] = useState(val)
+  const [errors, setErrors] = useState([])
   const [helperText, setHelperText] = useState(null)
 
   const onChange = e => {
     e.target ? setValue(e.target.value) : setValue(e)
-    e.target ? validateInput(e.target.value) :  validateInput(e)
-
+    e.target ? validateInput(e.target.value) : validateInput(e)
   }
 
   /**
@@ -28,6 +20,9 @@ export const useInputValue = ({
    * @return Array of errors
    */
   const validateInput = value => {
+    if (!validators) {
+      return
+    }
     const err = validators
       .filter(validator => !validator.check(value, validator.valueToCheck))
       .map(val => {
@@ -47,6 +42,7 @@ export const useInputValue = ({
     errors,
     validators,
     helperText,
-    onChange
+    onChange,
+    ...extras
   }
 }
