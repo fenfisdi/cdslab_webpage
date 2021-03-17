@@ -22,3 +22,25 @@ export const checkMaxLength = (value, maxValue) => {
 export const checkPattern = (value, pattern) => {
   return pattern.test(value)
 }
+/**
+ * Check max value
+ * @param {string} value
+ * @param {number} maxValue Max value
+ */
+ export const checkMaxValue = (value, maxValue) => {
+   if(!value){
+    value = 0;
+  }
+  return !(value >= maxValue)
+}
+/**
+ * Check min value
+ * @param {string} value
+ * @param {number} minValue min value
+ */
+ export const checkMinValue = (value, minValue) => {
+   if(!value){
+     value = 0;
+   }
+  return !(value < minValue)
+}
