@@ -2,6 +2,7 @@ import {
   checkMinLength,
   checkMaxLength,
   checkPattern,
+  checkMinValue,
 } from "../../../components/Forms/validators/validatorsCheks";
 import {
   PATTERN_ALPHANUMERIC,
@@ -55,6 +56,20 @@ export const VALIDATORS_REGISTER_FORM = {
       valueToCheck: 0,
     },
   ],
-  alphabetic: [],
+  alphabetic: [
+    {
+      type: "required",
+      message: REQUIRED_MESSAGE,
+      check: checkMinLength,
+      valueToCheck: 0,
+    },
+    ,
+    {
+      type: "minlength",
+      message: MIN_LENGTH_MESSAGE.replace("?", 2),
+      check: checkMinLength,
+      valueToCheck: 2,
+    },
+  ],
   dateTime: [],
 };
