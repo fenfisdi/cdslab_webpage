@@ -3,7 +3,7 @@ import { ColumnTitle, TableContainer, TableCell, TableRow, TableHeaderRow } from
 import { TextField } from '@material-ui/core'
 import { Button } from '../ui/Buttons'
 
-const DynamicTable = ({ initialItems, columns, callback }) => {
+const DynamicTable = ({ initialItems, columns }) => {
   const [items, setItems] = useState(initialItems)
 
   React.useEffect(() => {

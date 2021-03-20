@@ -29,10 +29,10 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   const username = useInputValue(
     '',
     VALIDATORS_LOGIN_FORM.username, {
-    name: 'username',
-    type: 'email',
-    label: 'Your Email', 
-  })
+      name: 'username',
+      type: 'email',
+      label: 'Your Email', 
+    })
 
   const verifyForm = async (e) => {
     e.preventDefault()

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import RegisterForm from '../../components/RegisterForm'
 import { useStore } from '../../store/storeContext'
