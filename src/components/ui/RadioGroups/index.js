@@ -6,6 +6,7 @@ import { RadioButton } from "../RadioButton";
 export const RadioGroups = ({
   options = [],
   value,
+  defaultValue,
   title,
   direction,
   onChange,

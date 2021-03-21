@@ -2,12 +2,16 @@ import { Grid, Paper } from "@material-ui/core";
 import React from "react";
 import { Input } from "../../ui/Input";
 import { useInputValue } from "../../ui/Input/useInputValue";
-import { VALIDATORS_REGISTER_FORM } from "./validators";
+import { checkTypeNumber, VALIDATORS_REGISTER_FORM } from "./validators";
 import { RadioGroups } from "../../ui/RadioGroups";
 import { TitleComponent } from "../../ui/Title";
 import theme from "../../../styles/theme";
 import { useRegisterFormStyles } from "./styles";
 import { PhoneNumber } from "../../ui/PhoneNumber";
+import { PasswordChecker } from "../PasswordChecker";
+import { useRadioGroupsValue } from "../../ui/RadioGroups/useRadioGroupsValue";
+import { SelectComponent } from "../../ui/Select";
+import { useSelectValue } from "../../ui/Select/useSelectValue";
 
 const RegisterForm = () => {
   const classes = useRegisterFormStyles(theme);
@@ -28,18 +32,25 @@ const RegisterForm = () => {
     type: "text",
     label: "Last Name",
   });
-  const phoneNumber = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "phoneNumber",
-    type: "text",
-    label: "phone Number",
+
+  const genre = useSelectValue("", VALIDATORS_REGISTER_FORM.genre, {
+    options: [
+      {
+        value: "female",
+        label: "Female",
+      },
+      {
+        value: "male",
+        label: "male",
+      },
+      {
+        value: "other",
+        label: "other",
+      },
+    ],
+    title: "Gender",
   });
-  /*  const sex = useInputValue(
-    '',
-    VALIDATORS_REGISTER_FORM.username, {
-    name: 'sex',
-    type: 'email',
-    label: 'Your Email', 
-  }) */
+
   const institution = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
     name: "institution",
     type: "text",
@@ -64,19 +75,30 @@ const RegisterForm = () => {
     type: "date",
     label: "birth date",
   });
+  const phoneNumber = useInputValue("", VALIDATORS_REGISTER_FORM.phone, {
+    name: "phoneNumber",
+    type: "text",
+    label: "phone Number",
+    onKeyDown: (event) => {
+      return checkTypeNumber(event);
+    },
+  });
+  const phoneExtension = useInputValue("", VALIDATORS_REGISTER_FORM.ext, {
+    name: "phoneExtension",
+    type: "text",
+    label: "phone Extension",
+    onKeyDown: (event) => {
+      return checkTypeNumber(event);
+    },
+  });
   const password = useInputValue("", VALIDATORS_REGISTER_FORM.password, {
     name: "password",
     type: "password",
     label: "Password",
   });
 
-  /* const passwordVerify = useInputValue("", VALIDATORS_REGISTER_FORM.username, {
-    name: "username",
-    type: "email",
-    label: "Your Email",
-  }); */
   /********************* */
-
+  console.log("::::::::::::>", genre);
   return (
     <Paper className={classes.formBody}>
       <Grid xs={12}>
@@ -116,25 +138,7 @@ const RegisterForm = () => {
             />
           </Grid>
           <Grid item container xs={4} direction="column">
-            <RadioGroups
-              options={[
-                {
-                  value: "female",
-                  label: "Female",
-                },
-                {
-                  value: "male",
-                  label: "male",
-                },
-              ]}
-              value={"female"}
-              title={"Sex"}
-              direction="row"
-              onChange={(event) => {
-                console.log("radio button:::>", event.target.value);
-              }}
-              style={{ marginTop: "20px" }}
-            />
+            <SelectComponent {...genre} />
             <Input
               disabled={false}
               required
@@ -179,15 +183,9 @@ const RegisterForm = () => {
           </Grid>
         </Grid>
         <Grid item container xs={12} direction="column">
-          <PhoneNumber phoneNumber={phoneNumber} />
-          <Input
-            disabled={false}
-            required
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            autoComplete="password"
-            {...password}
+          <PhoneNumber
+            phoneNumber={phoneNumber}
+            phoneExtension={phoneExtension}
           />
           <Input
             disabled={false}
@@ -197,6 +195,13 @@ const RegisterForm = () => {
             margin="normal"
             autoComplete="password"
             {...password}
+          />
+          <PasswordChecker
+            checkValue={password.value}
+            errorText={"Incorrect password.. "}
+            eventEmmiter={(value) => {
+              console.log("isVeri:::>", value);
+            }}
           />
         </Grid>
       </Grid>
