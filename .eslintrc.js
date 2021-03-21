@@ -13,8 +13,12 @@ module.exports = {
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'windows'],
-    quotes: ['error', 'single'],
+    quotes: ['warn', 'single'],
     semi: ['error', 'never'],
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'no-unused-vars': [
+      'warn',
+      { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
+    ]
   }
 }

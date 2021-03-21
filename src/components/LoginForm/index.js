@@ -14,25 +14,26 @@ import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 
-export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
+export const LoginForm = ({
+  onSubmit,
+  otro,
+  title = 'Sign in',
+  error,
+  loading
+}) => {
   // const [errorMessage, setErrorMessage] = useState()
   const classes = useLoginFormStyles(theme)
 
-  const password = useInputValue(
-    '',
-    VALIDATORS_LOGIN_FORM.password, {
-      name: 'password',
-      type: 'password',
-      label: 'Your password',
-    }
-  )
-  const username = useInputValue(
-    '',
-    VALIDATORS_LOGIN_FORM.username, {
-      name: 'username',
-      type: 'email',
-      label: 'Your Email', 
-    })
+  const password = useInputValue('', VALIDATORS_LOGIN_FORM.password, {
+    name: 'password',
+    type: 'password',
+    label: 'Your password'
+  })
+  const username = useInputValue('', VALIDATORS_LOGIN_FORM.username, {
+    name: 'username',
+    type: 'email',
+    label: 'Your Email'
+  })
 
   const verifyForm = async (e) => {
     e.preventDefault()
@@ -47,10 +48,15 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   }
 
   const fillError = () => {
-    return <LoginError><span>{error}</span></LoginError>
+    return (
+      <LoginError>
+        <span>{error}</span>
+      </LoginError>
+    )
   }
 
-  const isInvalidForm = () => !!(username.errors.length > 0 || password.errors.length > 0)
+  const isInvalidForm = () =>
+    !!(username.errors.length > 0 || password.errors.length > 0)
 
   const fillSignInHeader = () => (
     <>
@@ -121,9 +127,13 @@ export const LoginForm = ({ onSubmit, title = 'Sign in', error, loading }) => {
   return (
     <>
       {fillSignInHeader()}
-      {loading && <LoadingMessage><p>Logging in</p><MiniLoader /></LoadingMessage>}
+      {loading && (
+        <LoadingMessage>
+          <p>Logging in</p>
+          <MiniLoader />
+        </LoadingMessage>
+      )}
       {!loading && fillForm()}
-
     </>
   )
 }
