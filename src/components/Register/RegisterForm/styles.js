@@ -8,5 +8,6 @@ export const useRegisterFormStyles = makeStyles((theme) => ({
     background: "#ffffff",
     height: "100%",
     overflow: "hidden",
+    width: "70%",
   },
 }));

@@ -9,10 +9,6 @@ export const useSelectValue = (val, validator, extras) => {
   const onChange = (e) => {
     if (e && e.target) {
       setValue(e.target.value);
-      if (error) {
-        setError(false);
-        setHelperText("");
-      }
     }
   };
 
@@ -26,6 +22,13 @@ export const useSelectValue = (val, validator, extras) => {
       setHelperText(validator.message);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      setError(false);
+      setHelperText("");
+    }
+  }, [value]);
 
   return {
     error,
