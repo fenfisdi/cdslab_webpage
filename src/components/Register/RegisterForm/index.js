@@ -3,13 +3,11 @@ import React from "react";
 import { Input } from "../../ui/Input";
 import { useInputValue } from "../../ui/Input/useInputValue";
 import { checkTypeNumber, VALIDATORS_REGISTER_FORM } from "./validators";
-import { RadioGroups } from "../../ui/RadioGroups";
 import { TitleComponent } from "../../ui/Title";
 import theme from "../../../styles/theme";
 import { useRegisterFormStyles } from "./styles";
 import { PhoneNumber } from "../../ui/PhoneNumber";
 import { PasswordChecker } from "../PasswordChecker";
-import { useRadioGroupsValue } from "../../ui/RadioGroups/useRadioGroupsValue";
 import { SelectComponent } from "../../ui/Select";
 import { useSelectValue } from "../../ui/Select/useSelectValue";
 
@@ -98,26 +96,26 @@ const RegisterForm = () => {
   });
 
   /********************* */
-  console.log("::::::::::::>", genre);
+
   return (
     <Paper className={classes.formBody}>
-      <Grid xs={12}>
+      <Grid item container xs={12}>
         <TitleComponent
           justify={"center"}
           alignItems={"center"}
           title={"Registro"}
+          variant={"h5"}
         />
-        <Grid item container xs={12} spacing={2}>
-          <Grid item container xs={4} direction="column">
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="email"
-              {...email}
-            />
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
+          <Grid item xs={5}>
             <Input
               disabled={false}
               required
@@ -127,6 +125,8 @@ const RegisterForm = () => {
               autoComplete="name"
               {...name}
             />
+          </Grid>
+          <Grid item xs={5}>
             <Input
               disabled={false}
               required
@@ -137,37 +137,28 @@ const RegisterForm = () => {
               {...lastName}
             />
           </Grid>
-          <Grid item container xs={4} direction="column">
-            <SelectComponent {...genre} />
+        </Grid>
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
+          <Grid item xs={5}>
             <Input
               disabled={false}
               required
               fullWidth
               variant="outlined"
               margin="normal"
-              autoComplete="institution"
-              {...institution}
-            />
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="institutionAfiliation"
-              {...institutionAfiliation}
+              autoComplete="email"
+              {...email}
             />
           </Grid>
-          <Grid item container xs={4} direction="column">
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="profession"
-              {...profession}
-            />
+          <Grid item xs={5}>
             <Input
               disabled={false}
               required
@@ -182,27 +173,106 @@ const RegisterForm = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container xs={12} direction="column">
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
           <PhoneNumber
+            xs={5}
             phoneNumber={phoneNumber}
             phoneExtension={phoneExtension}
           />
-          <Input
-            disabled={false}
-            required
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            autoComplete="password"
-            {...password}
-          />
-          <PasswordChecker
-            checkValue={password.value}
-            errorText={"Incorrect password.. "}
-            eventEmmiter={(value) => {
-              console.log("isVeri:::>", value);
-            }}
-          />
+          <SelectComponent xs={5} {...genre} />
+        </Grid>
+
+        {/* <Divider style={{ margin: "10px 0", backgroundColor: "#0F0C5A" }} /> */}
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
+          <Grid item xs={5}>
+            <Input
+              disabled={false}
+              required
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              autoComplete="institution"
+              {...institution}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <Input
+              disabled={false}
+              required
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              autoComplete="institutionAfiliation"
+              {...institutionAfiliation}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
+          <Grid item xs={10}>
+            <Input
+              disabled={false}
+              required
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              autoComplete="profession"
+              {...profession}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          direction="row"
+          justify="center"
+        >
+          <Grid item xs={5}>
+            <Input
+              disabled={false}
+              required
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              autoComplete="password"
+              {...password}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <PasswordChecker
+              checkValue={password.value}
+              errorText={"Incorrect password.. "}
+              eventEmmiter={(value) => {
+                console.log("isVeri:::>", value);
+              }}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Paper>
