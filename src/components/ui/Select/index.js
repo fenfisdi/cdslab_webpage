@@ -1,19 +1,18 @@
 import {
   FormControl,
   FormHelperText,
+  Grid,
   InputLabel,
   makeStyles,
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    marginBottom: "16px",
+    width: "100%",
     marginTop: "16px",
+    marginBottom: "8px",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -21,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SelectComponent = ({
+  xs,
   value,
   options = [],
   title,
@@ -33,22 +33,28 @@ export const SelectComponent = ({
   const classes = useStyles();
 
   return (
-    <FormControl className={classes.formControl} error={error}>
-      <InputLabel id="selectComponent">{title}</InputLabel>
-      <Select
-        labelId="selectComponent"
-        id="selectComponent-simple"
-        value={value}
-        onChange={onChange}
-        onOpen={onOpen}
-        onClose={onClose}
+    <Grid xs={xs} item>
+      <FormControl
+        className={classes.formControl}
+        error={error}
+        variant="outlined"
       >
-        {options.map((option) => {
-          const { value: optionValue, label } = option;
-          return <MenuItem value={optionValue}>{label}</MenuItem>;
-        })}
-      </Select>
-      <FormHelperText>{helperText}</FormHelperText>
-    </FormControl>
+        <InputLabel htmlFor="selectComponent">{title}</InputLabel>
+        <Select
+          label={title}
+          id={`selectComponent-simple-${title}`}
+          value={value}
+          onChange={onChange}
+          onOpen={onOpen}
+          onClose={onClose}
+        >
+          {options.map((option) => {
+            const { value: optionValue, label } = option;
+            return <MenuItem value={optionValue}>{label}</MenuItem>;
+          })}
+        </Select>
+        <FormHelperText>{helperText}</FormHelperText>
+      </FormControl>
+    </Grid>
   );
 };

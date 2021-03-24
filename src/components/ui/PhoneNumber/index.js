@@ -1,20 +1,18 @@
 import MuiPhoneNumber from "material-ui-phone-number";
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import { Input } from "../Input";
-export const PhoneNumber = ({
-  val,
-  validators = [],
-  extras,
-  phoneNumber,
-  phoneExtension,
-}) => {
+const useStyles = makeStyles(() => ({
+  formControl: {
+    width: "100%",
+    marginTop: "16px",
+    marginBottom: "8px",
+  },
+}));
+
+export const PhoneNumber = ({ xs, phoneNumber, phoneExtension }) => {
+  const classes = useStyles();
   return (
-    <Grid
-      item
-      container
-      direction="row"
-      style={{ marginTop: "16px", marginBottom: "8px" }}
-    >
+    <Grid xs={xs} item direction="row" className={classes.formControl}>
       <MuiPhoneNumber
         name="phoneExt"
         label="Ext"
@@ -25,7 +23,7 @@ export const PhoneNumber = ({
         disabled={false}
         variant="outlined"
         {...phoneExtension}
-        style={{ width: "120px" }}
+        style={{ width: "30%" }}
       />
       <Input
         disabled={false}
@@ -37,7 +35,7 @@ export const PhoneNumber = ({
           shrink: true,
         }}
         {...phoneNumber}
-        style={{ width: "46%", "margin-top": "0px", "margin-bottom": "0px" }}
+        style={{ width: "70%", "margin-top": "0px", "margin-bottom": "0px" }}
       />
     </Grid>
   );
