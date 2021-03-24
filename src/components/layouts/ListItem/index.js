@@ -1,7 +1,7 @@
 import React from 'react'
 import Item from '../Item'
 
-const ListItem = ({ list = [], type, optionMenu, handleClick }) => {
+const ListItem = ({ list = [], optionMenu, handleClick }) => {
   const renderDefault = () => {
     return (
       <ul>

@@ -1,18 +1,18 @@
-import "react-phone-number-input/style.css";
-import { Grid, makeStyles } from "@material-ui/core";
-import { Input } from "../Input";
+import 'react-phone-number-input/style.css'
+import { Grid, makeStyles } from '@material-ui/core'
+import { Input } from '../Input'
 const useStyles = makeStyles(() => ({
   formControl: {
-    width: "100%",
-    marginTop: "16px",
-    marginBottom: "8px",
-  },
-}));
+    width: '100%',
+    marginTop: '16px',
+    marginBottom: '8px'
+  }
+}))
 
 export const PhoneNumber = ({ xs, phoneNumber }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
-    <Grid xs={xs} item direction="row" className={classes.formControl}>
+    <Grid xs={xs} item direction='row' className={classes.formControl}>
       {/* <PhoneInput
         placeholder="Enter phone number"
         {...phoneNumber}
@@ -32,17 +32,14 @@ export const PhoneNumber = ({ xs, phoneNumber }) => {
         style={{ width: "30%" }}
       />*/}
       <Input
-        disabled={false}
         required
-        variant="outlined"
-        margin="normal"
-        autoComplete="phoneNumber"
+        autoComplete='phoneNumber'
         InputLabelProps={{
-          shrink: true,
+          shrink: true
         }}
         {...phoneNumber}
-        style={{ width: "100%", "margin-top": "0px", "margin-bottom": "0px" }}
+        style={{ width: '100%', 'margin-top': '0px', 'margin-bottom': '0px' }}
       />
     </Grid>
-  );
-};
+  )
+}

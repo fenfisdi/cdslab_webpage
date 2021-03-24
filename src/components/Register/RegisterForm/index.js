@@ -1,97 +1,95 @@
-import { Grid, Paper } from "@material-ui/core";
-import React from "react";
-import { Input } from "../../ui/Input";
-import { useInputValue } from "../../ui/Input/useInputValue";
-import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from "./validators";
-import { TitleComponent } from "../../ui/Title";
-import theme from "../../../styles/theme";
-import { useRegisterFormStyles } from "./styles";
-import { PhoneNumber } from "../../ui/PhoneNumber";
-import { PasswordChecker } from "../PasswordChecker";
-import { SelectComponent } from "../../ui/Select";
-import { useSelectValue } from "../../ui/Select/useSelectValue";
-import Button from "@material-ui/core/Button";
-import { usePhoneNumberValue } from "../../ui/PhoneNumber/usePhoneNumberValue";
+import { Grid, Paper } from '@material-ui/core'
+import React from 'react'
+import { Input } from '../../ui/Input'
+import { useInputValue } from '../../ui/Input/useInputValue'
+import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
+import { TitleComponent } from '../../ui/Title'
+import theme from '../../../styles/theme'
+import { useRegisterFormStyles } from './styles'
+import { PasswordChecker } from '../PasswordChecker'
+import { useSelectValue } from '../../ui/Select/useSelectValue'
+import Button from '@material-ui/core/Button'
+import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 
 const RegisterForm = ({ eventEmitter }) => {
-  const classes = useRegisterFormStyles(theme);
+  const classes = useRegisterFormStyles(theme)
 
   /******* form fields  */
-  const email = useInputValue("", VALIDATORS_REGISTER_FORM.email, {
-    name: "email",
-    type: "email",
-    label: "Email",
-  });
-  const name = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "name",
-    type: "text",
-    label: "Name",
-  });
-  const lastName = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "lastName",
-    type: "text",
-    label: "Last Name",
-  });
+  const email = useInputValue('', VALIDATORS_REGISTER_FORM.email, {
+    name: 'email',
+    type: 'email',
+    label: 'Email'
+  })
+  const name = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'name',
+    type: 'text',
+    label: 'Name'
+  })
+  const lastName = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'lastName',
+    type: 'text',
+    label: 'Last Name'
+  })
 
-  const genre = useSelectValue("", VALIDATORS_REGISTER_FORM.genre, {
+  const genre = useSelectValue('', VALIDATORS_REGISTER_FORM.genre, {
     options: [
       {
-        value: "F",
-        label: "Female",
+        value: 'F',
+        label: 'Female'
       },
       {
-        value: "M",
-        label: "Male",
-      },
+        value: 'M',
+        label: 'Male'
+      }
     ],
-    title: "Gender",
-  });
+    title: 'Gender'
+  })
 
-  const institution = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "institution",
-    type: "text",
-    label: "Institution",
-  });
+  const institution = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'institution',
+    type: 'text',
+    label: 'Institution'
+  })
   const institutionAfiliation = useInputValue(
-    "",
+    '',
     VALIDATORS_REGISTER_FORM.alphabetic,
     {
-      name: "institutionAfiliation",
-      type: "text",
-      label: "Institution Afiliation",
+      name: 'institutionAfiliation',
+      type: 'text',
+      label: 'Institution Afiliation'
     }
-  );
-  const profession = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "profession",
-    type: "text",
-    label: "Profession",
-  });
-  const dateBirth = useInputValue("", VALIDATORS_REGISTER_FORM.dateTime, {
-    name: "dateBirth",
-    type: "date",
-    label: "birth date",
-  });
-  const phoneNumber = usePhoneNumberValue("", VALIDATORS_REGISTER_FORM.phone, {
-    name: "phoneNumber",
-    type: "text",
-    label: "phone Number",
+  )
+  const profession = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'profession',
+    type: 'text',
+    label: 'Profession'
+  })
+  const dateBirth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
+    name: 'dateBirth',
+    type: 'date',
+    label: 'birth date'
+  })
+  const phoneNumber = usePhoneNumberValue('', VALIDATORS_REGISTER_FORM.phone, {
+    name: 'phoneNumber',
+    type: 'text',
+    label: 'phone Number',
     onKeyDown: (event) => {
-      return checkTypePhoneNumber(event);
-    },
-  });
-  const phoneExtension = useInputValue("+57", VALIDATORS_REGISTER_FORM.ext, {
-    name: "phoneExtension",
-    type: "text",
-    label: "phone Extension",
+      return checkTypePhoneNumber(event)
+    }
+  })
+  const phoneExtension = useInputValue('+57', VALIDATORS_REGISTER_FORM.ext, {
+    name: 'phoneExtension',
+    type: 'text',
+    label: 'phone Extension',
     onKeyDown: (event) => {
-      return checkTypePhoneNumber(event);
-    },
-  });
-  const password = useInputValue("", VALIDATORS_REGISTER_FORM.password, {
-    name: "password",
-    type: "password",
-    label: "Password",
-  });
+      return checkTypePhoneNumber(event)
+    }
+  })
+  const password = useInputValue('', VALIDATORS_REGISTER_FORM.password, {
+    name: 'password',
+    type: 'password',
+    label: 'Password'
+  })
 
   const handleClick = () => {
     eventEmitter({
@@ -102,185 +100,135 @@ const RegisterForm = ({ eventEmitter }) => {
       institution: institution.value,
       institution_afiliation: institutionAfiliation.value,
       profession: profession.value,
-      date_of_birth: "2021-03-23T21:27:36.253Z",
+      date_of_birth: '2021-03-23T21:27:36.253Z',
       phone_number: phoneNumber.value,
-      password: password.value,
-    });
-  };
+      password: password.value
+    })
+  }
 
   /********************* */
 
   return (
     <Paper className={classes.formBody}>
-      <Grid item container xs={12} justify="center">
+      <Grid item container xs={12} justify='center'>
         <TitleComponent
-          justify={"center"}
-          alignItems={"center"}
-          title={"Registro"}
-          variant={"h5"}
+          justify={'center'}
+          alignItems={'center'}
+          title={'Registro'}
+          variant={'h5'}
         />
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
           <Grid item xs={5}>
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="name"
-              {...name}
-            />
+            <Input required fullWidth {...name} />
           </Grid>
           <Grid item xs={5}>
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="last name"
-              {...lastName}
-            />
+            <Input required fullWidth autoComplete='last name' {...lastName} />
           </Grid>
         </Grid>
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
           <Grid item xs={5}>
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="email"
-              {...email}
-            />
+            <Input required fullWidth {...email} />
           </Grid>
           <Grid item xs={5}>
             <Input
-              disabled={false}
               required
               fullWidth
-              variant="outlined"
               InputLabelProps={{
-                shrink: true,
+                shrink: true
               }}
-              margin="normal"
-              autoComplete="dateBirth"
+              margin='normal'
+              autoComplete='dateBirth'
               {...dateBirth}
             />
           </Grid>
         </Grid>
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
-          <PhoneNumber
-            xs={5}
-            phoneNumber={phoneNumber}
-            phoneExtension={phoneExtension}
-          />
-          <SelectComponent xs={5} {...genre} />
+          {/* <PhoneNumber
+          xs={5}
+          phoneNumber={phoneNumber}
+          phoneExtension={phoneExtension}
+        /> */}
         </Grid>
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
           <Grid item xs={5}>
             <Input
-              disabled={false}
               required
               fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="institution"
+              autoComplete='institution'
               {...institution}
             />
           </Grid>
           <Grid item xs={5}>
             <Input
-              disabled={false}
               required
               fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="institutionAfiliation"
+              autoComplete='institutionAfiliation'
               {...institutionAfiliation}
             />
           </Grid>
         </Grid>
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
           <Grid item xs={10}>
             <Input
-              disabled={false}
               required
               fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="profession"
+              autoComplete='profession'
               {...profession}
             />
           </Grid>
         </Grid>
-
         <Grid
           item
           container
           xs={12}
           spacing={1}
-          direction="row"
-          justify="center"
+          direction='row'
+          justify='center'
         >
           <Grid item xs={5}>
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="password"
-              {...password}
-            />
+            <Input required fullWidth autoComplete='password' {...password} />
           </Grid>
           <Grid item xs={5}>
             <PasswordChecker
               checkValue={password.value}
-              errorText={"Incorrect password.. "}
+              errorText={'Incorrect password.. '}
               eventEmitter={(value) => {
-                console.log("isVeri:::>", value);
+                console.log('isVeri:::>', value)
               }}
             />
           </Grid>
@@ -288,8 +236,8 @@ const RegisterForm = ({ eventEmitter }) => {
 
         <Button
           onClick={handleClick}
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           className={{}}
           disabled={false}
         >
@@ -297,7 +245,7 @@ const RegisterForm = ({ eventEmitter }) => {
         </Button>
       </Grid>
     </Paper>
-  );
-};
+  )
+}
 
-export default RegisterForm;
+export default RegisterForm

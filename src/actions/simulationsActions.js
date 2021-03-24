@@ -19,7 +19,7 @@ export const useSimulationActions = (dispatch) => {
     dispatch({ type: SIMULATION_SELECT, payload: simulation })
   }
 
-  const getSimulations = async (simulation) => {
+  const getSimulations = async () => {
     dispatch({ type: SIMULATION_LOADING })
     try {
       // TODO call api to get simulations
