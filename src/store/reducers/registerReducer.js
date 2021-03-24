@@ -14,17 +14,17 @@ export const initialState = {
 
 export const registerReducer = (state, action) => {
   switch (action.type) {
-    case REGISTER_LOADING:
-      return { ...state, loading: true, error: null, data: null }
-    case REGISTER_ERROR:
-      return { ...state, loading: false, error: action.payload }
-    case REGISTER_SAVE:
-      return {
-        ...state,
-        loading: false,
-        data: action.payload
-      }
-    default:
-      return state
+  case REGISTER_LOADING:
+    return { ...state, loading: true, error: null, data: null }
+  case REGISTER_ERROR:
+    return { ...state, loading: false, error: action.payload }
+  case REGISTER_SAVE:
+    return {
+      ...state,
+      loading: false,
+      data: action.payload
+    }
+  default:
+    return state
   }
 }

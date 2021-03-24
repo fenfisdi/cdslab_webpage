@@ -1,6 +1,7 @@
 import { useInputValue } from '../../ui/Input/useInputValue'
-import { checkTypeNumber, VALIDATORS_REGISTER_FORM } from './validators'
+import { checkTypeNumber, checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
 import { useSelectValue } from '../../ui/Select/useSelectValue'
+import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 
 export const useRegisterFormState = () => {
   /******* form fields  */
@@ -8,38 +9,27 @@ export const useRegisterFormState = () => {
     name: 'email',
     type: 'email',
     label: 'Email',
-    variant: 'outlined',
-    margin: 'normal',
-    autoComplete:'email'
   })
   const name = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'name',
     type: 'text',
     label: 'Name',
-    variant: 'outlined',
-    margin: 'normal',
   })
   const lastName = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'lastName',
     type: 'text',
     label: 'Last Name',
-    variant: 'outlined',
-    margin: 'normal',
   })
 
   const genre = useSelectValue('', VALIDATORS_REGISTER_FORM.genre, {
     options: [
       {
-        value: 'female',
+        value: 'F',
         label: 'Female',
       },
       {
-        value: 'male',
-        label: 'male',
-      },
-      {
-        value: 'other',
-        label: 'other',
+        value: 'M',
+        label: 'Male',
       },
     ],
     title: 'Gender',
@@ -49,8 +39,6 @@ export const useRegisterFormState = () => {
     name: 'institution',
     type: 'text',
     label: 'Institution',
-    variant: 'outlined',
-    margin: 'normal',
   })
   const institutionAfiliation = useInputValue(
     '',
@@ -59,49 +47,38 @@ export const useRegisterFormState = () => {
       name: 'institutionAfiliation',
       type: 'text',
       label: 'Institution Afiliation',
-      variant: 'outlined',
-      margin: 'normal',
     }
   )
   const profession = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'profession',
     type: 'text',
     label: 'Profession',
-    variant: 'outlined',
-    margin: 'normal',
-
   })
-  const date_of_birth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
-    name: 'date_of_birth',
+  const dateBirth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
+    name: 'dateBirth',
     type: 'date',
     label: 'birth date',
   })
-  const phoneNumber = useInputValue('', VALIDATORS_REGISTER_FORM.phone, {
+  const phoneNumber = usePhoneNumberValue('', VALIDATORS_REGISTER_FORM.phone, {
     name: 'phoneNumber',
     type: 'text',
     label: 'phone Number',
-    variant: 'outlined',
-    margin: 'normal',
     onKeyDown: (event) => {
-      return checkTypeNumber(event)
-    },
+      return checkTypePhoneNumber(event)
+    }
   })
-  const phoneExtension = useInputValue('', VALIDATORS_REGISTER_FORM.ext, {
+  const phoneExtension = useInputValue('+57', VALIDATORS_REGISTER_FORM.ext, {
     name: 'phoneExtension',
     type: 'text',
     label: 'phone Extension',
-    variant: 'outlined',
-    margin: 'normal',
     onKeyDown: (event) => {
-      return checkTypeNumber(event)
+      return checkTypePhoneNumber(event)
     },
   })
   const password = useInputValue('', VALIDATORS_REGISTER_FORM.password, {
     name: 'password',
     type: 'password',
     label: 'Password',
-    variant: 'outlined',
-    margin: 'normal',
   })
 
   return {
@@ -111,7 +88,7 @@ export const useRegisterFormState = () => {
     lastName,
     phoneExtension,
     phoneNumber,
-    date_of_birth,
+    dateBirth,
     institution,
     institutionAfiliation,
     genre,
