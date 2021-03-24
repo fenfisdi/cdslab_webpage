@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   FormControl,
   FormHelperText,
@@ -6,18 +7,18 @@ import {
   makeStyles,
   MenuItem,
   Select,
-} from "@material-ui/core";
+} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: "100%",
-    marginTop: "16px",
-    marginBottom: "8px",
+    width: '100%',
+    marginTop: '16px',
+    marginBottom: '8px',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-}));
+}))
 
 export const SelectComponent = ({
   xs,
@@ -30,7 +31,7 @@ export const SelectComponent = ({
   error,
   helperText,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Grid xs={xs} item>
@@ -49,12 +50,12 @@ export const SelectComponent = ({
           onClose={onClose}
         >
           {options.map((option) => {
-            const { value: optionValue, label } = option;
-            return <MenuItem value={optionValue}>{label}</MenuItem>;
+            const { value: optionValue, label } = option
+            return <MenuItem key={optionValue} value={optionValue}>{label}</MenuItem>
           })}
         </Select>
         <FormHelperText>{helperText}</FormHelperText>
       </FormControl>
     </Grid>
-  );
-};
+  )
+}

@@ -1,31 +1,32 @@
-import { Input } from "../../ui/Input";
-import { useEffect, useRef, useState } from "react";
+import React from 'react'
+import { Input } from '../../ui/Input'
+import { useEffect, useRef, useState } from 'react'
 
 export const PasswordChecker = ({
   checkValue,
-  errorText = "",
+  errorText = '',
   eventEmmiter,
 }) => {
-  const [value, setValue] = useState("");
-  const [isPress, setIsPress] = useState(false);
-  const [helperText, setHelperText] = useState(null);
+  const [value, setValue] = useState('')
+  const [isPress, setIsPress] = useState(false)
+  const [helperText, setHelperText] = useState(null)
 
   useEffect(() => {
     if (!isPress && value.length > 0) {
-      setIsPress(true);
+      setIsPress(true)
     }
     if (value != checkValue) {
-      setHelperText(errorText);
-      eventEmmiter({ success: false });
+      setHelperText(errorText)
+      eventEmmiter({ success: false })
     } else {
-      setHelperText(null);
-      eventEmmiter({ success: true });
+      setHelperText(null)
+      eventEmmiter({ success: true })
     }
-  }, [value]);
+  }, [value])
 
   const onChange = (value) => {
-    setValue(value.target.value);
-  };
+    setValue(value.target.value)
+  }
 
   return (
     <Input
@@ -41,5 +42,5 @@ export const PasswordChecker = ({
       helperText={isPress && helperText}
       onChange={(value) => onChange(value)}
     />
-  );
-};
+  )
+}
