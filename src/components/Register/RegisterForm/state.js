@@ -8,7 +8,6 @@ export const useRegisterFormState = () => {
     name: 'email',
     type: 'email',
     label: 'Email',
-    disabled: false,
     variant: 'outlined',
     margin: 'normal',
     autoComplete:'email'
@@ -17,11 +16,15 @@ export const useRegisterFormState = () => {
     name: 'name',
     type: 'text',
     label: 'Name',
+    variant: 'outlined',
+    margin: 'normal',
   })
   const lastName = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'lastName',
     type: 'text',
     label: 'Last Name',
+    variant: 'outlined',
+    margin: 'normal',
   })
 
   const genre = useSelectValue('', VALIDATORS_REGISTER_FORM.genre, {
@@ -46,6 +49,8 @@ export const useRegisterFormState = () => {
     name: 'institution',
     type: 'text',
     label: 'Institution',
+    variant: 'outlined',
+    margin: 'normal',
   })
   const institutionAfiliation = useInputValue(
     '',
@@ -54,12 +59,17 @@ export const useRegisterFormState = () => {
       name: 'institutionAfiliation',
       type: 'text',
       label: 'Institution Afiliation',
+      variant: 'outlined',
+      margin: 'normal',
     }
   )
   const profession = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'profession',
     type: 'text',
     label: 'Profession',
+    variant: 'outlined',
+    margin: 'normal',
+
   })
   const date_of_birth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
     name: 'date_of_birth',
@@ -70,6 +80,8 @@ export const useRegisterFormState = () => {
     name: 'phoneNumber',
     type: 'text',
     label: 'phone Number',
+    variant: 'outlined',
+    margin: 'normal',
     onKeyDown: (event) => {
       return checkTypeNumber(event)
     },
@@ -78,6 +90,8 @@ export const useRegisterFormState = () => {
     name: 'phoneExtension',
     type: 'text',
     label: 'phone Extension',
+    variant: 'outlined',
+    margin: 'normal',
     onKeyDown: (event) => {
       return checkTypeNumber(event)
     },
@@ -86,6 +100,8 @@ export const useRegisterFormState = () => {
     name: 'password',
     type: 'password',
     label: 'Password',
+    variant: 'outlined',
+    margin: 'normal',
   })
 
   return {

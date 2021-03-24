@@ -26,11 +26,9 @@ export const PhoneNumber = ({ xs, phoneNumber, phoneExtension }) => {
         {...phoneExtension}
         style={{ width: '30%' }}
       />
+      
       <Input
-        disabled={false}
         required
-        variant="outlined"
-        margin="normal"
         autoComplete="phoneNumber"
         InputLabelProps={{
           shrink: true,
