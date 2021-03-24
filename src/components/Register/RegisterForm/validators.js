@@ -2,12 +2,10 @@ import {
   checkMinLength,
   checkMaxLength,
   checkPattern,
-  checkMinValue,
 } from "../../../components/Forms/validators/validatorsCheks";
 import {
-  PATTERN_ALPHANUMERIC,
   PATTERN_EMAIL,
-  PATTERN_NUMERIC,
+  PATTERN_PHONE_NUMBER,
 } from "../../../components/Forms/validators/patterns";
 
 export const REQUIRED_MESSAGE = "This field is requiered.";
@@ -84,13 +82,13 @@ export const VALIDATORS_REGISTER_FORM = {
       type: "pattern",
       message: TYPE_NUMBER,
       check: checkPattern,
-      valueToCheck: PATTERN_NUMERIC,
+      valueToCheck: PATTERN_PHONE_NUMBER,
     },
     {
       type: "minlength",
-      message: MIN_LENGTH_MESSAGE.replace("?", 3),
+      message: MIN_LENGTH_MESSAGE.replace("?", 12),
       check: checkMinLength,
-      valueToCheck: 3,
+      valueToCheck: 12,
     },
   ],
   ext: [
@@ -108,14 +106,13 @@ export const VALIDATORS_REGISTER_FORM = {
   },
 };
 
-export const checkTypeNumber = (event) => {
+export const checkTypePhoneNumber = (event) => {
   const keyCod = event.keyCode;
   const key = event.key;
+  console.log(key);
+  console.log(keyCod);
 
-  if (
-    (![8, 9, 35, 36, 37, 39, 46].includes(keyCod) && isNaN(Number(key))) ||
-    keyCod == 32
-  ) {
+  if (![8, 9, 35, 36, 37, 39, 46, 187].includes(keyCod) && isNaN(Number(key))) {
     event.preventDefault();
     event.stopPropagation();
   }

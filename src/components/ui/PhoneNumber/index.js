@@ -1,4 +1,4 @@
-import MuiPhoneNumber from "material-ui-phone-number";
+import "react-phone-number-input/style.css";
 import { Grid, makeStyles } from "@material-ui/core";
 import { Input } from "../Input";
 const useStyles = makeStyles(() => ({
@@ -9,22 +9,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const PhoneNumber = ({ xs, phoneNumber, phoneExtension }) => {
+export const PhoneNumber = ({ xs, phoneNumber }) => {
   const classes = useStyles();
   return (
     <Grid xs={xs} item direction="row" className={classes.formControl}>
-      <MuiPhoneNumber
+      {/* <PhoneInput
+        placeholder="Enter phone number"
+        {...phoneNumber}
+        variant="outlined"
+      /> */}
+      {/*  <MuiPhoneNumber
         name="phoneExt"
         label="Ext"
         data-cy="user-phone"
         defaultCountry={"co"}
-        regions={["america", "europe", "asia", "oceania", "africa"]}
+        regions={["america"]}
         required={true}
         disabled={false}
         variant="outlined"
+        excludeCountries={["us"]}
         {...phoneExtension}
         style={{ width: "30%" }}
-      />
+      />*/}
       <Input
         disabled={false}
         required
@@ -35,7 +41,7 @@ export const PhoneNumber = ({ xs, phoneNumber, phoneExtension }) => {
           shrink: true,
         }}
         {...phoneNumber}
-        style={{ width: "70%", "margin-top": "0px", "margin-bottom": "0px" }}
+        style={{ width: "100%", "margin-top": "0px", "margin-bottom": "0px" }}
       />
     </Grid>
   );

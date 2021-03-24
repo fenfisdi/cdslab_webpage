@@ -2,7 +2,7 @@ import { Grid, Paper } from "@material-ui/core";
 import React from "react";
 import { Input } from "../../ui/Input";
 import { useInputValue } from "../../ui/Input/useInputValue";
-import { checkTypeNumber, VALIDATORS_REGISTER_FORM } from "./validators";
+import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from "./validators";
 import { TitleComponent } from "../../ui/Title";
 import theme from "../../../styles/theme";
 import { useRegisterFormStyles } from "./styles";
@@ -10,8 +10,10 @@ import { PhoneNumber } from "../../ui/PhoneNumber";
 import { PasswordChecker } from "../PasswordChecker";
 import { SelectComponent } from "../../ui/Select";
 import { useSelectValue } from "../../ui/Select/useSelectValue";
+import Button from "@material-ui/core/Button";
+import { usePhoneNumberValue } from "../../ui/PhoneNumber/usePhoneNumberValue";
 
-const RegisterForm = () => {
+const RegisterForm = ({ eventEmitter }) => {
   const classes = useRegisterFormStyles(theme);
 
   /******* form fields  */
@@ -34,16 +36,12 @@ const RegisterForm = () => {
   const genre = useSelectValue("", VALIDATORS_REGISTER_FORM.genre, {
     options: [
       {
-        value: "female",
+        value: "F",
         label: "Female",
       },
       {
-        value: "male",
-        label: "male",
-      },
-      {
-        value: "other",
-        label: "other",
+        value: "M",
+        label: "Male",
       },
     ],
     title: "Gender",
@@ -68,25 +66,25 @@ const RegisterForm = () => {
     type: "text",
     label: "Profession",
   });
-  const date_of_birth = useInputValue("", VALIDATORS_REGISTER_FORM.dateTime, {
-    name: "date_of_birth",
+  const dateBirth = useInputValue("", VALIDATORS_REGISTER_FORM.dateTime, {
+    name: "dateBirth",
     type: "date",
     label: "birth date",
   });
-  const phoneNumber = useInputValue("", VALIDATORS_REGISTER_FORM.phone, {
+  const phoneNumber = usePhoneNumberValue("", VALIDATORS_REGISTER_FORM.phone, {
     name: "phoneNumber",
     type: "text",
     label: "phone Number",
     onKeyDown: (event) => {
-      return checkTypeNumber(event);
+      return checkTypePhoneNumber(event);
     },
   });
-  const phoneExtension = useInputValue("", VALIDATORS_REGISTER_FORM.ext, {
+  const phoneExtension = useInputValue("+57", VALIDATORS_REGISTER_FORM.ext, {
     name: "phoneExtension",
     type: "text",
     label: "phone Extension",
     onKeyDown: (event) => {
-      return checkTypeNumber(event);
+      return checkTypePhoneNumber(event);
     },
   });
   const password = useInputValue("", VALIDATORS_REGISTER_FORM.password, {
@@ -95,11 +93,26 @@ const RegisterForm = () => {
     label: "Password",
   });
 
+  const handleClick = () => {
+    eventEmitter({
+      email: email.value,
+      name: name.value,
+      last_name: lastName.value,
+      sex: genre.value,
+      institution: institution.value,
+      institution_afiliation: institutionAfiliation.value,
+      profession: profession.value,
+      date_of_birth: "2021-03-23T21:27:36.253Z",
+      phone_number: phoneNumber.value,
+      password: password.value,
+    });
+  };
+
   /********************* */
 
   return (
     <Paper className={classes.formBody}>
-      <Grid item container xs={12}>
+      <Grid item container xs={12} justify="center">
         <TitleComponent
           justify={"center"}
           alignItems={"center"}
@@ -168,8 +181,8 @@ const RegisterForm = () => {
                 shrink: true,
               }}
               margin="normal"
-              autoComplete="date_of_birth"
-              {...date_of_birth}
+              autoComplete="dateBirth"
+              {...dateBirth}
             />
           </Grid>
         </Grid>
@@ -189,8 +202,6 @@ const RegisterForm = () => {
           />
           <SelectComponent xs={5} {...genre} />
         </Grid>
-
-        {/* <Divider style={{ margin: "10px 0", backgroundColor: "#0F0C5A" }} /> */}
 
         <Grid
           item
@@ -268,12 +279,22 @@ const RegisterForm = () => {
             <PasswordChecker
               checkValue={password.value}
               errorText={"Incorrect password.. "}
-              eventEmmiter={(value) => {
+              eventEmitter={(value) => {
                 console.log("isVeri:::>", value);
               }}
             />
           </Grid>
         </Grid>
+
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          color="primary"
+          className={{}}
+          disabled={false}
+        >
+          Continue
+        </Button>
       </Grid>
     </Paper>
   );
