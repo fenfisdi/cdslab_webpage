@@ -1,43 +1,48 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import RegisterForm from '../../components/RegisterForm'
+import React, { useEffect } from 'react'
+import RegisterForm from '../../components/Register/RegisterForm'
 import { useStore } from '../../store/storeContext'
 import { useUserActions } from '../../actions/userActions'
-import { useRegisterActions } from '../../actions/registerActions'
-import { Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+import { useRegisterStyles } from './styles'
+import theme from '../../styles/theme'
 
 const RegisterPage = () => {
   const {
     state: {
       register: { data, loading, error }
-    }, dispatch
+    },
+    dispatch
   } = useStore()
   const { registerUser } = useUserActions(dispatch)
-  const { save } = useRegisterActions(dispatch)
-  const [ window, setWindow ] = useState(1)
+  const classes = useRegisterStyles(theme)
 
   useEffect(() => {
-    console.log(data, loading, error)
-  }, [])
-
-  useEffect(() => {
-    console.log('Data updated ', data) // dummy example
-  }, [data])
+    if (data && !error) {
+      const { data: responseDate } = data
+      console.log('Data loader ', responseDate) // dummy example
+    }
+    if (error) {
+      console.log(':::::::error', error)
+    }
+  }, [data, error])
 
   // dummy example
-  const handleClick = (e) => {
-    e.preventDefault()
-    registerUser({
-      name: 'Juan',
-      lastname: 'Chaverra'
-    })
+  const sendForm = (object) => {
+    console.log('::data send', object)
+    registerUser(object)
   }
+
   return (
-    <section>
-      {window === 1 && <RegisterForm/>}
-      {window === 2 && <p>Estoy en la ventana dos</p>}
-      <Button  variant='contained' color="primary" onClick={handleClick}>Test reducer</Button>
-    </section>
+    <Grid
+      xs={12}
+      container
+      direction='column'
+      justify='center'
+      alignItems='center'
+      className={classes.body}
+    >
+      <RegisterForm eventEmitter={sendForm} />
+    </Grid>
   )
 }
 
