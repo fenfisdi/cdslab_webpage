@@ -28,8 +28,10 @@ const RegisterPage = () => {
 
   // dummy example
   const sendForm = (object) => {
-    console.log('::data send', object)
+    
     registerUser(object)
+    console.log('::data send', object)
+    
   }
 
   return (

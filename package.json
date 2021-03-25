@@ -12,13 +12,15 @@
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
     "date-fns": "^2.16.1",
+    "material-ui-phone-number": "^2.2.6",
+    "qrious": "^4.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "3.10.0",
+    "react-qrious": "^2.4.5",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "0.2.4",
-    "material-ui-phone-number": "^2.2.6"
+    "web-vitals": "0.2.4"
   },
   "resolutions": {
     "styled-components": "^5"
@@ -43,11 +45,11 @@
     ]
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "eslint": "7.22.0",
     "eslint-plugin-react": "7.22.0",
-    "styled-components": "5.2.1",
-    "axios": "^0.21.1", 
     "lodash": "^4.17.21",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "styled-components": "5.2.1"
   }
 }

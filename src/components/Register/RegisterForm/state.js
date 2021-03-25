@@ -1,5 +1,5 @@
 import { useInputValue } from '../../ui/Input/useInputValue'
-import { checkTypeNumber, checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
+import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
 import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 

@@ -12,12 +12,12 @@ import './styles/styles.css'
 import { LoginPage } from './pages/LoginPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
-import Dashboard from "./components/layouts/Dashboard";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { MiniLoader } from "./components/layouts/MiniLoader";
-import RegisterPage from "./pages/RegisterPage";
-import QRrender from "./pages/QRPage";
-import QRAuthentication from "./pages/QRValidationPage";
+import Dashboard from './components/layouts/Dashboard'
+import ErrorBoundary from './components/ErrorBoundary'
+import { MiniLoader } from './components/layouts/MiniLoader'
+import RegisterPage from './pages/RegisterPage'
+import QRrender from './pages/QRPage'
+import QRAuthentication from './pages/QRValidationPage'
 
 const App = () => {
   const {

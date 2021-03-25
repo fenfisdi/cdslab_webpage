@@ -2,7 +2,7 @@ import request from '../httpClient/api.request'
 
 export const registerUserService = async (userForm) => {
   const response = await request(
-    'http://localhost:8000/applicant/',
+    'http://127.0.0.1:8000/register/save_user',
     'POST',
     userForm
   )
