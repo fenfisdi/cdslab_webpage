@@ -1,110 +1,57 @@
-import { Grid, Paper } from "@material-ui/core";
-import React from "react";
-import { Input } from "../../ui/Input";
-import { useInputValue } from "../../ui/Input/useInputValue";
-import { checkTypeNumber, VALIDATORS_REGISTER_FORM } from "./validators";
-import { TitleComponent } from "../../ui/Title";
-import theme from "../../../styles/theme";
-import { useRegisterFormStyles } from "./styles";
-import { PhoneNumber } from "../../ui/PhoneNumber";
-import { PasswordChecker } from "../PasswordChecker";
-import { SelectComponent } from "../../ui/Select";
-import { useSelectValue } from "../../ui/Select/useSelectValue";
+import { Grid, Paper } from '@material-ui/core'
+import React from 'react'
+import { Input } from '../../ui/Input'
+import { TitleComponent } from '../../ui/Title'
+import theme from '../../../styles/theme'
+import { useRegisterFormStyles } from './styles'
+import { PhoneNumber } from '../../ui/PhoneNumber'
+import { PasswordChecker } from '../PasswordChecker'
+import { SelectComponent } from '../../ui/Select'
+import Button from '@material-ui/core/Button'
+import { useRegisterFormState } from './state'
 
-const RegisterForm = () => {
-  const classes = useRegisterFormStyles(theme);
+const RegisterForm = ({ eventEmitter }) => {
+  const classes = useRegisterFormStyles(theme)
 
-  /******* form fields  */
-  const email = useInputValue("", VALIDATORS_REGISTER_FORM.email, {
-    name: "email",
-    type: "email",
-    label: "Email",
-  });
-  const name = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "name",
-    type: "text",
-    label: "Name",
-  });
-  const lastName = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "lastName",
-    type: "text",
-    label: "Last Name",
-  });
+  const  {
+    email,
+    password,
+    name,
+    lastName,
+    phoneExtension,
+    phoneNumber,
+    dateBirth,
+    institution,
+    institutionAfiliation,
+    genre,
+    profession
+  } = useRegisterFormState()
 
-  const genre = useSelectValue("", VALIDATORS_REGISTER_FORM.genre, {
-    options: [
-      {
-        value: "female",
-        label: "Female",
-      },
-      {
-        value: "male",
-        label: "male",
-      },
-      {
-        value: "other",
-        label: "other",
-      },
-    ],
-    title: "Gender",
-  });
-
-  const institution = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "institution",
-    type: "text",
-    label: "Institution",
-  });
-  const institutionAfiliation = useInputValue(
-    "",
-    VALIDATORS_REGISTER_FORM.alphabetic,
-    {
-      name: "institutionAfiliation",
-      type: "text",
-      label: "Institution Afiliation",
-    }
-  );
-  const profession = useInputValue("", VALIDATORS_REGISTER_FORM.alphabetic, {
-    name: "profession",
-    type: "text",
-    label: "Profession",
-  });
-  const date_of_birth = useInputValue("", VALIDATORS_REGISTER_FORM.dateTime, {
-    name: "date_of_birth",
-    type: "date",
-    label: "birth date",
-  });
-  const phoneNumber = useInputValue("", VALIDATORS_REGISTER_FORM.phone, {
-    name: "phoneNumber",
-    type: "text",
-    label: "phone Number",
-    onKeyDown: (event) => {
-      return checkTypeNumber(event);
-    },
-  });
-  const phoneExtension = useInputValue("", VALIDATORS_REGISTER_FORM.ext, {
-    name: "phoneExtension",
-    type: "text",
-    label: "phone Extension",
-    onKeyDown: (event) => {
-      return checkTypeNumber(event);
-    },
-  });
-  const password = useInputValue("", VALIDATORS_REGISTER_FORM.password, {
-    name: "password",
-    type: "password",
-    label: "Password",
-  });
+  const handleClick = () => {
+    eventEmitter({
+      email: email.value,
+      name: name.value,
+      last_name: lastName.value,
+      sex: genre.value,
+      institution: institution.value,
+      institution_afiliation: institutionAfiliation.value,
+      profession: profession.value,
+      date_of_birth: '2021-03-23T21:27:36.253Z',
+      phone_number: phoneNumber.value,
+      password: password.value,
+    })
+  }
 
   /********************* */
 
   return (
     <Paper className={classes.formBody}>
-      <Grid item container xs={12}>
+      <Grid item container xs={12} justify="center">
         <TitleComponent
-          justify={"center"}
-          alignItems={"center"}
-          title={"Registro"}
-          variant={"h5"}
+          justify={'center'}
+          alignItems={'center'}
+          title={'Registro'}
+          variant={'h5'}
         />
 
         <Grid
@@ -168,8 +115,8 @@ const RegisterForm = () => {
                 shrink: true,
               }}
               margin="normal"
-              autoComplete="date_of_birth"
-              {...date_of_birth}
+              autoComplete="dateBirth"
+              {...dateBirth}
             />
           </Grid>
         </Grid>
@@ -189,8 +136,6 @@ const RegisterForm = () => {
           />
           <SelectComponent xs={5} {...genre} />
         </Grid>
-
-        {/* <Divider style={{ margin: "10px 0", backgroundColor: "#0F0C5A" }} /> */}
 
         <Grid
           item
@@ -267,16 +212,26 @@ const RegisterForm = () => {
           <Grid item xs={5}>
             <PasswordChecker
               checkValue={password.value}
-              errorText={"Incorrect password.. "}
-              eventEmmiter={(value) => {
-                console.log("isVeri:::>", value);
+              errorText={'Incorrect password.. '}
+              eventEmitter={(value) => {
+                console.log('isVeri:::>', value)
               }}
             />
           </Grid>
         </Grid>
+
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          color="primary"
+          className={{}}
+          disabled={false}
+        >
+          Continue
+        </Button>
       </Grid>
     </Paper>
-  );
-};
+  )
+}
 
-export default RegisterForm;
+export default RegisterForm

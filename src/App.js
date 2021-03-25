@@ -1,16 +1,16 @@
-import React, { Suspense } from "react";
-import Layout from "./components/layouts/Layout";
-import { useStore } from "./store/storeContext";
-import { GlobalStyles } from "./styles/GlobalStyles";
+import React, { Suspense } from 'react'
+import Layout from './components/layouts/Layout'
+import { useStore } from './store/storeContext'
+import { GlobalStyles } from './styles/GlobalStyles'
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from "react-router-dom";
-import "./styles/styles.css";
-import { LoginPage } from "./pages/LoginPage";
-import { NotFoundPage } from "./pages/NotFoundPage";
+} from 'react-router-dom'
+import './styles/styles.css'
+import { LoginPage } from './pages/LoginPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 
 import Dashboard from "./components/layouts/Dashboard";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -24,9 +24,9 @@ const App = () => {
     state: {
       session: { isAuth },
     },
-  } = useStore();
+  } = useStore()
 
-  const SimulationsPage = React.lazy(() => import("./pages/Simulations"));
+  const SimulationsPage = React.lazy(() => import('./pages/Simulations'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
@@ -41,15 +41,15 @@ const App = () => {
           ) : (
             <Redirect
               to={{
-                pathname: "/",
+                pathname: '/',
                 state: { from: location },
               }}
             />
           )
         }
       />
-    );
-  };
+    )
+  }
 
   return (
     <ErrorBoundary>
@@ -72,7 +72,7 @@ const App = () => {
         </Router>
       </Suspense>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-export default App;
+export default App

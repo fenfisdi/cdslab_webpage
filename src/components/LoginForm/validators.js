@@ -3,7 +3,7 @@ import {
   checkMaxLength,
   checkPattern
 } from '../../components/Forms/validators/validatorsCheks'
-import { PATTERN_ALPHANUMERIC, PATTERN_EMAIL } from '../../components/Forms/validators/patterns'
+import { PATTERN_EMAIL } from '../../components/Forms/validators/patterns'
 
 export const REQUIRED_MESSAGE = 'This field is requiered.'
 export const PATTERN_ERROR_MESSAGE = 'It must be a valid email. e.g. myemail@mydomain.com.'
