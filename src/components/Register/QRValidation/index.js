@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
 import { Input } from "../../ui/Input";
+import { useInputValue } from "../../ui/Input/useInputValue";
+import { VALIDATORS_QR_VALUE } from  "./validators"
 
-const QR_validation = () => {
+const QRvalidation = () => {
+    
+    const qrvalue = useInputValue("", VALIDATORS_QR_VALUE.qrvalue, {
+        name: "qrvalue",
+        type: "int",
+        label: "Code",
+      });
 
     return(
         <>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ marginTop: "2%" }}>
                 <h4>Please entered your code below</h4>
             </Grid>
             <Grid item xs={12}>
@@ -17,7 +25,7 @@ const QR_validation = () => {
                     fullWidth
                     variant="outlined"
                     margin="normal"
-                    //{...email}
+                    {...qrvalue}
                     />
             </Grid>
             <Button
@@ -33,4 +41,4 @@ const QR_validation = () => {
   );
 };
 
-export default QR_validation;
+export default QRvalidation;
