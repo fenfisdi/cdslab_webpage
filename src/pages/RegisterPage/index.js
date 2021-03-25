@@ -18,8 +18,8 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (data && !error) {
-      const { data: responseDate } = data
-      console.log('Data loader ', responseDate) // dummy example
+      
+      console.log('Data loader ', data) // dummy example
     }
     if (error) {
       console.log(':::::::error', error)

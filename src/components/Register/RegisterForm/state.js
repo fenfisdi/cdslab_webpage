@@ -1,5 +1,5 @@
 import { useInputValue } from '../../ui/Input/useInputValue'
-import { checkTypeNumber, checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
+import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
 import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 
@@ -67,7 +67,7 @@ export const useRegisterFormState = () => {
       return checkTypePhoneNumber(event)
     }
   })
-  const phoneExtension = useInputValue('+57', VALIDATORS_REGISTER_FORM.ext, {
+  const phoneExtension = useInputValue('', VALIDATORS_REGISTER_FORM.ext, {
     name: 'phoneExtension',
     type: 'text',
     label: 'phone Extension',

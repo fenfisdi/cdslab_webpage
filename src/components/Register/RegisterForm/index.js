@@ -18,7 +18,6 @@ const RegisterForm = ({ eventEmitter }) => {
     password,
     name,
     lastName,
-    phoneExtension,
     phoneNumber,
     dateBirth,
     institution,
@@ -132,7 +131,7 @@ const RegisterForm = ({ eventEmitter }) => {
           <PhoneNumber
             xs={5}
             phoneNumber={phoneNumber}
-            phoneExtension={phoneExtension}
+            
           />
           <SelectComponent xs={5} {...genre} />
         </Grid>
