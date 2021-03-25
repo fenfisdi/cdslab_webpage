@@ -67,7 +67,7 @@ export const useRegisterFormState = () => {
       return checkTypePhoneNumber(event)
     }
   })
-  const phoneExtension = useInputValue('+57', VALIDATORS_REGISTER_FORM.ext, {
+  const phoneExtension = useInputValue('', VALIDATORS_REGISTER_FORM.ext, {
     name: 'phoneExtension',
     type: 'text',
     label: 'phone Extension',
