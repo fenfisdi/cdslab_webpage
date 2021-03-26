@@ -28,7 +28,7 @@ export const SelectComponent = ({
   onChange,
   onOpen,
   onClose,
-  error,
+  errors,
   helperText,
 }) => {
   const classes = useStyles()
@@ -37,7 +37,7 @@ export const SelectComponent = ({
     <Grid xs={xs} item>
       <FormControl
         className={classes.formControl}
-        error={error}
+        error={errors}
         variant="outlined"
       >
         <InputLabel htmlFor="selectComponent">{title}</InputLabel>

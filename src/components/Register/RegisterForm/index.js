@@ -1,5 +1,5 @@
 import { Grid, Paper } from '@material-ui/core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '../../ui/Input'
 import { TitleComponent } from '../../ui/Title'
 import theme from '../../../styles/theme'
@@ -10,21 +10,37 @@ import { SelectComponent } from '../../ui/Select'
 import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 
+
 const RegisterForm = ({ eventEmitter }) => {
   const classes = useRegisterFormStyles(theme)
+  const [isValid, setIsvalid] = useState(false)
+  const[verificationPassword,setVerificationPassword] = useState(false)
+  const  fieldsData = useRegisterFormState()
 
-  const  {
-    email,
-    password,
+  const {
     name,
     lastName,
-    phoneNumber,
+    email,
     dateBirth,
+    phoneNumber,
+    genre,
     institution,
     institutionAfiliation,
-    genre,
-    profession
-  } = useRegisterFormState()
+    profession,
+    password,
+  } = fieldsData
+
+  useEffect(()=>{
+    let notIsValid = false
+    for(var key in fieldsData) {
+      if(fieldsData[key] && !fieldsData[key].value.length>0){        
+        notIsValid = true        
+      }else if(fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length>0){
+        notIsValid = true
+      }
+    }
+    setIsvalid(notIsValid)
+  },[fieldsData])
 
   const handleClick = () => {
     eventEmitter({
@@ -36,7 +52,7 @@ const RegisterForm = ({ eventEmitter }) => {
       institution_afiliation: institutionAfiliation.value,
       profession: profession.value,
       date_of_birth: '2021-03-23T21:27:36.253Z',
-      phone_number: phoneNumber.value,
+      phone_number: phoneNumber.value.trim(),
       password: password.value,
     })
   }
@@ -213,7 +229,8 @@ const RegisterForm = ({ eventEmitter }) => {
               checkValue={password.value}
               errorText={'Incorrect password.. '}
               eventEmitter={(value) => {
-                console.log('isVeri:::>', value)
+                const{success} = value                
+                setVerificationPassword(success)
               }}
             />
           </Grid>
@@ -224,7 +241,7 @@ const RegisterForm = ({ eventEmitter }) => {
           variant="contained"
           color="primary"
           className={{}}
-          disabled={false}
+          disabled={!isValid && verificationPassword? false:true}
         >
           Continue
         </Button>
