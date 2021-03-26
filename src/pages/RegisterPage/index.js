@@ -47,9 +47,9 @@ const RegisterPage = () => {
       direction='column'
       justify='center'
       alignItems='center'
-      className={classes.body}
+      className={classes.body}      
     >
-      <RegisterForm eventEmitter={sendForm} />
+      <RegisterForm eventEmitter={sendForm} loading={loading}/>      
       <SnackbarComponent 
         snackDuration={3500}
         configData={showSnack}  

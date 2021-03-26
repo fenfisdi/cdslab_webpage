@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 export const PasswordChecker = ({
   checkValue,
   errorText = '',
-  eventEmitter
+  eventEmitter,
 }) => {
   const [value, setValue] = useState('')
   const [isPress, setIsPress] = useState(false)
@@ -18,10 +18,8 @@ export const PasswordChecker = ({
     validatePassword(value, checkValue)
   }, [value])
 
-  useEffect(() => {
-    if (isPress) {
-      validatePassword(value, checkValue)
-    }
+  useEffect(() => {    
+    validatePassword(value, checkValue)    
   }, [checkValue])
 
   const onChange = (value) => {
@@ -43,14 +41,18 @@ export const PasswordChecker = ({
       disabled={false}
       required
       fullWidth
-      variant='outlined'
-      margin='normal'
-      autoComplete='repeat password'
-      name='repeat password'
-      type='password'
-      label='Repeat password'
+      variant="outlined"
+      InputLabelProps={{
+        shrink: true,
+      }}
+      margin="normal"
+      autoComplete="repeatPassword"
+      name="repeatPassword"
+      label="Repeat password"
+      type="password"
       helperText={isPress && helperText}
       onChange={(value) => onChange(value)}
+      value={value}
     />
   )
 }
