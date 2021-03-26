@@ -39,17 +39,20 @@ const createConfig = (url, method, params, settings) => {
   case OPTIONS_HTTP.POST:
     return {
       ...defaultConfig,
-      data: params
+      data: params,
+      key:OPTIONS_HTTP.POST
     }
   case OPTIONS_HTTP.DELETE:
     return {
       ...defaultConfig,
-      params
+      params,
+      key:OPTIONS_HTTP.DELETE
     }
   case OPTIONS_HTTP.PUT:
     return {
       ...defaultConfig,
-      data: params
+      data: params,
+      key:OPTIONS_HTTP.PUT
     }
 
   default:

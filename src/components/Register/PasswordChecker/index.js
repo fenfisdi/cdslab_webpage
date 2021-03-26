@@ -25,8 +25,8 @@ export const PasswordChecker = ({
     setValue(onChangeValue.target.value)
   }
 
-  const validatePassword = (validateValue, checkValue) => {
-    if (validateValue != checkValue) {
+  const validatePassword = (validateValue, valueToCheck) => {
+    if (validateValue != valueToCheck) {
       setHelperText(errorText)
       eventEmitter({ success: false })
     } else {
