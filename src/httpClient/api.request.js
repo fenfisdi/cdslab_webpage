@@ -1,22 +1,6 @@
 import axios from 'axios'
-import { isEmpty, merge } from 'lodash'
 import qs from 'qs'
 import { OPTIONS_HTTP } from '../constants/optionsHttp'
-
-const createHeaders = (settings, userLocal) => {
-  const { access_token_info: { accessToken = '' } = {} } = userLocal || {}
-  const defaultHeaders = {
-    'Ocp-Apim-Subscription-Key': `${process.env.REACT_APP_SUBSCRIPTION_KEY}`,
-    'Ocp-Apim-Trace': true,
-    Authorization: `Bearer ${accessToken}`
-  }
-
-  if (isEmpty(settings.headers)) {
-    return { ...defaultHeaders }
-  }
-
-  return merge({}, defaultHeaders, settings.headers)
-}
 
 const createConfig = (url, method, params, settings) => {
   const { isQueryString = false, cancelToken = false } = settings
