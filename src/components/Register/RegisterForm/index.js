@@ -34,10 +34,11 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   useEffect(()=>{
     let notIsValid = false
     for(var key in fieldsData) {
-      if(fieldsData[key] && !fieldsData[key].value.length>0){        
+      if(
+        (fieldsData[key] && !fieldsData[key].value.length>0) || 
+        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length>0)
+      ){        
         notIsValid = true        
-      }else if(fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length>0){
-        notIsValid = true
       }
     }
     setIsvalid(notIsValid)

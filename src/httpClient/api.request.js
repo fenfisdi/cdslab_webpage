@@ -33,8 +33,8 @@ const createConfig = (url, method, params, settings) => {
     return {
       ...defaultConfig,
       params,
-      paramsSerializer: (params) =>
-        isQueryString ? qs.stringify(params, { encode: false }) : null
+      paramsSerializer: (paramSerializer) =>
+        isQueryString ? qs.stringify(paramSerializer, { encode: false }) : null
     }
   case OPTIONS_HTTP.POST:
     return {
@@ -51,12 +51,6 @@ const createConfig = (url, method, params, settings) => {
       ...defaultConfig,
       data: params
     }
-  case OPTIONS_HTTP.PATCH:
-    return {
-      ...defaultConfig,
-      data: params,
-      params
-    }
 
   default:
     return defaultConfig
@@ -64,10 +58,8 @@ const createConfig = (url, method, params, settings) => {
 }
 
 const request = async (url, method, params, settings = {}) => {
-  //refreshTokenResponseInterceptor(axios);
-  const res = await axios(createConfig(url, method, params, settings))
-  return res
+  return await axios(createConfig(url, method, params, settings))
 }
 
 export default request
-//export const cancelToken = axios.CancelToken;
+

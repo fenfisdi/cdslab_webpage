@@ -67,14 +67,7 @@ export const useRegisterFormState = () => {
       return checkTypePhoneNumber(event)
     }
   })
-  /*  const phoneExtension = useInputValue('', VALIDATORS_REGISTER_FORM.ext, {
-    name: 'phoneExtension',
-    type: 'text',
-    label: 'phone Extension',
-    onKeyDown: (event) => {
-      return checkTypePhoneNumber(event)
-    },
-  }) */
+  
   const password = useInputValue('', VALIDATORS_REGISTER_FORM.password, {
     name: 'password',
     type: 'password',

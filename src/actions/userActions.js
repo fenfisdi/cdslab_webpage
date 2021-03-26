@@ -25,7 +25,6 @@ export const useUserActions = (dispatch) => {
         })
       })
 
-    /* ; */
   }
 
   return { registerUser }

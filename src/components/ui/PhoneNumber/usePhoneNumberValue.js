@@ -1,5 +1,5 @@
 import { useState } from 'react'
-export const usePhoneNumberValue = (val, validators = [], extras) => {
+export const usePhoneNumberValue = (val, validators, extras) => {
   const [value, setValue] = useState(val)
   const [errors, setErrors] = useState([])
   const [helperText, setHelperText] = useState(null)
@@ -14,14 +14,14 @@ export const usePhoneNumberValue = (val, validators = [], extras) => {
    * @param {*} value
    * @return Array of errors
    */
-  const validateInput = (value) => {
+  const validateInput = (inputValue) => {
     if (!validators) {
       return
     }
     const err = validators
-      .filter((validator) => !validator.check(value, validator.valueToCheck))
-      .map((val) => {
-        return { type: val.type, message: val.message }
+      .filter((validator) => !validator.check(inputValue, validator.valueToCheck))
+      .map((validatorValue) => {
+        return { type: validatorValue.type, message: validatorValue.message }
       })
     setErrors(err)
     updateHelperText(err)

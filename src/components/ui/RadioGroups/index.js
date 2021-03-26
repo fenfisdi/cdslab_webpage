@@ -1,12 +1,12 @@
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import { Grid, RadioGroup } from "@material-ui/core";
-import { RadioButton } from "../RadioButton";
+import React from 'react'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
+import { Grid, RadioGroup } from '@material-ui/core'
+import { RadioButton } from '../RadioButton'
 export const RadioGroups = ({
   options = [],
   value,
-  defaultValue,
   title,
   direction,
   onChange,
@@ -21,19 +21,20 @@ export const RadioGroups = ({
         aria-label={title}
         name="customized-radios"
       >
-        <Grid container item direction={direction || "column"}>
-          {options.map((option) => {
-            const { value, label } = option;
+        <Grid container item direction={direction || 'column'}>
+          {options.map((option,index) => {
+            const { value:optionValue, label } = option
             return (
               <FormControlLabel
-                value={value}
+                value={optionValue}
                 control={<RadioButton />}
                 label={label}
+                key={index}
               />
-            );
+            )
           })}
         </Grid>
       </RadioGroup>
     </FormControl>
-  );
-};
+  )
+}

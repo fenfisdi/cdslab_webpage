@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '../../ui/Input'
-import { useEffect, useState } from 'react'
 
 export const PasswordChecker = ({
   checkValue,
@@ -22,12 +21,12 @@ export const PasswordChecker = ({
     validatePassword(value, checkValue)    
   }, [checkValue])
 
-  const onChange = (value) => {
-    setValue(value.target.value)
+  const onChange = (onChangeValue) => {
+    setValue(onChangeValue.target.value)
   }
 
-  const validatePassword = (value, checkValue) => {
-    if (value != checkValue) {
+  const validatePassword = (validateValue, checkValue) => {
+    if (validateValue != checkValue) {
       setHelperText(errorText)
       eventEmitter({ success: false })
     } else {
@@ -51,7 +50,7 @@ export const PasswordChecker = ({
       label="Repeat password"
       type="password"
       helperText={isPress && helperText}
-      onChange={(value) => onChange(value)}
+      onChange={(onChangeValue) => onChange(onChangeValue)}
       value={value}
     />
   )
