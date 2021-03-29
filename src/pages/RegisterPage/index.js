@@ -6,39 +6,11 @@ import { Grid } from '@material-ui/core'
 import { useRegisterStyles } from './styles'
 import theme from '../../styles/theme'
 import SnackbarComponent from '../../components/ui/Snackbars'
+import { useRegisterState } from './state'
 
 const RegisterPage = () => {
-  const {
-    state: {
-      register: { data, loading, error }
-    },
-    dispatch
-  } = useStore()
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
-  const { registerUser } = useUserActions(dispatch)
+  const {showSnack,sendForm,handleCloseSnack,loading,error}= useRegisterState()
   const classes = useRegisterStyles(theme)
-
-  useEffect(() => {
-    if (data && !error) {
-      console.log('Data loader ', data) // dummy example
-      setShowSnack({...showSnack,show:true,success:true,error:false})
-    }
-
-    if (error) {
-      console.log(':::::::error', error)
-      setShowSnack({...showSnack,show:true,success:false,error:true})
-    }
-  }, [data, error])
-
-  const handleCloseSnack = () => {
-    setShowSnack({...showSnack,show:false})
-  }
-
-  // dummy example
-  const sendForm = (object) => {
-    console.log('::data send', object)
-    registerUser(object)
-  }
 
   return (
     <Grid
@@ -50,12 +22,12 @@ const RegisterPage = () => {
       className={classes.body}      
     >
       <RegisterForm eventEmitter={sendForm} loading={loading}/>      
-      <SnackbarComponent 
+      {showSnack && showSnack.show && <SnackbarComponent 
         snackDuration={3500}
         configData={showSnack}  
         handleCloseSnack={handleCloseSnack} 
         successMessage={'user successfully registered.'} 
-        errorMessage={'wrong to register user.'}/>
+        errorMessage={error && error.error && error.errorData.error}/>}
     </Grid>
   )
 }
