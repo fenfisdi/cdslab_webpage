@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import RegisterForm from '../../components/Register/RegisterForm'
-import { useStore } from '../../store/storeContext'
-import { useUserActions } from '../../actions/userActions'
 import { Grid } from '@material-ui/core'
 import { useRegisterStyles } from './styles'
 import theme from '../../styles/theme'
