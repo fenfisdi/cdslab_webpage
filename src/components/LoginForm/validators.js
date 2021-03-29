@@ -11,7 +11,7 @@ export const MAX_LENGTH_MESSAGE = 'The maximum size allowed is ? characters.'
 export const MIN_LENGTH_MESSAGE = 'The minimum size allowed is ? characters.'
 
 export const VALIDATORS_LOGIN_FORM = {
-  username: [
+  email: [
     {
       type: 'required',
       message: REQUIRED_MESSAGE,

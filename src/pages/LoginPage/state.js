@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 export const useLoginState = () => {
   const {
     state: {
-      session: { isAuth, loading, error }
+      session: { isAuth, loading, error, errorData, user }
     },
     dispatch
   } = useStore()
@@ -14,6 +14,9 @@ export const useLoginState = () => {
   const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
+  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
+
+
   const { from } = location.state || { from: { pathname: '/simulations' } }
   const redirectSimulations = () => {
     history.replace(from)
@@ -26,14 +29,31 @@ export const useLoginState = () => {
     }
   }, [isAuth])
 
+  useEffect(() => {
+    if (user && !error) {
+      console.log('success login ', user) // dummy example
+      setShowSnack({...showSnack,show:true,success:true,error:false})
+    }
+
+    if (error) {
+      console.log(':::::::error login', error)
+      setShowSnack({...showSnack,show:true,success:false,error:true})
+    }
+  }, [user, error])
+
+
+  const handleCloseSnack = () => {
+    setShowSnack({...showSnack,show:false})
+  }
+
   const handleSubmit = (dataForm) => {
     login({
-      username: dataForm?.username,
+      email: dataForm?.email,
       password: dataForm?.password
     })
   }
 
   return {
-    isAuth, loading, error, handleSubmit, title, setTitle
+    isAuth, loading, error, handleSubmit, title, setTitle, errorData, showSnack, setShowSnack, handleCloseSnack
   }
 }

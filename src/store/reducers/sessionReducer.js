@@ -12,6 +12,7 @@ export const initialState = {
     user: null,
     loading: false,
     error: null,
+    errorData:null,
     navigation: null
   }
 }
@@ -21,10 +22,12 @@ export const sessionReducer = (state, action) => {
   case SESSION_LOADING:
     return { ...state, loading: true, error: null }
   case SESSION_ERROR:
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, loading: false, error: true,errorData:action.payload}
   case SESSION_LOGIN:
     return {
       ...state,
+      error:false,
+      errorData:null,
       loading: false,
       isAuth: true,
       user: action.payload
