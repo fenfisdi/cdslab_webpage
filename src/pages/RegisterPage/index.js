@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import RegisterForm from '../../components/Register/RegisterForm'
 import { useStore } from '../../store/storeContext'
 import { useUserActions } from '../../actions/userActions'
 import { Grid } from '@material-ui/core'
 import { useRegisterStyles } from './styles'
 import theme from '../../styles/theme'
+import QRrender from '../QRPage'
+import SuccessRegister from '../SuccessRegisterPage'
 
 const RegisterPage = () => {
   const {
@@ -15,11 +17,13 @@ const RegisterPage = () => {
   } = useStore()
   const { registerUser } = useUserActions(dispatch)
   const classes = useRegisterStyles(theme)
+  const [step, setStep] = useState(0)
 
   useEffect(() => {
     if (data && !error) {
       
       console.log('Data loader ', data) // dummy example
+      setStep(1)
     }
     if (error) {
       console.log(':::::::error', error)
@@ -34,6 +38,11 @@ const RegisterPage = () => {
     
   }
 
+  const updateStep = (int) => {
+    
+    setStep(int)
+  } 
+
   return (
     <Grid
       xs={12}
@@ -43,7 +52,9 @@ const RegisterPage = () => {
       alignItems='center'
       className={classes.body}
     >
-      <RegisterForm eventEmitter={sendForm} />
+      {step==0 &&<RegisterForm eventEmitter={sendForm} />}
+      {step==1 &&<QRrender responseRegister={data} sendStep={updateStep} />}
+      {step==3 &&<SuccessRegister />}    
     </Grid>
   )
 }

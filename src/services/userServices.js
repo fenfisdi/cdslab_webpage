@@ -8,3 +8,11 @@ export const registerUserService = async (userForm) => {
   )
   return response
 }
+
+export const validateQrService = async (userQrValidation) => {
+  const response = await request(
+    `${process.env.REACT_APP_REGISTER_API_URL}/qr_validation`,
+    'POST',
+    userQrValidation
+  )
+}

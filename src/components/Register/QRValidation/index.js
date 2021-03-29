@@ -5,13 +5,23 @@ import { Input } from '../../ui/Input'
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_QR_VALUE } from  './validators'
 
-const QRvalidation = () => {
-    
+const QRvalidation = (props) => {
+  
+  console.log(({props}))
   const qrvalue = useInputValue('', VALIDATORS_QR_VALUE.qrvalue, {
     name: 'qrvalue',
     type: 'int',
     label: 'Code',
   })
+
+  const handleClick = () => {
+    props.eventEmitter({
+      email: props.email,
+      qr_value: qrvalue.value
+
+    })
+    props.sendStepSetup(3)
+  }
 
   return(
     <>
@@ -29,6 +39,7 @@ const QRvalidation = () => {
         />
       </Grid>
       <Button
+        onClick={handleClick}
         type="submit"
         variant="contained"
         color="primary"
