@@ -12,16 +12,18 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: REGISTER_LOADING })
     registerUserService(userForm)
       .then((response) => {
+        
         dispatch({
           type: REGISTER_SAVE,
           payload: response.data
         })
-        return response
       })
       .catch((error) => {
+        const {response:{data}}=error
+        
         dispatch({
           type: REGISTER_ERROR,
-          payload: { error: true, errorData: error }
+          payload: { error: true, errorData: data.detail }
         })
       })
 
