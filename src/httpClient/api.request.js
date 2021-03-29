@@ -45,7 +45,7 @@ const createConfig = (url, method, params, settings) => {
 }
 
 const request = async (url, method, params, settings = {}) => {
-  return await axios(createConfig(url, method, params, settings))
+  return axios(createConfig(url, method, params, settings))
 }
 
 export default request
