@@ -25,7 +25,7 @@ const RegisterPage = () => {
         configData={showSnack}  
         handleCloseSnack={handleCloseSnack} 
         successMessage={'user successfully registered.'} 
-        errorMessage={error && error.error && error.errorData.error}/>}
+        errorMessage={error && error.error && error.errorData.message}/>}
     </Grid>
   )
 }

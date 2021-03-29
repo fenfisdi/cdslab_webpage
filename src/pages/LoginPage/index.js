@@ -23,8 +23,8 @@ export const LoginPage = () => {
             snackDuration={3500}
             configData={showSnack}  
             handleCloseSnack={handleCloseSnack} 
-            successMessage={''} 
-            errorMessage={errorData && errorData.error}/>}
+            successMessage={'user loggin'} 
+            errorMessage={errorData && errorData.message}/>}
         </div>
       </Grid>
     </Grid>
