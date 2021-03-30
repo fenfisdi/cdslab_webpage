@@ -1,26 +1,31 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import { Input } from '../../ui/Input'
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_QR_VALUE } from  './validators'
 
-const QRvalidation = (props) => {
+const QRvalidation = ({eventEmitter, userData, sendStepSetup, qrValidation}) => {
   
-  console.log(({props}))
   const qrvalue = useInputValue('', VALIDATORS_QR_VALUE.qrvalue, {
     name: 'qrvalue',
     type: 'int',
     label: 'Code',
   })
+ 
+  useEffect(() => {
+    if(qrValidation){
+      console.log('Data loader ', qrValidation) // dummy example
+      sendStepSetup(3) 
+    }
+  }, [qrValidation])
 
   const handleClick = () => {
-    props.eventEmitter({
-      email: props.email,
+    eventEmitter({
+      email: userData.email,
       qr_value: qrvalue.value
 
     })
-    props.sendStepSetup(3)
   }
 
   return(

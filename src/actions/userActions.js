@@ -3,6 +3,12 @@ import {
   REGISTER_LOADING,
   REGISTER_SAVE
 } from './types/registerTypes'
+
+import{
+  VALIDATION_QR_SUCCESS,
+  VALIDATION_QR_ERROR
+} from './types/qrTypes'
+
 import { registerUserService, validateQrService } from '../services/userServices'
 export const useUserActions = (dispatch) => {
   /**
@@ -13,20 +19,21 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: REGISTER_LOADING })
     registerUserService(userForm)
       .then((response) => {
+        
         dispatch({
           type: REGISTER_SAVE,
           payload: response.data
         })
-        return response
       })
       .catch((error) => {
+        const {response:{data}}=error
+        
         dispatch({
           type: REGISTER_ERROR,
-          payload: { error: true, errorData: error }
+          payload: { error: true, errorData: data.detail }
         })
       })
 
-    /* ; */
   }
 
   const validateQr = (userQrValidation) => {
@@ -34,14 +41,14 @@ export const useUserActions = (dispatch) => {
     validateQrService(userQrValidation)
       .then((response) => {
         dispatch({
-          type: REGISTER_SAVE,
+          type: VALIDATION_QR_SUCCESS,
           payload: response.data
         })
         return response
       }) 
       .catch((error) => {
         dispatch({
-          type: REGISTER_ERROR,
+          type: VALIDATION_QR_ERROR,
           payload: { error: true, errorData: error }
         })
       })

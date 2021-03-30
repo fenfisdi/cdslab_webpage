@@ -5,17 +5,17 @@ import { useStore } from '../../store/storeContext'
 import { useUserActions } from '../../actions/userActions'
 import Grid from '@material-ui/core/Grid'
 
-const QRrender = (props) => {
+const QRrender = ({ responseRegister, sendStep }) => {
   const {
     state: {
-      register: { data, loading, error }
+      qrValidation: { data, isValid, error }
     },
     dispatch
   } = useStore()
+  const { validateQr } = useUserActions(dispatch)
 
   useEffect(() => {
     if (data && !error) {
-      
       console.log('Data loader ', data) // dummy example
     }
     if (error) {
@@ -24,10 +24,10 @@ const QRrender = (props) => {
   }, [data, error])
   
   useEffect(() => {
-    console.log(props.responseRegister.url_path)
-  }, [props.responseRegister.url_path]) 
+    console.log(responseRegister?.url_path)
+  }, [responseRegister]) 
 
-  const { validateQr } = useUserActions(dispatch)
+  
 
   const sendQrValue = (object) => {
     
@@ -35,6 +35,11 @@ const QRrender = (props) => {
     console.log('::data send', object)
     
   }
+
+  const fillQrImage = () => (<>
+    {responseRegister?.url_path && <QRImage qrUrl={responseRegister.url_path}/>}
+  </>
+  )
   return(
     <Grid container 
       direction="column" 
@@ -42,8 +47,8 @@ const QRrender = (props) => {
       justify="center"
       style={{ minHeight: '100vh' }}
     >
-      <QRImage qrUrl={props.responseRegister.url_path}/> 
-      <QRvalidation eventEmitter={sendQrValue} email={props.responseRegister.email} sendStepSetup={props.sendStep}/>
+      {fillQrImage()}
+      <QRvalidation eventEmitter={sendQrValue} userData={responseRegister} sendStepSetup={sendStep} qrValidation={isValid}/>
     </Grid>    
   )
 }

@@ -11,7 +11,8 @@ export const StoreProvider = ({ children }) => {
     combineReducers({
       session: sessionReducer,
       simulations: simulationReducer,
-      register: registerReducer
+      register: registerReducer,
+      qrValidation: registerReducer
     }),
     Object.assign(sessionInitialState, simulationInitialState, registerInitialState)
   )
