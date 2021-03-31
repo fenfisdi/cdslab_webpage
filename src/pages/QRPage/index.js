@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import  QRImage  from '../../components/QrForm/QRcode'
 import  QRvalidation  from '../../components/QrForm/QRValidation'
 import Grid from '@material-ui/core/Grid'
 import { useAuthQrState } from './state'
 
 const QRrender = ({ urlPath,email, sendStep, showSnack, setShowSnack }) => {
-  const {data, isValid, error, loading, validateQr}= useAuthQrState({urlPath,sendStep,showSnack, setShowSnack}) 
+  const {loading, validateQr}= useAuthQrState({urlPath,sendStep,showSnack, setShowSnack}) 
 
   
   const sendQrValue = (object) => {
