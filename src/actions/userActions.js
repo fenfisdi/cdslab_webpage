@@ -45,7 +45,6 @@ export const useUserActions = (dispatch) => {
           type: VALIDATION_QR_SUCCESS,
           payload: response.data
         })
-        return response
       }) 
       .catch((error) => {
         dispatch({

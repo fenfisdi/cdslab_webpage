@@ -10,7 +10,7 @@ export const registerUserService = async (userForm) => {
 }
 
 export const validateQrService = async (userQrValidation) => {
-  return await request(
+  return  request(
     `${process.env.REACT_APP_REGISTER_API_URL}/qr_validation`,
     'POST',
     userQrValidation
