@@ -11,7 +11,11 @@ import { useRegisterState } from './state'
 const RegisterPage = () => {
   const {showSnack,sendForm,handleCloseSnack,step,loading,error,data,updateStep}= useRegisterState()
   const classes = useRegisterStyles(theme)
-
+  const { 
+    email,
+    urlPath,
+    keyQr 
+  }= data && data.data ||{}
   // dummy example
 
   return (
@@ -24,7 +28,7 @@ const RegisterPage = () => {
       className={classes.body}      
     >
       {step==0 &&<RegisterForm eventEmitter={sendForm} loading={loading}/>}
-      {step==1 &&<QRrender responseRegister={data} sendStep={updateStep} />}
+      {step==1 &&<QRrender urlPath={urlPath} email={email} sendStep={updateStep} />}
       {step==3 &&<SuccessRegister />}         
       {showSnack && showSnack.show && <SnackbarComponent 
         snackDuration={3500}

@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import { useQrious } from 'react-qrious'
 
-const QRImage = (qrUrl) => {
+const QRImage = ({qrUrl}) => {
 
-  useEffect(() => {
-    console.log(qrUrl.qrUrl)
-  }, [qrUrl]) 
-
-  const [value] = useState(qrUrl.qrUrl)
+  const [value] = useState(qrUrl)
   const [dataUrl] = useQrious({ value, size: 300 })
   return (
     <>

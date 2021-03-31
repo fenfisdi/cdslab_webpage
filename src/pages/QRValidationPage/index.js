@@ -1,5 +1,5 @@
 import React from 'react'
-import  QRvalidation  from '../../components/Register/QRValidation'
+import  QRvalidation  from '../../components/QrForm/QRValidation'
 import Grid from '@material-ui/core/Grid'
 
 const QRAuthentication =() =>{

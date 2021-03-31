@@ -6,7 +6,8 @@ import {
 
 import{
   VALIDATION_QR_SUCCESS,
-  VALIDATION_QR_ERROR
+  VALIDATION_QR_ERROR,
+  VALIDATION_QR_LOADING
 } from './types/qrTypes'
 
 import { registerUserService, validateQrService } from '../services/userServices'
@@ -37,7 +38,7 @@ export const useUserActions = (dispatch) => {
   }
 
   const validateQr = (userQrValidation) => {
-    dispatch({ type: REGISTER_LOADING })
+    dispatch({ type: VALIDATION_QR_LOADING })
     validateQrService(userQrValidation)
       .then((response) => {
         dispatch({
