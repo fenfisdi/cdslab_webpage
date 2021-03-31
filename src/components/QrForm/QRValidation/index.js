@@ -6,7 +6,7 @@ import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_QR_VALUE } from  './validators'
 import LoaderComponent from '../../ui/Loader'
 
-const QRvalidation = ({eventEmitter,loading}) => {
+const QRvalidation = ({eventEmitter,loading,picture}) => {
   
   const qrvalue = useInputValue('', VALIDATORS_QR_VALUE.qrvalue, {
     name: 'qrvalue',
@@ -21,12 +21,12 @@ const QRvalidation = ({eventEmitter,loading}) => {
   return(
     
     <Grid container justify="center" alignItems="center" direction="column">
-      {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
+      {loading && <LoaderComponent width="100%" height={80} marginTop="20px"/>}
       {!loading && <Fragment>
         <Grid item xs={12} style={{ marginTop: '2%' }}>
-          <h4>Please entered your code below</h4>
+          <h4>Please enter verification code.</h4>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={picture ? 2:12}>
           <Input
             disabled={false}
             required
