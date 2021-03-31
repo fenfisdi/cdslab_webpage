@@ -25,10 +25,10 @@ export const useUserActions = (dispatch) => {
             type: REGISTER_ERROR,
             payload: data.detail
           })
-        }else{
+        }else if(error.request){
           dispatch({
             type: REGISTER_ERROR,
-            payload: { error: true, errorData: {message:'error'} }
+            payload:{message:'The request was made but no response was received'}
           })
         }      
       })

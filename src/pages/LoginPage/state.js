@@ -36,7 +36,7 @@ export const useLoginState = () => {
     }
 
     if (error) {
-      console.log(':::::::error login', error)
+      console.log(':::::::error login', error,errorData)
       setShowSnack({...showSnack,show:true,success:false,error:true})
     }
   }, [user, error])

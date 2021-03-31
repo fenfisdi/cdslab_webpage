@@ -27,10 +27,10 @@ export const useSessionActions = (dispatch) => {
             type: SESSION_ERROR,
             payload:data.detail
           })
-        }else{
+        }else if(error.request){
           dispatch({
             type: SESSION_ERROR,
-            payload:{message:'error'}
+            payload:{message:'The request was made but no response was received'}
           })
         }            
       })
