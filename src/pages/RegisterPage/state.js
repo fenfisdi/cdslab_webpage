@@ -41,7 +41,7 @@ export const useRegisterState = ({showSnack, setShowSnack}) => {
   }, [data, error])
     
   const sendForm = (object) => {
-    console.log('::data send', object)
+    console.log('::Register send data', object)
     registerUser(object)
   }
 
@@ -51,6 +51,11 @@ export const useRegisterState = ({showSnack, setShowSnack}) => {
   
 
   return {
-    sendForm,loading,data,error,updateStep,step
+    sendForm,
+    loading,
+    data,
+    error,
+    updateStep,
+    step
   }
 }

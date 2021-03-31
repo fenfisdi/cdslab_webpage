@@ -31,7 +31,8 @@ const QRrender = ({ urlPath,email, sendStep, showSnack, setShowSnack }) => {
       {fillQrImage()}
       <QRvalidation 
         eventEmitter={sendQrValue}  
-        loading={loading}       
+        loading={loading}
+        picture={urlPath?true:false}
       />
     </Grid>    
   )

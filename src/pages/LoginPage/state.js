@@ -3,7 +3,7 @@ import { useSessionActions } from '../../actions/sessionsActions'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-export const useLoginState = () => {
+export const useLoginState = ({showSnack, setShowSnack}) => {
   const {
     state: {
       session: { isAuth, loading, error, errorData, user }
@@ -11,49 +11,78 @@ export const useLoginState = () => {
     dispatch
   } = useStore()
   const { login } = useSessionActions(dispatch)
+  const [step, setStep] = useState(0)
+
+
   const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
-
-
   const { from } = location.state || { from: { pathname: '/simulations' } }
+  
+  
   const redirectSimulations = () => {
     history.replace(from)
   }
 
-  useEffect(() => {
-    // Is authenticated redirect to /simulations
-    if (isAuth) {
+  useEffect(()=>{
+    if(step==3){
       redirectSimulations()
     }
-  }, [isAuth])
+  },[step])
 
   useEffect(() => {
     if (user && !error) {
-      console.log('success login ', user) // dummy example
-      setShowSnack({...showSnack,show:true,success:true,error:false})
-    }
-
-    if (error) {
+      console.log('success login ', user) 
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:true,
+          successMessage:'logged user.',
+          error:false
+        }
+      )
+      setStep(1)
+    }else if (error) {
       console.log(':::::::error login', error,errorData)
-      setShowSnack({...showSnack,show:true,success:false,error:true})
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:false,
+          error:true,
+          errorMessage:errorData.message
+        }
+      )
     }
   }, [user, error])
 
 
-  const handleCloseSnack = () => {
-    setShowSnack({...showSnack,show:false})
-  }
 
   const handleSubmit = (dataForm) => {
+    console.log('::login send data', dataForm)
     login({
       email: dataForm?.email,
       password: dataForm?.password
     })
   }
 
+  const updateStep = (int) => {
+    setStep(int)
+  }
+
   return {
-    isAuth, loading, error, handleSubmit, title, setTitle, errorData, showSnack, setShowSnack, handleCloseSnack
+    isAuth, 
+    loading, 
+    error, 
+    handleSubmit, 
+    title, 
+    setTitle, 
+    errorData, 
+    showSnack, 
+    setShowSnack,
+    step,
+    updateStep,
+    data:user
   }
 }
