@@ -1,43 +1,32 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import RegisterForm from '../../components/RegisterForm'
-import { useStore } from '../../store/storeContext'
-import { useUserActions } from '../../actions/userActions'
-import { useRegisterActions } from '../../actions/registerActions'
-import { Button } from '@material-ui/core'
+import React from 'react'
+import RegisterForm from '../../components/Register/RegisterForm'
+import { Grid } from '@material-ui/core'
+import { useRegisterStyles } from './styles'
+import theme from '../../styles/theme'
+import SnackbarComponent from '../../components/ui/Snackbars'
+import { useRegisterState } from './state'
 
 const RegisterPage = () => {
-  const {
-    state: {
-      register: { data, loading, error }
-    }, dispatch
-  } = useStore()
-  const { registerUser } = useUserActions(dispatch)
-  const { save } = useRegisterActions(dispatch)
-  const [ window, setWindow ] = useState(1)
+  const {showSnack,sendForm,handleCloseSnack,loading,error}= useRegisterState()
+  const classes = useRegisterStyles(theme)
 
-  useEffect(() => {
-    console.log(data, loading, error)
-  }, [])
-
-  useEffect(() => {
-    console.log('Data updated ', data) // dummy example
-  }, [data])
-
-  // dummy example
-  const handleClick = (e) => {
-    e.preventDefault()
-    registerUser({
-      name: 'Juan',
-      lastname: 'Chaverra'
-    })
-  }
   return (
-    <section>
-      {window === 1 && <RegisterForm/>}
-      {window === 2 && <p>Estoy en la ventana dos</p>}
-      <Button  variant='contained' color="primary" onClick={handleClick}>Test reducer</Button>
-    </section>
+    <Grid
+      xs={12}
+      container
+      direction='column'
+      justify='center'
+      alignItems='center'
+      className={classes.body}      
+    >
+      <RegisterForm eventEmitter={sendForm} loading={loading}/>      
+      {showSnack && showSnack.show && <SnackbarComponent 
+        snackDuration={3500}
+        configData={showSnack}  
+        handleCloseSnack={handleCloseSnack} 
+        successMessage={'user successfully registered.'} 
+        errorMessage={error && error.error && error.errorData.error}/>}
+    </Grid>
   )
 }
 
