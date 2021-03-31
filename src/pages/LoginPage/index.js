@@ -11,7 +11,7 @@ import SnackbarComponent from '../../components/ui/Snackbars'
 export const LoginPage = () => {
   const { loading, handleSubmit, title ,errorData, showSnack, handleCloseSnack } = useLoginState()
   const classes = useLoginStyles(theme)
-
+  
   return (
     <Grid container component='main' className={classes.root}>
       <CssBaseline />

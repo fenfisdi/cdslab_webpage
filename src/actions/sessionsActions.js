@@ -21,11 +21,18 @@ export const useSessionActions = (dispatch) => {
         
       })
       .catch((error) => {
-        const {response:{data}} = error
-        dispatch({
-          type: SESSION_ERROR,
-          payload:data.detail
-        })    
+        if(error.response) {
+          const {response:{data}}=error
+          dispatch({
+            type: SESSION_ERROR,
+            payload:data.detail
+          })
+        }else{
+          dispatch({
+            type: SESSION_ERROR,
+            payload:{message:'error'}
+          })
+        }            
       })
     
   }

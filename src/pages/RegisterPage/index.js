@@ -7,7 +7,7 @@ import SnackbarComponent from '../../components/ui/Snackbars'
 import { useRegisterState } from './state'
 
 const RegisterPage = () => {
-  const {showSnack,sendForm,handleCloseSnack,loading,error}= useRegisterState()
+  const {showSnack,sendForm,handleCloseSnack,loading,error,errorData}= useRegisterState()
   const classes = useRegisterStyles(theme)
 
   return (
@@ -25,7 +25,7 @@ const RegisterPage = () => {
         configData={showSnack}  
         handleCloseSnack={handleCloseSnack} 
         successMessage={'user successfully registered.'} 
-        errorMessage={error && error.error && error.errorData.message}/>}
+        errorMessage={error && errorData && errorData.message}/>}
     </Grid>
   )
 }

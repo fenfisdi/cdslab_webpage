@@ -5,7 +5,7 @@ import { useStore } from '../../store/storeContext'
 export const useRegisterState = () => {
   const {
     state: {
-      register: { data, loading, error }
+      register: { data, loading, error, errorData }
     },
     dispatch
   } = useStore()
@@ -15,12 +15,12 @@ export const useRegisterState = () => {
     
   useEffect(() => {
     if (data && !error) {
-      console.log('Data loader ', data) // dummy example
+      console.log('success register ', data) // dummy example
       setShowSnack({...showSnack,show:true,success:true,error:false})
     }
     
     if (error) {
-      console.log(':::::::error', error)
+      console.log(':::::::error register', error)
       setShowSnack({...showSnack,show:true,success:false,error:true})
     }
   }, [data, error])
@@ -30,12 +30,11 @@ export const useRegisterState = () => {
   }
     
   // dummy example
-  const sendForm = (object) => {
-    console.log('::data send', object)
+  const sendForm = (object) => {    
     registerUser(object)
   }
 
   return {
-    showSnack,sendForm,handleCloseSnack,loading,data,error
+    showSnack,sendForm,handleCloseSnack,loading,data,error,errorData
   }
 }

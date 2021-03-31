@@ -19,12 +19,18 @@ export const useUserActions = (dispatch) => {
         })
       })
       .catch((error) => {
-        const {response:{data}}=error
-        
-        dispatch({
-          type: REGISTER_ERROR,
-          payload: { error: true, errorData: data.detail }
-        })
+        if(error.response) {
+          const {response:{data}}=error          
+          dispatch({
+            type: REGISTER_ERROR,
+            payload: data.detail
+          })
+        }else{
+          dispatch({
+            type: REGISTER_ERROR,
+            payload: { error: true, errorData: {message:'error'} }
+          })
+        }      
       })
 
   }

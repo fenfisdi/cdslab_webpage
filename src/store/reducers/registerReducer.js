@@ -8,16 +8,17 @@ export const initialState = {
   register: {
     data: null,
     loading: false,
-    error: null
+    error: false,
+    errorData:null
   }
 }
 
 export const registerReducer = (state, action) => {
   switch (action.type) {
   case REGISTER_LOADING:
-    return { ...state, loading: true, error: null, data: null }
+    return { ...state, loading: true, error: false, data: null }
   case REGISTER_ERROR:
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, loading: false, error: true, errorData:action.payload }
   case REGISTER_SAVE:
     return {
       ...state,
