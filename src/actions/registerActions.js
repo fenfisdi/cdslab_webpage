@@ -1,6 +1,6 @@
 import { REGISTER_LOADING, REGISTER_SAVE } from './types/registerTypes'
 
-export const useRegisterActions = (distpach) => {
+export const useRegisterActions = (dispatch) => {
 
   /**
    * Dummy method

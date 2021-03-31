@@ -2,7 +2,6 @@ import React from 'react'
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
 } from '@material-ui/pickers'
 import { StyledDatePicker } from './styles'
 

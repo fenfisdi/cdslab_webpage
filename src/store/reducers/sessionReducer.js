@@ -18,35 +18,35 @@ export const initialState = {
 
 export const sessionReducer = (state, action) => {
   switch (action.type) {
-    case SESSION_LOADING:
-      return { ...state, loading: true, error: null }
-    case SESSION_ERROR:
-      return { ...state, loading: false, error: action.payload }
-    case SESSION_LOGIN:
-      return {
-        ...state,
-        loading: false,
-        isAuth: true,
-        user: action.payload
-      }
-    case SESSION_LOGOUT:
-      return {
-        ...state,
-        loading: false,
-        isAuth: false,
-        user: null
-      }
-    case SESSION_SET_CURRENT_NAVIGATION:
-      return {
-        ...state,
-        navigation: { ...state.navigation, current: action.payload }
-      }
-    case SESSION_SET_CURRENT_SECTION_NAVIGATION:
-      return {
-        ...state,
-        navigation: { ...state.navigation, activeSection: action.payload }
-      }
-    default:
-      return state
+  case SESSION_LOADING:
+    return { ...state, loading: true, error: null }
+  case SESSION_ERROR:
+    return { ...state, loading: false, error: action.payload }
+  case SESSION_LOGIN:
+    return {
+      ...state,
+      loading: false,
+      isAuth: true,
+      user: action.payload
+    }
+  case SESSION_LOGOUT:
+    return {
+      ...state,
+      loading: false,
+      isAuth: false,
+      user: null
+    }
+  case SESSION_SET_CURRENT_NAVIGATION:
+    return {
+      ...state,
+      navigation: { ...state.navigation, current: action.payload }
+    }
+  case SESSION_SET_CURRENT_SECTION_NAVIGATION:
+    return {
+      ...state,
+      navigation: { ...state.navigation, activeSection: action.payload }
+    }
+  default:
+    return state
   }
 }

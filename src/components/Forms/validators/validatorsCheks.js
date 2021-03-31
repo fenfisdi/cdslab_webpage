@@ -27,9 +27,9 @@ export const checkPattern = (value, pattern) => {
  * @param {string} value
  * @param {number} maxValue Max value
  */
- export const checkMaxValue = (value, maxValue) => {
-   if(!value){
-    value = 0;
+export const checkMaxValue = (value, maxValue) => {
+  if(!value){
+    value = 0
   }
   return !(value >= maxValue)
 }
@@ -38,9 +38,9 @@ export const checkPattern = (value, pattern) => {
  * @param {string} value
  * @param {number} minValue min value
  */
- export const checkMinValue = (value, minValue) => {
-   if(!value){
-     value = 0;
-   }
+export const checkMinValue = (value, minValue) => {
+  if(!value){
+    value = 0
+  }
   return !(value < minValue)
 }

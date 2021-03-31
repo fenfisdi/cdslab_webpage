@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import ListItem from '../../../components/layouts/ListItem'
 import { useStore } from '../../../store/storeContext'
 import Icon from '@material-ui/core/Icon'
@@ -11,7 +11,7 @@ import { useSessionActions } from '../../../actions/sessionsActions'
 const SimulationListPage = () => {
   const {
     state: {
-      simulations: { simulations, loading, error },
+      simulations: { simulations, loading },
       session: { navigation }
     },
     dispatch

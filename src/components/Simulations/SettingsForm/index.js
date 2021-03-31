@@ -7,7 +7,7 @@ import RangeSlider from '../../ui/RangeSlider'
 import { Button } from '../../ui/Buttons'
 import DynamicTable from '../../TableAddSimpleElements'
 
-const SettingsForm = ({ simulation, loading, error }) => {
+const SettingsForm = ({ simulation, loading }) => {
   const {
     name,
     iterationTime,
@@ -50,14 +50,13 @@ const SettingsForm = ({ simulation, loading, error }) => {
       </FormGroup>
       <FormGroup>
         <DatePicker {...simulationDate}
-                  id='date-picker-dialog'
-                  format='MM/dd/yyyy'/>
+          id='date-picker-dialog'
+          format='MM/dd/yyyy'/>
         <Input {...populationSize} />
       </FormGroup>
       <FormGroup>
         <Input
-          {...iterationTime}
-          	disabled={loading}
+          {...iterationTime} disabled={loading}
         />
         <Input {...iterationsNumber} />
       </FormGroup>
