@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useUserActions } from '../../actions/userActions'
 import { useStore } from '../../store/storeContext'
 
