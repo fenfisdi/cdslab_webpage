@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useUserActions } from '../../actions/userActions'
 import { useStore } from '../../store/storeContext'
 
-export const useRegisterState = () => {
+export const useRegisterState = ({showSnack, setShowSnack}) => {
   const {
     state: {
       register: { data, loading, error }
     },
     dispatch
   } = useStore()
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
   const { registerUser } = useUserActions(dispatch)
   const [step, setStep] = useState(0)
   
@@ -17,21 +16,32 @@ export const useRegisterState = () => {
   useEffect(() => {
     if (data && !error) {
       console.log('Data loader ', data) // dummy example
-      setShowSnack({...showSnack,show:true,success:true,error:false})
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:true,
+          successMessage:'user successfully registered.',
+          error:false
+        }
+      )
       setStep(1)
     }
     
     if (error) {
       console.log(':::::::error', error)
-      setShowSnack({...showSnack,show:true,success:false,error:true})
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:false,
+          error:true,
+          errorMessage:error.errorData.error
+        }
+      )
     }
   }, [data, error])
     
-  const handleCloseSnack = () => {
-    setShowSnack({...showSnack,show:false})
-  }
-    
-  // dummy example
   const sendForm = (object) => {
     console.log('::data send', object)
     registerUser(object)
@@ -43,6 +53,6 @@ export const useRegisterState = () => {
   
 
   return {
-    showSnack,sendForm,handleCloseSnack,loading,data,error,updateStep,step
+    sendForm,loading,data,error,updateStep,step
   }
 }

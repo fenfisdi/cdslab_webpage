@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useUserActions } from '../../actions/userActions'
 import { useStore } from '../../store/storeContext'
 
-export const useAuthQrState = (urlPath, sendStep) => {
+export const useAuthQrState = ({urlPath, sendStep,showSnack, setShowSnack}) => {
   const {
     state: {
       authQr: { data, isValid, error, loading }
@@ -10,7 +10,7 @@ export const useAuthQrState = (urlPath, sendStep) => {
     dispatch
   } = useStore()
   const { validateQr } = useUserActions(dispatch)
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
+  //const [showSnack, setShowSnack] = useState({show:false, success:false, error:false})
 
   useEffect(() => {
     if (data && !error) {
@@ -19,7 +19,15 @@ export const useAuthQrState = (urlPath, sendStep) => {
     }
     if (error) {
       console.log('QRrender::::::::::::>error', error)
-      setShowSnack({...showSnack,show:true,success:false,error:true})
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:false,
+          error:true,
+          errorMessage:'Error key value not match'
+        }
+      )
     }
   }, [data, error])
       
