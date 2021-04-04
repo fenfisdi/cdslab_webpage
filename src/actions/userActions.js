@@ -23,7 +23,7 @@ export const useUserActions = (dispatch) => {
         
         dispatch({
           type: REGISTER_SAVE,
-          payload: response.data
+          payload: response.data.data
         })
       })
       .catch((error) => {

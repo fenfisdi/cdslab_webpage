@@ -15,7 +15,7 @@ export const LoginPage = () => {
   const { loading, handleSubmit, title, step, updateStep, data } = useLoginState({showSnack, setShowSnack})
   const { 
     email
-  }= data && data.data ||{}
+  }= data ||{}
   
   
   const handleCloseSnack = () => {

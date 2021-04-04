@@ -16,7 +16,7 @@ export const useSessionActions = (dispatch) => {
       .then((response) => {
         dispatch({
           type: SESSION_LOGIN,
-          payload: response.data
+          payload: response.data.data
         })
         
       })
