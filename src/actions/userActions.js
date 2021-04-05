@@ -53,10 +53,14 @@ export const useUserActions = (dispatch) => {
         })
       }) 
       .catch((error) => {
-        dispatch({
-          type: VALIDATION_QR_ERROR,
-          payload: { error: true, errorData: error }
-        })
+        if(error.response) {
+          const {response:{data}}=error          
+          dispatch({
+            type: VALIDATION_QR_ERROR,
+            payload:  data.detail
+          })
+        }
+        
       })
   }
 
