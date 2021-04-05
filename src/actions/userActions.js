@@ -3,10 +3,18 @@ import {
   REGISTER_LOADING,
   REGISTER_SAVE
 } from './types/registerTypes'
-import { registerUserService } from '../services/userServices'
+
+import{
+  VALIDATION_QR_SUCCESS,
+  VALIDATION_QR_ERROR,
+  VALIDATION_QR_LOADING
+} from './types/qrTypes'
+
+import { registerUserService, validateQrService } from '../services/userServices'
 export const useUserActions = (dispatch) => {
   /**
    * @param {*} userForm {username, name, lastname}
+   * @param {*} userQrValidation {username, name, lastname}
    */
   const registerUser = (userForm) => {
     dispatch({ type: REGISTER_LOADING })
@@ -29,5 +37,26 @@ export const useUserActions = (dispatch) => {
 
   }
 
-  return { registerUser }
+  const validateQr = (userQrValidation) => {
+    dispatch({ type: VALIDATION_QR_LOADING })
+    validateQrService(userQrValidation)
+      .then((response) => {
+        dispatch({
+          type: VALIDATION_QR_SUCCESS,
+          payload: response.data
+        })
+      }) 
+      .catch((error) => {
+        dispatch({
+          type: VALIDATION_QR_ERROR,
+          payload: { error: true, errorData: error }
+        })
+      })
+  }
+
+  return { registerUser, validateQr }
+
+  
 }
+
+
