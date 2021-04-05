@@ -5,7 +5,7 @@ import { useStore } from '../../store/storeContext'
 export const useAuthQrState = ({urlPath, sendStep,showSnack, setShowSnack}) => {
   const {
     state: {
-      authQr: { data, isValid, error, loading }
+      authQr: { data, isValid, error,errorData, loading }
     },
     dispatch
   } = useStore()
@@ -16,8 +16,7 @@ export const useAuthQrState = ({urlPath, sendStep,showSnack, setShowSnack}) => {
     if (data && !error) {
       sendStep(3)
       console.log('QRrender::::::::::::>success ', data) // dummy example
-    }
-    if (error) {
+    }else if (error) {
       console.log('QRrender::::::::::::>error', error)
       setShowSnack(
         {
@@ -25,7 +24,7 @@ export const useAuthQrState = ({urlPath, sendStep,showSnack, setShowSnack}) => {
           show:true,
           success:false,
           error:true,
-          errorMessage:'Error key value not match'
+          errorMessage:errorData.message
         }
       )
     }

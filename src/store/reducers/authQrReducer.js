@@ -10,7 +10,8 @@ export const initialState = {
     isValid: false,
     loading: false,
     data: null,
-    error: null
+    error: null,
+    errorData:null
   }
 }
   
@@ -20,7 +21,7 @@ export const authQrReducer = (state, action) => {
     return { ...state, loading: true, error: null, data: null, isValid:false }
   
   case VALIDATION_QR_ERROR:
-    return{...state, loading: false, error:action.payload}
+    return{...state, loading: false, error: true,errorData:action.payload}
   case VALIDATION_QR_SUCCESS:
     return {
       ...state, isValid: true, loading: false, data: action.payload

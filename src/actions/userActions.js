@@ -23,16 +23,22 @@ export const useUserActions = (dispatch) => {
         
         dispatch({
           type: REGISTER_SAVE,
-          payload: response.data
+          payload: response.data.data
         })
       })
       .catch((error) => {
-        const {response:{data}}=error
-        
-        dispatch({
-          type: REGISTER_ERROR,
-          payload: { error: true, errorData: data.detail }
-        })
+        if(error.response) {
+          const {response:{data}}=error          
+          dispatch({
+            type: REGISTER_ERROR,
+            payload: data.detail
+          })
+        }else if(error.request){
+          dispatch({
+            type: REGISTER_ERROR,
+            payload:{message:'The request was made but no response was received'}
+          })
+        }      
       })
 
   }
@@ -47,10 +53,14 @@ export const useUserActions = (dispatch) => {
         })
       }) 
       .catch((error) => {
-        dispatch({
-          type: VALIDATION_QR_ERROR,
-          payload: { error: true, errorData: error }
-        })
+        if(error.response) {
+          const {response:{data}}=error          
+          dispatch({
+            type: VALIDATION_QR_ERROR,
+            payload:  data.detail
+          })
+        }
+        
       })
   }
 
