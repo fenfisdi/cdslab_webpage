@@ -86,9 +86,9 @@ export const VALIDATORS_REGISTER_FORM = {
     },
     {
       type: 'minlength',
-      message: MIN_LENGTH_MESSAGE.replace('?', 12),
+      message: MIN_LENGTH_MESSAGE.replace('?', 13),
       check: checkMinLength,
-      valueToCheck: 12
+      valueToCheck: 13
     }
   ],
   ext: [

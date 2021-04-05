@@ -11,4 +11,8 @@ export const useRegisterFormStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     width: '70%',
   },
+  loading:{
+    'min-height':' 500px',
+    'align-items': 'center'
+  }
 }))

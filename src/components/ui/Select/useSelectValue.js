@@ -4,7 +4,7 @@ export const useSelectValue = (val, validator, extras) => {
   const [value, setValue] = useState(val)
   const [isPress, setIsPress] = useState(false)
   const [helperText, setHelperText] = useState(null)
-  const [error, setError] = useState(false)
+  const [errors, setErrors] = useState(false)
 
   const onChange = (e) => {
     if (e && e.target) {
@@ -18,20 +18,20 @@ export const useSelectValue = (val, validator, extras) => {
 
   const onClose = (event) => {
     if (validator.value && isPress && !value.length > 0) {
-      setError(true)
+      setErrors(true)
       setHelperText(validator.message)
     }
   }
 
   useEffect(() => {
-    if (error) {
-      setError(false)
+    if (errors) {
+      setErrors(false)
       setHelperText('')
     }
   }, [value])
 
   return {
-    error,
+    errors,
     helperText,
     value,
     onOpen,

@@ -16,6 +16,8 @@ import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
 import RegisterPage from './pages/RegisterPage'
+import QRrender from './pages/QRPage'
+import QRAuthentication from './pages/QRValidationPage'
 
 const App = () => {
   const {
@@ -62,6 +64,8 @@ const App = () => {
                 component={<SimulationsPage />}
               />
               <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/qr_code" component={QRrender} />
+              <Route exact path="/qr_validation" component={QRAuthentication} />
               <Route component={NotFoundPage} />
             </Switch>
           </Layout>
