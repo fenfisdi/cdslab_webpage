@@ -53,7 +53,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       institution: institution.value,
       institution_afiliation: institutionAfiliation.value,
       profession: profession.value,
-      date_of_birth: '2021-03-23T21:27:36.253Z',
+      date_of_birth: new Date(dateBirth.value),
       phone_number: phoneNumber.value.trim(),
       password: password.value,
     })

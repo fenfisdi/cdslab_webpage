@@ -16,9 +16,7 @@ import Typography from '@material-ui/core/Typography'
 
 export const LoginForm = ({
   onSubmit,
-  otro,
   title = 'Sign in',
-  error,
   loading
 }) => {
   // const [errorMessage, setErrorMessage] = useState()
@@ -29,8 +27,8 @@ export const LoginForm = ({
     type: 'password',
     label: 'Your password'
   })
-  const username = useInputValue('', VALIDATORS_LOGIN_FORM.username, {
-    name: 'username',
+  const email = useInputValue('', VALIDATORS_LOGIN_FORM.email, {
+    name: 'email',
     type: 'email',
     label: 'Your Email'
   })
@@ -41,22 +39,14 @@ export const LoginForm = ({
       // TODO setErrorMessage('you have an error')
     } else {
       onSubmit({
-        username: username.value,
+        email: email.value,
         password: password.value
       })
     }
   }
 
-  const fillError = () => {
-    return (
-      <LoginError>
-        <span>{error}</span>
-      </LoginError>
-    )
-  }
-
   const isInvalidForm = () =>
-    !!(username.errors.length > 0 || password.errors.length > 0)
+    !!(email.errors.length > 0 || password.errors.length > 0)
 
   const fillSignInHeader = () => (
     <>
@@ -94,7 +84,7 @@ export const LoginForm = ({
           variant='outlined'
           margin='normal'
           autoComplete='email'
-          {...username}
+          {...email}
         />
         <Input
           disabled={loading}
@@ -105,7 +95,7 @@ export const LoginForm = ({
           autoComplete='current-password'
           {...password}
         />
-        {error && fillError()}
+        
         <Button
           type='submit'
           fullWidth
