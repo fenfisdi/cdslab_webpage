@@ -1,62 +1,90 @@
 import { useEffect, useState } from 'react'
 import { accountRecoveryActions } from '../../actions/accountRecoveryActions'
 import { useStore } from '../../store/storeContext'
+import { useHistory } from 'react-router-dom'
 
 export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
   const {
-    state,
     state: {
-      accountRecovery: { loading, sendEmailData:{data, error, errorData} }
+      accountRecovery: { loading, sendEmailData, securityCode, resetPassword }
     },
     dispatch
   } = useStore()
-  const { requestPasswordChange } = accountRecoveryActions(dispatch)
+  const {
+    requestPasswordChange, 
+    requestSecurityCodeVerification, 
+    requestPasswordSubmission } = accountRecoveryActions(dispatch)
   const [step, setStep] = useState(0)
+  const history = useHistory()
   
 
-  console.log(':::::::::::::::::::::>state',state)
+  const redirectSimulations = (location) => {
+    history.replace(location)
+  }
 
   useEffect(() => {
-    if (data && !error) {
-      console.log('AccountRecovery success :::::::::::::::::::>', data) // dummy example
-      setShowSnack(
-        {
-          ...showSnack,
-          show: true,
-          success: true,
-          successMessage: 'AccountRecovery.',
-          error: false
-        }
-      )
-      setStep(1)
-    } else if (error) {
-      console.log('AccountRecovery error :::::::::::::::::>', errorData)
-      setShowSnack(
-        {
-          ...showSnack,
-          show: true,
-          success: false,
-          error: true,
-          errorMessage: errorData.message
-        }
-      )
-    }
-  }, [data, error]) 
+    updateshowSnackEffect(sendEmailData,'security code submitted.',setStep,1)    
+  }, [sendEmailData]) 
 
-  const sendForm = (userForm) => {
-    console.log('::AccountRecovery send data', userForm)
-    //requestPasswordChange(userForm)
+
+  useEffect(()=>{
+    updateshowSnackEffect(securityCode,'security code correct.',setStep,2)
+  },[securityCode])
+
+
+  useEffect(()=>{
+    updateshowSnackEffect(resetPassword,'password changed.',redirectSimulations,'/')
+  },[resetPassword])
+
+  const handleRequestPasswordChange = (userForm) => {
+    requestPasswordChange(userForm)
+  }
+
+  const handleRequestSecurityCode = (userForm) => {
+    requestSecurityCodeVerification(userForm)
+  }
+
+  const handleRequestPasswordSubmission = (userForm) => {
+    requestPasswordSubmission(userForm)
   }
 
   const updateStep = (int) => {
     setStep(int)
   }
+  
+  const updateshowSnackEffect =(dataEvaluate, successMessage,callback,callbackParam)=>{
+    if(dataEvaluate && dataEvaluate.data && !dataEvaluate.error) {
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:true,
+          successMessage:successMessage,
+          error:false
+        }
+      )
+      callback(callbackParam)
+    }else if(dataEvaluate && dataEvaluate.error) {
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:false,
+          error:true,
+          errorMessage:dataEvaluate.errorData.message
+        }
+      )
+    }
+  }
 
 
   return {
-    sendForm,
-    loading,
+    handleRequestPasswordChange,
+    handleRequestSecurityCode,
+    handleRequestPasswordSubmission,
     updateStep,
-    step
+    loading,
+    step,
+    sendEmailData
   }
 }

@@ -32,7 +32,7 @@ export const useLoginState = ({showSnack, setShowSnack}) => {
 
   useEffect(() => {
     if (user && !error) {
-      console.log('success login ', user) 
+      
       setShowSnack(
         {
           ...showSnack,
@@ -44,7 +44,7 @@ export const useLoginState = ({showSnack, setShowSnack}) => {
       )
       setStep(1)
     }else if (error) {
-      console.log(':::::::error login', error,errorData)
+      
       setShowSnack(
         {
           ...showSnack,
@@ -60,7 +60,7 @@ export const useLoginState = ({showSnack, setShowSnack}) => {
 
 
   const handleSubmit = (dataForm) => {
-    console.log('::login send data', dataForm)
+    
     login({
       email: dataForm?.email,
       password: dataForm?.password

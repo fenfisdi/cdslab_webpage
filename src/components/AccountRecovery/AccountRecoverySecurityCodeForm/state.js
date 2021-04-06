@@ -7,7 +7,7 @@ export const useAccountRecoverySecurityCodeFormState = () => {
   const securityCode = useInputValue('', VALIDATORS_ACCOUNT_RECOVERY_SECURYTI_CODE_FORM.number, {
     name: 'securityCode',
     type: 'text',
-    label: 'security Code',
+    label: 'security code',
     onKeyDown: (event) => {
       return checkTypePhoneNumber(event)
     }

@@ -11,10 +11,48 @@ import AccountRecoveryResetPasswordForm from '../../components/AccountRecovery/A
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { sendForm, step, loading, data, updateStep } = useAccountRecoveryState({ showSnack, setShowSnack })
+  const { 
+    handleRequestPasswordChange,
+    handleRequestSecurityCode,
+    handleRequestPasswordSubmission,
+    loading,
+    step,
+    sendEmailData } = useAccountRecoveryState({ showSnack, setShowSnack })
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
+
+  const handleClickRecoveryEmail = (formFields) => {
+    const {email} = formFields
+    handleRequestPasswordChange({email:email})
+  }
+
+  const handleClickSecurityCode = (formFields) => {
+    const {
+      data:{email}
+    } = sendEmailData
+
+    const {
+      securityCode
+    } = formFields
+
+    handleRequestSecurityCode({
+      security_code: securityCode,
+      email
+    })
+  }
+
+  const handleClickPasswordSubmission = (formFields) => {
+    const {
+      data:{email}
+    } = sendEmailData
+    const {password} = formFields
+    handleRequestPasswordSubmission({
+      email,
+      new_password:password,
+      new_verify_password:password
+    })
   }
 
   return (
@@ -26,9 +64,9 @@ const AccountRecoveryPage = () => {
       alignItems='center'
       className={classes.body}
     >
-      {/* <AccountRecoveryEmailForm loading={false} eventEmitter={sendForm} /> */}
-      {/* <AccountRecoverySecurityCodeForm loading={false} eventEmitter={sendForm} /> */}
-      <AccountRecoveryResetPasswordForm loading={false} eventEmitter={sendForm}/>
+      {step ==0 && <AccountRecoveryEmailForm loading={loading} handleClick={handleClickRecoveryEmail} />}
+      {step ==1 && <AccountRecoverySecurityCodeForm loading={loading} handleClick={handleClickSecurityCode} />}
+      {step ==2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission}/>}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
         configData={showSnack}

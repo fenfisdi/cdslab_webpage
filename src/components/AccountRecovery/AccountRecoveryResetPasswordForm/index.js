@@ -9,7 +9,7 @@ import { PasswordChecker } from '../../Register/PasswordChecker'
 import { useAccountRecoveryResetPasswordFormState } from './state'
 
 
-const AccountRecoveryResetPasswordForm = ({ loading, eventEmitter }) => {
+const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
   const classes = useAccountRecoveryResetPasswordFormStyles(theme)
   const [isValid, setIsvalid] = useState(false)
   const[verificationPassword,setVerificationPassword] = useState(false)
@@ -29,8 +29,8 @@ const AccountRecoveryResetPasswordForm = ({ loading, eventEmitter }) => {
   }, [password])
 
 
-  const handleClick = () => {
-    eventEmitter({
+  const handleClickButton = () => {
+    handleClick({
       password: password.value,
     })
   }
@@ -87,7 +87,7 @@ const AccountRecoveryResetPasswordForm = ({ loading, eventEmitter }) => {
                 Cancelar
               </Button>
               <Button
-                onClick={handleClick}
+                onClick={handleClickButton}
                 variant="contained"
                 color="primary"
                 className={{}}
