@@ -23,7 +23,7 @@ export const useUserActions = (dispatch) => {
         
         dispatch({
           type: REGISTER_SAVE,
-          payload: response.data
+          payload: response.data.data
         })
       })
       .catch((error) => {
@@ -53,10 +53,14 @@ export const useUserActions = (dispatch) => {
         })
       }) 
       .catch((error) => {
-        dispatch({
-          type: VALIDATION_QR_ERROR,
-          payload: { error: true, errorData: error }
-        })
+        if(error.response) {
+          const {response:{data}}=error          
+          dispatch({
+            type: VALIDATION_QR_ERROR,
+            payload:  data.detail
+          })
+        }
+        
       })
   }
 

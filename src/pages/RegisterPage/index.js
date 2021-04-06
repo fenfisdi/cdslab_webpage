@@ -15,8 +15,8 @@ const RegisterPage = () => {
   const { 
     email,
     urlPath
-  }= data && data.data ||{}
-
+  }= data || {}
+  
   const handleCloseSnack = () => {
     setShowSnack({...showSnack,show:false,success:false, error:false, successMessage:'', errorMessage:''})
   }
