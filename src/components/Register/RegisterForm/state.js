@@ -54,6 +54,26 @@ export const useRegisterFormState = () => {
     type: 'text',
     label: 'Profession',
   })
+  const securityQuestion1 = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'security question 1',
+    type: 'text',
+    label: 'security question 1',
+  })
+  const securityQuestion2 = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'security quetion 2',
+    type: 'text',
+    label: 'security question2',
+  })
+  const securityAnswer1 = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'security answer 1',
+    type: 'text',
+    label: 'security answer 1',
+  })
+  const securityAnswer2 = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+    name: 'security answer 2',
+    type: 'text',
+    label: 'security answer 2',
+  })
   const dateBirth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
     name: 'dateBirth',
     type: 'date',
@@ -85,6 +105,10 @@ export const useRegisterFormState = () => {
     institutionAfiliation,
     profession,
     password,
+    securityQuestion1,
+    securityQuestion2,
+    securityAnswer1,
+    securityAnswer2
   }
 
 }

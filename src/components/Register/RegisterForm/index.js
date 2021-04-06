@@ -10,6 +10,7 @@ import { SelectComponent } from '../../ui/Select'
 import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
+import { SecuritySharp } from '@material-ui/icons'
 
 
 const RegisterForm = ({ eventEmitter, loading }) => {
@@ -29,7 +30,14 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     institutionAfiliation,
     profession,
     password,
+    securityQuestion1,
+    securityQuestion2,
+    securityAnswer1,
+    securityAnswer2
   } = fieldsData
+
+  const questions=[securityQuestion1.value, securityQuestion2.value]
+  const answers=[securityAnswer1.value, securityAnswer2.value]
 
   useEffect(()=>{
     let notIsValid = false
@@ -56,6 +64,10 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       date_of_birth: new Date(dateBirth.value),
       phone_number: phoneNumber.value.trim(),
       password: password.value,
+      security_questions:{
+        questions,
+        answers
+      }
     })
   }
 
@@ -207,6 +219,72 @@ const RegisterForm = ({ eventEmitter, loading }) => {
                 margin="normal"
                 autoComplete="profession"
                 {...profession}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            container
+            xs={12}
+            spacing={1}
+            direction="row"
+            justify="center"
+          >
+            <Grid item xs={5}>
+              <Input
+                disabled={false}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="security question 1"
+                {...securityQuestion1}
+              />
+            </Grid>
+         
+            <Grid item xs={5}>
+              <Input
+                disabled={false}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="security answer 1"
+                {...securityAnswer1}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            container
+            xs={12}
+            spacing={1}
+            direction="row"
+            justify="center"
+          >
+            <Grid item xs={5}>
+              <Input
+                disabled={false}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="security question 2"
+                {...securityQuestion2}
+              />
+            </Grid>
+         
+            <Grid item xs={5}>
+              <Input
+                disabled={false}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="security answer 2"
+                {...securityAnswer2}
               />
             </Grid>
           </Grid>
