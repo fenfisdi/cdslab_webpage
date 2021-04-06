@@ -6,6 +6,7 @@ import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRe
 import SnackbarComponent from '../../components/ui/Snackbars'
 import { useAccountRecoveryState } from './state'
 import AccountRecoverySecurityCodeForm from '../../components/AccountRecovery/AccountRecoverySecurityCodeForm'
+import AccountRecoveryResetPasswordForm from '../../components/AccountRecovery/AccountRecoveryResetPasswordForm'
 
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)
@@ -26,7 +27,8 @@ const AccountRecoveryPage = () => {
       className={classes.body}
     >
       {/* <AccountRecoveryEmailForm loading={false} eventEmitter={sendForm} /> */}
-      <AccountRecoverySecurityCodeForm loading={false} eventEmitter={sendForm} />
+      {/* <AccountRecoverySecurityCodeForm loading={false} eventEmitter={sendForm} /> */}
+      <AccountRecoveryResetPasswordForm loading={false} eventEmitter={sendForm}/>
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
         configData={showSnack}
