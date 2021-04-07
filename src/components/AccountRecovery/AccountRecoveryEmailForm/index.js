@@ -7,7 +7,7 @@ import theme from '../../../styles/theme'
 import { TitleComponent } from '../../ui/Title'
 import { useAccountRecoveryEmailFormState } from './state'
 
-const AccountRecoveryEmailForm = ({ loading, eventEmitter }) => {
+const AccountRecoveryEmailForm = ({ loading, handleClick }) => {
   const classes = useAccountRecoveryEmailFormStyles(theme)
   const { email } = useAccountRecoveryEmailFormState()
   const [isValid, setIsvalid] = useState(false)
@@ -26,10 +26,8 @@ const AccountRecoveryEmailForm = ({ loading, eventEmitter }) => {
   }, [email])
 
 
-  const handleClick = () => {
-    eventEmitter({
-      email: email.value,
-    })
+  const handleClickButton = () => {
+    handleClick({email:email.value})
   }
 
   return (
@@ -72,7 +70,7 @@ const AccountRecoveryEmailForm = ({ loading, eventEmitter }) => {
                 Cancelar
               </Button>
               <Button
-                onClick={handleClick}
+                onClick={handleClickButton}
                 variant="contained"
                 color="primary"
                 className={{}}

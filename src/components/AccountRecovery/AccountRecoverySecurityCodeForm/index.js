@@ -7,7 +7,7 @@ import theme from '../../../styles/theme'
 import { TitleComponent } from '../../ui/Title'
 import {  useAccountRecoverySecurityCodeFormState } from './state'
 
-const AccountRecoverySecurityCodeForm = ({ loading, eventEmitter }) => {
+const AccountRecoverySecurityCodeForm = ({ loading, handleClick }) => {
   const classes = useAccountRecoverySecurityCodeFormStyles(theme)
   const { securityCode } = useAccountRecoverySecurityCodeFormState()
   const [isValid, setIsvalid] = useState(false)
@@ -26,10 +26,8 @@ const AccountRecoverySecurityCodeForm = ({ loading, eventEmitter }) => {
   }, [securityCode])
 
 
-  const handleClick = () => {
-    eventEmitter({
-      securityCode: securityCode.value,
-    })
+  const handleClickButton =()=>{
+    handleClick({securityCode:securityCode.value})
   }
 
   return (
@@ -78,7 +76,7 @@ const AccountRecoverySecurityCodeForm = ({ loading, eventEmitter }) => {
                 Cancelar
               </Button>
               <Button
-                onClick={handleClick}
+                onClick={handleClickButton}
                 variant="contained"
                 color="primary"
                 className={{}}
