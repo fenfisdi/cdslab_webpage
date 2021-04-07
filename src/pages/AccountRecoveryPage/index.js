@@ -64,7 +64,12 @@ const AccountRecoveryPage = () => {
       alignItems='center'
       className={classes.body}
     >
-      {step ==0 && <AccountRecoveryEmailForm loading={loading} handleClick={handleClickRecoveryEmail} />}
+      {step ==0 && <AccountRecoveryEmailForm 
+        loading={loading} 
+        handleClick={handleClickRecoveryEmail} 
+        messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'} 
+        messageTitle={'Recupera tu cuenta'}/>
+      }
       {step ==1 && <AccountRecoverySecurityCodeForm loading={loading} handleClick={handleClickSecurityCode} />}
       {step ==2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission}/>}
       {showSnack && showSnack.show && <SnackbarComponent

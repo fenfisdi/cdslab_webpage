@@ -5,6 +5,7 @@ import { simulationReducer, initialState as simulationInitialState } from './red
 import { registerReducer, initialState as registerInitialState } from './reducers/registerReducer'
 import { authQrReducer,initialState as auhtQrInitialState } from './reducers/authQrReducer'
 import { accountRecoveryReducer, initialState as accountRecoveryInitialState } from './reducers/accountRecoveryReducer'
+import { qrAccountRecoveryReducer, initialState as qrAccountRecoveryInitialState  } from './reducers/qrAccountRecoveryReducer'
 
 export const StoreContext = createContext()
 
@@ -15,9 +16,15 @@ export const StoreProvider = ({ children }) => {
       simulations: simulationReducer,
       register: registerReducer,
       authQr: authQrReducer,
-      accountRecovery:accountRecoveryReducer
+      accountRecovery:accountRecoveryReducer,
+      qrAccountRecovery:qrAccountRecoveryReducer
     }),
-    Object.assign(sessionInitialState, simulationInitialState, registerInitialState, auhtQrInitialState,accountRecoveryInitialState)
+    Object.assign(sessionInitialState, 
+      simulationInitialState, 
+      registerInitialState, 
+      auhtQrInitialState,
+      accountRecoveryInitialState,
+      qrAccountRecoveryInitialState)
   )
   const value = { state, dispatch }
 

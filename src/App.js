@@ -66,7 +66,7 @@ const App = () => {
                 component={<SimulationsPage />}
               />
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
-              <Route exact path="/QrBindingRecovery" component={RecoveryQrBindingPage} />
+              <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/qr_code" component={QRrender} />
               <Route exact path="/qr_validation" component={QRAuthentication} />

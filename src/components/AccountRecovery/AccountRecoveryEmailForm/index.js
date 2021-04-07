@@ -7,7 +7,7 @@ import theme from '../../../styles/theme'
 import { TitleComponent } from '../../ui/Title'
 import { useAccountRecoveryEmailFormState } from './state'
 
-const AccountRecoveryEmailForm = ({ loading, handleClick }) => {
+const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTitle }) => {
   const classes = useAccountRecoveryEmailFormStyles(theme)
   const { email } = useAccountRecoveryEmailFormState()
   const [isValid, setIsvalid] = useState(false)
@@ -38,7 +38,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick }) => {
           <TitleComponent
             justify={'center'}
             alignItems={'center'}
-            title={'Recupera tu cuenta'}
+            title={messageTitle}
             variant={'h6'}
           />
           <Grid
@@ -52,7 +52,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick }) => {
             className={classes.formEmail}
           >
             <Grid item container xs={12}>
-              <p>Ingresa tu correo electrónico para restablecer tu contraseña</p>
+              <p>{messageBody}</p>
             </Grid>
             <Grid item container xs={12}>
               <Input

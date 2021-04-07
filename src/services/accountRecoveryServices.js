@@ -24,11 +24,3 @@ export const requestPasswordSubmissionService = async (userForm) => {
     userForm
   ) 
 }
-
-export const requestQrBindingRecoverService = async (useForm) => {
-  return request(
-    `${process.env.REACT_APP_AUTH_API_URL}/qrRecoveryvinculation`,
-    'POST',
-    useForm
-  )
-}

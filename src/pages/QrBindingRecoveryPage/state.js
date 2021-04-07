@@ -1,62 +1,80 @@
 import { useEffect, useState } from 'react'
-import { accountRecoveryActions } from '../../actions/accountRecoveryActions'
+import { qrAccountRecoveryActions } from '../../actions/qrAccountRecoveryActions'
 import { useStore } from '../../store/storeContext'
+import { useHistory } from 'react-router-dom'
 
 export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) => {
   const {
-    state,
     state: {
-      accountRecovery: { loading, sendEmailData:{data, error, errorData} }
+      qrAccountRecovery: { loading, qrRecovery, qrSecurityQuestions }
     },
     dispatch
   } = useStore()
-  const { qrRecoverBinding } = accountRecoveryActions(dispatch)
+  const { requestQrBindingRecover, requestQrSecurityQuestions } = qrAccountRecoveryActions(dispatch)
   const [step, setStep] = useState(0)
+  const history = useHistory()
+  
+
+  const redirectToPage = (location) => {
+    history.replace(location)
+  }
     
   
-  console.log(':::::::::::::::::::::>state',state)
-  
   useEffect(() => {
-    if (data && !error) {
-      console.log('AccountRecovery success :::::::::::::::::::>', data) // dummy example
-      setShowSnack(
-        {
-          ...showSnack,
-          show: true,
-          success: true,
-          successMessage: 'AccountRecovery.',
-          error: false
-        }
-      )
-      setStep(1)
-    } else if (error) {
-      console.log('AccountRecovery error :::::::::::::::::>', errorData)
-      setShowSnack(
-        {
-          ...showSnack,
-          show: true,
-          success: false,
-          error: true,
-          errorMessage: errorData.message
-        }
-      )
-    }
-  }, [data, error]) 
+    updateshowSnackEffect(qrRecovery,'security question submitted.',setStep,1)    
+  }, [qrRecovery])
+
+  useEffect(() => {
+    updateshowSnackEffect(qrSecurityQuestions,'security question submitted.',setStep,2)    
+  }, [qrSecurityQuestions])
   
-  const sendForm = (userForm) => {
-    console.log('::AccountRecovery send data', userForm)
-    qrRecoverBinding(userForm)
+  
+  const handleRequestQrBindingRecover = (userForm) => {
+    requestQrBindingRecover(userForm)
+  }
+
+  const handleRequestQrSecurityQuestions = (userForm) =>{    
+    requestQrSecurityQuestions(userForm) 
   }
   
   const updateStep = (int) => {
     setStep(int)
   }
+
+  const updateshowSnackEffect =(dataEvaluate, successMessage,callback,callbackParam)=>{
+    if(dataEvaluate && dataEvaluate.data && !dataEvaluate.error) {
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:true,
+          successMessage:successMessage,
+          error:false
+        }
+      )
+      callback(callbackParam)
+    }else if(dataEvaluate && dataEvaluate.error) {
+      setShowSnack(
+        {
+          ...showSnack,
+          show:true,
+          success:false,
+          error:true,
+          errorMessage:dataEvaluate.errorData.message
+        }
+      )
+    }
+  }
   
   
   return {
-    sendForm,
-    loading,
+    handleRequestQrBindingRecover,
+    handleRequestQrSecurityQuestions,
+    redirectToPage,
     updateStep,
-    step
+    loading,
+    step,
+    qrRecovery,
+    qrSecurityQuestions
   }
 }

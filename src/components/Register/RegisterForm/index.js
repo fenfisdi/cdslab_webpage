@@ -10,7 +10,6 @@ import { SelectComponent } from '../../ui/Select'
 import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
-import { SecuritySharp } from '@material-ui/icons'
 
 
 const RegisterForm = ({ eventEmitter, loading }) => {
@@ -36,9 +35,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     securityAnswer2
   } = fieldsData
 
-  const questions=[securityQuestion1.value, securityQuestion2.value]
-  const answers=[securityAnswer1.value, securityAnswer2.value]
-
   useEffect(()=>{
     let notIsValid = false
     for(var key in fieldsData) {
@@ -53,6 +49,8 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   },[fieldsData])
 
   const handleClick = () => {
+    const questions=[securityQuestion1.value, securityQuestion2.value]
+    const answers=[securityAnswer1.value, securityAnswer2.value]
     eventEmitter({
       email: email.value,
       name: name.value,

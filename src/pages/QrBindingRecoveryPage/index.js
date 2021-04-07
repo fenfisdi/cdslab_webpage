@@ -5,15 +5,47 @@ import { useRecoveryQrBindingStyles } from './styles'
 import SnackbarComponent from '../../components/ui/Snackbars'
 import { useAccountRecoveryQrBindingState } from './state'
 import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRecoveryEmailForm'
-import securityQuestionsForm from '../../components/AccountRecovery/AccountRecoverySecurityQuestionsForm'
+import QrBindingRecoverySecurityQuestions from '../../components/QrForm/QrBindingRecoverySecurityQuestions'
+import QrBindingRecoveryShowLink from '../../components/QrForm/QrBindingRecoveryShowLink'
 
 const RecoveryQrBindingPage = () =>{
   const classes = useRecoveryQrBindingStyles(theme)
   const [showSnack, setShowSnack] = useState({show:false, success:false, error:false, successMessage:'', errorMessage:''})
-  const{ sendForm ,step,updateStep,loading,data } = useAccountRecoveryQrBindingState({ showSnack, setShowSnack})
+  const { 
+    handleRequestQrBindingRecover,
+    handleRequestQrSecurityQuestions,
+    redirectToPage,
+    step,
+    loading,
+    qrRecovery,
+    qrSecurityQuestions
+  } = useAccountRecoveryQrBindingState({ showSnack, setShowSnack})
+
+  const { data:dataRecovery } = qrRecovery || {}
+  const { data:dataSecurityQuestions } = qrSecurityQuestions || {}
 
   const handleCloseSnack = () => {
     setShowSnack({...showSnack,show:false,success:false, error:false, successMessage:'', errorMessage:''})
+  }
+
+  const handleClickRecoveryEmail = (formFields) => {
+    const {email} = formFields
+    handleRequestQrBindingRecover({
+      email
+    })
+  }
+
+  const handleClickSecurityQuestion = (formFields) => {
+    const { email }= dataRecovery || {}
+    const { answers } = formFields    
+    handleRequestQrSecurityQuestions({
+      email,
+      answers
+    }) 
+  }
+
+  const handleClickRedirect =()=>{
+    redirectToPage('/')
   }
 
   return (
@@ -25,9 +57,24 @@ const RecoveryQrBindingPage = () =>{
       alignItems='center'
       className={classes.body}      
     >
-      {step==0 &&<AccountRecoveryEmailForm eventEmitter={sendForm} loading={loading}/>}
-      {step==1 &&<securityQuestionsForm questions={data} loading={loading} />}
-      { /*step==3 &&<SuccessRegister />*/}         
+      {step==0 && <AccountRecoveryEmailForm 
+        handleClick={handleClickRecoveryEmail} 
+        loading={loading} 
+        messageBody={'Ingresa tu correo electrónico para restablecer tu Qr'} 
+        messageTitle={'Recuperar tu Qr'}/>}
+
+      {step==1 && <QrBindingRecoverySecurityQuestions
+        loading={loading} 
+        questions={dataRecovery ? dataRecovery.securityQuestions:[]}
+        handleEventEmitted={handleClickSecurityQuestion}
+      />}
+      
+      {step==2 && <QrBindingRecoveryShowLink 
+        qrUrl={dataSecurityQuestions && dataSecurityQuestions.urlPath}
+        title={'Codigo Qr generado.'}
+        handleClick={handleClickRedirect}
+      />}        
+      
       {showSnack && showSnack.show && <SnackbarComponent 
         snackDuration={3500}
         configData={showSnack}  
