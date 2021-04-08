@@ -7,7 +7,7 @@ import theme from '../../../styles/theme'
 import { TitleComponent } from '../../ui/Title'
 import {  useAccountRecoverySecurityCodeFormState } from './state'
 
-const AccountRecoverySecurityCodeForm = ({ loading, handleClick }) => {
+const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, messageBody  }) => {
   const classes = useAccountRecoverySecurityCodeFormStyles(theme)
   const { securityCode } = useAccountRecoverySecurityCodeFormState()
   const [isValid, setIsvalid] = useState(false)
@@ -51,12 +51,12 @@ const AccountRecoverySecurityCodeForm = ({ loading, handleClick }) => {
             alignItems="center"
             className={classes.formEmail}
           >
-            <Grid item container xs={12}>
+            <Grid item container direction="column" xs={12}>
               <Box p={1} bgcolor="background.paper">
-                Comprueba si recibiste un correo electrónico con tu código de 6 dígitos.
+                {messageTitle}
               </Box>
               <Box p={1} bgcolor="background.paper">
-                Enviamos el código a: m**********x@hotmail.com
+                {messageBody}
               </Box>
               
             </Grid>
