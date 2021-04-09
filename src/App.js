@@ -20,6 +20,7 @@ import QRrender from './pages/QRPage'
 import QRAuthentication from './pages/QRValidationPage'
 import AccountRecoveryPage from './pages/AccountRecoveryPage'
 import RecoveryQrBindingPage from './pages/QrBindingRecoveryPage'
+import CompartmentalModelsPage from './pages/CompartmentalModelsPage'
 
 const App = () => {
   const {
@@ -70,6 +71,7 @@ const App = () => {
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/qr_code" component={QRrender} />
               <Route exact path="/qr_validation" component={QRAuthentication} />
+              <Route exact path="/compartmentalModelsPage" component={CompartmentalModelsPage}/>
               <Route component={NotFoundPage} />
             </Switch>
           </Layout>
