@@ -7,6 +7,7 @@ import SnackbarComponent from '../../components/ui/Snackbars'
 import { useAccountRecoveryState } from './state'
 import AccountRecoverySecurityCodeForm from '../../components/AccountRecovery/AccountRecoverySecurityCodeForm'
 import AccountRecoveryResetPasswordForm from '../../components/AccountRecovery/AccountRecoveryResetPasswordForm'
+import { replaceStringInRange } from '../../utils/common'
 
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)
@@ -64,8 +65,18 @@ const AccountRecoveryPage = () => {
       alignItems='center'
       className={classes.body}
     >
-      {step ==0 && <AccountRecoveryEmailForm loading={loading} handleClick={handleClickRecoveryEmail} />}
-      {step ==1 && <AccountRecoverySecurityCodeForm loading={loading} handleClick={handleClickSecurityCode} />}
+      {step ==0 && <AccountRecoveryEmailForm 
+        loading={loading} 
+        handleClick={handleClickRecoveryEmail} 
+        messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'} 
+        messageTitle={'Recupera tu cuenta'}/>
+      }
+      {step ==1 && <AccountRecoverySecurityCodeForm 
+        loading={loading} 
+        handleClick={handleClickSecurityCode} 
+        messageTitle={'Comprueba si recibiste un correo electrónico con tu código de 6 dígitos.'}
+        messageBody={`Enviamos el código a: ${sendEmailData && replaceStringInRange(sendEmailData.data.email,1,5,'*****')}`}
+      />}
       {step ==2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission}/>}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
