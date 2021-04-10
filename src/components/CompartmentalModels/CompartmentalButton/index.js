@@ -5,7 +5,7 @@ import { Icon } from '@material-ui/core'
 import { useCompartmentalButtonStyles } from './styles'
 
 
-const CompartmentalButton = ({justify,alignItems}) => {
+const CompartmentalButton = ({justify,alignItems,text}) => {
   const classes = useCompartmentalButtonStyles()
 
   return (
@@ -18,7 +18,7 @@ const CompartmentalButton = ({justify,alignItems}) => {
       className={classes.body}
     >
       <Typography variant="body1" component="p" className={classes.text}>
-      Choose Simulation Type
+        {text}
       </Typography>          
       {/* <Button           
         startIcon={<Icon class="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />}

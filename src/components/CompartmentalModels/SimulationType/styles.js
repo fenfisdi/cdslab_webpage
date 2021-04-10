@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useCompartmentalModelsPageStyles = makeStyles(() => ({
+export const useSimulationTypeStyles = makeStyles(() => ({
   root: {
     height: '100vh',
   },

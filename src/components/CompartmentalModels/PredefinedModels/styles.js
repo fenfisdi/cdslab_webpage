@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useCompartmentalModelsPageStyles = makeStyles(() => ({
+export const usePredefinedModelsStyles = makeStyles(() => ({
   root: {
     height: '100vh',
   },
