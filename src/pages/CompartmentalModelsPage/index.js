@@ -5,6 +5,7 @@ import { useCompartmentalModelsPageStyles } from './styles'
 
 import PredefinedModels from '../../components/CompartmentalModels/PredefinedModels'
 import SimulationType from '../../components/CompartmentalModels/SimulationType'
+import AdjustParameters from '../../components/CompartmentalModels/AdjustParameters'
 
 const CompartmentalModelsPage = () => {
   const classes = useCompartmentalModelsPageStyles()
@@ -16,7 +17,14 @@ const CompartmentalModelsPage = () => {
   }
   
   const handleClickSimulationType =(charter)=>{
+    if(charter == 'Fixed parameters'){
+      updateStep(2)
+    }
     console.log('::::::::::::::::>handleClickSimulationType',charter)
+  }
+
+  const handleClickAdjustParameters =(charter)=>{
+    console.log('::::::::::::::::>handleClickAdjustParameters',charter)
   }
 
   return (
@@ -30,6 +38,7 @@ const CompartmentalModelsPage = () => {
     >
       {step==0 && <PredefinedModels handleClickPredefinedModels={handleClickPredefinedModels}/>}
       {step==1 && <SimulationType handleClickSimulationType={handleClickSimulationType} />}
+      {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters}/>}
     </Grid>
   )
 }
