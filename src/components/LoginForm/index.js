@@ -65,12 +65,12 @@ export const LoginForm = ({
     <Grid container>
       <Grid item xs>
         <Link className={classes.link} variant='body2' onClick={()=>{history.push('/accountRecovery')}}>
-          Forgot password?
+          {'Forgot password?'}
         </Link>
       </Grid>
       <Grid item>
-        <Link href='#' variant='body2'>
-          {'Don\'t have an account? Sign Up'}
+        <Link className={classes.link} variant='body2' onClick={()=>{history.push('/qrBindingRecovery')}}>
+          {'Forgot your security link?'}
         </Link>
       </Grid>
     </Grid>
