@@ -7,13 +7,11 @@ import { usePredefinedModelsState } from './state'
 import { usePredefinedModelsStyles } from './styles'
 
 
-const PredefinedModels = ({handleClickPredefinedModels}) => {
+const PredefinedModels = ({handleClickPredefinedModels,options}) => {
   const classes = usePredefinedModelsStyles()
   const {updateStep,step}= usePredefinedModelsState()
 
-  const handleClick =(charter)=>{
-    handleClickPredefinedModels(charter)
-  }
+ 
   
 
   return (
@@ -34,8 +32,8 @@ const PredefinedModels = ({handleClickPredefinedModels}) => {
       <ModelCard 
         justify="center"
         alignItems="center"
-        options={[{name:'SIR'},{name:'SEIR'},{name:'SEIRV'}]}
-        eventEmitted={handleClick}
+        options={options}
+        eventEmitted={handleClickPredefinedModels}
       />
       <CompartmentalButton        
         justify="center"

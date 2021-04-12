@@ -24,7 +24,7 @@ const CompartmentalButton = ({justify,alignItems,text}) => {
         startIcon={<Icon class="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />}
       >        
       </Button> */}
-      <Icon class="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />
+      <Icon className="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />
     </Grid>
   )
 }

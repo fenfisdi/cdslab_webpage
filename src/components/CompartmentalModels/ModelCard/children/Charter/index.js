@@ -6,10 +6,10 @@ import { useCharterStyles } from './styles'
 
 
 
-const Charter = ({name,handleClickCharter,selected})=>  {
+const Charter = ({name,indetifier,handleClickCharter,selected,extraOption})=>  {
   const classes = useCharterStyles()  
   return (
-    <Card className={selected==name ? classes.root + ' selected':classes.root } onClick={()=>{handleClickCharter(name)}}>
+    <Card className={selected==indetifier ? classes.root + ' selected':classes.root } onClick={()=>{handleClickCharter(extraOption)}}>
       <CardContent>
         <Typography variant="h6" component="h2">
           {name}

@@ -7,14 +7,9 @@ import {  useSimulationTypeStyles } from './styles'
 import { useSimulationTypeState } from './state'
 
 
-const SimulationType = ({handleClickSimulationType}) => {
+const SimulationType = ({handleClickSimulationType,options}) => {
   const classes = useSimulationTypeStyles()
   const { updateStep, step}= useSimulationTypeState()
-
-  const handleClick =(charter)=>{
-    handleClickSimulationType(charter)
-  }
-  
 
   return (
     <Grid 
@@ -34,8 +29,8 @@ const SimulationType = ({handleClickSimulationType}) => {
       <ModelCard 
         justify="center"
         alignItems="center"
-        options={[{name:'Adjust parameters'},{name:'Fixed parameters'}]}
-        eventEmitted={handleClick}
+        options={options}
+        eventEmitted={handleClickSimulationType}
       />
       <CompartmentalButton        
         justify="center"

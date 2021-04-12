@@ -7,7 +7,7 @@ import {  useAdjustParametersStyles } from './styles'
 import { useAdjustParametersState } from './state'
 
 
-const AdjustParameters = ({handleClickAdjustParameters}) => {
+const AdjustParameters = ({handleClickAdjustParameters,options}) => {
   const classes = useAdjustParametersStyles()
   const { updateStep, step}= useAdjustParametersState()
 
@@ -32,7 +32,7 @@ const AdjustParameters = ({handleClickAdjustParameters}) => {
       <ModelCard 
         justify="center"
         alignItems="center"
-        options={[{name:'Upload Data'},{name:'Use Available data (INS)'}]}
+        options={options}
         eventEmitted={handleClick}
       />
       <CompartmentalButton        
