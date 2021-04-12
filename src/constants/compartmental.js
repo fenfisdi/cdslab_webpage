@@ -1,8 +1,86 @@
-export const simulationFields = {
-  'SIR':{
+export const COMPARTMENTAL_FIELDS = {
+  SIR:{
     fields:[
-      {type:'text',label:'Influex rate', tag:'(People per day)'},
-      {type:'text',label:'Influex rate', tag:'(People per day)'}
+      {
+        label:'Influex Rate', 
+        tag:'(People per day)', 
+        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
+        indetifier:'influexRate' 
+      },
+      {
+        label:'Natural Death Rate', 
+        tag:'(People per day)',
+        input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
+        indetifier:'naturalDeath'
+      },
+      {
+        label:'Disease-Induced Death Rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
+        indetifier:'diseaseInduced'
+      },
+      {
+        label:'Transmission rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'transmissionRate',label:'Transmission rate'},
+        indetifier:'transmissionRate'
+      },
+      {
+        label:'Vaccination rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
+        indetifier:'vaccinationRate'
+      },
+      {
+        label:'Recovery rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
+        indetifier:'recoveryRate'
+      },
+      {
+        label:'Reinfection rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
+        indetifier:'reinfectionRate'
+      },
+      {
+        label:'Loss of immunity rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
+        indetifier:'lossofImmunityRate'
+      }
+    ]
+  },
+  SEIR:{
+    fields:[
+      {
+        label:'Influex Rate', 
+        tag:'(People per day)', 
+        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
+        indetifier:'influexRate' 
+      },
+      {
+        label:'Natural Death Rate', 
+        tag:'(People per day)',
+        input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
+        indetifier:'naturalDeath'
+      },
+      {
+        label:'Disease-Induced Death Rate', 
+        tag:'(Per day)',
+        input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
+        indetifier:'diseaseInduced'
+      }
+    ]
+  },
+  SEIRV:{
+    fields:[
+      {
+        label:'Influex Rate', 
+        tag:'(People per day)', 
+        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
+        indetifier:'influexRate' 
+      }
     ]
   }
 }

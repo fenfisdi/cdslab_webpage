@@ -1,7 +1,4 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
-import { Icon } from '@material-ui/core'
 
 import { useCompartmentalModelsPageState } from './state'
 import { useCompartmentalModelsPageStyles } from './styles'
@@ -11,7 +8,8 @@ import SimulationType from '../../components/CompartmentalModels/SimulationType'
 import AdjustParameters from '../../components/CompartmentalModels/AdjustParameters'
 import FixedParameters from '../../components/CompartmentalModels/FixedParameters'
 import BackButton from '../../components/ui/BackButton'
-import { ADJUST_PARAMETERS, MODEL_IDENTIFIERS, OPTIONS_ADJUST_PARAMETERS, OPTIONS_PREDEFINED_MODELS, OPTIONS_SIMULATION_TYPE, SIMULATION_IDENTIFIERS } from '../../constants/compartmental'
+import { OPTIONS_ADJUST_PARAMETERS, OPTIONS_PREDEFINED_MODELS, OPTIONS_SIMULATION_TYPE } from '../../constants/compartmental'
+
 
 const CompartmentalModelsPage = () => {
   const classes = useCompartmentalModelsPageStyles()
@@ -27,14 +25,7 @@ const CompartmentalModelsPage = () => {
   const  { predefinedModel, simulationType } = parameters
 
   return (
-    <Grid 
-      xs={12}
-      container 
-      direction="column" 
-      justify="center" 
-      alignItems="center"
-      spacing={2}
-    >
+    <div>
       {step!=0 && <BackButton evenOnClick={handleClickBackButton} text="back" />}
 
       {step==0 && <PredefinedModels handleClickPredefinedModels={handleClickPredefinedModels} options={OPTIONS_PREDEFINED_MODELS}/>}
@@ -44,7 +35,7 @@ const CompartmentalModelsPage = () => {
       {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters} options={OPTIONS_ADJUST_PARAMETERS}/>}
 
       {step==3 && <FixedParameters predefinedModel={predefinedModel} /> }
-    </Grid>
+    </div>
   )
 }
 

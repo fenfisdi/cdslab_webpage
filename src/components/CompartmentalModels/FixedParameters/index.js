@@ -3,17 +3,18 @@ import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { useFixedParametersStyles } from './styles'
 import { useFixedParametersState } from './state'
+import ParametersForm from './children/ParametersForm'
 
 
 const FixedParameters = ({predefinedModel}) => {
   const classes = useFixedParametersStyles()
   const {updateStep,step}= useFixedParametersState()
-  const {name}=predefinedModel
+  const {name,indetifier}=predefinedModel
 
   return (
     <Grid 
       xs={12}
-      container 
+      container      
       direction="column" 
       justify="center" 
       alignItems="center"
@@ -28,6 +29,8 @@ const FixedParameters = ({predefinedModel}) => {
       <Typography variant="body2" component="p" className={classes.title}>
       Configure parameters values    
       </Typography>
+
+      <ParametersForm modelIndetifier={indetifier}/>
       
     </Grid>
   )
