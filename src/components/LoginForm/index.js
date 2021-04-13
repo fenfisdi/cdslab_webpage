@@ -4,6 +4,7 @@ import { useInputValue } from '../ui/Input/useInputValue'
 import { Input } from '../ui/Input'
 import { LoadingMessage, LoginError, useLoginFormStyles } from './styles'
 import { VALIDATORS_LOGIN_FORM } from './validators'
+import { useHistory } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
@@ -21,6 +22,7 @@ export const LoginForm = ({
 }) => {
   // const [errorMessage, setErrorMessage] = useState()
   const classes = useLoginFormStyles(theme)
+  const history = useHistory()
 
   const password = useInputValue('', VALIDATORS_LOGIN_FORM.password, {
     name: 'password',
@@ -62,13 +64,13 @@ export const LoginForm = ({
   const fillLoginHelpers = () => (
     <Grid container>
       <Grid item xs>
-        <Link href='#' variant='body2'>
-          Forgot password?
+        <Link className={classes.link} variant='body2' onClick={()=>{history.push('/accountRecovery')}}>
+          {'Forgot password?'}
         </Link>
       </Grid>
       <Grid item>
-        <Link href='#' variant='body2'>
-          {'Don\'t have an account? Sign Up'}
+        <Link className={classes.link} variant='body2' onClick={()=>{history.push('/qrBindingRecovery')}}>
+          {'Forgot your security link?'}
         </Link>
       </Grid>
     </Grid>

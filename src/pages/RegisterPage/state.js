@@ -15,7 +15,7 @@ export const useRegisterState = ({showSnack, setShowSnack}) => {
     
   useEffect(() => {
     if (data && !error) {
-      console.log('Register success :::::::::::::::::::>', data) // dummy example
+      
       setShowSnack(
         {
           ...showSnack,
@@ -27,7 +27,7 @@ export const useRegisterState = ({showSnack, setShowSnack}) => {
       )
       setStep(1)
     }else if (error) {
-      console.log('Register error :::::::::::::::::>', errorData)
+      
       setShowSnack(
         {
           ...showSnack,
@@ -41,7 +41,7 @@ export const useRegisterState = ({showSnack, setShowSnack}) => {
   }, [data, error])
     
   const sendForm = (object) => {
-    console.log('::Register send data', object)
+    
     registerUser(object)
   }
 

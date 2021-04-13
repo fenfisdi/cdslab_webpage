@@ -39,5 +39,10 @@ export const useLoginFormStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  link: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }))

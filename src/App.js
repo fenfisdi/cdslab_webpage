@@ -18,6 +18,8 @@ import { MiniLoader } from './components/layouts/MiniLoader'
 import RegisterPage from './pages/RegisterPage'
 import QRrender from './pages/QRPage'
 import QRAuthentication from './pages/QRValidationPage'
+import AccountRecoveryPage from './pages/AccountRecoveryPage'
+import RecoveryQrBindingPage from './pages/QrBindingRecoveryPage'
 
 const App = () => {
   const {
@@ -63,6 +65,8 @@ const App = () => {
                 path="/simulations"
                 component={<SimulationsPage />}
               />
+              <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
+              <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/qr_code" component={QRrender} />
               <Route exact path="/qr_validation" component={QRAuthentication} />

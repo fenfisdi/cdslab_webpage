@@ -11,7 +11,7 @@ const QRAuthentication =() =>{
       justify="center"
       style={{ marginTop: '10%' }}
     >
-      <h1>CDSLAB</h1>
+      <h1>Hello</h1>
       <QRvalidation/>
     </Grid>
   )
