@@ -9,7 +9,7 @@ export const Input = (options) => {
     <TextField
       {...options}
       className={classes.root}
-      error={!!(options.helperText)}
+      error={!!(options.helperText) || (options.errors && options.errors.length)}
     />
 
   )

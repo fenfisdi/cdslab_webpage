@@ -4,9 +4,10 @@ import Typography from '@material-ui/core/Typography'
 import { useFixedParametersStyles } from './styles'
 import { useFixedParametersState } from './state'
 import ParametersForm from './children/ParametersForm'
+import LoaderComponent from '../../ui/Loader'
 
 
-const FixedParameters = ({predefinedModel,handleClickFixedParameters}) => {
+const FixedParameters = ({predefinedModel,handleClickFixedParameters,loading}) => {
   const classes = useFixedParametersStyles()
   const {updateStep,step}= useFixedParametersState()
   const {name,indetifier}=predefinedModel
@@ -28,8 +29,8 @@ const FixedParameters = ({predefinedModel,handleClickFixedParameters}) => {
       <Typography variant="body2" component="p" className={classes.title}>
       Configure parameters values    
       </Typography>
-
-      <ParametersForm modelIndetifier={indetifier} formParametersSave={handleClickFixedParameters}/>
+      {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
+      {!loading && <ParametersForm modelIndetifier={indetifier} formParametersSave={handleClickFixedParameters}/>}
       
     </Grid>
   )
