@@ -5,49 +5,57 @@ export const COMPARTMENTAL_FIELDS = {
         label:'Influex Rate', 
         tag:'(People per day)', 
         input:{type:'text',name:'influexRate',label:'Influex rate' }, 
-        indetifier:'influexRate' 
+        indetifier:'influexRate',
+        helper:'dummy'
       },
       {
         label:'Natural Death Rate', 
         tag:'(People per day)',
         input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
-        indetifier:'naturalDeath'
+        indetifier:'naturalDeath',
+        helper:'dummy'
       },
       {
         label:'Disease-Induced Death Rate', 
         tag:'(Per day)',
         input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
-        indetifier:'diseaseInduced'
+        indetifier:'diseaseInduced',
+        helper:'dummy'
       },
       {
         label:'Transmission rate', 
         tag:'(Per day)',
         input:{type:'text',name:'transmissionRate',label:'Transmission rate'},
-        indetifier:'transmissionRate'
+        indetifier:'transmissionRate',
+        helper:'dummy'
       },
       {
         label:'Vaccination rate', 
         tag:'(Per day)',
         input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
-        indetifier:'vaccinationRate'
+        indetifier:'vaccinationRate',
+        helper:'dummy'
       },
       {
         label:'Recovery rate', 
         tag:'(Per day)',
         input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
-        indetifier:'recoveryRate'
+        indetifier:'recoveryRate',
+        helper:'dummy'
       },
       {
         label:'Reinfection rate', 
         tag:'(Per day)',
         input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
-        indetifier:'reinfectionRate'
+        indetifier:'reinfectionRate',
+        helper:'dummy'
       },
       {
         label:'Loss of immunity rate', 
         tag:'(Per day)',
         input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
-        indetifier:'lossofImmunityRate'
+        indetifier:'lossofImmunityRate',
+        helper:'dummy'
       }
     ]
   },
@@ -57,7 +65,8 @@ export const COMPARTMENTAL_FIELDS = {
         label:'Influex Rate', 
         tag:'(People per day)', 
         input:{type:'text',name:'influexRate',label:'Influex rate' }, 
-        indetifier:'influexRate' 
+        indetifier:'influexRate',
+        helper:'dummy'
       },
       {
         label:'Natural Death Rate', 

@@ -6,7 +6,7 @@ import { useFixedParametersState } from './state'
 import ParametersForm from './children/ParametersForm'
 
 
-const FixedParameters = ({predefinedModel}) => {
+const FixedParameters = ({predefinedModel,handleClickFixedParameters}) => {
   const classes = useFixedParametersStyles()
   const {updateStep,step}= useFixedParametersState()
   const {name,indetifier}=predefinedModel
@@ -17,8 +17,7 @@ const FixedParameters = ({predefinedModel}) => {
       container      
       direction="column" 
       justify="center" 
-      alignItems="center"
-      spacing={2}
+      alignItems="center"      
     >
       <Typography variant="body1" component="p" className={classes.title}>
       Fixed Paramaters
@@ -30,7 +29,7 @@ const FixedParameters = ({predefinedModel}) => {
       Configure parameters values    
       </Typography>
 
-      <ParametersForm modelIndetifier={indetifier}/>
+      <ParametersForm modelIndetifier={indetifier} formParametersSave={handleClickFixedParameters}/>
       
     </Grid>
   )

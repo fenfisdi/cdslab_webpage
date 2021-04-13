@@ -15,7 +15,7 @@ const ModelCard = ({options=[],justify,alignItems,eventEmitted}) => {
   
   const handleClickCharter =(charter)=>{
     const {indetifier }=charter || {}
-    eventEmitted(charter)
+    eventEmitted(charter) 
     setSelected(indetifier)
   }
 

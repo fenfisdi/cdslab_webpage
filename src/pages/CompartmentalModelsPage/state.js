@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash'
 import { useEffect, useState } from 'react'
 import { useUserActions } from '../../actions/userActions'
 import { SIMULATION_IDENTIFIERS } from '../../constants/compartmental'
@@ -9,6 +10,7 @@ export const useCompartmentalModelsPageState = () => {
   const[parameters,setParameters] = useState(
     { predefinedModel:{}, simulationType:{} }
   )
+  const [configuredParameterValues,setConfiguredParameterValues] = useState({})
   
   const updateStep = (int) => {
     setStep(int)
@@ -37,6 +39,12 @@ export const useCompartmentalModelsPageState = () => {
     console.log('::::::::::::::::>handleClickAdjustParameter',adjustParameter)
   }
 
+  
+  const handleClickFixedParameters =(data)=>{
+    const {predefinedModel:{name} }= parameters
+    setConfiguredParameterValues({...configuredParameterValues,parametersValue:{name,data}})
+  }
+
   const handleClickBackButton =()=>{    
     const {simulationType } = parameters
     simulationType.indetifier == SIMULATION_IDENTIFIERS.FIXED ? updateStep(1) : updateStep(step-1)
@@ -47,6 +55,12 @@ export const useCompartmentalModelsPageState = () => {
       setParameters({...parameters,simulationType:{}})
     }
   },[step])
+
+  useEffect(()=>{
+    if(configuredParameterValues && !isEmpty(configuredParameterValues)){
+      console.log(':::::::configuredParameterValues',configuredParameterValues)
+    }
+  },[configuredParameterValues])
   
   return {    
     updateStep,    
@@ -55,6 +69,7 @@ export const useCompartmentalModelsPageState = () => {
     handleClickSimulationType,
     handleClickAdjustParameters,
     handleClickBackButton,
+    handleClickFixedParameters,
     step,
     parameters
   }

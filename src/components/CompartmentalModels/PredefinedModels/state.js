@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react'
 
 
 
-export const usePredefinedModelsState = () => {
+export const usePredefinedModelsState = ({handleClickPredefinedModels}) => {
   
-  const [step, setStep] = useState(0)
+  const [modelData, setModelData] = useState({})
 
-  const updateStep = (int) => {
-    setStep(int)
-  } 
+  const handleClickButton =()=>{
+    handleClickPredefinedModels(modelData)
+  }
   
   return {    
-    updateStep,    
-    step
+    handleClickButton,
+    setModelData,    
+    modelData
   }
 }

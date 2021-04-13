@@ -5,14 +5,17 @@ import ModelCard from '../ModelCard'
 import CompartmentalButton from '../CompartmentalButton'
 import { usePredefinedModelsState } from './state'
 import { usePredefinedModelsStyles } from './styles'
+import { isEmpty } from 'lodash'
 
 
 const PredefinedModels = ({handleClickPredefinedModels,options}) => {
   const classes = usePredefinedModelsStyles()
-  const {updateStep,step}= usePredefinedModelsState()
+  const {  
+    handleClickButton,
+    setModelData,    
+    modelData
+  }= usePredefinedModelsState({handleClickPredefinedModels})
 
- 
-  
 
   return (
     <Grid 
@@ -33,9 +36,11 @@ const PredefinedModels = ({handleClickPredefinedModels,options}) => {
         justify="center"
         alignItems="center"
         options={options}
-        eventEmitted={handleClickPredefinedModels}
+        eventEmitted={(data)=>{setModelData(data)}}
       />
-      <CompartmentalButton        
+      <CompartmentalButton
+        disabled={isEmpty(modelData)}   
+        onClick={handleClickButton}      
         justify="center"
         alignItems="center"
         text={'Choose Simulation Type'}

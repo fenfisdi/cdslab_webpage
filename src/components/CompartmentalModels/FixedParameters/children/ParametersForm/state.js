@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 
 
-export const useParametersFormState = ({fields}) => {
+export const useParametersFormState = ({fields,formParametersSave}) => {
   const [isValid, setIsvalid] = useState(false)
 
   useEffect(()=>{
     let notIsValid = false
-    for(var key in fields) {
-      console.log(fields[key])
+    for(var key in fields) {      
       if(
         (fields[key] && !fields[key].value.length>0) || 
         (fields[key] && Array.isArray(fields[key].errors) && fields[key].errors.length>0)
@@ -19,12 +18,11 @@ export const useParametersFormState = ({fields}) => {
   },[fields]) 
   
   const handleClickButton = () => {    
-    let answers=[]
+    let data={}
     for(var key in fields) {
-      answers.push(fields[key].value)
+      data[key]=fields[key]['value']
     }
-    console.log('data:::>',answers)
-    
+    formParametersSave(data)
   }
   
   return {

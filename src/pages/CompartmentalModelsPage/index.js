@@ -18,6 +18,7 @@ const CompartmentalModelsPage = () => {
     handleClickSimulationType,
     handleClickAdjustParameters,
     handleClickBackButton,
+    handleClickFixedParameters,
     step,
     parameters
   }= useCompartmentalModelsPageState()
@@ -34,7 +35,7 @@ const CompartmentalModelsPage = () => {
 
       {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters} options={OPTIONS_ADJUST_PARAMETERS}/>}
 
-      {step==3 && <FixedParameters predefinedModel={predefinedModel} /> }
+      {step==3 && <FixedParameters predefinedModel={predefinedModel} handleClickFixedParameters={handleClickFixedParameters}/> }
     </div>
   )
 }

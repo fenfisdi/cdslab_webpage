@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react'
 
 
 
-export const useSimulationTypeState = () => {
+export const useSimulationTypeState = ({handleClickSimulationType}) => {
   
-  const [step, setStep] = useState(0)
+  const [modelData, setModelData] = useState({})
 
-  const updateStep = (int) => {
-    setStep(int)
-  } 
+  const handleClickButton =()=>{
+    handleClickSimulationType(modelData)
+  }
   
   return {    
-    updateStep,    
-    step
+    handleClickButton,
+    setModelData,    
+    modelData
   }
 }

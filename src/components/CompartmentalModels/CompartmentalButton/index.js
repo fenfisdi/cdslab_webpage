@@ -1,11 +1,11 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { Icon } from '@material-ui/core'
 import { useCompartmentalButtonStyles } from './styles'
 
 
-const CompartmentalButton = ({justify,alignItems,text}) => {
+const CompartmentalButton = ({justify,alignItems,text, onClick,disabled, icon}) => {
   const classes = useCompartmentalButtonStyles()
 
   return (
@@ -17,14 +17,18 @@ const CompartmentalButton = ({justify,alignItems,text}) => {
       alignItems={alignItems}
       className={classes.body}
     >
-      <Typography variant="body1" component="p" className={classes.text}>
-        {text}
-      </Typography>          
-      {/* <Button           
-        startIcon={<Icon class="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />}
+             
+      <Button
+        className={disabled ? classes.button+' disabled':classes.button}
+        disabled={disabled}
+        onClick={onClick}           
+        endIcon={<Icon className={icon || 'fas fa-caret-right'}  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />}
       >        
-      </Button> */}
-      <Icon className="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} />
+        <Typography variant="body1" component="p" className={disabled?classes.text+' disabled':classes.text}>
+          {text}
+        </Typography>  
+      </Button>
+      {/* <Icon className="fas fa-caret-right"  style={{ fontSize: 60, color: '#827B00', marginLeft:'20px' }} /> */}
     </Grid>
   )
 }

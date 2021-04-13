@@ -5,11 +5,17 @@ import ModelCard from '../ModelCard'
 import CompartmentalButton from '../CompartmentalButton'
 import {  useSimulationTypeStyles } from './styles'
 import { useSimulationTypeState } from './state'
+import { isEmpty } from 'lodash'
 
 
 const SimulationType = ({handleClickSimulationType,options}) => {
   const classes = useSimulationTypeStyles()
-  const { updateStep, step}= useSimulationTypeState()
+  const {
+    handleClickButton,
+    setModelData,    
+    modelData
+  }= useSimulationTypeState({handleClickSimulationType})
+  const { name } = modelData || {}
 
   return (
     <Grid 
@@ -30,12 +36,14 @@ const SimulationType = ({handleClickSimulationType,options}) => {
         justify="center"
         alignItems="center"
         options={options}
-        eventEmitted={handleClickSimulationType}
+        eventEmitted={(data)=>{setModelData(data)}}
       />
-      <CompartmentalButton        
+      <CompartmentalButton
+        disabled={isEmpty(modelData)}   
+        onClick={handleClickButton}           
         justify="center"
         alignItems="center"
-        text={'Go to <Simulation type selected> Settings'}
+        text={`Go to ${name ? name: 'Simulation type selected'} Settings`}
       />
     </Grid>
   )

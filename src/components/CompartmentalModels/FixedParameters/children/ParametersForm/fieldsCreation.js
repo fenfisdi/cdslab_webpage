@@ -9,7 +9,6 @@ export const useParametersFormFieldsCreation = ({formFields=[]}) => {
     const field = useInputValue('', VALIDATORS_PARAMETERS_FORM.alphabetic, {
       name: name,
       type: type,
-      label: label,
       onKeyDown: (event) => {
         return checkTypePhoneNumber(event)
       }
