@@ -18,17 +18,20 @@ const FixedParameters = ({predefinedModel,handleClickFixedParameters,loading}) =
       container      
       direction="column" 
       justify="center" 
-      alignItems="center"      
+      alignItems="center" 
+      spacing={1}   
     >
-      <Typography variant="body1" component="p" className={classes.title}>
+      <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+        <Typography variant="body1" component="p" className={classes.title}>
       Fixed Paramaters
-      </Typography>
-      <Typography variant="body2" component="p" className={classes.title}>
-        {name} Model 
-      </Typography>
-      <Typography variant="body2" component="p" className={classes.title}>
+        </Typography>
+        <Typography variant="body2" component="p" className={classes.title}>
+          {name} Model 
+        </Typography>
+        <Typography variant="body2" component="p" className={classes.title}>
       Configure parameters values    
-      </Typography>
+        </Typography>
+      </Grid>
       {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
       {!loading && <ParametersForm modelIndetifier={indetifier} formParametersSave={handleClickFixedParameters}/>}
       

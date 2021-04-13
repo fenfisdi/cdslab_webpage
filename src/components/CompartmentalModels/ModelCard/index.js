@@ -24,16 +24,16 @@ const ModelCard = ({options=[],justify,alignItems,eventEmitted}) => {
       {options.map((opt,index)=>{
         const {name,indetifier}=opt
         return (
-          <Grid key={index} >
-            <Charter 
-              key={index} 
-              name={name} 
-              indetifier={indetifier}
-              handleClickCharter={handleClickCharter}
-              selected={selected}
-              extraOption={opt}
-            />
-          </Grid>
+          
+          <Charter 
+            key={index} 
+            name={name} 
+            indetifier={indetifier}
+            handleClickCharter={handleClickCharter}
+            selected={selected}
+            extraOption={opt}
+          />
+          
         )
       })}
     </Grid>

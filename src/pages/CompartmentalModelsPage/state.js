@@ -1,16 +1,23 @@
 import { isEmpty } from 'lodash'
 import { useEffect, useState } from 'react'
-import { useUserActions } from '../../actions/userActions'
+import { useCompartmentalModelActions } from '../../actions/compartmentalModelActions'
 import { SIMULATION_IDENTIFIERS } from '../../constants/compartmental'
 import { useStore } from '../../store/storeContext'
 
 export const useCompartmentalModelsPageState = () => {
-  
+  const {
+    state: {compartmentalModel: { configuredParameters, loading }},
+    dispatch
+  } = useStore()
+
+  const { registerModelParameters } = useCompartmentalModelActions(dispatch) 
+
   const [step, setStep] = useState(0)
+  const [configuredParameterValues,setConfiguredParameterValues] = useState({})
   const[parameters,setParameters] = useState(
     { predefinedModel:{}, simulationType:{} }
   )
-  const [configuredParameterValues,setConfiguredParameterValues] = useState({})
+  
   
   const updateStep = (int) => {
     setStep(int)
@@ -61,6 +68,10 @@ export const useCompartmentalModelsPageState = () => {
       console.log(':::::::configuredParameterValues',configuredParameterValues)
     }
   },[configuredParameterValues])
+
+  useEffect(()=>{
+    console.log('::::::::::>configuredParameters',configuredParameters)
+  },[configuredParameters])
   
   return {    
     updateStep,    

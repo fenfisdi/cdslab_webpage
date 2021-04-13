@@ -24,14 +24,16 @@ const SimulationType = ({handleClickSimulationType,options}) => {
       direction="column" 
       justify="center" 
       alignItems="center"
-      spacing={2}
+      spacing={1}
     >
-      <Typography variant="body1" component="p" className={classes.title}>
+      <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+        <Typography variant="body1" component="p" className={classes.title}>
         Compartmental models
-      </Typography>
-      <Typography variant="body2" component="p" className={classes.title}>
+        </Typography>
+        <Typography variant="body2" component="p" className={classes.title}>
         Choose simulation type   
-      </Typography>
+        </Typography>
+      </Grid>
       <ModelCard 
         justify="center"
         alignItems="center"
