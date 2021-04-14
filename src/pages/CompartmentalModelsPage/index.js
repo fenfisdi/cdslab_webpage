@@ -14,7 +14,7 @@ import SnackbarComponent from '../../components/ui/Snackbars'
 
 const CompartmentalModelsPage = () => {
   const classes = useCompartmentalModelsPageStyles()
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false, successMessage:'', errorMessage:''})
+  
   
   const {  
     handleClickPredefinedModels,
@@ -22,13 +22,14 @@ const CompartmentalModelsPage = () => {
     handleClickAdjustParameters,
     handleClickBackButton,
     handleClickFixedParameters,
+    handleCloseSnack,
     step,
-    parameters
+    parameters,
+    loading,
+    showSnack
   }= useCompartmentalModelsPageState()
 
-  const handleCloseSnack = () => {
-    setShowSnack({...showSnack,show:false,success:false, error:false, successMessage:'', errorMessage:''})
-  }
+  
 
   const  { predefinedModel, simulationType } = parameters
 
@@ -45,7 +46,7 @@ const CompartmentalModelsPage = () => {
       {step==3 && <FixedParameters 
         predefinedModel={predefinedModel} 
         handleClickFixedParameters={handleClickFixedParameters}
-        loading={false}
+        loading={loading}
       /> }
       
       {showSnack && showSnack.show && <SnackbarComponent 

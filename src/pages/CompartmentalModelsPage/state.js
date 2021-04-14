@@ -14,10 +14,16 @@ export const useCompartmentalModelsPageState = () => {
 
   const [step, setStep] = useState(0)
   const [configuredParameterValues,setConfiguredParameterValues] = useState({})
+  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false, successMessage:'', errorMessage:''})
+
   const[parameters,setParameters] = useState(
     { predefinedModel:{}, simulationType:{} }
   )
+
   
+  const handleCloseSnack = () => {
+    setShowSnack({...showSnack,show:false,success:false, error:false, successMessage:'', errorMessage:''})
+  }
   
   const updateStep = (int) => {
     setStep(int)
@@ -66,6 +72,8 @@ export const useCompartmentalModelsPageState = () => {
   useEffect(()=>{
     if(configuredParameterValues && !isEmpty(configuredParameterValues)){
       console.log(':::::::configuredParameterValues',configuredParameterValues)
+      const {parametersValue } = configuredParameterValues
+      registerModelParameters(parametersValue)
     }
   },[configuredParameterValues])
 
@@ -81,7 +89,10 @@ export const useCompartmentalModelsPageState = () => {
     handleClickAdjustParameters,
     handleClickBackButton,
     handleClickFixedParameters,
+    handleCloseSnack,
     step,
-    parameters
+    parameters,
+    loading,
+    showSnack
   }
 }

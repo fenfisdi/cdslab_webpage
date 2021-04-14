@@ -8,7 +8,7 @@ export const useCompartmentalModelActions = (dispatch) => {
      */
   const registerModelParameters = (userForm) => {
     dispatch({ type: COMPARTMENTAL_MODEL_LOADING })
-    registerModelParametersService(userForm)
+    /*registerModelParametersService(userForm)
       .then((response) => {
           
         dispatch({
@@ -29,7 +29,7 @@ export const useCompartmentalModelActions = (dispatch) => {
             payload:{message:'The request was made but no response was received'}
           })
         }      
-      })
+      })*/
   
   }
   
