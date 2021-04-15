@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import ParametersForm from '../ParametersForm'
 import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
+import LoaderComponent from '../../../../ui/Loader'
 
 
 
@@ -12,7 +13,8 @@ const FixedParametersFormConfigureValues = ({
   formParametersSave,
   configuredParameterValues,
   classes,
-  name}) => {
+  name,
+  loading}) => {
   
   return (
     <>
@@ -27,12 +29,13 @@ const FixedParametersFormConfigureValues = ({
               Configure parameters values    
         </Typography>
       </Grid>          
-      <ParametersForm 
+      {!loading && <ParametersForm 
         modelIndetifier={modelIndetifier} 
         formParametersSave={formParametersSave} 
         parameterValues={configuredParameterValues}
         fieldsSchema={COMPARTMENTAL_FIELDS}
-      />
+      />}
+      {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
     </>
   )
 }

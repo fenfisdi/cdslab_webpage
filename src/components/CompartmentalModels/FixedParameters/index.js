@@ -44,28 +44,28 @@ const FixedParameters = ({
         alignItems="center" 
         spacing={1}   
       >
-        {step == 0 && !loading &&
-        
+        {step == 0  &&
           <FixedParametersFormConfigureValues 
             modelIndetifier={indetifier}
             formParametersSave={handleFormParametersSave}
             configuredParameterValues={configuredParameterValues}
             classes={classes}
             name={name}
+            loading={loading}
           />                 
         }
 
-        {step == 1 && !loading && 
-
-        <FixedParametersFormStateVariables 
-          modelIndetifier={indetifier} 
-          formConfigureStateVariablesSave={handleFormConfigureStateVariablesSave} 
-          stateVariableValues={stateVariableValues}
-          classes={classes}
-        />        
+        {step == 1  && 
+        
+         <FixedParametersFormStateVariables 
+           modelIndetifier={indetifier} 
+           formConfigureStateVariablesSave={handleFormConfigureStateVariablesSave} 
+           stateVariableValues={stateVariableValues}
+           classes={classes}
+           loading={loading}
+         />        
         }
 
-        {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
       </Grid>
     </>
   )
