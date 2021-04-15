@@ -13,11 +13,9 @@ export const useCompartmentalModelsPageState = () => {
   const { registerModelParameters } = useCompartmentalModelActions(dispatch) 
 
   const [step, setStep] = useState(0)
-  const [configuredParameterValues,setConfiguredParameterValues] = useState({})
   const [showSnack, setShowSnack] = useState({show:false, success:false, error:false, successMessage:'', errorMessage:''})
-
   const[parameters,setParameters] = useState(
-    { predefinedModel:{}, simulationType:{} }
+    { predefinedModel:{}, simulationType:{}, configuredParameterValues:{}, stateVariableValues:{} }
   )
 
   
@@ -54,8 +52,8 @@ export const useCompartmentalModelsPageState = () => {
 
   
   const handleClickFixedParameters =(data)=>{
-    const {predefinedModel:{name} }= parameters
-    setConfiguredParameterValues({...configuredParameterValues,parametersValue:{name,data}})
+    console.log('::::::::::::::::>handleClickFixedParameters',data)
+    setParameters({...parameters,configuredParameterValues:data})
   }
 
   const handleClickBackButton =()=>{    
@@ -65,17 +63,21 @@ export const useCompartmentalModelsPageState = () => {
 
   useEffect(()=>{
     if(step && step==1){
-      setParameters({...parameters,simulationType:{}})
+      setParameters({...parameters,simulationType:{},configuredParameterValues:{}})
+    }else if(step && step == 0){
+      setParameters({...parameters,simulationType:{},configuredParameterValues:{},predefinedModel:{}})
     }
   },[step])
 
   useEffect(()=>{
-    if(configuredParameterValues && !isEmpty(configuredParameterValues)){
+    console.log(':::::::::::::>parameters',parameters)
+    const {configuredParameterValues}=parameters
+    if(parameters && !isEmpty(configuredParameterValues)){
       console.log(':::::::configuredParameterValues',configuredParameterValues)
-      const {parametersValue } = configuredParameterValues
-      registerModelParameters(parametersValue)
+      //const {parametersValue } = configuredParameterValues
+      //registerModelParameters(parametersValue)
     }
-  },[configuredParameterValues])
+  },[parameters])
 
   useEffect(()=>{
     console.log('::::::::::>configuredParameters',configuredParameters)

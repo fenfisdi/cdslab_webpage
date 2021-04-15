@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useCompartmentalModelsPageState } from './state'
 import { useCompartmentalModelsPageStyles } from './styles'
@@ -31,7 +31,7 @@ const CompartmentalModelsPage = () => {
 
   
 
-  const  { predefinedModel, simulationType } = parameters
+  const  { predefinedModel } = parameters
 
   return (
     <div>
