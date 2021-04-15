@@ -9,20 +9,30 @@ import ConfigureStateVariables from '../ConfigureStateVariables'
 import BackButton from '../../ui/BackButton'
 
 
-const FixedParameters = ({configuredParameterValues,stateVariableValues,predefinedModel,handleClickSaveConfiguredParameterValues,handleClickSaveConfigureStateVariables,loading,fatherUpdateStep}) => {
+const FixedParameters = ({
+  handleClickSaveConfiguredParameterValues,
+  handleClickSaveConfigureStateVariables,
+  loading,
+  fatherUpdateStep,
+  setParameters,
+  parameters}) => {
+  
   const classes = useFixedParametersStyles()
-  const {updateStep,step}= useFixedParametersState()
+  const  { predefinedModel, configuredParameterValues, stateVariableValues } = parameters
   const {name,indetifier}=predefinedModel
+  
+  const { 
+    handleFormParametersSave,
+    handleFormConfigureStateVariablesSave,
+    updateStep,
+    step}= useFixedParametersState({
+    setParameters,
+    parameters,
+    handleClickSaveConfiguredParameterValues,
+    handleClickSaveConfigureStateVariables})
+  
 
-  const handleFormParametersSave=(data)=>{
-    updateStep(1)
-    handleClickSaveConfiguredParameterValues(data)    
-  }
-
-  const handleFormConfigureStateVariablesSave=(data)=>{
-    handleClickSaveConfigureStateVariables(data)
-  }
-
+ 
 
   return (
     <>

@@ -25,6 +25,7 @@ const CompartmentalModelsPage = () => {
     handleClickSaveConfiguredParameterValues,
     handleClickSaveConfigureStateVariables,
     handleCloseSnack,
+    setParameters,
     step,
     parameters,
     loading,
@@ -33,7 +34,7 @@ const CompartmentalModelsPage = () => {
 
   
 
-  const  { predefinedModel, simulationType, configuredParameterValues, stateVariableValues } = parameters
+  const  { simulationType } = parameters
 
   return (
     <div>
@@ -45,14 +46,13 @@ const CompartmentalModelsPage = () => {
 
       {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters} options={OPTIONS_ADJUST_PARAMETERS}/>}
 
-      {step==3 && <FixedParameters 
-        configuredParameterValues={configuredParameterValues}
-        stateVariableValues={stateVariableValues}
-        predefinedModel={predefinedModel} 
+      {step==3 && <FixedParameters  
         handleClickSaveConfiguredParameterValues={handleClickSaveConfiguredParameterValues}
         handleClickSaveConfigureStateVariables={handleClickSaveConfigureStateVariables}
         loading={loading}
-        fatherUpdateStep={handleClickBackButton}        
+        fatherUpdateStep={handleClickBackButton} 
+        setParameters={setParameters}  
+        parameters={parameters}     
       /> }
       
       {showSnack && showSnack.show && <SnackbarComponent 

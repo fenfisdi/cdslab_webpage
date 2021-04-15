@@ -70,7 +70,7 @@ export const useCompartmentalModelsPageState = () => {
     if(step && step==1){
       setParameters({...parameters,simulationType:{},configuredParameterValues:{}})
     }else if(step && step == 0){
-      setParameters({...parameters,simulationType:{},configuredParameterValues:{},predefinedModel:{}})
+      setParameters({...parameters,simulationType:{},configuredParameterValues:{},predefinedModel:{},stateVariableValues:{}})
     }
   },[step])
 
