@@ -1,12 +1,11 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography'
 import { useFixedParametersStyles } from './styles'
 import { useFixedParametersState } from './state'
-import ParametersForm from './children/ParametersForm'
 import LoaderComponent from '../../ui/Loader'
-import ConfigureStateVariables from '../ConfigureStateVariables'
 import BackButton from '../../ui/BackButton'
+import FixedParametersFormConfigureValues from './children/FixedParametersFormConfigureValues'
+import FixedParametersFormStateVariables from './children/FixedParametersFormStateVariables'
 
 
 const FixedParameters = ({
@@ -19,7 +18,7 @@ const FixedParameters = ({
   
   const classes = useFixedParametersStyles()
   const  { predefinedModel, configuredParameterValues, stateVariableValues } = parameters
-  const {name,indetifier}=predefinedModel
+  const  { name, indetifier } = predefinedModel
   
   const { 
     handleFormParametersSave,
@@ -46,37 +45,26 @@ const FixedParameters = ({
         spacing={1}   
       >
         {step == 0 && !loading &&
-        <>
-          <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-            <Typography variant="body1" component="p" className={classes.title}>
-              Fixed Paramaters
-            </Typography>
-            <Typography variant="body2" component="p" className={classes.title}>
-              {name} Model 
-            </Typography>
-            <Typography variant="body2" component="p" className={classes.title}>
-              Configure parameters values    
-            </Typography>
-          </Grid>          
-          <ParametersForm 
-            modelIndetifier={indetifier} 
-            formParametersSave={handleFormParametersSave} 
-            configuredParameterValues={configuredParameterValues}/>
-        </>
+        
+          <FixedParametersFormConfigureValues 
+            modelIndetifier={indetifier}
+            formParametersSave={handleFormParametersSave}
+            configuredParameterValues={configuredParameterValues}
+            classes={classes}
+            name={name}
+          />                 
         }
+
         {step == 1 && !loading && 
-        <>
-          <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-            <Typography variant="body1" component="p" className={classes.title}>
-              Configure State Variables’ Initial Values
-            </Typography>
-          </Grid>
-          <ConfigureStateVariables 
-            modelIndetifier={indetifier} 
-            formConfigureStateVariablesSave={handleFormConfigureStateVariablesSave} 
-            stateVariableValues={stateVariableValues}/>
-        </>
+
+        <FixedParametersFormStateVariables 
+          modelIndetifier={indetifier} 
+          formConfigureStateVariablesSave={handleFormConfigureStateVariablesSave} 
+          stateVariableValues={stateVariableValues}
+          classes={classes}
+        />        
         }
+
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
       </Grid>
     </>

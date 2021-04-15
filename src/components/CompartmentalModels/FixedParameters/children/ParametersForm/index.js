@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 
-import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
 import { useParametersFormState } from './state'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
@@ -11,10 +10,10 @@ import CompartmentalButton from '../../../CompartmentalButton'
 import { useParametersFormStyle } from './styles'
 
 
-const ParametersForm = ({modelIndetifier,formParametersSave, configuredParameterValues}) => {
+const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fieldsSchema}) => {
   
-  const {fields:formFields} = COMPARTMENTAL_FIELDS[modelIndetifier] || {}
-  const fields = useParametersFormFieldsCreation({formFields,configuredParameterValues})
+  const {fields:formFields} = fieldsSchema[modelIndetifier] || {}
+  const fields = useParametersFormFieldsCreation({formFields,parameterValues})
 
   const {
     handleClickButton,    
