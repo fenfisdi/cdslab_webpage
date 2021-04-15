@@ -217,59 +217,24 @@ export const COMPARTMENTAL_FIELDS_STATE = {
   SIR:{
     fields:[
       {
-        label:'Influex Rate', 
-        tag:'(People per day)', 
-        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
-        indetifier:'influexRate',
+        label:'State Variable 1', 
+        tag:'(Units)', 
+        input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
+        indetifier:'stateVariable1',
         helper:'dummy'
       },
       {
-        label:'Natural Death Rate', 
+        label:'State Variable 2', 
         tag:'(People per day)',
-        input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
-        indetifier:'naturalDeath',
+        input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
+        indetifier:'stateVariable2',
         helper:'dummy'
       },
       {
-        label:'Disease-Induced Death Rate', 
+        label:'State Variable 3', 
         tag:'(Per day)',
-        input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
-        indetifier:'diseaseInduced',
-        helper:'dummy'
-      },
-      {
-        label:'Transmission rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'transmissionRate',label:'Transmission rate'},
-        indetifier:'transmissionRate',
-        helper:'dummy'
-      },
-      {
-        label:'Vaccination rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
-        indetifier:'vaccinationRate',
-        helper:'dummy'
-      },
-      {
-        label:'Recovery rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
-        indetifier:'recoveryRate',
-        helper:'dummy'
-      },
-      {
-        label:'Reinfection rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
-        indetifier:'reinfectionRate',
-        helper:'dummy'
-      },
-      {
-        label:'Loss of immunity rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
-        indetifier:'lossofImmunityRate',
+        input:{type:'text',name:'stateVariable3',label:'State Variable 3'},
+        indetifier:'stateVariable3',
         helper:'dummy'
       }
     ]
@@ -277,61 +242,29 @@ export const COMPARTMENTAL_FIELDS_STATE = {
   SEIR:{
     fields:[
       {
-        label:'Influex Rate', 
-        tag:'(People per day)', 
-        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
-        indetifier:'influexRate',
+        label:'State Variable 1', 
+        tag:'(Units)', 
+        input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
+        indetifier:'stateVariable1',
         helper:'dummy'
       },
       {
-        label:'Natural Death Rate', 
+        label:'State Variable 2', 
         tag:'(People per day)',
-        input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
-        indetifier:'naturalDeath'
-      },
-      {
-        label:'Disease-Induced Death Rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
-        indetifier:'diseaseInduced'
-      },
-      {
-        label:'Vaccination rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
-        indetifier:'vaccinationRate',
+        input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
+        indetifier:'stateVariable2',
         helper:'dummy'
-      },
-      {
-        label:'Recovery rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
-        indetifier:'recoveryRate',
-        helper:'dummy'
-      },
-      {
-        label:'Loss of immunity rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
-        indetifier:'lossofImmunityRate',
-        helper:'dummy'
-      },
-      {
-        label:'Reinfection rate', 
-        tag:'(Per day)',
-        input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
-        indetifier:'reinfectionRate',
-        helper:'dummy'
-      },
+      }
     ]
   },
   SEIRV:{
-    fields:[
+    fields:[      
       {
-        label:'Influex Rate', 
-        tag:'(People per day)', 
-        input:{type:'text',name:'influexRate',label:'Influex rate' }, 
-        indetifier:'influexRate' 
+        label:'State Variable 3', 
+        tag:'(Per day)',
+        input:{type:'text',name:'stateVariable3',label:'State Variable 3'},
+        indetifier:'stateVariable3',
+        helper:'dummy'
       }
     ]
   }

@@ -1,28 +1,26 @@
-import React, { useEffect } from 'react'
-import { Grid } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography'
-
-import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
-import { useParametersFormState } from './state'
-import { TitleComponent } from '../../../../ui/Title'
-import { Input } from '../../../../ui/Input'
-import { useParametersFormFieldsCreation } from './fieldsCreation'
-import CompartmentalButton from '../../../CompartmentalButton'
-import { useParametersFormStyle } from './styles'
+import { Grid, Typography } from '@material-ui/core'
+import React from 'react'
+import { COMPARTMENTAL_FIELDS_STATE } from '../../../constants/compartmental'
+import { Input } from '../../ui/Input'
+import { TitleComponent } from '../../ui/Title'
+import CompartmentalButton from '../CompartmentalButton'
+import { useConfigureStateVariablesCreation } from './fieldsCreation'
+import { useConfigureStateVariablesState } from './state'
+import { useConfigureStateVariablesStyles } from './styles'
 
 
-const ParametersForm = ({modelIndetifier,formParametersSave, configuredParameterValues}) => {
-  
-  const {fields:formFields} = COMPARTMENTAL_FIELDS[modelIndetifier] || {}
-  const fields = useParametersFormFieldsCreation({formFields,configuredParameterValues})
 
+
+const ConfigureStateVariables = ({modelIndetifier,formConfigureStateVariablesSave, stateVariableValues}) => {
+  const classes = useConfigureStateVariablesStyles()
+  const {fields:formFields} = COMPARTMENTAL_FIELDS_STATE[modelIndetifier] || {}
+  const fields = useConfigureStateVariablesCreation({formFields,stateVariableValues})
   const {
     handleClickButton,    
     isValid
-  } = useParametersFormState({fields,formParametersSave})
-
-  const classes = useParametersFormStyle()
+  } = useConfigureStateVariablesState({fields,formConfigureStateVariablesSave})
   
+
   return (
     <Grid 
       xs={12}
@@ -67,16 +65,16 @@ const ParametersForm = ({modelIndetifier,formParametersSave, configuredParameter
       })}
 
       {!formFields && <p>No hay campos</p>}
-
       <CompartmentalButton
         disabled={!isValid ? false:true}
         onClick={handleClickButton}        
         justify="center"
         alignItems="center"
-        text={'Configure State Variables Settings'}
+        text={'Review Configurations'}
       />
+      
     </Grid>
   )
 }
 
-export default ParametersForm
+export default ConfigureStateVariables

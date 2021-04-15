@@ -51,9 +51,14 @@ export const useCompartmentalModelsPageState = () => {
   }
 
   
-  const handleClickFixedParameters =(data)=>{
-    console.log('::::::::::::::::>handleClickFixedParameters',data)
+  const handleClickSaveConfiguredParameterValues =(data)=>{
+    console.log('::::::::::::::::>handleClickSaveConfiguredParameterValues',data)
     setParameters({...parameters,configuredParameterValues:data})
+  }
+
+  const handleClickSaveConfigureStateVariables =(data)=>{
+    console.log('::::::::::::::::>handleClickSaveConfigureStateVariables',data)
+    setParameters({...parameters,stateVariableValues:data})
   }
 
   const handleClickBackButton =()=>{    
@@ -70,12 +75,14 @@ export const useCompartmentalModelsPageState = () => {
   },[step])
 
   useEffect(()=>{
-    console.log(':::::::::::::>parameters',parameters)
-    const {configuredParameterValues}=parameters
-    if(parameters && !isEmpty(configuredParameterValues)){
-      console.log(':::::::configuredParameterValues',configuredParameterValues)
+    const {configuredParameterValues, stateVariableValues}=parameters || {}
+    if(!isEmpty(configuredParameterValues)){
+      console.log(':::::::::::::>parameters',parameters)
       //const {parametersValue } = configuredParameterValues
       //registerModelParameters(parametersValue)
+    }
+    if(!isEmpty(stateVariableValues)){
+      console.log(':::::::::::::>parameters',parameters)
     }
   },[parameters])
 
@@ -90,7 +97,8 @@ export const useCompartmentalModelsPageState = () => {
     handleClickSimulationType,
     handleClickAdjustParameters,
     handleClickBackButton,
-    handleClickFixedParameters,
+    handleClickSaveConfiguredParameterValues,
+    handleClickSaveConfigureStateVariables,
     handleCloseSnack,
     step,
     parameters,

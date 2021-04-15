@@ -10,6 +10,7 @@ import FixedParameters from '../../components/CompartmentalModels/FixedParameter
 import BackButton from '../../components/ui/BackButton'
 import { OPTIONS_ADJUST_PARAMETERS, OPTIONS_PREDEFINED_MODELS, OPTIONS_SIMULATION_TYPE } from '../../constants/compartmental'
 import SnackbarComponent from '../../components/ui/Snackbars'
+import { isEmpty } from 'lodash'
 
 
 const CompartmentalModelsPage = () => {
@@ -21,7 +22,8 @@ const CompartmentalModelsPage = () => {
     handleClickSimulationType,
     handleClickAdjustParameters,
     handleClickBackButton,
-    handleClickFixedParameters,
+    handleClickSaveConfiguredParameterValues,
+    handleClickSaveConfigureStateVariables,
     handleCloseSnack,
     step,
     parameters,
@@ -31,11 +33,11 @@ const CompartmentalModelsPage = () => {
 
   
 
-  const  { predefinedModel } = parameters
+  const  { predefinedModel, simulationType, configuredParameterValues, stateVariableValues } = parameters
 
   return (
     <div>
-      {step!=0 && <BackButton evenOnClick={handleClickBackButton} text="back" />}
+      {step!=0 && isEmpty(simulationType) && <BackButton evenOnClick={handleClickBackButton} text="back" />}
 
       {step==0 && <PredefinedModels handleClickPredefinedModels={handleClickPredefinedModels} options={OPTIONS_PREDEFINED_MODELS}/>}
 
@@ -44,9 +46,13 @@ const CompartmentalModelsPage = () => {
       {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters} options={OPTIONS_ADJUST_PARAMETERS}/>}
 
       {step==3 && <FixedParameters 
+        configuredParameterValues={configuredParameterValues}
+        stateVariableValues={stateVariableValues}
         predefinedModel={predefinedModel} 
-        handleClickFixedParameters={handleClickFixedParameters}
+        handleClickSaveConfiguredParameterValues={handleClickSaveConfiguredParameterValues}
+        handleClickSaveConfigureStateVariables={handleClickSaveConfigureStateVariables}
         loading={loading}
+        fatherUpdateStep={handleClickBackButton}        
       /> }
       
       {showSnack && showSnack.show && <SnackbarComponent 
