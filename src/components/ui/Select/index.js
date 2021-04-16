@@ -34,7 +34,7 @@ export const SelectComponent = ({
   const classes = useStyles()
 
   return (
-    <Grid xs={xs} item>
+    <Grid xs={xs} container item>
       <FormControl
         className={classes.formControl}
         error={errors}

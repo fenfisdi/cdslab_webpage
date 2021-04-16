@@ -1,46 +1,49 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import { Grid } from '@material-ui/core'
-import ModelCard from '../ModelCard'
-import CompartmentalButton from '../CompartmentalButton'
 import {  useAdjustParametersStyles } from './styles'
 import { useAdjustParametersState } from './state'
+import BackButton from '../../ui/BackButton'
+import AdjustParametersFormDataUpload from './children/AdjustParametersFormDataUpload'
+import AdjustParametersFormResourceSelection from './children/AdjustParametersFormResourceSelection'
+import { COMPARTMENTAL_FIELDS } from '../../../constants/compartmental'
 
 
-const AdjustParameters = ({handleClickAdjustParameters,options}) => {
+const AdjustParameters = ({
+  handleClickAdjustParameters,
+  options,
+  loading,
+  fatherUpdateStep,
+  setParameters,
+  parameters}) => {
+    
   const classes = useAdjustParametersStyles()
-  const { updateStep, step}= useAdjustParametersState()
-
-  const handleClick =(charter)=>{
-    handleClickAdjustParameters(charter)
-  }
-  
+  const {
+    handleClickButton,
+    setModelData,
+    updateStep,
+    step,
+    modelData
+  }= useAdjustParametersState({handleClickAdjustParameters})
+  const { name:slectedModel } = modelData || {}
+  const { predefinedModel: { indetifier } }= parameters || {}
 
   return (
-    <Grid 
-      xs={12}
-      container 
-      direction="column" 
-      justify="center" 
-      alignItems="center"
-      spacing={2}
-    >
-      <Typography variant="body1" component="p" className={classes.title}>
-        Choose Data Source
-      </Typography>
-    
-      <ModelCard 
-        justify="center"
-        alignItems="center"
+    <>
+      { <BackButton evenOnClick={()=>{step==0 ?fatherUpdateStep():updateStep(step-1)}} text="back" />}
+      {step == 0 && <AdjustParametersFormResourceSelection
         options={options}
-        eventEmitted={handleClick}
-      />
-      <CompartmentalButton        
-        justify="center"
-        alignItems="center"
-        text={'Go to <Upload Data / Use Available data selected> Settings'}
-      />
-    </Grid>
+        setModelData={setModelData}
+        classes={classes}
+        modelData={modelData}
+        handleClickButton={handleClickButton}
+        slectedModel={slectedModel}
+
+      />}
+
+      {step == 1 && <AdjustParametersFormDataUpload 
+        parameters={parameters}
+        selectValues={COMPARTMENTAL_FIELDS[indetifier].stateVariables}
+      />}
+    </>
   )
 }
 

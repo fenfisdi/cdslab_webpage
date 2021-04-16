@@ -44,7 +44,14 @@ const CompartmentalModelsPage = () => {
 
       {step==1 && <SimulationType handleClickSimulationType={handleClickSimulationType} options={OPTIONS_SIMULATION_TYPE}/>}
 
-      {step==2 && <AdjustParameters handleClickAdjustParameters={handleClickAdjustParameters} options={OPTIONS_ADJUST_PARAMETERS}/>}
+      {step==2 && <AdjustParameters 
+        handleClickAdjustParameters={handleClickAdjustParameters} 
+        options={OPTIONS_ADJUST_PARAMETERS}
+        loading={loading}
+        fatherUpdateStep={handleClickBackButton} 
+        setParameters={setParameters}  
+        parameters={parameters}
+      />}
 
       {step==3 && <FixedParameters  
         handleClickSaveConfiguredParameterValues={handleClickSaveConfiguredParameterValues}

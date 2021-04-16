@@ -33,7 +33,7 @@ const FixedParametersFormConfigureValues = ({
         modelIndetifier={modelIndetifier} 
         formParametersSave={formParametersSave} 
         parameterValues={configuredParameterValues}
-        fieldsSchema={COMPARTMENTAL_FIELDS}
+        fieldsSchema={COMPARTMENTAL_FIELDS[modelIndetifier].fields}
       />}
       {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
     </>

@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
-import { COMPARTMENTAL_FIELDS_STATE } from '../../../constants/compartmental'
+import { COMPARTMENTAL_FIELDS } from '../../../constants/compartmental'
 import { Input } from '../../ui/Input'
 import { TitleComponent } from '../../ui/Title'
 import CompartmentalButton from '../CompartmentalButton'
@@ -13,7 +13,7 @@ import { useConfigureStateVariablesStyles } from './styles'
 
 const ConfigureStateVariables = ({modelIndetifier,formConfigureStateVariablesSave, stateVariableValues}) => {
   const classes = useConfigureStateVariablesStyles()
-  const {fields:formFields} = COMPARTMENTAL_FIELDS_STATE[modelIndetifier] || {}
+  const {fieldStates:formFields} = COMPARTMENTAL_FIELDS[modelIndetifier] || {}
   const fields = useConfigureStateVariablesCreation({formFields,stateVariableValues})
   const {
     handleClickButton,    

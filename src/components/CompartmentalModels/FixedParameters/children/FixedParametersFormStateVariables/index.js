@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import ParametersForm from '../ParametersForm'
-import { COMPARTMENTAL_FIELDS_STATE } from '../../../../../constants/compartmental'
+import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
 import LoaderComponent from '../../../../ui/Loader'
 
 
@@ -26,7 +26,7 @@ const FixedParametersFormStateVariables = ({
         modelIndetifier={modelIndetifier} 
         formParametersSave={formConfigureStateVariablesSave} 
         parameterValues={stateVariableValues}
-        fieldsSchema={COMPARTMENTAL_FIELDS_STATE}
+        fieldsSchema={COMPARTMENTAL_FIELDS[modelIndetifier].fieldStates}
       />}
       {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
     </>

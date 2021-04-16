@@ -12,8 +12,8 @@ import { useParametersFormStyle } from './styles'
 
 const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fieldsSchema}) => {
   
-  const {fields:formFields} = fieldsSchema[modelIndetifier] || {}
-  const fields = useParametersFormFieldsCreation({formFields,parameterValues})
+  
+  const fields = useParametersFormFieldsCreation({fieldsSchema,parameterValues})
 
   const {
     handleClickButton,    
@@ -28,7 +28,7 @@ const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fi
       container
       item 
     >
-      {formFields && formFields.map((field,index)=>{
+      {fieldsSchema && fieldsSchema.map((field,index)=>{
         const {indetifier, label, tag } = field
         const {helperText}= fields[indetifier]
         delete fields[indetifier]['helperText']
@@ -65,7 +65,7 @@ const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fi
         )
       })}
 
-      {!formFields && <p>No hay campos</p>}
+      {!fieldsSchema && <p>No hay campos</p>}
 
       <CompartmentalButton
         disabled={!isValid ? false:true}

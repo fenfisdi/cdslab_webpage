@@ -57,7 +57,30 @@ export const COMPARTMENTAL_FIELDS = {
         indetifier:'lossofImmunityRate',
         helper:'dummy'
       }
-    ]
+    ],
+    fieldStates:[{
+      label:'State Variable 1', 
+      tag:'(Units)', 
+      input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
+      indetifier:'stateVariable1',
+      helper:'dummy'
+    },
+    {
+      label:'State Variable 2', 
+      tag:'(People per day)',
+      input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
+      indetifier:'stateVariable2',
+      helper:'dummy'
+    },
+    {
+      label:'State Variable 3', 
+      tag:'(Per day)',
+      input:{type:'text',name:'stateVariable3',label:'State Variable 3'},
+      indetifier:'stateVariable3',
+      helper:'dummy'
+    }],
+    stateVariables:[{label:'state1',value:'value state1'},{label:'state2',value:'value state2'},{label:'state3',value:'value state3'}]
+
   },
   SEIR:{
     fields:[
@@ -122,7 +145,22 @@ export const COMPARTMENTAL_FIELDS = {
         indetifier:'transmissionconstantBetweenSandI',
         helper:'dummy'
       }
-    ]
+    ],
+    fieldStates:[ {
+      label:'State Variable 1', 
+      tag:'(Units)', 
+      input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
+      indetifier:'stateVariable1',
+      helper:'dummy'
+    },
+    {
+      label:'State Variable 2', 
+      tag:'(People per day)',
+      input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
+      indetifier:'stateVariable2',
+      helper:'dummy'
+    }],
+    stateVariables:[{label:'state1',value:'value state1'},{label:'state2',value:'value state2'}]
   },
   SEIRV:{
     fields:[
@@ -209,27 +247,8 @@ export const COMPARTMENTAL_FIELDS = {
         indetifier:'transmissionadjustmentcoefficient',
         helper:'dummy'
       }
-    ]
-  }
-}
-
-export const COMPARTMENTAL_FIELDS_STATE = {
-  SIR:{
-    fields:[
-      {
-        label:'State Variable 1', 
-        tag:'(Units)', 
-        input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
-        indetifier:'stateVariable1',
-        helper:'dummy'
-      },
-      {
-        label:'State Variable 2', 
-        tag:'(People per day)',
-        input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
-        indetifier:'stateVariable2',
-        helper:'dummy'
-      },
+    ],
+    fieldStates:[
       {
         label:'State Variable 3', 
         tag:'(Per day)',
@@ -237,36 +256,8 @@ export const COMPARTMENTAL_FIELDS_STATE = {
         indetifier:'stateVariable3',
         helper:'dummy'
       }
-    ]
-  },
-  SEIR:{
-    fields:[
-      {
-        label:'State Variable 1', 
-        tag:'(Units)', 
-        input:{type:'text',name:'stateVariable1',label:'State Variable 1' }, 
-        indetifier:'stateVariable1',
-        helper:'dummy'
-      },
-      {
-        label:'State Variable 2', 
-        tag:'(People per day)',
-        input:{type:'text',name:'stateVariable2',label:'State Variable 2'}, 
-        indetifier:'stateVariable2',
-        helper:'dummy'
-      }
-    ]
-  },
-  SEIRV:{
-    fields:[      
-      {
-        label:'State Variable 3', 
-        tag:'(Per day)',
-        input:{type:'text',name:'stateVariable3',label:'State Variable 3'},
-        indetifier:'stateVariable3',
-        helper:'dummy'
-      }
-    ]
+    ],
+    stateVariables:[{label:'state3',value:'value state3'}]
   }
 }
 
