@@ -3,7 +3,7 @@ import { Button, Grid, Paper } from '@material-ui/core'
 import { useAccountRecoveryEmailFormStyles } from './styles'
 import { Input } from '../../ui/Input'
 import LoaderComponent from '../../ui/Loader'
-import theme from '../../../styles/theme'
+import theme from '../../../styles/cdslabTheme'
 import { TitleComponent } from '../../ui/Title'
 import { useAccountRecoveryEmailFormState } from './state'
 
@@ -27,7 +27,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
 
 
   const handleClickButton = () => {
-    handleClick({email:email.value})
+    handleClick({ email: email.value })
   }
 
   return (

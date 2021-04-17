@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
-import theme from '../../styles/theme'
+import theme from '../../styles/cdslabTheme'
 import Copyright from '../layouts/Copyright'
 import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -64,12 +64,12 @@ export const LoginForm = ({
   const fillLoginHelpers = () => (
     <Grid container>
       <Grid item xs>
-        <Link className={classes.link} variant='body2' onClick={()=>{history.push('/accountRecovery')}}>
+        <Link className={classes.link} variant='body2' onClick={() => { history.push('/accountRecovery') }}>
           {'Forgot password?'}
         </Link>
       </Grid>
       <Grid item>
-        <Link className={classes.link} variant='body2' onClick={()=>{history.push('/qrBindingRecovery')}}>
+        <Link className={classes.link} variant='body2' onClick={() => { history.push('/qrBindingRecovery') }}>
           {'Forgot your security link?'}
         </Link>
       </Grid>
@@ -97,7 +97,7 @@ export const LoginForm = ({
           autoComplete='current-password'
           {...password}
         />
-        
+
         <Button
           type='submit'
           fullWidth

@@ -2,7 +2,7 @@ import { Grid, Paper } from '@material-ui/core'
 import React, { Fragment, useEffect, useState } from 'react'
 import { Input } from '../../ui/Input'
 import { TitleComponent } from '../../ui/Title'
-import theme from '../../../styles/theme'
+import theme from '../../../styles/cdslabTheme'
 import { useRegisterFormStyles } from './styles'
 import { PhoneNumber } from '../../ui/PhoneNumber'
 import { PasswordChecker } from '../PasswordChecker'
@@ -15,8 +15,8 @@ import LoaderComponent from '../../ui/Loader'
 const RegisterForm = ({ eventEmitter, loading }) => {
   const classes = useRegisterFormStyles(theme)
   const [isValid, setIsvalid] = useState(false)
-  const[verificationPassword,setVerificationPassword] = useState(false)
-  const  fieldsData = useRegisterFormState()
+  const [verificationPassword, setVerificationPassword] = useState(false)
+  const fieldsData = useRegisterFormState()
 
   const {
     name,
@@ -35,22 +35,22 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     securityAnswer2
   } = fieldsData
 
-  useEffect(()=>{
+  useEffect(() => {
     let notIsValid = false
-    for(var key in fieldsData) {
-      if(
-        (fieldsData[key] && !fieldsData[key].value.length>0) || 
-        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length>0)
-      ){        
-        notIsValid = true        
+    for (var key in fieldsData) {
+      if (
+        (fieldsData[key] && !fieldsData[key].value.length > 0) ||
+        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)
+      ) {
+        notIsValid = true
       }
     }
     setIsvalid(notIsValid)
-  },[fieldsData])
+  }, [fieldsData])
 
   const handleClick = () => {
-    const questions=[securityQuestion1.value, securityQuestion2.value]
-    const answers=[securityAnswer1.value, securityAnswer2.value]
+    const questions = [securityQuestion1.value, securityQuestion2.value]
+    const answers = [securityAnswer1.value, securityAnswer2.value]
     eventEmitter({
       email: email.value,
       name: name.value,
@@ -62,7 +62,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       date_of_birth: new Date(dateBirth.value),
       phone_number: phoneNumber.value.trim(),
       password: password.value,
-      security_questions:{
+      security_questions: {
         questions,
         answers
       }
@@ -74,7 +74,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   return (
     <Paper className={classes.formBody}>
       <Grid item container xs={12} justify="center" className={loading ? classes.loading : null}>
-        {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
+        {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
           <TitleComponent
             justify={'center'}
@@ -162,7 +162,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             <PhoneNumber
               xs={5}
               phoneNumber={phoneNumber}
-            
+
             />
             <SelectComponent xs={5} {...genre} />
           </Grid>
@@ -186,7 +186,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
                 {...institution}
               />
             </Grid>
-         
+
             <Grid item xs={5}>
               <Input
                 disabled={false}
@@ -240,7 +240,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
                 {...securityQuestion1}
               />
             </Grid>
-         
+
             <Grid item xs={5}>
               <Input
                 disabled={false}
@@ -273,7 +273,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
                 {...securityQuestion2}
               />
             </Grid>
-         
+
             <Grid item xs={5}>
               <Input
                 disabled={false}
@@ -310,22 +310,22 @@ const RegisterForm = ({ eventEmitter, loading }) => {
               <PasswordChecker
                 checkValue={password.value}
                 errorText={'Incorrect password.. '}
-                eventEmitter={(value) => {                
-                  const{success} = value                
+                eventEmitter={(value) => {
+                  const { success } = value
                   setVerificationPassword(success)
                 }}
               />
             </Grid>
           </Grid>
-        
+
           <Button
             onClick={handleClick}
             variant="contained"
             color="primary"
             className={{}}
-            disabled={!isValid && verificationPassword? false:true}
+            disabled={!isValid && verificationPassword ? false : true}
           >
-          Continue
+            Continue
           </Button>
         </Fragment>}
       </Grid>

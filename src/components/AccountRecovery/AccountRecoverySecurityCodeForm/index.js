@@ -3,11 +3,11 @@ import { Box, Button, Grid, Paper } from '@material-ui/core'
 import { useAccountRecoverySecurityCodeFormStyles } from './styles'
 import { Input } from '../../ui/Input'
 import LoaderComponent from '../../ui/Loader'
-import theme from '../../../styles/theme'
+import theme from '../../../styles/cdslabTheme'
 import { TitleComponent } from '../../ui/Title'
-import {  useAccountRecoverySecurityCodeFormState } from './state'
+import { useAccountRecoverySecurityCodeFormState } from './state'
 
-const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, messageBody  }) => {
+const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, messageBody }) => {
   const classes = useAccountRecoverySecurityCodeFormStyles(theme)
   const { securityCode } = useAccountRecoverySecurityCodeFormState()
   const [isValid, setIsvalid] = useState(false)
@@ -26,8 +26,8 @@ const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, m
   }, [securityCode])
 
 
-  const handleClickButton =()=>{
-    handleClick({securityCode:securityCode.value})
+  const handleClickButton = () => {
+    handleClick({ securityCode: securityCode.value })
   }
 
   return (
@@ -58,7 +58,7 @@ const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, m
               <Box p={1} bgcolor="background.paper">
                 {messageBody}
               </Box>
-              
+
             </Grid>
             <Grid item container xs={12}>
               <Input
