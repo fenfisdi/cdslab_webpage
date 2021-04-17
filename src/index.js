@@ -2,13 +2,22 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import { StoreProvider } from './store/storeContext'
+import { ThemeProvider } from 'styled-components'
+import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles'
+import theme from './styles/cdslabTheme'
 import App from './App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider>
-      <App />
-    </StoreProvider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <StoreProvider>
+            <App />
+          </StoreProvider>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
