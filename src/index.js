@@ -8,17 +8,15 @@ import theme from './styles/cdslabTheme'
 import App from './App'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <StylesProvider injectFirst>
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <StoreProvider>
-            <App />
-          </StoreProvider>
-        </ThemeProvider>
-      </MuiThemeProvider>
-    </StylesProvider>
-  </React.StrictMode>,
+  <StylesProvider injectFirst>
+    <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <StoreProvider>
+          <App />
+        </StoreProvider>
+      </ThemeProvider>
+    </MuiThemeProvider>
+  </StylesProvider>,
   document.getElementById('root')
 )
 
