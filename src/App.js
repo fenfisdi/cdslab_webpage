@@ -71,7 +71,7 @@ const App = () => {
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/qr_code" component={QRrender} />
               <Route exact path="/qr_validation" component={QRAuthentication} />
-              <Route exact path="/compartmentalModelsPage" component={CompartmentalModelsPage}/>
+              <Route exact path="/compartmentalModelsPage" component={CompartmentalModelsPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Layout>

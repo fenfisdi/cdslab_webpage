@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2021: true
+    es2021: true,
+    jest: true
   },
   parser: 'babel-eslint',
   extends: ['eslint:recommended', 'plugin:react/recommended'],
@@ -13,7 +14,7 @@ module.exports = {
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'windows'],
-    quotes: ['warn', 'single'],
+    quotes: ['error', 'single'],
     semi: ['error', 'never'],
     'react/prop-types': 'off',
     'no-unused-vars': [

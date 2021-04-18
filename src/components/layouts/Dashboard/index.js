@@ -8,9 +8,9 @@ import Link from '@material-ui/core/Link'
 import Navigator from './Navigator'
 import Content from './Content'
 import Header from './Header'
-import theme from '../../../styles/theme'
+import theme from '../../../styles/cdslabTheme'
 
-function Copyright () {
+function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
@@ -52,7 +52,7 @@ const styles = {
   }
 }
 
-function Dashboard ({ classes, children }) {
+function Dashboard({ classes, children }) {
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
 import { useAccountRecoveryStyles } from './styles'
-import theme from '../../styles/theme'
+import theme from '../../styles/cdslabTheme'
 import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRecoveryEmailForm'
 import SnackbarComponent from '../../components/ui/Snackbars'
 import { useAccountRecoveryState } from './state'
@@ -12,7 +12,7 @@ import { replaceStringInRange } from '../../utils/common'
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { 
+  const {
     handleRequestPasswordChange,
     handleRequestSecurityCode,
     handleRequestPasswordSubmission,
@@ -25,13 +25,13 @@ const AccountRecoveryPage = () => {
   }
 
   const handleClickRecoveryEmail = (formFields) => {
-    const {email} = formFields
-    handleRequestPasswordChange({email:email})
+    const { email } = formFields
+    handleRequestPasswordChange({ email: email })
   }
 
   const handleClickSecurityCode = (formFields) => {
     const {
-      data:{email}
+      data: { email }
     } = sendEmailData
 
     const {
@@ -46,13 +46,13 @@ const AccountRecoveryPage = () => {
 
   const handleClickPasswordSubmission = (formFields) => {
     const {
-      data:{email}
+      data: { email }
     } = sendEmailData
-    const {password} = formFields
+    const { password } = formFields
     handleRequestPasswordSubmission({
       email,
-      new_password:password,
-      new_verify_password:password
+      new_password: password,
+      new_verify_password: password
     })
   }
 
@@ -65,19 +65,19 @@ const AccountRecoveryPage = () => {
       alignItems='center'
       className={classes.body}
     >
-      {step ==0 && <AccountRecoveryEmailForm 
-        loading={loading} 
-        handleClick={handleClickRecoveryEmail} 
-        messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'} 
-        messageTitle={'Recupera tu cuenta'}/>
+      {step == 0 && <AccountRecoveryEmailForm
+        loading={loading}
+        handleClick={handleClickRecoveryEmail}
+        messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'}
+        messageTitle={'Recupera tu cuenta'} />
       }
-      {step ==1 && <AccountRecoverySecurityCodeForm 
-        loading={loading} 
-        handleClick={handleClickSecurityCode} 
+      {step == 1 && <AccountRecoverySecurityCodeForm
+        loading={loading}
+        handleClick={handleClickSecurityCode}
         messageTitle={'Comprueba si recibiste un correo electrónico con tu código de 6 dígitos.'}
-        messageBody={`Enviamos el código a: ${sendEmailData && replaceStringInRange(sendEmailData.data.email,1,5,'*****')}`}
+        messageBody={`Enviamos el código a: ${sendEmailData && replaceStringInRange(sendEmailData.data.email, 1, 5, '*****')}`}
       />}
-      {step ==2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission}/>}
+      {step == 2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission} />}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
         configData={showSnack}

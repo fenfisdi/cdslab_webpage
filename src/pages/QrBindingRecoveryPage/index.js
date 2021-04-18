@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+
+import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
-import theme from '../../styles/theme'
+import theme from '../../styles/cdslabTheme'
 import { useRecoveryQrBindingStyles } from './styles'
 import SnackbarComponent from '../../components/ui/Snackbars'
 import { useAccountRecoveryQrBindingState } from './state'
@@ -8,10 +9,10 @@ import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRe
 import QrBindingRecoverySecurityQuestions from '../../components/QrForm/QrBindingRecoverySecurityQuestions'
 import QrBindingRecoveryShowLink from '../../components/QrForm/QrBindingRecoveryShowLink'
 
-const RecoveryQrBindingPage = () =>{
+const RecoveryQrBindingPage = () => {
   const classes = useRecoveryQrBindingStyles(theme)
-  const [showSnack, setShowSnack] = useState({show:false, success:false, error:false, successMessage:'', errorMessage:''})
-  const { 
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const {
     handleRequestQrBindingRecover,
     handleRequestQrSecurityQuestions,
     redirectToPage,
@@ -19,32 +20,32 @@ const RecoveryQrBindingPage = () =>{
     loading,
     qrRecovery,
     qrSecurityQuestions
-  } = useAccountRecoveryQrBindingState({ showSnack, setShowSnack})
+  } = useAccountRecoveryQrBindingState({ showSnack, setShowSnack })
 
-  const { data:dataRecovery } = qrRecovery || {}
-  const { data:dataSecurityQuestions } = qrSecurityQuestions || {}
+  const { data: dataRecovery } = qrRecovery || {}
+  const { data: dataSecurityQuestions } = qrSecurityQuestions || {}
 
   const handleCloseSnack = () => {
-    setShowSnack({...showSnack,show:false,success:false, error:false, successMessage:'', errorMessage:''})
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
   const handleClickRecoveryEmail = (formFields) => {
-    const {email} = formFields
+    const { email } = formFields
     handleRequestQrBindingRecover({
       email
     })
   }
 
   const handleClickSecurityQuestion = (formFields) => {
-    const { email }= dataRecovery || {}
-    const { answers } = formFields    
+    const { email } = dataRecovery || {}
+    const { answers } = formFields
     handleRequestQrSecurityQuestions({
       email,
       answers
-    }) 
+    })
   }
 
-  const handleClickRedirect =()=>{
+  const handleClickRedirect = () => {
     redirectToPage('/')
   }
 
@@ -55,32 +56,32 @@ const RecoveryQrBindingPage = () =>{
       direction='column'
       justify='center'
       alignItems='center'
-      className={classes.body}      
+      className={classes.body}
     >
-      {step==0 && <AccountRecoveryEmailForm 
-        handleClick={handleClickRecoveryEmail} 
-        loading={loading} 
-        messageBody={'Ingresa tu correo electrónico para restablecer tu Qr'} 
-        messageTitle={'Recuperar tu Qr'}/>}
+      {step == 0 && <AccountRecoveryEmailForm
+        handleClick={handleClickRecoveryEmail}
+        loading={loading}
+        messageBody={'Ingresa tu correo electrónico para restablecer tu Qr'}
+        messageTitle={'Recuperar tu Qr'} />}
 
-      {step==1 && <QrBindingRecoverySecurityQuestions
-        loading={loading} 
-        questions={dataRecovery ? dataRecovery.securityQuestions:[]}
+      {step == 1 && <QrBindingRecoverySecurityQuestions
+        loading={loading}
+        questions={dataRecovery ? dataRecovery.securityQuestions : []}
         handleEventEmitted={handleClickSecurityQuestion}
       />}
-      
-      {step==2 && <QrBindingRecoveryShowLink 
+
+      {step == 2 && <QrBindingRecoveryShowLink
         qrUrl={dataSecurityQuestions && dataSecurityQuestions.urlPath}
         title={'Codigo Qr generado.'}
         handleClick={handleClickRedirect}
-      />}        
-      
-      {showSnack && showSnack.show && <SnackbarComponent 
+      />}
+
+      {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
-        configData={showSnack}  
-        handleCloseSnack={handleCloseSnack} 
-        successMessage={showSnack.successMessage} 
-        errorMessage={showSnack.errorMessage}/>}
+        configData={showSnack}
+        handleCloseSnack={handleCloseSnack}
+        successMessage={showSnack.successMessage}
+        errorMessage={showSnack.errorMessage} />}
     </Grid>
   )
 }
