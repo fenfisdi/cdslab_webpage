@@ -1,5 +1,5 @@
-import { useStore } from '../../store/storeContext'
-import { useSessionActions } from '../../actions/sessionsActions'
+import { useStore } from '@store/storeContext'
+import { useSessionActions } from '@actions/sessionsActions'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
@@ -17,7 +17,7 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
   const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
-  const { from } = location.state || { from: { pathname: '/simulations' } }
+  const { from } = location.state || { from: { pathname: '/agents/simulations' } }
   const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
 
 

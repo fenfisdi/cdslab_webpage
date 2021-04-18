@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-
+import { useSessionActions } from '@actions/sessionsActions'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Header () {
+export default function Header() {
   const classes = useStyles()
-
   return (
     <div className={classes.root}>
       <AppBar position='static'>

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
-import ListItem from '../../../components/layouts/ListItem'
-import { useStore } from '../../../store/storeContext'
+import ListItem from '@components/layouts/ListItem'
+import { useStore } from '@store/storeContext'
 import Icon from '@material-ui/core/Icon'
 import { Button } from '@material-ui/core'
 import { SimulationContainer } from './styles'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { useSimulationActions } from '../../../actions/simulationsActions'
-import { useSessionActions } from '../../../actions/sessionsActions'
+import { useSimulationActions } from '@actions/simulationsActions'
+import { useSessionActions } from '@actions/sessionsActions'
+
 
 const SimulationListPage = () => {
   const {

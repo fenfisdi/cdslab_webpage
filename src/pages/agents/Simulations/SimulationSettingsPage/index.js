@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import SettingsForm from '../../../components/Simulations/SettingsForm'
-import { useStore } from '../../../store/storeContext'
-import { useSessionActions } from '../../../actions/sessionsActions'
-import NavigationButtons from '../../../components/layouts/NavigationButtons'
-import { useSimulationActions } from '../../../actions/simulationsActions'
+import SettingsForm from '@components/Simulations/SettingsForm'
+import { useStore } from '@store/storeContext'
+import { useSessionActions } from '@actions/sessionsActions'
+import NavigationButtons from '@components/layouts/NavigationButtons'
+import { useSimulationActions } from '@actions/simulationsActions'
 
 const SimulationSettingPage = () => {
   const {

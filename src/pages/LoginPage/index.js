@@ -4,9 +4,9 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Paper from '@material-ui/core/Paper'
 import { useLoginState } from './state'
 import { useLoginStyles } from './styles'
-import { LoginForm } from '../../components/LoginForm'
-import theme from '../../styles/cdslabTheme'
-import SnackbarComponent from '../../components/ui/Snackbars'
+import { LoginForm } from '@components/LoginForm'
+import theme from '@styles/cdslabTheme'
+import SnackbarComponent from '@components/ui/Snackbars'
 import QRrender from '../QRPage'
 
 export const LoginPage = () => {
