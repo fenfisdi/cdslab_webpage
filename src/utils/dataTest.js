@@ -1,3 +1,8 @@
+export const FAKE_USER = {
+  id: '123456',
+  name: 'Fale User',
+  username: 'fake.user'
+}
 export const SIMULATIONS = [
   {
     _id: 'aaaaaa',

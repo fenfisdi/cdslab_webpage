@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { SimulationContainer } from './styles'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { MiniLoader } from '../../components/layouts/MiniLoader'
+import { MiniLoader } from '@components/layouts/MiniLoader'
 
 const SimulationsPage = () => {
   const match = useRouteMatch()

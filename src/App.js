@@ -15,12 +15,6 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
-import RegisterPage from './pages/RegisterPage'
-import QRrender from './pages/QRPage'
-import QRAuthentication from './pages/QRValidationPage'
-import AccountRecoveryPage from './pages/AccountRecoveryPage'
-import RecoveryQrBindingPage from './pages/QrBindingRecoveryPage'
-import CompartmentalModelsPage from './pages/CompartmentalModelsPage'
 
 const App = () => {
   const {
@@ -29,7 +23,13 @@ const App = () => {
     },
   } = useStore()
 
-  const SimulationsPage = React.lazy(() => import('./pages/Simulations'))
+  const SimulationsPage = React.lazy(() => import('./pages/agents/Simulations'))
+  const RegisterPage = React.lazy(() => import('./pages/RegisterPage'))
+  const QRrender = React.lazy(() => import('./pages/QRPage'))
+  const QRAuthentication = React.lazy(() => import('./pages/QRValidationPage'))
+  const AccountRecoveryPage = React.lazy(() => import('./pages/AccountRecoveryPage'))
+  const RecoveryQrBindingPage = React.lazy(() => import('./pages/QrBindingRecoveryPage'))
+  const CompartmentalModelsPage = React.lazy(() => import('./pages/CompartmentalModelsPage'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
@@ -63,15 +63,18 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={LoginPage} />
               <PrivateRoute
-                path="/simulations"
+                path="/agents/simulations"
                 component={<SimulationsPage />}
+              />
+              <PrivateRoute
+                path="/compartmental_models"
+                component={<CompartmentalModelsPage />}
               />
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
               <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/qr_code" component={QRrender} />
               <Route exact path="/qr_validation" component={QRAuthentication} />
-              <Route exact path="/compartmentalModelsPage" component={CompartmentalModelsPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Layout>

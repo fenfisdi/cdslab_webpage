@@ -8,7 +8,6 @@ import theme from './styles/cdslabTheme'
 import App from './App'
 
 ReactDOM.render(
-  
   <StylesProvider injectFirst>
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>

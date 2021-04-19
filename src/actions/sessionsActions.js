@@ -1,4 +1,5 @@
 import { loginService } from '../services/sessionServices'
+import { FAKE_USER } from '../utils/dataTest'
 import {
   SESSION_ERROR,
   SESSION_LOADING,
@@ -7,10 +8,19 @@ import {
 } from './types/sessionTypes'
 
 export const useSessionActions = (dispatch) => {
+  const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
   /**
  * @param {*} loginInfo {username, password}
  */
   const login = async (loginInfo) => {
+    console.log({ LOGIN_ENABLED })
+    if (!LOGIN_ENABLED) {
+      dispatch({
+        type: SESSION_LOGIN,
+        payload: FAKE_USER
+      })
+      return
+    }
     dispatch({ type: SESSION_LOADING })
     loginService(loginInfo)
       .then((response) => {
@@ -18,23 +28,23 @@ export const useSessionActions = (dispatch) => {
           type: SESSION_LOGIN,
           payload: response.data.data
         })
-        
+
       })
       .catch((error) => {
-        if(error.response) {
-          const {response:{data}}=error
+        if (error.response) {
+          const { response: { data } } = error
           dispatch({
             type: SESSION_ERROR,
-            payload:data.detail
+            payload: data.detail
           })
-        }else if(error.request){
+        } else if (error.request) {
           dispatch({
             type: SESSION_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload: { message: 'The request was made but no response was received' }
           })
-        }            
+        }
       })
-    
+
   }
 
   const logout = async () => {
