@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useCompartmentalModelsPageState } from './state'
-import { useCompartmentalModelsPageStyles } from './styles'
+import { Container } from './styles'
 
 import PredefinedModels from '@components/CompartmentalModels/PredefinedModels'
 import SimulationType from '@components/CompartmentalModels/SimulationType'
@@ -14,8 +14,6 @@ import { isEmpty } from 'lodash'
 
 
 const ModelSettingsPage = () => {
-  const classes = useCompartmentalModelsPageStyles()
-
 
   const {
     handleClickPredefinedModels,
@@ -37,7 +35,7 @@ const ModelSettingsPage = () => {
   const { simulationType } = parameters
 
   return (
-    <div>
+    <Container>
       {step != 0 && isEmpty(simulationType) && <BackButton evenOnClick={handleClickBackButton} text="back" />}
 
       {step == 0 && <PredefinedModels handleClickPredefinedModels={handleClickPredefinedModels} options={OPTIONS_PREDEFINED_MODELS} />}
@@ -68,7 +66,7 @@ const ModelSettingsPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-    </div>
+    </Container>
   )
 }
 

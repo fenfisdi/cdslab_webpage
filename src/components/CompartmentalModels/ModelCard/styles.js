@@ -1,10 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-export const useModelCardStyles = makeStyles(() => ({
-  root: {
-    height: '100vh',
-  },
-  body: {
-    marginTop: '20px',
-  },
-}))
+export const CharterContainer = styled.article`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+`

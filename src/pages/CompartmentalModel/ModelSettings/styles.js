@@ -1,14 +1,10 @@
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-export const useCompartmentalModelsPageStyles = makeStyles(() => ({
-  root: {
-    height: '100vh',
-  },
-  body: {
-    marginTop: '20px',
-  },
-  title:{
-    marginBottom:'20px',
-    marginTop:'20px'
-  }
-}))
+
+export const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`
