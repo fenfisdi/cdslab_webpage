@@ -1,3 +1,14 @@
 {
-    "javascript.format.enable": false
-}
+    "eslint.options": {
+      "configFile": ".eslintrc.js"
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact"
+    ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  }

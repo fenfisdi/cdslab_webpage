@@ -7,7 +7,7 @@ import { useLoginStyles } from './styles'
 import { LoginForm } from '@components/LoginForm'
 import theme from '@styles/cdslabTheme'
 import SnackbarComponent from '@components/ui/Snackbars'
-import QRrender from '../QRPage'
+import QRrender from '../Auth/QRPage'
 
 export const LoginPage = () => {
   const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'

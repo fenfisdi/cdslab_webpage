@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
 import { useAccountRecoveryStyles } from './styles'
-import theme from '../../styles/cdslabTheme'
-import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRecoveryEmailForm'
-import SnackbarComponent from '../../components/ui/Snackbars'
+import theme from '@styles/cdslabTheme'
+import AccountRecoveryEmailForm from '@components/AccountRecovery/AccountRecoveryEmailForm'
+import SnackbarComponent from '@components/ui/Snackbars'
 import { useAccountRecoveryState } from './state'
-import AccountRecoverySecurityCodeForm from '../../components/AccountRecovery/AccountRecoverySecurityCodeForm'
-import AccountRecoveryResetPasswordForm from '../../components/AccountRecovery/AccountRecoveryResetPasswordForm'
-import { replaceStringInRange } from '../../utils/common'
+import AccountRecoverySecurityCodeForm from '@components/AccountRecovery/AccountRecoverySecurityCodeForm'
+import AccountRecoveryResetPasswordForm from '@components/AccountRecovery/AccountRecoveryResetPasswordForm'
+import { replaceStringInRange } from '@utils/common'
 
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)

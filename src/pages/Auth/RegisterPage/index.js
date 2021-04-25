@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import RegisterForm from '../../components/Register/RegisterForm'
+import RegisterForm from '@components/Register/RegisterForm'
 import { Grid } from '@material-ui/core'
 import { useRegisterStyles } from './styles'
-import theme from '../../styles/cdslabTheme'
+import theme from '@styles/cdslabTheme'
 import QRrender from '../QRPage'
 import SuccessRegister from '../SuccessRegisterPage'
-import SnackbarComponent from '../../components/ui/Snackbars'
+import SnackbarComponent from '@components/ui/Snackbars'
 import { useRegisterState } from './state'
 
 const RegisterPage = () => {

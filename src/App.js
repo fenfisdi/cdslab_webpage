@@ -23,13 +23,13 @@ const App = () => {
     },
   } = useStore()
 
-  const SimulationsPage = React.lazy(() => import('./pages/agents/Simulations'))
-  const RegisterPage = React.lazy(() => import('./pages/RegisterPage'))
-  const QRrender = React.lazy(() => import('./pages/QRPage'))
-  const QRAuthentication = React.lazy(() => import('./pages/QRValidationPage'))
-  const AccountRecoveryPage = React.lazy(() => import('./pages/AccountRecoveryPage'))
-  const RecoveryQrBindingPage = React.lazy(() => import('./pages/QrBindingRecoveryPage'))
-  const CompartmentalModelsPage = React.lazy(() => import('./pages/CompartmentalModelsPage'))
+  const AgentsPage = React.lazy(() => import('./pages/Agents'))
+  const RegisterPage = React.lazy(() => import('./pages/Auth/RegisterPage'))
+  const QRrender = React.lazy(() => import('./pages/Auth/QRPage'))
+  const QRAuthentication = React.lazy(() => import('./pages/Auth/QRValidationPage'))
+  const AccountRecoveryPage = React.lazy(() => import('./pages/Auth/AccountRecoveryPage'))
+  const RecoveryQrBindingPage = React.lazy(() => import('./pages/Auth/QrBindingRecoveryPage'))
+  const CompartmentalModelsPage = React.lazy(() => import('./pages/CompartmentalModel'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
@@ -63,8 +63,8 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={LoginPage} />
               <PrivateRoute
-                path="/agents/simulations"
-                component={<SimulationsPage />}
+                path="/agents"
+                component={<AgentsPage />}
               />
               <PrivateRoute
                 path="/compartmental_models"

@@ -1,32 +1,26 @@
-import { makeStyles } from '@material-ui/core'
+import Card from '@material-ui/core/Card'
+import styled, { css } from 'styled-components'
 
-export const useCharterStyles = makeStyles({
-  root: {
-    minWidth: 275,
-    marginRight:'30px',
-    marginLeft:'30px',
-    backgroundColor:'#66C2C1',
-    color: '#FFFFFF',
-    display:'flex',
-    justifyContent:'center',
-    paddingBottom:'35px',
-    '&:hover':{
-      cursor: 'pointer'
-    },
-    '&.selected':{
-      backgroundColor:'#b3cccb',
-      boxShadow: '0px 3px 6px #00000029',
-    }
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-})
+export const CardContainer = styled(Card)`
+  ${({ theme }) => `
+        background-color: ${theme.palette.secondary.dark};
+        &:hover{
+          background-color: ${theme.palette.secondary.light};
+        }
+    `}
+      ${props => props.selected && css`
+         ${({ theme }) => `
+          background-color: ${theme.palette.secondary.main};
+         `}
+      `}
+    color: white;
+    width: 30%;
+    height: 100px;
+    min-width: 275px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+`

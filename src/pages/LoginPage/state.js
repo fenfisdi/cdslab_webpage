@@ -17,7 +17,7 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
   const history = useHistory()
   const location = useLocation()
   const [title, setTitle] = useState('Sign in')
-  const { from } = location.state || { from: { pathname: '/agents/simulations' } }
+  const { from } = location.state || { from: { pathname: '/agents' } }
   const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
 
 

@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
-import theme from '../../styles/cdslabTheme'
+import theme from '@styles/cdslabTheme'
 import { useRecoveryQrBindingStyles } from './styles'
-import SnackbarComponent from '../../components/ui/Snackbars'
+import SnackbarComponent from '@components/ui/Snackbars'
 import { useAccountRecoveryQrBindingState } from './state'
-import AccountRecoveryEmailForm from '../../components/AccountRecovery/AccountRecoveryEmailForm'
-import QrBindingRecoverySecurityQuestions from '../../components/QrForm/QrBindingRecoverySecurityQuestions'
-import QrBindingRecoveryShowLink from '../../components/QrForm/QrBindingRecoveryShowLink'
+import AccountRecoveryEmailForm from '@components/AccountRecovery/AccountRecoveryEmailForm'
+import QrBindingRecoverySecurityQuestions from '@components/QrForm/QrBindingRecoverySecurityQuestions'
+import QrBindingRecoveryShowLink from '@components/QrForm/QrBindingRecoveryShowLink'
 
 const RecoveryQrBindingPage = () => {
   const classes = useRecoveryQrBindingStyles(theme)

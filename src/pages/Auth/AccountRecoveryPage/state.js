@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { accountRecoveryActions } from '../../actions/accountRecoveryActions'
-import { useStore } from '../../store/storeContext'
+import { accountRecoveryActions } from '@actions/accountRecoveryActions'
+import { useStore } from '@store/storeContext'
 import { useHistory } from 'react-router-dom'
 
 export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
@@ -11,30 +11,30 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
     dispatch
   } = useStore()
   const {
-    requestPasswordChange, 
-    requestSecurityCodeVerification, 
+    requestPasswordChange,
+    requestSecurityCodeVerification,
     requestPasswordSubmission } = accountRecoveryActions(dispatch)
   const [step, setStep] = useState(0)
   const history = useHistory()
-  
+
 
   const redirectSimulations = (location) => {
     history.replace(location)
   }
 
   useEffect(() => {
-    updateshowSnackEffect(sendEmailData,'security code submitted.',setStep,1)    
-  }, [sendEmailData]) 
+    updateshowSnackEffect(sendEmailData, 'security code submitted.', setStep, 1)
+  }, [sendEmailData])
 
 
-  useEffect(()=>{
-    updateshowSnackEffect(securityCode,'security code correct.',setStep,2)
-  },[securityCode])
+  useEffect(() => {
+    updateshowSnackEffect(securityCode, 'security code correct.', setStep, 2)
+  }, [securityCode])
 
 
-  useEffect(()=>{
-    updateshowSnackEffect(resetPassword,'password changed.',redirectSimulations,'/')
-  },[resetPassword])
+  useEffect(() => {
+    updateshowSnackEffect(resetPassword, 'password changed.', redirectSimulations, '/')
+  }, [resetPassword])
 
   const handleRequestPasswordChange = (userForm) => {
     requestPasswordChange(userForm)
@@ -51,27 +51,27 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
   const updateStep = (int) => {
     setStep(int)
   }
-  
-  const updateshowSnackEffect =(dataEvaluate, successMessage,callback,callbackParam)=>{
-    if(dataEvaluate && dataEvaluate.data && !dataEvaluate.error) {
+
+  const updateshowSnackEffect = (dataEvaluate, successMessage, callback, callbackParam) => {
+    if (dataEvaluate && dataEvaluate.data && !dataEvaluate.error) {
       setShowSnack(
         {
           ...showSnack,
-          show:true,
-          success:true,
-          successMessage:successMessage,
-          error:false
+          show: true,
+          success: true,
+          successMessage: successMessage,
+          error: false
         }
       )
       callback(callbackParam)
-    }else if(dataEvaluate && dataEvaluate.error) {
+    } else if (dataEvaluate && dataEvaluate.error) {
       setShowSnack(
         {
           ...showSnack,
-          show:true,
-          success:false,
-          error:true,
-          errorMessage:dataEvaluate.errorData.message
+          show: true,
+          success: false,
+          error: true,
+          errorMessage: dataEvaluate.errorData.message
         }
       )
     }
