@@ -1,18 +1,18 @@
 import React from 'react'
-import  QRvalidation  from '../../components/QrForm/QRValidation'
+import QRvalidation from '@components/QrForm/QRValidation'
 import Grid from '@material-ui/core/Grid'
 
-const QRAuthentication =() =>{
+const QRAuthentication = () => {
 
-  return(
-    <Grid container 
-      direction="column" 
+  return (
+    <Grid container
+      direction="column"
       alignItems="center"
       justify="center"
       style={{ marginTop: '10%' }}
     >
       <h1>Hello</h1>
-      <QRvalidation/>
+      <QRvalidation />
     </Grid>
   )
 }
