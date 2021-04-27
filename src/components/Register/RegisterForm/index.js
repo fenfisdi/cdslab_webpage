@@ -49,23 +49,29 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   }, [fieldsData])
 
   const handleClick = () => {
-    const questions = [securityQuestion1.value, securityQuestion2.value]
-    const answers = [securityAnswer1.value, securityAnswer2.value]
+  
     eventEmitter({
       email: email.value,
       name: name.value,
       last_name: lastName.value,
-      sex: genre.value,
+      gender: genre.value,
       institution: institution.value,
-      institution_afiliation: institutionAfiliation.value,
+      institution_role: institutionAfiliation.value,
       profession: profession.value,
-      date_of_birth: new Date(dateBirth.value),
-      phone_number: phoneNumber.value.trim(),
+      birthday: new Date(dateBirth.value),
+      phone: 3001234567, //phoneNumber.value.trim(),
+      phone_prefix: '+57',
       password: password.value,
-      security_questions: {
-        questions,
-        answers
-      }
+      security_questions: [
+        {
+          question:securityQuestion1.value,
+          answer:securityAnswer1.value
+        },
+        {
+          question:securityQuestion2.value,
+          answer:securityAnswer2.value
+        }
+      ]
     })
   }
 

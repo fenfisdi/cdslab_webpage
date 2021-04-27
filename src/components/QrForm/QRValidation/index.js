@@ -8,14 +8,14 @@ import LoaderComponent from '../../ui/Loader'
 
 const QRvalidation = ({eventEmitter,loading,picture}) => {
   
-  const qrvalue = useInputValue('', VALIDATORS_QR_VALUE.qrvalue, {
-    name: 'qrvalue',
+  const otp_code = useInputValue('', VALIDATORS_QR_VALUE.otp_code, {
+    name: 'otp_code',
     type: 'int',
     label: 'Code',
   })
 
   const handleClick = () => {
-    eventEmitter({qrValue: qrvalue.value})
+    eventEmitter({otp_code: otp_code.value})
   }
 
   return(
@@ -33,7 +33,7 @@ const QRvalidation = ({eventEmitter,loading,picture}) => {
             fullWidth
             variant="outlined"
             margin="normal"
-            {...qrvalue}
+            {...otp_code}
           />
         </Grid>
         <Grid item xs={8}>

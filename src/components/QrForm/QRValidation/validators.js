@@ -13,7 +13,7 @@ export const MAX_LENGTH_MESSAGE = 'The maximum size allowed is ? characters.'
 export const MIN_LENGTH_MESSAGE = 'The minimum size allowed is ? characters.'
 
 export const VALIDATORS_QR_VALUE = {
-  qrvalue: [
+  otp_code: [
     {
       type: 'required',
       message: REQUIRED_MESSAGE,

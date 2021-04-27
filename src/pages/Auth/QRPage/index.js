@@ -10,14 +10,14 @@ const QRrender = ({ urlPath, email, sendStep, showSnack, setShowSnack }) => {
 
 
   const sendQrValue = (object) => {
-    const { qrValue } = object
+    const { otp_code } = object
     validateQr({
       email: email,
-      qr_value: qrValue
+      otp_code: otp_code
     })
 
   }
-
+  
   const fillQrImage = () => (<>
     {urlPath && <QRImage qrUrl={urlPath} />}
   </>
