@@ -52,6 +52,13 @@ export const LoginForm = ({
 
   const fillSignInHeader = () => (
     <>
+      <Grid container>
+        <Grid item xs>
+          <Link className={classes.link} variant='body2' onClick={() => { history.push('/register') }}>
+            {'Sign Up'}
+          </Link>
+        </Grid>
+      </Grid>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
