@@ -31,7 +31,7 @@ const RegisterPage = () => {
       className={classes.body}
     >
       {step == 0 && <RegisterForm eventEmitter={sendForm} loading={loading} />}
-      {step == 1 && <QRrender urlPath={url} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
+      {step == 1 && <QRrender location={'register'} urlPath={url} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
       {step == 3 && <SuccessRegister />}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}

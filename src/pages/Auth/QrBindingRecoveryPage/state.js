@@ -21,7 +21,6 @@ export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) =>
 
 
   useEffect(() => {
-  
     updateshowSnackEffect(qrRecovery, 'security question submitted.', setStep, 1)
   }, [qrRecovery,qrSecurityQuestions])
 

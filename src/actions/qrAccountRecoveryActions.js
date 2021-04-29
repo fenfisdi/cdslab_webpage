@@ -23,7 +23,7 @@ export const qrAccountRecoveryActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: QR_ACCOUNT_RECOVERY_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({
@@ -49,7 +49,7 @@ export const qrAccountRecoveryActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: QR_ACCOUNT_SECURITY_QUESTIONS_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({

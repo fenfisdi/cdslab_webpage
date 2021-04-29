@@ -35,7 +35,7 @@ export const useSessionActions = (dispatch) => {
           const { response: { data } } = error
           dispatch({
             type: SESSION_ERROR,
-            payload: data.detail
+            payload: data
           })
         } else if (error.request) {
           dispatch({

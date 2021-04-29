@@ -6,7 +6,7 @@ import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_QR_VALUE } from  './validators'
 import LoaderComponent from '../../ui/Loader'
 
-const QRvalidation = ({eventEmitter,loading,picture}) => {
+const QRvalidation = ({ eventEmitter,loading,picture}) => {
   
   const otp_code = useInputValue('', VALIDATORS_QR_VALUE.otp_code, {
     name: 'otp_code',

@@ -28,7 +28,7 @@ const RecoveryQrBindingPage = () => {
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
-
+  
   const handleClickRecoveryEmail = (formFields) => {
     const { email } = formFields
     handleRequestQrBindingRecover({
@@ -66,7 +66,7 @@ const RecoveryQrBindingPage = () => {
 
       {step == 1 && <QrBindingRecoverySecurityQuestions
         loading={loading}
-        questions={dataRecovery ? dataRecovery.securityQuestions : []}
+        questions={dataRecovery}
         handleEventEmitted={handleClickSecurityQuestion}
       />}
 

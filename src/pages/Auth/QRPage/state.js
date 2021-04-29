@@ -9,16 +9,13 @@ export const useAuthQrState = ({ sendStep, showSnack, setShowSnack }) => {
     },
     dispatch
   } = useStore()
-  const { validateQr } = useUserActions(dispatch)
+  const { validateQr, validateCode } = useUserActions(dispatch)
 
 
   useEffect(() => {
     if (data && !error) {
-      console.log(data)
       sendStep(3)
-
     } else if (error) {
-
       setShowSnack(
         {
           ...showSnack,
@@ -33,6 +30,6 @@ export const useAuthQrState = ({ sendStep, showSnack, setShowSnack }) => {
 
 
   return {
-    data, isValid, error, loading, validateQr, showSnack
+    data, isValid, error, loading, validateQr, showSnack, validateCode
   }
 }

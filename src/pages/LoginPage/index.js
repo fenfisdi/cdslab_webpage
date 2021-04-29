@@ -30,7 +30,7 @@ export const LoginPage = () => {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           {step == 0 && <LoginForm onSubmit={handleSubmit} title={title} loading={loading} />}
-          {step == 1 && LOGIN_ENABLED && <QRrender urlPath={null} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
+          {step == 1 && LOGIN_ENABLED && <QRrender location={'login'} urlPath={null} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
           {showSnack && showSnack.show && <SnackbarComponent
             snackDuration={3500}
             configData={showSnack}

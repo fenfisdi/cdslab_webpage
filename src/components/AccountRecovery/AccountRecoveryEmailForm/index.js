@@ -14,20 +14,20 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
 
   useEffect(() => {
     let notIsValid = false
-
     if (
       (email && !email.value.length > 0) ||
       (email && Array.isArray(email.errors) && email.errors.length > 0)
     ) {
       notIsValid = true
     }
-
     setIsvalid(notIsValid)
+    
   }, [email])
 
 
   const handleClickButton = () => {
     handleClick({ email: email.value })
+    
   }
 
   return (

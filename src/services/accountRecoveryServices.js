@@ -9,7 +9,7 @@ export const requestSecurityCodeService = async (userForm) => {
 
 export const requestSecurityCodeVerificationService = async (userForm) => {
   return  request(
-    `${process.env.REACT_APP_AUTH_API_URL}/otp`,
+    `${process.env.REACT_APP_AUTH_API_URL}/validate_code`,
     'POST',
     userForm
   ) 
@@ -18,7 +18,7 @@ export const requestSecurityCodeVerificationService = async (userForm) => {
 
 export const requestPasswordSubmissionService = async (userForm) => {
   return  request(
-    `${process.env.REACT_APP_AUTH_API_URL}/passwordRecover`,
+    `${process.env.REACT_APP_AUTH_API_URL}/recover_password`,
     'POST',
     userForm
   ) 

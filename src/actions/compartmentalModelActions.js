@@ -6,7 +6,7 @@ export const useCompartmentalModelActions = (dispatch) => {
      * @param {*} userForm {username, name, lastname}
      * @param {*} userQrValidation {username, name, lastname}
      */
-  const registerModelParameters = (userForm) => {
+  const registerModelParameters = () => {
     dispatch({ type: COMPARTMENTAL_MODEL_LOADING })
     /*registerModelParametersService(userForm)
       .then((response) => {
@@ -21,7 +21,7 @@ export const useCompartmentalModelActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({
