@@ -34,7 +34,7 @@ const SimulationMainPage = () => {
       icon: 'send',
       name: 'Comparmental Models',
       indetifier: 'compar_models',
-      url: `${match.path}/options`
+      url: '/compartmentalModels'
     },
     {
       icon: 'drafts',
@@ -57,7 +57,7 @@ const SimulationMainPage = () => {
     <SimulationContainer>
       <ModelCard
         options={options}
-        eventEmitted={(cardData) => { cardData.url && history.push(cardData.url) }}
+        eventEmitted={(cardData) => { cardData.url && history.replace({ pathname: cardData.url }) }}
       />
     </SimulationContainer>
 
