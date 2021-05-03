@@ -15,7 +15,7 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
-import ModelSettingsPage from './pages/CompartmentalModel/ModelSettings'
+import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 
 const App = () => {
   const {
@@ -30,7 +30,7 @@ const App = () => {
   const QRAuthentication = React.lazy(() => import('./pages/Auth/QRValidationPage'))
   const AccountRecoveryPage = React.lazy(() => import('./pages/Auth/AccountRecoveryPage'))
   const RecoveryQrBindingPage = React.lazy(() => import('./pages/Auth/QrBindingRecoveryPage'))
-  const CompartmentalModelsPage = React.lazy(() => import('./pages/CompartmentalModel'))
+  const SimulationModelPage = React.lazy(() => import('./pages/SimulationModelPage'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
@@ -69,7 +69,7 @@ const App = () => {
               />
               <PrivateRoute
                 path="/simulationModels"
-                component={<CompartmentalModelsPage />}
+                component={<SimulationModelPage />}
               />
               <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />

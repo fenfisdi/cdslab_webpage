@@ -3,7 +3,7 @@ import { CompartmentalContainer } from './styles'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { MiniLoader } from '@components/layouts/MiniLoader'
 
-const CompartmentalModelPage = () => {
+const SimulationModelPage = () => {
   const match = useRouteMatch()
   const SimulationMainPage = React.lazy(() => import('./SimulationMainPage'))
   const SimulationSettingPage = React.lazy(() => import('./SimulationSettingsPage'))
@@ -22,4 +22,4 @@ const CompartmentalModelPage = () => {
   )
 }
 
-export default CompartmentalModelPage
+export default SimulationModelPage
