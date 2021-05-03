@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import ListItem from '@components/layouts/ListItem'
+
 import { useStore } from '@store/storeContext'
 import Icon from '@material-ui/core/Icon'
-import { Button } from '@material-ui/core'
 import { SimulationContainer } from './styles'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 import { useSimulationActions } from '@actions/simulationsActions'
 import { useSessionActions } from '@actions/sessionsActions'
+import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 
 
-const SimulationListPage = () => {
+const SimulationMainPage = () => {
   const {
     state: {
       simulations: { simulations, loading },
@@ -21,6 +21,7 @@ const SimulationListPage = () => {
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
   const location = useLocation()
+  const match = useRouteMatch()
 
   useEffect(() => {
     console.log(navigation)
@@ -31,15 +32,15 @@ const SimulationListPage = () => {
   const options = [
     {
       icon: 'send',
-      name: 'Settings'
+      name: 'Comparmental Models',
+      indetifier: 'compar_models',
+      url: `${match.path}/options`
     },
     {
       icon: 'drafts',
-      name: 'Clone'
-    },
-    {
-      icon: 'inbox',
-      name: 'Delete'
+      name: 'Agent based models',
+      indetifier: 'agent_based_models',
+      url: ''
     }
 
   ]
@@ -52,28 +53,15 @@ const SimulationListPage = () => {
     if (!navigation?.current) { setCurrenNavigation('Simulations') }
   }
 
-  const redirectSettings = (id) => {
-    const simulation = simulations.find(s => s._id === id)
-    setActiveSimulation(simulation)
-    const { from } = location.state || { from: { pathname: `/simulations/${id}/settings` } }
-    history.replace(from)
-  }
-
   return (
     <SimulationContainer>
-      <ListItem list={simulations} optionMenu={options} handleClick={redirectSettings} />
-      <Link to='simulations/add'>
-        <Button
-          variant='contained'
-          color='primary'
-          endIcon={<Icon>add_circle</Icon>}
-        >
-          Add New Simulation
-        </Button>
-      </Link>
+      <ModelCard
+        options={options}
+        eventEmitted={(cardData) => { cardData.url && history.push(cardData.url) }}
+      />
     </SimulationContainer>
 
   )
 }
 
-export default SimulationListPage
+export default SimulationMainPage

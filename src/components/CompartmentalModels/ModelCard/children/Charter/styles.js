@@ -3,17 +3,17 @@ import styled, { css } from 'styled-components'
 
 export const CardContainer = styled(Card)`
   ${({ theme }) => `
-        background-color: ${theme.palette.secondary.dark};
+        background-color: ${theme.palette.secondary.card};
         &:hover{
-          background-color: ${theme.palette.secondary.light};
+          background-color: ${theme.palette.secondary.cardSelect};
         }
     `}
       ${props => props.selected && css`
          ${({ theme }) => `
-          background-color: ${theme.palette.secondary.main};
+          background-color: ${theme.palette.secondary.cardSelect};
          `}
       `}
-    color: white;
+    color: '#000000';
     width: 30%;
     height: 100px;
     min-width: 275px;

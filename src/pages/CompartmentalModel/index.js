@@ -5,18 +5,17 @@ import { MiniLoader } from '@components/layouts/MiniLoader'
 
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
-  const SimulationListPage = React.lazy(() => import('./SimulationListPage'))
+  const SimulationMainPage = React.lazy(() => import('./SimulationMainPage'))
   const SimulationSettingPage = React.lazy(() => import('./SimulationSettingsPage'))
-  const ModelSettingsPage = React.lazy(() => import('./ModelSettings'))
+
 
   return (
     <CompartmentalContainer>
       <Suspense fallback={<MiniLoader />}>
         <Switch>
-          <Route path={match.path} exact component={SimulationListPage} />
-          <Route path={`${match.path}/simulations/:id/settings`} exact component={SimulationSettingPage} />
-          <Route path={`${match.path}/simulations/add`} exact component={SimulationSettingPage} />
-          <Route path={`${match.path}/model/settings`} exact component={ModelSettingsPage} />
+          <Route path={match.path} exact component={SimulationMainPage} />
+          <Route path={`${match.path}/options`} exact component={SimulationSettingPage} />
+
         </Switch>
       </Suspense>
     </CompartmentalContainer>

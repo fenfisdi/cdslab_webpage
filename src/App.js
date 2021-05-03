@@ -24,7 +24,7 @@ const App = () => {
     },
   } = useStore()
 
-  const AgentsPage = React.lazy(() => import('./pages/Agents'))
+  const AgentsPage = React.lazy(() => import('./pages/agents'))
   const RegisterPage = React.lazy(() => import('./pages/Auth/RegisterPage'))
   const QRrender = React.lazy(() => import('./pages/Auth/QRPage'))
   const QRAuthentication = React.lazy(() => import('./pages/Auth/QRValidationPage'))
@@ -68,10 +68,10 @@ const App = () => {
                 component={<AgentsPage />}
               />
               <PrivateRoute
-                path="/compartmental_models"
+                path="/simulationModels"
                 component={<CompartmentalModelsPage />}
               />
-              {/* <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} /> */}
+              <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
               <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
               <Route exact path="/register" component={RegisterPage} />
