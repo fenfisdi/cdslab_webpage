@@ -1,5 +1,5 @@
 import React from 'react'
-import {  useAdjustParametersStyles } from './styles'
+import { useAdjustParametersStyles } from './styles'
 import { useAdjustParametersState } from './state'
 import BackButton from '../../ui/BackButton'
 import AdjustParametersFormDataUpload from './children/AdjustParametersFormDataUpload'
@@ -13,23 +13,24 @@ const AdjustParameters = ({
   loading,
   fatherUpdateStep,
   setParameters,
-  parameters}) => {
-    
+  parameters }) => {
+
   const classes = useAdjustParametersStyles()
   const {
     handleClickButton,
     setModelData,
     updateStep,
+    sendForm,
     step,
     modelData
-  }= useAdjustParametersState({handleClickAdjustParameters})
-  const { name:slectedModel } = modelData || {}
-  const { predefinedModel: { indetifier } }= parameters || {}
+  } = useAdjustParametersState({ handleClickAdjustParameters })
+  const { name: slectedModel } = modelData || {}
+  const { predefinedModel: { indetifier } } = parameters || {}
 
   return (
     <>
-      { <BackButton evenOnClick={()=>{step==0 ?fatherUpdateStep():updateStep(step-1)}} text="back" />}
-      
+      { <BackButton evenOnClick={() => { step == 0 ? fatherUpdateStep() : updateStep(step - 1) }} text="back" />}
+
       {step == 0 && <AdjustParametersFormResourceSelection
         options={options}
         setModelData={setModelData}
@@ -40,9 +41,10 @@ const AdjustParameters = ({
 
       />}
 
-      {step == 1 && <AdjustParametersFormDataUpload 
+      {step == 1 && <AdjustParametersFormDataUpload
         parameters={parameters}
         selectValues={COMPARTMENTAL_FIELDS[indetifier].stateVariables}
+        eventEmitter={sendForm}
       />}
     </>
   )

@@ -15,6 +15,7 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
+import ModelSettingsPage from './pages/CompartmentalModel/ModelSettings'
 
 const App = () => {
   const {
@@ -70,6 +71,7 @@ const App = () => {
                 path="/compartmental_models"
                 component={<CompartmentalModelsPage />}
               />
+              {/* <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} /> */}
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
               <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
               <Route exact path="/register" component={RegisterPage} />

@@ -29,7 +29,7 @@ export const SelectComponent = ({
   onOpen,
   onClose,
   errors,
-  helperText,
+  helperText
 }) => {
   const classes = useStyles()
 
@@ -44,7 +44,7 @@ export const SelectComponent = ({
         <Select
           label={title}
           id={`selectComponent-simple-${title}`}
-          value={value}
+          value={value || ''}
           onChange={onChange}
           onOpen={onOpen}
           onClose={onClose}
