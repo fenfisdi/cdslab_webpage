@@ -7,16 +7,14 @@ export const useSelectValue = (val, validator, extras) => {
   const [errors, setErrors] = useState(false)
 
   const onChange = (e) => {
-    if (e && e.target) {
-      setValue(e.target.value)
-    }
+    e && setValue(e.target.value)
   }
 
-  const onOpen = (event) => {
+  const onOpen = () => {
     !isPress && setIsPress(true)
   }
 
-  const onClose = (event) => {
+  const onClose = () => {
     if (validator.value && isPress && !value.length > 0) {
       setErrors(true)
       setHelperText(validator.message)
@@ -37,6 +35,7 @@ export const useSelectValue = (val, validator, extras) => {
     onOpen,
     onClose,
     onChange,
+    setValue,
     ...extras,
   }
 }

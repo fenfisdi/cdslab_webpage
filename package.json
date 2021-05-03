@@ -15,6 +15,7 @@
     "babel-eslint": "10.1.0",
     "date-fns": "2.16.1",
     "material-ui-phone-number": "2.2.6",
+    "moment": "^2.29.1",
     "qrious": "4.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
