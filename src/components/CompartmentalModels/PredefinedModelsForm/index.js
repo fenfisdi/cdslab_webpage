@@ -2,19 +2,15 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
 import ModelCard from '../ModelCard'
-import CompartmentalButton from '../CompartmentalButton'
 import { usePredefinedModelsState } from './state'
 import { usePredefinedModelsStyles } from './styles'
-import { isEmpty } from 'lodash'
 import { Input } from '../../ui/Input'
 
 
-const PredefinedModelsForm = ({ handleClickPredefinedModels, options }) => {
+const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   const classes = usePredefinedModelsStyles()
   const {
-    handleClickButton,
     setModelData,
-    modelData,
     simulationName
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
@@ -47,14 +43,14 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options }) => {
         </Typography>
       </Grid>
 
-      <ModelCard
+      {options && options.length>0 && <ModelCard
         justify="center"
         alignItems="center"
         direction="column"
         options={options}
         eventEmitted={(data) => { setModelData(data) }}
         disabled={simulationName && simulationName.value ? false : true}
-      />
+      />}
   
     </Grid>
   )

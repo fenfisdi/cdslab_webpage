@@ -11,7 +11,7 @@ export const useCompartmentalNewSimulationPageState = () => {
     dispatch
   } = useStore()
   const { getPredefinedModels } = useCompartmentalModelActions(dispatch)
-
+  console.log('::::::::::::::>predefinedModelsList',predefinedModelsList)
   useEffect(() => {
     if(isNull(predefinedModelsList)){
       getPredefinedModels()
