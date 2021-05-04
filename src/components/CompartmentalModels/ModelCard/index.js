@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { Fragment } from 'react'
 import Charter from './children/Charter'
-import { useModelCardState } from './state'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
 
 
-const ModelCard = ({ options = [], eventEmitted }) => {
+const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false }) => {
   const [selected, setSelected] = useState('')
 
 
@@ -17,7 +15,7 @@ const ModelCard = ({ options = [], eventEmitted }) => {
   }
 
   return (
-    <CharterContainer>
+    <CharterContainer direction={direction}>
       {options.map((opt, index) => {
         const { name, indetifier, icon } = opt
         return (
@@ -34,6 +32,7 @@ const ModelCard = ({ options = [], eventEmitted }) => {
               handleClickCharter={handleClickCharter}
               selected={selected}
               extraOption={opt}
+              disabled={disabled}
             />
           </CharterBody>
         )

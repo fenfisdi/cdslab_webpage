@@ -4,9 +4,10 @@ import { CardContainer } from './styles'
 
 
 
-const Charter = ({ name, indetifier, handleClickCharter, selected, extraOption }) => {
+const Charter = ({ name, indetifier, handleClickCharter, selected, extraOption, disabled }) => {
+
   return (
-    <CardContainer selected={(selected === indetifier)} onClick={() => { handleClickCharter(extraOption) }}>
+    <CardContainer disabled={(disabled)} selected={(selected === indetifier)} onClick={() => { !disabled && handleClickCharter(extraOption) }}>
       <Typography variant="h6" component="h2">
         {name}
       </Typography>

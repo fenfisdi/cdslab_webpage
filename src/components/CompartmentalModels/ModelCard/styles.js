@@ -5,7 +5,7 @@ export const CharterContainer = styled.article`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    flex-direction="row";
+    flex-direction: ${props => props.direction};
 `
 export const CharterIcon = styled.div`
         margin: 5px;

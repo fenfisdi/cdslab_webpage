@@ -6,39 +6,56 @@ import CompartmentalButton from '../CompartmentalButton'
 import { usePredefinedModelsState } from './state'
 import { usePredefinedModelsStyles } from './styles'
 import { isEmpty } from 'lodash'
+import { Input } from '../../ui/Input'
 
 
-const PredefinedModels = ({ handleClickPredefinedModels, options, direction = 'column' }) => {
+const PredefinedModelsForm = ({ handleClickPredefinedModels, options }) => {
   const classes = usePredefinedModelsStyles()
   const {
     handleClickButton,
     setModelData,
-    modelData
+    modelData,
+    simulationName
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
+  console.log(simulationName.value)
 
   return (
     <Grid
       xs={12}
       container
-      direction={direction}
+      item
+      direction='column'
       justify="center"
       alignItems="center"
       spacing={1}
     >
-      <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-        <Typography variant="body1" component="p" className={classes.title}>
-          Compartmental models
-        </Typography>
+
+      <Grid item xs={6}>
+        <Input
+          disabled={false}
+          required
+          fullWidth
+          variant="outlined"
+          margin="normal"
+          autoComplete="simulationName"
+          {...simulationName}
+        />
+      </Grid>
+
+      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
         <Typography variant="body2" component="p" className={classes.title}>
           Choose one of the predefined models
         </Typography>
       </Grid>
+
       <ModelCard
         justify="center"
         alignItems="center"
+        direction="column"
         options={options}
         eventEmitted={(data) => { setModelData(data) }}
+        disabled={simulationName && simulationName.value ? false : true}
       />
       <CompartmentalButton
         disabled={isEmpty(modelData)}
@@ -51,4 +68,4 @@ const PredefinedModels = ({ handleClickPredefinedModels, options, direction = 'c
   )
 }
 
-export default PredefinedModels
+export default PredefinedModelsForm
