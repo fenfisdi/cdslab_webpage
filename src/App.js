@@ -42,7 +42,7 @@ const App = () => {
       <Route
         {...rest}
         render={({ location }) =>
-          allow ? (
+          isAuth ? (
             <Dashboard> {component} </Dashboard>
           ) : (
             <Redirect
