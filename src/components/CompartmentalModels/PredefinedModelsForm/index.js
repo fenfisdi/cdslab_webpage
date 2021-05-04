@@ -18,8 +18,6 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options }) => {
     simulationName
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
-  console.log(simulationName.value)
-
   return (
     <Grid
       xs={12}
@@ -57,13 +55,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options }) => {
         eventEmitted={(data) => { setModelData(data) }}
         disabled={simulationName && simulationName.value ? false : true}
       />
-      <CompartmentalButton
-        disabled={isEmpty(modelData)}
-        onClick={handleClickButton}
-        justify="center"
-        alignItems="center"
-        text={'Choose Simulation Type'}
-      />
+  
     </Grid>
   )
 }

@@ -1,5 +1,9 @@
-import { registerModelParametersService } from '../services/compartmentalModelServices'
-import { COMPARTMENTAL_MODEL_LOADING, COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_ERROR, COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_SUCCESS } from './types/compartmentalModelTypes'
+import { getPredefinedModelsService } from '../services/compartmentalModelServices'
+import {
+  COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
+  COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
+  COMPARTMENTAL_MODEL_LOADING
+} from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
   /**
@@ -8,11 +12,13 @@ export const useCompartmentalModelActions = (dispatch) => {
      */
   const registerModelParameters = () => {
     dispatch({ type: COMPARTMENTAL_MODEL_LOADING })
-    /*registerModelParametersService(userForm)
-      .then((response) => {
-          
+  }
+
+  const getPredefinedModels = () => {    
+    getPredefinedModelsService()
+      .then((response) => {        
         dispatch({
-          type: COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_SUCCESS,
+          type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
           payload: response.data.data
         })
       })
@@ -20,21 +26,20 @@ export const useCompartmentalModelActions = (dispatch) => {
         if(error.response) {
           const {response:{data}}=error          
           dispatch({
-            type: COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_ERROR,
+            type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
             payload: data 
           })
         }else if(error.request){
           dispatch({
-            type: COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_ERROR,
+            type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
             payload:{message:'The request was made but no response was received'}
           })
-        }      
-      })*/
-  
+        }
+      })
   }
-  
-  
-  return { registerModelParameters }
-  
-    
+
+
+  return { registerModelParameters, getPredefinedModels }
+
+
 }

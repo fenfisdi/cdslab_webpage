@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash'
 import { useEffect, useState } from 'react'
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_PREDEFINED_MODELS_FORM } from './validators'
@@ -17,8 +18,14 @@ export const usePredefinedModelsState = ({ handleClickPredefinedModels }) => {
   })
 
   const handleClickButton = () => {
-    handleClickPredefinedModels(modelData)
+    handleClickPredefinedModels({modelData, simulationName:simulationName.value})
   }
+
+  useEffect(()=>{
+    if(!isEmpty(modelData)){
+      handleClickPredefinedModels({modelData, simulationName:simulationName.value})
+    }
+  },[modelData])
 
   return {
     handleClickButton,

@@ -24,7 +24,7 @@ const App = () => {
     },
   } = useStore()
 
-  const AgentsPage = React.lazy(() => import('./pages/agents'))
+  const AgentsPage = React.lazy(() => import('./pages/Agents'))
   const RegisterPage = React.lazy(() => import('./pages/Auth/RegisterPage'))
   const QRrender = React.lazy(() => import('./pages/Auth/QRPage'))
   const QRAuthentication = React.lazy(() => import('./pages/Auth/QRValidationPage'))
