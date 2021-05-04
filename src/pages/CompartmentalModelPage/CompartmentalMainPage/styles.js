@@ -6,7 +6,7 @@ export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
     marginBottom: '20px',
     padding: theme.spacing(2),
     'box-shadow': '1px 3px 9px 5px rgba(0,0,0,0.14)',
-    background: '#ffffff',
+    background: '#3DB39E',
     height: '100%',
     overflow: 'hidden',
     width: '100%',

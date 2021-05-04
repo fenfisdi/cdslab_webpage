@@ -7,7 +7,7 @@ import { CompartmentalModelPageContainer } from './styles'
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
-  const CompartmentalNewSimulation = React.lazy(() => import('./CompartmentalNewSimulation'))
+  const CompartmentalNewSimulationPage = React.lazy(() => import('./CompartmentalNewSimulationPage'))
 
 
 
@@ -16,7 +16,7 @@ const CompartmentalModelPage = () => {
       <Suspense fallback={<MiniLoader />}>
         <Switch>
           <Route path={match.path} exact component={CompartmentalMainPage} />
-          <Route path={`${match.path}/newSimulations`} exact component={CompartmentalNewSimulation} />
+          <Route path={`${match.path}/newSimulations`} exact component={CompartmentalNewSimulationPage} />
         </Switch>
       </Suspense>
     </CompartmentalModelPageContainer>

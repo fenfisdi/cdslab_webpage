@@ -16,13 +16,13 @@ const CompartmentalMainPage = () => {
 
   const options = [
     {
-      icon: 'send',
+      
       name: 'New simulation',
       indetifier: 'new_simulation',
       url: `${match.path}/newSimulations`
     },
     {
-      icon: 'drafts',
+      
       name: 'My simulations',
       indetifier: 'my_simulations',
       url: ''
@@ -49,7 +49,7 @@ const CompartmentalMainPage = () => {
       <Grid container item xs={12}>
         <ModelCard
           options={options}
-          eventEmitted={(cardData) => { cardData.url && history.push(cardData.url) }}
+          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
         />
       </Grid>
     </Grid>

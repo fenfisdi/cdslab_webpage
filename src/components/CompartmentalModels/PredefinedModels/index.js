@@ -8,41 +8,41 @@ import { usePredefinedModelsStyles } from './styles'
 import { isEmpty } from 'lodash'
 
 
-const PredefinedModels = ({handleClickPredefinedModels,options}) => {
+const PredefinedModels = ({ handleClickPredefinedModels, options, direction = 'column' }) => {
   const classes = usePredefinedModelsStyles()
-  const {  
+  const {
     handleClickButton,
-    setModelData,    
+    setModelData,
     modelData
-  }= usePredefinedModelsState({handleClickPredefinedModels})
+  } = usePredefinedModelsState({ handleClickPredefinedModels })
 
 
   return (
-    <Grid 
+    <Grid
       xs={12}
-      container 
-      direction="column" 
-      justify="center" 
+      container
+      direction={direction}
+      justify="center"
       alignItems="center"
       spacing={1}
     >
       <Grid container item xs={12} justify="center" alignItems="center" direction="column">
         <Typography variant="body1" component="p" className={classes.title}>
-        Compartmental models
+          Compartmental models
         </Typography>
         <Typography variant="body2" component="p" className={classes.title}>
-        Choose one of the predefined models     
+          Choose one of the predefined models
         </Typography>
       </Grid>
-      <ModelCard 
+      <ModelCard
         justify="center"
         alignItems="center"
         options={options}
-        eventEmitted={(data)=>{setModelData(data)}}
+        eventEmitted={(data) => { setModelData(data) }}
       />
       <CompartmentalButton
-        disabled={isEmpty(modelData)}   
-        onClick={handleClickButton}      
+        disabled={isEmpty(modelData)}
+        onClick={handleClickButton}
         justify="center"
         alignItems="center"
         text={'Choose Simulation Type'}

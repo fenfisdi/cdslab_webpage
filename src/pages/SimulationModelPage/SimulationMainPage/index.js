@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 
 import { useStore } from '@store/storeContext'
-import Icon from '@material-ui/core/Icon'
+
 import { SimulationContainer } from './styles'
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 import { useSimulationActions } from '@actions/simulationsActions'
 import { useSessionActions } from '@actions/sessionsActions'
+
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
+import cmodelsSvg from '../../../assets/images/cmodels_SVG.svg'
+import agentsSVG from '../../../assets/images/agents_SVG.svg'
 
 
 const SimulationMainPage = () => {
@@ -20,8 +23,7 @@ const SimulationMainPage = () => {
   const { getSimulations, setActiveSimulation } = useSimulationActions(dispatch)
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
-  const location = useLocation()
-  const match = useRouteMatch()
+
 
   useEffect(() => {
     console.log(navigation)
@@ -31,13 +33,13 @@ const SimulationMainPage = () => {
 
   const options = [
     {
-      icon: 'send',
+      icon: cmodelsSvg,
       name: 'Comparmental Models',
       indetifier: 'compar_models',
       url: '/compartmentalModels'
     },
     {
-      icon: 'drafts',
+      icon: agentsSVG,
       name: 'Agent based models',
       indetifier: 'agent_based_models',
       url: ''
@@ -57,7 +59,7 @@ const SimulationMainPage = () => {
     <SimulationContainer>
       <ModelCard
         options={options}
-        eventEmitted={(cardData) => { cardData.url && history.replace({ pathname: cardData.url }) }}
+        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
       />
     </SimulationContainer>
 
