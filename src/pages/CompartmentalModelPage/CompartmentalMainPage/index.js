@@ -1,34 +1,16 @@
 import React from 'react'
 import { Grid, Paper } from '@material-ui/core'
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
-
-import Icon from '@material-ui/core/Icon'
+import { useHistory } from 'react-router-dom'
 
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { useCompartmentalMainPageStyles } from './styles'
+import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
 
 
 const CompartmentalMainPage = () => {
 
   const classes = useCompartmentalMainPageStyles()
   const history = useHistory()
-  const match = useRouteMatch()
-
-  const options = [
-    {
-      
-      name: 'New simulation',
-      indetifier: 'new_simulation',
-      url: `${match.path}/newSimulations`
-    },
-    {
-      
-      name: 'My simulations',
-      indetifier: 'my_simulations',
-      url: ''
-    }
-
-  ]
 
   return (
 
@@ -48,7 +30,7 @@ const CompartmentalMainPage = () => {
 
       <Grid container item xs={12}>
         <ModelCard
-          options={options}
+          options={OPTIONS_COMPARTMENTAL_MAIN}
           eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
         />
       </Grid>

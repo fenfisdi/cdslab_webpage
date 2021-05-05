@@ -1,8 +1,11 @@
-import { getPredefinedModelsService } from '../services/compartmentalModelServices'
+import { getPredefinedModelsService, storeCompartmentalSimulationService } from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
-  COMPARTMENTAL_MODEL_LOADING
+  COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
+  COMPARTMENTAL_MODEL_LOADING,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -23,8 +26,8 @@ export const useCompartmentalModelActions = (dispatch) => {
         })
       })
       .catch((error) => {
-        if(error.response) {
-          const {response:{data}}=error          
+        if(error.response) {          
+          const {response:{data}}=error                    
           dispatch({
             type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
             payload: data 
@@ -39,7 +42,45 @@ export const useCompartmentalModelActions = (dispatch) => {
   }
 
 
-  return { registerModelParameters, getPredefinedModels }
+  const storePredefinedModelsSelected =(predefinedModel)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
+      payload: predefinedModel
+    })
+  }
+
+
+  const storeCompartmentalSimulation =(simulation)=>{
+    storeCompartmentalSimulationService(simulation).then((response)=>{      
+      dispatch({
+        type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error) => {
+      if(error.response) {          
+        const {response:{data}}=error                    
+        dispatch({
+          type: COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
+          payload: data 
+        })
+      }else if(error.request){
+        dispatch({
+          type: COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
+          payload:{message:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+  
+
+
+
+
+  return { 
+    registerModelParameters, 
+    getPredefinedModels, 
+    storePredefinedModelsSelected,
+    storeCompartmentalSimulation }
 
 
 }
