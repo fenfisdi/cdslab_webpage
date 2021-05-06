@@ -24,14 +24,23 @@ export const useCompartmentalChooseSimulationPageState = () => {
 
 
   useEffect(()=>{
-    console.log('currentSimulation::::::::::::::::>',currentSimulation)
-    console.log('predefinedModelSelected::::::::::::::::>',predefinedModelSelected)
+    if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){
+
+      const {modelData:{identifier:model_id}}=predefinedModelSelected
+      const { data:{identifier}} = currentSimulation
+      history.push({ 
+        pathname: '/compartmentalModels/configureParameters',
+        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
+      })      
+    }
+    
   },[currentSimulation])
   
 
   const executeSelectedOption =(option)=>{
     const {indetifier}=option
     if(indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE){
+
       const {modelData:{identifier:model_id}, simulationName:name}=predefinedModelSelected
       
       storeCompartmentalSimulation({
