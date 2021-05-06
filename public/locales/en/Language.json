@@ -1,0 +1,16 @@
+{
+  "loginPage": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Pasword",
+    "forgotPasword": "Forgot password?",
+    "forgotYourSecurityLink": "Forgot your security link?"
+  },
+  "validators": {
+    "fieldRequired": "This field is required.",
+    "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",
+    "maxLength": "The maximum character width  is ?.",
+    "minLength": "The minimum character width  is {{?}}."
+  }
+}

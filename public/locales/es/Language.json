@@ -1,0 +1,16 @@
+{
+  "loginPage": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPasword": "¿Se te olvidó tu contraseña?",
+    "forgotYourSecurityLink": "¿Olvidaste tu enlace de seguridad?"
+  },
+  "validators": {
+    "fieldRequired": "Este campo es obligatorio.",
+    "validateEmail": "Debe contener un email válido e.j. myemail@mydomain.com.",
+    "maxLength": "El número máximo de carácteres es ?.",
+    "minLength": "El número mínimo de carácteres es ?."
+  }
+}

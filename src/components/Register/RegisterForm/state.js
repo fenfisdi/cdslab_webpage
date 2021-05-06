@@ -40,13 +40,13 @@ export const useRegisterFormState = () => {
     type: 'text',
     label: 'Institution',
   })
-  const institutionAfiliation = useInputValue(
+  const institutionAffiliation = useInputValue(
     '',
     VALIDATORS_REGISTER_FORM.alphabetic,
     {
-      name: 'institutionAfiliation',
+      name: 'institutionAffiliation',
       type: 'text',
-      label: 'Institution Afiliation',
+      label: 'Institution Affiliation',
     }
   )
   const profession = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
@@ -102,7 +102,7 @@ export const useRegisterFormState = () => {
     phoneNumber,
     genre,
     institution,
-    institutionAfiliation,
+    institutionAffiliation,
     profession,
     password,
     securityQuestion1,

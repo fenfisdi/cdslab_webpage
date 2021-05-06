@@ -4,11 +4,11 @@ import {
   checkPattern
 } from '../../components/Forms/validators/validatorsCheks'
 import { PATTERN_EMAIL } from '../../components/Forms/validators/patterns'
-
-export const REQUIRED_MESSAGE = 'This field is requiered.'
-export const PATTERN_ERROR_MESSAGE = 'It must be a valid email. e.g. myemail@mydomain.com.'
-export const MAX_LENGTH_MESSAGE = 'The maximum size allowed is ? characters.'
-export const MIN_LENGTH_MESSAGE = 'The minimum size allowed is ? characters.'
+//'validators.maxLength'
+export const REQUIRED_MESSAGE = 'validators.fieldRequired'
+export const PATTERN_ERROR_MESSAGE = 'validators.validateEmail'
+export const MAX_LENGTH_MESSAGE = 'validators.maxLength'
+export const MIN_LENGTH_MESSAGE = 'validators.minLength'
 
 export const VALIDATORS_LOGIN_FORM = {
   email: [

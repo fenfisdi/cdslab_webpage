@@ -1,22 +1,30 @@
-import React from 'react'
+import React, {Suspense}from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import { StoreProvider } from './store/storeContext'
 import { ThemeProvider } from 'styled-components'
 import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles'
+import { LanguageContextProvider } from './config/languageContext'
 import theme from './styles/cdslabTheme'
 import App from './App'
+import './config/languageSettings'
 
 ReactDOM.render(
+  
   <StylesProvider injectFirst>
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <StoreProvider>
-          <App />
+          <Suspense fallback="loading">
+            <LanguageContextProvider>
+              <App />
+            </LanguageContextProvider>
+          </Suspense>
         </StoreProvider>
       </ThemeProvider>
     </MuiThemeProvider>
-  </StylesProvider>,
+  </StylesProvider>
+  ,
   document.getElementById('root')
 )
 

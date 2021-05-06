@@ -26,7 +26,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     phoneNumber,
     genre,
     institution,
-    institutionAfiliation,
+    institutionAffiliation,
     profession,
     password,
     securityQuestion1,
@@ -56,7 +56,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       last_name: lastName.value,
       gender: genre.value,
       institution: institution.value,
-      institution_role: institutionAfiliation.value,
+      institution_role: institutionAffiliation.value,
       profession: profession.value,
       birthday: new Date(dateBirth.value),
       phone: 3001234567, //phoneNumber.value.trim(),
@@ -200,8 +200,8 @@ const RegisterForm = ({ eventEmitter, loading }) => {
                 fullWidth
                 variant="outlined"
                 margin="normal"
-                autoComplete="institutionAfiliation"
-                {...institutionAfiliation}
+                autoComplete="institutionAffiliation"
+                {...institutionAffiliation}
               />
             </Grid>
           </Grid>
