@@ -4,7 +4,7 @@ import { useCompartmentalConfigureParametersPageState } from './state'
 
 
 const CompartmentalConfigureParametersPage = () => {
-  const { loading, simulation_identifier, parameters } = useCompartmentalConfigureParametersPageState()
+  const { loading, currentSimulation, predefinedModelSelected } = useCompartmentalConfigureParametersPageState()
   
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">

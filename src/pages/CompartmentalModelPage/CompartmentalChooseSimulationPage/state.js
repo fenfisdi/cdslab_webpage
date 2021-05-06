@@ -25,7 +25,6 @@ export const useCompartmentalChooseSimulationPageState = () => {
 
   useEffect(()=>{
     if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){
-
       const {modelData:{identifier:model_id}}=predefinedModelSelected
       const { data:{identifier}} = currentSimulation
       history.push({ 

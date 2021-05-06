@@ -12,40 +12,49 @@ export const useCompartmentalConfigureParametersPageState = () => {
 
   const {
     state: {      
-      compartmentalModel: { loading, predefinedModelSelected, currentSimulation }
+      compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation} }
     },
     dispatch
   } = useStore()
   
-  const { storeCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+  const { findCompartmentalSimulation, findPredefinedModel } = useCompartmentalModelActions(dispatch)
 
   useEffect(()=>{
-    if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){      
-      console.log('currentSimulation::::::::::::::::>',currentSimulation)
+    const params = getStateWithQueryparams(history)
+    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
+      console.log('currentSimulation::::::::::::::::>',dataCurrentSimulation)
       console.log('predefinedModelSelected::::::::::::::::>',predefinedModelSelected)
+
+    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){      
+      const params = getStateWithQueryparams(history)      
+      const {name}=dataCurrentSimulation
+      findPredefinedModel({model_id:params.model_id,  simulationName:name})
+
+    }else if(!isEmpty(params) && dataCurrentSimulation == null &&
+      isEmpty(predefinedModelSelected)){
+      const params = getStateWithQueryparams(history)
+      findCompartmentalSimulation(params.simulation_identifier)
     }
     
-  },[currentSimulation])
+  },[dataCurrentSimulation,predefinedModelSelected])
 
 
-  const getStateWithQueryparams = (history) => {
-    if (history && history.location) {
+  const getStateWithQueryparams = (queryParams) => {
+    if (queryParams && queryParams.location) {
       const {
         location: { search }
-      } = history
+      } = queryParams
   
-      const filters = qs.parse(search, {
+      const params = qs.parse(search, {
         ignoreQueryPrefix: true
-      })
-      console.log('::::::::::::::::::::>filters',filters)
-      return filters
+      })      
+      return params
     }
   }
 
   return {
     loading,
-    simulation_identifier:getStateWithQueryparams(history),
-    parameters:predefinedModelSelected && predefinedModelSelected.modelData? predefinedModelSelected.modelData.parameters : []
-
+    currentSimulation:dataCurrentSimulation,
+    predefinedModelSelected:predefinedModelSelected
   }
 }

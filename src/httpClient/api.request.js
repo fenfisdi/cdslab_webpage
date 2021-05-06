@@ -5,7 +5,7 @@ import { OPTIONS_HTTP } from '../constants/optionsHttp'
 
 
 const createHeaders = (settings) => {
-  const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXItNzI1OEBleGFtcGwzLmNvbSIsImV4cCI6MTYyMDI2NzQwNn0.Uhm6KA4I3z0zKHu8Jj2Zt9FLRkG_ULSJyDZEARgxKV0'
+  const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXItNzI1OEBleGFtcGwzLmNvbSIsImV4cCI6MTYyMDQ4ODYyOH0.6Yes8_ZRufOFjO3GOUNePnK6QdqSHWZxEtFgvXuAb2Y'
   const defaultHeaders = {    
     Authorization: `Bearer ${accessToken}`
   }

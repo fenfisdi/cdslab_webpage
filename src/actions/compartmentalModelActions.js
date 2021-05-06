@@ -1,4 +1,4 @@
-import { getPredefinedModelsService, storeCompartmentalSimulationService } from '../services/compartmentalModelServices'
+import { findCompartmentalSimulationService, findPredefinedModelService, getPredefinedModelsService, storeCompartmentalSimulationService } from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -49,6 +49,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const setDefinitionCompartmentalSimulation =(simulation)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+      payload: simulation
+    })
+  }
+
 
   const storeCompartmentalSimulation =(simulation)=>{
     storeCompartmentalSimulationService(simulation).then((response)=>{      
@@ -71,6 +78,23 @@ export const useCompartmentalModelActions = (dispatch) => {
       }
     })
   }
+
+  const findCompartmentalSimulation =(idSimulation)=>{
+    findCompartmentalSimulationService(idSimulation).then((response)=>{      
+      dispatch({
+        type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+        payload: response.data.data
+      })
+    })
+  }
+
+  const findPredefinedModel =({model_id:idModel,simulationName})=>{
+    findPredefinedModelService(idModel).then((response)=>{            
+      const modelData = response.data.data
+      storePredefinedModelsSelected({modelData,simulationName})
+    })
+    
+  }
   
 
 
@@ -80,7 +104,10 @@ export const useCompartmentalModelActions = (dispatch) => {
     registerModelParameters, 
     getPredefinedModels, 
     storePredefinedModelsSelected,
-    storeCompartmentalSimulation }
+    storeCompartmentalSimulation,
+    findCompartmentalSimulation,
+    findPredefinedModel,
+    setDefinitionCompartmentalSimulation }
 
 
 }

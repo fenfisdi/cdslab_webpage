@@ -1,23 +1,28 @@
 import { useEffect } from 'react'
 import { useStore } from '@store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
-import { isNull } from 'lodash'
+import { isEmpty, isNull } from 'lodash'
 
 export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack }) => {
   const {
-    state: {      
-      compartmentalModel: { loading, predefinedModels:{data:predefinedModelsList,error,errorData} }
+    state: {
+      compartmentalModel: { loading, predefinedModels:{data:predefinedModelsList,error,errorData}, predefinedModelSelected, currentSimulation }
     },
     dispatch
   } = useStore()
   
-  const { getPredefinedModels, storePredefinedModelsSelected } = useCompartmentalModelActions(dispatch)
+  const { getPredefinedModels, storePredefinedModelsSelected, setDefinitionCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
   
   useEffect(() => {
     if(isNull(predefinedModelsList) && error!=true){
       getPredefinedModels()
     }
-  }, []) 
+
+    if(!isEmpty(predefinedModelSelected) && currentSimulation.data != null){
+      storePredefinedModelsSelected({})
+      setDefinitionCompartmentalSimulation(null)
+    }
+  }, [predefinedModelsList]) 
 
   useEffect(()=>{
     if(error == true){

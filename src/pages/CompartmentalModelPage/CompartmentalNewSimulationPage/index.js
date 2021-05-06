@@ -27,7 +27,7 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
 
       {predefinedModelsList && <PredefinedModelsForm
-        handleClickPredefinedModels={(values) => { setPredefinedModelSelected(values) }}
+        handleClickPredefinedModels={(values) => { values && setPredefinedModelSelected(values) }}
         options={predefinedModelsList}
       />}
       {showSnack && showSnack.show && <SnackbarComponent
