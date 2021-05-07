@@ -23,6 +23,7 @@
     "phoneNumber": "Número de contacto",
     "password": "Contraseña"
   },
+  "successRegister": "Por favor revisa tu correo para finalizar el proceso",
   "qrForm": {
     "code": "Codigo",
     "enterCode": "Por favor ingrese el código de verificación.",

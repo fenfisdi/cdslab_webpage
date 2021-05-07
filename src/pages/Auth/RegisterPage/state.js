@@ -10,7 +10,7 @@ export const useRegisterState = ({ showSnack, setShowSnack }) => {
     dispatch
   } = useStore()
   const { registerUser } = useUserActions(dispatch)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
 
 
   useEffect(() => {

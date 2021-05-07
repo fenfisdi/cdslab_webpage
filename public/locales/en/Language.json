@@ -29,6 +29,7 @@
     "continue": "Continue",
     "recoverQrBinding": "Did you lost the QR binding?"
   },
+  "successRegister": "Please check your email to finish the process",
   "validators": {
     "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",
