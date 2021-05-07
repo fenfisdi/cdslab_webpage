@@ -7,6 +7,22 @@
     "forgotPasword": "¿Se te olvidó tu contraseña?",
     "forgotYourSecurityLink": "¿Olvidaste tu enlace de seguridad?"
   },
+  "registerPage": {
+    "title": "Registro",
+    "email": "Correo electrónico",
+    "name": "Nombre",
+    "lastName": "Apellidos",
+    "institution": "Institución",
+    "institutionAffiliation": "Afiliación a la institución",
+    "profession": "Profesión",
+    "securityQuestion1": "Pregunta de seguridad 1",
+    "securityQuestion2": "Pregunta de seguridad 2",
+    "answerQuestion1": "Respuesta pregunta 1",
+    "answerQuestion2": "Respuesta pregunta 2",
+    "birthDate": "Fecha de nacimiento",
+    "phoneNumber": "Número de contacto",
+    "password": "Contraseña"
+  },
   "validators": {
     "fieldRequired": "Este campo es obligatorio.",
     "validateEmail": "Debe contener un email válido e.j. myemail@mydomain.com.",

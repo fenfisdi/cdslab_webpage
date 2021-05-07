@@ -7,6 +7,22 @@
     "forgotPasword": "Forgot password?",
     "forgotYourSecurityLink": "Forgot your security link?"
   },
+  "registerPage": {
+    "title": "Register",
+    "email": "Email",
+    "name": "Name",
+    "lastName": "Last Name",
+    "institution": "Institution",
+    "institutionAffiliation": "Institution affiliation",
+    "profession": "Profession",
+    "securityQuestion1": "Security question 1",
+    "securityQuestion2": "Security question 2",
+    "answerQuestion1": "Answer question 1",
+    "answerQuestion2": "Answer question 2",
+    "birthDate": "Birth date",
+    "phoneNumber": "Phone number",
+    "password": "Password"
+  },
   "validators": {
     "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",

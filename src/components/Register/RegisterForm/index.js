@@ -1,5 +1,5 @@
 import { Grid, Paper } from '@material-ui/core'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Input } from '../../ui/Input'
 import { TitleComponent } from '../../ui/Title'
 import theme from '../../../styles/cdslabTheme'
@@ -10,6 +10,7 @@ import { SelectComponent } from '../../ui/Select'
 import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
+import { languageContext } from '../../../config/languageContext'
 
 
 const RegisterForm = ({ eventEmitter, loading }) => {
@@ -17,6 +18,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   const [isValid, setIsvalid] = useState(false)
   const [verificationPassword, setVerificationPassword] = useState(false)
   const fieldsData = useRegisterFormState()
+  const { t } = useContext(languageContext)
 
   const {
     name,
@@ -85,7 +87,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
           <TitleComponent
             justify={'center'}
             alignItems={'center'}
-            title={'Registro'}
+            title={t('registerPage.title')}
             variant={'h5'}
           />
 
