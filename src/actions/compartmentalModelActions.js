@@ -42,7 +42,7 @@ export const useCompartmentalModelActions = (dispatch) => {
   }
 
 
-  const storePredefinedModelsSelected =(predefinedModel)=>{
+  const storePredefinedModelSelected =(predefinedModel)=>{
     dispatch({
       type: COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
       payload: predefinedModel
@@ -91,7 +91,7 @@ export const useCompartmentalModelActions = (dispatch) => {
   const findPredefinedModel =({model_id:idModel,simulationName})=>{
     findPredefinedModelService(idModel).then((response)=>{            
       const modelData = response.data.data
-      storePredefinedModelsSelected({modelData,simulationName})
+      storePredefinedModelSelected({modelData,simulationName})
     })
     
   }
@@ -103,7 +103,7 @@ export const useCompartmentalModelActions = (dispatch) => {
   return { 
     registerModelParameters, 
     getPredefinedModels, 
-    storePredefinedModelsSelected,
+    storePredefinedModelSelected,
     storeCompartmentalSimulation,
     findCompartmentalSimulation,
     findPredefinedModel,

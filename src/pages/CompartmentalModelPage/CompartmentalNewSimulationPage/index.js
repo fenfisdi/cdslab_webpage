@@ -10,7 +10,7 @@ import { useHistory  } from 'react-router'
 const CompartmentalNewSimulationPage = ({pathParent}) => {
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { predefinedModelsList, storePredefinedModelsSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
+  const { predefinedModelsList, storePredefinedModelSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
   
   
   const handleCloseSnack = () => {
@@ -18,7 +18,7 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
   }
 
   const setPredefinedModelSelected =(values)=>{
-    storePredefinedModelsSelected(values)
+    storePredefinedModelSelected(values)
     history.push({ pathname: `${pathParent}/chooseSimulation` })
   }
 

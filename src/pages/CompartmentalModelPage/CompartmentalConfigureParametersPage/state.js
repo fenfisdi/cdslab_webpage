@@ -3,13 +3,11 @@ import { useCompartmentalModelActions } from '@actions/compartmentalModelActions
 import qs from 'qs'
 import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
 export const useCompartmentalConfigureParametersPageState = () => {
   const history = useHistory()
-  const location = useLocation()
-
-
+  
   const {
     state: {      
       compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation} }
