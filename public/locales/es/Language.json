@@ -27,6 +27,7 @@
     "fieldRequired": "Este campo es obligatorio.",
     "validateEmail": "Debe contener un email válido e.j. myemail@mydomain.com.",
     "maxLength": "El número máximo de carácteres es ?.",
-    "minLength": "El número mínimo de carácteres es ?."
+    "minLength": "El número mínimo de carácteres es ?.",
+    "validatePhone": "Este campo debe ser un número telefónico válido."
   }
 }

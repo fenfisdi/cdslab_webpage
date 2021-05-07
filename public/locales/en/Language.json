@@ -27,6 +27,7 @@
     "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",
     "maxLength": "The maximum character width  is ?.",
-    "minLength": "The minimum character width  is {{?}}."
+    "minLength": "The minimum character width  is {{?}}.",
+    "validatePhone": "This field must be a phone number."
   }
 }
