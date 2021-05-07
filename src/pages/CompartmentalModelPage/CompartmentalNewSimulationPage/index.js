@@ -4,6 +4,8 @@ import PredefinedModelsForm from '../../../components/CompartmentalModels/Predef
 import SnackbarComponent from '@components/ui/Snackbars'
 import { useCompartmentalNewSimulationPageState } from './state'
 import { useHistory  } from 'react-router'
+import SupportComponent from '../../../components/SupportComponent'
+import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
 
 
 
@@ -25,6 +27,13 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
   return (
 
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+      <Grid container item xs={12} 
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start">
+        <p></p>
+        <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+      </Grid>
 
       {predefinedModelsList && <PredefinedModelsForm
         handleClickPredefinedModels={(values) => { values && setPredefinedModelSelected(values) }}

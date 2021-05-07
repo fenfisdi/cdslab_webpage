@@ -17,7 +17,7 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
   return (
     <CharterContainer direction={direction}>
       {options.map((opt, index) => {
-        const { name, indetifier, icon } = opt
+        const { name, indetifier, icon,titleIcon } = opt
         return (
           <CharterBody key={index}>
             {icon &&
@@ -33,6 +33,7 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
               selected={selected}
               extraOption={opt}
               disabled={disabled}
+              titleIcon={titleIcon}
             />
           </CharterBody>
         )
