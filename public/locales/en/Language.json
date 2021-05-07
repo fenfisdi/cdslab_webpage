@@ -1,4 +1,8 @@
 {
+  "common": {
+    "continueButton": "Continue",
+    "cancelButton": "Cancel"
+  },
   "loginPage": {
     "signIn": "Sign in",
     "signUp": "Sign up",
@@ -26,10 +30,20 @@
   "qrForm": {
     "code": "Code",
     "enterCode": "Please enter the verification code.",
-    "continue": "Continue",
     "recoverQrBinding": "Did you lost the QR binding?"
   },
   "successRegister": "Please check your email to finish the process",
+  "accountRecovery": {
+    "messageBody": "Enter your email to reset your password",
+    "messageConfirm": "Check if you received an email with your 6-digit code.",
+    "codeSended": "We send the code to:",
+    "messageTitle": "Recover your account"
+  },
+  "qrBindingRecovery": {
+    "messageBody": "Enter your email to reset your Qr",
+    "messageTitle": "Recover your Qr",
+    "title": "Qr code generated."
+  },
   "validators": {
     "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",

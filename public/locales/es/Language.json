@@ -1,4 +1,8 @@
 {
+  "common": {
+    "continueButton": "Continuar",
+    "cancelButton": "Cancelar"
+  },
   "loginPage": {
     "signIn": "Iniciar sesión",
     "signUp": "Registrarse",
@@ -24,6 +28,17 @@
     "password": "Contraseña"
   },
   "successRegister": "Por favor revisa tu correo para finalizar el proceso",
+  "accountRecovery": {
+    "messageBody": "Ingresa tu correo electrónico para restablecer tu contraseña",
+    "messageConfirm": "Comprueba si recibiste un correo electrónico con tu código de 6 dígitos.",
+    "codeSended": "Enviamos el código a:",
+    "messageTitle": "Recupera tu cuenta"
+  },
+  "qrBindingRecovery": {
+    "messageBody": "Ingrese su correo electrónico para restablecer su Qr",
+    "messageTitle": "Recupera tu Qr",
+    "title": "Codigo Qr generado."
+  },
   "qrForm": {
     "code": "Codigo",
     "enterCode": "Por favor ingrese el código de verificación.",

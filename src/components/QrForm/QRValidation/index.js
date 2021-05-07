@@ -47,7 +47,7 @@ const QRvalidation = ({ eventEmitter,loading,picture}) => {
             className={{}}
             disabled={false}
           >
-            {t('qrForm.continue')}
+            {t('common.continueButton')}
           </Button>
         </Grid>
       </Fragment>}
