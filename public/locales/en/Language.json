@@ -23,9 +23,16 @@
     "phoneNumber": "Phone number",
     "password": "Password"
   },
+  "qrForm": {
+    "code": "Code",
+    "enterCode": "Please enter the verification code.",
+    "continue": "Continue",
+    "recoverQrBinding": "Did you lost the QR binding?"
+  },
   "validators": {
     "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",
+    "validateCodeType": "Invalid type code",
     "maxLength": "The maximum character width  is ?.",
     "minLength": "The minimum character width  is {{?}}.",
     "validatePhone": "This field must be a phone number."
