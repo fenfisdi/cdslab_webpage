@@ -14,13 +14,12 @@ const RegisterPage = () => {
   const { sendForm, step, loading, data, updateStep } = useRegisterState({ showSnack, setShowSnack })
   const {
     email,
-    urlPath
+    url
   } = data || {}
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
-
 
   return (
     <Grid
@@ -32,7 +31,7 @@ const RegisterPage = () => {
       className={classes.body}
     >
       {step == 0 && <RegisterForm eventEmitter={sendForm} loading={loading} />}
-      {step == 1 && <QRrender urlPath={urlPath} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
+      {step == 1 && <QRrender location={'register'} urlPath={url} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
       {step == 3 && <SuccessRegister />}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}

@@ -2,15 +2,14 @@ import request from '../httpClient/api.request'
 
 export const requestSecurityCodeService = async (userForm) => {
   return  request(
-    `${process.env.REACT_APP_AUTH_API_URL}/securityCodeRecoverylink`,
+    `${process.env.REACT_APP_AUTH_API_URL}/recovery_code?email=${userForm.email}`,
     'POST',
-    userForm
   ) 
 }
 
 export const requestSecurityCodeVerificationService = async (userForm) => {
   return  request(
-    `${process.env.REACT_APP_AUTH_API_URL}/validateSecuritycode`,
+    `${process.env.REACT_APP_AUTH_API_URL}/validate_code`,
     'POST',
     userForm
   ) 
@@ -19,7 +18,7 @@ export const requestSecurityCodeVerificationService = async (userForm) => {
 
 export const requestPasswordSubmissionService = async (userForm) => {
   return  request(
-    `${process.env.REACT_APP_AUTH_API_URL}/passwordRecover`,
+    `${process.env.REACT_APP_AUTH_API_URL}/recover_password`,
     'POST',
     userForm
   ) 

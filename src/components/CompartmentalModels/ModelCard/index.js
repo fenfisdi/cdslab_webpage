@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import Charter from './children/Charter'
-import { useModelCardState } from './state'
-import { CharterContainer } from './styles'
+import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
 
 
-const ModelCard = ({ options = [], eventEmitted }) => {
+const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false }) => {
   const [selected, setSelected] = useState('')
 
 
@@ -16,18 +15,27 @@ const ModelCard = ({ options = [], eventEmitted }) => {
   }
 
   return (
-    <CharterContainer>
+    <CharterContainer direction={direction}>
       {options.map((opt, index) => {
-        const { name, indetifier } = opt
+        const { name, indetifier, icon,titleIcon } = opt
         return (
-          <Charter
-            key={index}
-            name={name}
-            indetifier={indetifier}
-            handleClickCharter={handleClickCharter}
-            selected={selected}
-            extraOption={opt}
-          />
+          <CharterBody key={index}>
+            {icon &&
+              <CharterIcon>
+                <img src={icon} alt="Cinque Terre" width="200" height="200" />
+              </CharterIcon>
+            }
+            <Charter
+              key={index}
+              name={name}
+              indetifier={indetifier}
+              handleClickCharter={handleClickCharter}
+              selected={selected}
+              extraOption={opt}
+              disabled={disabled}
+              titleIcon={titleIcon}
+            />
+          </CharterBody>
         )
       })}
     </CharterContainer>

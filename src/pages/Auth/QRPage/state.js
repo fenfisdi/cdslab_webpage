@@ -2,22 +2,20 @@ import { useEffect } from 'react'
 import { useUserActions } from '@actions/userActions'
 import { useStore } from '@store/storeContext'
 
-export const useAuthQrState = ({ urlPath, sendStep, showSnack, setShowSnack }) => {
+export const useAuthQrState = ({ sendStep, showSnack, setShowSnack }) => {
   const {
     state: {
       authQr: { data, isValid, error, errorData, loading }
     },
     dispatch
   } = useStore()
-  const { validateQr } = useUserActions(dispatch)
+  const { validateQr, validateCode } = useUserActions(dispatch)
 
 
   useEffect(() => {
     if (data && !error) {
       sendStep(3)
-
     } else if (error) {
-
       setShowSnack(
         {
           ...showSnack,
@@ -32,6 +30,6 @@ export const useAuthQrState = ({ urlPath, sendStep, showSnack, setShowSnack }) =
 
 
   return {
-    data, isValid, error, loading, validateQr, showSnack
+    data, isValid, error, loading, validateQr, showSnack, validateCode
   }
 }

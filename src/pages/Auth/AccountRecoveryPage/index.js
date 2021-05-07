@@ -18,6 +18,7 @@ const AccountRecoveryPage = () => {
     handleRequestPasswordSubmission,
     loading,
     step,
+    updateStep,
     sendEmailData } = useAccountRecoveryState({ showSnack, setShowSnack })
 
   const handleCloseSnack = () => {
@@ -25,6 +26,7 @@ const AccountRecoveryPage = () => {
   }
 
   const handleClickRecoveryEmail = (formFields) => {
+    
     const { email } = formFields
     handleRequestPasswordChange({ email: email })
   }
@@ -51,8 +53,8 @@ const AccountRecoveryPage = () => {
     const { password } = formFields
     handleRequestPasswordSubmission({
       email,
-      new_password: password,
-      new_verify_password: password
+      password: password,
+      verify_password: password
     })
   }
 
@@ -69,7 +71,8 @@ const AccountRecoveryPage = () => {
         loading={loading}
         handleClick={handleClickRecoveryEmail}
         messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'}
-        messageTitle={'Recupera tu cuenta'} />
+        messageTitle={'Recupera tu cuenta'}
+        sendStep={updateStep} />
       }
       {step == 1 && <AccountRecoverySecurityCodeForm
         loading={loading}

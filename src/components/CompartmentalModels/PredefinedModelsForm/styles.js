@@ -9,6 +9,7 @@ export const usePredefinedModelsStyles = makeStyles(() => ({
   },
   title:{
     marginBottom:'20px',
-    marginTop:'20px'
+    marginTop:'20px',
+    fontWeight:'500'
   }
 }))

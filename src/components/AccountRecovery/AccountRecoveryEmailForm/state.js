@@ -9,7 +9,7 @@ export const useAccountRecoveryEmailFormState = () => {
     type: 'email',
     label: 'Email',
   })
-
+  
   return {
     email,
   }

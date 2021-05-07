@@ -1,3 +1,4 @@
+import request from '../httpClient/api.request'
 import {
   REGISTER_ERROR,
   REGISTER_LOADING,
@@ -31,7 +32,7 @@ export const useUserActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: REGISTER_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({
@@ -47,26 +48,46 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: VALIDATION_QR_LOADING })
     validateQrService(userQrValidation)
       .then((response) => {
+        console.log({response})
         dispatch({
           type: VALIDATION_QR_SUCCESS,
           payload: response.data
         })
       }) 
       .catch((error) => {
+        console.log({error})
         if(error.response) {
           const {response:{data}}=error          
           dispatch({
             type: VALIDATION_QR_ERROR,
-            payload:  data.detail
+            payload:  data
           })
         }
         
       })
   }
 
-  return { registerUser, validateQr }
+  const validateCode = async (userQrValidation) => {     
+    dispatch({ type: VALIDATION_QR_LOADING })     
+    try{       
+      const response = await request(         
+        `${process.env.REACT_APP_AUTH_API_URL}/otp`,
+        'POST'
+        ,userQrValidation)             
+      dispatch({type: VALIDATION_QR_SUCCESS, payload: response.data})}
+    catch(error){       
+      if(error.response) {         
+        const {response:{data}}=error                  
+        dispatch({           
+          type: VALIDATION_QR_ERROR,          
+          payload:  data       
+        })       
+      }     
+    }
+  }
+  
+
+  return { registerUser, validateQr, validateCode }
 
   
 }
-
-

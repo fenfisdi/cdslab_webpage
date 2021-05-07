@@ -15,7 +15,7 @@ export const useRegisterState = ({ showSnack, setShowSnack }) => {
 
   useEffect(() => {
     if (data && !error) {
-
+      
       setShowSnack(
         {
           ...showSnack,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { accountRecoveryActions } from '@actions/accountRecoveryActions'
 import { useStore } from '@store/storeContext'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
   const {
@@ -14,14 +14,36 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
     requestPasswordChange,
     requestSecurityCodeVerification,
     requestPasswordSubmission } = accountRecoveryActions(dispatch)
+
   const [step, setStep] = useState(0)
   const history = useHistory()
+  const location = useLocation()
+  const { from } = location.state || { from: { pathname: '/agents' } }
 
-
-  const redirectSimulations = (location) => {
-    history.replace(location)
+  const redirectLogin = () => {
+    history.replace(from)
   }
 
+  useEffect(()=>{
+    console.log(step)
+    if(sendEmailData.error===false){
+      setStep(1)
+    }
+  })
+
+  useEffect(()=>{
+    console.log(step)
+    if(securityCode.error==false){
+      setStep(2)
+    }
+  })
+
+  useEffect(()=>{
+    if(resetPassword.error==false){
+      redirectLogin()
+    }
+  })
+  
   useEffect(() => {
     updateshowSnackEffect(sendEmailData, 'security code submitted.', setStep, 1)
   }, [sendEmailData])
@@ -33,7 +55,7 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
 
 
   useEffect(() => {
-    updateshowSnackEffect(resetPassword, 'password changed.', redirectSimulations, '/')
+    updateshowSnackEffect(resetPassword, 'password changed.', redirectLogin, '/agents')
   }, [resetPassword])
 
   const handleRequestPasswordChange = (userForm) => {

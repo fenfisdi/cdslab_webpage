@@ -24,7 +24,7 @@ export const accountRecoveryActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: ACCOUNT_RECOVERY_SEND_EMAIL_ERROR,
-            payload: data.detail
+            payload: data
           })
         }else if(error.request){
           dispatch({
@@ -51,7 +51,7 @@ export const accountRecoveryActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: ACCOUNT_RECOVERY_SECURITY_CODE_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({
@@ -76,7 +76,7 @@ export const accountRecoveryActions = (dispatch) => {
           const {response:{data}}=error          
           dispatch({
             type: ACCOUNT_RECOVERY_RESET_PASSWORD_ERROR,
-            payload: data.detail
+            payload: data 
           })
         }else if(error.request){
           dispatch({

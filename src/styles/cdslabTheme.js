@@ -12,7 +12,9 @@ let theme = createMuiTheme({
       light: '#a79e02',
       main: '#827b00',
       dark: '#524e01',
-      contrastText: '#fff'
+      contrastText: '#fff',
+      card: '#C4C4C4',
+      cardSelect: '#a79d9d'
     }
   },
   typography: {
