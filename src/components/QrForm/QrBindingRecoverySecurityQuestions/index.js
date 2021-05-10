@@ -9,71 +9,104 @@ import theme from '../../../styles/cdslabTheme'
 import { useQrBindingRecoverySecurityQuestionsState } from './state'
 
 
+const QUESTIONS=[
+  {'question': 'nombre perro'},
+  {'question': 'nombre mascota'}
+]
+
 const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmitted }) => {
   const classes = useQrBindingRecoverySecurityQuestionsStyles(theme)
-  const { fields } = useQrBindingRecoverySecurityQuestionsState({ numberQuestions: questions})
+  const { fields } = useQrBindingRecoverySecurityQuestionsState({ numberQuestions: QUESTIONS.length})
   const [isValid, setIsvalid] = useState(false)
+  const [internalQuestions, setInternalQuestions] = useState(QUESTIONS)
+  const [questionsFields, setQuestionsFields] = useState(()=>{}) 
 
-  const securityAnswer = useInputValue('', VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS.alphabetic, {
-    name: 'securityAnswer',
-    type: 'securityAnswer',
-  })
-
-  useEffect(() => {
+  useEffect(() =>{
+    console.log(1)
+    //renderQuestions()
     console.log(questions)
-    let notIsValid = false
-    for (var key in fields) {
-      if (
-        (fields[key] && !fields[key].value.length > 0) ||
-        (fields[key] && Array.isArray(fields[key].errors) && fields[key].errors.length > 0)
-      ) {
-        notIsValid = true
-      }
-    }
-    setIsvalid(notIsValid)
+  },[])
+   
+  useEffect(() => {
+    console.log(2)
+    console.log(questions)
+    //renderQuestions()
+    validateForm()
   }, [fields])
+ 
+  useEffect(() =>{
+    if(questions?.length > 0){
+      setInternalQuestions(questions)
+    }
+    renderQuestions()
+  },[questions])
 
+  const validateForm = () => {
+    console.log(fields)
+    let isFormValid = true
+    for (var key in fields) {
+
+      isFormValid = fields[key].value?.length > 0 && fields[key].errors?.length > 0
+      if(!isFormValid){
+        break
+      }
+      
+    }
+    setIsvalid(isFormValid)
+  } 
 
   const handleClickButton = () => {
     let answers = []
     for (var key in fields) {
       answers.push(fields[key].value)
     }
+    console.log({answers})
+    console.log({fields})
     handleEventEmitted({
       answers
     })
 
   }
   
-  const renderQuestions = questions.map((question) =>{
-    return(
-      <Grid key={`${question.question}`}
-        item
-        xs={12}
-        direction="row"
-      >
-        <Grid
+  const renderQuestions =  () =>{
+    if(fields==={}){
+      return
+    }
+    const questionsToRender = internalQuestions? internalQuestions.map((question, i) =>{
+      
+      return(
+        <Grid key={`${question.question}`}
           item
-          direction="column"
-        >
-          {question.question}
-        </Grid>
-        <Grid
-          item
+          xs={12}
           direction="row"
         >
-          <Input
-            disabled={loading}
-            required
-            fullWidth
-            variant='outlined'
-            margin='normal'
-            
-          />
+          <Grid
+            item
+            direction="column"
+          >
+            {question.question}
+          </Grid>
+          <Grid
+            item
+            direction="row"
+          >
+            <Input
+              disabled={loading}
+              required
+              fullWidth
+              variant='outlined'
+              margin='normal'
+              {...fields['answer'+i]}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    )
-  })
+      )
+    })
+      : null
+    //console.log(questionsToRender)
+    setQuestionsFields(questionsToRender)
+    return (questionsToRender)
+  }
 
   return (
     <Paper className={classes.formBody}>
@@ -85,7 +118,7 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
             spacing={3}
             justify='center'
           >
-            {renderQuestions}
+            {questionsFields}
             
             <Grid item container xs={12} justify="center" spacing={1}>
               <Button variant="contained" color="default" style={{ 'margin-right': '6px' }}>

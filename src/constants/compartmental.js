@@ -1,3 +1,6 @@
+import notesPixel from '../assets/images/notes_pixel_perfect.svg'
+import plusPixel from '../assets/images/plus__pixel_buddha.svg'
+
 export const COMPARTMENTAL_FIELDS = {
   SIR:{
     fields:[
@@ -261,12 +264,13 @@ export const COMPARTMENTAL_FIELDS = {
   }
 }
 
+
+/***********CONST INDETIFIER ***** */
 export const MODEL_IDENTIFIERS ={
   SIR:'SIR',
   SEIR:'SEIR',
   SEIRV:'SEIRV'
 }
-
 
 export const SIMULATION_IDENTIFIERS ={
   ADJUST:'ADJUST',
@@ -278,6 +282,13 @@ export const ADJUST_PARAMETERS = {
   USE_AVAILABLE:'USE_AVAILABLE'
 }
 
+export const INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION ={
+  OPTIMIZE:'optimize_parameters',
+  FIXED:'fixed_parameters'
+}
+
+
+/********* CONST OPTIONS ***** */
 export const OPTIONS_PREDEFINED_MODELS = [
   {name:'SIR',indetifier:MODEL_IDENTIFIERS.SIR},
   {name:'SEIR',indetifier:MODEL_IDENTIFIERS.SEIR},
@@ -291,3 +302,33 @@ export const OPTIONS_SIMULATION_TYPE = [
 export const OPTIONS_ADJUST_PARAMETERS = [
   {name:'Upload Data',indetifier:ADJUST_PARAMETERS.UPLOAD_DATA},
   {name:'Use Available data (INS)',indetifier:ADJUST_PARAMETERS.USE_AVAILABLE}]
+
+export const OPTIONS_COMPARTMENTAL_MAIN = [
+  {
+    titleIcon:plusPixel,  
+    name: 'New simulation',
+    indetifier: 'new_simulation',
+    url: 'compartmentalModels/newSimulations'
+  },
+  {
+    titleIcon:notesPixel,
+    name: 'My simulations',
+    indetifier: 'my_simulations',
+    url: ''
+  }
+]
+
+export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
+  {
+      
+    name: 'Optimize parameters',
+    indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
+    url: ''
+  },
+  {
+    
+    name: 'Fixed parameters',
+    indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
+    url: ''
+  }
+]

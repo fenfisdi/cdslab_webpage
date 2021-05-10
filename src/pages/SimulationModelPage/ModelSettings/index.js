@@ -3,7 +3,7 @@ import React from 'react'
 import { useCompartmentalModelsPageState } from './state'
 import { Container } from './styles'
 
-import PredefinedModels from '@components/CompartmentalModels/PredefinedModels'
+import PredefinedModelsForm from '@components/CompartmentalModels/PredefinedModelsForm'
 import SimulationType from '@components/CompartmentalModels/SimulationType'
 import AdjustParameters from '@components/CompartmentalModels/AdjustParameters'
 import FixedParameters from '@components/CompartmentalModels/FixedParameters'
@@ -38,7 +38,7 @@ const ModelSettingsPage = () => {
     <Container>
       {step != 0 && isEmpty(simulationType) && <BackButton evenOnClick={handleClickBackButton} text="back" />}
 
-      {step == 0 && <PredefinedModels handleClickPredefinedModels={handleClickPredefinedModels} options={OPTIONS_PREDEFINED_MODELS} />}
+      {step == 0 && <PredefinedModelsForm handleClickPredefinedModels={handleClickPredefinedModels} options={OPTIONS_PREDEFINED_MODELS} />}
 
       {step == 1 && <SimulationType handleClickSimulationType={handleClickSimulationType} options={OPTIONS_SIMULATION_TYPE} />}
 
