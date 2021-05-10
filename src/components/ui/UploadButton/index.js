@@ -33,7 +33,7 @@ export const UploadButton = ({
 
       </Grid>
       <Grid xs={12} container item direction="row" justify="center" alignItems="baseline">
-        <p>{fileName && fileName}</p>
+        {fileName &&<p>{ fileName}</p>}
       </Grid>
     </Grid>
   )

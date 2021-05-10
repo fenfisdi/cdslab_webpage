@@ -1,6 +1,23 @@
 import axios from 'axios'
+import { isEmpty, merge } from 'lodash'
 import qs from 'qs'
 import { OPTIONS_HTTP } from '../constants/optionsHttp'
+
+
+const createHeaders = (settings) => {
+  const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXItNTUzMEBleGFtcGwzLmNvbSIsImV4cCI6MTYyMDUxOTgwMX0.MlhR1IhhuUP9ZUdwaP4HdfxTZo95DoCUrDYjhWfARJA'
+  const defaultHeaders = {    
+    Authorization: `Bearer ${accessToken}`
+  }
+
+  if (isEmpty(settings.headers)) {
+    return { ...defaultHeaders }
+  }
+
+  return merge({}, defaultHeaders, settings.headers)
+}
+
+
 
 const createConfig = (url, method, params, settings) => {
   const { isQueryString = false, cancelToken = false } = settings
@@ -9,7 +26,7 @@ const createConfig = (url, method, params, settings) => {
     method,
     cancelToken,
     timeout: 1000 * 120, // Wait for 120 seconds
-    headers: {}
+    headers: createHeaders(settings)
   }
 
   switch (method) {
