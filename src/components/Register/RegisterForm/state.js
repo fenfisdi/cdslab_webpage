@@ -24,19 +24,6 @@ export const useRegisterFormState = () => {
     label: t('registerPage.lastName'),
   })
 
-  const genre = useSelectValue('', VALIDATORS_REGISTER_FORM.genre, {
-    options: [
-      {
-        value: 'F',
-        label: 'Female',
-      },
-      {
-        value: 'M',
-        label: 'Male',
-      },
-    ],
-    title: 'Gender',
-  })
 
   const institution = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'institution',
@@ -103,7 +90,6 @@ export const useRegisterFormState = () => {
     email,
     dateBirth,
     phoneNumber,
-    genre,
     institution,
     institutionAffiliation,
     profession,

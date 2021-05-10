@@ -26,7 +26,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     email,
     dateBirth,
     phoneNumber,
-    genre,
     institution,
     institutionAffiliation,
     profession,
@@ -56,7 +55,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       email: email.value,
       name: name.value,
       last_name: lastName.value,
-      gender: genre.value,
       institution: institution.value,
       institution_role: institutionAffiliation.value,
       profession: profession.value,
@@ -172,7 +170,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
               phoneNumber={phoneNumber}
 
             />
-            <SelectComponent xs={5} {...genre} />
           </Grid>
 
           <Grid
