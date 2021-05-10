@@ -12,10 +12,10 @@
     "forgotYourSecurityLink": "Forgot your security link?"
   },
   "registerPage": {
-    "title": "Register",
+    "title": "Sign up",
     "email": "Email",
     "name": "Name",
-    "lastName": "Last Name",
+    "lastName": "Last name",
     "institution": "Institution",
     "institutionAffiliation": "Institution affiliation",
     "profession": "Profession",
