@@ -15,17 +15,17 @@ const CompartmentalConfigureParametersPage = () => {
         </Typography>
       </Grid>
 
-      {/* {modelData && modelData.parameters && <ConfigurableParametersForm
+      {modelData && modelData.parameters && <ConfigurableParametersForm
         parameters={modelData && modelData.parameters}
-      />} */}
+      />}
 
-      <ConfigurableParametersForm
+      {/* <ConfigurableParametersForm
         parameters={
           [
             {label:'labelA', unit:'per day', minValue:2,maxValue:5},
             {label:'labelB', unit:'per day', minValue:2,maxValue:7}
           ]
-        }/>
+        }/> */}
       
 
     </Grid>

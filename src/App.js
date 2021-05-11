@@ -20,7 +20,7 @@ import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 const App = () => {
   const {
     state: {
-      session: { isAuth },
+      session: { isAuth  },
     },
   } = useStore()
 

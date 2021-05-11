@@ -1,7 +1,7 @@
 import { checkMinLength } from '../../../../Forms/validators/validatorsCheks'
 
-export const MAX_LENGTH_MESSAGE = 'The maximum size allowed is ? characters.'
-export const MIN_LENGTH_MESSAGE = 'The minimum size allowed is ? characters.'
+export const MAX_LENGTH_MESSAGE = 'The maximum value allowed is ?.'
+export const MIN_LENGTH_MESSAGE = 'The minimum value allowed is ?.'
 export const REQUIRED_MESSAGE = 'This field is requiered.'
 
 export const extraParametersValidators =({minValue, maxValue})=>{  
@@ -32,25 +32,4 @@ export const extraParametersValidators =({minValue, maxValue})=>{
   ]
   
   return validators
-}
-
-
-export const showError =(fields,setErrorText)=>{  
-  if(fields.length>0){
-    let countError =0
-    fields.forEach((field)=>{
-      const {fieldInput:{errors}} = field
-      if(errors.length>0){
-        setErrorText(errors.map(e => e.message)?.join('\n'))
-        return
-      }
-      countError = countError +1                     
-    })            
-    countError == fields.length && setErrorText('')
-    if(fields.length>=2){
-      countError == fields.length && fields[0]['fieldInput']['value'] > fields[1]['fieldInput']['value'] && setErrorText('nooo')     
-    }
-  }
-  
-  
 }

@@ -43,16 +43,8 @@ export const useCompartmentalChooseSimulationPageState = () => {
       const {modelData:{identifier:model_id}, simulationName:name}=predefinedModelSelected
       
       storeCompartmentalSimulation({
-        'name': name,
-        'optimize_parameters': true,
+        'name': name,        
         'status':'incomplete',
-        'interval_date': [
-          '2019-08-24T14:15:22Z',
-          '2019-08-24T14:15:22Z'
-        ],
-        'parameters_limits': [],
-        'state_variables_init_vals': { },
-        'state_variable_to_fit': { },
         'model_id': model_id
       })
     }

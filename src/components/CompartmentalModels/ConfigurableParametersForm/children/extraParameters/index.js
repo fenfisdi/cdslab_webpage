@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect }  from 'react'
 import { Grid } from '@material-ui/core'
-import { useExtraParametersFieldsCreation } from './fieldsCreation'
+
 import { Input } from '../../../../ui/Input'
 
 
 
-const ExtraParameters = ({ parentValue, maxValue, minValue, showError }) => {
- 
-  const fieldsExtraParameters = useExtraParametersFieldsCreation({parentValue,maxValue,minValue})
+const ExtraParameters = ({ extraParameters=[], handleShowError }) => {
   useEffect(()=>{
-    let countError =0
-    fieldsExtraParameters.forEach((fieldExtraParameters)=>{
-      const {fieldInput:{errors}} = fieldExtraParameters
+    
+    let countNoError = 0
+    extraParameters.forEach((fieldExtraParameters)=>{
+      const {errors} = fieldExtraParameters
       if(errors.length>0){
-        showError(errors.map(e => e.message)?.join('\n'))
+        console.log('::::::::::::::erormaessage',errors.map(e => e.message)?.join('\n'))
+        handleShowError(errors.map(e => e.message)?.join('\n'))
         return
-      }
-      countError = countError +1  
-      console.log(':::::::::::::>fieldsExtraParameters',fieldExtraParameters)
+      }  
+      countNoError = countNoError +1               
     })
-    countError == fieldsExtraParameters.length && showError('')
-    fieldsExtraParameters[0]['fieldInput']['value'] == 3 && showError('noo')
-  },[fieldsExtraParameters])
+    if(countNoError == extraParameters.length){
+      handleShowError('')
+      if(extraParameters.length == 2){
+        const {value:valueFirst} = extraParameters[0]
+        const {value:valueSecond } = extraParameters[1]         
+        if(valueSecond!='' && valueFirst>valueSecond){            
+          handleShowError('The minimum value must be less than maximum value')
+        }          
+      }
+    }
+    
+    
+  },[extraParameters])
 
 
   return (  
-    <Grid container item xs={fieldsExtraParameters.length+1}>     
-      {fieldsExtraParameters && fieldsExtraParameters.map((field,index)=>{      
-        const { fieldInput } = field        
-        delete fieldInput['helperText']
-        //showError(fieldsExtraParameters)   
+    <Grid container item xs={extraParameters.length+1}>     
+      {extraParameters.length>0 && extraParameters.map((parameter,index)=>{              
+        delete parameter['helperText']       
         return (
           <Grid container item xs key={index} justify="center" alignItems="center">
             <Input              
@@ -38,7 +45,7 @@ const ExtraParameters = ({ parentValue, maxValue, minValue, showError }) => {
               variant="outlined"
               margin="normal"
               autoComplete="name"
-              {...fieldInput}  
+              {...parameter}  
             />   
             
           </Grid>          
