@@ -65,15 +65,16 @@ function Dashboard({ classes, children }) {
       <nav className={classes.drawer}>
         <Hidden smUp implementation='js'>
           <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
+            PaperProps={{ style: { width: drawerWidth, background: '#44605D' } }}
             variant='temporary'
             open={mobileOpen}
             onClose={handleDrawerToggle}
           />
         </Hidden>
         <Hidden xsDown implementation='css'>
-          <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+          <Navigator PaperProps={{ style: { width: drawerWidth, background: '#44605D' } }} />
         </Hidden>
+        {/* <Menunuevo /> */}
       </nav>
       <div className={classes.app}>
         <Header onDrawerToggle={handleDrawerToggle} />

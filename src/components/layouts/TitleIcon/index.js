@@ -14,7 +14,7 @@ const TitleIcon = ({title,icon,width,height,colorText,fontSize,fontWeight}) => {
           <img src={icon} width={width} height={height}/>
         </CharterIcon>      
       </CharterBody>
-      <Typography variant="body2" component="p" style={{'color':colorText,'font-size':fontSize, 'font-weight': fontWeight}}>
+      <Typography variant="body2" component="p" style={{'color':colorText,fontSize:fontSize, fontWeight: fontWeight}}>
         {title}
       </Typography>
     </Grid>
