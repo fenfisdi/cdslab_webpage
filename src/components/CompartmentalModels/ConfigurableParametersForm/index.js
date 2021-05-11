@@ -1,62 +1,61 @@
-import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Grid } from '@material-ui/core'
 import { useConfigurableParametersFormFieldsCreation } from './fieldsCreation'
 import { SelectComponent } from '../../ui/Select'
 import { TitleComponent } from '../../ui/Title'
+import ExtraParameters from './children/extraParameters'
+import { Fragment } from 'react'
+import { showError } from './children/extraParameters/validators'
 
 
 const ConfigurableParametersForm = ({parameters}) => {
   
-  const fields = useConfigurableParametersFormFieldsCreation({parameters})
-  console.log('estos son los parameters:::::::::::::>',parameters)
-  console.log('estos son los fiels:::::::::::::>',fields)
+  const fieldsParametersForm = useConfigurableParametersFormFieldsCreation({parameters})
+  console.log('ConfigurableParametersForm parameters:::::::::::::>',parameters)
+  console.log('ConfigurableParametersForm fields:::::::::::::>',fieldsParametersForm)
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+    <Grid container item xs={12}>
       
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p">
-        ConfigurableParametersForm
-        </Typography>
-      </Grid>
       {parameters && parameters.map((field,index)=>{
-        const { label, representation,unit } = field
-        const {helperText}= fields[label]
+        const { label, unit, maxValue, minValue } = field
+        const { value } = fieldsParametersForm[label] 
+        const [errorText,setErrorText] = useState('')
         
-        
+        const handleShowError =(fieldsExtraParameters)=>{              
+          console.log('::::::::::::::::>fieldsExtraParameters',fieldsExtraParameters)
+          setErrorText(fieldsExtraParameters)
+          //showError(fieldsExtraParameters,setErrorText)
+        }
+
         return (
-          <Grid key={index}  item container xs={12} direction="column" justify="center" alignItems="center">
-            <Grid item container xs={12} key={index} direction="row" justify="center" alignItems="center" spacing={2}>
+          <Fragment key={index}>
+            <Grid container item xs={12}  direction="row" justify="center" spacing={1}>
               <TitleComponent
-                xs={3}
+                xs={2}
                 justify={'flex-end'}
                 alignItems={'center'}
                 title={label}
                 variant={'h6'}
                 key={index}
               />
-              <Grid item container xs={6}>
-                <SelectComponent
-                  xs={6}
-                  title="Select Variable"
-                  {...fields[label]} 
-                  options={[]} />
-                {/* <Input
-                  disabled={false}
-                  required                  
-                  variant="outlined"
-                  margin="normal"
-                  autoComplete="name"
-                   
-                /> */}              
-              </Grid>        
-              <Grid item container xs={3} justify="flex-start" alignItems="center">
+              
+              <SelectComponent
+                xs={3}              
+                title="Select Variable"
+                {...fieldsParametersForm[label]}  />                
+              
+              {value && <ExtraParameters parentValue={value} maxValue={maxValue} minValue={minValue} showError={handleShowError}/> }
+
+              <Grid item container xs={1} justify="flex-start" alignItems="center">
                 {unit}
               </Grid>
-            </Grid>
-            {/* <Typography variant="body1" component="p" className={helperText ? classes.helperText + ' error': classes.helperText}>
-              {helperText}
-            </Typography> */}
-          </Grid>
+
+            </Grid>  
+            <Grid container item xs={12} key={index} direction="row" justify="center" spacing={1}>
+              <p  style={{color:'red'}}>{errorText}</p>              
+            </Grid> 
+          </Fragment>    
+            
         )
       })}
 

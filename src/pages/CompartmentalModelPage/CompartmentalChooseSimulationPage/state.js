@@ -45,11 +45,12 @@ export const useCompartmentalChooseSimulationPageState = () => {
       storeCompartmentalSimulation({
         'name': name,
         'optimize_parameters': true,
+        'status':'incomplete',
         'interval_date': [
           '2019-08-24T14:15:22Z',
           '2019-08-24T14:15:22Z'
         ],
-        'parameters_limits': { },
+        'parameters_limits': [],
         'state_variables_init_vals': { },
         'state_variable_to_fit': { },
         'model_id': model_id
