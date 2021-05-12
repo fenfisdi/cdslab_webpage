@@ -38,12 +38,12 @@ const App = () => {
   // screen if you're not yet authenticated.
   // Dev enviroment
   const PrivateRoute = ({ component, ...rest }) => {
-    const allow = true
+    //const allow = true
     return (
       <Route
         {...rest}
         render={({ location }) =>
-          allow ? (
+          isAuth ? (
             <Dashboard> {component} </Dashboard>
           ) : (
             <Redirect

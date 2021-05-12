@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, Icon } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
-import { Icon } from '@material-ui/core'
 import { useCompartmentalButtonStyles } from './styles'
 
 
