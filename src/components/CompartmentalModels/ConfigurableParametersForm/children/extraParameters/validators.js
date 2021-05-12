@@ -40,9 +40,9 @@ export const checkErrorsExtraParametersForm = ({extraParameters,handleShowError}
     const {value:valueFirst,errors} = extraParameters[0]
     const {value:valueSecond } = extraParameters[1]         
     const setErrors = extraParameters[0]['custom-actions']['setErrors']
-    if(errors.length == 1 && valueFirst!='' && valueSecond!='' && parseInt(valueFirst)<parseInt(valueSecond)){ 
+    if(errors.length == 1 && !errors[0]['type'] && valueFirst!='' && valueSecond!='' && parseInt(valueFirst)<parseInt(valueSecond)){ 
       setErrors([])
-    }      
+    }     
   }
 
   extraParameters.every(fieldExtraParameters => {

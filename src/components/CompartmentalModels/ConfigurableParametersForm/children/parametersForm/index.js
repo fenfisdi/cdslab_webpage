@@ -11,7 +11,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
   return(
     <Fragment>
       {parameters && parameters.map((parameter,index)=>{
-        const { label, unit } = parameter
+        const { label, unit, representation } = parameter
         const { value } = fieldsParametersForm[label]['SELECTInput'] 
         const [errorText,setErrorText] = useState('')
 
@@ -30,11 +30,12 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                 title={label}
                 variant={'h6'}
                 key={index}
+                unit={representation}
               />
               
               <SelectComponent
                 xs={3}              
-                title="Select Variable"
+                title="Select Option"
                 {...fieldsParametersForm[label]['SELECTInput']}  />                
               
               {value && <ExtraParameters                 
