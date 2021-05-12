@@ -32,7 +32,7 @@ export const useConfigurableParametersFormFieldsCreation = ({parameters=[],value
           return checkTypePhoneNumber(event)
         }}),
       }
-    ],
+    ]
 
     field[`${SIMULATION_IDENTIFIERS.OPTIMIZE}Input`]=[
       {

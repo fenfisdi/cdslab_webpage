@@ -19,9 +19,7 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
 
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
-    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){   
-      /* console.log('::::::::::::::::::::>dataCurrentSimulation',dataCurrentSimulation)  
-      console.log('::::::::::::::::::::::predefinedModelSelected',predefinedModelSelected) */ 
+    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
       setShowSnack(
         {
           ...showSnack,
@@ -47,7 +45,7 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
 
 
   useEffect(()=>{
-    if(error == true){
+    if(error){
       setShowSnack(
         {
           ...showSnack,

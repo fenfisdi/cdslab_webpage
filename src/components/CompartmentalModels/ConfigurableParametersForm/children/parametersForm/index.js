@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Grid } from '@material-ui/core'
-import { Fragment } from 'react'
 import { TitleComponent } from '../../../../ui/Title'
 import { SelectComponent } from '../../../../ui/Select'
 import ExtraParameters from '../extraParameters'
