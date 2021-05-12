@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
 import { useCompartmentalConfigureParametersPageState } from './state'
 import ConfigurableParametersForm from '../../../components/CompartmentalModels/ConfigurableParametersForm'
-
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const CompartmentalConfigureParametersPage = () => {
-  const { loading, currentSimulation, predefinedModelSelected, predefinedModelSelected:{modelData} } = useCompartmentalConfigureParametersPageState()
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const { 
+    currentSimulation, 
+    predefinedModelSelected:{modelData}, 
+    executeRequestConfigureParameters } = useCompartmentalConfigureParametersPageState({showSnack, setShowSnack })
   
+
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
+
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
       <Grid container item xs={6} justify="center" alignItems="center" direction="column">
@@ -16,16 +25,17 @@ const CompartmentalConfigureParametersPage = () => {
       </Grid>
 
       {modelData && modelData.parameters && <ConfigurableParametersForm
-        parameters={modelData && modelData.parameters}
+        parameters={modelData.parameters}
+        handleRequestAction={executeRequestConfigureParameters}
+        valuesFieldParameters={currentSimulation && currentSimulation.parameters_limits}
       />}
 
-      {/* <ConfigurableParametersForm
-        parameters={
-          [
-            {label:'labelA', unit:'per day', minValue:2,maxValue:5},
-            {label:'labelB', unit:'per day', minValue:2,maxValue:7}
-          ]
-        }/> */}
+      {showSnack && showSnack.show && <SnackbarComponent
+        snackDuration={3500}
+        configData={showSnack}
+        handleCloseSnack={handleCloseSnack}
+        successMessage={showSnack.successMessage}
+        errorMessage={showSnack.errorMessage} />}
       
 
     </Grid>

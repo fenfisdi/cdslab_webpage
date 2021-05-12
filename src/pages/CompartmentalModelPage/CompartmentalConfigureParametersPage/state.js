@@ -5,23 +5,30 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 
-export const useCompartmentalConfigureParametersPageState = () => {
+export const useCompartmentalConfigureParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   
   const {
     state: {      
-      compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation} }
+      compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation,error,errorData} }
     },
     dispatch
   } = useStore()
   
-  const { findCompartmentalSimulation, findPredefinedModel } = useCompartmentalModelActions(dispatch)
+  const { findCompartmentalSimulation, findPredefinedModel, updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
 
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
     if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
-      console.log('currentSimulation::::::::::::::::>',dataCurrentSimulation)
-      console.log('predefinedModelSelected::::::::::::::::>',predefinedModelSelected)
+      setShowSnack(
+        {
+          ...showSnack,
+          show: true,
+          success: true,
+          error: false,
+          successMessage: 'loaded configuration parameters'
+        }
+      )
 
     }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){      
       const params = getStateWithQueryparams(history)      
@@ -37,6 +44,21 @@ export const useCompartmentalConfigureParametersPageState = () => {
   },[dataCurrentSimulation,predefinedModelSelected])
 
 
+  useEffect(()=>{
+    if(error == true){
+      setShowSnack(
+        {
+          ...showSnack,
+          show: true,
+          success: false,
+          error: true,
+          errorMessage: errorData.detail
+        }
+      )
+    }
+  },[error])
+
+
   const getStateWithQueryparams = (queryParams) => {
     if (queryParams && queryParams.location) {
       const {
@@ -50,9 +72,21 @@ export const useCompartmentalConfigureParametersPageState = () => {
     }
   }
 
+
+  const executeRequestConfigureParameters =(option)=>{
+    const {  name,identifier } = dataCurrentSimulation
+
+    updateCompartmentalSimulation({
+      'name':name,
+      'parameters_limits': option
+    },identifier)    
+    
+  }
+
   return {
     loading,
     currentSimulation:dataCurrentSimulation,
-    predefinedModelSelected:predefinedModelSelected
+    predefinedModelSelected:predefinedModelSelected,
+    executeRequestConfigureParameters
   }
 }
