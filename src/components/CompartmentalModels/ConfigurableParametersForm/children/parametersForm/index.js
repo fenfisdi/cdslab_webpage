@@ -16,12 +16,13 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
         const [errorText,setErrorText] = useState('')
 
         const handleShowError =(errorMessage)=>{
-          setErrorText(errorMessage)
+          setErrorText(errorMessage)          
         }
         
         return (
-          <Fragment key={index}>
-            <Grid container item xs={12}  direction="row" justify="center" spacing={1}>
+          <Grid container item xs={12}  direction="column" justify="center" alignItems="center" key={index}>
+            
+            <Grid container item xs={12}  direction="row" justify="center" alignItems="center" spacing={1}>
               <TitleComponent
                 xs={2}
                 justify={'flex-end'}
@@ -45,11 +46,13 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                 {unit}
               </Grid>
 
-            </Grid>  
+            </Grid>
+
             <Grid container item xs={12} key={index} direction="row" justify="center" spacing={1}>
-              <p  style={{color:'red'}}>{errorText}</p>              
-            </Grid> 
-          </Fragment>    
+              <p style={{color:'red'}}>{errorText}</p>              
+            </Grid>
+
+          </Grid>    
             
         )
       })}

@@ -10,7 +10,7 @@ export const useConfigurableParametersFormFieldsCreation = ({parameters=[]}) => 
   let fields = {}
   for (let index = 0; index < parameters.length; index++) {
     let field ={}
-    const { label, max_value:maxValue, min_value:minValue }=parameters[index]
+    const { label, max_value:maxValue= Number.MAX_SAFE_INTEGER, min_value:minValue=0 }=parameters[index]
     field['SELECTInput'] = useSelectValue('', VALIDATORS_CONFIGURABLE_PARAMETERS_FORM.selectors, 
       {
         options:[
