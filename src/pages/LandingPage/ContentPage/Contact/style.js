@@ -49,7 +49,7 @@ export const useContactStyles = makeStyles(() => ({
     display: 'inline-flex'
   },
   textEmail:{
-    color: 'blue',
+    color: '#46c2ad',
     display: 'inline-flex'
   }
 }))
