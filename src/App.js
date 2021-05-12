@@ -24,6 +24,7 @@ const App = () => {
     },
   } = useStore()
 
+  const LandingPage = React.lazy(() => import('./pages/LandingPage'))
   const AgentsPage = React.lazy(() => import('./pages/Agents'))
   const RegisterPage = React.lazy(() => import('./pages/Auth/RegisterPage'))
   const QRrender = React.lazy(() => import('./pages/Auth/QRPage'))
@@ -65,6 +66,10 @@ const App = () => {
           <Layout>
             <Switch>
               <Route exact path="/" component={LoginPage} />
+              <PrivateRoute
+                path="/landingPage"
+                component={<LandingPage />}
+              />
               <PrivateRoute
                 path="/agents"
                 component={<AgentsPage />}

@@ -15,7 +15,6 @@ import cdsSvg from '../../../assets/images/layout/Logo CDSL Iniciales_Opc1.svg'
 import { NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 
-//TODO: Colocar en constantes (Preguntar)
 const categories = [
   {
     id: '',
@@ -31,7 +30,6 @@ const categories = [
     ]
   }
 ]
-//TODO: Colocar en una pagina de estilos aparte
 const styles =  (theme) => ({
   categoryHeader: {
     paddingTop: theme.spacing(6),
@@ -141,3 +139,4 @@ Navigator.propTypes = {
 }
 
 export default withStyles(styles)(Navigator)
+ 
