@@ -59,5 +59,18 @@ export const useScopeStyles = makeStyles(() => ({
     display: 'block',
     margin: '0 auto'
   },
-  
+  imgPython:{
+    width: '100%',
+  },
+  scopeLink:{
+    width: '200px',
+    height: 'auto',
+    'word-wrap': 'break-word',
+    display: 'initial'
+  },
+  divImgPython:{
+    width: '20%',
+    display: 'inline-flex',
+    float: 'right'
+  }
 }))

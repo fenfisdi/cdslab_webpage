@@ -16,7 +16,14 @@ export const useHeaderStyles = makeStyles(() => ({
   },
   image :{
     width: '100%',
-    height: '100px'
+    transform: 'scale(1.5)',
+    height: '230px',
+    textAlign: 'center'
+  },
+  title:{
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '1.2rem'
   }
 }))
 

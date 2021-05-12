@@ -9,7 +9,8 @@ import Navigator from './Navigator'
 import Content from './Content'
 import Header from './Header'
 import theme from '../../../styles/cdslabTheme'
-
+import { Grid, IconButton } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -77,7 +78,19 @@ function Dashboard({ classes, children }) {
         {/* <Menunuevo /> */}
       </nav>
       <div className={classes.app}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+        {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
+        <Hidden smUp>
+          <Grid item>
+            <IconButton
+              color='inherit'
+              aria-label='open drawer'
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Grid>
+        </Hidden>
         <main className={classes.main}>
           <Content>
             {children}

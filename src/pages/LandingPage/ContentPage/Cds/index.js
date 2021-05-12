@@ -1,5 +1,6 @@
 import React from 'react'
-import imgBoxCds from '../../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
+import imgBoxCdsLab from '../../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
+import imgBoxCdsLib from '../../../../assets/images/ladingPage/Logo CDSL Iniciales_Opc1.svg'
 import { useStepStyles } from './style'
 import theme from '@styles/cdslabTheme'
 import { 
@@ -14,12 +15,12 @@ const Cds = () => {
 
       <div className={classes.containerCds}>
         <div className={classes.boxCds}>
-          <img className={classes.image} src={imgBoxCds} />
-          <div className={classes.textCds}> <p>{ COMPOUND_ONE }</p> </div>
+          <img className={classes.imageLab} src={imgBoxCdsLab} />
+          <div className={classes.textCdsLab}> <p>{ COMPOUND_ONE }</p> </div>
         </div>
         <div className={classes.boxCds}>
-          <img className={classes.image} src={imgBoxCds} />
-          <div className={classes.textCds}> { COMPOUND_TWO } </div>
+          <img className={classes.imageLib} src={imgBoxCdsLib} />
+          <div className={classes.textCdsLib}> { COMPOUND_TWO } </div>
         </div>
       </div>
     </>

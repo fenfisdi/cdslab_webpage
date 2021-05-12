@@ -1,6 +1,6 @@
 import React from 'react'
-import imgMinCiencia from '../../../../assets/images/ladingPage/minciencias.png'
-import imgSena from '../../../../assets/images/ladingPage/sena.jpg'
+import imgMinCiencia from '../../../../assets/images/ladingPage/Minciencias_Colombia.svg'
+import imgSena from '../../../../assets/images/ladingPage/SENA Colombia logo.svg'
 import { useSponsorsStyles } from './style'
 import theme from '@styles/cdslabTheme'
 import { 

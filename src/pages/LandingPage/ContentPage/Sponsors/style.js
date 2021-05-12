@@ -28,13 +28,13 @@ export const useSponsorsStyles = makeStyles(() => ({
   },
   imageMinCiencias: {
     top: '-20px',
-    height: '30px',
+    height: '45px',
     display: 'block',
     margin: '0 auto',
     position: 'relative',
   },
   imageSena: {
-    top: '-40px',
+    top: '-36px',
     height: '70px',
     display: 'block',
     margin: '0 auto',
@@ -50,7 +50,7 @@ export const useSponsorsStyles = makeStyles(() => ({
   },
   textSena:{
     position: 'relative',
-    top: '-60px',
+    top: '-48px',
     textAlign: 'justify',
     margin: '20px',
     'flex-wrap': 'wrap',

@@ -36,11 +36,13 @@ export const SCOPE_TWO = `La plataforma puede ser usada por personal de la salud
    por estudiantes en formación de modelos epidemiológicos, por los mismos docentes que quieran capacitar 
    a sus alumnos en el uso de estas herramientas y por el público en general, bajo los lineamientos de la 
    licencia: 
-
+`
+export const SCOPE_TWO_LICENSE = `
 GNU General Public License v3.0
+`
 
+export const SCOPE_TWO_lINK = `
 https://github.com/fenfisdi/cdslib/blob/main/LICENSE
-
 `
 
 export const MODELS_QUESTION = `¿Qué modelos se pueden ejecutar? 
