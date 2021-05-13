@@ -1,34 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import ParametersForm from '../ParametersForm'
-import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
-import LoaderComponent from '../../../../ui/Loader'
+import { useParametersFormFieldsCreation } from '../ParametersForm/fieldsCreation'
+import CompartmentalButton from '../../../CompartmentalButton'
 
 
 
 
 const FixedParametersFormStateVariables = ({
-  modelIndetifier,
-  formConfigureStateVariablesSave,
-  stateVariableValues,
-  classes,
+  fieldsSchema,
   loading}) => {
+  const fields = useParametersFormFieldsCreation({fieldsSchema})
+  useEffect(()=>{
+    console.log('::::::::::::::::>fields',fields)
+  },[fields])
   
   return (
     <>
       <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-        <Typography variant="body1" component="p" className={classes.title}>
+        <Typography variant="body1" component="p" >
               Configure State Variables  Initial Values
         </Typography>
       </Grid>
-      {!loading && <ParametersForm 
-        modelIndetifier={modelIndetifier} 
-        formParametersSave={formConfigureStateVariablesSave} 
-        parameterValues={stateVariableValues}
-        fieldsSchema={COMPARTMENTAL_FIELDS[modelIndetifier].fieldStates}
-      />}
-      {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
+      {!loading && <ParametersForm fields={fields} fieldsSchema={fieldsSchema} />}
+
+      <CompartmentalButton
+        disabled={true}
+        onClick={()=>{console.log('::::::::::::::::::::>comaprmental')}}
+        justify="flex-end"
+        alignItems="center"
+        text={'Continue'}
+      />  
+
     </>
   )
 }
