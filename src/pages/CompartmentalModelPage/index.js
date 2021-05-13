@@ -12,6 +12,8 @@ const CompartmentalModelPage = () => {
   const CompartmentalChooseSimulationPage = React.lazy(() => import('./CompartmentalChooseSimulationPage'))
   const CompartmentalConfigureParametersPage = React.lazy(() => import('./CompartmentalConfigureParametersPage'))
   const CompartmentalOptimizeParametersPage = React.lazy(() => import('./CompartmentalOptimizeParametersPage'))
+  const CompartmentalConfigureStateVariablesPage = React.lazy(() => import('./CompartmentalConfigureStateVariablesPage'))
+  
 
 
 
@@ -26,6 +28,7 @@ const CompartmentalModelPage = () => {
           <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
           <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />
           <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
+          <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
         </Switch>
       </Suspense>
     </CompartmentalModelPageContainer>
