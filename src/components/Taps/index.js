@@ -58,6 +58,11 @@ export default function FullWidthTabs(props) {
   const {tabs} = props
   const classes = useStyles()
 
+  const renderImg = (icon) => {
+    const iconTab = icon === 'cmodels_SVG' ? imgCompartamental : imgAgents
+    return iconTab
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -72,7 +77,7 @@ export default function FullWidthTabs(props) {
                       (
                         <div className={classes.linkDisabled}>
                           <div className={classes.divImg} > 
-                            <img src={tab.icon === 'cmodels_SVG' ? imgCompartamental : imgAgents} className={classes.img} />
+                            <img src={renderImg(tab.icon)} className={classes.img} />
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </div>
@@ -83,7 +88,7 @@ export default function FullWidthTabs(props) {
                           activeClassName={classes.itemActiveItem}  
                           className={classes.link}>
                           <div className={classes.divImg} > 
-                            <img src={tab.icon === 'cmodels_SVG' ? imgCompartamental : imgAgents} className={classes.img} />
+                            <img src={renderImg(tab.icon)} className={classes.img} />
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </NavLink>

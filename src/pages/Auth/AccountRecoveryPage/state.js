@@ -17,8 +17,6 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
 
   const [step, setStep] = useState(0)
   const history = useHistory()
-  //const location = useLocation()
-  // const { from } = location.state || { from: { pathname: '/agents' } }
   const { from } =  { from: { pathname: '/landingPage' } }
   const redirectLogin = () => {
     history.replace(from)
