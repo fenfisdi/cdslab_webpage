@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { MiniLoader } from '@components/layouts/MiniLoader'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
+import LoaderComponent from '../../components/ui/Loader'
 
 
 
@@ -34,7 +35,7 @@ const CompartmentalModelPage = () => {
   return (
     <CompartmentalModelPageContainer>
       <FullWidthTabs tabs={tabs} />
-      <Suspense fallback={<MiniLoader />}>
+      <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
         <Switch>
           <Route path={match.path} exact component={CompartmentalMainPage} />
           <Route path={`${match.path}/newSimulations`} exact render={(props) => (
