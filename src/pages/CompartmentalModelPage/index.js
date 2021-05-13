@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { MiniLoader } from '@components/layouts/MiniLoader'
 import { CompartmentalModelPageContainer } from './styles'
+import FullWidthTabs from '../../components/Taps'
 
 
 
@@ -15,10 +16,24 @@ const CompartmentalModelPage = () => {
   const CompartmentalConfigureStateVariablesPage = React.lazy(() => import('./CompartmentalConfigureStateVariablesPage'))
   
 
-
+  const tabs = [
+    {
+      label: 'Compartmental',
+      path:  match.path,
+      disabled : false,
+      icon : 'cmodels_SVG'
+    },
+    {
+      label: 'Agents',
+      path: `${match.path}/newSimulations`,
+      disabled : true,
+      icon: 'agents_SVG'
+    },
+  ]
 
   return (
     <CompartmentalModelPageContainer>
+      <FullWidthTabs tabs={tabs} />
       <Suspense fallback={<MiniLoader />}>
         <Switch>
           <Route path={match.path} exact component={CompartmentalMainPage} />

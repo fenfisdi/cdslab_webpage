@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ADJUST_PARAMETERS } from '../../../constants/compartmental'
 
 export const useAdjustParametersState = ({ handleClickAdjustParameters }) => {

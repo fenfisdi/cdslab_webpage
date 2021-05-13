@@ -314,7 +314,7 @@ export const OPTIONS_COMPARTMENTAL_MAIN = [
     titleIcon:plusPixel,  
     name: 'New simulation',
     indetifier: 'new_simulation',
-    url: 'compartmentalModels/newSimulations'
+    url: 'compartmentalModels/newSimulations',
   },
   {
     titleIcon:notesPixel,
