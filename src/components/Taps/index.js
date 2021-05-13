@@ -1,110 +1,100 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import SwipeableViews from 'react-swipeable-views'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
+import { NavLink } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core'
+import imgAgents from '../../assets/images/taps/agents_SVG.svg'
+import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children} </Typography>
-        </Box>
-      )}
-    </div>
-  )
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-}
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  }
-}
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    
-  },
-  colorLabel:{
-    color: '#000'
-  },
-  TabPanel:{
-    width: '100%'
-  },
-  taps: {
+    width:'100%',
     background: '#fff'
+  },
+  itemActiveItem: {
+    '& > div' : {
+      color: '#44605d',
+      fontSize: '15px'
+    },
+    '& > div > img' : {
+      height: '35px'
+    }
+  },
+  containerTaps:{   
+    display: 'inline-flex',
+    height: '40px',
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
+  taps : {
+    width: '50%',
+    cursor: 'pointer',
+    background: '#F1F1F1'
+  },
+  img: {
+    height: '30px'
+  },
+  divImg :{
+    width: '50%'
+  },
+  divLabel:{
+    width: '40%',
+    position: 'relative',
+    top: '7px'
+  },
+  link: {
+    display: 'inline-flex',
+    textDecoration : 'none'
+  },
+  linkDisabled: {
+    display: 'inline-flex',
+    textDecoration : 'none',
+    color: '#808080'
   }
 }))
 
 export default function FullWidthTabs(props) {
 
+ 
   const {tabs} = props
   const classes = useStyles()
-  const theme = useTheme()
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
-  const handleChangeIndex = (index) => {
-    setValue(index)
-  }
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-          className={classes.taps}
-        >
+        <div  className={classes.containerTaps}>
           {
-            tabs.map((tab,i) => (
-              <Tab label={tab.label} key={i} disabled={tab.disabled} className={classes.colorLabel} {...a11yProps(i)} />
-            ))
+            tabs.map((tab,i) => {
+              return (
+                <div key={i} className={classes.taps}>
+                  {
+                    tab.disabled 
+                      ? 
+                      (
+                        <div className={classes.linkDisabled}>
+                          <div className={classes.divImg} > 
+                            <img src={tab.icon === 'cmodels_SVG' ? imgCompartamental : imgAgents} className={classes.img} />
+                          </div>
+                          <div className={classes.divLabel} >{tab.label}</div>
+                        </div>
+                      )
+                      : (
+                        <NavLink  
+                          to={tab.path} 
+                          activeClassName={classes.itemActiveItem}  
+                          className={classes.link}>
+                          <div className={classes.divImg} > 
+                            <img src={tab.icon === 'cmodels_SVG' ? imgCompartamental : imgAgents} className={classes.img} />
+                          </div>
+                          <div className={classes.divLabel} >{tab.label}</div>
+                        </NavLink>
+                      )
+                  }
+                  
+                </div>
+              )})
           }
-        </Tabs>
+        </div>
       </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-        
-      >
-        {
-          tabs.map((tab,i) => (
-            <TabPanel className={classes.TabPanel} value={value} key={i} index={i} dir={theme.direction}>
-              {tab.content}
-            </TabPanel>
-          ))
-        }
-      </SwipeableViews>
     </div>
   )
 }

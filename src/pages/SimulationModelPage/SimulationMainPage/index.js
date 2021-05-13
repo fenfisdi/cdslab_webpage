@@ -41,13 +41,15 @@ const SimulationMainPage = () => {
       icon: cmodelsSvg,
       name: 'Comparmental Models',
       indetifier: 'compar_models',
-      url: '/compartmentalModels'
+      url: '/compartmentalModels',
+      tipo: 1
     },
     {
       icon: agentsSVG,
       name: 'Agent based models',
       indetifier: 'agent_based_models',
-      url: ''
+      url: '',
+      tipo: 2
     }
 
   ]
@@ -65,7 +67,7 @@ const SimulationMainPage = () => {
       <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={70} height={70} colorText='#827C02' fontSize='20px' fontWeight='bold'/>
       <ModelCard
         options={options}
-        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
+        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
       />
     </SimulationContainer>
 
