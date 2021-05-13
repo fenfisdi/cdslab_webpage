@@ -15,7 +15,7 @@ const CompartmentalMainPage = () => {
   return (
 
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-      <Grid container item xs={12} justify="center" alignItems="center">
+      <Grid container item xs={9} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
           <p>
             Compartmental models are useful dynamical models widely used in epidemiology to describe the transmission of infectious diseases.
