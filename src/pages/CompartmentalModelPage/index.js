@@ -24,6 +24,7 @@ const CompartmentalModelPage = () => {
           )} />
           <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
           <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />
+          
         </Switch>
       </Suspense>
     </CompartmentalModelPageContainer>

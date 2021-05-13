@@ -44,7 +44,6 @@ const styles = {
   },
   main: {
     flex: 1,
-    padding: theme.spacing(6, 4),
     background: '#fff'
   },
   footer: {
