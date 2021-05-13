@@ -1,25 +1,14 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
-
-import { useParametersFormState } from './state'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
-import { useParametersFormFieldsCreation } from './fieldsCreation'
-import CompartmentalButton from '../../../CompartmentalButton'
 import { useParametersFormStyle } from './styles'
 
 
-const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fieldsSchema}) => {
+const ParametersForm = ({fields, fieldsSchema}) => {
   
   
-  const fields = useParametersFormFieldsCreation({fieldsSchema,parameterValues})
-
-  const {
-    handleClickButton,    
-    isValid
-  } = useParametersFormState({fields,formParametersSave})
-
   const classes = useParametersFormStyle()
   
   return (
@@ -29,9 +18,9 @@ const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fi
       item 
     >
       {fieldsSchema && fieldsSchema.map((field,index)=>{
-        const {indetifier, label, tag } = field
-        const {helperText}= fields[indetifier]
-        delete fields[indetifier]['helperText']
+        const {label, unit } = field
+        const {helperText}= fields[label]
+        delete fields[label]['helperText']
         
         return (
           <Grid key={index}  item container xs={12} direction="column" justify="center" alignItems="center">
@@ -44,18 +33,18 @@ const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fi
                 variant={'h6'}
                 key={index}
               />
-              <Grid item container xs={1}>
+              <Grid item container xs={2}>
                 <Input
                   disabled={false}
                   required                  
                   variant="outlined"
                   margin="normal"
                   autoComplete="name"
-                  {...fields[indetifier]}  
+                  {...fields[label]}  
                 />              
               </Grid>        
               <Grid item container xs={4} justify="flex-start" alignItems="center">
-                {tag}
+                {unit}
               </Grid>
             </Grid>
             <Typography variant="body1" component="p" className={helperText ? classes.helperText + ' error': classes.helperText}>
@@ -67,13 +56,6 @@ const ParametersForm = ({modelIndetifier,formParametersSave, parameterValues, fi
 
       {!fieldsSchema && <p>No hay campos</p>}
 
-      <CompartmentalButton
-        disabled={!isValid ? false:true}
-        onClick={handleClickButton}        
-        justify="center"
-        alignItems="center"
-        text={'Configure State Variables Settings'}
-      />
     </Grid>
   )
 }
