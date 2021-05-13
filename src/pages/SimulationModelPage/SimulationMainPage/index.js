@@ -62,7 +62,7 @@ const SimulationMainPage = () => {
 
   return (
     <SimulationContainer>
-      <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={50} height={50} colorText='#827C02' fontSize='20px' fontWeight='bold'/>
+      <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={70} height={70} colorText='#827C02' fontSize='20px' fontWeight='bold'/>
       <ModelCard
         options={options}
         eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}

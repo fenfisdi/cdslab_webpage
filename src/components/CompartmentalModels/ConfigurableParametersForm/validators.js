@@ -25,4 +25,29 @@ export const checkTypePhoneNumber = (event) => {
     event.stopPropagation()
   }
 }
+
+export const checkErrorsForm = ({fieldsParametersForm,setIsValid})=>{
+  let isOk = false
+  for (const keyfieldsParameters in fieldsParametersForm) {
+    const { value: selectValue } = fieldsParametersForm[keyfieldsParameters]['SELECTInput']      
+    if(selectValue!=''){        
+      const extraFields =  fieldsParametersForm[keyfieldsParameters][`${selectValue}Input`]
+      extraFields.every(v => {
+        if (v.value=='' || v.errors.length>0) {
+          isOk=false
+          return false
+        }                  
+        isOk = true          
+        return true
+      })
+    }else{
+      isOk=false
+    }
+
+    setIsValid(isOk)
+    if(!isOk){
+      return
+    }
+  }
+}
   
