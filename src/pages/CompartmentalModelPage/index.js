@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { MiniLoader } from '@components/layouts/MiniLoader'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
