@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useCompartmentalButtonStyles = makeStyles(() => ({
   text:{
-    color:'#827B00',
+    color:'#44605D',
     '&.disabled':{
       color:'rgba(0, 0, 0, 0.26)'
     }

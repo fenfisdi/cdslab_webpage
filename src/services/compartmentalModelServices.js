@@ -34,3 +34,11 @@ export const findPredefinedModelService = async (idModel) => {
     `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/model/${idModel}`,
     'GET')
 }
+
+export const updateCompartmentalSimulationService = async (simulation,idSimulation) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/simulation/${idSimulation}`,
+    'PUT',
+    simulation
+  )
+}
