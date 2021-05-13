@@ -3,6 +3,8 @@ import { Grid, Typography } from '@material-ui/core'
 import { useCompartmentalConfigureParametersPageState } from './state'
 import ConfigurableParametersForm from '../../../components/CompartmentalModels/ConfigurableParametersForm'
 import SnackbarComponent from '@components/ui/Snackbars'
+import SupportComponent from '../../../components/SupportComponent'
+import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -18,6 +20,15 @@ const CompartmentalConfigureParametersPage = () => {
 
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+     
+      <Grid container item xs={12} 
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start">
+        <p></p>
+        <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
+      </Grid>
+
       <Grid container item xs={6} justify="center" alignItems="center" direction="column">
         <Typography variant="body2" component="p">
         Configure parameters values
