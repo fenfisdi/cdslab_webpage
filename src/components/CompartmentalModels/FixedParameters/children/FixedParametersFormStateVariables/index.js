@@ -1,19 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import ParametersForm from '../ParametersForm'
 import { useParametersFormFieldsCreation } from '../ParametersForm/fieldsCreation'
 import CompartmentalButton from '../../../CompartmentalButton'
+import { checkErrorsStateVariableForm } from './validators'
+import { creationResponseStateVariableForm } from './fieldsCreation'
 
 
 
 
-const FixedParametersFormStateVariables = ({
-  fieldsSchema,
-  loading}) => {
-  const fields = useParametersFormFieldsCreation({fieldsSchema})
+const FixedParametersFormStateVariables = ({fieldsSchema,loading,executeRequestConfigureStateVariables,valuesFieldParameters}) => {
+  const [isValid,setIsValid] = useState(false)
+  const fields = useParametersFormFieldsCreation({fieldsSchema,valuesFieldParameters})
+
   useEffect(()=>{
-    console.log('::::::::::::::::>fields',fields)
+    setIsValid(checkErrorsStateVariableForm({fields}))
   },[fields])
   
   return (
@@ -26,8 +28,8 @@ const FixedParametersFormStateVariables = ({
       {!loading && <ParametersForm fields={fields} fieldsSchema={fieldsSchema} />}
 
       <CompartmentalButton
-        disabled={true}
-        onClick={()=>{console.log('::::::::::::::::::::>comaprmental')}}
+        disabled={isValid?false:true }
+        onClick={()=>{executeRequestConfigureStateVariables(creationResponseStateVariableForm ({fields}))}}
         justify="flex-end"
         alignItems="center"
         text={'Continue'}
