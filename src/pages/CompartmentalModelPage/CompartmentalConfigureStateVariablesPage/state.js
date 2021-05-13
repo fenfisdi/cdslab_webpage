@@ -30,13 +30,11 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
         }
       )
 
-    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){      
-      const params = getStateWithQueryparams(history)      
+    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){       
       const {name}=dataCurrentSimulation
       findPredefinedModel({model_id:params.model_id,  simulationName:name})
 
     }else if(!isEmpty(params) && dataCurrentSimulation == null && isEmpty(predefinedModelSelected)){
-      const params = getStateWithQueryparams(history)
       findCompartmentalSimulation(params.simulation_identifier)
     }
     

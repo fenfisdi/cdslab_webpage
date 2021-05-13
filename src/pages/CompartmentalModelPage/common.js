@@ -6,10 +6,9 @@ export const getStateWithQueryparams = (queryParams) => {
       location: { search }
     } = queryParams
 
-    const params = qs.parse(search, {
+    return qs.parse(search, {
       ignoreQueryPrefix: true
     })      
-    return params
   }
 }
 
