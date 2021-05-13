@@ -19,7 +19,7 @@ const CompartmentalConfigureParametersPage = () => {
   }
 
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+    <Grid container item xs={11} justify="center" alignItems="center" direction="column">
      
       <Grid container item xs={12} 
         direction="row"
