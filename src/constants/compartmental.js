@@ -287,6 +287,11 @@ export const INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION ={
   FIXED:'fixed_parameters'
 }
 
+export const INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION ={
+  UPLOAD:'UPLOAD DATA',
+  USEAVAILABLE:'USE AVAILABLE DATA'
+}
+
 
 /********* CONST OPTIONS ***** */
 export const OPTIONS_PREDEFINED_MODELS = [
@@ -329,6 +334,22 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
     
     name: 'Fixed parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
+    url: ''
+  }
+]
+
+
+export const OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION = [
+  {
+      
+    name: 'Upload data',
+    indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.UPLOAD,
+    url: ''
+  },
+  {
+    
+    name: 'Use available data (INS)',
+    indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.USEAVAILABLE,
     url: ''
   }
 ]
