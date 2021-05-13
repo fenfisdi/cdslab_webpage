@@ -3,6 +3,8 @@ import { Grid } from '@material-ui/core'
 import SnackbarComponent from '@components/ui/Snackbars'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
 import { useCompartmentalConfigureStateVariablesPageState } from './state'
+import SupportComponent from '../../../components/SupportComponent'
+import { HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS } from '../../../constants/helpInformation'
 
 const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -16,7 +18,15 @@ const CompartmentalConfigureStateVariablesPage = () => {
   }
 
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column">      
+    <Grid container item xs={12} justify="center" alignItems="center" direction="column">  
+
+      <Grid container item xs={12} 
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start">
+        <p></p>
+        <SupportComponent text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS}/>
+      </Grid>    
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
         fieldsSchema={modelData.state_variables}

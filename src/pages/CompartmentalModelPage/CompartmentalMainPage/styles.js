@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-
+import styled from 'styled-components'
 export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
   formBody: {
     marginTop: '10px',
@@ -17,3 +17,13 @@ export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
     'align-items': 'center'
   }
 }))
+
+
+export const CompartmentalMainPageContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+0  width: 100%;
+  background: #fff
+`

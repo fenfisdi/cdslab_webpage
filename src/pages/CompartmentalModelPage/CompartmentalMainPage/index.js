@@ -1,21 +1,17 @@
-import React from 'react'
 import { Grid, Paper } from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
-
+import React from 'react'
+import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
-import { useCompartmentalMainPageStyles } from './styles'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
-
+import { useCompartmentalMainPageStyles } from './styles'
 
 const CompartmentalMainPage = () => {
-
   const classes = useCompartmentalMainPageStyles()
   const history = useHistory()
-
+ 
   return (
-
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-      <Grid container item xs={9} justify="center" alignItems="center">
+      <Grid container item xs={12} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
           <p>
             Compartmental models are useful dynamical models widely used in epidemiology to describe the transmission of infectious diseases.
@@ -31,11 +27,10 @@ const CompartmentalMainPage = () => {
       <Grid container item xs={12}>
         <ModelCard
           options={OPTIONS_COMPARTMENTAL_MAIN}
-          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
+          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url, }) }}
         />
       </Grid>
     </Grid>
-
   )
 }
 

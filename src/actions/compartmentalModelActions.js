@@ -17,6 +17,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     dispatch({ type: COMPARTMENTAL_MODEL_LOADING })
   }
 
+  const  registerCompartmentalModelStore = (response) => {
+    dispatch({
+      type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+      payload: response.data.data
+    })
+  }
+
   const registerCompartmentalSimulation = (data) =>{
     dispatch({
       type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
@@ -82,7 +89,7 @@ export const useCompartmentalModelActions = (dispatch) => {
 
   const storeCompartmentalSimulation =(simulation)=>{
     storeCompartmentalSimulationService(simulation).then((response)=>{      
-      registerCompartmentalSimulation(response.data.data)
+      registerCompartmentalModelStore(response)
     }).catch((error) => {
       registerErrorCompartmentalSimulation(error)
     })
@@ -91,9 +98,10 @@ export const useCompartmentalModelActions = (dispatch) => {
   const findCompartmentalSimulation =(idSimulation)=>{
     
     findCompartmentalSimulationService(idSimulation).then((response)=>{      
-      registerCompartmentalSimulation(response.data.data)
+      registerCompartmentalModelStore(response)
     })
   }
+  
 
   const findPredefinedModel =({model_id:idModel,simulationName})=>{
     
