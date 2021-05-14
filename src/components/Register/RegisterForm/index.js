@@ -1,12 +1,13 @@
 import { Grid, Paper } from '@material-ui/core'
 import React, { Fragment, useEffect, useState, useContext } from 'react'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import { Input } from '../../ui/Input'
 import { TitleComponent } from '../../ui/Title'
 import theme from '../../../styles/cdslabTheme'
 import { useRegisterFormStyles } from './styles'
 import { PhoneNumber } from '../../ui/PhoneNumber'
 import { PasswordChecker } from '../PasswordChecker'
-import { SelectComponent } from '../../ui/Select'
 import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
@@ -18,6 +19,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   const [isValid, setIsvalid] = useState(false)
   const [verificationPassword, setVerificationPassword] = useState(false)
   const fieldsData = useRegisterFormState()
+  const [phonePrefix, setPrefix] = useState('')
   const { t } = useContext(languageContext)
 
   const {
@@ -50,7 +52,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   }, [fieldsData])
 
   const handleClick = () => {
-  
+
     eventEmitter({
       email: email.value,
       name: name.value,
@@ -59,8 +61,8 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       institution_role: institutionAffiliation.value,
       profession: profession.value,
       birthday: new Date(dateBirth.value),
-      phone: 3001234567, //phoneNumber.value.trim(),
-      phone_prefix: '+57',
+      phone: phoneNumber.value, //phoneNumber.value.trim(),
+      phone_prefix: phonePrefix,
       password: password.value,
       security_questions: [
         {
@@ -164,12 +166,21 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             spacing={1}
             direction="row"
             justify="center"
+            alignItems="center"
           >
-            <PhoneNumber
+            <Grid item xs={2}>
+              <PhoneInput
+                inputStyle={{width:'90px'}}
+                country={'co'}
+                value={phonePrefix}
+                onChange={setPrefix}
+              />
+            </Grid>
+            {<PhoneNumber
               xs={5}
               phoneNumber={phoneNumber}
 
-            />
+            />}
           </Grid>
 
           <Grid

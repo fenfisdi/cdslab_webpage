@@ -78,17 +78,17 @@ export const VALIDATORS_REGISTER_FORM = {
       check: checkMinLength,
       valueToCheck: 0
     },
-    {
+    /* {
       type: 'pattern',
       message: TYPE_NUMBER,
       check: checkPattern,
-      valueToCheck: PATTERN_PHONE_NUMBER
-    },
+      valueToCheck: 9 //PATTERN_PHONE_NUMBER
+    }, */
     {
       type: 'minlength',
-      message: MIN_LENGTH_MESSAGE.replace('?', 13),
+      message: MIN_LENGTH_MESSAGE.replace('?', 10),
       check: checkMinLength,
-      valueToCheck: 13
+      valueToCheck: 9
     }
   ],
   ext: [

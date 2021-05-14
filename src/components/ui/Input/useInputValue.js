@@ -37,7 +37,6 @@ export const useInputValue = (
   }
 
   const updateHelperText = (err) => {
-    console.log(err)
     err.length > 0 ? setHelperText(err.map(e => t(e.message))?.join('\n')) : setHelperText(null)
   }
 

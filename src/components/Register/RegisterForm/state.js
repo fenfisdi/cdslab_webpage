@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
-import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 import { languageContext } from '../../../config/languageContext'
 
