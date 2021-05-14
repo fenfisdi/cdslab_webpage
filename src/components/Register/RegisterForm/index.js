@@ -19,7 +19,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   const [isValid, setIsvalid] = useState(false)
   const [verificationPassword, setVerificationPassword] = useState(false)
   const fieldsData = useRegisterFormState()
-  const [phonePrefix, setPrefix] = useState('')
+  const [phonePrefix, setPrefix] = useState('57')
   const { t } = useContext(languageContext)
 
   const {
@@ -62,7 +62,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       profession: profession.value,
       birthday: new Date(dateBirth.value),
       phone: phoneNumber.value, //phoneNumber.value.trim(),
-      phone_prefix: phonePrefix,
+      phone_prefix: `+${phonePrefix}`,
       password: password.value,
       security_questions: [
         {
