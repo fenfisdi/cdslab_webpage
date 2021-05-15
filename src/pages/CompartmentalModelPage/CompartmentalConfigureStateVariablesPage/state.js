@@ -1,11 +1,12 @@
 import { useStore } from '@store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
 
 export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
+  const [isSend, setIsSend] = useState(false)
   const history = useHistory()
   
   const {
@@ -40,7 +41,17 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
     
   },[dataCurrentSimulation,predefinedModelSelected])
   
+  useEffect(()=>{
+    if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
+      const {modelData:{identifier:model_id}}=predefinedModelSelected
+      const { identifier} = dataCurrentSimulation
+      history.push({ 
+        pathname: '/compartmentalModels/optimizeParameters',
+        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
+      })
 
+    }
+  },[isSend,dataCurrentSimulation])
 
   useEffect(()=>{
     if(error){
@@ -64,6 +75,7 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
       'state_variable_limits': option,
       'parameters_limits':parameters_limits
     },identifier) 
+    setIsSend(true)
   }
 
   return {

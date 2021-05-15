@@ -6,56 +6,64 @@ export const COMPARTMENTAL_FIELDS = {
     fields:[
       {
         label:'Influex Rate', 
-        tag:'(People per day)', 
+        name:'influexRate',
+        unit:'(People per day)', 
         input:{type:'text',name:'influexRate',label:'Influex rate' }, 
         indetifier:'influexRate',
         helper:'dummy'
       },
       {
         label:'Natural Death Rate', 
-        tag:'(People per day)',
+        name:'naturalDeath',
+        unit:'(People per day)',
         input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
         indetifier:'naturalDeath',
         helper:'dummy'
       },
       {
         label:'Disease-Induced Death Rate', 
-        tag:'(Per day)',
+        name:'diseaseInduced',
+        unit:'(Per day)',
         input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
         indetifier:'diseaseInduced',
         helper:'dummy'
       },
       {
         label:'Transmission rate', 
-        tag:'(Per day)',
+        name:'transmissionRate',
+        unit:'(Per day)',
         input:{type:'text',name:'transmissionRate',label:'Transmission rate'},
         indetifier:'transmissionRate',
         helper:'dummy'
       },
       {
         label:'Vaccination rate', 
-        tag:'(Per day)',
+        name:'vaccinationRate',
+        unit:'(Per day)',
         input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
         indetifier:'vaccinationRate',
         helper:'dummy'
       },
       {
         label:'Recovery rate', 
-        tag:'(Per day)',
+        name:'recoveryRate',
+        unit:'(Per day)',
         input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
         indetifier:'recoveryRate',
         helper:'dummy'
       },
       {
         label:'Reinfection rate', 
-        tag:'(Per day)',
+        name:'reinfectionRate',
+        unit:'(Per day)',
         input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
         indetifier:'reinfectionRate',
         helper:'dummy'
       },
       {
         label:'Loss of immunity rate', 
-        tag:'(Per day)',
+        name:'lossofImmunityRate',
+        unit:'(Per day)',
         input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
         indetifier:'lossofImmunityRate',
         helper:'dummy'
@@ -88,62 +96,80 @@ export const COMPARTMENTAL_FIELDS = {
   SEIR:{
     fields:[
       {
-        label:'Influex Rate', 
-        tag:'(People per day)', 
+        
+        name:'influexRate',
+        label:'Influex rate',  
+        unit:'(People per day)', 
         input:{type:'text',name:'influexRate',label:'Influex rate' }, 
         indetifier:'influexRate',
         helper:'dummy'
       },
       {
-        label:'Natural Death Rate', 
-        tag:'(People per day)',
+        
+        name:'naturalDeath',
+        label:'Natural death rate', 
+        unit:'(People per day)',
         input:{type:'text',name:'naturalDeath',label:'Natural death rate'}, 
         indetifier:'naturalDeath'
       },
       {
-        label:'Disease-Induced Death Rate', 
-        tag:'(Per day)',
+        
+        name:'diseaseInduced',
+        label:'Disease-induced death rated Death Rate', 
+        unit:'(Per day)',
         input:{type:'text',name:'diseaseInduced',label:'Disease-induced death rate'},
         indetifier:'diseaseInduced'
       },
       {
-        label:'Vaccination rate', 
-        tag:'(Per day)',
+        
+        name:'vaccinationRate',
+        label:'Vaccination ratete', 
+        unit:'(Per day)',
         input:{type:'text',name:'vaccinationRate',label:'Vaccination rate'},
         indetifier:'vaccinationRate',
         helper:'dummy'
       },
       {
-        label:'Recovery rate', 
-        tag:'(Per day)',
+        
+        name:'recoveryRate',
+        label:'Recovery rate',
+        unit:'(Per day)',
         input:{type:'text',name:'recoveryRate',label:'Recovery rate'},
         indetifier:'recoveryRate',
         helper:'dummy'
       },
       {
-        label:'Loss of immunity rate', 
-        tag:'(Per day)',
+        
+        name:'lossofImmunityRate',
+        label:'Loss of immunity ratety rate', 
+        unit:'(Per day)',
         input:{type:'text',name:'lossofImmunityRate',label:'Loss of immunity rate'},
         indetifier:'lossofImmunityRate',
         helper:'dummy'
       },
       {
-        label:'Reinfection rate', 
-        tag:'(Per day)',
+        
+        name:'reinfectionRate',
+        label:'Reinfection ratete', 
+        unit:'(Per day)',
         input:{type:'text',name:'reinfectionRate',label:'Reinfection rate'},
         indetifier:'reinfectionRate',
         helper:'dummy'
       },
       {
-        label:'Transmission constant between S and E', 
-        tag:'(per person,  per day)',
+        
+        name:'transmissionconstantBetweenSandE',
+        label:'Transmission constant between S and Eonstant between S and E', 
+        unit:'(per person,  per day)',
         input:{type:'text',name:'transmissionconstantBetweenSandE',label:'Transmission constant between S and E'},
         indetifier:'transmissionconstantBetweenSandE',
         helper:'dummy'
       },
       {
-        label:'Transmission constant between S and I', 
-        tag:'(per person,  per day)',
+        
+        name:'transmissionconstantBetweenSandI',
+        label:'Transmission constant between S and Ionstant between S and I', 
+        unit:'(per person,  per day)',
         input:{type:'text',name:'transmissionconstantBetweenSandI',label:'Transmission constant between S and I'},
         indetifier:'transmissionconstantBetweenSandI',
         helper:'dummy'
@@ -288,6 +314,11 @@ export const INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION ={
   FIXED:'fixed_parameters'
 }
 
+export const INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION ={
+  UPLOAD:'UPLOAD DATA',
+  USEAVAILABLE:'USE AVAILABLE DATA'
+}
+
 
 /********* CONST OPTIONS ***** */
 export const OPTIONS_PREDEFINED_MODELS = [
@@ -330,6 +361,22 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
     
     name: 'Fixed parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
+    url: ''
+  }
+]
+
+
+export const OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION = [
+  {
+      
+    name: 'Upload data',
+    indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.UPLOAD,
+    url: ''
+  },
+  {
+    
+    name: 'Use available data (INS)',
+    indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.USEAVAILABLE,
     url: ''
   }
 ]

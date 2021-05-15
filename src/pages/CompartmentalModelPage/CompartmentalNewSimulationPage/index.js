@@ -6,7 +6,7 @@ import { useCompartmentalNewSimulationPageState } from './state'
 import { useHistory  } from 'react-router'
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
-
+import LoaderComponent from '../../../components/ui/Loader'
 
 
 const CompartmentalNewSimulationPage = ({pathParent}) => {
@@ -38,6 +38,11 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
       {predefinedModelsList && <PredefinedModelsForm
         handleClickPredefinedModels={(values) => { values && setPredefinedModelSelected(values) }}
         options={predefinedModelsList}
+      />}
+      {!predefinedModelsList && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
       />}
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
