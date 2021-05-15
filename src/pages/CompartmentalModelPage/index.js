@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import React, { Suspense, useState } from 'react'
+import { Link, NavLink, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom'
 import { MiniLoader } from '@components/layouts/MiniLoader'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
+import Breadcrumbs from '../../components/Breadcrumbs'
 
 
 
@@ -29,20 +30,23 @@ const CompartmentalModelPage = () => {
   ]
 
   return (
-    <CompartmentalModelPageContainer>
+    <>
       <FullWidthTabs tabs={tabs} />
-      <Suspense fallback={<MiniLoader />}>
-        <Switch>
-          <Route path={match.path} exact component={CompartmentalMainPage} />
-          <Route path={`${match.path}/newSimulations`} exact render={(props) => (
-            <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
-          )} />
-          <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
-          <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />
+      <CompartmentalModelPageContainer>
+        {/* <Breadcrumbs /> */}
+        <Suspense fallback={<MiniLoader />}>
+          <Switch>
+            <Route path={match.path} exact component={CompartmentalMainPage} />
+            <Route path={`${match.path}/newSimulations`} exact render={(props) => (
+              <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
+            )} />
+            <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
+            <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />
           
-        </Switch>
-      </Suspense>
-    </CompartmentalModelPageContainer>
+          </Switch>
+        </Suspense>
+      </CompartmentalModelPageContainer>
+    </>
   )
 }
 
