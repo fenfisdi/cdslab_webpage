@@ -7,10 +7,10 @@ import {
   PATTERN_NUMERIC,
 } from '../../../components/Forms/validators/patterns'
 
-export const REQUIRED_MESSAGE = 'This field is requiered.'
-export const PATTERN_ERROR_MESSAGE ='Invalid type code'
-export const MAX_LENGTH_MESSAGE = 'The maximum size allowed is ? characters.'
-export const MIN_LENGTH_MESSAGE = 'The minimum size allowed is ? characters.'
+export const REQUIRED_MESSAGE = 'validators.fieldRequired'
+export const PATTERN_ERROR_MESSAGE ='validators.validateCodeType'
+export const MAX_LENGTH_MESSAGE = 'validators.maxLength'
+export const MIN_LENGTH_MESSAGE = 'validators.minLength'
 
 export const VALIDATORS_QR_VALUE = {
   otp_code: [

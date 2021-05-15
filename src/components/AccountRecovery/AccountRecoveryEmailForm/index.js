@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { useAccountRecoveryEmailFormStyles } from './styles'
 import { Input } from '../../ui/Input'
@@ -6,11 +6,13 @@ import LoaderComponent from '../../ui/Loader'
 import theme from '../../../styles/cdslabTheme'
 import { TitleComponent } from '../../ui/Title'
 import { useAccountRecoveryEmailFormState } from './state'
+import { languageContext } from '../../../config/languageContext'
 
 const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTitle }) => {
   const classes = useAccountRecoveryEmailFormStyles(theme)
   const { email } = useAccountRecoveryEmailFormState()
   const [isValid, setIsvalid] = useState(false)
+  const { t } = useContext(languageContext)
 
   useEffect(() => {
     let notIsValid = false
@@ -67,7 +69,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
             </Grid>
             <Grid item container xs={12} justify="flex-end" spacing={1}>
               <Button variant="contained" color="default" style={{ 'margin-right': '6px' }}>
-                Cancelar
+                {t('common.cancelButton')}
               </Button>
               <Button
                 onClick={handleClickButton}
@@ -76,7 +78,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
                 className={{}}
                 disabled={!isValid ? false : true}
               >
-                Continue
+                {t('common.continueButton')}
               </Button>
             </Grid>
           </Grid>
