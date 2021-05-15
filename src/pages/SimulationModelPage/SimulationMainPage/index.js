@@ -31,7 +31,7 @@ const SimulationMainPage = () => {
 
 
   useEffect(() => {
-    console.log(navigation)
+    //console.log('navegacion: ' + JSON.stringify(navigation))
     updateNavigationTitle()
     loadData()
   }, [])
