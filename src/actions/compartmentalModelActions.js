@@ -1,11 +1,20 @@
-import { findCompartmentalSimulationService, findPredefinedModelService, getPredefinedModelsService, storeCompartmentalSimulationService, updateCompartmentalSimulationService } from '../services/compartmentalModelServices'
+import { 
+  findCompartmentalSimulationService, 
+  findPredefinedModelService, 
+  getPredefinedModelsService, 
+  storeCompartmentalSimulationService, 
+  updateCompartmentalSimulationService,
+  storeCompartmentalSimulationFolderService } from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
   COMPARTMENTAL_MODEL_LOADING,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
-  COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -41,9 +50,16 @@ export const useCompartmentalModelActions = (dispatch) => {
     }else if(error.request){
       dispatch({
         type: COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
-        payload:{message:'The request was made but no response was received'}
+        payload:{detail:'The request was made but no response was received'}
       })
     }
+  }
+
+  const  registerLoadCompartmentalSimulationFolder = (loader) => {
+    dispatch({
+      type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD,
+      payload: loader
+    })
   }
 
   const getPredefinedModels = () => {  
@@ -65,7 +81,7 @@ export const useCompartmentalModelActions = (dispatch) => {
         }else if(error.request){
           dispatch({
             type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{detail:'The request was made but no response was received'}
           })
         }
       })
@@ -88,10 +104,36 @@ export const useCompartmentalModelActions = (dispatch) => {
 
 
   const storeCompartmentalSimulation =(simulation)=>{
+    registerLoadCompartmentalSimulationFolder(true)
     storeCompartmentalSimulationService(simulation).then((response)=>{      
       registerCompartmentalModelStore(response)
     }).catch((error) => {
+      registerLoadCompartmentalSimulationFolder(false)
       registerErrorCompartmentalSimulation(error)
+    })
+  }
+
+  const storeCompartmentalSimulationFolder =(idSimulation)=>{
+    storeCompartmentalSimulationFolderService(idSimulation).then((response)=>{  
+      registerLoadCompartmentalSimulationFolder(false)    
+      dispatch({
+        type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error) => {
+      registerLoadCompartmentalSimulationFolder(false)
+      if(error.response) {          
+        const {response:{data}}=error                    
+        dispatch({
+          type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR,
+          payload: data 
+        })
+      }else if(error.request){
+        dispatch({
+          type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
     })
   }
 
@@ -133,7 +175,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     findCompartmentalSimulation,
     findPredefinedModel,
     setDefinitionCompartmentalSimulation,
-    updateCompartmentalSimulation }
+    updateCompartmentalSimulation,
+    storeCompartmentalSimulationFolder }
 
 
 }

@@ -12,8 +12,7 @@ export const checkTypePhoneNumber = (event) => {
 }
 
 // process CSV data
-export const processData = dataString => {
-  console.log(':::::::::::::::::>dataString',dataString)
+export const processData = dataString => {  
   const dataStringLines = dataString.split(/\r\n|\n/)
   const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/)
 

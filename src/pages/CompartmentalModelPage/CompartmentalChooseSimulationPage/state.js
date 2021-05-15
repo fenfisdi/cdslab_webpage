@@ -9,12 +9,12 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
   const history = useHistory()
   const {
     state: {      
-      compartmentalModel: { loading, predefinedModelSelected, currentSimulation }
+      compartmentalModel: {  predefinedModelSelected, currentSimulation, simulationFolderInformation }
     },
     dispatch
   } = useStore()
   
-  const { storeCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+  const { storeCompartmentalSimulation,storeCompartmentalSimulationFolder } = useCompartmentalModelActions(dispatch)
 
   useEffect(()=>{
     if(isEmpty(predefinedModelSelected)){
@@ -34,16 +34,38 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
           errorMessage: currentSimulation.errorData.detail
         }
       )
-    }else if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){
+    }else if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected) 
+    && !currentSimulation.error &&
+    !simulationFolderInformation.error &&
+    simulationFolderInformation.data == null
+    ){
+      const { data:{identifier}} = currentSimulation      
+      storeCompartmentalSimulationFolder(identifier)        
+    }
+    
+  },[currentSimulation])
+
+
+  useEffect(()=>{
+    if(simulationFolderInformation.error){      
+      setShowSnack(
+        {
+          ...showSnack,
+          show: true,
+          success: false,
+          error: true,
+          errorMessage: simulationFolderInformation.errorData.detail
+        }
+      )
+    }else if(simulationFolderInformation.data!=null){
       const {modelData:{identifier:model_id}}=predefinedModelSelected
       const { data:{identifier}} = currentSimulation
       history.push({ 
         pathname: '/compartmentalModels/configureParameters',
         search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
-      })      
+      })  
     }
-    
-  },[currentSimulation])
+  },[simulationFolderInformation])
 
   
   const executeSelectedOption =(option)=>{
@@ -63,7 +85,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
 
 
   return {
-    loading,
+    loadingSimulationFolderInformation:simulationFolderInformation.loadingSimulationFolderInformation,
     executeSelectedOption
   }
 }

@@ -7,6 +7,9 @@ import {
   COMPARTMENTAL_MODEL_REGISTER_PARAMETERS_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS
 } from '../../actions/types/compartmentalModelTypes'
 
@@ -28,6 +31,12 @@ export const initialState = {
       data: null,
       error: null,
       errorData: null,
+    },
+    simulationFolderInformation:{
+      data: null,
+      error: null,
+      errorData: null,
+      loadingSimulationFolderInformation: false
     },
     loading: false
   }
@@ -71,6 +80,21 @@ export const compartmentalModelReducer = (state, action) => {
   case COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS:
     return {
       ...state, loading: false, currentSimulation: { ...state.currentSimulation, error: false, data: action.payload }
+    }
+
+  case COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR:
+    return {
+      ...state, loading: false, simulationFolderInformation: { ...state.simulationFolderInformation, error: true, errorData: action.payload, loadingSimulationFolderInformation:false }
+    }
+
+  case COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS:
+    return {
+      ...state, loading: false, simulationFolderInformation: { ...state.simulationFolderInformation, error: false, data: action.payload, loadingSimulationFolderInformation:false }
+    }
+
+  case COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD:
+    return {
+      ...state, loading: false, simulationFolderInformation: { ...state.simulationFolderInformation, loadingSimulationFolderInformation:action.payload }
     }
 
     

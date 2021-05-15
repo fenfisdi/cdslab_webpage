@@ -23,6 +23,14 @@ export const storeCompartmentalSimulationService = async (simulation) => {
   )
 }
 
+export const storeCompartmentalSimulationFolderService = async (idSimulation) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/folder/simulation?uuid=${idSimulation}`,
+    'POST',
+  )
+}
+
+
 export const findCompartmentalSimulationService = async (idSimulation) => {
   return request(
     `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/simulation/${idSimulation}`,

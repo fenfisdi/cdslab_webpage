@@ -20,16 +20,8 @@ const useStyles = makeStyles({
   }
 })
 
-function createData(name, calories, ) {
-  return { name, calories }
-}
 
-const rows = [
-  createData('', ''),
-  createData('', '')
-]
-
-export default function TableFormat({Variable='Variable'}) {
+export default function TableFormatStatic({Variable='Variable'}) {
   const classes = useStyles()
 
   return (

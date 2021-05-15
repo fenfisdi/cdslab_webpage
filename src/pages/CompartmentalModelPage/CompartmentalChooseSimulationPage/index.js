@@ -6,12 +6,13 @@ import {HELP_INFORMATION_CHOOSE_SIMULATIONS} from '../../../constants/helpInform
 import SnackbarComponent from '@components/ui/Snackbars'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
+import LoaderComponent from '../../../components/ui/Loader'
 
 
 
 const CompartmentalChooseSimulationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const {executeSelectedOption } = useCompartmentalChooseSimulationPageState({showSnack, setShowSnack })
+  const {executeSelectedOption,loadingSimulationFolderInformation } = useCompartmentalChooseSimulationPageState({showSnack, setShowSnack })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -31,7 +32,7 @@ const CompartmentalChooseSimulationPage = () => {
         </Typography>
       </Grid>
 
-      <Grid container item xs={12}>
+      {!loadingSimulationFolderInformation && <Grid container item xs={12}>
         <ModelCard
           ruta="chooseSimulation"
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
@@ -39,7 +40,13 @@ const CompartmentalChooseSimulationPage = () => {
           eventEmitted={executeSelectedOption}
           
         />
-      </Grid>
+      </Grid>}
+
+      {loadingSimulationFolderInformation && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
+      />}
 
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
