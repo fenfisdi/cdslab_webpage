@@ -8,7 +8,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import UserListComponent from '../../components/UserManagement/ListUsers/index'
+import UserListComponent from '../../components/UserManagement/TableListComponent/index'
 
 
 

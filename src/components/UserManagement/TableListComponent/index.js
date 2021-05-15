@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import SearchIcon from '@material-ui/icons/Search'
-import ShowTableComponent from '../TableComponent/index'
-import SortedTable from '../TableComponent/SortTable'
+import ShowTableComponent from '../TableComponent/SortTable'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -26,7 +25,7 @@ export default function UserListComponent() {
         <Grid item>
           <TextField id="input-with-icon-grid" label="Search user" />
         </Grid>
-        <SortedTable/>
+        <ShowTableComponent/>
       </Grid>
     </Grid>
   )
