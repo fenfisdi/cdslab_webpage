@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { useQrBindingRecoverySecurityQuestionsStyles } from './styles'
-import { useInputValue } from '../../ui/Input/useInputValue'
-import { VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS }  from './validators'
 import { Input } from '../../ui/Input'
 import LoaderComponent from '../../ui/Loader'
 import theme from '../../../styles/cdslabTheme'
@@ -13,11 +11,6 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
   const classes = useQrBindingRecoverySecurityQuestionsStyles(theme)
   const { fields } = useQrBindingRecoverySecurityQuestionsState({ numberQuestions: questions})
   const [isValid, setIsvalid] = useState(false)
-
-  const securityAnswer = useInputValue('', VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS.alphabetic, {
-    name: 'securityAnswer',
-    type: 'securityAnswer',
-  })
 
   useEffect(() => {
     console.log(questions)

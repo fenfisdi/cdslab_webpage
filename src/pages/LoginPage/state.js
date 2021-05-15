@@ -1,6 +1,6 @@
 import { useStore } from '@store/storeContext'
 import { useSessionActions } from '@actions/sessionsActions'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export const useLoginState = ({ showSnack, setShowSnack }) => {

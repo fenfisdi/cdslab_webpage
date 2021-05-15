@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useRecoveryQrBindingStyles = makeStyles((theme) => ({
+export const useRecoveryQrBindingStyles = makeStyles(() => ({
   root: {
     height: '100vh',
   },
