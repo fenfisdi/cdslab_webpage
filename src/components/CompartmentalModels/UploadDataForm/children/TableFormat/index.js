@@ -45,12 +45,15 @@ export default function TableFormat({Variable='Variable'}) {
         </TableHead>
 
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell align="center" className={classes.tableCell}></TableCell>
-              <TableCell align="center" className={classes.tableCell}></TableCell>                            
-            </TableRow>
-          ))}
+          <TableRow>
+            <TableCell align="center" className={classes.tableCell}></TableCell>
+            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+          </TableRow>
+          
+          <TableRow>
+            <TableCell align="center" className={classes.tableCell}></TableCell>
+            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

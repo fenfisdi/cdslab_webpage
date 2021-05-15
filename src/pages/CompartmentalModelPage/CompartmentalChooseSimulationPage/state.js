@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 
-export const useCompartmentalChooseSimulationPageState = () => {
+export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   const {
     state: {      
@@ -24,7 +24,17 @@ export const useCompartmentalChooseSimulationPageState = () => {
 
 
   useEffect(()=>{
-    if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){
+    if(currentSimulation.error){
+      setShowSnack(
+        {
+          ...showSnack,
+          show: true,
+          success: false,
+          error: true,
+          errorMessage: currentSimulation.errorData.detail
+        }
+      )
+    }else if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected)){
       const {modelData:{identifier:model_id}}=predefinedModelSelected
       const { data:{identifier}} = currentSimulation
       history.push({ 
@@ -34,8 +44,8 @@ export const useCompartmentalChooseSimulationPageState = () => {
     }
     
   },[currentSimulation])
-  
 
+  
   const executeSelectedOption =(option)=>{
     const {indetifier}=option
     if(indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE){

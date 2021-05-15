@@ -8,8 +8,11 @@ export const useUploadButtonValue = (val, extras) => {
   const [fileName, setFileName] = useState('')
 
   const onChange = (event) => {
-    event && setValue(event.target.files[0])
-    event && setFileName(event.target.files[0].name)
+    if(event.target.files && event.target.files[0]){
+      setValue(event.target.files[0])
+      setFileName(event.target.files[0].name)
+    }
+    
   }
 
   useEffect(() => {

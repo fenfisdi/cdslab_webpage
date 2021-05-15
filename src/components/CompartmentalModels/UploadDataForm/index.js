@@ -24,23 +24,26 @@ const UploadDataForm =()=>{
 
   
   const handleFileUpload = e => {
-    uploadButton.onChange(e)
-    const file = e.target.files[0]
-    const reader = new FileReader()
-    reader.onload = (evt) => {
-      /* Parse data */
-      const bstr = evt.target.result
-      const wb = XLSX.read(bstr, { type: 'binary' })
-      /* Get first worksheet */
-      const wsname = wb.SheetNames[0]
-      const ws = wb.Sheets[wsname]
-      /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_csv(ws, { header: 1 })
-      const { body, headers } = processData(data)
-      setData(body)
-      setColumns(headers)
+    if(e.target.files && e.target.files[0]){
+      uploadButton.onChange(e)
+      const file = e.target.files[0]
+      const reader = new FileReader()
+      reader.onload = (evt) => {
+        /* Parse data */
+        const bstr = evt.target.result
+        const wb = XLSX.read(bstr, { type: 'binary' })
+        /* Get first worksheet */
+        const wsname = wb.SheetNames[0]
+        const ws = wb.Sheets[wsname]
+        /* Convert array of arrays */
+        const data = XLSX.utils.sheet_to_csv(ws, { header: 1 })
+        const { body, headers } = processData(data)
+        setData(body)
+        setColumns(headers)
+      }
+      reader.readAsBinaryString(file)
     }
-    reader.readAsBinaryString(file)
+    
   }
  
  

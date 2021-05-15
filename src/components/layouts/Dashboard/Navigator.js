@@ -90,8 +90,8 @@ function Navigator (props) {
         <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
           <img src={cdsSvg} className={classes.image} />
         </ListItem>
-        {categories.map(({ id, children}) => (
-          <React.Fragment key={id}>
+        {categories.map(({ id, children},index) => (
+          <React.Fragment key={index}>
             <ListItem className={classes.categoryHeader}>
               <ListItemText
                 classes={{
