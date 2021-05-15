@@ -1,0 +1,56 @@
+{
+  "common": {
+    "continueButton": "Continue",
+    "cancelButton": "Cancel"
+  },
+  "loginPage": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Pasword",
+    "forgotPasword": "Forgot password?",
+    "forgotYourSecurityLink": "Lost your QR link?"
+  },
+  "registerPage": {
+    "title": "Sign up",
+    "email": "Email",
+    "name": "Name",
+    "lastName": "Last name",
+    "institution": "Institution",
+    "institutionAffiliation": "Institution affiliation",
+    "profession": "Profession",
+    "securityQuestion1": "Security question 1",
+    "securityQuestion2": "Security question 2",
+    "answerQuestion1": "Answer question 1",
+    "answerQuestion2": "Answer question 2",
+    "birthDate": "Birth date",
+    "phoneNumber": "Phone number",
+    "password": "Password"
+  },
+  "qrForm": {
+    "code": "Code",
+    "enterCode": "Please enter the verification code",
+    "recoverQrBinding": "Lost your QR link?"
+  },
+  "successRegister": "Please check your email to finish the process",
+  "accountRecovery": {
+    "messageBody": "Enter your email to reset your password",
+    "messageConfirm": "Check if you received an email with your 6-digit code",
+    "codeSended": "We send the code to:",
+    "messageTitle": "Recover your account"
+  },
+  "qrBindingRecovery": {
+    "messageBody": "Enter your email to reset your Qr",
+    "messageTitle": "Recover your Qr",
+    "title": "Qr code generated"
+  },
+  "validators": {
+    "fieldRequired": "This field is required",
+    "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com",
+    "validateCodeType": "Invalid type code",
+    "maxLength": "The maximum character width  is ?",
+    "minLength": "The minimum character width  is {{?}}",
+    "validatePhone": "This field must be a phone number",
+    "validatePasswords": "Passwords don't match"
+  }
+}

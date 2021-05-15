@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Grid } from '@material-ui/core'
 import { TitleComponent } from '../../ui/Title'
 import QRImage from '../QRcode'
+import { languageContext } from '../../../config/languageContext'
 
 const QrBindingRecoveryShowLink = ({qrUrl, title, handleClick}) => {
-  
+
+  const { t } = useContext(languageContext)
   return (
     <Grid
       item
@@ -31,7 +33,7 @@ const QrBindingRecoveryShowLink = ({qrUrl, title, handleClick}) => {
         color="primary"
         className={{}}          
       >
-                Continue
+        {t('common.continueButton')}
       </Button>
      
     </Grid>

@@ -1,13 +1,13 @@
 import { useStore } from '@store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
-import { getStateWithQueryparams } from '../common'
 import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
+import { getStateWithQueryparams } from '../common'
 
-export const useCompartmentalConfigureParametersPageState = ({showSnack, setShowSnack }) => {
-  const history = useHistory()
+export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
   const [isSend, setIsSend] = useState(false)
+  const history = useHistory()
   
   const {
     state: {      
@@ -17,7 +17,7 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
   } = useStore()
   
   const { findCompartmentalSimulation, findPredefinedModel, updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
-
+  
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
     if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
@@ -27,36 +27,31 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
           show: true,
           success: true,
           error: false,
-          successMessage: 'loaded configuration parameters'
+          successMessage: 'loaded configuration state variables'
         }
       )
 
-    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){      
-      const params = getStateWithQueryparams(history)      
+    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){       
       const {name}=dataCurrentSimulation
       findPredefinedModel({model_id:params.model_id,  simulationName:name})
 
-    }else if(!isEmpty(params) && dataCurrentSimulation == null &&
-      isEmpty(predefinedModelSelected)){
-      const params = getStateWithQueryparams(history)
+    }else if(!isEmpty(params) && dataCurrentSimulation == null && isEmpty(predefinedModelSelected)){
       findCompartmentalSimulation(params.simulation_identifier)
     }
     
   },[dataCurrentSimulation,predefinedModelSelected])
-
-
+  
   useEffect(()=>{
     if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
       const {modelData:{identifier:model_id}}=predefinedModelSelected
       const { identifier} = dataCurrentSimulation
       history.push({ 
-        pathname: '/compartmentalModels/stateVariables',
+        pathname: '/compartmentalModels/optimizeParameters',
         search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
       })
 
     }
   },[isSend,dataCurrentSimulation])
-
 
   useEffect(()=>{
     if(error){
@@ -73,13 +68,13 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
   },[error])
 
 
-  const executeRequestConfigureParameters =(option)=>{    
-    const {  name,identifier,state_variable_limits } = dataCurrentSimulation
+  const executeRequestConfigureStateVariables =(option)=>{
+    const {  name,identifier,parameters_limits } = dataCurrentSimulation
     updateCompartmentalSimulation({
       'name':name,
-      'parameters_limits': option,
-      'state_variable_limits':state_variable_limits
-    },identifier)    
+      'state_variable_limits': option,
+      'parameters_limits':parameters_limits
+    },identifier) 
     setIsSend(true)
   }
 
@@ -87,6 +82,6 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
     loading,
     currentSimulation:dataCurrentSimulation,
     predefinedModelSelected:predefinedModelSelected,
-    executeRequestConfigureParameters
+    executeRequestConfigureStateVariables
   }
 }

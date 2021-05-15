@@ -1,9 +1,8 @@
-import React, { Suspense, useState } from 'react'
-import { Link, NavLink, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom'
-import { MiniLoader } from '@components/layouts/MiniLoader'
+import React, { Suspense } from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
-import Breadcrumbs from '../../components/Breadcrumbs'
+import LoaderComponent from '../../components/ui/Loader'
 
 
 
@@ -13,6 +12,9 @@ const CompartmentalModelPage = () => {
   const CompartmentalNewSimulationPage = React.lazy(() => import('./CompartmentalNewSimulationPage'))
   const CompartmentalChooseSimulationPage = React.lazy(() => import('./CompartmentalChooseSimulationPage'))
   const CompartmentalConfigureParametersPage = React.lazy(() => import('./CompartmentalConfigureParametersPage'))
+  const CompartmentalConfigureStateVariablesPage = React.lazy(() => import('./CompartmentalConfigureStateVariablesPage'))
+  const CompartmentalOptimizeParametersPage = React.lazy(() => import('./CompartmentalOptimizeParametersPage'))
+  
 
   const tabs = [
     {
@@ -32,17 +34,18 @@ const CompartmentalModelPage = () => {
   return (
     <>
       <FullWidthTabs tabs={tabs} />
+      
       <CompartmentalModelPageContainer>
-        {/* <Breadcrumbs /> */}
-        <Suspense fallback={<MiniLoader />}>
+        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />
             <Route path={`${match.path}/newSimulations`} exact render={(props) => (
               <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
             )} />
             <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
-            <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />
-          
+            <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
+            <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
+            <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
           </Switch>
         </Suspense>
       </CompartmentalModelPageContainer>

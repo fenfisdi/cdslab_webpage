@@ -1,45 +1,45 @@
 import React, { useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
-import { useCompartmentalConfigureParametersPageState } from './state'
-import ConfigurableParametersForm from '../../../components/CompartmentalModels/ConfigurableParametersForm'
 import SnackbarComponent from '@components/ui/Snackbars'
+import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
+import { useCompartmentalConfigureStateVariablesPageState } from './state'
 import SupportComponent from '../../../components/SupportComponent'
-import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
+import { HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
 
-const CompartmentalConfigureParametersPage = () => {
+const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { 
+  const {     
     currentSimulation, 
     predefinedModelSelected:{modelData}, 
-    executeRequestConfigureParameters } = useCompartmentalConfigureParametersPageState({showSnack, setShowSnack })
+    executeRequestConfigureStateVariables }= useCompartmentalConfigureStateVariablesPageState({showSnack, setShowSnack })
   
-
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
   return (
-    <Grid container item xs={11} justify="center" alignItems="center" direction="column">
-     
+    <Grid container item xs={11} justify="center" alignItems="center" direction="column">  
+
       <Grid container item xs={12} 
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <p></p>
-        <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
+        <SupportComponent text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS}/>
       </Grid>
+
 
       <Grid container item xs={6} justify="center" alignItems="center" direction="column">
         <Typography variant="body2" component="p">
-        Configure parameters values sad
+        Configure State Variables Initial Values
         </Typography>
-      </Grid>
+      </Grid>    
 
-      {modelData && modelData.parameters && <ConfigurableParametersForm
-        parameters={modelData.parameters}
-        handleRequestAction={executeRequestConfigureParameters}
-        valuesFieldParameters={currentSimulation && currentSimulation.parameters_limits}
+      {modelData && modelData.state_variables && <FixedParametersFormStateVariables
+        fieldsSchema={modelData.state_variables}
+        executeRequestConfigureStateVariables={executeRequestConfigureStateVariables}
+        valuesFieldParameters={currentSimulation && currentSimulation.state_variable_limits}
       />}
 
       {!modelData  && <LoaderComponent
@@ -61,4 +61,4 @@ const CompartmentalConfigureParametersPage = () => {
   )
 }
 
-export default CompartmentalConfigureParametersPage
+export default CompartmentalConfigureStateVariablesPage

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import theme from '@styles/cdslabTheme'
 import { useRecoveryQrBindingStyles } from './styles'
@@ -8,6 +8,7 @@ import { useAccountRecoveryQrBindingState } from './state'
 import AccountRecoveryEmailForm from '@components/AccountRecovery/AccountRecoveryEmailForm'
 import QrBindingRecoverySecurityQuestions from '@components/QrForm/QrBindingRecoverySecurityQuestions'
 import QrBindingRecoveryShowLink from '@components/QrForm/QrBindingRecoveryShowLink'
+import { languageContext } from '../../../config/languageContext'
 
 const RecoveryQrBindingPage = () => {
   const classes = useRecoveryQrBindingStyles(theme)
@@ -22,6 +23,7 @@ const RecoveryQrBindingPage = () => {
     qrSecurityQuestions
   } = useAccountRecoveryQrBindingState({ showSnack, setShowSnack })
 
+  const { t } = useContext(languageContext)
   const { data: dataRecovery } = qrRecovery || {}
   const { data: dataSecurityQuestions } = qrSecurityQuestions || {}
 
@@ -61,8 +63,8 @@ const RecoveryQrBindingPage = () => {
       {step == 0 && <AccountRecoveryEmailForm
         handleClick={handleClickRecoveryEmail}
         loading={loading}
-        messageBody={'Ingresa tu correo electrónico para restablecer tu Qr'}
-        messageTitle={'Recuperar tu Qr'} />}
+        messageBody={t('qrBindingRecovery.messageBody')}
+        messageTitle={t('qrBindingRecovery.messageTitle')} />}
 
       {step == 1 && <QrBindingRecoverySecurityQuestions
         loading={loading}
@@ -72,7 +74,7 @@ const RecoveryQrBindingPage = () => {
 
       {step == 2 && <QrBindingRecoveryShowLink
         qrUrl={dataSecurityQuestions && dataSecurityQuestions.urlPath}
-        title={'Codigo Qr generado.'}
+        title={t('qrBindingRecovery.title')}
         handleClick={handleClickRedirect}
       />}
 

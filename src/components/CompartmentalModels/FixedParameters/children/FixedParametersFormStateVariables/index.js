@@ -1,34 +1,34 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography'
+import React, { useEffect, useState } from 'react'
 import ParametersForm from '../ParametersForm'
-import { COMPARTMENTAL_FIELDS } from '../../../../../constants/compartmental'
-import LoaderComponent from '../../../../ui/Loader'
+import { useParametersFormFieldsCreation } from '../ParametersForm/fieldsCreation'
+import CompartmentalButton from '../../../CompartmentalButton'
+import { checkErrorsStateVariableForm } from './validators'
+import { creationResponseStateVariableForm } from './fieldsCreation'
 
 
 
 
-const FixedParametersFormStateVariables = ({
-  modelIndetifier,
-  formConfigureStateVariablesSave,
-  stateVariableValues,
-  classes,
-  loading}) => {
+const FixedParametersFormStateVariables = ({fieldsSchema,loading,executeRequestConfigureStateVariables,valuesFieldParameters}) => {
+  const [isValid,setIsValid] = useState(false)
+  const fields = useParametersFormFieldsCreation({fieldsSchema,valuesFieldParameters})
+
+  useEffect(()=>{
+    setIsValid(checkErrorsStateVariableForm({fields}))
+  },[fields])
   
   return (
     <>
-      <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-        <Typography variant="body1" component="p" className={classes.title}>
-              Configure State Variables  Initial Values
-        </Typography>
-      </Grid>
-      {!loading && <ParametersForm 
-        modelIndetifier={modelIndetifier} 
-        formParametersSave={formConfigureStateVariablesSave} 
-        parameterValues={stateVariableValues}
-        fieldsSchema={COMPARTMENTAL_FIELDS[modelIndetifier].fieldStates}
-      />}
-      {loading && <LoaderComponent width="100p%" height={80} marginTop="20px"/>}
+      
+      {!loading && <ParametersForm fields={fields} fieldsSchema={fieldsSchema} />}
+
+      <CompartmentalButton
+        disabled={isValid?false:true }
+        onClick={()=>{executeRequestConfigureStateVariables(creationResponseStateVariableForm ({fields}))}}
+        justify="flex-end"
+        alignItems="center"
+        text={'Continue'}
+      />  
+
     </>
   )
 }

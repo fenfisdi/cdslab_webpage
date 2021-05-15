@@ -1,0 +1,57 @@
+{
+  "common": {
+    "continueButton": "Continuar",
+    "cancelButton": "Cancelar"
+  },
+  "loginPage": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPasword": "¿Se te olvidó tu contraseña?",
+    "forgotYourSecurityLink": "¿Perdiste tu enlace QR?"
+  },
+  "registerPage": {
+    "title": "Registro",
+    "email": "Correo electrónico",
+    "name": "Nombre",
+    "lastName": "Apellidos",
+    "institution": "Institución",
+    "institutionAffiliation": "Afiliación a la institución",
+    "profession": "Profesión",
+    "securityQuestion1": "Pregunta de seguridad 1",
+    "securityQuestion2": "Pregunta de seguridad 2",
+    "answerQuestion1": "Respuesta pregunta 1",
+    "answerQuestion2": "Respuesta pregunta 2",
+    "birthDate": "Fecha de nacimiento",
+    "phoneNumber": "Número de contacto",
+    "password": "Contraseña"
+  },
+  "successRegister": "Por favor revisa tu correo para finalizar el proceso",
+  "accountRecovery": {
+    "messageBody": "Ingresa tu correo electrónico para restablecer tu contraseña",
+    "messageConfirm": "Comprueba si recibiste un correo electrónico con tu código de 6 dígitos",
+    "codeSended": "Enviamos el código a:",
+    "messageTitle": "Recupera tu cuenta"
+  },
+  "qrBindingRecovery": {
+    "messageBody": "Ingrese su correo electrónico para restablecer su Qr",
+    "messageTitle": "Recupera tu Qr",
+    "title": "Codigo Qr generado"
+  },
+  "qrForm": {
+    "code": "Codigo",
+    "enterCode": "Por favor ingrese el código de verificación",
+    "continue": "Contimuar",
+    "recoverQrBinding": "¿Perdiste tu enlace QR?"
+  },
+  "validators": {
+    "fieldRequired": "Este campo es obligatorio",
+    "validateEmail": "Debe contener un email válido e.j. myemail@mydomain.com",
+    "validateCodeType": "Código inválido",
+    "maxLength": "El número máximo de carácteres es ?",
+    "minLength": "El número mínimo de carácteres es ?",
+    "validatePhone": "Este campo debe ser un número telefónico válido",
+    "validatePasswords": "Contraseñas no coinciden"
+  }
+}
