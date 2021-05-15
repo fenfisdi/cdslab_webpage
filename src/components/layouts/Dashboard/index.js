@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import Navigator from './Navigator'
 import Content from './Content'
-import Header from './Header'
 import theme from '../../../styles/cdslabTheme'
-
+import { Grid, IconButton } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -43,8 +43,7 @@ const styles = {
   },
   main: {
     flex: 1,
-    padding: theme.spacing(6, 4),
-    background: '#eaeff1'
+    background: '#fff'
   },
   footer: {
     padding: theme.spacing(2),
@@ -65,18 +64,31 @@ function Dashboard({ classes, children }) {
       <nav className={classes.drawer}>
         <Hidden smUp implementation='js'>
           <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
+            PaperProps={{ style: { width: drawerWidth, background: '#44605D' } }}
             variant='temporary'
             open={mobileOpen}
             onClose={handleDrawerToggle}
           />
         </Hidden>
         <Hidden xsDown implementation='css'>
-          <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+          <Navigator PaperProps={{ style: { width: drawerWidth, background: '#44605D' } }} />
         </Hidden>
+        {/* <Menunuevo /> */}
       </nav>
       <div className={classes.app}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+        {/* <Header onDrawerToggle={handleDrawerToggle} /> */}
+        <Hidden smUp>
+          <Grid item>
+            <IconButton
+              color='inherit'
+              aria-label='open drawer'
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Grid>
+        </Hidden>
         <main className={classes.main}>
           <Content>
             {children}

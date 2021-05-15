@@ -46,6 +46,7 @@ export const useInputValue = (
     validators,
     helperText,
     onChange,
+    'custom-actions':{'setErrors':setErrors},
     ...extras
   }
 }
