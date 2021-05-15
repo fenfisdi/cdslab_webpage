@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { accountRecoveryActions } from '@actions/accountRecoveryActions'
 import { useStore } from '@store/storeContext'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
   const {
@@ -17,7 +17,9 @@ export const useAccountRecoveryState = ({ showSnack, setShowSnack }) => {
 
   const [step, setStep] = useState(0)
   const history = useHistory()
-  const { from } =  { from: { pathname: '/landingPage' } }
+  const location = useLocation()
+  const { from } = location.state || { from: { pathname: '/landingPage' } }
+
   const redirectLogin = () => {
     history.replace(from)
   }

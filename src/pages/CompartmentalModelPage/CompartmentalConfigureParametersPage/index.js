@@ -32,7 +32,7 @@ const CompartmentalConfigureParametersPage = () => {
 
       <Grid container item xs={6} justify="center" alignItems="center" direction="column">
         <Typography variant="body2" component="p">
-        Configure parameters values
+        Configure parameters values sad
         </Typography>
       </Grid>
 

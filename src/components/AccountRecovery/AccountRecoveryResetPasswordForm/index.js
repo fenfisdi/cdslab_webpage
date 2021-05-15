@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Box, Button, Grid, Paper } from '@material-ui/core'
 import { useAccountRecoveryResetPasswordFormStyles } from './styles'
 import { Input } from '../../ui/Input'
@@ -7,6 +7,7 @@ import theme from '../../../styles/cdslabTheme'
 import { TitleComponent } from '../../ui/Title'
 import { PasswordChecker } from '../../Register/PasswordChecker'
 import { useAccountRecoveryResetPasswordFormState } from './state'
+import { languageContext } from '../../../config/languageContext'
 
 
 const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
@@ -14,6 +15,7 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
   const [isValid, setIsvalid] = useState(false)
   const [verificationPassword, setVerificationPassword] = useState(false)
   const { password } = useAccountRecoveryResetPasswordFormState()
+  const { t } =  useContext(languageContext)
 
   useEffect(() => {
     let notIsValid = false
@@ -75,7 +77,7 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
             <Grid item container xs={6}>
               <PasswordChecker
                 checkValue={password.value}
-                errorText={'Incorrect password.. '}
+                errorText={t('validators.validatePasswords')}
                 eventEmitter={(value) => {
                   const { success } = value
                   setVerificationPassword(success)

@@ -33,9 +33,11 @@ const CompartmentalChooseSimulationPage = () => {
 
       <Grid container item xs={12}>
         <ModelCard
+          ruta="chooseSimulation"
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
+          
         />
       </Grid>
 

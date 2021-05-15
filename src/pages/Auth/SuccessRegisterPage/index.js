@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Grid from '@material-ui/core/Grid'
+import { languageContext } from '../../../config/languageContext'
 
 const SuccessRegister =() =>{
 
+  const { t } = useContext(languageContext)
   return(
     <Grid container 
       direction="column" 
@@ -10,7 +12,7 @@ const SuccessRegister =() =>{
       justify="center"
       style={{ marginTop: '10%' }}
     >
-      <h1>Please check your email to finish the process</h1>
+      <h1>{t('successRegister')}</h1>
     </Grid>
   )
 }

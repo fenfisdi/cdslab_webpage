@@ -4,12 +4,13 @@ import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
 
 
-const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false }) => {
+const ModelCard = ({ ruta='',options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
+  
   const [selected, setSelected] = useState('')
-
-
   const handleClickCharter = (charter) => {
     const { indetifier } = charter || {}
+    const patchLocalStorage = localStorage.getItem('patch')
+    localStorage.setItem('patch',patchLocalStorage + '/' +ruta)
     eventEmitted(charter)
     setSelected(indetifier)
   }

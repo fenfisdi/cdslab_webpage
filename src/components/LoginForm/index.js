@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { MiniLoader } from '../layouts/MiniLoader'
 import { useInputValue } from '../ui/Input/useInputValue'
 import { Input } from '../ui/Input'
@@ -14,25 +14,27 @@ import Copyright from '../layouts/Copyright'
 import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
+import { languageContext } from '../../config/languageContext'
 
 export const LoginForm = ({
   onSubmit,
-  title = 'Sign in',
   loading
 }) => {
   // const [errorMessage, setErrorMessage] = useState()
   const classes = useLoginFormStyles(theme)
   const history = useHistory()
+  
+  const {t, language,  changelanguage } = useContext(languageContext)
 
   const password = useInputValue('', VALIDATORS_LOGIN_FORM.password, {
     name: 'password',
     type: 'password',
-    label: 'Your password'
+    label: t('loginPage.password')
   })
   const email = useInputValue('', VALIDATORS_LOGIN_FORM.email, {
     name: 'email',
     type: 'email',
-    label: 'Your Email'
+    label: t('loginPage.email')
   })
 
   const verifyForm = async (e) => {
@@ -46,16 +48,22 @@ export const LoginForm = ({
       })
     }
   }
-
+  
   const isInvalidForm = () =>
     !!(email.errors.length > 0 || password.errors.length > 0)
 
   const fillSignInHeader = () => (
+    
     <>
-      <Grid container>
-        <Grid item xs>
-          <Link className={classes.link} variant='body2' onClick={() => { history.push('/register') }}>
-            {'Sign Up'}
+      <Grid container justify="space-between">
+        <Grid item xs={2}>
+          <Link className={classes.link} variant='body2' onClick={() => {history.push('/register')}}>
+            {t('loginPage.signUp')}
+          </Link>
+        </Grid>
+        <Grid item xs={2}>
+          <Link className={classes.link} variant='body2' onClick={changelanguage}>
+            {language ? 'ES':'EN' }
           </Link>
         </Grid>
       </Grid>
@@ -63,7 +71,7 @@ export const LoginForm = ({
         <LockOutlinedIcon />
       </Avatar>
       <Typography component='h1' variant='h5'>
-        {title}
+        {t('loginPage.signIn')}
       </Typography>
     </>
   )
@@ -72,12 +80,12 @@ export const LoginForm = ({
     <Grid container>
       <Grid item xs>
         <Link className={classes.link} variant='body2' onClick={() => { history.push('/accountRecovery') }}>
-          {'Forgot password?'}
+          {t('loginPage.forgotPasword')}
         </Link>
       </Grid>
       <Grid item>
         <Link className={classes.link} variant='body2' onClick={() => { history.push('/qrBindingRecovery') }}>
-          {'Forgot your security link?'}
+          {t('loginPage.forgotYourSecurityLink')}
         </Link>
       </Grid>
     </Grid>
@@ -113,7 +121,7 @@ export const LoginForm = ({
           className={classes.submit}
           disabled={isInvalidForm()}
         >
-          Sign In
+          {t('loginPage.signIn')}
         </Button>
         {fillLoginHelpers()}
         <Box mt={5}>

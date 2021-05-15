@@ -33,22 +33,25 @@ const CompartmentalModelPage = () => {
   ]
 
   return (
-    <CompartmentalModelPageContainer>
+    <>
       <FullWidthTabs tabs={tabs} />
-      <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
-        <Switch>
-          <Route path={match.path} exact component={CompartmentalMainPage} />
-          <Route path={`${match.path}/newSimulations`} exact render={(props) => (
-            <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
-          )} />
-          <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
-          <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
-          <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
-          <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
-          <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
-        </Switch>
-      </Suspense>
-    </CompartmentalModelPageContainer>
+      
+      <CompartmentalModelPageContainer>
+        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+          <Switch>
+            <Route path={match.path} exact component={CompartmentalMainPage} />
+            <Route path={`${match.path}/newSimulations`} exact render={(props) => (
+              <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
+            )} />
+            <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
+            <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
+            <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
+            <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
+            <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
+          </Switch>
+        </Suspense>
+      </CompartmentalModelPageContainer>
+    </>
   )
 }
 

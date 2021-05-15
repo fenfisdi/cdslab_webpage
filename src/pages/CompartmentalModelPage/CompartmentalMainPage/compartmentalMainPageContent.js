@@ -25,8 +25,10 @@ export const CompartmentalMainPageContent = () => {
 
       <Grid container item xs={12}>
         <ModelCard
+          ruta="newSimulation"
           options={OPTIONS_COMPARTMENTAL_MAIN}
-          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url }) }}
+          eventEmitted={(cardData) => { cardData.url && history.push( cardData.url ) }}
+          
         />
       </Grid>
     </Grid>

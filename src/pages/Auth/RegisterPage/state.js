@@ -14,6 +14,7 @@ export const useRegisterState = ({ showSnack, setShowSnack }) => {
 
 
   useEffect(() => {
+    console.log(data)
     if (data && !error) {
       
       setShowSnack(
@@ -41,7 +42,7 @@ export const useRegisterState = ({ showSnack, setShowSnack }) => {
   }, [data, error])
 
   const sendForm = (object) => {
-
+    
     registerUser(object)
   }
 
