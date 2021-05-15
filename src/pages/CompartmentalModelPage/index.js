@@ -14,6 +14,7 @@ const CompartmentalModelPage = () => {
   const CompartmentalConfigureParametersPage = React.lazy(() => import('./CompartmentalConfigureParametersPage'))
   const CompartmentalConfigureStateVariablesPage = React.lazy(() => import('./CompartmentalConfigureStateVariablesPage'))
   const CompartmentalOptimizeParametersPage = React.lazy(() => import('./CompartmentalOptimizeParametersPage'))
+  const CompartmentalUploadDataPage = React.lazy(() => import('./CompartmentalUploadDataPage'))
   
 
   const tabs = [
@@ -44,6 +45,7 @@ const CompartmentalModelPage = () => {
           <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
           <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
           <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
+          <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
         </Switch>
       </Suspense>
     </CompartmentalModelPageContainer>

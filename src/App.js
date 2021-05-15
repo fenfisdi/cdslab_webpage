@@ -38,6 +38,7 @@ const App = () => {
   // screen if you're not yet authenticated.
   // Dev enviroment
   const PrivateRoute = ({ component, ...rest }) => {
+    
     return (
       <Route
         {...rest}
