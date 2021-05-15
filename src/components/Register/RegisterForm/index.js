@@ -325,7 +325,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             <Grid item xs={5}>
               <PasswordChecker
                 checkValue={password.value}
-                errorText={'Incorrect password.. '}
+                errorText={t('validators.validatePasswords')}
                 eventEmitter={(value) => {
                   const { success } = value
                   setVerificationPassword(success)

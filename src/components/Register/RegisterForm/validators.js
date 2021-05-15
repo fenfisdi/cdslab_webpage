@@ -5,7 +5,6 @@ import {
 } from '../../../components/Forms/validators/validatorsCheks'
 import {
   PATTERN_EMAIL,
-  PATTERN_PHONE_NUMBER
 } from '../../../components/Forms/validators/patterns'
 
 export const REQUIRED_MESSAGE = 'validators.fieldRequired'

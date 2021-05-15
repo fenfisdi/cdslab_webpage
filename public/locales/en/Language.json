@@ -9,7 +9,7 @@
     "email": "Email",
     "password": "Pasword",
     "forgotPasword": "Forgot password?",
-    "forgotYourSecurityLink": "Forgot your security link?"
+    "forgotYourSecurityLink": "Lost your QR link?"
   },
   "registerPage": {
     "title": "Sign up",
@@ -29,27 +29,28 @@
   },
   "qrForm": {
     "code": "Code",
-    "enterCode": "Please enter the verification code.",
-    "recoverQrBinding": "Did you lost the QR binding?"
+    "enterCode": "Please enter the verification code",
+    "recoverQrBinding": "Lost your QR link?"
   },
   "successRegister": "Please check your email to finish the process",
   "accountRecovery": {
     "messageBody": "Enter your email to reset your password",
-    "messageConfirm": "Check if you received an email with your 6-digit code.",
+    "messageConfirm": "Check if you received an email with your 6-digit code",
     "codeSended": "We send the code to:",
     "messageTitle": "Recover your account"
   },
   "qrBindingRecovery": {
     "messageBody": "Enter your email to reset your Qr",
     "messageTitle": "Recover your Qr",
-    "title": "Qr code generated."
+    "title": "Qr code generated"
   },
   "validators": {
-    "fieldRequired": "This field is required.",
-    "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com.",
+    "fieldRequired": "This field is required",
+    "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com",
     "validateCodeType": "Invalid type code",
-    "maxLength": "The maximum character width  is ?.",
-    "minLength": "The minimum character width  is {{?}}.",
-    "validatePhone": "This field must be a phone number."
+    "maxLength": "The maximum character width  is ?",
+    "minLength": "The minimum character width  is {{?}}",
+    "validatePhone": "This field must be a phone number",
+    "validatePasswords": "Passwords don't match"
   }
 }

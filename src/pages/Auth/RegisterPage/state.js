@@ -42,8 +42,8 @@ export const useRegisterState = ({ showSnack, setShowSnack }) => {
   }, [data, error])
 
   const sendForm = (object) => {
-    console.log(object)
-    //registerUser(object)
+    
+    registerUser(object)
   }
 
   const updateStep = (int) => {
