@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS } from '../../../constants/helpInformation'
 import UploadDataForm from '../../../components/CompartmentalModels/UploadDataForm'
-
+import SnackbarComponent from '@components/ui/Snackbars'
+import { useCompartmentalUploadDataPageState } from './state'
+import LoaderComponent from '../../../components/ui/Loader'
 
 
 const CompartmentalUploadDataPage = () => {
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   
-  
+  const{ 
+    selectOptions, 
+    executeRequestUploadData, 
+    loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({showSnack, setShowSnack})
+
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column" spacing={5}>
       <Grid container item xs={12} 
@@ -25,10 +35,28 @@ const CompartmentalUploadDataPage = () => {
         </Typography>
       </Grid>
 
-      <Grid container item xs={12}>
-        <UploadDataForm/>
-      </Grid>
+      {!loadingSimulationFileUpload && <Grid container item xs={12}>
+        <UploadDataForm
+          selectOptions={selectOptions}
+          executeRequest={executeRequestUploadData}
+        />
+      </Grid>}
+
+      {loadingSimulationFileUpload && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
+      />}
+
+      {showSnack && showSnack.show && <SnackbarComponent
+        snackDuration={3500}
+        configData={showSnack}
+        handleCloseSnack={handleCloseSnack}
+        successMessage={showSnack.successMessage}
+        errorMessage={showSnack.errorMessage} />}
     </Grid>
+
+    
 
   )
 }

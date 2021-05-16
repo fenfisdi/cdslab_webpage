@@ -32,7 +32,7 @@ export default function TableFormatStatic({Variable='Variable'}) {
         <TableHead>
           <TableRow>
             <TableCell align="center" className={classes.tableCell}>Date</TableCell>
-            <TableCell align="center" className={`${classes.tableCell} red`}>{Variable?Variable:'Variable'}</TableCell>
+            <TableCell align="center" className={`${classes.tableCell}`}>{Variable?Variable:'Variable'}</TableCell>
           </TableRow>
         </TableHead>
 

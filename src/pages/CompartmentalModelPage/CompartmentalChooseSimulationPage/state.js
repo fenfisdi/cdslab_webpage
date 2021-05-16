@@ -77,7 +77,8 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
       storeCompartmentalSimulation({
         'name': name,        
         'status':'incomplete',
-        'model_id': model_id
+        'model_id': model_id,
+        'optimize_parameters':true
       })
     }
     

@@ -21,31 +21,33 @@ const useStyles = makeStyles({
 })
 
 
-export default function TableFormatDynamic({headersTable,dataTable}) {
+export default function TableFormatDynamic({headersTable=[],dataTable=[]}) {
   const classes = useStyles()
 
   return (
-    
     <TableContainer component={Paper} className={classes.TableContainer}>
-      <Table >
-        
-        <TableHead>
-          <TableRow>
-            <TableCell align="center" className={classes.tableCell}>Date</TableCell>
-            <TableCell align="center" className={`${classes.tableCell}`}>Variable</TableCell>
-          </TableRow>
+      <Table>        
+        <TableHead> 
+          <TableRow >
+            {headersTable.map((row,index) => (
+            
+              <TableCell key={`${row.name}header${index}`} align="center" className={classes.tableCell}>
+                {row.name}
+              </TableCell>
+            
+            ))}     
+          </TableRow>       
         </TableHead>
-
         <TableBody>
-          <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
-          </TableRow>
-          
-          <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
-          </TableRow>
+          {dataTable.map((row,index) => (
+            <TableRow key={`body${index}`}>
+              {headersTable.map((header)=>(
+                <TableCell key={`${header.name}body_cell`}align="center" className={classes.tableCell}>
+                  {row[header.name]}
+                </TableCell>                          
+              ))}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

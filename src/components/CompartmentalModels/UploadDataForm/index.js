@@ -6,25 +6,39 @@ import { UploadButton } from '../../ui/UploadButton'
 import CompartmentalButton from '../CompartmentalButton'
 import TableFormatStatic from './children/TableFormatStatic'
 import { useUploadDataFormState } from './state'
-import * as XLSX from 'xlsx'
-import { processData } from '../../../utils/common'
 import { useUploadDataFormStyles } from './styles'
+import TableFormatDynamic from './children/TableFormatDynamic'
+import { processData } from '../../../utils/common'
+import * as XLSX from 'xlsx'
 
-const UploadDataForm =()=>{
-  const formFields = useUploadDataFormState()
+const UploadDataForm =({selectOptions, executeRequest})=>{  
   const classes = useUploadDataFormStyles()
-  const { stateVariable, uploadButton } = formFields
+  
   const [headersTable, setHeadersTable] = useState([])
   const [dataTable, setDataTable] = useState([])
-
-  useEffect(()=>{
-    if(dataTable.length>0 && headersTable.length>0){
-      console.log('Headers:::::::::::::>',headersTable)
-      console.log('datable:::::::::::::>',dataTable)
-    }
-  },[dataTable,headersTable])
+  const [isValid, setIsvalid] = useState(false)
+  const formFields = useUploadDataFormState()
+  const { stateVariable, uploadButton } = formFields
 
   
+  useEffect(() => {
+    let notIsValid = false
+    for (var key in formFields) {
+      if (!formFields[key].value) {
+        notIsValid = true
+      }
+    }
+    setIsvalid(notIsValid)
+  }, [formFields])
+ 
+  const handleClickButton = () => {
+    let formData = new FormData()
+    formData.append('file', uploadButton.value)
+    formData.append('stateVariable', stateVariable.value)
+    executeRequest({ formData })
+  }
+
+
   const handleFileUpload = e => {
     if(e.target.files && e.target.files[0]){
       uploadButton.onChange(e)
@@ -39,15 +53,14 @@ const UploadDataForm =()=>{
         const ws = wb.Sheets[wsname]
         /* Convert array of arrays */
         const data = XLSX.utils.sheet_to_csv(ws, { header: 1 })
-        const { body, headers } = processData(data)
-        setDataTable(body)
+        const { body, headers } = processData(data)        
+        setDataTable(body.slice(0,3))
         setHeadersTable(headers)
       }
       reader.readAsBinaryString(file)
     }
     
   }
- 
  
   return (
     <Grid
@@ -63,7 +76,7 @@ const UploadDataForm =()=>{
         xs={4}
         title="Select Variable"
         {...stateVariable}
-        options={[{label:'a',name:'a', value:'a'}]} />
+        options={selectOptions || []} />
 
       <Grid container item xs={6} 
         justify="center"
@@ -97,9 +110,16 @@ const UploadDataForm =()=>{
 
       <UploadButton xs={6} {...uploadButton} onChange={handleFileUpload} />
 
+      {uploadButton.value && <Grid container item xs={4}>
+        <TableFormatDynamic
+          headersTable={headersTable}
+          dataTable={dataTable}
+        />
+      </Grid>}
+
       <CompartmentalButton
-        disabled={true}
-        onClick={()=>{console.log(':::::::::::::::::::>a')}}
+        disabled={isValid}
+        onClick={handleClickButton}
         justify="center"
         alignItems="center"
         text={'Configure State Variables Settings'}
