@@ -5,6 +5,7 @@ import ConfigurableParametersForm from '../../../components/CompartmentalModels/
 import SnackbarComponent from '@components/ui/Snackbars'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
+import LoaderComponent from '../../../components/ui/Loader'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -19,7 +20,7 @@ const CompartmentalConfigureParametersPage = () => {
   }
 
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+    <Grid container item xs={11} justify="center" alignItems="center" direction="column">
      
       <Grid container item xs={12} 
         direction="row"
@@ -31,7 +32,7 @@ const CompartmentalConfigureParametersPage = () => {
 
       <Grid container item xs={6} justify="center" alignItems="center" direction="column">
         <Typography variant="body2" component="p">
-        Configure parameters values
+        Configure parameters values sad
         </Typography>
       </Grid>
 
@@ -39,6 +40,12 @@ const CompartmentalConfigureParametersPage = () => {
         parameters={modelData.parameters}
         handleRequestAction={executeRequestConfigureParameters}
         valuesFieldParameters={currentSimulation && currentSimulation.parameters_limits}
+      />}
+
+      {!modelData  && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
       />}
 
       {showSnack && showSnack.show && <SnackbarComponent

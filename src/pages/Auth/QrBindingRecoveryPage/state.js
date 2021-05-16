@@ -11,7 +11,7 @@ export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) =>
     dispatch
   } = useStore()
   const { requestQrBindingRecover, requestQrSecurityQuestions } = qrAccountRecoveryActions(dispatch)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
   const history = useHistory()
 
 

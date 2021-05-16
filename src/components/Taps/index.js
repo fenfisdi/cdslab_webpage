@@ -11,17 +11,11 @@ const useStyles = makeStyles(() => ({
     background: '#fff'
   },
   itemActiveItem: {
-    '& > div' : {
-      color: '#44605d',
-      fontSize: '15px'
-    },
-    '& > div > img' : {
-      height: '35px'
-    }
+    background: '#fff'
   },
   containerTaps:{   
     display: 'inline-flex',
-    height: '40px',
+    height: '50px',
     textAlign: 'center',
     justifyContent: 'center'
   },
@@ -31,23 +25,29 @@ const useStyles = makeStyles(() => ({
     background: '#F1F1F1'
   },
   img: {
-    height: '30px'
+    height: '40px',
+    position: 'relative',
+    top: '6px'
   },
   divImg :{
     width: '50%'
   },
   divLabel:{
-    width: '40%',
     position: 'relative',
-    top: '7px'
+    top: '10px',
+    fontSize: '18px'
   },
   link: {
     display: 'inline-flex',
-    textDecoration : 'none'
+    textDecoration : 'none',
+    width: '100%',
+    height: '50px',
   },
   linkDisabled: {
     display: 'inline-flex',
     textDecoration : 'none',
+    width: '100%',
+    height: '50px',
     color: '#808080'
   }
 }))

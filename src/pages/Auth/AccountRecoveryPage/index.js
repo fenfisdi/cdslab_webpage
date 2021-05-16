@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import { useAccountRecoveryStyles } from './styles'
 import theme from '@styles/cdslabTheme'
@@ -8,6 +8,7 @@ import { useAccountRecoveryState } from './state'
 import AccountRecoverySecurityCodeForm from '@components/AccountRecovery/AccountRecoverySecurityCodeForm'
 import AccountRecoveryResetPasswordForm from '@components/AccountRecovery/AccountRecoveryResetPasswordForm'
 import { replaceStringInRange } from '@utils/common'
+import { languageContext } from '../../../config/languageContext'
 
 const AccountRecoveryPage = () => {
   const classes = useAccountRecoveryStyles(theme)
@@ -20,7 +21,7 @@ const AccountRecoveryPage = () => {
     step,
     updateStep,
     sendEmailData } = useAccountRecoveryState({ showSnack, setShowSnack })
-
+  const { t } = useContext(languageContext)
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -70,15 +71,15 @@ const AccountRecoveryPage = () => {
       {step == 0 && <AccountRecoveryEmailForm
         loading={loading}
         handleClick={handleClickRecoveryEmail}
-        messageBody={'Ingresa tu correo electrónico para restablecer tu contraseña'}
-        messageTitle={'Recupera tu cuenta'}
+        messageBody={t('accountRecovery.messageBody')}
+        messageTitle={t('accountRecovery.messageTitle')}
         sendStep={updateStep} />
       }
       {step == 1 && <AccountRecoverySecurityCodeForm
         loading={loading}
         handleClick={handleClickSecurityCode}
-        messageTitle={'Comprueba si recibiste un correo electrónico con tu código de 6 dígitos.'}
-        messageBody={`Enviamos el código a: ${sendEmailData && replaceStringInRange(sendEmailData.data.email, 1, 5, '*****')}`}
+        messageTitle={t('accountRecovery.messageConfirm')}
+        messageBody={t('accountRecovery.codeSended') `${sendEmailData && replaceStringInRange(sendEmailData.data.email, 1, 5, '*****')}`}
       />}
       {step == 2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission} />}
       {showSnack && showSnack.show && <SnackbarComponent

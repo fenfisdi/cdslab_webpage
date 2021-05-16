@@ -35,10 +35,13 @@ const SimulationType = ({handleClickSimulationType,options}) => {
         </Typography>
       </Grid>
       <ModelCard 
+        direction="column"
         justify="center"
         alignItems="center"
+        ruta="compartmentalModels"
         options={options}
         eventEmitted={(data)=>{setModelData(data)}}
+        
       />
       <CompartmentalButton
         disabled={isEmpty(modelData)}   

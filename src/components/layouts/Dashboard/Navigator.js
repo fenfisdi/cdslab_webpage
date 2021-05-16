@@ -9,18 +9,18 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import BuildIcon from '@material-ui/icons/Build'
 import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
-import cdsSvg from '../../../assets/images/layout/Logo CDSL Iniciales_Opc1.svg'
+import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
+import { Icon } from '@material-ui/core'
 
 const categories = [
   {
     id: '',
     children: [
       { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: <BuildIcon />,typeIcon : 'material', href: '/userManagement' },
+      { id: 'Management', icon: <Icon className={'fas fa-key'} />,typeIcon : 'material', href: '/userManagement' },
     ]
   },
   {
@@ -58,7 +58,7 @@ const styles =  (theme) => ({
     'text-decoration': 'underline !important',
   },
   itemPrimary: {
-    fontSize: 'inherit'
+    fontSize: '24'
   },
   boderItem: {
     border: '1px solid #fff'
@@ -68,7 +68,7 @@ const styles =  (theme) => ({
     marginRight: theme.spacing(2)
   },
   divider: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(11),
     backgroundColor: '#fff'
   },
   link:{
@@ -77,8 +77,10 @@ const styles =  (theme) => ({
     width: '100%',
   },
   image:{
-    width: '100%',
-    transform: 'scale(1.5)'
+    width: '60%',
+    transform: 'scale(1.5)',
+    display: 'block',
+    margin: '0 auto'
   }
 })
 

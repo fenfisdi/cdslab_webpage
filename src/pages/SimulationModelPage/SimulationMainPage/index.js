@@ -31,7 +31,7 @@ const SimulationMainPage = () => {
 
 
   useEffect(() => {
-    console.log(navigation)
+    //console.log('navegacion: ' + JSON.stringify(navigation))
     updateNavigationTitle()
     loadData()
   }, [])
@@ -64,7 +64,7 @@ const SimulationMainPage = () => {
 
   return (
     <SimulationContainer>
-      <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={70} height={70} colorText='#827C02' fontSize='20px' fontWeight='bold'/>
+      <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={100} height={100} colorText='#827C02' fontSize='40px' fontWeight='bold'/>
       <ModelCard
         options={options}
         eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import { Input } from '../../ui/Input'
+
 
 export const PasswordChecker = ({
   checkValue,
@@ -9,6 +10,7 @@ export const PasswordChecker = ({
   const [value, setValue] = useState('')
   const [isPress, setIsPress] = useState(false)
   const [helperText, setHelperText] = useState(null)
+  
 
   useEffect(() => {
     if (!isPress && value.length > 0) {
