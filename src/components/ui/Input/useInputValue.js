@@ -40,6 +40,8 @@ export const useInputValue = (
     err.length > 0 ? setHelperText(err.map(e => t(e.message))?.join('\n')) : setHelperText(null)
   }
 
+  console.log(helperText)
+
   return {
     value,
     errors,

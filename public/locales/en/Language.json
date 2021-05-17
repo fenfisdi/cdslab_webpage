@@ -45,12 +45,12 @@
     "title": "Qr code generated"
   },
   "validators": {
-    "fieldRequired": "This field is required",
+    "fieldRequired": "This field is required.",
     "validateEmail": "It must contain a valid email. e.g. myemail@mydomain.com",
-    "validateCodeType": "Invalid type code",
-    "maxLength": "The maximum character width  is ?",
-    "minLength": "The minimum character width  is {{?}}",
-    "validatePhone": "This field must be a phone number",
-    "validatePasswords": "Passwords don't match"
+    "validateCodeType": "Invalid type code.",
+    "maxLength": "The maximum character width  is ?.",
+    "minLength": "The minimum character width  is ?.",
+    "validatePhone": "This field must be a phone number.",
+    "validatePasswords": "Passwords don't match."
   }
 }
