@@ -92,7 +92,12 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   const executeRequestUploadData =({formData})=>{
     const {  name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
     state_variable_limits.map((stateVariable)=>{
-      stateVariable.label.toLowerCase() == formData.get('stateVariable') ? stateVariable.to_fit= true : stateVariable.to_fit = false      
+      const {label} = stateVariable
+      if(label.toLowerCase() == formData.get('stateVariable').toLowerCase()){
+        stateVariable.to_fit = true  
+      }else{
+        stateVariable.to_fit = false      
+      }
     })
     formData.delete('stateVariable')
     storeCompartmentalFileUpload({

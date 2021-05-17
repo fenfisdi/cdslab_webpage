@@ -1,10 +1,8 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import SupportComponent from '../../../components/SupportComponent'
 import {CompartmentalReviewConfigurationMessageContainer,CompartmentalReviewConfigurationMessageFormTitle,useCompartmentalReviewConfigurationMessageStyles} from './styles'
 import {HELP_INFORMATION_REVIEW_CONFIGURATION_MESSAGE_SIMULATIONS} from '../../../constants/helpInformation'
-import { Typography } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
  
 
 const CompartmentalReviewConfigurationMessagePage=()=>{
