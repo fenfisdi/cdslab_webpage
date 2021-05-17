@@ -1,19 +1,12 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import SearchIcon from '@material-ui/icons/Search'
-import ShowTableComponent from '../TableComponent/SortTable'
+import ShowTableComponent from '../TableComponent/index'
+import {showTableStyles} from './styles'
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-    justify: 'center',
-  },
-}))
-
-export default function UserListComponent() {
-  const classes = useStyles()
+export const TableComponent=() => {
+  const classes = showTableStyles()
 
   return (
     

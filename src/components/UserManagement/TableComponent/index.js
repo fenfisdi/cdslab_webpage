@@ -1,24 +1,18 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
-import ActiveComponent from '../SwitchComponent/index'
-
-const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'email', label: 'E-mail', minWidth: 100 },
-  { id: 'active', label: 'Active', minWidth: 100 },
-]
+import Paper from '@material-ui/core/Paper'
+import { ActiveComponent } from './SwitchComponent/index'
+import { TableHeaderComponent } from './TableHeadComponent/index'
 
 function createData(name, email, active) {
-  
-  return { name, email, active}
+  return { name, email, active }
 }
 
 const rows = [
@@ -26,86 +20,131 @@ const rows = [
   createData('Victoria', 'victoria@example.com', true),
   createData('Clara', 'clara@example.com', true),
   createData('Diana', 'diana@example.com', true),
-  createData('Alejandro', 'zico@example.com', true),
+  createData('Alejandro', 'Alejandro@example.com', true),
   createData('Ramiro', 'ramiro@example.com', true),
   createData('Santiago', 'santiago@example.com', true),
   createData('Edgar', 'edgar@example.com', true),
   createData('Camilo', 'camilo@example.com', true),
   createData('Johan', 'johan@example.com', true),
-  createData('kiiron', 'kiiron@example.com', true),
+  createData('Kiiron', 'kiiron@example.com', true),
   createData('Sasha', 'sasha@example.com', true),
   createData('Odin', 'odin@example.com', true),
   createData('Dasha', 'dasha@example.com', true),
   createData('Lola', 'lola@example.com', true),
 ]
 
-const useStyles = makeStyles({
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1
+  }
+  return 0
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy)
+}
+
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index])
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0])
+    if (order !== 0) return order
+    return a[1] - b[1]
+  })
+  return stabilizedThis.map((el) => el[0])
+}
+
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  container: {
-    maxHeight: 440,
+  paper: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
   },
-})
+  table: {
+    minWidth: '100%',
+  },
+}))
 
 export default function ShowTableComponent() {
   const classes = useStyles()
+  const [order, setOrder] = React.useState('asc')
+  const [orderBy, setOrderBy] = React.useState('calories')
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc'
+    setOrder(isAsc ? 'desc' : 'asc')
+    setOrderBy(property)
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value)
+    setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
   }
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id]
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {typeof value === 'boolean' ? <ActiveComponent/> : value}
+    <Grid className={classes.root}>
+      <Paper className={classes.paper}>
+        <TableContainer>
+          <Table
+            className={classes.table}
+            aria-labelledby="tableTitle"
+            aria-label="enhanced table"
+          >
+            <TableHeaderComponent
+              classes={classes}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+            />
+            <TableBody>
+              {stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  const labelId = `enhanced-table-checkbox-${index}`
+
+                  return (
+                    <TableRow
+                      hover
+                      tabIndex={-1}
+                      key={row.name}
+                    >
+                      <TableCell padding="checkbox">
                       </TableCell>
-                    )
-                  })}
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </Paper>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="left"><ActiveComponent/></TableCell>
+                    </TableRow>
+                  )
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </Grid>
   )
 }

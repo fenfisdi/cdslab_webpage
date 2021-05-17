@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Switch from '@material-ui/core/Switch'
 
-export default function ActiveComponent() {
+export const ActiveComponent = () => {
   const [state, setState] = useState({
     checkedA: true,
     checkedB: true,

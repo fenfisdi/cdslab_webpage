@@ -8,10 +8,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import UserListComponent from '../../components/UserManagement/TableListComponent/index'
-
-
-
+import {TableComponent} from '../../components/UserManagement/ShowTableComponent/index'
 
 
 function TabPanel(props) {
@@ -73,7 +70,8 @@ export default function UserManagementPage() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <UserListComponent/>
+        <TableComponent/>
+
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
