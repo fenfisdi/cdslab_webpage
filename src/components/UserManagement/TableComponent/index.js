@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import { ActiveComponent } from './SwitchComponent/index'
 import { TableHeaderComponent } from './TableHeadComponent/index'
 import { useTableComponentStyles } from './styles'
+import {useTableComponentState} from './state'
 
 function createData(name, email, active) {
   return { name, email, active }
@@ -33,31 +34,7 @@ const rows = [
   createData('Lola', 'lola@example.com', true),
 ]
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1
-  }
-  return 0
-}
 
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy)
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index])
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0])
-    if (order !== 0) return order
-    return a[1] - b[1]
-  })
-  return stabilizedThis.map((el) => el[0])
-}
 
 export const ShowTableComponent = () => {
   const classes = useTableComponentStyles()
@@ -65,6 +42,12 @@ export const ShowTableComponent = () => {
   const [orderBy, setOrderBy] = React.useState('name')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const functionsTable = useTableComponentState()
+  const {
+    getComparator,
+    stableSort
+  }=functionsTable
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
