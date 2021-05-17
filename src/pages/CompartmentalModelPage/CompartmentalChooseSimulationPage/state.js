@@ -57,16 +57,15 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
           errorMessage: simulationFolderInformation.errorData.detail
         }
       )
-    }else if(simulationFolderInformation.data!=null){
+    }else if(simulationFolderInformation.data!=null && currentSimulation.data!=null){
       const {modelData:{identifier:model_id}}=predefinedModelSelected
       const { data:{identifier}} = currentSimulation
       history.push({ 
         pathname: '/compartmentalModels/configureParameters',
-        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
+        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`
       })  
     }
   },[simulationFolderInformation])
-
   
   const executeSelectedOption =(option)=>{
     const {indetifier}=option

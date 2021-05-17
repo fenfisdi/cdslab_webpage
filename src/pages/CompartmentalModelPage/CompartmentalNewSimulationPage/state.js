@@ -11,7 +11,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
     dispatch
   } = useStore()
   
-  const { getPredefinedModels, storePredefinedModelSelected, setDefinitionCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+  const { getPredefinedModels, storePredefinedModelSelected, setDefinitionCompartmentalSimulation, setDefinitionCompartmentalFolderSimulation } = useCompartmentalModelActions(dispatch)
   
   useEffect(() => {
     if(isNull(predefinedModelsList) && error!=true){
@@ -21,6 +21,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
     if(!isEmpty(predefinedModelSelected) && currentSimulation.data != null){
       storePredefinedModelSelected({})
       setDefinitionCompartmentalSimulation(null)
+      setDefinitionCompartmentalFolderSimulation(null)
     }
   }, [predefinedModelsList]) 
 
