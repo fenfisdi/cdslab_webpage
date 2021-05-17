@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import SearchIcon from '@material-ui/icons/Search'
-import ShowTableComponent from '../TableComponent/index'
+import {ShowTableComponent} from '../TableComponent/index'
 import {showTableStyles} from './styles'
 
 export const TableComponent=() => {

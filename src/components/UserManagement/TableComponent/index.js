@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -10,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { ActiveComponent } from './SwitchComponent/index'
 import { TableHeaderComponent } from './TableHeadComponent/index'
+import { useTableComponentStyles } from './styles'
 
 function createData(name, email, active) {
   return { name, email, active }
@@ -59,23 +59,10 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0])
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: '100%',
-  },
-}))
-
-export default function ShowTableComponent() {
-  const classes = useStyles()
+export const ShowTableComponent = () => {
+  const classes = useTableComponentStyles()
   const [order, setOrder] = React.useState('asc')
-  const [orderBy, setOrderBy] = React.useState('calories')
+  const [orderBy, setOrderBy] = React.useState('name')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
