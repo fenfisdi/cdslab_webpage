@@ -58,4 +58,7 @@ export const GlobalStyles = createGlobalStyle`
         .align-center{
            text-align: center;     
         }
+        header{
+           box-shadow: unset !important;
+        }
         `

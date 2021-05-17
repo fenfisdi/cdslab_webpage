@@ -6,7 +6,6 @@ import AdjustParametersFormDataUpload from './children/AdjustParametersFormDataU
 import AdjustParametersFormResourceSelection from './children/AdjustParametersFormResourceSelection'
 import { COMPARTMENTAL_FIELDS } from '../../../constants/compartmental'
 
-
 const AdjustParameters = ({
   handleClickAdjustParameters,
   options,
@@ -36,7 +35,6 @@ const AdjustParameters = ({
         modelData={modelData}
         handleClickButton={handleClickButton}
         slectedModel={slectedModel}
-
       />}
 
       {step == 1 && <AdjustParametersFormDataUpload

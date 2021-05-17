@@ -9,7 +9,6 @@ import { ACCOUNT_RECOVERY_LOADING,
 import { requestPasswordSubmissionService, requestSecurityCodeService, requestSecurityCodeVerificationService } from '../services/accountRecoveryServices'
 
 export const accountRecoveryActions = (dispatch) => {
-  
   const requestPasswordChange = (userForm) => {
     dispatch({ type: ACCOUNT_RECOVERY_LOADING })
     requestSecurityCodeService(userForm)
@@ -20,22 +19,20 @@ export const accountRecoveryActions = (dispatch) => {
         })
       })
       .catch((error) => {
-        if(error.response) {
-          const {response:{data}}=error          
+        if (error.response) {
+          const { response: { data } } = error
           dispatch({
             type: ACCOUNT_RECOVERY_SEND_EMAIL_ERROR,
             payload: data
           })
-        }else if(error.request){
+        } else if (error.request) {
           dispatch({
             type: ACCOUNT_RECOVERY_SEND_EMAIL_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message:'The request was made but no response was received' }
           })
-        }      
+        }
       })
-  
   }
-
 
   const requestSecurityCodeVerification = (userForm) => {
     dispatch({ type: ACCOUNT_RECOVERY_LOADING })
@@ -47,18 +44,18 @@ export const accountRecoveryActions = (dispatch) => {
         })
       })
       .catch((error) => {
-        if(error.response) {
-          const {response:{data}}=error          
+        if (error.response) {
+          const { response: { data } } = error
           dispatch({
             type: ACCOUNT_RECOVERY_SECURITY_CODE_ERROR,
-            payload: data 
+            payload: data
           })
-        }else if(error.request){
+        } else if (error.request) {
           dispatch({
             type: ACCOUNT_RECOVERY_SECURITY_CODE_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message: 'The request was made but no response was received' }
           })
-        }      
+        }
       })
   }
 
@@ -72,26 +69,20 @@ export const accountRecoveryActions = (dispatch) => {
         })
       })
       .catch((error) => {
-        if(error.response) {
-          const {response:{data}}=error          
+        if (error.response) {
+          const { response: { data } } = error
           dispatch({
             type: ACCOUNT_RECOVERY_RESET_PASSWORD_ERROR,
-            payload: data 
+            payload: data
           })
-        }else if(error.request){
+        } else if (error.request){
           dispatch({
             type: ACCOUNT_RECOVERY_RESET_PASSWORD_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message: 'The request was made but no response was received' }
           })
-        }      
+        }
       })
-  
   }
-  
+
   return { requestPasswordChange, requestSecurityCodeVerification, requestPasswordSubmission }
-  
-    
 }
-  
-  
-  

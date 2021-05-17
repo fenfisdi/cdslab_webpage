@@ -14,7 +14,6 @@ export const useCompartmentalModelsPageState = () => {
     { predefinedModel: {}, simulationType: {}, configuredParameterValues: {}, stateVariableValues: {} }
   )
 
-
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -74,8 +73,6 @@ export const useCompartmentalModelsPageState = () => {
     const { configuredParameterValues, stateVariableValues } = parameters || {}
     if (!isEmpty(configuredParameterValues)) {
       console.log(':::::::::::::>parameters', parameters)
-      //const {parametersValue } = configuredParameterValues
-      //registerModelParameters(parametersValue)
     }
     if (!isEmpty(stateVariableValues)) {
       console.log(':::::::::::::>parameters', parameters)

@@ -14,7 +14,6 @@ const NavigationButtons = ({ main, back, forward }) => {
           variant='contained'
           color='secondary'
           startIcon={<HomeIcon />}
-
         >
           {main.name}
         </Button>

@@ -45,13 +45,13 @@ export const useCompartmentalModelActions = (dispatch) => {
   }
 
   const registerErrorCompartmentalSimulation =(error)=>{
-    if(error.response) {          
-      const {response:{data}}=error                    
+    if (error.response) {
+      const { response: { data } } = error
       dispatch({
         type: COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
-        payload: data 
+        payload: data
       })
-    }else if(error.request){
+    }else if(error.request) {
       dispatch({
         type: COMPARTMENTAL_MODEL_STORE_SIMULATION_ERROR,
         payload:{detail:'The request was made but no response was received'}
@@ -76,20 +76,20 @@ export const useCompartmentalModelActions = (dispatch) => {
   const getPredefinedModels = () => {  
     
     getPredefinedModelsService()
-      .then((response) => {        
+      .then((response) => {
         dispatch({
           type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
           payload: response.data.data
         })
       })
       .catch((error) => {
-        if(error.response) {          
-          const {response:{data}}=error                    
+        if (error.response) {
+          const { response: { data } } = error
           dispatch({
             type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
-            payload: data 
+            payload: data
           })
-        }else if(error.request){
+        } else if (error.request) {
           dispatch({
             type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
             payload:{detail:'The request was made but no response was received'}
@@ -98,7 +98,6 @@ export const useCompartmentalModelActions = (dispatch) => {
       })
   }
 
-
   const storePredefinedModelSelected =(predefinedModel)=>{
     dispatch({
       type: COMPARTMENTAL_MODEL_STORE_PREDEFINED_MODEL_SELECTED,
@@ -106,7 +105,7 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
-  const setDefinitionCompartmentalSimulation =(simulation)=>{
+  const setDefinitionCompartmentalSimulation = (simulation) => {
     dispatch({
       type: COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
       payload: simulation
@@ -190,33 +189,25 @@ export const useCompartmentalModelActions = (dispatch) => {
       registerCompartmentalModelStore(response)
     })
   }
-  
 
-  const findPredefinedModel =({model_id:idModel,simulationName})=>{
-    
-    findPredefinedModelService(idModel).then((response)=>{            
+  const findPredefinedModel = ({ model_id: idModel,simulationName }) => {
+    findPredefinedModelService(idModel).then((response) => {
       const modelData = response.data.data
       storePredefinedModelSelected({modelData,simulationName})
     })
-    
   }
 
-  const updateCompartmentalSimulation =(simulation,idSimulation)=>{
-    
-    updateCompartmentalSimulationService(simulation,idSimulation).then((response)=>{      
+  const updateCompartmentalSimulation = (simulation,idSimulation) => {
+    updateCompartmentalSimulationService(simulation,idSimulation).then((response) => {
       registerCompartmentalSimulation(response.data.data)
     }).catch((error) => {
       registerErrorCompartmentalSimulation(error)
     })
   }
-  
 
-
-
-
-  return { 
-    registerModelParameters, 
-    getPredefinedModels, 
+  return {
+    registerModelParameters,
+    getPredefinedModels,
     storePredefinedModelSelected,
     storeCompartmentalSimulation,
     findCompartmentalSimulation,

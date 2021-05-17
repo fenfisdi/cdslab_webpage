@@ -35,4 +35,3 @@ export const VALIDATORS_ACCOUNT_RECOVERY_EMAIL_FORM = {
     }
   ]
 }
-  

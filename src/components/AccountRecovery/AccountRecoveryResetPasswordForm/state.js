@@ -13,5 +13,4 @@ export const useAccountRecoveryResetPasswordFormState = () => {
   return {
     password,
   }
-
 }
