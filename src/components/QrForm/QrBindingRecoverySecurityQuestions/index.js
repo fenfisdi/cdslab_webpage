@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { useQrBindingRecoverySecurityQuestionsStyles } from './styles'
-import { useInputValue } from '../../ui/Input/useInputValue'
-import { VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS }  from './validators'
 import { Input } from '../../ui/Input'
 import LoaderComponent from '../../ui/Loader'
 import theme from '../../../styles/cdslabTheme'
@@ -23,14 +21,12 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
 
   useEffect(() =>{
     console.log(1)
-    //renderQuestions()
     console.log(questions)
   },[])
    
   useEffect(() => {
     console.log(2)
     console.log(questions)
-    //renderQuestions()
     validateForm()
   }, [fields])
  
@@ -50,10 +46,9 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
       if(!isFormValid){
         break
       }
-      
     }
     setIsvalid(isFormValid)
-  } 
+  }
 
   const handleClickButton = () => {
     let answers = []
@@ -65,9 +60,8 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
     handleEventEmitted({
       answers
     })
-
   }
-  
+
   const renderQuestions =  () =>{
     if(fields==={}){
       return
@@ -103,7 +97,6 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
       )
     })
       : null
-    //console.log(questionsToRender)
     setQuestionsFields(questionsToRender)
     return (questionsToRender)
   }
@@ -119,7 +112,6 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
             justify='center'
           >
             {questionsFields}
-            
             <Grid item container xs={12} justify="center" spacing={1}>
               <Button variant="contained" color="default" style={{ 'margin-right': '6px' }}>
                 Cancelar
@@ -136,7 +128,6 @@ const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmi
             </Grid>
           </Grid>
         </Fragment>}
-
       </Grid>
     </Paper>
   )
