@@ -16,8 +16,8 @@ export const extraParametersValidators =({minValue, maxValue})=>{
     {
       type: 'maxlength',
       message: MAX_LENGTH_MESSAGE.replace('?', maxValue),
-      check: (value,comparativeValue)=>{
-        return (value<comparativeValue ) 
+      check: (value,comparativeValue)=>{        
+        return (value<=comparativeValue ) 
       },
       valueToCheck: maxValue
     },
@@ -25,7 +25,7 @@ export const extraParametersValidators =({minValue, maxValue})=>{
       type: 'minlength',
       message: MIN_LENGTH_MESSAGE.replace('?', minValue),
       check: (value,comparativeValue)=>{
-        return (comparativeValue<value) 
+        return (comparativeValue<=value) 
       },
       valueToCheck: minValue
     }
