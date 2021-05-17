@@ -26,7 +26,7 @@ export const VALIDATORS_LOGIN_FORM = {
     },
     {
       type: 'maxlength',
-      message: MAX_LENGTH_MESSAGE.replace('?', 100),
+      message: MAX_LENGTH_MESSAGE,
       check: checkMaxLength,
       valueToCheck: 100
     }
@@ -40,7 +40,7 @@ export const VALIDATORS_LOGIN_FORM = {
     },
     {
       type: 'minlength',
-      message: MIN_LENGTH_MESSAGE.replace('?', 3),
+      message: MIN_LENGTH_MESSAGE,
       check: checkMinLength,
       valueToCheck: 3
     },
