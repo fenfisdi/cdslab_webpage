@@ -90,7 +90,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
 
   const executeRequestUploadData =({formData})=>{
-    const {  name,identifier,parameters_limits,state_variable_limits } = dataCurrentSimulation
+    const {  name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
     state_variable_limits.map((stateVariable)=>{
       stateVariable.label.toLowerCase() == formData.get('stateVariable') ? stateVariable.to_fit= true : stateVariable.to_fit = false      
     })
@@ -99,7 +99,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
       'name':name,
       'parameters_limits':parameters_limits,
       'state_variable_limits':state_variable_limits,
-      'optimize_parameters':true
+      'parameter_type':parameter_type
     },identifier,formData)
     
   }

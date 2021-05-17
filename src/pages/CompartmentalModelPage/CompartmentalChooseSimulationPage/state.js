@@ -77,7 +77,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
         'name': name,        
         'status':'incomplete',
         'model_id': model_id,
-        'optimize_parameters':true
+        'parameter_type':'optimized'
       })
     }
     

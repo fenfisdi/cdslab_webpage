@@ -74,12 +74,12 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
 
 
   const executeRequestConfigureParameters =(option)=>{    
-    const {  name,identifier,state_variable_limits,optimize_parameters } = dataCurrentSimulation
+    const {  name,identifier,state_variable_limits,parameter_type } = dataCurrentSimulation
     updateCompartmentalSimulation({
       'name':name,
       'parameters_limits': option,
       'state_variable_limits':state_variable_limits,
-      'optimize_parameters':optimize_parameters
+      'parameter_type':parameter_type
     },identifier)    
     setIsSend(true)
   }
