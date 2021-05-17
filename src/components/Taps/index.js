@@ -11,7 +11,9 @@ const useStyles = makeStyles(() => ({
     background: '#fff'
   },
   itemActiveItem: {
-    background: '#fff'
+    background: '#fff',
+    color: 'rgb(68, 96, 93)',
+    textDecoration: 'none'
   },
   containerTaps:{   
     display: 'inline-flex',
