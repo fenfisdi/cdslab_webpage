@@ -5,8 +5,6 @@ import { useInputStyle } from './styles'
 export const Input = (options) => {
   const classes = useInputStyle()
 
-  console.log('options', options)
-
   return (
     <TextField
       {...options}
