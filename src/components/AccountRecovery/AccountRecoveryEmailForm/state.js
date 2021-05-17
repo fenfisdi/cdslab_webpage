@@ -11,9 +11,8 @@ export const useAccountRecoveryEmailFormState = () => {
     type: 'email',
     label: t('registerPage.email'),
   })
-  
+
   return {
     email,
   }
-
 }
