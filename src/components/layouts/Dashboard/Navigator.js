@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 import { Icon } from '@material-ui/core'
 
@@ -26,13 +26,16 @@ const categories = [
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon />,typeIcon : 'material',href: '/ModelSettingsPage' },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/ModelSettingsPage' },
     ]
   }
 ]
 const styles =  (theme) => ({
+  paper:{
+    border: 'none !important'
+  },
   categoryHeader: {
-    paddingTop: theme.spacing(6),
+    paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(2)
   },
   categoryHeaderPrimary: {
@@ -58,17 +61,22 @@ const styles =  (theme) => ({
     'text-decoration': 'underline !important',
   },
   itemPrimary: {
-    fontSize: '24'
+    fontSize: '18px'
   },
   boderItem: {
     border: '1px solid #fff'
   },
   itemIcon: {
-    minWidth: '20%',
-    marginRight: theme.spacing(2)
+    'min-width': '18%',
+    position: 'relative',
+    top: '-5px',
+    '& > div':{
+      fontSize: '40px'
+    }
+
   },
   divider: {
-    marginTop: theme.spacing(11),
+    marginTop: theme.spacing(8),
     backgroundColor: '#fff'
   },
   link:{
@@ -89,9 +97,11 @@ function Navigator (props) {
   return (
     <Drawer variant='permanent' {...other}>
       <List disablePadding>
-        <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-          <img src={cdsSvg} className={classes.image} />
-        </ListItem>
+        <Link to='landingPage'>
+          <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
+            <img src={cdsSvg} className={classes.image} />
+          </ListItem>
+        </Link>
         {categories.map(({ id, children}) => (
           <React.Fragment key={id}>
             <ListItem className={classes.categoryHeader}>
@@ -112,7 +122,7 @@ function Navigator (props) {
                   <ListItemIcon className={classes.itemIcon}>
                     {
                       typeIcon === 'svg' 
-                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='20px' fontWeight='bold'/> )
+                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='40px' fontWeight='bold'/> )
                         : icon
                     }
                     
