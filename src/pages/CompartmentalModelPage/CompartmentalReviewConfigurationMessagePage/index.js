@@ -25,13 +25,12 @@ const CompartmentalReviewConfigurationMessagePage=()=>{
         </Typography>
       </CompartmentalReviewConfigurationMessageFormTitle>
      
-      <Grid container item xs={9} justify="center" alignItems="center">
+      <Grid container item xs={4} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
+          <p>Simulations can take several minutes.</p>
           <p>
-          Simulations can take several minutes.
-          </p>
-          <p>
-          You’ll be notified via e-mail when everythings is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset.
+            You’ll be notified via e-mail when everythings is done. 
+            After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset.
           </p>
         </Paper>
       </Grid>

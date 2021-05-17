@@ -31,9 +31,8 @@ export const useCompartmentalReviewConfigurationMessageStyles = makeStyles((them
     height: '100%',
     overflow: 'hidden',
     width: '100%',
-  },
-  loading: {
-    'min-height': ' 500px',
-    'align-items': 'center'
+    '& p':{
+      marginBottom:'20px'
+    }
   }
 }))
