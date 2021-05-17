@@ -50,7 +50,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
 
   useEffect(()=>{
-    if(simulationFileUpload.data!=null && !simulationFileUpload.error){
+    if(dataCurrentSimulation!= null && simulationFileUpload.data!=null && !simulationFileUpload.error){
       setShowSnack(
         {
           ...showSnack,
