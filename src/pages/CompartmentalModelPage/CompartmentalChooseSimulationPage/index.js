@@ -7,6 +7,7 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
+import { CompartmentalChooseSimulationSection, CompartmentalChooseSimulatioFormTitle } from './styles'
 
 
 
@@ -17,7 +18,8 @@ const CompartmentalChooseSimulationPage = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column" spacing={5}>
+    <CompartmentalChooseSimulationSection>
+      
       <Grid container item xs={12} 
         direction="row"
         justify="space-between"
@@ -26,11 +28,11 @@ const CompartmentalChooseSimulationPage = () => {
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>
      
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px'}}>
+      <CompartmentalChooseSimulatioFormTitle>
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
           Choose simulation type
         </Typography>
-      </Grid>
+      </CompartmentalChooseSimulatioFormTitle>
 
       {!loadingSimulationFolderInformation && <Grid container item xs={12}>
         <ModelCard
@@ -54,7 +56,7 @@ const CompartmentalChooseSimulationPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-    </Grid>
+    </CompartmentalChooseSimulationSection>
 
   )
 }

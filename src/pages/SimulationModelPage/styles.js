@@ -6,4 +6,5 @@ export const CompartmentalContainer = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 80px;
 `

@@ -6,7 +6,7 @@ import { UploadButton } from '../../ui/UploadButton'
 import CompartmentalButton from '../CompartmentalButton'
 import TableFormatStatic from './children/TableFormatStatic'
 import { useUploadDataFormState } from './state'
-import { useUploadDataFormStyles } from './styles'
+import { UploadDataFormSection, UploadDataFormTitle, useUploadDataFormStyles } from './styles'
 import TableFormatDynamic from './children/TableFormatDynamic'
 import { processData } from '../../../utils/common'
 import * as XLSX from 'xlsx'
@@ -63,45 +63,26 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
   }
  
   return (
-    <Grid
-      xs={12}
-      container
-      item
-      direction="column"
-      justify="center"
-      alignItems="center"
-      spacing={2}
-    >
+    <UploadDataFormSection>
       <SelectComponent
-        xs={4}
+        xs={3}
         title="Select Variable"
         {...stateVariable}
         options={selectOptions || []} />
 
-      <Grid container item xs={6} 
-        justify="center"
-        alignItems="center" 
-        direction="column">
-
-        <Grid container item justify="center"
-          alignItems="center">
-          <Typography  className={classes.paragraph}>
+      <UploadDataFormTitle>
+        <Typography  className={classes.paragraph}>
             Upload a CSV optimization data file.
-          </Typography>
-        </Grid>
-
-        <Grid container item justify="center"
-          alignItems="center">
-          <Typography className={classes.paragraph}>
+        </Typography>
+        <Typography className={classes.paragraph}>
             The uploaded file should meet the following structure:
-          </Typography>
-        </Grid>
-
-      </Grid>
+        </Typography>
+      </UploadDataFormTitle>
 
       <Grid container item  xs={3}>
         
         <TableFormatStatic Variable={stateVariable.value} />
+
         <Typography className={`${classes.paragraph} sub`}>
           The Date column must be formatted using ISO date format: yyyy-mm-dd.
         </Typography>
@@ -124,7 +105,7 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
         alignItems="center"
         text={'Configure State Variables Settings'}
       />
-    </Grid>
+    </UploadDataFormSection>
   )
 }
 

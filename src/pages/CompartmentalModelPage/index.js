@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { CompartmentalModelPageContainer } from './styles'
+import { CompartmentalModelPageContainer, CompartmentalModelPageContainerTitle } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
-
-
+import TitleIcon from '../../components/layouts/TitleIcon'
+import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
 
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
@@ -35,8 +35,10 @@ const CompartmentalModelPage = () => {
   return (
     <>
       <FullWidthTabs tabs={tabs} />
-      
-      <CompartmentalModelPageContainer>
+      <CompartmentalModelPageContainerTitle>
+        <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
+      </CompartmentalModelPageContainerTitle>
+      <CompartmentalModelPageContainer>        
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />

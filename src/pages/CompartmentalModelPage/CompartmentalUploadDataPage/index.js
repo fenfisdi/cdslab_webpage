@@ -6,6 +6,7 @@ import UploadDataForm from '../../../components/CompartmentalModels/UploadDataFo
 import SnackbarComponent from '@components/ui/Snackbars'
 import { useCompartmentalUploadDataPageState } from './state'
 import LoaderComponent from '../../../components/ui/Loader'
+import { CompartmentalUploadDataSection, CompartmentalUploadDataTitle } from './styles'
 
 
 const CompartmentalUploadDataPage = () => {
@@ -20,7 +21,7 @@ const CompartmentalUploadDataPage = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column" spacing={5}>
+    <CompartmentalUploadDataSection>
       <Grid container item xs={12} 
         direction="row"
         justify="space-between"
@@ -29,11 +30,11 @@ const CompartmentalUploadDataPage = () => {
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
      
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'20px'}}>
+      <CompartmentalUploadDataTitle>
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
         Choose variable to fit model
         </Typography>
-      </Grid>
+      </CompartmentalUploadDataTitle>
 
       {!loadingSimulationFileUpload && <Grid container item xs={12}>
         <UploadDataForm
@@ -54,7 +55,7 @@ const CompartmentalUploadDataPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-    </Grid>
+    </CompartmentalUploadDataSection>
 
     
 

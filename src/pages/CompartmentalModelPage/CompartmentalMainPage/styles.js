@@ -24,6 +24,14 @@ export const CompartmentalMainPageContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-0  width: 100%;
-  background: #fff
+  width: 100%;
+`
+
+export const CompartmentalMainPageCards = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top:30px
 `
