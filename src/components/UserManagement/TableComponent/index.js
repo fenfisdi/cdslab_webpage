@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -37,11 +37,12 @@ const rows = [
 
 
 export const ShowTableComponent = () => {
+
   const classes = useTableComponentStyles()
-  const [order, setOrder] = React.useState('asc')
-  const [orderBy, setOrderBy] = React.useState('name')
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [order, setOrder] = useState('asc')
+  const [orderBy, setOrderBy] = useState('name')
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const functionsTable = useTableComponentState()
   const {
