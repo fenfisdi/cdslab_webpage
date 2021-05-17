@@ -1,6 +1,6 @@
 import { useStore } from '@store/storeContext'
 import { useSessionActions } from '@actions/sessionsActions'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export const useLoginState = ({ showSnack, setShowSnack }) => {
@@ -10,17 +10,13 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
     },
     dispatch
   } = useStore()
+
   const { login } = useSessionActions(dispatch)
   const [step, setStep] = useState(0)
-
-
   const history = useHistory()
-  //const location = useLocation()
   const [title, setTitle] = useState('Sign in')
-  //const { from } = location.state || { from: { pathname: '/agents' } }
   const { from } =  { from: { pathname: '/landingPage' } }
   const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
-
 
   const redirectSimulations = () => {
     history.replace(from)
@@ -36,7 +32,6 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
 
   useEffect(() => {
     if (user && !error) {
-
       setShowSnack(
         {
           ...showSnack,
@@ -61,10 +56,7 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
     }
   }, [user, error])
 
-
-
   const handleSubmit = (dataForm) => {
-
     login({
       email: dataForm?.email,
       password: dataForm?.password

@@ -6,9 +6,7 @@ import { QR_ACCOUNT_RECOVERY_ERROR,
   QR_ACCOUNT_SECURITY_QUESTIONS_SUCCESS } from './types/qrTypes'
 import { requestQrBindingRecoverService, requestQrSecurityQuestionsService } from '../services/qrAccountRecoveryServices'
 
-  
 export const qrAccountRecoveryActions = (dispatch) => {
-    
   const requestQrBindingRecover = (userForm) => {
     dispatch({ type: QR_ACCOUNT_RECOVERY_LOADING })
     requestQrBindingRecoverService(userForm)
@@ -20,17 +18,17 @@ export const qrAccountRecoveryActions = (dispatch) => {
       })
       .catch((error) => {
         if(error.response) {
-          const {response:{data}}=error          
+          const { response: { data } } = error
           dispatch({
             type: QR_ACCOUNT_RECOVERY_ERROR,
-            payload: data 
+            payload: data
           })
-        }else if(error.request){
+        }else if (error.request) {
           dispatch({
             type: QR_ACCOUNT_RECOVERY_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message:'The request was made but no response was received' }
           })
-        }      
+        }
       })
     
   }
@@ -46,26 +44,19 @@ export const qrAccountRecoveryActions = (dispatch) => {
       })
       .catch((error) => {
         if(error.response) {
-          const {response:{data}}=error          
+          const {response:{data}}=error
           dispatch({
             type: QR_ACCOUNT_SECURITY_QUESTIONS_ERROR,
-            payload: data 
+            payload: data
           })
-        }else if(error.request){
+        }else if (error.request) {
           dispatch({
             type: QR_ACCOUNT_SECURITY_QUESTIONS_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message:'The request was made but no response was received' }
           })
-        }      
+        }
       })
-    
   }
-  
-    
+
   return { requestQrBindingRecover, requestQrSecurityQuestions }
-    
-      
 }
-    
-    
-    
