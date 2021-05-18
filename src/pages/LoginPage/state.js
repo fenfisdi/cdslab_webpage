@@ -31,6 +31,7 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
   }, [step])
 
   useEffect(() => {
+    user ? localStorage.setItem('role', user.role): []
     if (user && !error) {
       setShowSnack(
         {
