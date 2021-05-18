@@ -18,7 +18,8 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_LOADER,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
-  COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
+  COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -125,9 +126,8 @@ export const useCompartmentalModelActions = (dispatch) => {
       storeCompartmentalFileUploadService(idSimulation,file).then((responseFile)=>{
         dispatch({
           type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
-          payload: responseFile.data.data
+          payload: {fileStore:responseFile.data.data, simulationStore:responseSimulation.data.data}
         })
-        registerCompartmentalSimulation(responseSimulation.data.data)
         registerLoaderCompartmentalSimulationFile(false)
       }).catch((erroFile)=>{
         registerLoaderCompartmentalSimulationFile(false)
@@ -149,6 +149,13 @@ export const useCompartmentalModelActions = (dispatch) => {
       registerErrorCompartmentalSimulation(error)
     })
     
+  }
+
+  const updateNextStepFileUploadProperty =(nextStep)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
+      payload: nextStep
+    })
   }
 
 
@@ -216,7 +223,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     updateCompartmentalSimulation,
     storeCompartmentalSimulationFolder,
     storeCompartmentalFileUpload,
-    setDefinitionCompartmentalFolderSimulation }
+    setDefinitionCompartmentalFolderSimulation,
+    updateNextStepFileUploadProperty }
 
 
 }
