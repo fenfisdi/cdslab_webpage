@@ -44,8 +44,9 @@ export const ShowTableComponent = ({configAdmin, filter}) => {
   const [orderBy, setOrderBy] = useState('name')
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
-  const filterRows = rows.filter(rows=>{
-    return rows.name.includes(filter)
+
+  const filterRows = rows.filter(row=>{
+    return row.name.includes(filter)
   })
 
   const functionsTable = useTableComponentState()
