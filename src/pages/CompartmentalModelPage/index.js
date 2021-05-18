@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
+import CompartmentalMySimulationPage from './CompartmentalMySimulationPage'
 
 
 
@@ -41,6 +42,9 @@ const CompartmentalModelPage = () => {
             <Route path={match.path} exact component={CompartmentalMainPage} />
             <Route path={`${match.path}/newSimulations`} exact render={(props) => (
               <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
+            )} />
+            <Route path={`${match.path}/mySimulations`} exact render={(props) => (
+              <CompartmentalMySimulationPage {...props} pathParent={match.path} />
             )} />
             <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
             <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          

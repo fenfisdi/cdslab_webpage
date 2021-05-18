@@ -346,7 +346,7 @@ export const OPTIONS_COMPARTMENTAL_MAIN = [
     titleIcon:notesPixel,
     name: 'My simulations',
     indetifier: 'my_simulations',
-    url: ''
+    url: 'compartmentalModels/mySimulations'
   }
 ]
 
