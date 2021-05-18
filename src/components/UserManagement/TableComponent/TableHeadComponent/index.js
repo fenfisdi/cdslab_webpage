@@ -5,12 +5,12 @@ import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import {useTableHeadStyles} from './styles'
 
-export const TableHeaderComponent=({order, orderBy, onRequestSort})=>{
-
+export const TableHeaderComponent=({order, orderBy, onRequestSort, changeAdmin})=>{
+  console.log(changeAdmin)
   const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
     { id: 'email', numeric: true, disablePadding: false, label: 'E-mail' },
-    { id: 'active', numeric: true, disablePadding: false, label: 'Active' },  
+    { id: 'active', numeric: true, disablePadding: false, label: `${changeAdmin ? 'Admin' : 'Active'}`},  
   ]
   const classes = useTableHeadStyles()
   const createSortHandler = (property) => (event) => {

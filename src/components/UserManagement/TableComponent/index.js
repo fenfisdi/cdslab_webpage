@@ -37,13 +37,16 @@ const rows = [
 
 
 
-export const ShowTableComponent = () => {
+export const ShowTableComponent = ({configAdmin, filter}) => {
 
   const classes = useTableComponentStyles()
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('name')
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
+  const filterRows = rows.filter(rows=>{
+    return rows.name.includes(filter)
+  })
 
   const functionsTable = useTableComponentState()
   const {
@@ -80,10 +83,11 @@ export const ShowTableComponent = () => {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={filterRows.length}
+              changeAdmin={configAdmin}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(filterRows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`

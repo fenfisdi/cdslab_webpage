@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function UserManagementPage() {
+  const isRoot = true //tag del back
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
 
@@ -71,7 +72,7 @@ export default function UserManagementPage() {
       </AppBar>
       <TabPanel value={value} index={0}>
         <TableComponent/>
-
+        {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

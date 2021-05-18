@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import SearchIcon from '@material-ui/icons/Search'
 import {ShowTableComponent} from '../TableComponent/index'
 import {showTableStyles} from './styles'
 
-export const TableComponent=() => {
+
+export const TableComponent=({adminTable}) => {
   const classes = showTableStyles()
+  const [ query, setQuery ] = useState('')
 
   return (
     
@@ -16,9 +18,16 @@ export const TableComponent=() => {
           <SearchIcon />
         </Grid>
         <Grid item>
-          <TextField id="input-with-icon-grid" label="Search user" />
+          <TextField 
+            id="input-with-icon-grid" 
+            label="Search user"
+            value={query}
+            onChange={(e)=>{
+              setQuery(e.target.value)
+            }}
+          />
         </Grid>
-        <ShowTableComponent/>
+        <ShowTableComponent configAdmin={adminTable} filter={query}/>
       </Grid>
     </Grid>
   )
