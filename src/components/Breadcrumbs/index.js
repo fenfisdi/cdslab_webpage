@@ -13,7 +13,6 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-
 const Breadcrumbs = props => {
   const {
     history,
@@ -24,11 +23,6 @@ const Breadcrumbs = props => {
   console.log(pathnames)
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
-      {/* {pathnames.length > 0 ? (
-        <Link onClick={() => history.push(match.path)}>compartmentalModels</Link>
-      ) : (
-        <Typography> Home </Typography>
-      )} */}
       {pathnames.map((name, index) => {
         const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
         const isLast = index === pathnames.length - 1

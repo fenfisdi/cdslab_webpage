@@ -6,13 +6,14 @@ import { OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../../c
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS} from '../../../constants/helpInformation'
 import { useCompartmentalOptimizeParametersPageState } from './state'
+import { CompartmentalOptimizeParametersSection, CompartmentalOptimizeParametersTitle } from './styles'
 
 
 const CompartmentalOptimizeParametersPage = () => {
   const { executeSelectedOption } = useCompartmentalOptimizeParametersPageState()
   
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column" spacing={5}>
+    <CompartmentalOptimizeParametersSection>
       <Grid container item xs={12} 
         direction="row"
         justify="space-between"
@@ -21,11 +22,11 @@ const CompartmentalOptimizeParametersPage = () => {
         <SupportComponent text={HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS}/>
       </Grid>
      
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px'}}>
+      <CompartmentalOptimizeParametersTitle>
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
           Choose data source
         </Typography>
-      </Grid>
+      </CompartmentalOptimizeParametersTitle>
 
       <Grid container item xs={12}>
         <ModelCard
@@ -34,7 +35,7 @@ const CompartmentalOptimizeParametersPage = () => {
           eventEmitted={executeSelectedOption}
         />
       </Grid>
-    </Grid>
+    </CompartmentalOptimizeParametersSection>
 
   )
 }

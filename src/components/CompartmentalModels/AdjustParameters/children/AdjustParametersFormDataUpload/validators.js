@@ -15,7 +15,6 @@ export const VALIDATORS_ADJUST_PARAMETERS_FORM_DATA_UPLOAD = {
     message: REQUIRED_MESSAGE,
     value: true
   }
-    
 }
   
 export const checkTypePhoneNumber = (event) => {
@@ -27,4 +26,3 @@ export const checkTypePhoneNumber = (event) => {
     event.stopPropagation()
   }
 }
-  

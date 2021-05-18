@@ -6,7 +6,7 @@ export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
     marginBottom: '20px',
     padding: theme.spacing(2),
     'box-shadow': '1px 3px 9px 5px rgba(0,0,0,0.14)',
-    background: 'rgba(61, 179, 158, 0.18)',
+    background: '#c4c4c442',
     fontWeight:'500',
     height: '100%',
     overflow: 'hidden',
@@ -24,6 +24,14 @@ export const CompartmentalMainPageContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-0  width: 100%;
-  background: #fff
+  width: 100%;
+`
+
+export const CompartmentalMainPageCards = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top:30px
 `

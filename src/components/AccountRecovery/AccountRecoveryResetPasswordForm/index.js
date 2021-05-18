@@ -9,7 +9,6 @@ import { PasswordChecker } from '../../Register/PasswordChecker'
 import { useAccountRecoveryResetPasswordFormState } from './state'
 import { languageContext } from '../../../config/languageContext'
 
-
 const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
   const classes = useAccountRecoveryResetPasswordFormStyles(theme)
   const [isValid, setIsvalid] = useState(false)
@@ -19,7 +18,6 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
 
   useEffect(() => {
     let notIsValid = false
-
     if (
       (password && !password.value.length > 0) ||
       (password && Array.isArray(password.errors) && password.errors.length > 0)

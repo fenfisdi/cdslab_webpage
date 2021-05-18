@@ -21,73 +21,67 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: REGISTER_LOADING })
     registerUserService(userForm)
       .then((response) => {
-        
         dispatch({
           type: REGISTER_SAVE,
           payload: response.data.data
         })
       })
-      .catch((error) => {
+      .catch ((error) => {
         if(error.response) {
-          const {response:{data}}=error          
+          const { response: { data } } = error
           dispatch({
             type: REGISTER_ERROR,
             payload: data 
           })
-        }else if(error.request){
+        } else if (error.request){
           dispatch({
             type: REGISTER_ERROR,
-            payload:{message:'The request was made but no response was received'}
+            payload:{ message:'The request was made but no response was received' }
           })
-        }      
+        }
       })
-
   }
 
   const validateQr = (userQrValidation) => {
     dispatch({ type: VALIDATION_QR_LOADING })
     validateQrService(userQrValidation)
       .then((response) => {
-        console.log({response})
+        console.log({ response })
         dispatch({
           type: VALIDATION_QR_SUCCESS,
           payload: response.data
         })
-      }) 
+      })
       .catch((error) => {
-        console.log({error})
+        console.error({ error })
         if(error.response) {
-          const {response:{data}}=error          
+          const { response: { data } } = error
           dispatch({
             type: VALIDATION_QR_ERROR,
-            payload:  data
+            payload: data
           })
         }
-        
       })
   }
 
-  const validateCode = async (userQrValidation) => {     
-    dispatch({ type: VALIDATION_QR_LOADING })     
-    try{       
-      const response = await request(         
+  const validateCode = async (userQrValidation) => {
+    dispatch({ type: VALIDATION_QR_LOADING })
+    try {
+      const response = await request(
         `${process.env.REACT_APP_AUTH_API_URL}/otp`,
         'POST'
-        ,userQrValidation)             
-      dispatch({type: VALIDATION_QR_SUCCESS, payload: response.data})}
-    catch(error){       
-      if(error.response) {         
-        const {response:{data}}=error                  
-        dispatch({           
-          type: VALIDATION_QR_ERROR,          
-          payload:  data       
-        })       
-      }     
+        ,userQrValidation)
+      dispatch({ type: VALIDATION_QR_SUCCESS, payload: response.data })}
+    catch (error){
+      if (error.response) {
+        const { response: { data } } = error
+        dispatch({
+          type: VALIDATION_QR_ERROR,
+          payload:  data
+        })
+      }
     }
   }
-  
 
   return { registerUser, validateQr, validateCode }
-
-  
 }

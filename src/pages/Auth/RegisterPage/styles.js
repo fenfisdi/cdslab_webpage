@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useRegisterStyles = makeStyles((theme) => ({
+export const useRegisterStyles = makeStyles(() => ({
   root: {
     height: '100vh',
   },
