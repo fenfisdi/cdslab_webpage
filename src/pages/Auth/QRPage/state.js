@@ -13,6 +13,7 @@ export const useAuthQrState = ({ sendStep, showSnack, setShowSnack }) => {
 
 
   useEffect(() => {
+    
     if (data && !error) {
       sendStep(3)
     } else if (error) {
