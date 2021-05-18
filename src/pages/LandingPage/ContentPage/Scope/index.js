@@ -28,12 +28,12 @@ const Scope = () => {
         </div>
         <div className={classes.boxScope}>
           <div className={classes.question}> { SCOPE_QUESTION_TWO } </div>
-          <div className={classes.divScopeImg}><img  img className={classes.imgOpenSource} src={imgOpenSource} /></div>
+          <div className={classes.divScopeImg}><img className={classes.imgOpenSource} src={imgOpenSource} /></div>
           <div className={classes.textScope}> 
             <div>{ SCOPE_TWO } </div>
             <br />
             <div> { SCOPE_TWO_LICENSE } </div>
-            <div className={classes.scopeLink} > { SCOPE_TWO_lINK } </div>
+            <div className={classes.scopeLink} ><a href={SCOPE_TWO_lINK } target='_blank' rel="noreferrer">{ SCOPE_TWO_lINK }</a>  </div>
             <div className={classes.divImgPython} > <img  img className={classes.imgPython} src={imgPython} /> </div>
           </div>
         </div>

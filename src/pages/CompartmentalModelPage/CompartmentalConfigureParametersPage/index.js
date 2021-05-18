@@ -6,6 +6,7 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
+import { CompartmentalConfigureParametersSection,CompartmentalConfigureParametersTitle } from './styles'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -20,7 +21,7 @@ const CompartmentalConfigureParametersPage = () => {
   }
 
   return (
-    <Grid container item xs={11} justify="center" alignItems="center" direction="column">
+    <CompartmentalConfigureParametersSection>
      
       <Grid container item xs={12} 
         direction="row"
@@ -30,11 +31,11 @@ const CompartmentalConfigureParametersPage = () => {
         <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
       </Grid>
 
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p">
-        Configure parameters values sad
+      <CompartmentalConfigureParametersTitle>
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
+          Configure parameters values 
         </Typography>
-      </Grid>
+      </CompartmentalConfigureParametersTitle>
 
       {modelData && modelData.parameters && <ConfigurableParametersForm
         parameters={modelData.parameters}
@@ -56,7 +57,7 @@ const CompartmentalConfigureParametersPage = () => {
         errorMessage={showSnack.errorMessage} />}
       
 
-    </Grid>
+    </CompartmentalConfigureParametersSection>
 
   )
 }

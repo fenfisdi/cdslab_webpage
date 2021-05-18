@@ -46,12 +46,12 @@
     "recoverQrBinding": "¿Perdiste tu enlace QR?"
   },
   "validators": {
-    "fieldRequired": "Este campo es obligatorio",
+    "fieldRequired": "Este campo es obligatorio.",
     "validateEmail": "Debe contener un email válido e.j. myemail@mydomain.com",
-    "validateCodeType": "Código inválido",
-    "maxLength": "El número máximo de carácteres es ?",
-    "minLength": "El número mínimo de carácteres es ?",
-    "validatePhone": "Este campo debe ser un número telefónico válido",
-    "validatePasswords": "Contraseñas no coinciden"
+    "validateCodeType": "Código inválido.",
+    "maxLength": "El número máximo de carácteres es ?.",
+    "minLength": "El número mínimo de carácteres es ?.",
+    "validatePhone": "Este campo debe ser un número telefónico válido.",
+    "validatePasswords": "Contraseñas no coinciden."
   }
 }

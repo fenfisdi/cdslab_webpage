@@ -37,6 +37,18 @@ export const LoginForm = ({
     label: t('loginPage.email')
   })
 
+  if (password.helperText) {
+    if (password.value.length < 4) {
+      password.helperText = password.helperText.replace('?', 3)
+    } else if (password.value.length > 49) {
+      password.helperText = password.helperText.replace('?', 50)
+    }
+  }
+
+  if (email.helperText && email.value.length > 99) {
+    email.helperText = email.helperText.replace('?', 100)
+  }
+
   const verifyForm = async (e) => {
     e.preventDefault()
     if (isInvalidForm()) {
@@ -52,8 +64,7 @@ export const LoginForm = ({
   const isInvalidForm = () =>
     !!(email.errors.length > 0 || password.errors.length > 0)
 
-  const fillSignInHeader = () => (
-    
+  const fillSignInHeader = () => ( 
     <>
       <Grid container justify="space-between">
         <Grid item xs={2}>

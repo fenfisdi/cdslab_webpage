@@ -1,9 +1,12 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { Grid } from '@material-ui/core'
 import ModelCard from '../ModelCard'
 import { usePredefinedModelsState } from './state'
-import { usePredefinedModelsStyles } from './styles'
+import { 
+  CompartmentalPredefinedModelForm, 
+  usePredefinedModelsStyles, 
+  CompartmentalPredefinedModelFormTitle,
+  CompartmentalPredefinedModelFormInput } from './styles'
 import { Input } from '../../ui/Input'
 
 
@@ -15,17 +18,15 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
   return (
-    <Grid
-      xs={12}
-      container
-      item
-      direction='column'
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
+    <CompartmentalPredefinedModelForm>
 
-      <Grid item xs={6}>
+      <CompartmentalPredefinedModelFormTitle>
+        <Typography variant="body2" component="p" className={classes.title}>
+          Choose one of the predefined models
+        </Typography>
+      </CompartmentalPredefinedModelFormTitle>
+
+      <CompartmentalPredefinedModelFormInput>
         <Input
           disabled={false}
           required
@@ -35,13 +36,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
           autoComplete="simulationName"
           {...simulationName}
         />
-      </Grid>
-
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p" className={classes.title}>
-          Choose one of the predefined models
-        </Typography>
-      </Grid>
+      </CompartmentalPredefinedModelFormInput>
 
       {options && options.length>0 && <ModelCard
         justify="center"
@@ -52,7 +47,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
         disabled={simulationName && simulationName.value ? false : true}
       />}
   
-    </Grid>
+    </CompartmentalPredefinedModelForm>
   )
 }
 

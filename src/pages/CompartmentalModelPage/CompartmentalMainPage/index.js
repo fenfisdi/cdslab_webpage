@@ -3,14 +3,14 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
-import { useCompartmentalMainPageStyles } from './styles'
+import { useCompartmentalMainPageStyles, CompartmentalMainPageContainer,CompartmentalMainPageCards } from './styles'
 
 const CompartmentalMainPage = () => {
   const classes = useCompartmentalMainPageStyles()
   const history = useHistory()
  
   return (
-    <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+    <CompartmentalMainPageContainer>
       <Grid container item xs={9} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
           <p>
@@ -24,13 +24,13 @@ const CompartmentalMainPage = () => {
         </Paper>
       </Grid>
 
-      <Grid container item xs={12}>
+      <CompartmentalMainPageCards>
         <ModelCard
           options={OPTIONS_COMPARTMENTAL_MAIN}
           eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url, }) }}
         />
-      </Grid>
-    </Grid>
+      </CompartmentalMainPageCards>
+    </CompartmentalMainPageContainer>
   )
 }
 

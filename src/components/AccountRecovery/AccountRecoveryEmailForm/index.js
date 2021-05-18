@@ -26,10 +26,8 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
     
   }, [email])
 
-
   const handleClickButton = () => {
     handleClick({ email: email.value })
-    
   }
 
   return (
@@ -82,9 +80,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
               </Button>
             </Grid>
           </Grid>
-
         </Fragment>}
-
       </Grid>
     </Paper>
   )

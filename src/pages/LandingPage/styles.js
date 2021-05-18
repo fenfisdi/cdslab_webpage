@@ -23,7 +23,7 @@ export const useHeaderStyles = makeStyles(() => ({
   title:{
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: '1.2rem'
+    fontSize: '1.7rem'
   }
 }))
 

@@ -1,6 +1,4 @@
-import { PATTERN_EMAIL } from '../../Forms/validators/patterns'
-import { checkMaxLength, checkMinLength, checkPattern } from '../../Forms/validators/validatorsCheks'
-
+import { checkMaxLength, checkMinLength } from '../../Forms/validators/validatorsCheks'
 
 export const REQUIRED_MESSAGE = 'This field is requiered.'
 export const PATTERN_ERROR_MESSAGE =
