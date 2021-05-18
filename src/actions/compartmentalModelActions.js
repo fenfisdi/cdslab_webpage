@@ -5,7 +5,8 @@ import {
   storeCompartmentalSimulationService, 
   updateCompartmentalSimulationService,
   storeCompartmentalSimulationFolderService, 
-  storeCompartmentalFileUploadService} from '../services/compartmentalModelServices'
+  storeCompartmentalFileUploadService,
+  getFixedParametersFormFieldsService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -19,7 +20,9 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_LOADER,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
-  COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY
+  COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
+  COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -212,6 +215,28 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const getFixedParametersFormFields = ()=>{
+    getFixedParametersFormFieldsService().then((response)=>{
+      dispatch({
+        type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_SUCCESS,
+        payload: response
+      })
+    }).catch((error) => {
+      if(error.response) {          
+        const {response:{data}}=error                    
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
+          payload: data 
+        })
+      }else if(error.request){
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+
   return {
     registerModelParameters,
     getPredefinedModels,
@@ -224,7 +249,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     storeCompartmentalSimulationFolder,
     storeCompartmentalFileUpload,
     setDefinitionCompartmentalFolderSimulation,
-    updateNextStepFileUploadProperty }
+    updateNextStepFileUploadProperty,
+    getFixedParametersFormFields }
 
 
 }
