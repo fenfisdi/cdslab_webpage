@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import Switch from '@material-ui/core/Switch'
 
-export const ActiveComponent = () => {
+export const ActiveComponent = ({isActive}) => {
   const [state, setState] = useState({
-    checkedA: true,
-    checkedB: true,
+    checkedB: isActive,
   })
 
   const handleChange = (event) => {

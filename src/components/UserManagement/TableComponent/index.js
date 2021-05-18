@@ -17,21 +17,22 @@ function createData(name, email, active) {
 }
 
 const rows = [
-  createData('Andrea', 'andrea@example.com', true),
+  createData('Andrea', 'andrea@example.com', false),
   createData('Victoria', 'victoria@example.com', true),
   createData('Clara', 'clara@example.com', true),
   createData('Diana', 'diana@example.com', true),
   createData('Alejandro', 'Alejandro@example.com', true),
-  createData('Ramiro', 'ramiro@example.com', true),
+  createData('Ramiro', 'ramiro@example.com', false),
   createData('Santiago', 'santiago@example.com', true),
   createData('Edgar', 'edgar@example.com', true),
   createData('Camilo', 'camilo@example.com', true),
-  createData('Johan', 'johan@example.com', true),
+  createData('Johan', 'johan@example.com', false),
   createData('Kiiron', 'kiiron@example.com', true),
   createData('Sasha', 'sasha@example.com', true),
   createData('Odin', 'odin@example.com', true),
-  createData('Dasha', 'dasha@example.com', true),
+  createData('Dasha', 'dasha@example.com', false),
   createData('Lola', 'lola@example.com', true),
+  
 ]
 
 
@@ -61,7 +62,7 @@ export const ShowTableComponent = () => {
   }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
+    setRowsPerPage(parseInt(event.target.value, 5))
     setPage(0)
   }
 
@@ -99,7 +100,7 @@ export const ShowTableComponent = () => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left"><ActiveComponent/></TableCell>
+                      <TableCell align="left"><ActiveComponent isActive={row.active}/></TableCell>
                     </TableRow>
                   )
                 })}
@@ -107,7 +108,7 @@ export const ShowTableComponent = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
