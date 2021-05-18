@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext } from 'react'
 import QRImage from '@components/QrForm/QRcode'
 import QRvalidation from '@components/QrForm/QRValidation'
 import Grid from '@material-ui/core/Grid'
