@@ -7,12 +7,8 @@ import { useAuthQrState } from './state'
 import {languageContext} from '../../../config/languageContext'
 
 const QRrender = ({location, urlPath, email, sendStep, showSnack, setShowSnack }) => {
-  const { data, loading, validateQr, validateCode } = useAuthQrState({ urlPath, sendStep, showSnack, setShowSnack })
+  const { loading, validateQr, validateCode } = useAuthQrState({ urlPath, sendStep, showSnack, setShowSnack })
   const { t } = useContext(languageContext)
-
-  useEffect(()=>{
-    data ? localStorage.setItem('token', data.data.token) : []
-  })
 
   const sendQrValue = (object) => {
     const { otp_code } = object
