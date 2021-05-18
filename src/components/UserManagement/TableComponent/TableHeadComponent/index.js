@@ -40,9 +40,9 @@ export const TableHeaderComponent=({order, orderBy, onRequestSort, changeAdmin})
                     if (order=='desc'){
                       return 'sorted descending'
                     }
-                    else {
-                      return 'sorted ascending'
-                    }
+                  
+                    return 'sorted ascending'
+                    
                   })}
                 </span>
               ): null}
