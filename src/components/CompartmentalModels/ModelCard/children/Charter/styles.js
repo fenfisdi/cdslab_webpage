@@ -14,9 +14,9 @@ export const CardContainer = styled(Card)`
          `}
       `}
     color: '#000000';
-    width: 30%;
-    height: 100px;
-    min-width: 275px;
+    width:  80px;
+    height: 80px;
+    min-width: 240px;
     display: flex;
     align-items: center;
     justify-content: center;

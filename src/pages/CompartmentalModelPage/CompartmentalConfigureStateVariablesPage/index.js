@@ -6,6 +6,7 @@ import { useCompartmentalConfigureStateVariablesPageState } from './state'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
+import { CompartmentalConfigureStateVariablesSection, CompartmentalConfigureStateVariablesTitle } from './styles'
 
 const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -19,7 +20,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
   }
 
   return (
-    <Grid container item xs={11} justify="center" alignItems="center" direction="column">  
+    <CompartmentalConfigureStateVariablesSection>  
 
       <Grid container item xs={12} 
         direction="row"
@@ -30,11 +31,11 @@ const CompartmentalConfigureStateVariablesPage = () => {
       </Grid>
 
 
-      <Grid container item xs={6} justify="center" alignItems="center" direction="column">
-        <Typography variant="body2" component="p">
+      <CompartmentalConfigureStateVariablesTitle>
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
         Configure State Variables Initial Values
         </Typography>
-      </Grid>    
+      </CompartmentalConfigureStateVariablesTitle>    
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
         fieldsSchema={modelData.state_variables}
@@ -56,7 +57,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         errorMessage={showSnack.errorMessage} />}
       
 
-    </Grid>
+    </CompartmentalConfigureStateVariablesSection>
 
   )
 }
