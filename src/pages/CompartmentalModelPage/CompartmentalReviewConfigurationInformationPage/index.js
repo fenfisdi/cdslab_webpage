@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid,Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import SupportComponent from '../../../components/SupportComponent'
 import { 
@@ -12,7 +12,6 @@ import {
   ExtraParamsItem,
   ExtraParamsLabel } from './styles'
 import {HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS} from '../../../constants/helpInformation'
-import { Typography } from '@material-ui/core'
 import { useCompartmentalReviewConfigurationInformationPageState } from './state'
 import LoaderComponent from '../../../components/ui/Loader'
 import SnackbarComponent from '@components/ui/Snackbars'
@@ -142,7 +141,7 @@ const CompartmentalReviewConfigurationInformationPage =()=>{
 
     
 
-      {false && <LoaderComponent
+      {isEmpty(currentSimulation) || isEmpty(predefinedModelSelected) && <LoaderComponent
         width={50}
         height={50}
         marginTop={5}
