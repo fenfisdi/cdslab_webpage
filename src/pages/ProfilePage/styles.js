@@ -4,9 +4,9 @@ export const useProfilePageStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     marginTop: '5%',
-    marginRight: '10%'
+    marginBottom: '2%'
   },
   item: {
-    marginRight: '10%'
+    marginRight: '10%',
   },
 }))
