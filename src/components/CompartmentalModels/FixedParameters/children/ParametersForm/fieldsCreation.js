@@ -6,12 +6,11 @@ export const useParametersFormFieldsCreation = ({fieldsSchema=[],valuesFieldPara
   let fields = {}
   for (let index = 0; index < fieldsSchema.length; index++) {
     const { 
-      label,
-      name
+      label
     }=fieldsSchema[index] || {}
     const updateValuePersis = valuesFieldParameters[index]
     const field = useInputValue(updateValuePersis!=undefined?updateValuePersis['value']: '', VALIDATORS_PARAMETERS_FORM.alphabetic, {
-      name: name,
+      name: label,
       type: 'text',
       onKeyDown: (event) => {
         return checkTypePhoneNumber(event)
