@@ -61,7 +61,6 @@ export const updateCompartmentalSimulationService = async (simulation,idSimulati
   )
 }
 
-
 export const getFixedParametersFormFieldsService = async () => {
   return [
     {
@@ -129,4 +128,11 @@ export const getFixedParametersFormFieldsService = async () => {
       helper:'dummy'
     }
   ]
+}
+
+export const executeSimulationService = async (idSimulation) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/simulation/${idSimulation}/execute`,
+    'POST'
+  )
 }
