@@ -1,5 +1,7 @@
 
 import {
+  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
+  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
   COMPARTMENTAL_MODEL_LOADING,
@@ -48,6 +50,11 @@ export const initialState = {
       errorData: null,
       loadingSimulationFileUpload: false,
       nextStep:false
+    },
+    simulationExecuted:{
+      data: null,
+      error: null,
+      errorData: null,
     },
     loading: false
   }
@@ -139,6 +146,18 @@ export const compartmentalModelReducer = (state, action) => {
     return {
       ...state, loading: false, simulationFileUpload: { ...state.simulationFileUpload, nextStep:action.payload }
     } 
+
+  case COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR:
+    return {
+      ...state, loading: false, 
+      simulationExecuted: { ...state.simulationExecuted, error: true, errorData: action.payload }
+    }
+
+  case COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS:
+    return {
+      ...state, loading: false, 
+      simulationExecuted: { ...state.simulationExecuted, error: false, data: action.payload }
+    }
     
 
   default:

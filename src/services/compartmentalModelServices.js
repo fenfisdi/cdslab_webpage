@@ -60,3 +60,10 @@ export const updateCompartmentalSimulationService = async (simulation,idSimulati
     simulation
   )
 }
+
+export const executeSimulationService = async (idSimulation) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/simulation/${idSimulation}/execute`,
+    'POST'
+  )
+}

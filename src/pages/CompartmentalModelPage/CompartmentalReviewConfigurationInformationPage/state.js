@@ -15,7 +15,7 @@ export const useCompartmentalReviewConfigurationInformationPageState = ({showSna
       compartmentalModel: { 
         predefinedModelSelected, 
         currentSimulation:{data:dataCurrentSimulation,error,errorData}, 
-        simulationFileUpload 
+        simulationFileUpload
       }
     },
     dispatch
@@ -23,7 +23,9 @@ export const useCompartmentalReviewConfigurationInformationPageState = ({showSna
   
   const { 
     findCompartmentalSimulation, 
-    findPredefinedModel,updateNextStepFileUploadProperty } = useCompartmentalModelActions(dispatch)
+    findPredefinedModel,
+    updateNextStepFileUploadProperty,
+    executeSimulation } = useCompartmentalModelActions(dispatch)
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
@@ -72,6 +74,7 @@ export const useCompartmentalReviewConfigurationInformationPageState = ({showSna
   const executeRequestRunSimulation =()=>{
     const {modelData:{identifier:model_id}}=predefinedModelSelected
     const { identifier} = dataCurrentSimulation
+    executeSimulation(identifier)
     history.push({ 
       pathname: '/compartmentalModels/reviewConfigurationMessage',
       search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
