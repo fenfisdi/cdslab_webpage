@@ -13,7 +13,9 @@ export const useAuthQrState = ({ sendStep, showSnack, setShowSnack }) => {
 
 
   useEffect(() => {
+    
     if (data && !error) {
+      localStorage.setItem('token', data.data.token)
       sendStep(3)
     } else if (error) {
       setShowSnack(
