@@ -18,7 +18,7 @@ const ParametersForm = ({fields, fieldsSchema}) => {
       item 
     >
       {fieldsSchema && fieldsSchema.map((field,index)=>{
-        const {label, unit } = field
+        const {label, representation, unit } = field
         const {helperText}= fields[label]
         delete fields[label]['helperText']
         
@@ -27,10 +27,11 @@ const ParametersForm = ({fields, fieldsSchema}) => {
             <Grid item container xs={12} key={index} direction="row" justify="center" alignItems="center" spacing={2}>
               <TitleComponent
                 xs={4}
-                justify={'flex-end'}
-                alignItems={'center'}
+                justify='flex-end'
+                alignItems='center'
                 title={label}
-                variant={'h6'}
+                unit={representation}
+                variant='h6'
                 key={index}
               />
               <Grid item container xs={2}>
