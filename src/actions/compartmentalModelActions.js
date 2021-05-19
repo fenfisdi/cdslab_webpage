@@ -126,6 +126,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const setDefinitionCompartmentalExecuteSimulation =(data)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
+      payload: data
+    })
+  }
+
   const storeCompartmentalFileUpload = (simulation,idSimulation,file)=>{
     registerLoaderCompartmentalSimulationFile(true)
     updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
@@ -241,11 +248,8 @@ export const useCompartmentalModelActions = (dispatch) => {
   }
   
   const executeSimulation =(idSimulation)=>{
-    executeSimulationService(idSimulation).then((response)=>{
-      dispatch({
-        type: COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
-        payload: response.data.data
-      })
+    executeSimulationService(idSimulation).then((response)=>{      
+      setDefinitionCompartmentalExecuteSimulation(response.data.data)
     }).catch((error)=>{
       if (error.response) {
         const { response: { data } } = error
@@ -276,7 +280,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     setDefinitionCompartmentalFolderSimulation,
     updateNextStepFileUploadProperty,
     getFixedParametersFormFields, 
-    executeSimulation }
+    executeSimulation,
+    setDefinitionCompartmentalExecuteSimulation }
 
 
 }
