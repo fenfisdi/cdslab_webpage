@@ -1,19 +1,20 @@
 import { useStore } from '@store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
 
 export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) => {
-  const [selectOptions, setSelectOptions] = useState([])
+
   const history = useHistory()
   
 
   const {
     state: {      
       compartmentalModel: { 
-        predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation,error,errorData}, 
+        predefinedModelSelected, 
+        currentSimulation:{data:dataCurrentSimulation,error,errorData}, 
         simulationFileUpload 
       }
     },
@@ -27,18 +28,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
-    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){               
-      const {modelData:{state_variables}} = predefinedModelSelected || {}
-      const arrayStateDto = []
-      state_variables.map((state)=>{
-        const stateObject = {}
-        stateObject.label = state.label.toLowerCase()
-        stateObject.name  = state.name
-        stateObject.value = state.label.toLowerCase()
-        arrayStateDto.push(stateObject)
-      })
-      setSelectOptions(arrayStateDto)
-    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){       
+    if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){       
       const {name}=dataCurrentSimulation
       findPredefinedModel({model_id:params.model_id,  simulationName:name})
 
@@ -50,7 +40,10 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
 
   useEffect(()=>{
-    if(dataCurrentSimulation!= null && simulationFileUpload.data!=null && !simulationFileUpload.error){
+    if( simulationFileUpload.nextStep && dataCurrentSimulation!= null && 
+      simulationFileUpload.data!=null && !simulationFileUpload.error ){
+      const {modelData:{identifier:model_id}}=predefinedModelSelected
+      const { identifier} = dataCurrentSimulation
       setShowSnack(
         {
           ...showSnack,
@@ -60,6 +53,10 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
           successMessage: `${simulationFileUpload.data ? simulationFileUpload.data.name:''} file loaded.`
         }
       )
+      history.push({ 
+        pathname: '/compartmentalModels/reviewConfigurationInformation',
+        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
+      })
     }else if(simulationFileUpload.error && simulationFileUpload.errorData!=null){
       setShowSnack(
         {
@@ -111,7 +108,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
   return {
     loadingSimulationFileUpload:simulationFileUpload.loadingSimulationFileUpload,
-    selectOptions,
+    stateVariables:predefinedModelSelected?.modelData?.state_variables || [],
     currentSimulation:dataCurrentSimulation,
     predefinedModelSelected:predefinedModelSelected,
     executeRequestUploadData

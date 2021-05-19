@@ -13,13 +13,26 @@ const CompartmentalUploadDataPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   
   const{ 
-    selectOptions, 
+    stateVariables, 
     executeRequestUploadData, 
     loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({showSnack, setShowSnack})
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
+
+  const optionListDTO =(options)=>{
+    const arrayStateDto = []
+    options.map((state)=>{
+      const stateObject = {}
+      stateObject.label = state.label.toLowerCase()
+      stateObject.name  = state.name
+      stateObject.value = state.label.toLowerCase()
+      arrayStateDto.push(stateObject)
+    })
+    return arrayStateDto
+  }
+
   return (
     <CompartmentalUploadDataSection>
       <Grid container item xs={12} 
@@ -36,9 +49,9 @@ const CompartmentalUploadDataPage = () => {
         </Typography>
       </CompartmentalUploadDataTitle>
 
-      {!loadingSimulationFileUpload && <Grid container item xs={12}>
+      {!loadingSimulationFileUpload && stateVariables.length>0 && <Grid container item xs={12}>
         <UploadDataForm
-          selectOptions={selectOptions}
+          selectOptions={optionListDTO(stateVariables)}
           executeRequest={executeRequestUploadData}
         />
       </Grid>}
