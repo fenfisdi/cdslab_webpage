@@ -2,22 +2,16 @@ import { isEmpty } from 'lodash'
 import { useContext, useEffect, useState } from 'react'
 import { languageContext } from '../../../config/languageContext'
 import { useInputValue } from '../../ui/Input/useInputValue'
+import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { VALIDATORS_MY_SIMULATIONS_FORM } from './validators'
 
-const MODEL_TYPE = [
-  {
-    SIR : 'sir',
-    MOD_SEIRV : 'modSeirv',
-    SEIR : 'seir',
-  }
-]
+const MODEL_TYPE_SIR = 'sir'
+const MODEL_TYPE_MOD_SEIRV = 'modSeirv'
+const MODEL_TYPE_SEIR = 'seir'
 
-const PARAMETER_TYPE = [
-  {
-    FIXED : 'fixParameter',
-    OPTIMIZE : 'optimizeParameters',
-  }
-]
+const PARAMETER_TYPE_FIXED = 'fixed'
+const PARAMETER_TYPE_OPTIMIZE_PARAMETERS = 'optimized'
+
 
 export const useMySimulationsForm = () => {
   const {t} = useContext(languageContext)
@@ -26,45 +20,43 @@ export const useMySimulationsForm = () => {
     type: 'text',
     label: t('mySimulations.email'),
   })
-  const modelType = useInputValue('', VALIDATORS_MY_SIMULATIONS_FORM.alphabetic, {
-    name: 'modelType',
-    type: 'text',
-    label: t('mySimulations.modelType'),
-    options:[
-      {label:'Sir', value:MODEL_TYPE.SIR},
-      {label:'Mod Seirv', value:MODEL_TYPE.MOD_SEIRV},
-      {label:'Seir', value:MODEL_TYPE.SEIR}
-    ]
+  const modelType = useSelectValue('', VALIDATORS_MY_SIMULATIONS_FORM.modelType, {
   })
-  const parameterType = useInputValue('', VALIDATORS_MY_SIMULATIONS_FORM.alphabetic, {
-    name: 'parameterType',
-    type: 'text',
-    label: t('mySimulations.parameterType'),
-    options:[
-      {label:'Fixed parameter', value:PARAMETER_TYPE.FIXED},
-      {label:'Optimize parameter', value:PARAMETER_TYPE.OPTIMIZE}
-    ]
+
+  const optionsModelType =[
+    {label:'Sir', value:MODEL_TYPE_SIR},
+    {label:'Mod Seirv', value:MODEL_TYPE_MOD_SEIRV},
+    {label:'Seir', value:MODEL_TYPE_SEIR}
+  ]
+  const parameterType = useSelectValue('', VALIDATORS_MY_SIMULATIONS_FORM.modelType, {
   })
+
+  const optionsParameterType = [
+    {label:'Fixed parameter', value:PARAMETER_TYPE_FIXED},
+    {label:'Optimize parameter', value:PARAMETER_TYPE_OPTIMIZE_PARAMETERS}
+  ]
   const year = useInputValue('', VALIDATORS_MY_SIMULATIONS_FORM.alphabetic, {
     name: 'year',
-    type: 'text',
+    type: 'number',
     label: t('mySimulations.year'),
   })
   const month = useInputValue('', VALIDATORS_MY_SIMULATIONS_FORM.alphabetic, {
-    name: 'lastName',
-    type: 'text',
+    name: 'month',
+    type: 'number',
     label: t('mySimulations.month'),
   })
   const day = useInputValue('', VALIDATORS_MY_SIMULATIONS_FORM.alphabetic, {
-    name: 'lastName',
-    type: 'text',
+    name: 'day',
+    type: 'number',
     label: t('mySimulations.day'),
   })
 
   return {
     search,
     modelType,
+    optionsModelType,
     parameterType,
+    optionsParameterType,
     year,
     month,
     day

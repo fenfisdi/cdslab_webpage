@@ -1,7 +1,7 @@
 import { Input } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import theme from '../../../styles/cdslabTheme'
 import { SelectComponent } from '../../ui/Select'
 import { useMySimulationsForm } from './state'
@@ -11,15 +11,30 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
 
   const classes = useSimulationsStyles(theme)
   const fieldsData = useMySimulationsForm()
-
+  const [isValid, setIsvalid] = useState(false)
   const {
     search,
     modelType,
+    optionsModelType,
     parameterType,
+    optionsParameterType,
     year,
     month,
     day
   } = fieldsData
+  
+
+  const handleClick = () => {
+
+    eventEmitter({
+      search: search.value,
+      modelType: modelType.value,
+      parameterType: parameterType.value,
+      year: year.value,
+      month: month.value,
+      day: day.value,
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -43,13 +58,16 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
             <SelectComponent
               title="Model Type"
               {...modelType}
-              options={modelType.options} />
+              options={optionsModelType}
+            />
           </Grid>
           <Grid item xs={6}>
             <SelectComponent
               title="Parameter Type"
+              className={classes.selectComponent}
               {...parameterType}
-              options={parameterType.options} />
+              options= {optionsParameterType}
+            />
           </Grid>
         </Grid>
         <Grid item xs={4} container>
@@ -90,6 +108,17 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
               {...day}
             />
           </Grid>
+        </Grid>
+        <Grid item xs={12} container justify="flex-end">
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            color="grey"
+            className={classes.buttonSearch}
+            disabled={!isValid ? false : true}
+          >
+            Search
+          </Button>
         </Grid>
       </Grid>
     </div>

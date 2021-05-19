@@ -7,6 +7,7 @@ import { authQrReducer,initialState as auhtQrInitialState } from './reducers/aut
 import { accountRecoveryReducer, initialState as accountRecoveryInitialState } from './reducers/accountRecoveryReducer'
 import { qrAccountRecoveryReducer, initialState as qrAccountRecoveryInitialState  } from './reducers/qrAccountRecoveryReducer'
 import { compartmentalModelReducer, initialState as compartmentalModelInitialState  } from './reducers/compartmentalModelReducer'
+import { mySimulationReducer , initialState as mySimulationsInitialState } from './reducers/mySimulationsReducer'
 
 export const StoreContext = createContext()
 
@@ -15,6 +16,7 @@ export const StoreProvider = ({ children }) => {
     combineReducers({
       session: sessionReducer,
       simulations: simulationReducer,
+      mySimulations : mySimulationReducer,
       register: registerReducer,
       authQr: authQrReducer,
       accountRecovery:accountRecoveryReducer,
@@ -23,6 +25,7 @@ export const StoreProvider = ({ children }) => {
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
+      mySimulationsInitialState,
       registerInitialState, 
       auhtQrInitialState,
       accountRecoveryInitialState,
