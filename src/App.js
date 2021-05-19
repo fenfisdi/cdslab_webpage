@@ -33,7 +33,7 @@ const App = () => {
   const RecoveryQrBindingPage = React.lazy(() => import('./pages/Auth/QrBindingRecoveryPage'))
   const SimulationModelPage = React.lazy(() => import('./pages/SimulationModelPage'))
   const CompartmentalModelPage = React.lazy(() => import('./pages/CompartmentalModelPage'))
-  const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
+  const ProfilePage = React.lazy(() => import('./pages/ProfilePage/ProfileMainPage'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.

@@ -1,74 +1,30 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Link from '@material-ui/core/Link'
-import Button from '@material-ui/core/Button'
-import Switch from '@material-ui/core/Switch'
-import SaveIcon from '@material-ui/icons/Save'
-import {useProfilePageStyles } from './styles'
+import React, { Suspense } from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { CompartmentalModelPageContainer, CompartmentalModelPageContainerTitle } from './styles'
+import LoaderComponent from '../../components/ui/Loader'
+import TitleIcon from '../../components/layouts/TitleIcon'
+import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
 
+const ProfilePage = () => {
+  const match = useRouteMatch()
+  const ProfileMainPage = React.lazy(() => import('./ProfileMainPage'))
+  const UpdateDataPage = React.lazt(()=>import('./UpdateDataPage'))
+  
 
-const ProfilePage=()=>{
-  const classes = useProfilePageStyles()
-  const [state, setState] = React.useState({
-    notifySmulations: true,
-    notifyFileRemoval: true,
-  })
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-  }
-
-  return(
-    <Grid container  className={classes.root}>
-      <Grid container  spacing={9}  direction="column" justify="center"  alignItems="center">
-        <Grid item>
-          <AccountCircleIcon style={{ fontSize: 80, color: '#827C02'}} />
-        </Grid>
-        <Grid item>
-          <Link href="#" onClick={console.log(1)} color="inherit">
-          Update personal data
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link href="#" onClick={console.log(1)} color="inherit">
-          Change password
-          </Link>
-        </Grid>
-        <Grid item>
-          <Link href="#" onClick={console.log(1)} color="inherit">
-          Change QR bindings
-          </Link>
-        </Grid>
-      </Grid>
-      <Grid container className={classes.root} spacing={2} direction='column' justify="flex-end" alignItems="flex-end">
-        <Grid item className={classes.item}>
-          <FormControlLabel
-            control={<Switch checked={state.notifySmulations} onChange={handleChange} name="notifySmulations"/>}
-            label="Notify me when a simulation finishes"
-            labelPlacement="start" 
-          />
-        </Grid>
-        <Grid item className={classes.item}>
-          <FormControlLabel
-            control={<Switch checked={state.notifyFileRemoval} onChange={handleChange} name="notifyFileRemoval"/>}
-            label="Notify me before file removal"
-            labelPlacement="start"
-          />
-        </Grid>
-        <Grid item className={classes.item}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<SaveIcon />}
-          >
-        Save changes
-          </Button>
-        </Grid>
-      </Grid>
-    </Grid>
+  return (
+    <>
+      <CompartmentalModelPageContainerTitle>
+        <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
+      </CompartmentalModelPageContainerTitle>
+      <CompartmentalModelPageContainer>        
+        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+          <Switch>
+            <Route path={match.path} exact component={ProfileMainPage} />
+            <Route path={match.path} exact component={UpdateDataPage} />
+          </Switch>
+        </Suspense>
+      </CompartmentalModelPageContainer>
+    </>
   )
 }
 

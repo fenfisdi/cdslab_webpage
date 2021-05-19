@@ -1,12 +1,20 @@
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-export const useProfilePageStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    marginTop: '5%',
-    marginBottom: '2%'
-  },
-  item: {
-    marginRight: '10%',
-  },
-}))
+export const CompartmentalModelPageContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 70px;
+  margin-top: 10px;
+`
+
+export const CompartmentalModelPageContainerTitle = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+`
