@@ -6,7 +6,6 @@ import {
   updateCompartmentalSimulationService,
   storeCompartmentalSimulationFolderService, 
   storeCompartmentalFileUploadService,
-  getFixedParametersFormFieldsService,
   executeSimulationService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
@@ -22,8 +21,6 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
   COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
-  COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_SUCCESS,
-  COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
@@ -233,27 +230,6 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
-  const getFixedParametersFormFields = ()=>{
-    getFixedParametersFormFieldsService().then((response)=>{
-      dispatch({
-        type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_SUCCESS,
-        payload: response
-      })
-    }).catch((error) => {
-      if(error.response) {          
-        const {response:{data}}=error                    
-        dispatch({
-          type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
-          payload: data 
-        })
-      }else if(error.request){
-        dispatch({
-          type: COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
-          payload:{detail:'The request was made but no response was received'}
-        })
-      }
-    })
-  }
   
   const executeSimulation =(idSimulation)=>{
     executeSimulationService(idSimulation).then((response)=>{      
@@ -287,7 +263,6 @@ export const useCompartmentalModelActions = (dispatch) => {
     storeCompartmentalFileUpload,
     setDefinitionCompartmentalFolderSimulation,
     updateNextStepFileUploadProperty,
-    getFixedParametersFormFields, 
     executeSimulation,
     setDefinitionCompartmentalExecuteSimulation,
     setDefinitionFileDataProperty }
