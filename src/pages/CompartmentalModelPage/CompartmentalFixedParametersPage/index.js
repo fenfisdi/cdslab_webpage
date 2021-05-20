@@ -14,8 +14,9 @@ const CompartmentalFixedParametersPage =()=>{
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   
   const { 
+    currentSimulation,
     fixedParametersFormFields, 
-    executeRequestConfigureParameters 
+    executeRequestConfigureParametersFixed 
   } = useCompartmentalFixedParametersPageState({showSnack, setShowSnack })
 
   const handleCloseSnack = () => {
@@ -40,10 +41,10 @@ const CompartmentalFixedParametersPage =()=>{
       </CompartmentalFixedParametersTitle>
 
       {fixedParametersFormFields && fixedParametersFormFields.length>0 && <FixedParametersFormStateVariables
-        fieldsSchema={fixedParametersFormFields} 
-        valuesFieldParameters={[]} 
+        fieldParameters={fixedParametersFormFields} 
+        valuesFieldParameters={currentSimulation.parameters_limits} 
         executeRequestConfigureStateVariables={(valuesPr)=>{
-          executeRequestConfigureParameters(valuesPr)
+          executeRequestConfigureParametersFixed(valuesPr)
         }}
       />}
 

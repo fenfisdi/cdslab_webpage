@@ -38,7 +38,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
       </CompartmentalConfigureStateVariablesTitle>    
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
-        fieldsSchema={modelData.state_variables}
+        fieldParameters={modelData.state_variables}
         executeRequestConfigureStateVariables={executeRequestConfigureStateVariables}
         valuesFieldParameters={currentSimulation && currentSimulation.state_variable_limits}
       />}
