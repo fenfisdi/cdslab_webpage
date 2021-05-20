@@ -25,7 +25,8 @@ import {
   COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_SUCCESS,
   COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
-  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR
+  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -170,6 +171,13 @@ export const useCompartmentalModelActions = (dispatch) => {
       payload: nextStep
     })
   }
+  
+  const setDefinitionFileDataProperty =(data)=>{
+    dispatch({
+      type:COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
+      payload:data
+    })
+  }
 
 
   const storeCompartmentalSimulation =(simulation)=>{
@@ -281,7 +289,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     updateNextStepFileUploadProperty,
     getFixedParametersFormFields, 
     executeSimulation,
-    setDefinitionCompartmentalExecuteSimulation }
+    setDefinitionCompartmentalExecuteSimulation,
+    setDefinitionFileDataProperty }
 
 
 }

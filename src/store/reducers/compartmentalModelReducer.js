@@ -18,7 +18,8 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
-  COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
 } from '../../actions/types/compartmentalModelTypes'
 
 
@@ -154,6 +155,11 @@ export const compartmentalModelReducer = (state, action) => {
     return {
       ...state, loading: false, simulationFileUpload: { ...state.simulationFileUpload, nextStep:action.payload }
     } 
+
+  case COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA:
+    return {
+      ...state, loading: false, simulationFileUpload: { ...state.simulationFileUpload, data:action.payload }
+    }
 
   case COMPARTMENTAL_MODEL_GET_FIXED_PARAMETERS_FORM_FIELDS_ERROR:
     return {

@@ -20,7 +20,8 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
     storePredefinedModelSelected, 
     setDefinitionCompartmentalSimulation, 
     setDefinitionCompartmentalFolderSimulation,
-    setDefinitionCompartmentalExecuteSimulation } = useCompartmentalModelActions(dispatch)
+    setDefinitionCompartmentalExecuteSimulation,
+    setDefinitionFileDataProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(() => {
     if(isNull(predefinedModelsList) && error!=true){
@@ -32,6 +33,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
       setDefinitionCompartmentalSimulation(null)
       setDefinitionCompartmentalFolderSimulation(null)
       setDefinitionCompartmentalExecuteSimulation(null)
+      setDefinitionFileDataProperty(null)
     }
   }, [predefinedModelsList]) 
 
