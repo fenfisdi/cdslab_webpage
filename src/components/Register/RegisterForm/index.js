@@ -15,6 +15,7 @@ import { languageContext } from '../../../config/languageContext'
 
 
 const RegisterForm = ({ eventEmitter, loading }) => {
+  
   const classes = useRegisterFormStyles(theme)
   const [isValid, setIsvalid] = useState(false)
   const [verificationPassword, setVerificationPassword] = useState(false)
@@ -338,7 +339,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             onClick={handleClick}
             variant="contained"
             color="primary"
-            className={{}}
             disabled={!isValid && verificationPassword ? false : true}
           >
             Continue

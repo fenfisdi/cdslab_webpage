@@ -1,9 +1,10 @@
 import React from 'react'
+import UpdateProfileForm from '../../../components/UpdateProfileForm'
 
 const UpdateDataPage=()=>{
 
   return (
-    <h2>Hola mundo</h2>
+    <UpdateProfileForm/>
   )
 }
 
