@@ -7,24 +7,84 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
-import { CompartmentalChooseSimulationSection, CompartmentalChooseSimulatioFormTitle } from './styles'
+import {
+  CompartmentalChooseSimulationSection,
+  CompartmentalChooseSimulatioFormTitle,
+  CompartmentalChooseSimulatioDate,
+  Label,
+  Input,
+  Column,
+  Error
+} from './styles'
 
 const CompartmentalChooseSimulationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const {executeSelectedOption,loadingSimulationFolderInformation } = useCompartmentalChooseSimulationPageState({showSnack, setShowSnack })
+  const [initialDate, setInitialDate] = useState('')
+  const [finalDate, setFinalDate] = useState('')
+  const [showError, setShowError] = useState(false)
+  const {executeSelectedOption,loadingSimulationFolderInformation } = useCompartmentalChooseSimulationPageState({ showSnack, setShowSnack })
+
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
+
+  const handleDate = (dateFinal) => {
+    setShowError(false)
+    console.log(dateFinal > initialDate)
+    if (dateFinal > initialDate) {
+      setFinalDate(dateFinal)
+    } else {
+      setFinalDate('')
+      setShowError(true)
+    }
+  }
+
   return (
     <CompartmentalChooseSimulationSection>
-      
       <Grid container item xs={12}
         direction="row"
         justify="space-between"
-        alignItems="flex-start">
+        alignItems="flex-start"
+      >
         <p></p>
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>
+
+      <Grid container item xs={12}
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start"
+      >
+        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
+          Choose simulation dates
+        </Typography>
+      </Grid>
+
+      <CompartmentalChooseSimulatioDate>
+        <Column>
+          <Label htmlFor='initial'>Simulation initial date</Label>
+          <Input
+            type='date'
+            id='initial'
+            value={initialDate}
+            onChange={e => setInitialDate(e.target.value)}
+          />
+        </Column>
+
+        <Column>
+          <Label htmlFor='final'>Simulation final date</Label>
+          <Input
+            type='date'
+            id='final'
+            value={finalDate}
+            onChange={e => handleDate(e.target.value)}
+            error={showError}
+          />
+          {showError && (
+            <Error>The final date must be greater than the initial date.</Error>
+          )}
+        </Column>
+      </CompartmentalChooseSimulatioDate>
 
       <CompartmentalChooseSimulatioFormTitle>
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
@@ -38,6 +98,7 @@ const CompartmentalChooseSimulationPage = () => {
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
+          disabled={initialDate === '' || finalDate === ''}
         />
       </Grid>}
 
