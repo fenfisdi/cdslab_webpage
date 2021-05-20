@@ -11,7 +11,7 @@ import { CompartmentalOptimizeParametersSection, CompartmentalOptimizeParameters
 
 const CompartmentalOptimizeParametersPage = () => {
   const { executeSelectedOption } = useCompartmentalOptimizeParametersPageState()
-  
+
   return (
     <CompartmentalOptimizeParametersSection>
       <Grid container item xs={12} 
@@ -36,7 +36,6 @@ const CompartmentalOptimizeParametersPage = () => {
         />
       </Grid>
     </CompartmentalOptimizeParametersSection>
-
   )
 }
 

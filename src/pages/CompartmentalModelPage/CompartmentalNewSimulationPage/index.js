@@ -8,13 +8,10 @@ import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
 
-
 const CompartmentalNewSimulationPage = ({pathParent}) => {
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { predefinedModelsList, storePredefinedModelSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
-  
-  
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -25,7 +22,6 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
   }
 
   return (
-
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
       <Grid container item xs={12} 
         direction="row"
@@ -51,7 +47,6 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
     </Grid>
-
   )
 }
 

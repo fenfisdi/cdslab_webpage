@@ -96,7 +96,6 @@ export default function FullWidthTabs(props) {
                         </NavLink>
                       )
                   }
-                  
                 </div>
               )})
           }

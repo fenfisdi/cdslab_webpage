@@ -8,11 +8,10 @@ import { getStateWithQueryparams } from '../common'
 export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) => {
   const [selectOptions, setSelectOptions] = useState([])
   const history = useHistory()
-  
 
   const {
-    state: {      
-      compartmentalModel: { 
+    state: {
+      compartmentalModel: {
         predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation,error,errorData}, 
         simulationFileUpload 
       }
@@ -27,8 +26,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
-    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){               
-      const {modelData:{state_variables}} = predefinedModelSelected || {}
+    if (dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){
+      const { modelData: { state_variables } } = predefinedModelSelected || {}
       const arrayStateDto = []
       state_variables.map((state)=>{
         const stateObject = {}
@@ -38,19 +37,18 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
         arrayStateDto.push(stateObject)
       })
       setSelectOptions(arrayStateDto)
-    }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){       
-      const {name}=dataCurrentSimulation
-      findPredefinedModel({model_id:params.model_id,  simulationName:name})
+    } else if (dataCurrentSimulation != null && isEmpty(predefinedModelSelected)) {
+      const {name} = dataCurrentSimulation
+      findPredefinedModel({model_id:params.model_id, simulationName:name})
 
-    }else if(!isEmpty(params) && dataCurrentSimulation == null && isEmpty(predefinedModelSelected)){
+    } else if (!isEmpty(params) && dataCurrentSimulation == null && isEmpty(predefinedModelSelected)){
       findCompartmentalSimulation(params.simulation_identifier)
     }
-    
   },[dataCurrentSimulation,predefinedModelSelected])
 
 
   useEffect(()=>{
-    if(dataCurrentSimulation!= null && simulationFileUpload.data!=null && !simulationFileUpload.error){
+    if (dataCurrentSimulation != null && simulationFileUpload.data != null && !simulationFileUpload.error) {
       setShowSnack(
         {
           ...showSnack,
@@ -60,7 +58,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
           successMessage: `${simulationFileUpload.data ? simulationFileUpload.data.name:''} file loaded.`
         }
       )
-    }else if(simulationFileUpload.error && simulationFileUpload.errorData!=null){
+    } else if (simulationFileUpload.error && simulationFileUpload.errorData != null) {
       setShowSnack(
         {
           ...showSnack,
@@ -89,14 +87,14 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   },[error])
 
 
-  const executeRequestUploadData =({formData})=>{
-    const {  name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
-    state_variable_limits.map((stateVariable)=>{
+  const executeRequestUploadData = ({ formData }) => {
+    const { name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
+    state_variable_limits.map((stateVariable) => {
       const {label} = stateVariable
-      if(label.toLowerCase() == formData.get('stateVariable').toLowerCase()){
-        stateVariable.to_fit = true  
-      }else{
-        stateVariable.to_fit = false      
+      if (label.toLowerCase() == formData.get('stateVariable').toLowerCase()){
+        stateVariable.to_fit = true
+      } else {
+        stateVariable.to_fit = false
       }
     })
     formData.delete('stateVariable')
@@ -106,7 +104,6 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
       'state_variable_limits':state_variable_limits,
       'parameter_type':parameter_type
     },identifier,formData)
-    
   }
 
   return {

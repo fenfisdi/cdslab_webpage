@@ -121,8 +121,6 @@ export const compartmentalModelReducer = (state, action) => {
       ...state, loading: false, simulationFileUpload: { ...state.simulationFileUpload, loadingSimulationFileUpload:action.payload }
     }
 
-    
-
   default:
     return state
   }

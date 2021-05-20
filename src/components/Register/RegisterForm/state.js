@@ -98,5 +98,4 @@ export const useRegisterFormState = () => {
     securityAnswer1,
     securityAnswer2
   }
-
 }

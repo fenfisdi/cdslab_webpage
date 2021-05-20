@@ -9,8 +9,6 @@ import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalChooseSimulationSection, CompartmentalChooseSimulatioFormTitle } from './styles'
 
-
-
 const CompartmentalChooseSimulationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const {executeSelectedOption,loadingSimulationFolderInformation } = useCompartmentalChooseSimulationPageState({showSnack, setShowSnack })
@@ -20,14 +18,14 @@ const CompartmentalChooseSimulationPage = () => {
   return (
     <CompartmentalChooseSimulationSection>
       
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <p></p>
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>
-     
+
       <CompartmentalChooseSimulatioFormTitle>
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
           Choose simulation type
@@ -40,7 +38,6 @@ const CompartmentalChooseSimulationPage = () => {
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
-          
         />
       </Grid>}
 
@@ -57,7 +54,6 @@ const CompartmentalChooseSimulationPage = () => {
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
     </CompartmentalChooseSimulationSection>
-
   )
 }
 

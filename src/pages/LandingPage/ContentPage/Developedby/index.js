@@ -11,8 +11,8 @@ const DevelopedBy = () => {
       <h1 className={classes.title}>Desarrollado Por:</h1>
       <div className={classes.storyText}>
         <div className={classes.divDeveloped}>
-          <div className={classes.textDeveloped}> 
-            { DEVELOPED_BY_TEXT } 
+          <div className={classes.textDeveloped}>
+            { DEVELOPED_BY_TEXT }
           </div>
           <div className={classes.divDevelopedImg}><img className={classes.imgDeveloped} src={imgDeveloped} /></div>
         </div>
@@ -20,4 +20,5 @@ const DevelopedBy = () => {
     </>
   )
 }
+
 export default DevelopedBy

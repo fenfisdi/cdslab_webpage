@@ -23,7 +23,6 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
       notIsValid = true
     }
     setIsvalid(notIsValid)
-    
   }, [email])
 
   const handleClickButton = () => {
@@ -74,7 +73,7 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
                 variant="contained"
                 color="primary"
                 className={{}}
-                disabled={!isValid ? false : true}
+                disabled={ !isValid ? false : true }
               >
                 {t('common.continueButton')}
               </Button>

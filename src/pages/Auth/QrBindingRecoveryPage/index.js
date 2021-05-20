@@ -89,5 +89,3 @@ const RecoveryQrBindingPage = () => {
 }
 
 export default RecoveryQrBindingPage
-
-

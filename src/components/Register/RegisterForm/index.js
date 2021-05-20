@@ -77,18 +77,16 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     })
   }
 
-  /********************* */
-
   return (
     <Paper className={classes.formBody}>
       <Grid item container xs={12} justify="center" className={loading ? classes.loading : null}>
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
           <TitleComponent
-            justify={'center'}
-            alignItems={'center'}
+            justify='center'
+            alignItems='center'
             title={t('registerPage.title')}
-            variant={'h5'}
+            variant='h5'
           />
 
           <Grid
@@ -170,8 +168,8 @@ const RegisterForm = ({ eventEmitter, loading }) => {
           >
             <Grid item xs={2}>
               <PhoneInput
-                inputStyle={{width:'90px'}}
-                country={'co'}
+                inputStyle={{ width:'90px' }}
+                country='co'
                 value={phonePrefix}
                 onChange={setPrefix}
               />
@@ -179,7 +177,6 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             {<PhoneNumber
               xs={5}
               phoneNumber={phoneNumber}
-
             />}
           </Grid>
 
@@ -339,7 +336,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             variant="contained"
             color="primary"
             className={{}}
-            disabled={!isValid && verificationPassword ? false : true}
+            disabled={ !isValid && verificationPassword ? false : true }
           >
             Continue
           </Button>
