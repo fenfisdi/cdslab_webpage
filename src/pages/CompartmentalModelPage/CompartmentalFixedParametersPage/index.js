@@ -1,5 +1,4 @@
-import { Typography } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import React, { useState } from 'react' 
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
