@@ -2,19 +2,16 @@ import { useEffect, useState } from 'react'
 import { useMySimulationActions } from '@actions/mySimulationsActions'
 import { useStore } from '../../../store/storeContext'
 import { useComparmentalMySimulationFilter } from './filter'
-import { useSessionActions } from '@actions/sessionsActions'
 
 export const useComparmentalMySimulationState = () => {
   const {
     state: {
-      mySimulations: { mySimulations, loading },
-      session: { navigation }
+      mySimulations: { mySimulations, loading,execution }
     },
     dispatch
   } = useStore()
 
-  const { getMySimulations,setActiveSimulation } = useMySimulationActions(dispatch)
-  const { setCurrenNavigation } = useSessionActions(dispatch)
+  const { getMySimulations,setActiveSimulation,deleteSimulation,getExecution } = useMySimulationActions(dispatch)
   const {
     filterSimulationName,
     filterModelType,
@@ -24,24 +21,20 @@ export const useComparmentalMySimulationState = () => {
     filterDateYear
   } = useComparmentalMySimulationFilter()
 
-  const [rows, setRows] = useState([])
-  const [rowsFiltered, setRowsFiltered] = useState([])
+  const [rows] = useState(mySimulations)
+  const [rowsFiltered, setRowsFiltered] = useState(mySimulations)
   
   useEffect(() => {
     mySimulationsList()
   }, [])
   
   const mySimulationsList = () => {
-    console.log(mySimulations,loading)
-    if (mySimulations.length === 0 && !loading) { getMySimulations() }
-  }
-  
-  const updateNavigationTitle = () => {
-    if (!navigation?.current) { setCurrenNavigation('mySimulations') }
+    if (execution) { getMySimulations() }
   }
 
+
   const columns = [
-    { field: 'Seleccionar', headerName: 'ID', width: 70 },  
+    { field: 'Select', headerName: 'ID', width: 70 },  
     { field: 'Simulation Name', headerName: 'ID', width: 70 },
     { field: 'Model Type', headerName: 'ID', width: 70 },
     { field: 'Parameter Type', headerName: 'ID', width: 70 },
@@ -78,13 +71,21 @@ export const useComparmentalMySimulationState = () => {
   }
 
   const handleClickPreview = (row) =>{
+    getExecution()
     setActiveSimulation(row)
   }
+  const handleClickDelete = (rows) =>{
+    rows.map((elem) => {
+      deleteSimulation(elem)
+    })
+  }
   return {
+    loading,
     rowsFiltered,
+    setRowsFiltered,
     columns,
     filterForm,
-    rows,
-    handleClickPreview
+    handleClickPreview,
+    handleClickDelete
   }
 }

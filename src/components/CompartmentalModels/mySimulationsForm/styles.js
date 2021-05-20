@@ -18,13 +18,6 @@ export const useSimulationsStyles = makeStyles((theme) => ({
     'min-height':' 500px',
     'align-items': 'center'
   },
-  titleDate:{
-    display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
-    height: '100px'
-
-  },
   buttonSearch: {
     float: 'rigth'
   },

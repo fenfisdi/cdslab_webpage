@@ -11,6 +11,8 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
 
   const classes = useSimulationsStyles(theme)
   const fieldsData = useMySimulationsForm()
+  const [disabledMonth, setDisabledMonth] = useState(true)
+  const [disabledDay, setDisabledDay] = useState(true)
   const [isValid, setIsvalid] = useState(false)
   const {
     search,
@@ -23,9 +25,23 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
     day
   } = fieldsData
   
+  const handleYear = (event) => {
+    if(event.target.value > 0){
+      setDisabledMonth(false)
+    }else{
+      setDisabledMonth(true)
+    }
+  }
+  const handleMonth = (event) => {
+    if(event.target.value > 0){
+      setDisabledDay(false)
+    }else{
+      setDisabledDay(true)
+    }
+  }
+  
 
   const handleClick = () => {
-
     eventEmitter({
       search: search.value,
       modelType: modelType.value,
@@ -72,41 +88,52 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
         </Grid>
         <Grid item xs={4} container>
           <Grid item xs={3}>
-            <div className={classes.titleDate}>
+            <div>
               <p>Date :</p>
             </div>
           </Grid>
-          <Grid item xs={9}>
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="off"
-              placeholder="Year"
-              {...year}
-            />
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="off"
-              placeholder="Month"
-              {...month}
-            />
-            <Input
-              disabled={false}
-              required
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              autoComplete="off"
-              placeholder="Day"
-              {...day}
-            />
+          <Grid item container xs={9}>
+            
+            <Grid item xs={4}>
+              <Input
+                disabled={false}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="off"
+                placeholder="Year"
+                onKeyUp={handleYear}
+                {...year}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Input
+                disabled={disabledMonth}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="off"
+                placeholder="Month"
+                onKeyUp={handleMonth}
+                {...month}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Input
+                disabled={disabledDay}
+                required
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                autoComplete="off"
+                placeholder="Day"
+                {...day}
+              />
+            </Grid>
+            
+            
           </Grid>
         </Grid>
         <Grid item xs={12} container justify="flex-end">

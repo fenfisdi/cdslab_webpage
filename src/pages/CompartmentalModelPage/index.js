@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer, CompartmentalModelPageContainerTitle } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
-import CompartmentalMySimulationPage from './CompartmentalMySimulationPage'
 
 
 import TitleIcon from '../../components/layouts/TitleIcon'
@@ -19,7 +18,8 @@ const CompartmentalModelPage = () => {
   const CompartmentalOptimizeParametersPage = React.lazy(() => import('./CompartmentalOptimizeParametersPage'))
   const CompartmentalUploadDataPage = React.lazy(() => import('./CompartmentalUploadDataPage'))
   const CompartmentalReviewConfigurationMessagePage = React.lazy(() => import('./CompartmentalReviewConfigurationMessagePage'))
-  
+  const CompartmentalMySimulationPage = React.lazy(() => import('./CompartmentalMySimulationPage'))
+  const CompartamentalMySimulationsPreviewPage = React.lazy(() => import('./CompartamentalMySimulationsPreviewPage'))
   
 
   const tabs = [
@@ -31,7 +31,7 @@ const CompartmentalModelPage = () => {
     },
     {
       label: 'Agents',
-      path: `${match.path}/newSimulations`,
+      path: `${match.path}/mySimulations`,
       disabled : true,
       icon: 'agents_SVG'
     },
@@ -53,6 +53,7 @@ const CompartmentalModelPage = () => {
             <Route path={`${match.path}/mySimulations`} exact render={(props) => (
               <CompartmentalMySimulationPage {...props} pathParent={match.path} />
             )} />
+            <Route path={`${match.path}/preview`} exact component={CompartamentalMySimulationsPreviewPage} />
             <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
             <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
             <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
