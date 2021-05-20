@@ -7,6 +7,7 @@ import LoaderComponent from '../../components/ui/Loader'
 const UserManagementPage = () => {
   const match = useRouteMatch()
   const UserManagementMainPage = React.lazy(() => import('./UserManagementMainPage'))
+  const SysManagementMainPage = React.lazy(() => import('./SysManagementMainPage'))
   
   const tabs = [
     {
@@ -17,8 +18,8 @@ const UserManagementPage = () => {
     },
     {
       label: 'Sys Management',
-      path: `${match.path}/newSimulations`,
-      disabled : true,
+      path: `${match.path}/SysManagement`,
+      disabled : false,
       icon: 'agents_SVG'
     },
   ]
@@ -31,6 +32,7 @@ const UserManagementPage = () => {
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={UserManagementMainPage} />
+            <Route path={`${match.path}/SysManagement`} exact component={SysManagementMainPage} />
           </Switch>
         </Suspense>
       </UserManagementPageContainer>
