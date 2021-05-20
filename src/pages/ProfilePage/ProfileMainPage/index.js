@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import { Grid } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -16,6 +17,8 @@ const ProfileMainPage=()=>{
     notifyFileRemoval: true,
   })
 
+  const history = useHistory()
+
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked })
   }
@@ -27,9 +30,13 @@ const ProfileMainPage=()=>{
           <AccountCircleIcon style={{ fontSize: 80, color: '#827C02'}} />
         </Grid>
         <Grid item>
-          <Link href='#/updateDataProfile' color="inherit">
+          <Button onClick={()=>{
+            history.push({ 
+              pathname: '/profile/UpdateDataProfile',
+            })
+          }} color="inherit">
           Update personal data
-          </Link>
+          </Button>
         </Grid>
         <Grid item>
           <Link href="#" onClick={console.log(1)} color="inherit">
