@@ -20,9 +20,6 @@ export const useCompartmentalChooseSimulationPageState = (
     dispatch
   } = useStore()
 
-  console.log(initialDate)
-  console.log(finalDate)
-  
   const { storeCompartmentalSimulation,storeCompartmentalSimulationFolder } = useCompartmentalModelActions(dispatch)
 
   useEffect(() => {
@@ -39,7 +36,8 @@ export const useCompartmentalChooseSimulationPageState = (
           show: true,
           success: false,
           error: true,
-          errorMessage: currentSimulation.errorData.detail
+          // errorMessage: currentSimulation.errorData.detail
+          errorMessage: 'Un errror ocurrio'
         }
       )
     } else if (!isEmpty(currentSimulation) && currentSimulation.data != null && !isEmpty(predefinedModelSelected) 
@@ -93,10 +91,10 @@ export const useCompartmentalChooseSimulationPageState = (
       'status':'incomplete',
       'model_id': model_id,
       'parameter_type':parameter_type.toLowerCase(),
-      // 'interval_date': {
-      //   'start': initialDate,
-      //   'end': finalDate
-      // }
+      'interval_date': {
+        'start': initialDate,
+        'end': finalDate
+      }
     })
   }
 
