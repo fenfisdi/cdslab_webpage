@@ -26,5 +26,8 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
   },
   plot:{
     height: '200px'
+  },
+  imgExt:{
+    width: '30px'
   }
 }))

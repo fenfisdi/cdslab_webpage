@@ -55,6 +55,7 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
   return (
     <div className={classes.root}>
       <Grid
+        item
         xs={12}
         container 
         spacing={3}
@@ -140,7 +141,6 @@ export const MySimulationsForm = ({ eventEmitter, loading }) => {
           <Button
             onClick={handleClick}
             variant="contained"
-            color="grey"
             className={classes.buttonSearch}
             disabled={!isValid ? false : true}
           >

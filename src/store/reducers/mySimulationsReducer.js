@@ -15,7 +15,7 @@ export const initialState = {
     mySimulations: [],
     mySimulationSelected: null,
     mySimulationFiles: [],
-    mySimulationFileSelected: null,
+    mySimulationFileSelected: [],
     loading: false,
     execution: true,
     error: null

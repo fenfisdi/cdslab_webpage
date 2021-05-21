@@ -8,12 +8,9 @@ import {
 import { withRouter } from 'react-router'
 
 const useStyles = makeStyles(() => ({
-  separador: {
-    fontSize: '20px',
-  },
 }))
 
-const Breadcrumbs = props => {
+const MyBreadcrumbs = props => {
   const {
     history,
     location: { pathname }
@@ -22,7 +19,7 @@ const Breadcrumbs = props => {
   const pathnames = pathname.split('/').filter(x => x)
   console.log(pathnames)
   return (
-    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
+    <MUIBreadcrumbs aria-label="breadcrumb" separator='›'>
       {pathnames.map((name, index) => {
         const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
         const isLast = index === pathnames.length - 1
@@ -38,4 +35,4 @@ const Breadcrumbs = props => {
   )
 }
 
-export default withRouter(Breadcrumbs)
+export default withRouter(MyBreadcrumbs)

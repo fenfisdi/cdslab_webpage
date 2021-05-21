@@ -67,6 +67,7 @@ const SimulationMainPage = () => {
       <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       <ModelCard
         options={options}
+        ruta='PrimeraRuta'
         eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
       />
     </SimulationContainer>

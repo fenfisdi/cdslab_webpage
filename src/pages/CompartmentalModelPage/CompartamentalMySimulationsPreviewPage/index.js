@@ -16,11 +16,12 @@ import Plot from 'react-plotly.js'
 import plot_json from './data.json'
 import imgCsv from'../../../assets/images/csv_darius_dan.svg'
 import imgGrap from'../../../assets/images/line-graph_pixelmeetup.svg'
+import { CSVLink } from 'react-csv'
 
 const CompartamentalMySimulationsPreviewPage = () => {
   const classes = useCompartamentalMySimulationPreviewStyles(theme)
-  const {loading,mySimulationFiles,handleDownloadFile} = useCompartamentalMySimulationsPreviewState()
-
+  const {loading,mySimulationFiles,handleDownloadFile,mySimulationFileSelected} = useCompartamentalMySimulationsPreviewState()
+  const [dataFile] = useState(mySimulationFileSelected)
   const [plotJson] = useState(JSON.parse(plot_json))
   const {
     state: {
@@ -46,11 +47,6 @@ const CompartamentalMySimulationsPreviewPage = () => {
     {name : 'Execution time'}
   ]
 
-  const handlePreviewChart = () => {
-    var graph = plot_json 
-    Plot.ne  ('plotly-timeseries', graph, {})
-  }
-
   return (
     <div className={classes.root}>
       <Grid container item xs={12} spacing={3}>
@@ -64,7 +60,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
               ))
             }
           </Grid>
-          <Grid  item xs={3} spacing={3}>
+          <Grid item xs={3} >
             <Paper className={classes.paper}>{name}</Paper>
             <Paper className={classes.paper}>{model_name ? model_name : 'none'}</Paper>
             <Paper className={classes.paper}>{parameter_type ? parameter_type : 'none'}</Paper>
@@ -78,7 +74,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
             <Paper className={classes.paper}>2 horas</Paper>
           </Grid>
           <Grid container item xs={2} alignItems="flex-end" justify="center">
-            <Grid item xs justify="center"></Grid>
+            <Grid item xs container></Grid>
             <Grid item xs>
               <span className={classes.textoDownload}>Dowdload</span>
               <Button
@@ -98,8 +94,8 @@ const CompartamentalMySimulationsPreviewPage = () => {
           <Grid  item xs={12}>
             <span className={classes.textoDownload}> Associated Files</span>
           </Grid>
-          <Grid container item xs={7}>
-            <Grid  item xs={7}>
+          <Grid container item xs={12}>
+            <Grid  item xs={12}>
               <Table>
               
                 <TableHead>
@@ -117,8 +113,8 @@ const CompartamentalMySimulationsPreviewPage = () => {
                         <TableCell>
                           {
                             elem.ext === 'csv'
-                              ? (<img src={imgCsv}  />)
-                              : (<img src={imgGrap}  />)
+                              ? (<img src={imgCsv} className={classes.imgExt} />)
+                              : (<img src={imgGrap} className={classes.imgExt} />)
                           }
                         </TableCell>
                         <TableCell>
@@ -128,19 +124,26 @@ const CompartamentalMySimulationsPreviewPage = () => {
                           {elem.type}
                         </TableCell>
                         <TableCell>
-                          <Button onClick={() => handleDownloadFile(elem)}>
-                            <GetAppIcon className={classes.iconDownload}/>
-                          </Button>
+                          {
+                            elem.ext === 'csv'
+                              ? (<CSVLink
+                                data={elem.body}
+                                asyncOnClick={true}
+                              >
+                                <GetAppIcon className={classes.iconDownload}/>
+                              </CSVLink>)
+                              : ( <p>img</p>)
+                          }
+                          
                         </TableCell>
                       </TableRow>
 
                     ))
                   }
-                
                 </TableBody>
               </Table>
             </Grid>
-            <Grid  item xs={4} className={classes.plot}>
+            <Grid  item xs={12} className={classes.plot}>
               <Plot 
                 {...plotJson}
               />

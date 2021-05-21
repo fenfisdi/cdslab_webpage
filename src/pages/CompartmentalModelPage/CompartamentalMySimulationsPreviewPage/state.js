@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
 import { useMySimulationActions } from '../../../actions/mySimulationsActions'
 import { useStore } from '../../../store/storeContext'
-
+const { convertCSVToArray } = require('convert-csv-to-array')
 
 export const useCompartamentalMySimulationsPreviewState = () => {
   const {
     state: {
-      mySimulations: { mySimulationSelected,mySimulationFiles, loading,execution }
+      mySimulations: { mySimulationSelected,mySimulationFiles,mySimulationFileSelected, loading,execution }
     },
     dispatch
   } = useStore()
 
-  const { getMySimulationsFiles,getMySimulationsDownloadFiles } = useMySimulationActions(dispatch)
+  const { getMySimulationsFiles } = useMySimulationActions(dispatch)
 
   useEffect(() => {
     handleGetFiles()
@@ -23,12 +23,17 @@ export const useCompartamentalMySimulationsPreviewState = () => {
   }
 
   const handleDownloadFile = (elem) => {
-    getMySimulationsDownloadFiles(mySimulationSelected.identifier, elem.uuid)
+    const arrayofArrays = convertCSVToArray(elem.body, {
+      header: false,
+      separator: ',',
+    })
+    return arrayofArrays
   }
 
   return {
     loading,
     mySimulationFiles,
-    handleDownloadFile
+    handleDownloadFile,
+    mySimulationFileSelected
   }
 }

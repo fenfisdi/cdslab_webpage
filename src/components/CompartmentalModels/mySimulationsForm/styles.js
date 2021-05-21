@@ -19,7 +19,8 @@ export const useSimulationsStyles = makeStyles((theme) => ({
     'align-items': 'center'
   },
   buttonSearch: {
-    float: 'rigth'
+    float: 'rigth',
+    background:'grey'
   },
   selectComponent: {
     border: '1px solid #fff'

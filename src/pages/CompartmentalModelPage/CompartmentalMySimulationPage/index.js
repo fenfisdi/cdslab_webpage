@@ -63,7 +63,6 @@ const CompartmentalMySimulationPage = () => {
               <Button
                 onClick={handleClickRemove}
                 variant="contained"
-                color="grey"
                 className={classes.buttonSearch}
                 startIcon={<DeleteOutlineIcon />}
               >

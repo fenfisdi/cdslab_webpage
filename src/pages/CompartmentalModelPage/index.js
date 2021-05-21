@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer, CompartmentalModelPageContainerTitle } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
-
+import MyBreadcrumbs  from '../../components/Breadcrumbs'
 
 import TitleIcon from '../../components/layouts/TitleIcon'
 import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
@@ -39,11 +39,13 @@ const CompartmentalModelPage = () => {
 
   return (
     <>
-      <FullWidthTabs tabs={tabs} />
+      <FullWidthTabs tabs={tabs} /> 
+      
       <CompartmentalModelPageContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       </CompartmentalModelPageContainerTitle>
-      <CompartmentalModelPageContainer>        
+      <CompartmentalModelPageContainer>      
+        <MyBreadcrumbs />  
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />

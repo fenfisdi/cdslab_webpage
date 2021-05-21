@@ -6,5 +6,8 @@ export const useCompartamentalMySimulationForm = makeStyles(() => ({
   },
   iconPreview:{
     cursor: 'pointer'
+  },
+  buttonSearch: {
+    background: 'grey'
   }
 }))

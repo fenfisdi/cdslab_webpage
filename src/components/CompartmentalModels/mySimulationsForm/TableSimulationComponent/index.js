@@ -6,6 +6,7 @@ import { CheckBoxComponent } from '../CheckBoxComponent'
 import imgPreview from '../../../../assets/images/document_freepik.svg'
 import { Link } from 'react-router-dom'
 import { TablePagination } from '@material-ui/core'
+import { TableHead } from '@material-ui/core'
 
 export const TableSimulationsComponent = (props) => {
 
@@ -25,14 +26,18 @@ export const TableSimulationsComponent = (props) => {
     <Grid container item xs={12}>
       <Table>
           
-        {
-          columns.map((col,i) =>  (
-            <th key={i}  className={classes.columns}>
-              {col.field}
-            </th>
-          )
-          )
-        }
+        <TableHead>
+          <TableRow>
+            {
+              columns.map((col,i) =>  (
+                <TableCell key={i}  className={classes.columns}>
+                  {col.field}
+                </TableCell>
+              )
+              )
+            }
+          </TableRow>
+        </TableHead>
         <TableBody>
           {
             rowsFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

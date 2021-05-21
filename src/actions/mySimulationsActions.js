@@ -5,7 +5,6 @@ import {
   MY_SIMULATION_SELECT,
   MY_SIMULATION_SET_FILES,
   MY_SIMULATION_SET_LIST,
-  MY_SIMULATION_FILE_SELECT,
   MY_SIMULATION_EXECUTION_TRUE,
   MY_SIMULATION_EXECUTION_FALSE
 } from './types/mySimulationTypes'
@@ -15,6 +14,7 @@ import {
   requestListSimulations, 
   requestListSimulationsFiles 
 } from '../services/simulationsServices'
+const { convertCSVToArray } = require('convert-csv-to-array')
 
 export const useMySimulationActions = (dispatch) => {
 
@@ -56,10 +56,24 @@ export const useMySimulationActions = (dispatch) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
     dispatch({ type: MY_SIMULATION_LOADING })
     requestListSimulationsFiles(uidSimulations)
-      .then(({data}) => {
-        console.log('Files :',data)
+      .then(async({data}) => {
         if(data.data.length > 0) {
-          dispatch({ type: MY_SIMULATION_SET_FILES, payload: data.data })
+          const dataFiles = []
+          data.data.map(async(file) => {
+            const {data : dataInformationContent} = await downloadSimulationsFiles(uidSimulations,file.uuid)
+            console.log(dataInformationContent)
+            const arrayofArrays = convertCSVToArray(dataInformationContent, {
+              header: false,
+              separator: ',',
+            })
+            
+            dataFiles.push({
+              body: arrayofArrays,
+              ...file
+            })
+          })
+          console.log('Files', dataFiles)
+          dispatch({ type: MY_SIMULATION_SET_FILES, payload: dataFiles})
         }else{
           dispatch({
             type: MY_SIMULATION_ERROR,
@@ -83,14 +97,11 @@ export const useMySimulationActions = (dispatch) => {
       })
   }
 
-  const getMySimulationsDownloadFiles = async (uidSimulations,uidFile) => {
+  const getMySimulationsDownloadFiles = async (uidSimulations,uuidFile) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
     dispatch({ type: MY_SIMULATION_LOADING })
-    downloadSimulationsFiles(uidSimulations,uidFile)
-      .then(({data}) => {
-        console.log('Download :',data)
-        dispatch({ type: MY_SIMULATION_FILE_SELECT, payload: data.data })
-      })
+    downloadSimulationsFiles(uidSimulations,uuidFile)
+      .then(({data}) => data)
       .catch((error) => {
         if(error.response) {
           const { response: { data } } = error
@@ -98,22 +109,22 @@ export const useMySimulationActions = (dispatch) => {
             type: MY_SIMULATION_ERROR,
             payload: data
           })
+          
         }else if (error.request) {
           dispatch({
             type: MY_SIMULATION_ERROR,
             payload:{ message:'The request was made but no response was received' }
           })
         }
+        return error
       })
   }
 
   const deleteSimulation = async (row) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
-    console.log('entro delete',row)
     dispatch({ type: MY_SIMULATION_LOADING })
     try {
-      requestDeleteSimulations(row.identifier).then((response) => {
-        console.log('response',response)
+      requestDeleteSimulations(row.identifier).then(() => {
         dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
       })
         .catch((error) => {

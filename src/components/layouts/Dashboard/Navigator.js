@@ -102,8 +102,8 @@ function Navigator (props) {
             <img src={cdsSvg} className={classes.image} />
           </ListItem>
         </Link>
-        {categories.map(({ id, children}) => (
-          <React.Fragment key={id}>
+        {categories.map(({ id, children}, i) => (
+          <React.Fragment key={i}>
             <ListItem className={classes.categoryHeader}>
               <ListItemText
                 classes={{
@@ -113,8 +113,8 @@ function Navigator (props) {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon,typeIcon, active,href }) => (
-              <NavLink key={childId} activeClassName={classes.itemActiveItem} className={classes.link} to={href} variant='body2'>
+            {children.map(({ id: childId, icon,typeIcon, active,href },i) => (
+              <NavLink key={i} activeClassName={classes.itemActiveItem} className={classes.link} to={href} variant='body2'>
                 <ListItem
                   button
                   className={clsx(classes.item, active && classes.itemActiveItem)}
