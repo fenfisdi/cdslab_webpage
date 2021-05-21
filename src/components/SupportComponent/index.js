@@ -71,9 +71,9 @@ export default function SupportComponent({text}) {
           Help information
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>            
+          <Typography gutterBottom>
             {text}
-          </Typography>          
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} style={{'color':'#333'}}>

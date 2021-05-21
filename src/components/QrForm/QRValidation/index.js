@@ -52,7 +52,6 @@ const QRvalidation = ({ eventEmitter,loading,picture}) => {
         </Grid>
       </Fragment>}
     </Grid>
-    
   )
 }
 

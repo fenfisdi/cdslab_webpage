@@ -47,7 +47,6 @@ const CompartmentalOptimizeParametersPage = () => {
         errorMessage={showSnack.errorMessage} />}
 
     </CompartmentalOptimizeParametersSection>
-
   )
 }
 

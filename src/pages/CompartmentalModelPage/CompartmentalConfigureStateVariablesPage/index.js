@@ -10,9 +10,9 @@ import { CompartmentalConfigureStateVariablesSection, CompartmentalConfigureStat
 
 const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const {     
-    currentSimulation, 
-    predefinedModelSelected:{modelData}, 
+  const {
+    currentSimulation,
+    predefinedModelSelected:{modelData},
     executeRequestConfigureStateVariables }= useCompartmentalConfigureStateVariablesPageState({showSnack, setShowSnack })
   
   const handleCloseSnack = () => {
@@ -35,7 +35,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
         Configure State Variables Initial Values
         </Typography>
-      </CompartmentalConfigureStateVariablesTitle>    
+      </CompartmentalConfigureStateVariablesTitle>
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
         fieldParameters={modelData.state_variables}
@@ -55,10 +55,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-      
-
     </CompartmentalConfigureStateVariablesSection>
-
   )
 }
 

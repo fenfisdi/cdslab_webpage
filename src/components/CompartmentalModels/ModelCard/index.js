@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
-
-
 const ModelCard = ({ ruta='',options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
   
   const [selected, setSelected] = useState('')

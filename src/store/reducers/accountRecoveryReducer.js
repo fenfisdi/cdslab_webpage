@@ -41,12 +41,12 @@ export const accountRecoveryReducer = (state, action) => {
   case ACCOUNT_RECOVERY_SECURITY_CODE_ERROR:
     return {
       ...state, loading: false, securityCode:{ error: true, errorData: action.payload }
-    }  
+    }
 
   case ACCOUNT_RECOVERY_SECURITY_CODE_SUCCESS:
     return {
       ...state, loading: false, securityCode:{ error:false, data: action.payload }
-    } 
+    }
 
   case ACCOUNT_RECOVERY_RESET_PASSWORD_ERROR:
     return {
@@ -57,7 +57,6 @@ export const accountRecoveryReducer = (state, action) => {
     return {
       ...state, loading: false, resetPassword:{ error: false, data: action.payload }
     }
-
 
   default:
     return state

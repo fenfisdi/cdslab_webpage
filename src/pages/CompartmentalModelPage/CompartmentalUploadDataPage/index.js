@@ -11,10 +11,10 @@ import { CompartmentalUploadDataSection, CompartmentalUploadDataTitle } from './
 
 const CompartmentalUploadDataPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  
-  const{ 
-    stateVariables, 
-    executeRequestUploadData, 
+
+  const {
+    stateVariables,
+    executeRequestUploadData,
     loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({showSnack, setShowSnack})
 
   const handleCloseSnack = () => {
@@ -35,14 +35,14 @@ const CompartmentalUploadDataPage = () => {
 
   return (
     <CompartmentalUploadDataSection>
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <p></p>
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
-     
+
       <CompartmentalUploadDataTitle>
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
         Choose variable to fit model
@@ -69,9 +69,6 @@ const CompartmentalUploadDataPage = () => {
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
     </CompartmentalUploadDataSection>
-
-    
-
   )
 }
 

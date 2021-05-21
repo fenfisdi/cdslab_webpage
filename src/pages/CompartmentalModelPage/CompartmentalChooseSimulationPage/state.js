@@ -5,22 +5,28 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 
-export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSnack }) => {
+export const useCompartmentalChooseSimulationPageState = (
+  {
+    showSnack,
+    setShowSnack,
+    initialDate,
+    finalDate
+  }) => {
   const history = useHistory()
   const {
-    state: {      
+    state: {
       compartmentalModel: {  predefinedModelSelected, currentSimulation, simulationFolderInformation }
     },
     dispatch
   } = useStore()
-  
+
   const { storeCompartmentalSimulation,storeCompartmentalSimulationFolder } = useCompartmentalModelActions(dispatch)
 
-  useEffect(()=>{
-    if(isEmpty(predefinedModelSelected)){
+  useEffect(() => {
+    if (isEmpty(predefinedModelSelected)){
       history.push({ pathname: '/compartmentalModels/newSimulations' })
     }
-  },[predefinedModelSelected])
+  }, [predefinedModelSelected])
 
 
   useEffect(()=>{
@@ -31,18 +37,18 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
           show: true,
           success: false,
           error: true,
-          errorMessage: currentSimulation.errorData.detail
+          // errorMessage: currentSimulation.errorData.detail
+          errorMessage: 'Un errror ocurrio'
         }
       )
-    }else if(!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected) 
+    } else if (!isEmpty(currentSimulation) && currentSimulation.data != null && !isEmpty(predefinedModelSelected) 
     && !currentSimulation.error &&
     !simulationFolderInformation.error &&
     simulationFolderInformation.data == null
-    ){
-      const { data:{identifier}} = currentSimulation      
-      storeCompartmentalSimulationFolder(identifier)        
+    ) {
+      const { data: { identifier } } = currentSimulation
+      storeCompartmentalSimulationFolder(identifier)
     }
-    
   },[currentSimulation])
 
 
@@ -57,36 +63,40 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
           errorMessage: simulationFolderInformation.errorData.detail
         }
       )
-    }else if(simulationFolderInformation.data!=null && currentSimulation.data!=null){
-      const {modelData:{identifier:model_id}}=predefinedModelSelected
-      const { data:{identifier,parameter_type}} = currentSimulation
+    } else if (simulationFolderInformation.data !=null && currentSimulation.data != null) {
+      const { modelData: { identifier: model_id } } = predefinedModelSelected
+      const { data: { identifier, parameter_type } } = currentSimulation
       let pathname =''
-      if(SIMULATION_IDENTIFIERS.OPTIMIZE == parameter_type.toUpperCase()){
+      if (SIMULATION_IDENTIFIERS.OPTIMIZE == parameter_type.toUpperCase()) {
         pathname= '/compartmentalModels/configureParameters'
-      }else if(SIMULATION_IDENTIFIERS.FIXED == parameter_type.toUpperCase()){
+      } else if (SIMULATION_IDENTIFIERS.FIXED == parameter_type.toUpperCase()) {
         pathname= '/compartmentalModels/fixedParameters'
-      }      
-      history.push({ 
+      }
+      history.push({
         pathname: pathname,
-        search:   `?simulation_identifier=${identifier}&model_id=${model_id}`
+        search: `?simulation_identifier=${identifier}&model_id=${model_id}`
       })
     }
   },[simulationFolderInformation])
   
-  const executeSelectedOption =(option)=>{
-    const {indetifier}=option
-    const {modelData:{identifier:model_id}, simulationName:name}=predefinedModelSelected
+  const executeSelectedOption = (option) => {
+    const { indetifier } = option
+    const { modelData: { identifier: model_id }, simulationName: name } = predefinedModelSelected
     let parameter_type=''
-    if(indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE){
-      parameter_type = SIMULATION_IDENTIFIERS.OPTIMIZE            
-    }else if(indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED){
+    if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE) {
+      parameter_type = SIMULATION_IDENTIFIERS.OPTIMIZE
+    } else if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED) {
       parameter_type = SIMULATION_IDENTIFIERS.FIXED
     }
     storeCompartmentalSimulation({
-      'name': name,        
+      'name': name,
       'status':'incomplete',
       'model_id': model_id,
-      'parameter_type':parameter_type.toLowerCase()
+      'parameter_type':parameter_type.toLowerCase(),
+      'interval_date': {
+        'start': initialDate,
+        'end': finalDate
+      }
     })
   }
 
