@@ -33,6 +33,7 @@ const App = () => {
   const RecoveryQrBindingPage = React.lazy(() => import('./pages/Auth/QrBindingRecoveryPage'))
   const SimulationModelPage = React.lazy(() => import('./pages/SimulationModelPage'))
   const CompartmentalModelPage = React.lazy(() => import('./pages/CompartmentalModelPage'))
+  const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage'))
 
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
@@ -81,6 +82,10 @@ const App = () => {
               <PrivateRoute
                 path="/compartmentalModels"
                 component={<CompartmentalModelPage />}
+              />
+              <PrivateRoute
+                path="/userManagement"
+                component={<UserManagementPage />}
               />
               <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
               <Route exact path="/accountRecovery" component={AccountRecoveryPage} />

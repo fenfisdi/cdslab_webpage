@@ -1,6 +1,6 @@
 import { useStore } from '@store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
-import { INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION } from '@constants/compartmental'
+import { INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION, SIMULATION_IDENTIFIERS } from '@constants/compartmental'
 import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
@@ -52,7 +52,7 @@ export const useCompartmentalChooseSimulationPageState = (
     }
   },[currentSimulation])
 
-  useEffect(()=>{
+  useEffect(() => {
     if (simulationFolderInformation.error) {
       setShowSnack(
         {
@@ -63,33 +63,41 @@ export const useCompartmentalChooseSimulationPageState = (
           errorMessage: simulationFolderInformation.errorData.detail
         }
       )
-    } else if (simulationFolderInformation.data != null && currentSimulation.data != null) {
+    } else if (simulationFolderInformation.data !=null && currentSimulation.data != null) {
       const { modelData: { identifier: model_id } } = predefinedModelSelected
-      const { data: { identifier } } = currentSimulation
+      const { data: { identifier, parameter_type } } = currentSimulation
+      let pathname =''
+      if (SIMULATION_IDENTIFIERS.OPTIMIZE == parameter_type.toUpperCase()) {
+        pathname= '/compartmentalModels/configureParameters'
+      } else if (SIMULATION_IDENTIFIERS.FIXED == parameter_type.toUpperCase()) {
+        pathname= '/compartmentalModels/fixedParameters'
+      }
       history.push({
-        pathname: '/compartmentalModels/configureParameters',
+        pathname: pathname,
         search: `?simulation_identifier=${identifier}&model_id=${model_id}`
       })
     }
-  }, [simulationFolderInformation])
-
+  },[simulationFolderInformation])
+  
   const executeSelectedOption = (option) => {
     const { indetifier } = option
+    const { modelData: { identifier: model_id }, simulationName: name } = predefinedModelSelected
+    let parameter_type=''
     if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE) {
-
-      const { modelData: { identifier: model_id }, simulationName: name } = predefinedModelSelected
-
-      storeCompartmentalSimulation({
-        'name': name,
-        'status':'incomplete',
-        'model_id': model_id,
-        'parameter_type':'optimized',
-        // 'interval_date': {
-        //   'start': initialDate,
-        //   'end': finalDate
-        // }
-      })
+      parameter_type = SIMULATION_IDENTIFIERS.OPTIMIZE
+    } else if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED) {
+      parameter_type = SIMULATION_IDENTIFIERS.FIXED
     }
+    storeCompartmentalSimulation({
+      'name': name,
+      'status':'incomplete',
+      'model_id': model_id,
+      'parameter_type':parameter_type.toLowerCase(),
+      // 'interval_date': {
+      //   'start': initialDate,
+      //   'end': finalDate
+      // }
+    })
   }
 
 
