@@ -1,9 +1,16 @@
 import React from 'react'
+import { TextEditor } from '../../ui/TextEditor'
 
-const SysNotification = () => {
+const SysNotification = ({ classes, editorState, setEditorState }) => {
   return (
     <>
-      SysNotification
+      <TextEditor
+        editorState={editorState}
+        setEditorState={setEditorState}
+        toolbarClass={classes.toolbarClass}
+        buttonClass={classes.buttonClass}
+        editorClass={classes.editorClass}
+      />
     </>
   )
 }

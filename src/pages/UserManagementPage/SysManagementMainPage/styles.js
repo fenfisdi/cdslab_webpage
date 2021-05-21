@@ -1,9 +1,11 @@
 import { makeStyles } from '@material-ui/core'
 
-export const sysManagementStyles = makeStyles({
+export const sysManagementStyles = makeStyles((theme) => ({
   sysManagementTableContainer: {
     marginTop: '20px',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    borderRadius: '7px',
+    border: '1px solid #E3E3E3'
   },
 
   sysManagementTabsContainer: {
@@ -22,4 +24,34 @@ export const sysManagementStyles = makeStyles({
       color: 'black'
     }
   },
-})
+
+  toolbarClass: {
+    width: '100%',
+    marginTop: '10px',
+    marginBottom: '10px',
+    backgroundColor: 'white'
+  },
+
+  buttonClass: {
+    backgroundColor: '#E3E3E3',
+    marginLeft: '7px',
+    marginBottom: '7px'
+  },
+
+  paper: {
+    padding: '10px',
+    border: '1px solid #E3E3E3'
+  },
+
+  editorClass: {
+    height: '100px'
+  },
+
+  button: {
+    margin: theme.spacing(1)
+  },
+
+  buttonContainer: {
+    textAlign: 'center'
+  }
+}))

@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { EditorState } from 'draft-js'
+import { TextEditor } from '../../ui/TextEditor'
 
-const SysSimulation = ({value,
-  index}) => {
-
-  console.log(value,
-    index)
+const SysSimulation = ({ classes, editorState, setEditorState }) => {
   return (
     <>
-      SysSimulation
+      <TextEditor
+        editorState={editorState}
+        setEditorState={setEditorState}
+        toolbarClass={classes.toolbarClass}
+        buttonClass={classes.buttonClass}
+        editorClass={classes.editorClass}
+      />
     </>
   )
 }

@@ -1,36 +1,24 @@
 import React from 'react'
-import { Container } from '@material-ui/core'
-import AlertCommon from '../../../components/ui/AlertCommon'
+import { Container, Button } from '@material-ui/core'
+import SaveIcon from '@material-ui/icons/Save'
 import { notificationStrings, sysCellNamesTable, secondaryTabTitles } from '../constants'
 import Simpletable from '../../../components/ui/SimpleTable'
-import { sysManagementStyles } from './styles'
+import AlertCommon from '../../../components/ui/AlertCommon'
 import SecondaryTabs from '../../../components/ui/SecondaryTabs'
-import { SysNotification, SysSimulation } from '../../../components/SysManagement/index'
+import { useSysManagementState } from './state'
 
 const SysManagementMainPage = () => {
 
-  const classes = sysManagementStyles()
-
-  function createData(process, time) {
-    return { process, time }
-  }
-  
-  const rows = [
-    createData('Maximum storage time', 30),
-    createData('Notification time before removal', 5),
-    createData('Scheduled removal', 1)
-  ]
-
-  const titles = ['Process', 'Time(days)']
-
-  const tabsComponents = [
-    SysNotification,
-    SysSimulation
-  ]
+  const [
+    classes,
+    rows,
+    titles,
+    tabsComponents
+  ] = useSysManagementState()
 
   return(
     <>
-      <Container maxWidth={'md'}>
+      <Container maxWidth={'sm'}>
         <AlertCommon
           title={notificationStrings.title1}
           message={notificationStrings.message1}
@@ -52,8 +40,20 @@ const SysManagementMainPage = () => {
           <SecondaryTabs
             tabTitles={secondaryTabTitles}
             arrayComponents={tabsComponents}
-            classes={classes.root}
+            tabsClass={classes.root}
+            paperClass={classes.paper}
           />
+        </div>
+        <div className={classes.buttonContainer}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            className={classes.button}
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
         </div>
       </Container>
     </>
