@@ -27,7 +27,6 @@ const AccountRecoveryPage = () => {
   }
 
   const handleClickRecoveryEmail = (formFields) => {
-    
     const { email } = formFields
     handleRequestPasswordChange({ email: email })
   }
@@ -88,7 +87,6 @@ const AccountRecoveryPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-
     </Grid>
   )
 }

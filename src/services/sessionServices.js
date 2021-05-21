@@ -6,6 +6,4 @@ export const loginService = async (authForm) => {
     'POST',
     authForm
   )
-  
-  
 }

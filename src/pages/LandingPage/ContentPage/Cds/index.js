@@ -12,7 +12,6 @@ const Cds = () => {
   return (
     <>
       <h1 className={classes.title}>Compuesta Por:</h1>
-
       <div className={classes.containerCds}>
         <div className={classes.boxCds}>
           <img className={classes.imageLab} src={imgBoxCdsLab} />
@@ -26,4 +25,5 @@ const Cds = () => {
     </>
   )
 }
+
 export default Cds

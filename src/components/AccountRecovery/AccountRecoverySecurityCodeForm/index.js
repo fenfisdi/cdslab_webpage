@@ -80,7 +80,7 @@ const AccountRecoverySecurityCodeForm = ({ loading, handleClick, messageTitle, m
                 variant="contained"
                 color="primary"
                 className={{}}
-                disabled={!isValid ? false : true}
+                disabled={ !isValid ? false : true }
               >
                 Continue
               </Button>
