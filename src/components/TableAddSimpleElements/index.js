@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ColumnTitle, TableContainer, TableCell, TableRow, TableHeaderRow } from './styles'
 import { TextField } from '@material-ui/core'
 import { Button } from '../ui/Buttons'
@@ -6,7 +6,7 @@ import { Button } from '../ui/Buttons'
 const DynamicTable = ({ initialItems, columns }) => {
   const [items, setItems] = useState(initialItems)
 
-  React.useEffect(() => {
+  useEffect(() => {
     renderRows()
     console.log('items changed')
   }, [items])
@@ -18,7 +18,6 @@ const DynamicTable = ({ initialItems, columns }) => {
       itemEmpty[column.att] = ''
     })
     its.push(itemEmpty)
-
     setItems(its)
   }
 

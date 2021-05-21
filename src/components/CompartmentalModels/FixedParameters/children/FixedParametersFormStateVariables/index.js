@@ -4,14 +4,13 @@ import { useParametersFormFieldsCreation } from '../ParametersForm/fieldsCreatio
 import CompartmentalButton from '../../../CompartmentalButton'
 import { checkErrorsStateVariableForm } from './validators'
 import { creationResponseStateVariableForm } from './fieldsCreation'
+import { isEmpty } from 'lodash'
 
 
-
-
-const FixedParametersFormStateVariables = ({fieldsSchema,loading,executeRequestConfigureStateVariables,valuesFieldParameters}) => {
+const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameters,executeRequestConfigureStateVariables}) => {
   const [isValid,setIsValid] = useState(false)
-  const fields = useParametersFormFieldsCreation({fieldsSchema,valuesFieldParameters})
-
+  const fields = useParametersFormFieldsCreation({fieldParameters,valuesFieldParameters})
+  
   useEffect(()=>{
     setIsValid(checkErrorsStateVariableForm({fields}))
   },[fields])
@@ -19,7 +18,7 @@ const FixedParametersFormStateVariables = ({fieldsSchema,loading,executeRequestC
   return (
     <>
       
-      {!loading && <ParametersForm fields={fields} fieldsSchema={fieldsSchema} />}
+      {!isEmpty(fields) && <ParametersForm fields={fields} fieldParameters={fieldParameters} />}
 
       <CompartmentalButton
         disabled={isValid?false:true }

@@ -6,9 +6,7 @@ import { Input } from '../../../../ui/Input'
 import { useParametersFormStyle } from './styles'
 
 
-const ParametersForm = ({fields, fieldsSchema}) => {
-  
-  
+const ParametersForm = ({fields, fieldParameters}) => {
   const classes = useParametersFormStyle()
   
   return (
@@ -17,8 +15,8 @@ const ParametersForm = ({fields, fieldsSchema}) => {
       container
       item 
     >
-      {fieldsSchema && fieldsSchema.map((field,index)=>{
-        const {label, unit } = field
+      {fieldParameters && fieldParameters.map((field,index)=>{
+        const {label, representation, unit } = field
         const {helperText}= fields[label]
         delete fields[label]['helperText']
         
@@ -27,10 +25,11 @@ const ParametersForm = ({fields, fieldsSchema}) => {
             <Grid item container xs={12} key={index} direction="row" justify="center" alignItems="center" spacing={2}>
               <TitleComponent
                 xs={4}
-                justify={'flex-end'}
-                alignItems={'center'}
+                justify='flex-end'
+                alignItems='center'
                 title={label}
-                variant={'h6'}
+                unit={representation}
+                variant='h6'
                 key={index}
               />
               <Grid item container xs={2}>
@@ -54,7 +53,7 @@ const ParametersForm = ({fields, fieldsSchema}) => {
         )
       })}
 
-      {!fieldsSchema && <p>No hay campos</p>}
+      {!fieldParameters && <p>No hay campos</p>}
 
     </Grid>
   )

@@ -28,7 +28,6 @@ export const CompartmentalMainPageContent = () => {
           ruta="newSimulation"
           options={OPTIONS_COMPARTMENTAL_MAIN}
           eventEmitted={(cardData) => { cardData.url && history.push( cardData.url ) }}
-          
         />
       </Grid>
     </Grid>

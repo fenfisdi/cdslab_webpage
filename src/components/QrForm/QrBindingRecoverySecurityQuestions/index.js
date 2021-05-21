@@ -8,8 +8,8 @@ import { useQrBindingRecoverySecurityQuestionsState } from './state'
 
 
 const QUESTIONS=[
-  {'question': 'nombre perro'},
-  {'question': 'nombre mascota'}
+  { 'question': 'nombre perro' },
+  { 'question': 'nombre mascota' }
 ]
 
 const QrBindingRecoverySecurityQuestions = ({ loading, questions, handleEventEmitted }) => {

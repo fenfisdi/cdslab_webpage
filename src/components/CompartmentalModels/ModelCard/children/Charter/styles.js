@@ -20,7 +20,6 @@ export const CardContainer = styled(Card)`
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     margin-bottom: 10px;
-
 `

@@ -18,7 +18,6 @@ const createHeaders = (settings) => {
 }
 
 
-
 const createConfig = (url, method, params, settings) => {
   const { isQueryString = false, cancelToken = false } = settings
   const defaultConfig = {
@@ -66,4 +65,3 @@ const request = async (url, method, params, settings = {}) => {
 }
 
 export default request
-

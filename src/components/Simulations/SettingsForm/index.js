@@ -81,7 +81,6 @@ const SettingsForm = ({ simulation, loading }) => {
       <FormGroup>
         <DynamicTable columns={tableColumns} initialItems={tableItems} />
       </FormGroup>
-
     </Form>
   )
 }

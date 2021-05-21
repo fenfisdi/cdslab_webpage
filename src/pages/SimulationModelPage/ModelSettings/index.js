@@ -30,10 +30,8 @@ const ModelSettingsPage = () => {
     showSnack
   } = useCompartmentalModelsPageState()
 
-
-
   const { simulationType } = parameters
-
+  
   return (
     <Container>
       {step != 0 && isEmpty(simulationType) && <BackButton evenOnClick={handleClickBackButton} text="back" />}
