@@ -22,7 +22,10 @@ const CompartmentalChooseSimulationPage = () => {
   const [initialDate, setInitialDate] = useState('')
   const [finalDate, setFinalDate] = useState('')
   const [showError, setShowError] = useState(false)
-  const {executeSelectedOption,loadingSimulationFolderInformation } = useCompartmentalChooseSimulationPageState({ showSnack, setShowSnack })
+  const {
+    executeSelectedOption,
+    loadingSimulationFolderInformation
+  } = useCompartmentalChooseSimulationPageState({ showSnack, setShowSnack, initialDate, finalDate })
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })

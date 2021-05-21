@@ -5,7 +5,13 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 
-export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSnack }) => {
+export const useCompartmentalChooseSimulationPageState = (
+  {
+    showSnack,
+    setShowSnack,
+    initialDate,
+    finalDate
+  }) => {
   const history = useHistory()
   const {
     state: {
@@ -13,17 +19,19 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
     },
     dispatch
   } = useStore()
+
+  console.log(initialDate)
+  console.log(finalDate)
   
   const { storeCompartmentalSimulation,storeCompartmentalSimulationFolder } = useCompartmentalModelActions(dispatch)
 
   useEffect(() => {
-    if (isEmpty(predefinedModelSelected)) {
+    if (isEmpty(predefinedModelSelected)){
       history.push({ pathname: '/compartmentalModels/newSimulations' })
     }
-  },[predefinedModelSelected])
+  }, [predefinedModelSelected])
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (currentSimulation.error) {
       setShowSnack(
         {
@@ -34,7 +42,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
           errorMessage: currentSimulation.errorData.detail
         }
       )
-    } else if (!isEmpty(currentSimulation) && currentSimulation.data!= null && !isEmpty(predefinedModelSelected) 
+    } else if (!isEmpty(currentSimulation) && currentSimulation.data != null && !isEmpty(predefinedModelSelected) 
     && !currentSimulation.error &&
     !simulationFolderInformation.error &&
     simulationFolderInformation.data == null
@@ -44,8 +52,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
     }
   },[currentSimulation])
 
-
-  useEffect(() => {
+  useEffect(()=>{
     if (simulationFolderInformation.error) {
       setShowSnack(
         {
@@ -76,10 +83,13 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
         'name': name,
         'status':'incomplete',
         'model_id': model_id,
-        'parameter_type':'optimized'
+        'parameter_type':'optimized',
+        // 'interval_date': {
+        //   'start': initialDate,
+        //   'end': finalDate
+        // }
       })
     }
-
   }
 
 
