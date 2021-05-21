@@ -55,8 +55,8 @@ const CompartmentalChooseSimulationPage = () => {
 
       <Grid container item xs={12}
         direction="row"
-        justify="space-between"
-        alignItems="flex-start"
+        justify="center"
+        alignItems="center"
       >
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
           Choose simulation dates

@@ -28,8 +28,9 @@ export const useCompartmentalChooseSimulationPageState = (
     }
   }, [predefinedModelSelected])
 
-  useEffect(() => {
-    if (currentSimulation.error) {
+
+  useEffect(()=>{
+    if(currentSimulation.data == null && currentSimulation.error){
       setShowSnack(
         {
           ...showSnack,
@@ -50,8 +51,9 @@ export const useCompartmentalChooseSimulationPageState = (
     }
   },[currentSimulation])
 
-  useEffect(() => {
-    if (simulationFolderInformation.error) {
+
+  useEffect(()=>{
+    if(simulationFolderInformation.data == null && simulationFolderInformation.error){      
       setShowSnack(
         {
           ...showSnack,
