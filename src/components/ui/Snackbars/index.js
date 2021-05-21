@@ -21,11 +21,13 @@ export default function SnackbarComponent({configData,handleCloseSnack,successMe
   const {show, success, error}=configData || {}
 
   const displayMessage =(message)=>{
+    let messageToShow = ''
     if (typeof message === 'string' || message instanceof String){
-      return message
+      messageToShow = message
     }else{
-      return 'there was an error, please contact us.'
+      messageToShow = 'there was an error, please contact us.'
     }
+    return  messageToShow
   }
 
   return (
