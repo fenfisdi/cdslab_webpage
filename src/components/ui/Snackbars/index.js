@@ -20,20 +20,26 @@ export default function SnackbarComponent({configData,handleCloseSnack,successMe
   const classes = useStyles()
   const {show, success, error}=configData || {}
 
-  
+  const displayMessage =(message)=>{
+    if (typeof message === 'string' || message instanceof String){
+      return message
+    }else{
+      return 'there was an error, please contact us.'
+    }
+  }
 
   return (
     <div className={classes.root}>
      
       {success&&<Snackbar open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
         <Alert onClose={handleCloseSnack} severity="success">
-          {successMessage}
+          {displayMessage(successMessage)}
         </Alert>        
       </Snackbar>}
 
       {error && <Snackbar open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
         <Alert onClose={handleCloseSnack} severity="error">
-          {errorMessage}
+          {displayMessage(errorMessage)}
         </Alert>
       </Snackbar>}
 

@@ -24,7 +24,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
 
 
   useEffect(()=>{
-    if(currentSimulation.error){
+    if(currentSimulation.data == null && currentSimulation.error){
       setShowSnack(
         {
           ...showSnack,
@@ -47,7 +47,7 @@ export const useCompartmentalChooseSimulationPageState = ({showSnack, setShowSna
 
 
   useEffect(()=>{
-    if(simulationFolderInformation.error){      
+    if(simulationFolderInformation.data == null && simulationFolderInformation.error){      
       setShowSnack(
         {
           ...showSnack,
