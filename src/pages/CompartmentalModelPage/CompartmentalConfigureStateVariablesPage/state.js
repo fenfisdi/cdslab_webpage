@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
+import { SIMULATION_IDENTIFIERS } from '../../../constants/compartmental'
 
 export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
   const [isSend, setIsSend] = useState(false)
@@ -42,14 +43,20 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
   },[dataCurrentSimulation,predefinedModelSelected])
   
   useEffect(()=>{
-    if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){      
+    if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){
       const {modelData:{identifier:model_id}}=predefinedModelSelected
-      const { identifier} = dataCurrentSimulation
+      const { identifier, parameter_type } = dataCurrentSimulation
+      let pathname = ''
+      if(parameter_type == SIMULATION_IDENTIFIERS.OPTIMIZE.toLowerCase()){
+        pathname = '/compartmentalModels/optimizeParameters'
+      }
+      else if(parameter_type == SIMULATION_IDENTIFIERS.FIXED.toLowerCase()){
+        pathname = '/compartmentalModels/reviewConfigurationInformation'
+      }
       history.push({ 
-        pathname: '/compartmentalModels/optimizeParameters',
+        pathname: pathname,
         search:   `?simulation_identifier=${identifier}&model_id=${model_id}`  ,
       })
-
     }
   },[isSend,dataCurrentSimulation])
 

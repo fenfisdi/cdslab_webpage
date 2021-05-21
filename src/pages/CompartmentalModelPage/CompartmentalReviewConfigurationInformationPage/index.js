@@ -122,14 +122,14 @@ const CompartmentalReviewConfigurationInformationPage =()=>{
           </SubItems>
           {displayStateVariables(currentSimulation.state_variable_limits)}
         </ItemsTable>
-        <Items className="jump">
+        {fileName && <Items className="jump">
           <SubItems className="titleSubItmes">
             <span>Data Source:</span>
           </SubItems>
           <SubItems >
             <span>{fileName}</span>
           </SubItems>
-        </Items>
+        </Items>}
         <CompartmentalButton
           disabled={false}
           onClick={()=>{executeRequestRunSimulation()}}
