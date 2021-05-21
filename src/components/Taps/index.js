@@ -2,8 +2,7 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core'
-import imgAgents from '../../assets/images/taps/agents_SVG.svg'
-import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -60,11 +59,6 @@ export default function FullWidthTabs(props) {
   const {tabs} = props
   const classes = useStyles()
 
-  const renderImg = (icon) => {
-    const iconTab = icon === 'cmodels_SVG' ? imgCompartamental : imgAgents
-    return iconTab
-  }
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -79,7 +73,7 @@ export default function FullWidthTabs(props) {
                       (
                         <div className={classes.linkDisabled}>
                           <div className={classes.divImg} > 
-                            <img src={renderImg(tab.icon)} className={classes.img} />
+                            <img src={tab.icon} className={classes.img} />
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </div>
@@ -90,7 +84,7 @@ export default function FullWidthTabs(props) {
                           activeClassName={classes.itemActiveItem}  
                           className={classes.link}>
                           <div className={classes.divImg} > 
-                            <img src={renderImg(tab.icon)} className={classes.img} />
+                            <img src={tab.icon} className={classes.img} />
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </NavLink>

@@ -5,7 +5,8 @@ import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
 import TitleIcon from '../../components/layouts/TitleIcon'
 import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
-
+import imgAgents from '../../assets/images/taps/agents_SVG.svg'
+import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
@@ -26,13 +27,13 @@ const CompartmentalModelPage = () => {
       label: 'Compartmental',
       path:  match.path,
       disabled : false,
-      icon : 'cmodels_SVG'
+      icon : imgCompartamental
     },
     {
       label: 'Agents',
       path: `${match.path}/newSimulations`,
       disabled : true,
-      icon: 'agents_SVG'
+      icon: imgAgents
     },
   ]
 
