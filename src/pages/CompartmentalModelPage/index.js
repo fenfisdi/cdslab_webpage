@@ -20,26 +20,28 @@ const CompartmentalModelPage = () => {
   const CompartmentalReviewConfigurationMessagePage = React.lazy(() => import('./CompartmentalReviewConfigurationMessagePage'))
   const CompartmentalFixedParametersPage = React.lazy(()=>import('./CompartmentalFixedParametersPage'))
   
-  
-
   const tabs = [
     {
+      id: 1,
       label: 'Compartmental',
       path:  match.path,
       disabled : false,
-      icon : imgCompartamental
+      icon : imgCompartamental,
+      iconType: 'svg'
     },
     {
+      id: 2,
       label: 'Agents',
       path: `${match.path}/newSimulations`,
       disabled : true,
-      icon: imgAgents
+      icon: imgAgents,
+      iconType: 'svg'
     },
   ]
 
   return (
     <>
-      <FullWidthTabs tabs={tabs} />
+      <FullWidthTabs tabs={tabs} idTab={1}/>
       <CompartmentalModelPageContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       </CompartmentalModelPageContainerTitle>

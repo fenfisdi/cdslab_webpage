@@ -20,7 +20,7 @@ const categories = [
     id: '',
     children: [
       { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: <Icon className={'fas fa-key'} />,typeIcon : 'material', href: '/userManagement' },
+      { id: 'Management', icon: <Icon className={'fas fa-key'} />,typeIcon : 'material', href: '/management' },
     ]
   },
   {

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@material-ui/core/AppBar'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core'
+import { Icon } from '@material-ui/core'
+import { useStore } from '../../store/storeContext'
+import { useSessionActions } from '../../actions/sessionsActions'
 
 
 const useStyles = makeStyles(() => ({
@@ -55,10 +58,43 @@ const useStyles = makeStyles(() => ({
 
 export default function FullWidthTabs(props) {
 
- 
-  const {tabs} = props
+  const {tabs,idTab} = props
   const classes = useStyles()
+  const history = useHistory()
+  const {
+    state: {      
+      session: {tabs:tabsSession}
+    },
+    dispatch
+  } = useStore()
 
+  const { 
+    setActiveTab
+  } = useSessionActions(dispatch)
+
+  useEffect(() => {
+    if(tabsSession){
+      tabs.map((elem) => {
+        if(elem.id === idTab){
+          setActiveTab(false)
+          history.push(elem.path)
+        }
+      })
+    }
+  }, [])
+
+  const renderImg = (tab) => (
+    <div>
+      {
+        tab.iconType === 'svg'
+          ? (
+            <img src={tab.icon} className={classes.img} />
+          )
+          :
+          (<Icon className={tab.icon} style={{ fontSize: 20, marginLeft:'-10px' }}/>)
+      }
+    </div>
+  )
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -73,7 +109,7 @@ export default function FullWidthTabs(props) {
                       (
                         <div className={classes.linkDisabled}>
                           <div className={classes.divImg} > 
-                            <img src={tab.icon} className={classes.img} />
+                            {renderImg(tab)}
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </div>
@@ -84,7 +120,7 @@ export default function FullWidthTabs(props) {
                           activeClassName={classes.itemActiveItem}  
                           className={classes.link}>
                           <div className={classes.divImg} > 
-                            <img src={tab.icon} className={classes.img} />
+                            {renderImg(tab)}
                           </div>
                           <div className={classes.divLabel} >{tab.label}</div>
                         </NavLink>

@@ -21,7 +21,7 @@ const ModelCard = ({ ruta='',options = [], eventEmitted, direction = 'row', disa
           <CharterBody key={index}>
             {icon &&
               <CharterIcon>
-                <img src={icon} alt="Cinque Terre" width="200" height="200" />
+                <img src={icon} alt="Cinque Terre" width="100" height="100" />
               </CharterIcon>
             }
             <Charter
