@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import AppBar from '@material-ui/core/AppBar'
 import { NavLink, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core'
-import { Icon } from '@material-ui/core'
+import { Icon,AppBar } from '@material-ui/core'
 import { useStore } from '../../store/storeContext'
 import { useSessionActions } from '../../actions/sessionsActions'
 
