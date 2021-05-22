@@ -84,7 +84,7 @@ const App = () => {
                 component={<CompartmentalModelPage />}
               />
               <PrivateRoute
-                path="/userManagement"
+                path="/management"
                 component={<UserManagementPage />}
               />
               <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />

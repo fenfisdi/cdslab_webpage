@@ -5,7 +5,8 @@ import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
 import TitleIcon from '../../components/layouts/TitleIcon'
 import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
-
+import imgAgents from '../../assets/images/taps/agents_SVG.svg'
+import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
@@ -19,26 +20,28 @@ const CompartmentalModelPage = () => {
   const CompartmentalReviewConfigurationMessagePage = React.lazy(() => import('./CompartmentalReviewConfigurationMessagePage'))
   const CompartmentalFixedParametersPage = React.lazy(()=>import('./CompartmentalFixedParametersPage'))
   
-  
-
   const tabs = [
     {
+      id: 1,
       label: 'Compartmental',
       path:  match.path,
       disabled : false,
-      icon : 'cmodels_SVG'
+      icon : imgCompartamental,
+      iconType: 'svg'
     },
     {
+      id: 2,
       label: 'Agents',
       path: `${match.path}/newSimulations`,
       disabled : true,
-      icon: 'agents_SVG'
+      icon: imgAgents,
+      iconType: 'svg'
     },
   ]
 
   return (
     <>
-      <FullWidthTabs tabs={tabs} />
+      <FullWidthTabs tabs={tabs} idTab={1}/>
       <CompartmentalModelPageContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       </CompartmentalModelPageContainerTitle>
