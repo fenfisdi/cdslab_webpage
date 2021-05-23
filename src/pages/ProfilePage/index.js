@@ -7,6 +7,7 @@ const ProfilePage = () => {
   const match = useRouteMatch()
   const ProfileMainPage = React.lazy(() => import('./ProfileMainPage'))
   const UpdateDataPage = React.lazy(()=>import('./UpdateDataPage'))
+  const ChangePassword = React.lazy(()=>import('./ChangePassword') )
   
   return (
     <>
@@ -15,6 +16,7 @@ const ProfilePage = () => {
           <Switch>
             <Route path={match.path} exact component={ProfileMainPage}/>
             <Route path={`${match.path}/UpdateDataProfile`} exact component={UpdateDataPage} />
+            <Route path={`${match.path}/ChangePassword`} exact component={ChangePassword} />
           </Switch>
         </Suspense>
       </ProfilePageContainer>

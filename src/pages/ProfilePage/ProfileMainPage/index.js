@@ -39,9 +39,13 @@ const ProfileMainPage=()=>{
           </Button>
         </Grid>
         <Grid item>
-          <Link href="#" onClick={console.log(1)} color="inherit">
+          <Button onClick={()=>{
+            history.push({ 
+              pathname: '/profile/ChangePassword',
+            })
+          }} color="inherit">
           Change password
-          </Link>
+          </Button>
         </Grid>
         <Grid item>
           <Link href="#" onClick={console.log(1)} color="inherit">
