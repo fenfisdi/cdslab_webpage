@@ -28,7 +28,6 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
     setIsvalid(notIsValid)
   }, [password])
 
-
   const handleClickButton = () => {
     handleClick({
       password: password.value,
@@ -41,10 +40,10 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
           <TitleComponent
-            justify={'center'}
-            alignItems={'center'}
-            title={'Cambio de contraseña'}
-            variant={'h6'}
+            justify='center'
+            alignItems='center'
+            title='Cambio de contraseña'
+            variant='h6'
           />
           <Grid
             item
@@ -97,9 +96,7 @@ const AccountRecoveryResetPasswordForm = ({ loading, handleClick }) => {
               </Button>
             </Grid>
           </Grid>
-
         </Fragment>}
-
       </Grid>
     </Paper>
   )

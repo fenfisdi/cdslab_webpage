@@ -20,14 +20,8 @@ const SimulationSettingPage = () => {
 
   }, [])
 
-
-
-
-
   return (
     <div>
-
-
     </div>
   )
 }

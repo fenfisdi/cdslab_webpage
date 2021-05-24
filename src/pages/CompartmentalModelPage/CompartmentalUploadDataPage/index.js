@@ -11,34 +11,47 @@ import { CompartmentalUploadDataSection, CompartmentalUploadDataTitle } from './
 
 const CompartmentalUploadDataPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  
-  const{ 
-    selectOptions, 
-    executeRequestUploadData, 
+
+  const {
+    stateVariables,
+    executeRequestUploadData,
     loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({showSnack, setShowSnack})
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
+
+  const optionListDTO =(options)=>{
+    const arrayStateDto = []
+    options.map((state)=>{
+      const stateObject = {}
+      stateObject.label = state.label.toLowerCase()
+      stateObject.name  = state.name
+      stateObject.value = state.label.toLowerCase()
+      arrayStateDto.push(stateObject)
+    })
+    return arrayStateDto
+  }
+
   return (
     <CompartmentalUploadDataSection>
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <p></p>
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
-     
+
       <CompartmentalUploadDataTitle>
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
         Choose variable to fit model
         </Typography>
       </CompartmentalUploadDataTitle>
 
-      {!loadingSimulationFileUpload && <Grid container item xs={12}>
+      {!loadingSimulationFileUpload && stateVariables.length>0 && <Grid container item xs={12}>
         <UploadDataForm
-          selectOptions={selectOptions}
+          selectOptions={optionListDTO(stateVariables)}
           executeRequest={executeRequestUploadData}
         />
       </Grid>}
@@ -56,9 +69,6 @@ const CompartmentalUploadDataPage = () => {
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
     </CompartmentalUploadDataSection>
-
-    
-
   )
 }
 

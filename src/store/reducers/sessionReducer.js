@@ -3,7 +3,9 @@ import {
   SESSION_ERROR,
   SESSION_LOGIN,
   SESSION_LOGOUT,
-  SESSION_SET_CURRENT_NAVIGATION, SESSION_SET_CURRENT_SECTION_NAVIGATION
+  SESSION_SET_CURRENT_NAVIGATION, 
+  SESSION_SET_CURRENT_SECTION_NAVIGATION,
+  SESSION_SET_TABS_RENDER
 } from '../../actions/types/sessionTypes'
 
 export const initialState = {
@@ -13,7 +15,8 @@ export const initialState = {
     loading: false,
     error: null,
     errorData:null,
-    navigation: null
+    navigation: null,
+    tabs: true
   }
 }
 
@@ -49,6 +52,11 @@ export const sessionReducer = (state, action) => {
       ...state,
       navigation: { ...state.navigation, activeSection: action.payload }
     }
+  case SESSION_SET_TABS_RENDER:
+    return {
+      ...state,
+      tabs: action.payload
+    }  
   default:
     return state
   }

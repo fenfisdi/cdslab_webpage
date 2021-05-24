@@ -7,11 +7,9 @@ import { useHistory } from 'react-router-dom'
 import { useSimulationActions } from '@actions/simulationsActions'
 import { useSessionActions } from '@actions/sessionsActions'
 
-
 import cmodelsSvg from '../../../assets/images/cmodels_SVG.svg'
 import agentsSVG from '../../../assets/images/agents_SVG.svg'
 import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
-
 
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import TitleIcon from '../../../components/layouts/TitleIcon'
@@ -28,7 +26,6 @@ const SimulationMainPage = () => {
   const { getSimulations } = useSimulationActions(dispatch)
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
-
 
   useEffect(() => {
     //console.log('navegacion: ' + JSON.stringify(navigation))
@@ -51,7 +48,6 @@ const SimulationMainPage = () => {
       url: '',
       tipo: 2
     }
-
   ]
 
   const loadData = () => {
@@ -71,7 +67,6 @@ const SimulationMainPage = () => {
         eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
       />
     </SimulationContainer>
-
   )
 }
 

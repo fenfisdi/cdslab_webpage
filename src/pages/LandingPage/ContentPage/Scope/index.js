@@ -24,7 +24,7 @@ const Scope = () => {
             <div className={classes.divScopeImg}><img className={classes.imgPadlock} src={imgPadlock} /></div>
             <div className={classes.textScope}> { SCOPE_ONE } </div>
           </div>
-    
+
         </div>
         <div className={classes.boxScope}>
           <div className={classes.question}> { SCOPE_QUESTION_TWO } </div>
@@ -41,4 +41,5 @@ const Scope = () => {
     </>
   )
 }
+
 export default Scope

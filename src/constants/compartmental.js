@@ -96,7 +96,6 @@ export const COMPARTMENTAL_FIELDS = {
   SEIR:{
     fields:[
       {
-        
         name:'influexRate',
         label:'Influex rate',  
         unit:'(People per day)', 
@@ -105,7 +104,6 @@ export const COMPARTMENTAL_FIELDS = {
         helper:'dummy'
       },
       {
-        
         name:'naturalDeath',
         label:'Natural death rate', 
         unit:'(People per day)',
@@ -113,7 +111,6 @@ export const COMPARTMENTAL_FIELDS = {
         indetifier:'naturalDeath'
       },
       {
-        
         name:'diseaseInduced',
         label:'Disease-induced death rated Death Rate', 
         unit:'(Per day)',
@@ -121,7 +118,6 @@ export const COMPARTMENTAL_FIELDS = {
         indetifier:'diseaseInduced'
       },
       {
-        
         name:'vaccinationRate',
         label:'Vaccination ratete', 
         unit:'(Per day)',
@@ -130,7 +126,6 @@ export const COMPARTMENTAL_FIELDS = {
         helper:'dummy'
       },
       {
-        
         name:'recoveryRate',
         label:'Recovery rate',
         unit:'(Per day)',
@@ -139,7 +134,6 @@ export const COMPARTMENTAL_FIELDS = {
         helper:'dummy'
       },
       {
-        
         name:'lossofImmunityRate',
         label:'Loss of immunity ratety rate', 
         unit:'(Per day)',
@@ -157,7 +151,6 @@ export const COMPARTMENTAL_FIELDS = {
         helper:'dummy'
       },
       {
-        
         name:'transmissionconstantBetweenSandE',
         label:'Transmission constant between S and Eonstant between S and E', 
         unit:'(per person,  per day)',
@@ -166,7 +159,6 @@ export const COMPARTMENTAL_FIELDS = {
         helper:'dummy'
       },
       {
-        
         name:'transmissionconstantBetweenSandI',
         label:'Transmission constant between S and Ionstant between S and I', 
         unit:'(per person,  per day)',
@@ -352,7 +344,6 @@ export const OPTIONS_COMPARTMENTAL_MAIN = [
 
 export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
   {
-      
     name: 'Optimize parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
     url: ''

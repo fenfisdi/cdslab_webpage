@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import { Input } from '../../ui/Input'
 
-
 export const PasswordChecker = ({
   checkValue,
   errorText = '',
@@ -10,7 +9,6 @@ export const PasswordChecker = ({
   const [value, setValue] = useState('')
   const [isPress, setIsPress] = useState(false)
   const [helperText, setHelperText] = useState(null)
-  
 
   useEffect(() => {
     if (!isPress && value.length > 0) {
@@ -19,8 +17,8 @@ export const PasswordChecker = ({
     validatePassword(value, checkValue)
   }, [value])
 
-  useEffect(() => {    
-    validatePassword(value, checkValue)    
+  useEffect(() => {
+    validatePassword(value, checkValue)
   }, [checkValue])
 
   const onChange = (onChangeValue) => {
