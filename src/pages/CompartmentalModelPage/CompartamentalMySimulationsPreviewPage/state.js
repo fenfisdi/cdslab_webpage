@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useMySimulationActions } from '../../../actions/mySimulationsActions'
 import { useStore } from '../../../store/storeContext'
-const { convertCSVToArray } = require('convert-csv-to-array')
 
 export const useCompartamentalMySimulationsPreviewState = () => {
   const {
@@ -22,18 +21,17 @@ export const useCompartamentalMySimulationsPreviewState = () => {
     if (execution) {getMySimulationsFiles(mySimulationSelected.identifier)}
   }
 
-  const handleDownloadFile = (elem) => {
-    const arrayofArrays = convertCSVToArray(elem.body, {
-      header: false,
-      separator: ',',
-    })
-    return arrayofArrays
+  const handelDownloadImg = (body) => {
+    const a = document.createElement('a')
+    a.href = 'data:image/png;base64,' + body 
+    a.download = 'Image.png'
+    a.click()
   }
 
   return {
     loading,
     mySimulationFiles,
-    handleDownloadFile,
+    handelDownloadImg,
     mySimulationFileSelected
   }
 }
