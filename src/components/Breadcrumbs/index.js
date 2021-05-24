@@ -30,7 +30,7 @@ const Breadcrumbs = () => {
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={2} className={classes.separador} >
       {path.map(({name}, index) => {
         const isLast = index === path.length - 1
-        const routeTo = `/${path.slice(0, index + 1).map(({name}) => name).join('/')}`
+        const routeTo = `/${path.slice(0, index + 1).map(({name:nameRoute}) => nameRoute).join('/')}`
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
