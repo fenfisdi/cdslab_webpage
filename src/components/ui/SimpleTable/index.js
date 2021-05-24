@@ -10,8 +10,12 @@ import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 500,
   },
+
+  cellRoot: {
+    width: '20px'
+  }
 })
 
 const Simpletable = ({titles, rows, cellNames, param, handleComponent}) => {
@@ -19,7 +23,7 @@ const Simpletable = ({titles, rows, cellNames, param, handleComponent}) => {
 
   const tableCell = (item, index) =>
     cellNames.map((nameItem) => (
-      <TableCell key={nameItem}>{ nameItem === param ? handleComponent(item, index) : item[nameItem]}</TableCell>
+      <TableCell classes={{ root: classes.cellRoot }} size='small' key={nameItem}>{ nameItem === param ? handleComponent(item, index) : <label>{item[nameItem]}</label>}</TableCell>
     ))
 
   return (
@@ -28,7 +32,7 @@ const Simpletable = ({titles, rows, cellNames, param, handleComponent}) => {
         <TableHead>
           <TableRow>
             {titles.map((title) => (
-              <TableCell key={title.name}>{ title }</TableCell>
+              <TableCell size='small' key={title.name}>{ title }</TableCell>
             ))}
           </TableRow>
         </TableHead>

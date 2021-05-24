@@ -90,6 +90,20 @@ const SysManagementState = (props) => {
       })
   }
 
+  const updateEditorTemplateSuccess = () => {
+    dispatch({
+      type: Types.UPDATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_SUCCESS,
+      payload: false
+    })
+  }
+
+  const updateEditorTemplateFailed = () => {
+    dispatch({
+      type: Types.UPDATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_FAILED,
+      payload: false
+    })
+  }
+
   const createEditorTemplate = ( emailData ) => {
     sendNotificationEmail( emailData )
       .then((response) => {
@@ -123,7 +137,9 @@ const SysManagementState = (props) => {
         updateEditorTemplate,
         createEditorTemplate,
         clearUpdateProcessTimeTableDataSuccess,
-        clearUpdateProcessTimeTableDataFailed
+        clearUpdateProcessTimeTableDataFailed,
+        updateEditorTemplateSuccess,
+        updateEditorTemplateFailed
       }}
     >
       {props.children}

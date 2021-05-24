@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { EditorState } from 'draft-js'
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { useStore } from '@store/storeContext'
 import { useSysManagementActions } from '@actions/sysManagementActions'
 import { SysNotification, SysSimulation } from '../../../components/SysManagement'
@@ -35,12 +35,11 @@ export const useSysManagementState = () => {
     updateProcessTimeTableData,
     updateSysManagementTemplateEditorSuccess,
     updateSysManagementTemplateEditorFailed,
-    createSysManagementTemplateEditorSuccess,
-    createSysManagementTemplateEditorFailed,
     updateEditorTemplate,
-    createEditorTemplate,
     clearUpdateProcessTimeTableDataSuccess,
-    clearUpdateProcessTimeTableDataFailed
+    clearUpdateProcessTimeTableDataFailed,
+    updateEditorTemplateSuccess,
+    updateEditorTemplateFailed
   } = sysManagementContext
 
   const [editorNotificationState, setEditorNotificationState] = useState(
@@ -56,35 +55,28 @@ export const useSysManagementState = () => {
     loadTemplateEditor()
   }, [])
 
-  console.log(editorNotificationState)
-
   useEffect(() => {
     handleFillTableData()
   }, [sysManagementTableData])
 
   useEffect(() => {
-    // (templateEditorData)
-    // && handleFillTemplateEditor()
+    (templateEditorData)
+    && handleFillTemplateEditor()
   }, [templateEditorData])
 
+  // => template Editor handle
+  const handleFillTemplateEditor = () => {
+    const blocksFromHTML = convertFromRaw(JSON.parse(templateEditorData.content))
+    setEditorNotificationState(() => EditorState.createWithContent(blocksFromHTML))
+  }
+  // => template Editor handle
+
+  // => form handles
   const handleOnChange = ({target}) => {
     const {name, value} = target
     setTableData((prevState) => ({
       ...prevState,
       [name]: value
-    }))
-  }
-
-  const handleFillTemplateEditor = () => {
-    setEditorNotificationState((prevState) => ((EditorState.createEmpty(templateEditorData.content))))
-  }
-
-  const handleFillTableData = () => {
-    setTableData((prevState) => ({
-      ...prevState,
-      storage_time: sysManagementTableData.storage_time,
-      simulation_removal_before: sysManagementTableData.simulation_removal_before,
-      simulation_scheduled_removal: sysManagementTableData.simulation_scheduled_removal
     }))
   }
 
@@ -98,41 +90,67 @@ export const useSysManagementState = () => {
       setIsRequiredMessage('Hay campos requeridos sin diligenciar')
     }
 
+    if (!editorNotificationState.getCurrentContent().hasText() &&
+    !editorSimulationState.getCurrentContent().hasText()) {
+      isValidate = true
+      setIsRequired(true)
+      setIsRequiredMessage('Hay campos requeridos sin diligenciar')
+    }
+
     if (!isValidate) {
       updateProcessTimeTableData(tableData)
+      updateEditorTemplate({
+        name: 'Notification',
+        content: JSON.stringify(convertToRaw(editorNotificationState.getCurrentContent()))
+      })
     }
   }
+  // => form handles
 
   const handleCloseSnack = () => {
     clearUpdateProcessTimeTableDataSuccess()
     clearUpdateProcessTimeTableDataFailed()
+    updateEditorTemplateSuccess()
+    updateEditorTemplateFailed()
     setIsRequired(false)
   }
 
-  const handleComponent = (item, index) => (
+  // => table handles and data
+  const handleFillTableData = () => {
+    setTableData((prevState) => ({
+      ...prevState,
+      storage_time: sysManagementTableData.storage_time,
+      simulation_removal_before: sysManagementTableData.simulation_removal_before,
+      simulation_scheduled_removal: sysManagementTableData.simulation_scheduled_removal
+    }))
+  }
+
+  const handleComponentForTable = (item, index) => (
     <TextFieldCommon
       label={''}
       name={tableDataKeys[index]}
       disabled={false}
       value={tableData[tableDataKeys[index]]}
       required={isRequired}
-      inputClass={''}
+      inputClass={classes.inputClass}
       handleChange={handleOnChange}
     />
   )
 
-  function createData(process, time) {
+  function createTableData(process, time) {
     return { process, time }
   }
   
-  const rows = [
-    createData('Maximum storage time', sysManagementTableData.storage_time),
-    createData('Notification time before removal', sysManagementTableData.simulation_scheduled_removal),
-    createData('Scheduled removal', sysManagementTableData.simulation_removal_before)
+  const tableRows = [
+    createTableData('Maximum storage time', sysManagementTableData.storage_time),
+    createTableData('Notification time before removal', sysManagementTableData.simulation_scheduled_removal),
+    createTableData('Scheduled removal', sysManagementTableData.simulation_removal_before)
   ]
 
-  const titles = ['Process', 'Time(days)']
+  const tableTitles = ['Process', 'Time(days)']
+  // => table handles and data
 
+  // => tabs data
   const tabsComponents = [
     () =>
       <SysNotification
@@ -147,17 +165,20 @@ export const useSysManagementState = () => {
         setEditorState={setEditorSimulationState}
       />
   ]
+  // => tabs data
 
   return [
     classes,
-    rows,
-    titles,
+    tableRows,
+    tableTitles,
     tabsComponents,
     updateSysManagementTableDataSuccess,
     updateSysManagementTableDataFailed,
     isRequiredMessage,
     isRequired,
-    handleComponent,
+    updateSysManagementTemplateEditorSuccess,
+    updateSysManagementTemplateEditorFailed,
+    handleComponentForTable,
     handleValidations,
     handleCloseSnack
   ]

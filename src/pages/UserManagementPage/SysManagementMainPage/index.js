@@ -12,14 +12,16 @@ const SysManagementMainPage = () => {
 
   const [
     classes,
-    rows,
-    titles,
+    tableRows,
+    tableTitles,
     tabsComponents,
     updateSysManagementTableDataSuccess,
     updateSysManagementTableDataFailed,
     isRequiredMessage,
     isRequired,
-    handleComponent,
+    updateSysManagementTemplateEditorSuccess,
+    updateSysManagementTemplateEditorFailed,
+    handleComponentForTable,
     handleValidations,
     handleCloseSnack
   ] = useSysManagementState()
@@ -34,11 +36,11 @@ const SysManagementMainPage = () => {
         />
         <div className={classes.sysManagementTableContainer}>
           <Simpletable
-            titles={titles}
-            rows={rows}
+            titles={tableTitles}
+            rows={tableRows}
             cellNames={sysCellNamesTable}
             param={'time'}
-            handleComponent={handleComponent}
+            handleComponent={handleComponentForTable}
           />
         </div>
         <AlertCommon
@@ -68,8 +70,8 @@ const SysManagementMainPage = () => {
         </div>
       </Container>
       <SnackBarCommon
-        success={updateSysManagementTableDataSuccess}
-        error={updateSysManagementTableDataFailed || isRequired}
+        success={updateSysManagementTableDataSuccess || updateSysManagementTemplateEditorSuccess}
+        error={updateSysManagementTableDataFailed || isRequired || updateSysManagementTemplateEditorFailed}
         handleCloseSnack={handleCloseSnack}
         successMessage={'Proceso exitoso'}
         errorMessage={isRequiredMessage}

@@ -12,6 +12,10 @@ export const sysManagementStyles = makeStyles((theme) => ({
     marginTop: '20px'
   },
 
+  inputClass: {
+    width: '70px'
+  },
+
   root: {
     width: '120px',
     backgroundColor: '#E3E3E3',
