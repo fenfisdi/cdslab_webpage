@@ -1,10 +1,10 @@
 
-import{
+import {
   VALIDATION_QR_SUCCESS,
   VALIDATION_QR_ERROR,
   VALIDATION_QR_LOADING
 } from '../../actions/types/qrTypes'
-  
+
 export const initialState = {
   authQr: {
     isValid: false,
@@ -14,7 +14,7 @@ export const initialState = {
     errorData:null
   }
 }
-  
+
 export const authQrReducer = (state, action) => {
   switch (action.type) {
   case VALIDATION_QR_LOADING:
@@ -30,4 +30,3 @@ export const authQrReducer = (state, action) => {
     return state
   }
 }
-  

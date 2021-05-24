@@ -12,7 +12,6 @@ const Sponsors = () => {
   return (
     <>
       <h1 className={classes.title}>Patrocinadores:</h1>
-
       <div className={classes.containerCds}>
         <div className={classes.boxCds}>
           <img className={classes.imageMinCiencias} src={imgMinCiencia} />
@@ -26,4 +25,5 @@ const Sponsors = () => {
     </>
   )
 }
+
 export default Sponsors

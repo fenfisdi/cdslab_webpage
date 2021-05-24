@@ -55,3 +55,12 @@ export const HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS = `Cr
   Aenean lacinia bibendum nulla sed consectetur. 
   Praesent commodo cursus magna, vel scelerisque nisl consectetur et. 
   Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.`
+
+
+
+export const HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS = `Cras mattis consectetur purus sit amet fermentum. 
+  Cras justo odio, dapibus ac facilisis in, egestas eget quam. 
+  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. 
+  Aenean lacinia bibendum nulla sed consectetur. 
+  Praesent commodo cursus magna, vel scelerisque nisl consectetur et. 
+  Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.`

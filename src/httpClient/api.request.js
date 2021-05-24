@@ -6,7 +6,7 @@ import { OPTIONS_HTTP } from '../constants/optionsHttp'
 
 const createHeaders = (settings) => {
   const accessToken = localStorage.getItem('token')
-  const defaultHeaders = {    
+  const defaultHeaders = {
     Authorization: `Bearer ${accessToken}`
   }
 
@@ -16,7 +16,6 @@ const createHeaders = (settings) => {
 
   return merge({}, defaultHeaders, settings.headers)
 }
-
 
 
 const createConfig = (url, method, params, settings) => {
@@ -66,4 +65,3 @@ const request = async (url, method, params, settings = {}) => {
 }
 
 export default request
-

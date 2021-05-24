@@ -15,28 +15,26 @@ const QrBindingRecoveryShowLink = ({qrUrl, title, handleClick}) => {
       spacing={1}
       direction="column"
       justify="center"
-      alignItems="center"            
+      alignItems="center"
     >
       <TitleComponent
-        justify={'center'}
-        alignItems={'center'}
+        justify='center'
+        alignItems='center'
         title={title}
-        variant={'h5'}
+        variant='h5'
       />
-         
+
       <QRImage qrUrl={qrUrl}/>
-      
-             
+
       <Button
-        onClick={handleClick}      
+        onClick={handleClick}
         variant="contained"
         color="primary"
-        className={{}}          
       >
         {t('common.continueButton')}
       </Button>
-     
     </Grid>
   )
 }
+
 export default QrBindingRecoveryShowLink

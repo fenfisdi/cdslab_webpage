@@ -1,20 +1,24 @@
 import { useInputValue } from '../../../../ui/Input/useInputValue'
-import { checkTypePhoneNumber, VALIDATORS_PARAMETERS_FORM } from './validators'
+import { checkTypePhoneNumber, parametersFormFieldsValidators } from './validators'
 
-export const useParametersFormFieldsCreation = ({fieldsSchema=[],valuesFieldParameters=[]}) => {
+export const useParametersFormFieldsCreation = ({fieldParameters=[],valuesFieldParameters=[]}) => {
   /******* form fields  */
   let fields = {}
-  for (let index = 0; index < fieldsSchema.length; index++) {
+  for (let index = 0; index < fieldParameters.length; index++) {
     const { 
-      label
-    }=fieldsSchema[index] || {}
+      label,
+      representation='',
+      max_value:maxValue= Number.MAX_SAFE_INTEGER, 
+      min_value:minValue=0
+    }=fieldParameters[index] || {}
     const updateValuePersis = valuesFieldParameters[index]
-    const field = useInputValue(updateValuePersis!=undefined?updateValuePersis['value']: '', VALIDATORS_PARAMETERS_FORM.alphabetic, {
+    const field = useInputValue(updateValuePersis!=undefined?updateValuePersis['value']: '', parametersFormFieldsValidators({minValue, maxValue}), {
       name: label,
       type: 'text',
       onKeyDown: (event) => {
         return checkTypePhoneNumber(event)
-      }
+      },
+      representation:representation
     })
     fields[label]=field        
   } 

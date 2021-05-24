@@ -11,6 +11,5 @@ export const Input = (options) => {
       className={classes.root}
       error={!!(options.helperText) || ( options.errors && options.errors.length>0)}
     />
-
   )
 }

@@ -22,7 +22,8 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
   COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
-  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR
+  COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -123,6 +124,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const setDefinitionCompartmentalExecuteSimulation =(data)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
+      payload: data
+    })
+  }
+
   const storeCompartmentalFileUpload = (simulation,idSimulation,file)=>{
     registerLoaderCompartmentalSimulationFile(true)
     updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
@@ -158,6 +166,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     dispatch({
       type: COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
       payload: nextStep
+    })
+  }
+  
+  const setDefinitionFileDataProperty =(data)=>{
+    dispatch({
+      type:COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
+      payload:data
     })
   }
 
@@ -215,12 +230,10 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  
   const executeSimulation =(idSimulation)=>{
-    executeSimulationService(idSimulation).then((response)=>{
-      dispatch({
-        type: COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
-        payload: response.data.data
-      })
+    executeSimulationService(idSimulation).then((response)=>{      
+      setDefinitionCompartmentalExecuteSimulation(response.data.data)
     }).catch((error)=>{
       if (error.response) {
         const { response: { data } } = error
@@ -250,7 +263,9 @@ export const useCompartmentalModelActions = (dispatch) => {
     storeCompartmentalFileUpload,
     setDefinitionCompartmentalFolderSimulation,
     updateNextStepFileUploadProperty,
-    executeSimulation }
+    executeSimulation,
+    setDefinitionCompartmentalExecuteSimulation,
+    setDefinitionFileDataProperty }
 
 
 }

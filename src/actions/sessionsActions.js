@@ -4,7 +4,7 @@ import {
   SESSION_ERROR,
   SESSION_LOADING,
   SESSION_LOGIN,
-  SESSION_LOGOUT, SESSION_SET_CURRENT_NAVIGATION, SESSION_SET_CURRENT_SECTION_NAVIGATION
+  SESSION_LOGOUT, SESSION_SET_CURRENT_NAVIGATION, SESSION_SET_CURRENT_SECTION_NAVIGATION, SESSION_SET_TABS_RENDER
 } from './types/sessionTypes'
 
 export const useSessionActions = (dispatch) => {
@@ -59,5 +59,9 @@ export const useSessionActions = (dispatch) => {
     dispatch({ type: SESSION_SET_CURRENT_SECTION_NAVIGATION, payload: sectionTitle })
   }
 
-  return { login, logout, setCurrenNavigation, setActiveSection }
+  const setActiveTab = (active) => {
+    dispatch({ type: SESSION_SET_TABS_RENDER, payload: active })
+  }
+
+  return { login, logout, setCurrenNavigation, setActiveSection,setActiveTab }
 }

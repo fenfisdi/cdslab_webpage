@@ -12,7 +12,6 @@ import DevelopedBy from './Developedby'
 import Sponsors from './Sponsors'
 import Contact from './Contact'
 
-
 const Contents = () => {
   const classes = useContentStyles(theme)
 

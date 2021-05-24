@@ -14,7 +14,6 @@ const CompartmentalConfigureParametersPage = () => {
     currentSimulation, 
     predefinedModelSelected:{modelData}, 
     executeRequestConfigureParameters } = useCompartmentalConfigureParametersPageState({showSnack, setShowSnack })
-  
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -23,7 +22,7 @@ const CompartmentalConfigureParametersPage = () => {
   return (
     <CompartmentalConfigureParametersSection>
      
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
@@ -55,10 +54,7 @@ const CompartmentalConfigureParametersPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-      
-
     </CompartmentalConfigureParametersSection>
-
   )
 }
 

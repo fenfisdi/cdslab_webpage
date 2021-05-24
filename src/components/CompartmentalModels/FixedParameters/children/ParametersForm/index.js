@@ -6,9 +6,7 @@ import { Input } from '../../../../ui/Input'
 import { useParametersFormStyle } from './styles'
 
 
-const ParametersForm = ({fields, fieldsSchema}) => {
-  
-  
+const ParametersForm = ({fields, fieldParameters}) => {
   const classes = useParametersFormStyle()
   
   return (
@@ -17,7 +15,7 @@ const ParametersForm = ({fields, fieldsSchema}) => {
       container
       item 
     >
-      {fieldsSchema && fieldsSchema.map((field,index)=>{
+      {fieldParameters && fieldParameters.map((field,index)=>{
         const {label, representation, unit } = field
         const {helperText}= fields[label]
         delete fields[label]['helperText']
@@ -55,7 +53,7 @@ const ParametersForm = ({fields, fieldsSchema}) => {
         )
       })}
 
-      {!fieldsSchema && <p>No hay campos</p>}
+      {!fieldParameters && <p>No hay campos</p>}
 
     </Grid>
   )

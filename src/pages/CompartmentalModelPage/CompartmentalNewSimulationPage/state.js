@@ -6,12 +6,22 @@ import { isEmpty, isNull } from 'lodash'
 export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack }) => {
   const {
     state: {
-      compartmentalModel: { loading, predefinedModels:{data:predefinedModelsList,error,errorData}, predefinedModelSelected, currentSimulation }
+      compartmentalModel: { 
+        loading, 
+        predefinedModels:{data:predefinedModelsList,error,errorData}, 
+        predefinedModelSelected, 
+        currentSimulation }
     },
     dispatch
   } = useStore()
   
-  const { getPredefinedModels, storePredefinedModelSelected, setDefinitionCompartmentalSimulation, setDefinitionCompartmentalFolderSimulation } = useCompartmentalModelActions(dispatch)
+  const { 
+    getPredefinedModels, 
+    storePredefinedModelSelected, 
+    setDefinitionCompartmentalSimulation, 
+    setDefinitionCompartmentalFolderSimulation,
+    setDefinitionCompartmentalExecuteSimulation,
+    setDefinitionFileDataProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(() => {
     if(isNull(predefinedModelsList) && error!=true){
@@ -22,6 +32,8 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
       storePredefinedModelSelected({})
       setDefinitionCompartmentalSimulation(null)
       setDefinitionCompartmentalFolderSimulation(null)
+      setDefinitionCompartmentalExecuteSimulation(null)
+      setDefinitionFileDataProperty(null)
     }
   }, [predefinedModelsList]) 
 
