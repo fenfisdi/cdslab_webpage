@@ -5,7 +5,13 @@ import { useStore } from '../../../store/storeContext'
 export const useCompartamentalMySimulationsPreviewState = () => {
   const {
     state: {
-      mySimulations: { mySimulationSelected,mySimulationFiles,mySimulationFileSelected, loading,execution }
+      mySimulations: { 
+        mySimulationSelected,
+        mySimulationFiles,
+        mySimulationFileSelected, 
+        loading,
+        execution 
+      }
     },
     dispatch
   } = useStore()
@@ -17,7 +23,6 @@ export const useCompartamentalMySimulationsPreviewState = () => {
   }, [])
 
   const handleGetFiles = () => {
-    console.log(mySimulationSelected.identifier)
     if (execution) {getMySimulationsFiles(mySimulationSelected.identifier)}
   }
 

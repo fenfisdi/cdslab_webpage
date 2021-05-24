@@ -62,10 +62,12 @@ export const useMySimulationActions = (dispatch) => {
           data.data.map(async(file) => {
             const body = transformFile(uidSimulations,file)
             dataFiles.push({
-              body,
+              body:body,
               ...file
             })
           })
+          console.log('Files',data.data)
+          console.log('dataFiles',dataFiles)
           dispatch({ type: MY_SIMULATION_SET_FILES, payload: dataFiles})
         }else{
           dispatch({
@@ -92,7 +94,7 @@ export const useMySimulationActions = (dispatch) => {
 
   const transformFile = async(uidSimulations,file) => {
     const {data : dataInformationContent} = await downloadSimulationsFiles(uidSimulations,file.uuid)
-    let body
+    var body
     if(file.ext === 'csv'){
       const decodeFile = atob(dataInformationContent)
       body = convertCSVToArray(decodeFile, {

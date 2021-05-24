@@ -13,7 +13,7 @@ import imgGrap from'../../../../assets/images/line-graph_pixelmeetup.svg'
 import imgPreview from '../../../../assets/images/document_freepik.svg'
 import { useTableSimulationPreview } from './styles'
 
-export const tableMySimulationPreview = (props) => {
+export const TableMySimulationPreview = (props) => {
 
   const {
     mySimulationFiles,
@@ -31,56 +31,64 @@ export const tableMySimulationPreview = (props) => {
           <TableCell>Download</TableCell>
         </TableRow>
       </TableHead>
-      <TableBody>
-        {
-          mySimulationFiles.map((elem, i) => (
-            <TableRow key={i}>
-              <TableCell>
-                {
-                  elem.ext === 'csv'
-                    ? (<img src={imgCsv} className={classes.imgExt} />)
-                    : (<img src={imgGrap} className={classes.imgExt} />)
-                }
-              </TableCell>
-              <TableCell>
-                {elem.name}
-              </TableCell>
-              <TableCell>
-                {elem.type}
-              </TableCell>
-              <TableCell>
-                {
-                  elem.ext === 'csv'
-                    ? (<CSVLink
-                      data={elem.body}
-                      asyncOnClick={true}
-                    >
-                      <GetAppIcon className={classes.iconDownload}/>
-                    </CSVLink>)
-                    : ( 
-                      <Button onClick={() => handelDownloadImg(elem.body)}>
-                        <GetAppIcon className={classes.iconDownload}/>
-                      </Button>
-                    )
-                }
-                {
-                  (elem.ext === 'img' && elem.status === 'done') 
-                            && (
-                              <Button onClick={() => setPlotJson(elem.json_image)}>
-                                <TitleIcon
-                                  icon={imgPreview} 
-                                  width={20} 
-                                  height={20}  
-                                  fontSize='40px'
-                                />
-                              </Button>
-                            )
-                }
-              </TableCell>
-            </TableRow>
-          ))
-        }
-      </TableBody>
+      {
+        mySimulationFiles ?
+          (
+            <TableBody>
+              {
+                mySimulationFiles.map((elem, i) => (
+                  <TableRow key={i}>
+                    <TableCell>
+                      {
+                        elem.ext === 'csv'
+                          ? (<img src={imgCsv} className={classes.imgExt} />)
+                          : (<img src={imgGrap} className={classes.imgExt} />)
+                      }
+                    </TableCell>
+                    <TableCell>
+                      {elem.name}
+                    </TableCell>
+                    <TableCell>
+                      {elem.type}
+                    </TableCell>
+                    <TableCell>
+                      {
+                        elem.ext === 'csv'
+                          ? (<CSVLink
+                            data={elem.body}
+                            asyncOnClick={true}
+                          >
+                            <GetAppIcon className={classes.iconDownload}/>
+                          </CSVLink>)
+                          : ( 
+                            <Button onClick={() => handelDownloadImg(elem.body)}>
+                              <GetAppIcon className={classes.iconDownload}/>
+                            </Button>
+                          )
+                      }
+                      {
+                        (elem.ext === 'img' && elem.status === 'done') 
+                              && (
+                                <Button onClick={() => setPlotJson(elem.json_image)}>
+                                  <TitleIcon
+                                    icon={imgPreview} 
+                                    width={20} 
+                                    height={20}  
+                                    fontSize='40px'
+                                  />
+                                </Button>
+                              )
+                      }
+                    </TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          )
+          :
+          (<TableBody> <TableCell> Not Files </TableCell> </TableBody>)
+      }
+      
     </Table>
   )
 }
