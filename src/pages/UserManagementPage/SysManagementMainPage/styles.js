@@ -16,6 +16,10 @@ export const sysManagementStyles = makeStyles((theme) => ({
     width: '70px'
   },
 
+  generalContainer: {
+    marginTop: '10px'
+  },
+
   root: {
     width: '120px',
     backgroundColor: '#E3E3E3',

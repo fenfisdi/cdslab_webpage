@@ -7,6 +7,7 @@ import AlertCommon from '../../../components/ui/AlertCommon'
 import SecondaryTabs from '../../../components/ui/SecondaryTabs'
 import SnackBarCommon from '../../../components/ui/SnackBarCommon'
 import { useSysManagementState } from './state'
+import FullWidthTabs from '../../../components/Taps'
 
 const SysManagementMainPage = () => {
 
@@ -26,49 +27,71 @@ const SysManagementMainPage = () => {
     handleCloseSnack
   ] = useSysManagementState()
 
+  const tabs = [
+    {
+      id: 1,
+      label: 'Users Management',
+      path:  'usersManagement',
+      disabled : true,
+      icon : 'fas fa-users',
+      iconType: 'icon'
+    },
+    {
+      id: 2,
+      label: 'Sys Management',
+      path: 'sysManagement',
+      disabled : false,
+      icon: 'fas fa-tools',
+      iconType: 'icon'
+    },
+  ]
+
   return(
     <>
-      <Container maxWidth={'sm'}>
-        <AlertCommon
-          title={notificationStrings.title1}
-          message={notificationStrings.message1}
-          severity={'info'}
-        />
-        <div className={classes.sysManagementTableContainer}>
-          <Simpletable
-            titles={tableTitles}
-            rows={tableRows}
-            cellNames={sysCellNamesTable}
-            param={'time'}
-            handleComponent={handleComponentForTable}
+      <FullWidthTabs tabs={tabs} idTab={2} />
+      <div className={classes.generalContainer}>
+        <Container maxWidth={'sm'}>
+          <AlertCommon
+            title={notificationStrings.title1}
+            message={notificationStrings.message1}
+            severity={'info'}
           />
-        </div>
-        <AlertCommon
-          title={notificationStrings.title2}
-          message={notificationStrings.message2}
-          severity={'info'}
-        />
-        <div className={classes.sysManagementTabsContainer}>
-          <SecondaryTabs
-            tabTitles={secondaryTabTitles}
-            arrayComponents={tabsComponents}
-            tabsClass={classes.root}
-            paperClass={classes.paper}
+          <div className={classes.sysManagementTableContainer}>
+            <Simpletable
+              titles={tableTitles}
+              rows={tableRows}
+              cellNames={sysCellNamesTable}
+              param={'time'}
+              handleComponent={handleComponentForTable}
+            />
+          </div>
+          <AlertCommon
+            title={notificationStrings.title2}
+            message={notificationStrings.message2}
+            severity={'info'}
           />
-        </div>
-        <div className={classes.buttonContainer}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            className={classes.button}
-            startIcon={<SaveIcon />}
-            onClick={handleValidations}
-          >
+          <div className={classes.sysManagementTabsContainer}>
+            <SecondaryTabs
+              tabTitles={secondaryTabTitles}
+              arrayComponents={tabsComponents}
+              tabsClass={classes.root}
+              paperClass={classes.paper}
+            />
+          </div>
+          <div className={classes.buttonContainer}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              className={classes.button}
+              startIcon={<SaveIcon />}
+              onClick={handleValidations}
+            >
             Save
-          </Button>
-        </div>
-      </Container>
+            </Button>
+          </div>
+        </Container>
+      </div>
       <SnackBarCommon
         success={updateSysManagementTableDataSuccess || updateSysManagementTemplateEditorSuccess}
         error={updateSysManagementTableDataFailed || isRequired || updateSysManagementTemplateEditorFailed}
