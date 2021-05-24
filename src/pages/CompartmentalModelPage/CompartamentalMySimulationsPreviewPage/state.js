@@ -21,7 +21,7 @@ export const useCompartamentalMySimulationsPreviewState = () => {
     if (execution) {getMySimulationsFiles(mySimulationSelected.identifier)}
   }
 
-  const handelDownloadImg = (body) => {
+  const handleDownloadImg = (body) => {
     const a = document.createElement('a')
     a.href = 'data:image/png;base64,' + body 
     a.download = 'Image.png'
@@ -31,7 +31,7 @@ export const useCompartamentalMySimulationsPreviewState = () => {
   return {
     loading,
     mySimulationFiles,
-    handelDownloadImg,
+    handleDownloadImg,
     mySimulationFileSelected
   }
 }

@@ -10,13 +10,15 @@ import Plot from 'react-plotly.js'
 import plot_json from './data.json'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import LoaderComponent from '../../../components/ui/Loader'
+import tableMySimulationPreview from '../../../components/CompartmentalModels/mySimulationsPreview/tableSimulationPreview'
+
 
 const CompartamentalMySimulationsPreviewPage = () => {
   const classes = useCompartamentalMySimulationPreviewStyles(theme)
   const {
     loading,
     mySimulationFiles,
-    handelDownloadImg
+    handleDownloadImg
   } = useCompartamentalMySimulationsPreviewState()
 
   const [plotJson, setPlotJson] = useState(JSON.parse(plot_json))
@@ -103,7 +105,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
                 <Grid  item xs={12}>
                   <tableMySimulationPreview 
                     mySimulationFiles= {mySimulationFiles}
-                    handelDownloadImg= {handelDownloadImg}
+                    handelDownloadImg= {handleDownloadImg}
                     setPlotJson={setPlotJson}
                   />
                 </Grid>
