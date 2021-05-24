@@ -45,7 +45,7 @@ const App = () => {
       <Route
         {...rest}
         render={({ location }) =>
-          isAuth ? (  //isAuth
+          isAuth ? (  
             <Dashboard> {component} </Dashboard>
           ) : (
             <Redirect
@@ -85,7 +85,7 @@ const App = () => {
                 component={<CompartmentalModelPage />}
               />
               <PrivateRoute
-                path="/userManagement"
+                path="/management"
                 component={<UserManagementPage />}
               />
               <PrivateRoute

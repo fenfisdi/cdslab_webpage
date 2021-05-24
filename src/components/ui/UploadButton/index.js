@@ -5,7 +5,6 @@ import {
 } from '@material-ui/core'
 
 
-
 export const UploadButton = ({
   xs,
   onChange,
@@ -19,7 +18,6 @@ export const UploadButton = ({
         <Button
           variant="contained"
           component="label"
-
         >
           Upload File
           <input

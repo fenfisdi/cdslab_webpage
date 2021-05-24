@@ -34,7 +34,6 @@ const CompartmentalReviewConfigurationMessagePage=()=>{
       </Grid>
     </CompartmentalReviewConfigurationMessageContainer>
   )
-
 }
 
 export default CompartmentalReviewConfigurationMessagePage

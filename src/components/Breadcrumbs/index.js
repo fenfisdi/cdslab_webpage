@@ -20,7 +20,7 @@ const Breadcrumbs = props => {
   } = props
   const classes = useStyles()
   const pathnames = pathname.split('/').filter(x => x)
-  console.log(pathnames)
+
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
       {pathnames.map((name, index) => {
@@ -30,7 +30,7 @@ const Breadcrumbs = props => {
           <Typography key={name}>{name}</Typography>
         ) : (
           <Link key={name} onClick={() => history.push(routeTo)}>
-            {name}  
+            {name}
           </Link>
         )
       })}

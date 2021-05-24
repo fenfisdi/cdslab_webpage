@@ -5,7 +5,6 @@ import {
 import DatePicker from '../DatePicker'
 import Box from '@material-ui/core/Box'
 
-
 export const RangePicker = ({
   xs,
   valueFirst,
@@ -23,7 +22,6 @@ export const RangePicker = ({
 
   return (
     <Grid xs={xs} container item direction="row" justify="center" alignItems="baseline">
-
       <DatePicker
         variant="inline"
         format="dd/MM/yyyy"
@@ -56,7 +54,6 @@ export const RangePicker = ({
           'aria-label': 'change date',
         }}
         style={{ 'marginLeft': '10px' }}
-
       />
     </Grid>
   )

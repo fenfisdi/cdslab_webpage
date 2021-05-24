@@ -27,7 +27,6 @@ const AccountRecoveryPage = () => {
   }
 
   const handleClickRecoveryEmail = (formFields) => {
-    
     const { email } = formFields
     handleRequestPasswordChange({ email: email })
   }
@@ -79,7 +78,7 @@ const AccountRecoveryPage = () => {
         loading={loading}
         handleClick={handleClickSecurityCode}
         messageTitle={t('accountRecovery.messageConfirm')}
-        messageBody={t('accountRecovery.codeSended') `${sendEmailData && replaceStringInRange(sendEmailData.data.email, 1, 5, '*****')}`}
+        messageBody='Please check your box mail'
       />}
       {step == 2 && <AccountRecoveryResetPasswordForm loading={false} handleClick={handleClickPasswordSubmission} />}
       {showSnack && showSnack.show && <SnackbarComponent
@@ -88,7 +87,6 @@ const AccountRecoveryPage = () => {
         handleCloseSnack={handleCloseSnack}
         successMessage={showSnack.successMessage}
         errorMessage={showSnack.errorMessage} />}
-
     </Grid>
   )
 }

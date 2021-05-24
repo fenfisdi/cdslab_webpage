@@ -46,7 +46,6 @@ export const useRangePickerValue = (valFirst, valSecond, validator, extras) => {
       valueFirst: valueFirst ? moment(valueFirst).format(formatter) : valueFirst,
       valueSecond: valueSecond ? moment(valueSecond).format(formatter) : valueSecond
     }
-
   }
 
   useEffect(() => {
@@ -67,7 +66,6 @@ export const useRangePickerValue = (valFirst, valSecond, validator, extras) => {
         setErrorsSecond(true)
       }
     }
-
   }, [valueFirst, valueSecond])
 
   useEffect(() => {
