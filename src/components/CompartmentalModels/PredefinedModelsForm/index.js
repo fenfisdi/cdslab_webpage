@@ -39,7 +39,6 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
       </CompartmentalPredefinedModelFormInput>
 
       {options && options.length>0 && <ModelCard
-        ruta='chooseSimulation'
         justify="center"
         alignItems="center"
         direction="column"

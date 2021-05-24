@@ -43,11 +43,11 @@ const CompartmentalModelPage = () => {
   return (
     <>
       <FullWidthTabs tabs={tabs} idTab={1}/>
-      <Breadcrumbs  />
       <CompartmentalModelPageContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       </CompartmentalModelPageContainerTitle>
-      <CompartmentalModelPageContainer>        
+      <CompartmentalModelPageContainer>  
+        <Breadcrumbs  />      
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />

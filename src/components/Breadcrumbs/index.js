@@ -6,28 +6,35 @@ import {
   Typography
 } from '@material-ui/core'
 import { useHistory, withRouter } from 'react-router'
-import { PathProvider, usePath } from '../PathContext'
+import {  usePath } from '../PathContext'
 
 const useStyles = makeStyles(() => ({
   separador: {
-    fontSize: '20px',
+    fontSize: '16px',
   },
 }))
 
-const Breadcrumbs = props => {
-
+const Breadcrumbs = () => {
   const classes = useStyles()
   const history = useHistory()
-  const [path] = usePath()
+  const [path, setPatch] = usePath()
+
+  const handleHistory = (routeTo, index) => {
+    path.length = index + 1
+    sessionStorage.setItem('path',JSON.stringify(path))
+    setPatch(path)
+    history.push(routeTo)
+  }
+
   return (
-    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
+    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={2} className={classes.separador} >
       {path.map(({name}, index) => {
         const isLast = index === path.length - 1
         const routeTo = `/${path.slice(0, index + 1).map(({name}) => name).join('/')}`
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
-          <Link key={name} onClick={() => history.push(routeTo)}>
+          <Link key={name} onClick={() => handleHistory(routeTo,index)}>
             {name}
           </Link>
         )
