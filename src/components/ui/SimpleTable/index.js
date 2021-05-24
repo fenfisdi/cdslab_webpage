@@ -14,12 +14,12 @@ const useStyles = makeStyles({
   },
 })
 
-const Simpletable = ({titles, rows, cellNames}) => {
+const Simpletable = ({titles, rows, cellNames, param, handleComponent}) => {
   const classes = useStyles()
 
-  const tableCell = (item) =>
+  const tableCell = (item, index) =>
     cellNames.map((nameItem) => (
-      <TableCell key={nameItem}>{item[nameItem]}</TableCell>
+      <TableCell key={nameItem}>{ nameItem === param ? handleComponent(item, index) : item[nameItem]}</TableCell>
     ))
 
   return (
@@ -33,9 +33,9 @@ const Simpletable = ({titles, rows, cellNames}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <TableRow key={row.process}>
-              {tableCell(row)}
+              {tableCell(row, index)}
             </TableRow>
           ))}
         </TableBody>

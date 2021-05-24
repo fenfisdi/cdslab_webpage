@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { UserManagementPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
+import SysManagementState from '../../context/SysManagement/sysManagementState'
 
 const UserManagementPage = () => {
   const match = useRouteMatch()
@@ -32,7 +33,7 @@ const UserManagementPage = () => {
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={UserManagementMainPage} />
-            <Route path={`${match.path}/SysManagement`} exact component={SysManagementMainPage} />
+            <Route path={`${match.path}/SysManagement`} exact component={() => (<SysManagementState><SysManagementMainPage/></SysManagementState>)} />
           </Switch>
         </Suspense>
       </UserManagementPageContainer>

@@ -5,6 +5,7 @@ import { notificationStrings, sysCellNamesTable, secondaryTabTitles } from '../c
 import Simpletable from '../../../components/ui/SimpleTable'
 import AlertCommon from '../../../components/ui/AlertCommon'
 import SecondaryTabs from '../../../components/ui/SecondaryTabs'
+import SnackBarCommon from '../../../components/ui/SnackBarCommon'
 import { useSysManagementState } from './state'
 
 const SysManagementMainPage = () => {
@@ -13,7 +14,14 @@ const SysManagementMainPage = () => {
     classes,
     rows,
     titles,
-    tabsComponents
+    tabsComponents,
+    updateSysManagementTableDataSuccess,
+    updateSysManagementTableDataFailed,
+    isRequiredMessage,
+    isRequired,
+    handleComponent,
+    handleValidations,
+    handleCloseSnack
   ] = useSysManagementState()
 
   return(
@@ -29,6 +37,8 @@ const SysManagementMainPage = () => {
             titles={titles}
             rows={rows}
             cellNames={sysCellNamesTable}
+            param={'time'}
+            handleComponent={handleComponent}
           />
         </div>
         <AlertCommon
@@ -51,11 +61,19 @@ const SysManagementMainPage = () => {
             size="large"
             className={classes.button}
             startIcon={<SaveIcon />}
+            onClick={handleValidations}
           >
             Save
           </Button>
         </div>
       </Container>
+      <SnackBarCommon
+        success={updateSysManagementTableDataSuccess}
+        error={updateSysManagementTableDataFailed || isRequired}
+        handleCloseSnack={handleCloseSnack}
+        successMessage={'Proceso exitoso'}
+        errorMessage={isRequiredMessage}
+      />
     </>
   )
 }
