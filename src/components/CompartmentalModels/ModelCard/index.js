@@ -1,16 +1,34 @@
 import React, { useState } from 'react'
+import { usePath } from '../../PathContext'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
 const ModelCard = ({ ruta='',options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
   
   const [selected, setSelected] = useState('')
+  const [path, setPath] = usePath()
+
   const handleClickCharter = (charter) => {
+    handlePath()
     const { indetifier } = charter || {}
-    const patchLocalStorage = localStorage.getItem('patch')
-    localStorage.setItem('patch',patchLocalStorage + '/' +ruta)
     eventEmitted(charter)
     setSelected(indetifier)
+  }
+
+  const handlePath = () =>{
+    if(path){
+      const newPath = [...path,{name: ruta}]
+      handlePathLocalStorage(newPath)
+      setPath(newPath)
+    }else{
+      const newPath = [{name: ruta}]
+      handlePathLocalStorage(newPath)
+      setPath(newPath)
+    }
+  }
+
+  const handlePathLocalStorage = (newPath) => {
+    sessionStorage.setItem('path', JSON.stringify(newPath) )
   }
 
   return (

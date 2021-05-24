@@ -7,6 +7,7 @@ import TitleIcon from '../../components/layouts/TitleIcon'
 import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+import Breadcrumbs from '../../components/Breadcrumbs'
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
@@ -42,6 +43,7 @@ const CompartmentalModelPage = () => {
   return (
     <>
       <FullWidthTabs tabs={tabs} idTab={1}/>
+      <Breadcrumbs  />
       <CompartmentalModelPageContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       </CompartmentalModelPageContainerTitle>

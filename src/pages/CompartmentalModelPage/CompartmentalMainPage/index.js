@@ -26,6 +26,7 @@ const CompartmentalMainPage = () => {
 
       <CompartmentalMainPageCards>
         <ModelCard
+          ruta='newSimulation'
           options={OPTIONS_COMPARTMENTAL_MAIN}
           eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url, }) }}
         />

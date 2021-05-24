@@ -5,7 +5,8 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core'
-import { withRouter } from 'react-router'
+import { useHistory, withRouter } from 'react-router'
+import { PathProvider, usePath } from '../PathContext'
 
 const useStyles = makeStyles(() => ({
   separador: {
@@ -14,18 +15,15 @@ const useStyles = makeStyles(() => ({
 }))
 
 const Breadcrumbs = props => {
-  const {
-    history,
-    location: { pathname }
-  } = props
-  const classes = useStyles()
-  const pathnames = pathname.split('/').filter(x => x)
 
+  const classes = useStyles()
+  const history = useHistory()
+  const [path] = usePath()
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
-      {pathnames.map((name, index) => {
-        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
-        const isLast = index === pathnames.length - 1
+      {path.map(({name}, index) => {
+        const isLast = index === path.length - 1
+        const routeTo = `/${path.slice(0, index + 1).map(({name}) => name).join('/')}`
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (

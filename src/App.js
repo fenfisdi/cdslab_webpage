@@ -16,6 +16,7 @@ import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
 import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
+import { PathProvider } from './components/PathContext'
 
 const App = () => {
   const {
@@ -62,41 +63,43 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<MiniLoader />}>
-        <Router>
-          <GlobalStyles />
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={LoginPage} />
-              <PrivateRoute
-                path="/landingPage"
-                component={<LandingPage />}
-              />
-              <PrivateRoute
-                path="/agents"
-                component={<AgentsPage />}
-              />
-              <PrivateRoute
-                path="/simulationModels"
-                component={<SimulationModelPage />}
-              />
-              <PrivateRoute
-                path="/compartmentalModels"
-                component={<CompartmentalModelPage />}
-              />
-              <PrivateRoute
-                path="/management"
-                component={<UserManagementPage />}
-              />
-              <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
-              <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
-              <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <Route exact path="/qr_code" component={QRrender} />
-              <Route exact path="/qr_validation" component={QRAuthentication} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </Layout>
-        </Router>
+        <PathProvider>
+          <Router>
+            <GlobalStyles />
+            <Layout>
+              <Switch>
+                <Route exact path="/" component={LoginPage} />
+                <PrivateRoute
+                  path="/landingPage"
+                  component={<LandingPage />}
+                />
+                <PrivateRoute
+                  path="/agents"
+                  component={<AgentsPage />}
+                />
+                <PrivateRoute
+                  path="/simulationModels"
+                  component={<SimulationModelPage />}
+                />
+                <PrivateRoute
+                  path="/compartmentalModels"
+                  component={<CompartmentalModelPage />}
+                />
+                <PrivateRoute
+                  path="/management"
+                  component={<UserManagementPage />}
+                />
+                <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
+                <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
+                <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
+                <Route exact path="/register" component={RegisterPage} />
+                <Route exact path="/qr_code" component={QRrender} />
+                <Route exact path="/qr_validation" component={QRAuthentication} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </Layout>
+          </Router>
+        </PathProvider>
       </Suspense>
     </ErrorBoundary>
   )
