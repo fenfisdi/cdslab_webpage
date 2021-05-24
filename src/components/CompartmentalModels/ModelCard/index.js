@@ -18,16 +18,16 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
   const handlePath = (charter) =>{
     if(path){
       const newPath = [...path,{name: charter.ruta}]
-      handlePathLocalStorage(newPath)
+      handlePathSessionStorage(newPath)
       setPath(newPath)
     }else{
       const newPath = [{name: charter.ruta}]
-      handlePathLocalStorage(newPath)
+      handlePathSessionStorage(newPath)
       setPath(newPath)
     }
   }
 
-  const handlePathLocalStorage = (newPath) => {
+  const handlePathSessionStorage = (newPath) => {
     sessionStorage.setItem('path', JSON.stringify(newPath) )
   }
 
