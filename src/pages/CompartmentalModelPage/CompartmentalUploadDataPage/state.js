@@ -52,7 +52,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
         }
       )
       history.push({ 
-        pathname: '/compartmentalModels/reviewConfigurationInformation',
+        pathname: '/compartmentalModels/chooseDate',
         search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
       })
     } else if (simulationFileUpload.error && simulationFileUpload.errorData != null) {
