@@ -5,6 +5,7 @@ import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
