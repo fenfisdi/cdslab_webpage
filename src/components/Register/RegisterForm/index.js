@@ -336,12 +336,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             onClick={handleClick}
             variant="contained"
             color="primary"
-<<<<<<< HEAD
             disabled={!isValid && verificationPassword ? false : true}
-=======
-            className={{}}
-            disabled={ !isValid && verificationPassword ? false : true }
->>>>>>> dev
           >
             Continue
           </Button>
