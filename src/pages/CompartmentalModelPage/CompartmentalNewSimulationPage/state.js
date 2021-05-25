@@ -9,8 +9,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
       compartmentalModel: { 
         loading, 
         predefinedModels:{data:predefinedModelsList,error,errorData}, 
-        predefinedModelSelected, 
-        currentSimulation }
+        predefinedModelSelected }
     },
     dispatch
   } = useStore()
