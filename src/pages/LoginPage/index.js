@@ -11,6 +11,7 @@ import QRrender from '../Auth/QRPage'
 
 export const LoginPage = () => {
   const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
+  sessionStorage.removeItem('path')
   const classes = useLoginStyles(theme)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { loading, handleSubmit, title, step, updateStep, data } = useLoginState({ showSnack, setShowSnack })

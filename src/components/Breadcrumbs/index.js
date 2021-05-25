@@ -27,7 +27,7 @@ const Breadcrumbs = () => {
   }
 
   return (
-    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={2} className={classes.separador} >
+    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
       {path.map(({name}, index) => {
         const isLast = index === path.length - 1
         const routeTo = `/${path.slice(0, index + 1).map(({name:nameRoute}) => nameRoute).join('/')}`

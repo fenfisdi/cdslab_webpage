@@ -1,35 +1,21 @@
 import React, { useState } from 'react'
-import { usePath } from '../../PathContext'
+import { usePathBreadCrums } from '../../../helpers'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
 const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
   
   const [selected, setSelected] = useState('')
-  const [path, setPath] = usePath()
-
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const handleClickCharter = (charter) => {
-    handlePath(charter)
+    
+    handlePathBreadCrums(charter.ruta)
     const { indetifier } = charter || {}
     eventEmitted(charter)
     setSelected(indetifier)
   }
 
-  const handlePath = (charter) =>{
-    if(path){
-      const newPath = [...path,{name: charter.ruta}]
-      handlePathSessionStorage(newPath)
-      setPath(newPath)
-    }else{
-      const newPath = [{name: charter.ruta}]
-      handlePathSessionStorage(newPath)
-      setPath(newPath)
-    }
-  }
-
-  const handlePathSessionStorage = (newPath) => {
-    sessionStorage.setItem('path', JSON.stringify(newPath) )
-  }
+  
 
   return (
     <CharterContainer direction={direction}>
