@@ -33,13 +33,13 @@ const SysManagementState = (props) => {
 
   const updateProcessTimeTableData = ( tableData ) => {
     updateTimeProcessTableData( tableData )
-      .then((response) => {
+      .then(() => {
         dispatch({
           type: Types.UPDATE_SYS_MANAGEMENT_TABLE_DATA_SUCCESS,
           payload: true
         })
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch({
           type: Types.UPDATE_SYS_MANAGEMENT_TABLE_DATA_FAILED,
           payload: true
@@ -76,13 +76,13 @@ const SysManagementState = (props) => {
 
   const updateEditorTemplate = ( emailData ) => {
     updateTemplateEditor( emailData )
-      .then((response) => {
+      .then(() => {
         dispatch({
           type: Types.UPDATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_SUCCESS,
           payload: true
         })
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch({
           type: Types.UPDATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_FAILED,
           payload: true
@@ -106,13 +106,13 @@ const SysManagementState = (props) => {
 
   const createEditorTemplate = ( emailData ) => {
     sendNotificationEmail( emailData )
-      .then((response) => {
+      .then(() => {
         dispatch({
           type: Types.CREATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_SUCCESS,
           payload: true
         })
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch({
           type: Types.CREATE_SYS_MANAGEMENT_TEMPLATE_EDITOR_FAILED,
           payload: true
