@@ -40,7 +40,7 @@ const UserManagamentPage = () => {
       icon: toolsSVG,
       name: 'Sys Management',
       indetifier: 'sys_management',
-      url: '',
+      url: `${match.path}/SysManagement`,
       tipo: 2
     }
   ]
