@@ -9,9 +9,9 @@ const TitleIcon = ({title,icon,width,height,colorText,fontSize,fontWeight}) => {
   return (
     <Grid container item xs={6} justify="center" alignItems="center" direction="row">
       <CharterBody>
-        <CharterIcon>
+        {icon && <CharterIcon>
           <img src={icon} width={width} height={height}/>
-        </CharterIcon>
+        </CharterIcon>}
       </CharterBody>
       <Typography variant="body2" component="p" style={{'color':colorText,fontSize:fontSize, fontWeight: fontWeight}}>
         {title}
