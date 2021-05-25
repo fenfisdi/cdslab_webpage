@@ -23,7 +23,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   const {
     findCompartmentalSimulation,
     findPredefinedModel,
-    storeCompartmentalFileUpload } = useCompartmentalModelActions(dispatch)
+    storeCompartmentalFileUpload,
+    updateNextStepFileUploadProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
@@ -52,9 +53,10 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
         }
       )
       history.push({ 
-        pathname: '/compartmentalModels/reviewConfigurationInformation',
+        pathname: '/compartmentalModels/chooseDate',
         search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
       })
+      updateNextStepFileUploadProperty(false)
     } else if (simulationFileUpload.error && simulationFileUpload.errorData != null) {
       setShowSnack(
         {

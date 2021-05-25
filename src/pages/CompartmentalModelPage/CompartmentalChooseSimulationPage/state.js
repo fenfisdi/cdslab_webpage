@@ -8,9 +8,7 @@ import { useHistory } from 'react-router'
 export const useCompartmentalChooseSimulationPageState = (
   {
     showSnack,
-    setShowSnack,
-    initialDate,
-    finalDate
+    setShowSnack
   }) => {
   const history = useHistory()
   const {
@@ -37,8 +35,7 @@ export const useCompartmentalChooseSimulationPageState = (
           show: true,
           success: false,
           error: true,
-          // errorMessage: currentSimulation.errorData.detail
-          errorMessage: 'Un errror ocurrio'
+          errorMessage: currentSimulation.errorData.message
         }
       )
     } else if (!isEmpty(currentSimulation) && currentSimulation.data != null && !isEmpty(predefinedModelSelected) 
@@ -92,11 +89,7 @@ export const useCompartmentalChooseSimulationPageState = (
       'name': name,
       'status':'incomplete',
       'model_id': model_id,
-      'parameter_type':parameter_type.toLowerCase(),
-      'interval_date': {
-        'start': initialDate,
-        'end': finalDate
-      }
+      'parameter_type':parameter_type.toLowerCase()
     })
   }
 

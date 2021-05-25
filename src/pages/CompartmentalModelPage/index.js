@@ -17,6 +17,7 @@ const CompartmentalModelPage = () => {
   const CompartmentalConfigureStateVariablesPage = React.lazy(() => import('./CompartmentalConfigureStateVariablesPage'))
   const CompartmentalOptimizeParametersPage = React.lazy(() => import('./CompartmentalOptimizeParametersPage'))
   const CompartmentalUploadDataPage = React.lazy(() => import('./CompartmentalUploadDataPage'))
+  const CompartmentalChooseDatePage = React.lazy(() => import('./CompartmentalChooseDatePage'))
   const CompartmentalReviewConfigurationInformationPage = React.lazy(() => import('./CompartmentalReviewConfigurationInformationPage'))
   const CompartmentalReviewConfigurationMessagePage = React.lazy(() => import('./CompartmentalReviewConfigurationMessagePage'))
   const CompartmentalFixedParametersPage = React.lazy(()=>import('./CompartmentalFixedParametersPage'))
@@ -59,6 +60,7 @@ const CompartmentalModelPage = () => {
             <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
             <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
             <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
+            <Route path={`${match.path}/chooseDate`} exact component={CompartmentalChooseDatePage} />
             <Route path={`${match.path}/reviewConfigurationInformation`} exact component={CompartmentalReviewConfigurationInformationPage} />
             <Route path={`${match.path}/reviewConfigurationMessage`} exact component={CompartmentalReviewConfigurationMessagePage} />
             <Route path={`${match.path}/fixedParameters`} exact component={CompartmentalFixedParametersPage} />
