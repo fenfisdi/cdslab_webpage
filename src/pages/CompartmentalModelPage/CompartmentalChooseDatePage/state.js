@@ -36,13 +36,11 @@ export const useCompartmentalChooseDatePageState = (
       )
 
     }else if(dataCurrentSimulation!= null &&  isEmpty(predefinedModelSelected)){      
-      const params = getStateWithQueryparams(history)      
       const {name}=dataCurrentSimulation
       findPredefinedModel({model_id:params.model_id,  simulationName:name})
 
     }else if(!isEmpty(params) && dataCurrentSimulation == null &&
       isEmpty(predefinedModelSelected)){
-      const params = getStateWithQueryparams(history)
       findCompartmentalSimulation(params.simulation_identifier)
     }
     
