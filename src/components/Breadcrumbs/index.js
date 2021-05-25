@@ -5,31 +5,36 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core'
-import { withRouter } from 'react-router'
+import { useHistory, withRouter } from 'react-router'
+import {  usePath } from '../PathContext'
 
 const useStyles = makeStyles(() => ({
   separador: {
-    fontSize: '20px',
+    fontSize: '16px',
   },
 }))
 
-const Breadcrumbs = props => {
-  const {
-    history,
-    location: { pathname }
-  } = props
+const Breadcrumbs = () => {
   const classes = useStyles()
-  const pathnames = pathname.split('/').filter(x => x)
+  const history = useHistory()
+  const [path, setPatch] = usePath()
+
+  const handleHistory = (routeTo, index) => {
+    path.length = index + 1
+    sessionStorage.setItem('path',JSON.stringify(path))
+    setPatch(path)
+    history.push(routeTo)
+  }
 
   return (
-    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' className={classes.separador} >
-      {pathnames.map((name, index) => {
-        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
-        const isLast = index === pathnames.length - 1
+    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={2} className={classes.separador} >
+      {path.map(({name}, index) => {
+        const isLast = index === path.length - 1
+        const routeTo = `/${path.slice(0, index + 1).map(({name:nameRoute}) => nameRoute).join('/')}`
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
-          <Link key={name} onClick={() => history.push(routeTo)}>
+          <Link key={name} onClick={() => handleHistory(routeTo,index)}>
             {name}
           </Link>
         )

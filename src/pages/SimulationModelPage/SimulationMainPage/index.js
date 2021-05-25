@@ -39,6 +39,7 @@ const SimulationMainPage = () => {
       name: 'Comparmental Models',
       indetifier: 'compar_models',
       url: '/compartmentalModels',
+      ruta: 'compartmentalModels',
       tipo: 1
     },
     {
@@ -46,6 +47,7 @@ const SimulationMainPage = () => {
       name: 'Agent based models',
       indetifier: 'agent_based_models',
       url: '',
+      ruta: 'agentBasedModels',
       tipo: 2
     }
   ]

@@ -314,9 +314,9 @@ export const INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION ={
 
 /********* CONST OPTIONS ***** */
 export const OPTIONS_PREDEFINED_MODELS = [
-  {name:'SIR',indetifier:MODEL_IDENTIFIERS.SIR},
-  {name:'SEIR',indetifier:MODEL_IDENTIFIERS.SEIR},
-  {name:'SEIRV',indetifier:MODEL_IDENTIFIERS.SEIRV}]
+  {name:'SIR',indetifier:MODEL_IDENTIFIERS.SIR,ruta:'chooseSimulation'},
+  {name:'SEIR',indetifier:MODEL_IDENTIFIERS.SEIR,ruta:'chooseSimulation'},
+  {name:'SEIRV',indetifier:MODEL_IDENTIFIERS.SEIRV,ruta:'chooseSimulation'}]
 
 
 export const OPTIONS_SIMULATION_TYPE = [
@@ -333,12 +333,14 @@ export const OPTIONS_COMPARTMENTAL_MAIN = [
     name: 'New simulation',
     indetifier: 'new_simulation',
     url: 'compartmentalModels/newSimulations',
+    ruta: 'newSimulations'
   },
   {
     titleIcon:notesPixel,
     name: 'My simulations',
     indetifier: 'my_simulations',
-    url: ''
+    url: '',
+    ruta: 'mySimulations'
   }
 ]
 
@@ -346,13 +348,15 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
   {
     name: 'Optimize parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
-    url: ''
+    url: '',
+    ruta: 'OptimizeParameters'
   },
   {
     
     name: 'Fixed parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
-    url: ''
+    url: '',
+    ruta: 'fixedParameters'
   }
 ]
 
