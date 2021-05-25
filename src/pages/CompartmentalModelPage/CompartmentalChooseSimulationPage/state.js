@@ -35,8 +35,7 @@ export const useCompartmentalChooseSimulationPageState = (
           show: true,
           success: false,
           error: true,
-          // errorMessage: currentSimulation.errorData.detail
-          errorMessage: 'Un errror ocurrio'
+          errorMessage: currentSimulation.errorData.message
         }
       )
     } else if (!isEmpty(currentSimulation) && currentSimulation.data != null && !isEmpty(predefinedModelSelected) 
