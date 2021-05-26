@@ -102,7 +102,7 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
         onClick={handleClickButton}
         justify="center"
         alignItems="center"
-        text={'Configure State Variables Settings'}
+        text={'Continue'}
       />
     </UploadDataFormSection>
   )
