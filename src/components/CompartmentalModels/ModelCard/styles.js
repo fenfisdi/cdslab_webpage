@@ -24,5 +24,4 @@ export const CharterBody = styled.div`
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    
 `

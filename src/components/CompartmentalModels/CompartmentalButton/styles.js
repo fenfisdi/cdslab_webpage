@@ -14,6 +14,6 @@ export const useCompartmentalButtonStyles = makeStyles(() => ({
     
   },
   body:{
-    marginTop:'50px'
+    margin: '10px'
   }
 }))

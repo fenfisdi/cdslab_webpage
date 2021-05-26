@@ -8,6 +8,7 @@ import SecondaryTabs from '../../../components/ui/SecondaryTabs'
 import SnackBarCommon from '../../../components/ui/SnackBarCommon'
 import { useSysManagementState } from './state'
 import FullWidthTabs from '../../../components/Taps'
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 
 const SysManagementMainPage = () => {
 
@@ -79,16 +80,14 @@ const SysManagementMainPage = () => {
             />
           </div>
           <div className={classes.buttonContainer}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.button}
-              startIcon={<SaveIcon />}
+            <CompartmentalButton 
+              justify='center'
+              alignItems='center'
+              text='Save changes'
               onClick={handleValidations}
-            >
-            Save
-            </Button>
+              disabled={false}
+              icon='fas fa-save'
+            />
           </div>
         </Container>
       </div>

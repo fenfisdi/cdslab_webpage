@@ -39,7 +39,7 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
           <CharterBody key={index}>
             {icon &&
               <CharterIcon>
-                <img src={icon} alt="Cinque Terre" width="100" height="100" />
+                <img src={icon} alt="Cinque Terre" width="200" height="200" />
               </CharterIcon>
             }
             <Charter

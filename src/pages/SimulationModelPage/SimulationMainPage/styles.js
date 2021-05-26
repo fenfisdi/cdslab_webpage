@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SimulationContainer = styled.nav`
+export const SimulationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,4 +23,11 @@ export const ContainerTitle = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  margin-bottom: 5%;
 `
+
+export const ContainerModelCard = styled.div`
+display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;`

@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import { useStore } from '@store/storeContext'
 
-import { SimulationContainer,ContainerCard,ContainerTitle } from './styles'
+import { SimulationContainer, ContainerCard, ContainerTitle } from './styles'
 import { useHistory } from 'react-router-dom'
 import { useSimulationActions } from '@actions/simulationsActions'
 import { useSessionActions } from '@actions/sessionsActions'
 
 import cmodelsSvg from '../../../assets/images/cmodels_SVG.svg'
 import agentsSVG from '../../../assets/images/agents_SVG.svg'
+import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 
 import TitleIcon from '../../../components/layouts/TitleIcon'
-import MediaCard from '../../../components/CompartmentalModels/MediaCard'
+import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import { Divider } from '@material-ui/core'
@@ -78,21 +79,14 @@ const SimulationMainPage = () => {
   return (
     <SimulationContainer>
       <ContainerTitle>
-        <TitleIcon title={'Simulations'} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
+        <TitleIcon title={'Simulations'} icon={lineChartFreepik}/>
         <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
-        <Divider variant="middle" styles={{margin: '10px 0',
-          backgroundColor: '#0F0C5A'}} />
       </ContainerTitle>
       
-      <ContainerCard>
-        {options.map((option,index)=>{
-          return (
-            <MediaCard key={index} 
-              option={option}
-            />
-          )
-        })}
-      </ContainerCard>
+      <ModelCard
+        options={options}
+        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
+      />
     </SimulationContainer>
   )
 }

@@ -13,7 +13,7 @@ export const CardContainer = styled(Card)`
           background-color: ${theme.palette.secondary.cardSelect};
          `}
       `}
-    color: '#000000';
+    color: ${({ theme }) => `${theme.palette.secondary.cardFont}`};
     width:  80px;
     height: 80px;
     min-width: 240px;
