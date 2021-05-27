@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import SnackbarComponent from '@components/ui/Snackbars'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
 import { useCompartmentalConfigureStateVariablesPageState } from './state'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
-import { CompartmentalConfigureStateVariablesSection, CompartmentalConfigureStateVariablesTitle } from './styles'
+import { CompartmentalConfigureStateVariablesSection } from './styles'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -30,12 +31,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         <SupportComponent text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS}/>
       </Grid>
 
-
-      <CompartmentalConfigureStateVariablesTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-        Configure State Variables Initial Values
-        </Typography>
-      </CompartmentalConfigureStateVariablesTitle>
+      <SubtitleCommon text='Configure initial values of the state variables' />
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
         fieldParameters={modelData.state_variables}

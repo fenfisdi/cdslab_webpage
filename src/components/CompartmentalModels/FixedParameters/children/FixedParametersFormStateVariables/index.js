@@ -5,6 +5,7 @@ import CompartmentalButton from '../../../CompartmentalButton'
 import { checkErrorsStateVariableForm } from './validators'
 import { creationResponseStateVariableForm } from './fieldsCreation'
 import { isEmpty } from 'lodash'
+import { Fragment } from 'react'
 
 
 const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameters,executeRequestConfigureStateVariables}) => {
@@ -16,7 +17,7 @@ const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameter
   },[fields])
   
   return (
-    <>
+    <Fragment>
       
       {!isEmpty(fields) && <ParametersForm fields={fields} fieldParameters={fieldParameters} />}
 
@@ -28,7 +29,7 @@ const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameter
         text={'Continue'}
       />  
 
-    </>
+    </Fragment>
   )
 }
 
