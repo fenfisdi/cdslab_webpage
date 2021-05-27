@@ -15,7 +15,7 @@ const UserManagementPage = () => {
         <Switch>
           <Route path={match.path} exact component={UserManagamentGeneralPage} />
           <Route path={`${match.path}/usersManagement`} exact component={UserManagementMainPage} />
-          <Route path={`${match.path}/SysManagement`} exact component={() => (<SysManagementState><SysManagementMainPage/></SysManagementState>)} />
+          <Route path={`${match.path}/SysManagement`} exact component={SysManagementMainPage} />
         </Switch>
       </Suspense>
     </>
