@@ -47,7 +47,6 @@ const UserManagementMainPage = () => {
           justify='center'
           alignItems='center'
           text='Save changes'
-          onClick={() => {}}
           disabled={false}
           icon='fas fa-save'
         />

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import ParametersForm from '../ParametersForm'
 import { useParametersFormFieldsCreation } from '../ParametersForm/fieldsCreation'
 import CompartmentalButton from '../../../CompartmentalButton'
 import { checkErrorsStateVariableForm } from './validators'
 import { creationResponseStateVariableForm } from './fieldsCreation'
 import { isEmpty } from 'lodash'
-import { Fragment } from 'react'
-
 
 const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameters,executeRequestConfigureStateVariables}) => {
   const [isValid,setIsValid] = useState(false)
