@@ -24,11 +24,13 @@ const CompartmentalUploadDataPage = () => {
   const optionListDTO =(options)=>{
     const arrayStateDto = []
     options.map((state)=>{
-      const stateObject = {}
-      stateObject.label = state.label.toLowerCase()
-      stateObject.name  = state.name
-      stateObject.value = state.label.toLowerCase()
-      arrayStateDto.push(stateObject)
+      if(state.can_fit){
+        const stateObject = {}
+        stateObject.label = state.label.toLowerCase()
+        stateObject.name  = state.name
+        stateObject.value = state.label.toLowerCase()
+        arrayStateDto.push(stateObject)
+      }
     })
     return arrayStateDto
   }
