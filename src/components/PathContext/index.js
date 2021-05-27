@@ -11,9 +11,9 @@ export function usePath() {
 }
 
 export const PathProvider = ({children}) => {
-  const pathState = useState([])
+  const [path, setPath] = useState([])
   return (
-    <PathContext.Provider value={pathState}> 
+    <PathContext.Provider value={{path,setPath}}> 
       {children}
     </PathContext.Provider>
   )

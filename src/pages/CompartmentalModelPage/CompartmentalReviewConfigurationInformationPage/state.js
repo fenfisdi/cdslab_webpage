@@ -9,7 +9,7 @@ import {  usePath } from '../../../components/PathContext'
 export const useCompartmentalReviewConfigurationInformationPageState = ({showSnack, setShowSnack }) => {
   
   const history = useHistory()
-  const [path,setPath] = usePath()
+  const {setPath}  = usePath()
 
   const {
     state: {      

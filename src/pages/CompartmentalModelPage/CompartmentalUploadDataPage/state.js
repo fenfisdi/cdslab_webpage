@@ -20,7 +20,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
     },
     dispatch
   } = useStore()
-  const [path, setPath] = usePath()
+  const {setPath}  = usePath()
 
   const {
     findCompartmentalSimulation,

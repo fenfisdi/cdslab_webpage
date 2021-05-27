@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 const Breadcrumbs = () => {
   const classes = useStyles()
   const history = useHistory()
-  const [path, setPatch] = usePath()
+  const {path, setPatch} = usePath()
 
   const handleHistory = (routeTo,parameters, index) => {
     const routesBlocker = handleRoutesBlocker(routeTo)

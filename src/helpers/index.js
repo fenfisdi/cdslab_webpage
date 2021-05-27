@@ -1,7 +1,7 @@
 import { usePath } from '../components/PathContext'
 
 export const usePathBreadCrums = () => {
-  const [path, setPath] = usePath()
+  const {path, setPath} = usePath()
 
   const handlePathBreadCrums = (ruta,parameters) => {
     if(path){

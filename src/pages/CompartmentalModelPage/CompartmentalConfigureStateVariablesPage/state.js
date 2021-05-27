@@ -11,7 +11,7 @@ import { usePath } from '../../../components/PathContext'
 export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
   const [isSend, setIsSend] = useState(false)
   const history = useHistory()
-  const [path, setPath] = usePath()
+  const {setPath}  = usePath()
   const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
