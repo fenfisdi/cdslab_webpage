@@ -29,5 +29,17 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
   },
   imgExt:{
     width: '30px'
+  },
+  notPlot: {
+    background: '#eee',
+    height: '300px',
+    display: 'flex',
+    textAlign: 'center',
+    'align-items': 'center'
+  },
+  divPlot:{
+    width: '100%',
+    color: '#929292',
+    fontSize: '40px'
   }
 }))

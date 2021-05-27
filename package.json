@@ -17,6 +17,7 @@
     "convert-csv-to-array": "^1.0.3",
     "date-fns": "2.16.1",
     "draft-js": "^0.11.7",
+    "fs": "^0.0.1-security",
     "i18next": "^20.2.2",
     "i18next-browser-languagedetector": "^6.1.0",
     "i18next-http-backend": "^1.2.2",

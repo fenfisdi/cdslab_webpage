@@ -66,8 +66,6 @@ export const useMySimulationActions = (dispatch) => {
               ...file
             })
           })
-          console.log('Files',data.data)
-          console.log('dataFiles',dataFiles)
           dispatch({ type: MY_SIMULATION_SET_FILES, payload: dataFiles})
         }else{
           dispatch({
@@ -94,16 +92,7 @@ export const useMySimulationActions = (dispatch) => {
 
   const transformFile = async(uidSimulations,file) => {
     const {data : dataInformationContent} = await downloadSimulationsFiles(uidSimulations,file.uuid)
-    var body
-    if(file.ext === 'csv'){
-      body = convertCSVToArray(dataInformationContent, {
-        header: false,
-        separator: ',',
-      })
-    }else{
-      body = dataInformationContent
-    }
-    return body
+    return dataInformationContent
   }
   
   const getMySimulationsDownloadFiles = async (uidSimulations,uuidFile) => {

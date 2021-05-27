@@ -16,12 +16,10 @@ import { TableMySimulationPreview } from '../../../components/CompartmentalModel
 const CompartamentalMySimulationsPreviewPage = () => {
   const classes = useCompartamentalMySimulationPreviewStyles(theme)
   const {
-    loading,
-    mySimulationFiles,
-    handleDownloadImg
+    loading
   } = useCompartamentalMySimulationsPreviewState()
 
-  const [plotJson, setPlotJson] = useState(JSON.parse(plot_json))
+  const [plotJson, setPlotJson] = useState()
   const {
     state: {
       mySimulations: { mySimulationSelected }
@@ -104,19 +102,23 @@ const CompartamentalMySimulationsPreviewPage = () => {
               <Grid container item xs={12}>
                 <Grid  item xs={12}>
                   <TableMySimulationPreview 
-                    mysimulationfiles= {mySimulationFiles}
-                    handeldownloadimg= {handleDownloadImg}
-                    setplotjson={setPlotJson}
+                    setPlotJson={setPlotJson}
                   />
                 </Grid>
-                <Grid  item xs={12} className={classes.plot}>
-                  <Plot 
-                    {...plotJson}
-                  />
-                </Grid>
-              </Grid>
-              <Grid>
-            
+                {
+                  plotJson ?
+                    (<Grid  item xs={12} className={classes.plot}>
+                      <Plot 
+                        {...plotJson}
+                      />
+                    </Grid>)
+                    :
+                    (<Grid  item xs={12} className={classes.notPlot}>
+                      <div className={classes.divPlot}>GRAPH</div>
+                    </Grid>
+                    )
+                }
+                
               </Grid>
             </Grid>
           </Grid>
