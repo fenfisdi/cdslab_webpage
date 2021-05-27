@@ -13,6 +13,7 @@ import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import TitleIcon from '../../../components/layouts/TitleIcon'
+import { usePathBreadCrums } from '../../../helpers'
 
 
 const SimulationMainPage = () => {
@@ -26,7 +27,7 @@ const SimulationMainPage = () => {
   const { getSimulations } = useSimulationActions(dispatch)
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
-
+  const {handlePathBreadCrums } = usePathBreadCrums()
   useEffect(() => {
     //console.log('navegacion: ' + JSON.stringify(navigation))
     updateNavigationTitle()
@@ -39,6 +40,7 @@ const SimulationMainPage = () => {
       name: 'Comparmental Models',
       indetifier: 'compar_models',
       url: '/compartmentalModels',
+      ruta: 'compartmentalModels',
       tipo: 1
     },
     {
@@ -46,6 +48,7 @@ const SimulationMainPage = () => {
       name: 'Agent based models',
       indetifier: 'agent_based_models',
       url: '',
+      ruta: 'agentBasedModels',
       tipo: 2
     }
   ]
@@ -58,13 +61,17 @@ const SimulationMainPage = () => {
     if (!navigation?.current) { setCurrenNavigation('Simulations') }
   }
 
+  const handleEventEmitted = (cardData) => {
+    handlePathBreadCrums('compartmentalModels')
+    cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) 
+  }
+
   return (
     <SimulationContainer>
       <TitleIcon title={'Simulations'} icon={lineChartFreepik} width={60} height={60} colorText='#827C02' fontSize='45px' fontWeight='bold'/>
       <ModelCard
         options={options}
-        ruta='PrimeraRuta'
-        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
+        eventEmitted={(cardData) => handleEventEmitted(cardData)}
       />
     </SimulationContainer>
   )

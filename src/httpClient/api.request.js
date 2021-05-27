@@ -6,7 +6,7 @@ import { OPTIONS_HTTP } from '../constants/optionsHttp'
 
 const createHeaders = (settings) => {
   const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXItNTgwNkBleGFtcGwzLmNvbSIsImV4cCI6MTYyMjI0NTY2MH0.XLSk7mfyd7KQV_y1gj70ACkQ_y_jdwGkTasmMVxWZTM'
-  const defaultHeaders = {    
+  const defaultHeaders = {
     Authorization: `Bearer ${accessToken}`
   }
 
@@ -65,3 +65,4 @@ const request = async (url, method, params, settings = {}) => {
 }
 
 export default request
+
