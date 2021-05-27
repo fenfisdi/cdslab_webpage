@@ -54,7 +54,7 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
         pathname = '/compartmentalModels/optimizeParameters'
       }
       else if(parameter_type == SIMULATION_IDENTIFIERS.FIXED.toLowerCase()){
-        pathname = '/compartmentalModels/reviewConfigurationInformation'
+        pathname = '/compartmentalModels/chooseDate'
       }
       history.push({ 
         pathname: pathname,

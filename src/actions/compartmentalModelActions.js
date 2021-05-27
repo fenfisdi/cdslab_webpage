@@ -23,7 +23,8 @@ import {
   COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
-  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
+  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -168,6 +169,13 @@ export const useCompartmentalModelActions = (dispatch) => {
       payload: nextStep
     })
   }
+
+  const updateChooseDataSourceProperty =(data)=>{
+    dispatch({
+      type: COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY,
+      payload: data
+    })
+  }
   
   const setDefinitionFileDataProperty =(data)=>{
     dispatch({
@@ -263,6 +271,7 @@ export const useCompartmentalModelActions = (dispatch) => {
     storeCompartmentalFileUpload,
     setDefinitionCompartmentalFolderSimulation,
     updateNextStepFileUploadProperty,
+    updateChooseDataSourceProperty,
     executeSimulation,
     setDefinitionCompartmentalExecuteSimulation,
     setDefinitionFileDataProperty }
