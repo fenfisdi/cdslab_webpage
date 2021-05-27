@@ -62,7 +62,7 @@ export default function SupportComponent({text}) {
 
   return (
     <div> 
-      <IconButton style={{'color':'#827C02'}} aria-label=" Help information" onClick={handleClickOpen}>
+      <IconButton style={{'color':'#75BCC3'}} aria-label=" Help information" onClick={handleClickOpen}>
         <Icon className="far fa-question-circle"  style={{ fontSize: 35 }} /> 
       </IconButton>
       

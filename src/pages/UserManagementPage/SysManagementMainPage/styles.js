@@ -17,7 +17,8 @@ export const sysManagementStyles = makeStyles((theme) => ({
   },
 
   generalContainer: {
-    marginTop: '10px'
+    marginTop: '10px',
+    padding: '10px'
   },
 
   root: {
@@ -56,7 +57,8 @@ export const sysManagementStyles = makeStyles((theme) => ({
   },
 
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.red
   },
 
   buttonContainer: {

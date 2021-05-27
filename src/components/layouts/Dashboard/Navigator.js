@@ -14,6 +14,7 @@ import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.sv
 import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 import { Icon } from '@material-ui/core'
+import { usePath } from '../../PathContext'
 
 const categories = [
   {
@@ -94,6 +95,10 @@ const styles =  (theme) => ({
 
 function Navigator (props) {
   const { classes, ...other } = props
+  const {setPath} = usePath()
+  const handleDeletePath = () => {
+    setPath([])
+  }
   return (
     <Drawer variant='permanent' {...other}>
       <List disablePadding>
@@ -113,8 +118,15 @@ function Navigator (props) {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon,typeIcon, active,href },i) => (
-              <NavLink key={i} activeClassName={classes.itemActiveItem} className={classes.link} to={href} variant='body2'>
+            {children.map(({ id: childId, icon,typeIcon, active,href }) => (
+              <NavLink 
+                key={childId} 
+                activeClassName={classes.itemActiveItem} 
+                className={classes.link} 
+                to={href} 
+                variant='body2'
+                onClick={handleDeletePath}
+              >
                 <ListItem
                   button
                   className={clsx(classes.item, active && classes.itemActiveItem)}

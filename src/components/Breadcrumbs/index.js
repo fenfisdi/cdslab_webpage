@@ -17,14 +17,14 @@ const useStyles = makeStyles(() => ({
 const Breadcrumbs = () => {
   const classes = useStyles()
   const history = useHistory()
-  const {path, setPatch} = usePath()
+  const {path, setPath} = usePath()
 
   const handleHistory = (routeTo,parameters, index) => {
     const routesBlocker = handleRoutesBlocker(routeTo)
     if(routesBlocker){
       path.length = index + 1
       sessionStorage.setItem('path',JSON.stringify(path))
-      setPatch(path)
+      setPath(path)
       if(parameters){
         history.replace(routeTo + parameters)
       }else{

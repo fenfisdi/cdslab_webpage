@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { EditorState } from 'draft-js'
+import React from 'react'
 import { TextEditor } from '../../ui/TextEditor'
 
 const SysSimulation = ({ classes, editorState, setEditorState }) => {

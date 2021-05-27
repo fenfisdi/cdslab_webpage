@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     }
   },
   TableContainer:{
-    overflow: 'visible'
+    overflow: 'visible',
+    marginTop:'30px'
   }
 })
 
