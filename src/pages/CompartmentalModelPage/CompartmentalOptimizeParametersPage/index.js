@@ -34,6 +34,7 @@ const CompartmentalOptimizeParametersPage = () => {
           options={OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
+          height='250px'
         />
       </Grid>
 

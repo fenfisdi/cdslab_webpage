@@ -10,7 +10,7 @@ import {
 
 export const initialState = {
   session: {
-    isAuth: false,
+    isAuth: localStorage.getItem('token')?true:false,
     user: null,
     loading: false,
     error: null,
