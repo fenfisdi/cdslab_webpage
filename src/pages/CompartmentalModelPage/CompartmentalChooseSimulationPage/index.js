@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useCompartmentalChooseSimulationPageState } from './state'
 import { OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION } from '../../../constants/compartmental'
 import {HELP_INFORMATION_CHOOSE_SIMULATIONS} from '../../../constants/helpInformation'
@@ -8,10 +8,9 @@ import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
 import {
-  CompartmentalChooseSimulationSection,
-  CompartmentalChooseSimulatioFormTitle
+  CompartmentalChooseSimulationForm,
+  CompartmentalChooseSimulationSection
 } from './styles'
-import DividerCommon from '../../../components/ui/DividerCommon'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalChooseSimulationPage = () => {
@@ -40,13 +39,14 @@ const CompartmentalChooseSimulationPage = () => {
 
       <SubtitleCommon text='Choose simulation type' />
 
-      {!loadingSimulationFolderInformation && <Grid container item xs={12}>
+      {!loadingSimulationFolderInformation && <CompartmentalChooseSimulationForm>
         <ModelCard
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
+          height='250px'
         />
-      </Grid>}
+      </CompartmentalChooseSimulationForm>}
 
       {loadingSimulationFolderInformation && <LoaderComponent
         width={50}

@@ -5,8 +5,7 @@ import { OPTIONS_HTTP } from '../constants/optionsHttp'
 
 
 const createHeaders = (settings) => {
-  const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXItNTUzMEBleGFtcGwzLmNvbSIsImV4cCI6MTYyMjA0NDg5OX0.w0laBwkLjHDpdU-Xzsaob97ob3qQeWViwc3xSrCR930'
-  // localStorage.getItem('token')
+  const accessToken = localStorage.getItem('token')
   const defaultHeaders = {
     Authorization: `Bearer ${accessToken}`
   }

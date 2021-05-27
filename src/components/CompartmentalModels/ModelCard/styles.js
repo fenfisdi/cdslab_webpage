@@ -4,8 +4,9 @@ export const CharterContainer = styled.article`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: ${props => props.justifyContent};
     flex-direction: ${props => props.direction};
+    height:${props => props.height};
 `
 export const CharterIcon = styled.div`
         margin: 5px;

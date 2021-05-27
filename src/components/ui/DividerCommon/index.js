@@ -1,7 +1,7 @@
 import { Divider, makeStyles } from '@material-ui/core'
 import React from 'react'
 
-export const sysManagementStyles = makeStyles((theme) => ({
+export const sysManagementStyles = makeStyles(() => ({
   divider: {
     width: '100%',
     backgroundColor: '#E5E5E5',

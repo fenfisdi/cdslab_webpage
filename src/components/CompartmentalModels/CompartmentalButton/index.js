@@ -22,7 +22,7 @@ const CompartmentalButton = ({justify,alignItems,text, onClick,disabled, icon}) 
         className={disabled ? classes.button+' disabled':classes.button}
         disabled={disabled}
         onClick={onClick}           
-        startIcon={<Icon className={icon || 'fas fa-arrow-circle-right'}  style={{ fontSize: 25, color: '#00838F' }} />}
+        endIcon={<Icon className={icon || 'fas fa-arrow-circle-right'}  style={{ fontSize: 25, color: '#00838F' }} />}
       >        
         <Typography variant="body1" component="p" className={disabled?classes.text+' disabled':classes.text}>
           {text}

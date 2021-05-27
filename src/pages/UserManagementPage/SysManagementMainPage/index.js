@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Button } from '@material-ui/core'
-import SaveIcon from '@material-ui/icons/Save'
+import { Container } from '@material-ui/core'
+
 import { notificationStrings, sysCellNamesTable, secondaryTabTitles } from '../constants'
 import Simpletable from '../../../components/ui/SimpleTable'
 import AlertCommon from '../../../components/ui/AlertCommon'

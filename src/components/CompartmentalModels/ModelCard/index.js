@@ -3,7 +3,7 @@ import { usePath } from '../../PathContext'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
-const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
+const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false, justifyContent='space-around', height='auto'  }) => {
   
   const [selected, setSelected] = useState('')
   const [path, setPath] = usePath()
@@ -32,7 +32,7 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
   }
 
   return (
-    <CharterContainer direction={direction}>
+    <CharterContainer direction={direction} justifyContent={justifyContent} height={height}>
       {options.map((opt, index) => {
         const { name, indetifier, icon,titleIcon } = opt
         return (

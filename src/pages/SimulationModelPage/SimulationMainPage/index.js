@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useStore } from '@store/storeContext'
 
-import { SimulationContainer, ContainerCard, ContainerTitle } from './styles'
+import { SimulationContainer, ContainerTitle } from './styles'
 import { useHistory } from 'react-router-dom'
 import { useSimulationActions } from '@actions/simulationsActions'
 import { useSessionActions } from '@actions/sessionsActions'
@@ -14,7 +14,6 @@ import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
-import { Divider } from '@material-ui/core'
 
 
 const SimulationMainPage = () => {

@@ -1,10 +1,9 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { CompartmentalModelPageContainer, CompartmentalModelPageContainerTitle } from './styles'
+import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
-import TitleIcon from '../../components/layouts/TitleIcon'
-import lineChartFreepik from '../../assets/images/line-chart_freepik.svg'
+
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 import Breadcrumbs from '../../components/Breadcrumbs'
