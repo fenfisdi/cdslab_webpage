@@ -4,14 +4,17 @@ export const usePathBreadCrums = () => {
   const {path, setPath} = usePath()
 
   const handlePathBreadCrums = (ruta,parameters) => {
-    if(path){
-      const newPath = [...path,{name: ruta,parameters: parameters}]
-      handlePathSessionStorage(newPath)
-      setPath(newPath)
-    }else{
-      const newPath = [{name: ruta,parameters: parameters}]
-      handlePathSessionStorage(newPath)
-      setPath(newPath)
+    let containsPath = path.find(element => element.name === ruta)
+    if(!containsPath){
+      if(path){
+        const newPath = [...path,{name: ruta,parameters: parameters}]
+        handlePathSessionStorage(newPath)
+        setPath(newPath)
+      }else{
+        const newPath = [{name: ruta,parameters: parameters}]
+        handlePathSessionStorage(newPath)
+        setPath(newPath)
+      }
     }
   }
 
