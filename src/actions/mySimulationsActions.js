@@ -96,8 +96,7 @@ export const useMySimulationActions = (dispatch) => {
     const {data : dataInformationContent} = await downloadSimulationsFiles(uidSimulations,file.uuid)
     var body
     if(file.ext === 'csv'){
-      const decodeFile = atob(dataInformationContent)
-      body = convertCSVToArray(decodeFile, {
+      body = convertCSVToArray(dataInformationContent, {
         header: false,
         separator: ',',
       })
