@@ -5,14 +5,15 @@ import CompartmentalButton from '../CompartmentalButton'
 import ParametersForm from './children/parametersForm'
 import { checkErrorsForm } from './validators'
 import { isEmpty } from 'lodash'
+import { usePathBreadCrums } from '../../../helpers'
 
 const ConfigurableParametersForm = ({parameters,handleRequestAction,valuesFieldParameters}) => {
   const [isValid,setIsValid] = useState(true)
   const fieldsParametersForm = useConfigurableParametersFormFieldsCreation({parameters,valuesFieldParameters})
-
   useEffect(()=>{
     checkErrorsForm({fieldsParametersForm,setIsValid})
   },[fieldsParametersForm])
+  
 
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
@@ -21,7 +22,7 @@ const ConfigurableParametersForm = ({parameters,handleRequestAction,valuesFieldP
 
       <CompartmentalButton
         disabled={!isValid ? true:false}
-        onClick={()=>{handleRequestAction(creationResponseConfigurableParametersForm(fieldsParametersForm))}}
+        onClick={() => handleRequestAction(creationResponseConfigurableParametersForm(fieldsParametersForm))}
         justify="flex-end"
         alignItems="center"
         text={'Continue'}

@@ -4,11 +4,12 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
+import {  usePath } from '../../../components/PathContext'
 
 export const useCompartmentalReviewConfigurationInformationPageState = ({showSnack, setShowSnack }) => {
   
   const history = useHistory()
-  
+  const [path,setPath] = usePath()
 
   const {
     state: {      
@@ -95,9 +96,10 @@ export const useCompartmentalReviewConfigurationInformationPageState = ({showSna
 
 
   const executeRequestRunSimulation =()=>{
+    
     const { identifier} = dataCurrentSimulation
     executeSimulation(identifier)
-    
+    setPath([{name: 'compartmentalModels'},{name: 'executionSimulation'}])
   }
 
   return {

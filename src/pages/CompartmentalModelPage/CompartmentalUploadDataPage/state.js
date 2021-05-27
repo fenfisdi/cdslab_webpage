@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
+import { usePathBreadCrums } from '../../../helpers'
+import { usePath } from '../../../components/PathContext'
 
 export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) => {
 
@@ -19,7 +21,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
     },
     dispatch
   } = useStore()
-  
+  const [path, setPath] = usePath()
+
   const {
     findCompartmentalSimulation,
     findPredefinedModel,
@@ -85,6 +88,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
   const executeRequestUploadData = ({ formData }) => {
     const { name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
+    const { modelData: { identifier: model_id } } = predefinedModelSelected
+    const { identifier:indentifierParam} = dataCurrentSimulation
     state_variable_limits.map((stateVariable) => {
       const {label} = stateVariable
       if (label.toLowerCase() == formData.get('stateVariable').toLowerCase()){
@@ -100,6 +105,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
       'state_variable_limits':state_variable_limits,
       'parameter_type':parameter_type
     },identifier,formData)
+    alert('reviewConfigurationInformation')
+    setPath([{name: 'compartmentalModels'},{name: 'reviewConfigurationInformation',parameters: `?simulation_identifier=${indentifierParam}&model_id=${model_id}`}])
   }
 
   return {

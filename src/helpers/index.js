@@ -3,13 +3,13 @@ import { usePath } from '../components/PathContext'
 export const usePathBreadCrums = () => {
   const [path, setPath] = usePath()
 
-  const handlePathBreadCrums = (ruta) => {
+  const handlePathBreadCrums = (ruta,parameters) => {
     if(path){
-      const newPath = [...path,{name: ruta}]
+      const newPath = [...path,{name: ruta,parameters: parameters}]
       handlePathSessionStorage(newPath)
       setPath(newPath)
     }else{
-      const newPath = [{name: ruta}]
+      const newPath = [{name: ruta,parameters: parameters}]
       handlePathSessionStorage(newPath)
       setPath(newPath)
     }

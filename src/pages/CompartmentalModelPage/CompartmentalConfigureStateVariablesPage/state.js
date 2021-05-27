@@ -5,11 +5,14 @@ import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
 import { SIMULATION_IDENTIFIERS } from '../../../constants/compartmental'
+import { usePathBreadCrums } from '../../../helpers'
+import { usePath } from '../../../components/PathContext'
 
 export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
   const [isSend, setIsSend] = useState(false)
   const history = useHistory()
-  
+  const [path, setPath] = usePath()
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
       compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation,error,errorData} }
@@ -77,12 +80,20 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
 
   const executeRequestConfigureStateVariables =(option)=>{
     const {  name,identifier,parameters_limits,parameter_type } = dataCurrentSimulation
+    const {modelData:{identifier:model_id}}=predefinedModelSelected
     updateCompartmentalSimulation({
       'name':name,
       'state_variable_limits': option,
       'parameters_limits':parameters_limits,
       'parameter_type':parameter_type
     },identifier) 
+    if(parameter_type == SIMULATION_IDENTIFIERS.OPTIMIZE.toLowerCase()){
+      handlePathBreadCrums('optimizeParameters',`?simulation_identifier=${identifier}&model_id=${model_id}`)
+    }
+    else if(parameter_type == SIMULATION_IDENTIFIERS.FIXED.toLowerCase()){
+      setPath([{name: 'compartmentalModels'},{name: 'reviewConfigurationInformation'}])
+    }
+    
     setIsSend(true)
   }
 
