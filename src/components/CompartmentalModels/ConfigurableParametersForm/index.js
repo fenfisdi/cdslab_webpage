@@ -5,7 +5,6 @@ import CompartmentalButton from '../CompartmentalButton'
 import ParametersForm from './children/parametersForm'
 import { checkErrorsForm } from './validators'
 import { isEmpty } from 'lodash'
-import { usePathBreadCrums } from '../../../helpers'
 
 const ConfigurableParametersForm = ({parameters,handleRequestAction,valuesFieldParameters}) => {
   const [isValid,setIsValid] = useState(true)

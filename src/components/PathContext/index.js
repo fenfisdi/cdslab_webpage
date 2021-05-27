@@ -11,7 +11,6 @@ export function usePath() {
 }
 
 export const PathProvider = ({children}) => {
-  const localStoragePath = JSON.parse(sessionStorage.getItem('path')) || []
   const pathState = useState([])
   return (
     <PathContext.Provider value={pathState}> 

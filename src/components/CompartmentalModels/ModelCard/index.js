@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { usePathBreadCrums } from '../../../helpers'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
