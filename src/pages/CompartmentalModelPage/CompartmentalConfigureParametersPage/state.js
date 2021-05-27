@@ -4,11 +4,12 @@ import { getStateWithQueryparams } from '../common'
 import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
+import { usePathBreadCrums } from '../../../helpers'
 
 export const useCompartmentalConfigureParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   const [isSend, setIsSend] = useState(false)
-  
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
       compartmentalModel: { loading, predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation,error,errorData} }
@@ -75,6 +76,8 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
 
   const executeRequestConfigureParameters =(option)=>{    
     const {  name,identifier,state_variable_limits,parameter_type } = dataCurrentSimulation
+    const {modelData:{identifier:model_id}}=predefinedModelSelected
+    handlePathBreadCrums('stateVariables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
     updateCompartmentalSimulation({
       'name':name,
       'parameters_limits': option,

@@ -4,6 +4,7 @@ import { INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION, SIMULATION_IDENTIFIERS } fr
 import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
+import { usePathBreadCrums } from '../../../helpers'
 
 export const useCompartmentalChooseSimulationPageState = (
   {
@@ -18,6 +19,7 @@ export const useCompartmentalChooseSimulationPageState = (
     dispatch
   } = useStore()
 
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const { storeCompartmentalSimulation,storeCompartmentalSimulationFolder } = useCompartmentalModelActions(dispatch)
 
   useEffect(() => {
@@ -77,8 +79,9 @@ export const useCompartmentalChooseSimulationPageState = (
   },[simulationFolderInformation])
   
   const executeSelectedOption = (option) => {
-    const { indetifier } = option
+    const { indetifier, ruta } = option
     const { modelData: { identifier: model_id }, simulationName: name } = predefinedModelSelected
+    
     let parameter_type=''
     if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE) {
       parameter_type = SIMULATION_IDENTIFIERS.OPTIMIZE
@@ -91,6 +94,7 @@ export const useCompartmentalChooseSimulationPageState = (
       'model_id': model_id,
       'parameter_type':parameter_type.toLowerCase()
     })
+    handlePathBreadCrums(ruta,`?simulation_identifier=${indetifier}&model_id=${model_id}`)
   }
 
 

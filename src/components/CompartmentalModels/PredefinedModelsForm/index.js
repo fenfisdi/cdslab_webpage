@@ -8,15 +8,21 @@ import {
   CompartmentalPredefinedModelFormTitle,
   CompartmentalPredefinedModelFormInput } from './styles'
 import { Input } from '../../ui/Input'
+import { usePathBreadCrums } from '../../../helpers'
 
 
 const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   const classes = usePredefinedModelsStyles()
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     setModelData,
     simulationName
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
+  const handleEventEmitted = (cardData) => {
+    handlePathBreadCrums('chooseSimulation')
+    setModelData(cardData) 
+  }
   return (
     <CompartmentalPredefinedModelForm>
 
@@ -43,7 +49,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
         alignItems="center"
         direction="column"
         options={options}
-        eventEmitted={(data) => { setModelData(data) }}
+        eventEmitted={(cardData) => handleEventEmitted(cardData)}
         disabled={simulationName && simulationName.value ? false : true}
       />}
   

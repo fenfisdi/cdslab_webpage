@@ -5,11 +5,12 @@ import { INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../.
 import { useStore } from '../../../store/storeContext'
 import { useEffect, useState } from 'react'
 import { getStateWithQueryparams } from '../common'
+import { usePathBreadCrums } from '../../../helpers'
 
 export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   const [isValid, setIsValid] = useState(false)
-  
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
       compartmentalModel: { 
@@ -83,6 +84,8 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
         dataSource = 'ins'
         pathname = '/compartmentalModels/ins'
       }
+      const { modelData:{ identifier:model_id } }=predefinedModelSelected
+      const { identifier: identefierParam } = dataCurrentSimulation
 
 
       updateChooseDataSourceProperty({
@@ -98,6 +101,7 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
         'data_source':dataSource
       },identifier) 
 
+      handlePathBreadCrums('uploadData',`?simulation_identifier=${identefierParam}&model_id=${model_id}`)
     }
     
   }

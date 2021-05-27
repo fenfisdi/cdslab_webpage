@@ -4,10 +4,12 @@ import { getStateWithQueryparams } from '../common'
 import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
+import { usePathBreadCrums } from '../../../helpers'
 
 export const useCompartmentalFixedParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   const [isSend, setIsSend] = useState(false)
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
       compartmentalModel: { loading, 
@@ -66,7 +68,8 @@ export const useCompartmentalFixedParametersPageState = ({showSnack, setShowSnac
 
   const executeRequestConfigureParametersFixed =(fieldsValues)=>{
     const {  name,identifier,parameter_type,state_variable_limits } = dataCurrentSimulation
-    
+    const {modelData:{identifier:model_id}}=predefinedModelSelected
+    handlePathBreadCrums('stateVariables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
     fieldsValues.map((field)=>{
       field.type = 'fixed'
     })
