@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import SaveIcon from '@material-ui/icons/Save'
 import FullWidthTabs from '../../../components/Taps'
 import { UserManagementPageMainContainer } from './styles'
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -42,15 +43,13 @@ const UserManagementMainPage = () => {
       <UserManagementPageMainContainer>
         <TableComponent/>
         {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          className={classes.button}
-          startIcon={<SaveIcon />}
-        >
-        Save
-        </Button>
+        <CompartmentalButton
+          justify='center'
+          alignItems='center'
+          text='Save changes'
+          disabled={false}
+          icon='fas fa-save'
+        />
       </UserManagementPageMainContainer>
     </>
   )

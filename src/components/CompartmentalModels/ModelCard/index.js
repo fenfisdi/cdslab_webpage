@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Charter from './children/Charter'
 import { CharterContainer, CharterIcon, CharterBody } from './styles'
 
-const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false,  }) => {
+const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = false, justifyContent='space-around', height='auto'  }) => {
   
   const [selected, setSelected] = useState('')
   
@@ -15,14 +15,14 @@ const ModelCard = ({ options = [], eventEmitted, direction = 'row', disabled = f
   
 
   return (
-    <CharterContainer direction={direction}>
+    <CharterContainer direction={direction} justifyContent={justifyContent} height={height}>
       {options.map((opt, index) => {
         const { name, indetifier, icon,titleIcon } = opt
         return (
           <CharterBody key={index}>
             {icon &&
               <CharterIcon>
-                <img src={icon} alt="Cinque Terre" width="100" height="100" />
+                <img src={icon} alt="Cinque Terre" width="200" height="200" />
               </CharterIcon>
             }
             <Charter

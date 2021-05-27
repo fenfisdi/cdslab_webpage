@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS } from '../../../constants/helpInformation'
 import UploadDataForm from '../../../components/CompartmentalModels/UploadDataForm'
 import SnackbarComponent from '@components/ui/Snackbars'
 import { useCompartmentalUploadDataPageState } from './state'
 import LoaderComponent from '../../../components/ui/Loader'
-import { CompartmentalUploadDataSection, CompartmentalUploadDataTitle } from './styles'
+import { CompartmentalUploadDataSection } from './styles'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 
 const CompartmentalUploadDataPage = () => {
@@ -43,12 +44,8 @@ const CompartmentalUploadDataPage = () => {
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
 
-      <CompartmentalUploadDataTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-        Choose variable to fit model
-        </Typography>
-      </CompartmentalUploadDataTitle>
-
+      <SubtitleCommon text='Choose variable to fit model' />
+      
       {!loadingSimulationFileUpload && stateVariables.length>0 && <Grid container item xs={12}>
         <UploadDataForm
           selectOptions={optionListDTO(stateVariables)}

@@ -100,7 +100,7 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
       <CompartmentalButton
         disabled={isValid}
         onClick={handleClickButton}
-        justify="center"
+        justify="flex-end"
         alignItems="center"
         text={'Continue'}
       />
