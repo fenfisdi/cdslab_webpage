@@ -17,24 +17,51 @@ const useStyles = makeStyles(() => ({
 const Breadcrumbs = () => {
   const classes = useStyles()
   const history = useHistory()
-  const [path, setPatch] = usePath()
+  const {path, setPatch} = usePath()
 
-  const handleHistory = (routeTo, index) => {
-    path.length = index + 1
-    sessionStorage.setItem('path',JSON.stringify(path))
-    setPatch(path)
-    history.push(routeTo)
+  const handleHistory = (routeTo,parameters, index) => {
+    const routesBlocker = handleRoutesBlocker(routeTo)
+    if(routesBlocker){
+      path.length = index + 1
+      sessionStorage.setItem('path',JSON.stringify(path))
+      setPatch(path)
+      if(parameters){
+        history.replace(routeTo + parameters)
+      }else{
+        if(routeTo === 'compartmentalModels'){
+          history.replace('/' + routeTo)
+        }else{
+          history.replace(routeTo)
+        }
+      }
+    }
   }
 
+  const handleRoutesBlocker = (routeTo) => {
+    if(routeTo === 'chooseSimulation'){
+      return false
+    }
+    if(routeTo === 'newSimulations' && path.find(element => element.name === 'chooseSimulation')){
+      return false
+    }
+    if(routeTo === 'compartmentalModels' && path.find(element => element.name === 'chooseSimulation')){
+      return false
+    }
+    if(path.find(element => element.name === 'reviewConfigurationInformation')){
+      return false
+    }
+    return true
+  }
+  
   return (
-    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={2} className={classes.separador} >
-      {path.map(({name}, index) => {
+    <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
+      {path.map(({name,parameters}, index) => {
         const isLast = index === path.length - 1
-        const routeTo = `/${path.slice(0, index + 1).map(({name:nameRoute}) => nameRoute).join('/')}`
+        
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
-          <Link key={name} onClick={() => handleHistory(routeTo,index)}>
+          <Link key={name} onClick={() => handleHistory(name,parameters,index)}>
             {name}
           </Link>
         )

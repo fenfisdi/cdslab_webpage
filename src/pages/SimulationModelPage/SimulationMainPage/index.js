@@ -14,6 +14,7 @@ import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import { usePathBreadCrums } from '../../../helpers'
 
 
 const SimulationMainPage = () => {
@@ -27,7 +28,7 @@ const SimulationMainPage = () => {
   const { getSimulations } = useSimulationActions(dispatch)
   const { setCurrenNavigation } = useSessionActions(dispatch)
   const history = useHistory()
-
+  const {handlePathBreadCrums } = usePathBreadCrums()
   useEffect(() => {
     
     updateNavigationTitle()
@@ -75,6 +76,11 @@ const SimulationMainPage = () => {
     if (!navigation?.current) { setCurrenNavigation('Simulations') }
   }
 
+  const handleEventEmitted = (cardData) => {
+    handlePathBreadCrums('compartmentalModels')
+    cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) 
+  }
+
   return (
     <SimulationContainer>
       <ContainerTitle>
@@ -84,7 +90,7 @@ const SimulationMainPage = () => {
       
       <ModelCard
         options={options}
-        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
+        eventEmitted={(cardData) => handleEventEmitted(cardData)}
       />
     </SimulationContainer>
   )

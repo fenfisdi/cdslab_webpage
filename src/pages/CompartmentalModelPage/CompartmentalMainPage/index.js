@@ -3,12 +3,18 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
+import { usePathBreadCrums } from '../../../helpers'
 import { useCompartmentalMainPageStyles, CompartmentalMainPageContainer,CompartmentalMainPageCards } from './styles'
 
 const CompartmentalMainPage = () => {
   const classes = useCompartmentalMainPageStyles()
   const history = useHistory()
- 
+  const {handlePathBreadCrums } = usePathBreadCrums()
+
+  const handleEventEmitted = (cardData) => {
+    handlePathBreadCrums(cardData.ruta)
+    cardData.url && history.push( cardData.url )
+  }
   return (
     <CompartmentalMainPageContainer>
       <Grid container item xs={9} justify="center" alignItems="center">
@@ -27,7 +33,7 @@ const CompartmentalMainPage = () => {
       <CompartmentalMainPageCards>
         <ModelCard
           options={OPTIONS_COMPARTMENTAL_MAIN}
-          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url, }) }}
+          eventEmitted={(cardData) => handleEventEmitted(cardData)}
         />
       </CompartmentalMainPageCards>
     </CompartmentalMainPageContainer>

@@ -349,7 +349,7 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
     name: 'Optimize parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
     url: '',
-    ruta: 'OptimizeParameters'
+    ruta: 'configureParameters'
   },
   {
     
