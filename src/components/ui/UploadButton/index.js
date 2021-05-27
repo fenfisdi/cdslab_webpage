@@ -3,6 +3,7 @@ import {
   Button,
   Grid
 } from '@material-ui/core'
+import { useUploadButtonStyle } from './styles'
 
 
 export const UploadButton = ({
@@ -11,13 +12,14 @@ export const UploadButton = ({
   accept,
   fileName
 }) => {
-
+  const classes = useUploadButtonStyle()
   return (
     <Grid xs={xs} container item direction="column" justify="center" alignItems="center">
       <Grid xs={12} container item direction="row" justify="center" alignItems="baseline">
         <Button
           variant="contained"
           component="label"
+          className={classes.root}
         >
           Upload File
           <input

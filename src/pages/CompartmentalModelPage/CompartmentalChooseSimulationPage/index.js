@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useCompartmentalChooseSimulationPageState } from './state'
 import { OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION } from '../../../constants/compartmental'
 import {HELP_INFORMATION_CHOOSE_SIMULATIONS} from '../../../constants/helpInformation'
@@ -8,9 +8,10 @@ import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
 import {
-  CompartmentalChooseSimulationSection,
-  CompartmentalChooseSimulatioFormTitle
+  CompartmentalChooseSimulationForm,
+  CompartmentalChooseSimulationSection
 } from './styles'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalChooseSimulationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -36,19 +37,16 @@ const CompartmentalChooseSimulationPage = () => {
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>
 
-      <CompartmentalChooseSimulatioFormTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-          Choose simulation type
-        </Typography>
-      </CompartmentalChooseSimulatioFormTitle>
+      <SubtitleCommon text='Choose simulation type' />
 
-      {!loadingSimulationFolderInformation && <Grid container item xs={12}>
+      {!loadingSimulationFolderInformation && <CompartmentalChooseSimulationForm>
         <ModelCard
           options={OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION}
           direction="column"
           eventEmitted={executeSelectedOption}
+          height='250px'
         />
-      </Grid>}
+      </CompartmentalChooseSimulationForm>}
 
       {loadingSimulationFolderInformation && <LoaderComponent
         width={50}

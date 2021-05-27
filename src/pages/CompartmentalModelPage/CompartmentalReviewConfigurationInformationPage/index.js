@@ -1,9 +1,8 @@
-import { Grid,Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import React, { useState } from 'react'
 import SupportComponent from '../../../components/SupportComponent'
 import { 
-  CompartmentalReviewConfigurationInformationContainer, 
-  CompartmentalReviewConfigurationInformationFormTitle,
+  CompartmentalReviewConfigurationInformationContainer
 } from './styles'
 import {HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS} from '../../../constants/helpInformation'
 import { useCompartmentalReviewConfigurationInformationPageState } from './state'
@@ -11,6 +10,7 @@ import LoaderComponent from '../../../components/ui/Loader'
 import SnackbarComponent from '@components/ui/Snackbars'
 import { isEmpty } from 'lodash'
 import ReviewSimulationSettings from '../../../components/CompartmentalModels/ReviewSimulationSettings'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalReviewConfigurationInformationPage =()=>{
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -36,11 +36,7 @@ const CompartmentalReviewConfigurationInformationPage =()=>{
         <SupportComponent text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS}/>
       </Grid>
 
-      <CompartmentalReviewConfigurationInformationFormTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-          Review configurations
-        </Typography>
-      </CompartmentalReviewConfigurationInformationFormTitle>
+      <SubtitleCommon text='Review configurations' />
 
       {!isEmpty(currentSimulation) && !isEmpty(predefinedModelSelected) && <ReviewSimulationSettings 
         simulation={{

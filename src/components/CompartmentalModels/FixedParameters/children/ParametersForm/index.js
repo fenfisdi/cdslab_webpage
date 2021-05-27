@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
-import { useParametersFormStyle } from './styles'
+import { useParametersFormStyle,ParametersFormHeader,ParametersFormHeaderItem } from './styles'
 
 
 const ParametersForm = ({fields, fieldParameters}) => {
@@ -15,6 +15,17 @@ const ParametersForm = ({fields, fieldParameters}) => {
       container
       item 
     >
+      <ParametersFormHeader>
+        <ParametersFormHeaderItem justifyContent="flex-end" alignItems="center">
+          <span>Parameter</span>
+        </ParametersFormHeaderItem>
+        <ParametersFormHeaderItem justifyContent="center" alignItems="center">
+          <span>Configuration Type</span>      
+        </ParametersFormHeaderItem>
+        <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
+          <span>Value</span>
+        </ParametersFormHeaderItem>
+      </ParametersFormHeader>
       {fieldParameters && fieldParameters.map((field,index)=>{
         const {label, representation, unit } = field
         const {helperText}= fields[label]
@@ -32,6 +43,7 @@ const ParametersForm = ({fields, fieldParameters}) => {
                 variant='h6'
                 key={index}
               />
+              <Grid xs={1}></Grid>
               <Grid item container xs={2}>
                 <Input
                   disabled={false}
@@ -41,7 +53,8 @@ const ParametersForm = ({fields, fieldParameters}) => {
                   autoComplete="name"
                   {...fields[label]}  
                 />              
-              </Grid>        
+              </Grid>  
+              <Grid xs={1}></Grid>      
               <Grid item container xs={4} justify="flex-start" alignItems="center">
                 {unit}
               </Grid>

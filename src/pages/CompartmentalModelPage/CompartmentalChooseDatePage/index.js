@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import SnackbarComponent from '@components/ui/Snackbars'
 import {
   CompartmentalChooseDateSection,
@@ -15,6 +15,7 @@ import CompartmentalButton from '../../../components/CompartmentalModels/Compart
 import { useCompartmentalChooseDatePageState } from './state'
 import { isEmpty } from 'lodash'
 import LoaderComponent from '../../../components/ui/Loader'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalChooseDatePage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -59,19 +60,11 @@ const CompartmentalChooseDatePage = () => {
         <SupportComponent text={HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS}/>
       </Grid>
 
-      <Grid container item xs={12}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-          Choose simulation dates
-        </Typography>
-      </Grid> 
+      <SubtitleCommon text='Choose simulation dates' />
 
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
-          <Label htmlFor='initial'>Simulation initial date</Label>
+          <Label htmlFor='initial'><strong>Simulation initial date</strong></Label>
           <Input
             type='date'
             id='initial'
@@ -81,7 +74,7 @@ const CompartmentalChooseDatePage = () => {
         </Column>
 
         <Column>
-          <Label htmlFor='final'>Simulation final date</Label>
+          <Label htmlFor='final'><strong>Simulation final date</strong></Label>
           <Input
             type='date'
             id='final'
