@@ -12,8 +12,6 @@ import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
-import SupportComponent from '../../../components/SupportComponent'
-import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import { usePathBreadCrums } from '../../../helpers'
 
 
@@ -85,7 +83,6 @@ const SimulationMainPage = () => {
     <SimulationContainer>
       <ContainerTitle>
         <TitleIcon title={'Simulations'} icon={lineChartFreepik}/>
-        <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
       </ContainerTitle>
       
       <ModelCard

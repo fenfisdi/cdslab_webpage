@@ -44,7 +44,7 @@ const CompartmentalModelPage = () => {
     <>
       <FullWidthTabs tabs={tabs} idTab={1}/>
       <CompartmentalModelPageContainer>  
-        <Breadcrumbs  />      
+        {/* <Breadcrumbs  />       */}
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />

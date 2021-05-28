@@ -78,7 +78,7 @@ const styles =  (theme) => ({
 
   },
   divider: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     backgroundColor: '#fff'
   },
   link:{
@@ -110,6 +110,7 @@ function Navigator (props) {
         </Link>
         {categories.map(({ id, children}) => (
           <React.Fragment key={id}>
+            <Divider className={classes.divider} />
             <ListItem className={classes.categoryHeader}>
               <ListItemText
                 classes={{
@@ -151,7 +152,7 @@ function Navigator (props) {
               </NavLink>
             ))}
 
-            <Divider className={classes.divider} />
+            
           </React.Fragment>
         ))}
       </List>
