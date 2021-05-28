@@ -29,8 +29,8 @@ export const sysManagementStyles = makeStyles((theme) => ({
     borderTopRightRadius: '7px',
 
     '&:focus': {
-      backgroundColor: '#CFCFCF',
-      color: 'black'
+      backgroundColor: theme.palette.secondary.cardFont,
+      color: 'white'
     }
   },
 

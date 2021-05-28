@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import LoaderComponent from '../../components/ui/Loader'
-import SysManagementState from '../../context/SysManagement/sysManagementState'
 
 const UserManagementPage = () => {
   const match = useRouteMatch()
