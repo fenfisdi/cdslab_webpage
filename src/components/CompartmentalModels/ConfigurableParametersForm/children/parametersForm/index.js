@@ -55,7 +55,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                 <StyledTableRow >
                   <TableCell  align="center">
                     <strong style={{marginRight:'10px'}}>{label}</strong>
-                    {decodedString}
+                    ({decodedString})
                   </TableCell >
                   <ParametersFormBodyItem>
                     <SelectComponent
