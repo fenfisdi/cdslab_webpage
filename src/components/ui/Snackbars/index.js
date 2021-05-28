@@ -10,10 +10,18 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    display:'flex',
     '& > * + *': {
       marginTop: theme.spacing(2),
-    },
+    }
   },
+  snackbar:{
+    width: '50%',
+    marginLeft:'7%',
+    display: 'flex',
+    'align-items': 'center',
+    'justify-content': 'center',
+  }
 }))
 
 export default function SnackbarComponent({configData,handleCloseSnack,successMessage,errorMessage,snackDuration}) {
@@ -33,13 +41,13 @@ export default function SnackbarComponent({configData,handleCloseSnack,successMe
   return (
     <div className={classes.root}>
      
-      {success&&<Snackbar open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
+      {success && <Snackbar className={classes.snackbar} open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
         <Alert onClose={handleCloseSnack} severity="success">
           {displayMessage(successMessage)}
         </Alert>        
       </Snackbar>}
 
-      {error && <Snackbar open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
+      {error && <Snackbar className={classes.snackbar} open={show} autoHideDuration={snackDuration} onClose={handleCloseSnack}>
         <Alert onClose={handleCloseSnack} severity="error">
           {displayMessage(errorMessage)}
         </Alert>
