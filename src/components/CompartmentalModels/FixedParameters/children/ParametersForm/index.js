@@ -39,7 +39,7 @@ const ParametersForm = ({fields, fieldParameters}) => {
                 justify='flex-end'
                 alignItems='center'
                 title={label}
-                unit={representation}
+                unit={`(${representation})`}
                 variant='h6'
                 key={index}
               />
