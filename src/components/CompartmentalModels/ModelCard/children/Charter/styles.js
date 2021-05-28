@@ -7,7 +7,7 @@ export const CardContainer = styled(Card)`
         &:hover{
           background-color: ${theme.palette.secondary.cardSelect};
           & > svg {
-            fill: ${({ theme }) => theme.palette.secondary.cardFont};
+            fill: ${theme.palette.secondary.cardFont};
           }
         }
     `}
