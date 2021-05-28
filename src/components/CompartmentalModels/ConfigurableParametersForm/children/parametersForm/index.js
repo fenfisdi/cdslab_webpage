@@ -13,11 +13,15 @@ import { ParametersFormBodyItem } from './styles'
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
+    'border-collapse': 'separate',
+    'border-spacing': '0 10px'    
   },
 })
 
 const StyledTableRow = withStyles(() => ({
   root: {
+    background:'#ECEFF1',
+    marginBottom:'10px',
     '& > td':{
       border:'0px'
     }

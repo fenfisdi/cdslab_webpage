@@ -32,7 +32,15 @@ const ParametersForm = ({fields, fieldParameters}) => {
         delete fields[label]['helperText']
         
         return (
-          <Grid key={index}  item container xs={12} direction="column" justify="center" alignItems="center">
+          <Grid
+            key={index}  
+            item 
+            container xs={12} 
+            direction="column" 
+            justify="center" 
+            alignItems="center" 
+            style={{'background':' #ECEFF1',
+              'margin-top': '10px'}}>
             <Grid item container xs={12} key={index} direction="row" justify="center" alignItems="center" spacing={2}>
               <TitleComponent
                 xs={4}
