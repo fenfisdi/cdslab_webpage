@@ -14,7 +14,6 @@ import managementIcon from '../../../assets/images/management/management_color.s
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
-import { Icon } from '@material-ui/core'
 import { usePath } from '../../PathContext'
 
 const categories = [

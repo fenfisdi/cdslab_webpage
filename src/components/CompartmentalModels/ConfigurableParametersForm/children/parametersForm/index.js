@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import { ParametersFormBodyItem } from './styles'
 
 const useStyles = makeStyles({
   table: {
@@ -56,26 +57,14 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                     <strong style={{marginRight:'10px'}}>{label}</strong>
                     {decodedString}
                   </TableCell >
-                  <TableCell style={{
-                    display: 'flex',
-                    'align-items': 'center',
-                    'justify-content': 'center'
-                  
-                  }}>
+                  <ParametersFormBodyItem>
                     <SelectComponent
                       xs={6} 
                       title="Select Option"
                       {...fieldsParametersForm[label]['SELECTInput']}  />
-                  </TableCell >
-                  <TableCell style={{
-                    width:'33%'
-                  }}>
-                    <div style={{
-                      'display': 'flex',
-                      'flex-direction': 'row',
-                      'align-items': 'center',
-                      'justify-content': 'center'
-                    }}>
+                  </ParametersFormBodyItem >
+                  <TableCell style={{ width:'33%' }}>
+                    <ParametersFormBodyItem>
                       {value && <ExtraParameters                 
                         extraParameters={fieldsParametersForm[label][`${value}Input`]}
                         handleShowError={handleShowError}
@@ -85,7 +74,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                       <div>
                         {unit}
                       </div>
-                    </div>
+                    </ParametersFormBodyItem>
 
                   </TableCell >
                 </StyledTableRow>
