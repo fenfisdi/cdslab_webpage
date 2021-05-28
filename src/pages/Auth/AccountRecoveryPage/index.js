@@ -7,7 +7,6 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import { useAccountRecoveryState } from './state'
 import AccountRecoverySecurityCodeForm from '@components/AccountRecovery/AccountRecoverySecurityCodeForm'
 import AccountRecoveryResetPasswordForm from '@components/AccountRecovery/AccountRecoveryResetPasswordForm'
-import { replaceStringInRange } from '@utils/common'
 import { languageContext } from '../../../config/languageContext'
 
 const AccountRecoveryPage = () => {
