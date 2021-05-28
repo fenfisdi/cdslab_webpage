@@ -5,14 +5,18 @@ import { INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../.
 import { useStore } from '../../../store/storeContext'
 import { useEffect, useState } from 'react'
 import { getStateWithQueryparams } from '../common'
+import { usePathBreadCrums } from '../../../helpers'
 
 export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()
   const [isValid, setIsValid] = useState(false)
-  
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     state: {      
-      compartmentalModel: { predefinedModelSelected, currentSimulation:{data:dataCurrentSimulation, error, errorData} }
+      compartmentalModel: { 
+        predefinedModelSelected, 
+        currentSimulation:{data:dataCurrentSimulation, error, errorData},
+        chooseDataSource }
     },
     dispatch
   } = useStore()
@@ -20,25 +24,23 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
   const { 
     findCompartmentalSimulation, 
     findPredefinedModel,
-    updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+    updateCompartmentalSimulation,
+    updateChooseDataSourceProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
-    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){   
-      
+    if( dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected)){
       setIsValid(true)      
-      if(dataCurrentSimulation.data_source != null && dataCurrentSimulation.data_source != 'none' ){
+      if(dataCurrentSimulation.data_source != null && dataCurrentSimulation.data_source != 'none' && chooseDataSource.nextStep){
         const { modelData:{ identifier:model_id } }=predefinedModelSelected
         const { identifier } = dataCurrentSimulation
-        let pathname = ''
-        
-        if(dataCurrentSimulation.data_source == 'upload'){
-          pathname = '/compartmentalModels/uploadData'
-        }
-
         history.push({ 
-          pathname: pathname,
+          pathname: chooseDataSource.pathname,
           search:`?simulation_identifier=${identifier}&model_id=${model_id}`  ,
+        })
+        updateChooseDataSourceProperty({
+          nextStep:false,
+          pathname:''
         })
       }
 
@@ -74,11 +76,22 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
       const { name, identifier,state_variable_limits,parameter_type,parameters_limits } = dataCurrentSimulation
       
       let dataSource = ''
+      let pathname = ''
       if(indetifier == INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.UPLOAD){
         dataSource = 'upload'
+        pathname = '/compartmentalModels/uploadData'
       }else if(indetifier == INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.USEAVAILABLE){
         dataSource = 'ins'
+        pathname = '/compartmentalModels/ins'
       }
+      const { modelData:{ identifier:model_id } }=predefinedModelSelected
+      const { identifier: identefierParam } = dataCurrentSimulation
+
+
+      updateChooseDataSourceProperty({
+        nextStep:true,
+        pathname:pathname
+      })
      
       updateCompartmentalSimulation({
         'name':name,
@@ -88,6 +101,7 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
         'data_source':dataSource
       },identifier) 
 
+      handlePathBreadCrums('uploadData',`?simulation_identifier=${identefierParam}&model_id=${model_id}`)
     }
     
   }

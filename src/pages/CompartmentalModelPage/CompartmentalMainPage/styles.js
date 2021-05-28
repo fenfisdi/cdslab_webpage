@@ -5,12 +5,13 @@ export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
     marginTop: '10px',
     marginBottom: '20px',
     padding: theme.spacing(2),
-    'box-shadow': '1px 3px 9px 5px rgba(0,0,0,0.14)',
-    background: '#c4c4c442',
-    fontWeight:'500',
+    'box-shadow': '-1px 0px 8px 5px rgba(0,0,0,0.14)',
+    background: '#ECEFF1',
+    ...theme.font.paragraphs,
     height: '100%',
     overflow: 'hidden',
     width: '100%',
+    color: '#000504'
   },
   loading: {
     'min-height': ' 500px',
@@ -19,12 +20,13 @@ export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
 }))
 
 
-export const CompartmentalMainPageContainer = styled.section`
+export const CompartmentalMainPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 3%;
 `
 
 export const CompartmentalMainPageCards = styled.section`

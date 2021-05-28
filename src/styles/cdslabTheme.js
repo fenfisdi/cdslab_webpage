@@ -6,17 +6,38 @@ let theme = createMuiTheme({
       light: '#79e2e1',
       main: '#66c2c1',
       dark: '#4f9695',
-      contrastText: '#fff'
+      contrastText: '#fff',
+      colorTitle: '#006064'
     },
     secondary: {
       light: '#a79e02',
       main: '#827b00',
       dark: '#524e01',
       contrastText: '#fff',
-      card: '#C4C4C4',
-      cardSelect: '#a79d9d'
+      card: '#E0F3FA',
+      cardFont: '#006064',
+      cardSelect: '#E5E5E5'
     }
   },
+
+  font: {
+    title: {
+
+    },
+
+    subtitle: {
+      fontSize: '15px',
+      fontFamily: 'Roboto',
+      fontWeight: '400px'
+    },
+
+    paragraphs: {
+      fontSize: '15px',
+      fontFamily: 'Roboto',
+      fontWeight: '300px'
+    }
+  },
+
   typography: {
     h5: {
       fontWeight: 500,

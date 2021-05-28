@@ -6,7 +6,7 @@ import { checkErrorsExtraParametersForm } from './validators'
 
 
 
-const ExtraParameters = ({ extraParameters=[], handleShowError }) => {
+const ExtraParameters = ({ extraParameters=[], handleShowError, xs }) => {
  
  
   useEffect(()=>{
@@ -15,11 +15,11 @@ const ExtraParameters = ({ extraParameters=[], handleShowError }) => {
 
 
   return (  
-    <Grid container item xs={extraParameters.length+1}>     
+    <Grid container item xs={xs}>     
       {extraParameters.length>0 && extraParameters.map((parameter,index)=>{              
         delete parameter['helperText']        
         return (
-          <Grid container item xs key={index} justify="center" alignItems="center">
+          <Grid container item xs key={index} justify="center" alignItems="center" style={{marginRight:'5px'}}>
             <Input              
               disabled={false}
               required                  

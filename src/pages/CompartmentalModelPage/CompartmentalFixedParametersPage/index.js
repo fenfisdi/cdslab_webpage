@@ -1,12 +1,13 @@
-import { Typography, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import React, { useState } from 'react' 
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
-import { CompartmentalFixedParametersSection, CompartmentalFixedParametersTitle } from './styles'
+import { CompartmentalFixedParametersSection } from './styles'
 import SnackbarComponent from '@components/ui/Snackbars'
 import LoaderComponent from '../../../components/ui/Loader'
 import { useCompartmentalFixedParametersPageState } from './state'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 
 const CompartmentalFixedParametersPage =()=>{
@@ -33,11 +34,8 @@ const CompartmentalFixedParametersPage =()=>{
         <SupportComponent text={HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS}/>
       </Grid>
 
-      <CompartmentalFixedParametersTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-        CompartmentalFixedParametersPage
-        </Typography>
-      </CompartmentalFixedParametersTitle>
+      
+      <SubtitleCommon text='Configuration of fixed parameters' />
 
       {fixedParametersFormFields && fixedParametersFormFields.length>0 && <FixedParametersFormStateVariables
         fieldParameters={fixedParametersFormFields} 
