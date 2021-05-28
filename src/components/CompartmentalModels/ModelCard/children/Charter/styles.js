@@ -6,6 +6,9 @@ export const CardContainer = styled(Card)`
         background-color: ${theme.palette.secondary.card};
         &:hover{
           background-color: ${theme.palette.secondary.cardSelect};
+          & > svg {
+            fill: ${({ theme }) => theme.palette.secondary.cardFont};
+          }
         }
     `}
       ${props => props.selected && css`
@@ -22,4 +25,7 @@ export const CardContainer = styled(Card)`
     justify-content: center;
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     margin-bottom: 10px;
+    svg {
+      margin-right:10px;
+    }
 `
