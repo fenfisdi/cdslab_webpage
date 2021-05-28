@@ -31,14 +31,16 @@ export const useMySimulationsPreviewState = () => {
       a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data) 
       a.download = 'index.html'
       a.click()
+      a.remove()
     })
   }
   const handleDownloadCsv = (body) => {
     body.then((data) => {
       const a = document.createElement('a')
-      a.href = 'data:text/csv,' + data 
+      a.href = 'data:text/csv,' + encodeURIComponent(data) 
       a.download = 'archivo.csv'
       a.click()
+      a.remove()
     })
   }
   return {
