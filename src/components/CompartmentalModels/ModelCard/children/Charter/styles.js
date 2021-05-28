@@ -6,16 +6,13 @@ export const CardContainer = styled(Card)`
         background-color: ${theme.palette.secondary.card};
         &:hover{
           background-color: ${theme.palette.secondary.cardSelect};
-          & > svg {
-            fill: ${theme.palette.secondary.cardFont};
-          }
         }
     `}
-      ${props => props.selected && css`
-         ${({ theme }) => `
-          background-color: ${theme.palette.secondary.cardSelect};
-         `}
-      `}
+    ${props => props.selected && css`
+        ${({ theme }) => `
+        background-color: ${theme.palette.secondary.cardSelect};
+        `}
+    `}
     color: ${({ theme }) => theme.palette.secondary.cardFont};
     width:  80px;
     height: 80px;
