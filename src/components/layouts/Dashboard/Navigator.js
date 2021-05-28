@@ -10,10 +10,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
+import managementIcon from '../../../assets/images/management/management_color.svg'
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
-import { Icon } from '@material-ui/core'
 import { usePath } from '../../PathContext'
 
 const categories = [
@@ -21,7 +21,7 @@ const categories = [
     id: '',
     children: [
       { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: <Icon className={'fas fa-key'} />,typeIcon : 'material', href: '/management' },
+      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management' },
     ]
   },
   {
@@ -77,7 +77,7 @@ const styles =  (theme) => ({
 
   },
   divider: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     backgroundColor: '#fff'
   },
   link:{
@@ -109,6 +109,7 @@ function Navigator (props) {
         </Link>
         {categories.map(({ id, children}) => (
           <React.Fragment key={id}>
+            <Divider className={classes.divider} />
             <ListItem className={classes.categoryHeader}>
               <ListItemText
                 classes={{
@@ -134,7 +135,7 @@ function Navigator (props) {
                   <ListItemIcon className={classes.itemIcon}>
                     {
                       typeIcon === 'svg' 
-                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='40px' fontWeight='bold'/> )
+                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='10px' fontWeight='bold'/> )
                         : icon
                     }
                     
@@ -150,7 +151,7 @@ function Navigator (props) {
               </NavLink>
             ))}
 
-            <Divider className={classes.divider} />
+            
           </React.Fragment>
         ))}
       </List>

@@ -1,83 +1,88 @@
 import React, { useState, Fragment } from 'react'
-import { Grid } from '@material-ui/core'
-import { TitleComponent } from '../../../../ui/Title'
 import { SelectComponent } from '../../../../ui/Select'
 import ExtraParameters from '../extraParameters'
-import { ParametersFormHeader, ParametersFormBody, ParametersFormHeaderItem } from './styles'
+import { withStyles, makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import { ParametersFormBodyItem } from './styles'
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+})
+
+const StyledTableRow = withStyles(() => ({
+  root: {
+    '& > td':{
+      border:'0px'
+    }
+  },
+}))(TableRow)
 
 
 const ParametersForm = ({parameters,fieldsParametersForm}) => {
-
-  return(
-    <Fragment>
-      <ParametersFormHeader>
-        <ParametersFormHeaderItem justifyContent="flex-end" alignItems="center">
-          <span>Parameter</span>
-        </ParametersFormHeaderItem>
-        <ParametersFormHeaderItem justifyContent="center" alignItems="center">
-          <span>Configuration Type</span>      
-        </ParametersFormHeaderItem>
-        <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
-          <span>Value</span>
-        </ParametersFormHeaderItem>
-      </ParametersFormHeader>
-      
-      {parameters && parameters.map((parameter,index)=>{
-        const { label, unit, representation } = parameter
-        const { value } = fieldsParametersForm[label]['SELECTInput'] 
-        const [errorText,setErrorText] = useState('')
-
-        const handleShowError =(errorMessage)=>{
-          setErrorText(errorMessage)          
-        }
+  const classes = useStyles()
+  return (
+    <TableContainer >
+      <Table className={classes.table} aria-label="customized table">
         
-        return (
-          <ParametersFormBody key={index}>
-            
-            <Grid container item xs={12}  direction="row" justify="center" alignItems="center" spacing={2}>
-              <TitleComponent
-                xs={2}
-                justify={'flex-end'}
-                alignItems={'center'}
-                title={label}
-                variant={'h6'}
-                key={index}
-                unit={representation}
-              />
+        <TableHead style={{  background:'#CFD8DC'}}>
+          <TableRow>
+            <TableCell align="center">Parameter</TableCell>
+            <TableCell align="center">Configuration Type</TableCell>
+            <TableCell align="center">Value</TableCell>
+          </TableRow>
+        </TableHead>
 
-              <Grid container item xs={1}>
-              </Grid>
+        <TableBody>
+          {parameters && parameters.map((parameter,index)=> {
+            const { label, unit, representation } = parameter
+            const { value } = fieldsParametersForm[label]['SELECTInput'] 
+            const [errorText,setErrorText] = useState('')
+  
+            const handleShowError =(errorMessage)=>{
+              setErrorText(errorMessage)          
+            }
+            const parser = new DOMParser()
+            const decodedString = parser.parseFromString(`<!doctype html><body>${representation}`, 'text/html').body.textContent
+            return (
+              <Fragment  key={index}>
+                <StyledTableRow >
+                  <TableCell  align="center">
+                    <strong style={{marginRight:'10px'}}>{label}</strong>
+                    {decodedString}
+                  </TableCell >
+                  <ParametersFormBodyItem>
+                    <SelectComponent
+                      xs={6} 
+                      title="Select Option"
+                      {...fieldsParametersForm[label]['SELECTInput']}  />
+                  </ParametersFormBodyItem >
+                  <TableCell style={{ width:'33%' }}>
+                    <ParametersFormBodyItem>
+                      {value && <ExtraParameters                 
+                        extraParameters={fieldsParametersForm[label][`${value}Input`]}
+                        handleShowError={handleShowError}
+                        xs={10}
+                        errorText={errorText}
+                      /> } 
+                      <div>
+                        {unit}
+                      </div>
+                    </ParametersFormBodyItem>
 
-              <SelectComponent
-                xs={2}              
-                title="Select Option"
-                {...fieldsParametersForm[label]['SELECTInput']}  />
-              
-              {!value && 
-              <Grid container item xs={1}>
-              </Grid>}         
-              
-              {value && <ExtraParameters                 
-                extraParameters={fieldsParametersForm[label][`${value}Input`]}
-                handleShowError={handleShowError}
-                xs={2}
-              /> }
-
-              <Grid item container xs={1} justify="flex-start" alignItems="center">
-                {unit}
-              </Grid>
-
-            </Grid>
-
-            <Grid container item xs={12} key={index} direction="row" justify="center" spacing={1}>
-              <p style={{color:'red'}}>{errorText}</p>              
-            </Grid>
-
-          </ParametersFormBody>    
-            
-        )
-      })}
-    </Fragment>
+                  </TableCell >
+                </StyledTableRow>
+              </Fragment>
+            )})}
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }
 

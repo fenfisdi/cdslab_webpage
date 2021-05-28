@@ -12,6 +12,7 @@ import {
   CompartmentalChooseSimulationSection
 } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalChooseSimulationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -33,7 +34,8 @@ const CompartmentalChooseSimulationPage = () => {
         justify="space-between"
         alignItems="flex-start"
       >
-        <p></p>
+        <Grid></Grid>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>
 

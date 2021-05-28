@@ -9,6 +9,8 @@ import SnackBarCommon from '../../../components/ui/SnackBarCommon'
 import { useSysManagementState } from './state'
 import FullWidthTabs from '../../../components/Taps'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
+import userSvg from '../../../assets/images/management/users_color.svg'
+import toolsSVG from '../../../assets/images/management/tools-solid.svg'
 
 const SysManagementMainPage = () => {
 
@@ -34,16 +36,16 @@ const SysManagementMainPage = () => {
       label: 'Users Management',
       path:  'usersManagement',
       disabled : true,
-      icon : 'fas fa-users',
-      iconType: 'icon'
+      icon: userSvg,
+      iconType: 'svg'
     },
     {
       id: 2,
       label: 'Sys Management',
       path: 'sysManagement',
       disabled : false,
-      icon: 'fas fa-tools',
-      iconType: 'icon'
+      icon: toolsSVG,
+      iconType: 'svg'
     },
   ]
 
@@ -81,7 +83,7 @@ const SysManagementMainPage = () => {
           </div>
           <div className={classes.buttonContainer}>
             <CompartmentalButton 
-              justify='center'
+              justify='flex-end'
               alignItems='center'
               text='Save changes'
               onClick={handleValidations}

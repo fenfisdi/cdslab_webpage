@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 export const useCompartmentalMainPageStyles = makeStyles((theme) => ({
   formBody: {
-    marginTop: '10px',
+    marginTop: '20px',
     marginBottom: '20px',
     padding: theme.spacing(2),
     'box-shadow': '-1px 0px 8px 5px rgba(0,0,0,0.14)',

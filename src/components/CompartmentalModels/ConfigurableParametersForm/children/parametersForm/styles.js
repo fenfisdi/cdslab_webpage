@@ -21,6 +21,13 @@ export const ParametersFormHeaderItem = styled.div`
   color:#000000;
   `
 
+export const ParametersFormBodyItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  `
+
 export const ParametersFormBody = styled.div`
   display: flex;
   flex-direction: column;

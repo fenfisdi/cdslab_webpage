@@ -7,6 +7,7 @@ import { useHistory  } from 'react-router'
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalNewSimulationPage = ({pathParent}) => {
   const history = useHistory()
@@ -26,9 +27,10 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
       <Grid container item xs={12} 
         direction="row"
         justify="space-between"
-        alignItems="flex-start">
-        <p></p>
-        <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+        alignItems="center">
+        <Grid></Grid>
+        <Grid><Breadcrumbs /></Grid>
+        <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
       </Grid>
 
       {predefinedModelsList && <PredefinedModelsForm
