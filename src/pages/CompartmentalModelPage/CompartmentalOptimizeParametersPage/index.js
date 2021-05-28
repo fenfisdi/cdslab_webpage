@@ -5,7 +5,7 @@ import { OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../../c
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS} from '../../../constants/helpInformation'
 import { useCompartmentalOptimizeParametersPageState } from './state'
-import { CompartmentalOptimizeParametersSection } from './styles'
+import { CompartmentalOptimizeParametersContainerModelCard, CompartmentalOptimizeParametersSection } from './styles'
 import SnackbarComponent from '@components/ui/Snackbars'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
@@ -29,14 +29,16 @@ const CompartmentalOptimizeParametersPage = () => {
     
       <SubtitleCommon text='Choose data source' />
 
-      <Grid container item xs={12}>
-        <ModelCard
-          options={OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION}
-          direction="column"
-          eventEmitted={executeSelectedOption}
-          height='250px'
-        />
-      </Grid>
+      <CompartmentalOptimizeParametersContainerModelCard>
+        <Grid container item xs={12}>
+          <ModelCard
+            options={OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION}
+            direction="column"
+            eventEmitted={executeSelectedOption}
+            height='300px'
+          />
+        </Grid>
+      </CompartmentalOptimizeParametersContainerModelCard>
 
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
