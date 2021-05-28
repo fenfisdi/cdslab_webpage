@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import {TableComponent} from '../../../components/UserManagement/ShowTableComponent/index'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import SaveIcon from '@material-ui/icons/Save'
 import FullWidthTabs from '../../../components/Taps'
 import { UserManagementPageMainContainer } from './styles'
+import { userManagementMainPageState } from './state'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,7 +14,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 const UserManagementMainPage = () => {
 
-  
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const { getUsersListData } = userManagementMainPageState({ showSnack, setShowSnack })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
 
   const classes = useStyles()
   const isRoot = true
@@ -36,6 +41,7 @@ const UserManagementMainPage = () => {
       iconType: 'icon'
     },
   ]
+
   return(
     <>
       <FullWidthTabs tabs={tabs} idTab={1} />
@@ -55,4 +61,5 @@ const UserManagementMainPage = () => {
     </>
   )
 }
+
 export default UserManagementMainPage

@@ -9,6 +9,7 @@ import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformati
 import LoaderComponent from '../../../components/ui/Loader'
 
 const CompartmentalNewSimulationPage = ({pathParent}) => {
+  
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { predefinedModelsList, storePredefinedModelSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })

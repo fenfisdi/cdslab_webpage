@@ -4,7 +4,7 @@ import {
   USER_LIST_ERROR
 } from './types/userManagementTypes'
 
-export const ManagementActions = (dispatch)=>{
+export const managementActions = (dispatch)=>{
 
   const getUsersListData = () => {  
     

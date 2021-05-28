@@ -26,6 +26,7 @@ export const userManagementReducer = (state, action) => {
     return {...state, loading: false, error: false, data: action.payload }
 
   default:
+
     return state
   }
 }
