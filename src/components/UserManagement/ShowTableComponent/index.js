@@ -6,10 +6,10 @@ import {ShowTableComponent} from '../TableComponent/index'
 import {showTableStyles} from './styles'
 
 
-export const TableComponent=({adminTable}) => {
+export const TableComponent=({adminTable, row}) => {
   const classes = showTableStyles()
   const [ query, setQuery ] = useState('')
-
+  
   return (
     
     <Grid className={classes.margin}>
@@ -27,7 +27,7 @@ export const TableComponent=({adminTable}) => {
             }}
           />
         </Grid>
-        <ShowTableComponent configAdmin={adminTable} filter={query}/>
+        <ShowTableComponent configAdmin={adminTable} rows={row} filter={query}/>
       </Grid>
     </Grid>
   )

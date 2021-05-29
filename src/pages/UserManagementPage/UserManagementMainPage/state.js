@@ -2,22 +2,31 @@ import { useEffect } from 'react'
 import { useStore } from '@store/storeContext'
 import { managementActions } from '@actions/managementActions'
 import { isNull } from 'lodash'
+import { getUsersList } from '../../../services/userManagementService'
 
 export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   const {
     state:{
-      userListRecovery: { data, error, errorData }
+      userManagement: { 
+        userListRecovery:{
+          data, error, errorData
+        }
+      }
     }, 
     dispatch
   } = useStore()
 
   const { getUsersListData } = managementActions(dispatch)
-
+  
   useEffect(() => {
+    
     if(isNull(data) && error!=true){
       getUsersListData()
     }
-  },[data,error,errorData])
+    if(!isNull(data)){
+      console.log(data)
+    }
+  },[data])
 
   useEffect(()=>{
     if(error == true){
@@ -35,6 +44,7 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
 
 
   return {
-    getUsersListData
+    getUsersListData,
+    data
   }
 }

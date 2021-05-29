@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const UserManagementMainPage = () => {
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { getUsersListData } = userManagementMainPageState({ showSnack, setShowSnack })
+  const { getUsersListData, data } = userManagementMainPageState({ showSnack, setShowSnack })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -23,7 +23,9 @@ const UserManagementMainPage = () => {
   const classes = useStyles()
   const isRoot = true
   
-  const tabs = [
+ 
+
+  const tab = [
     {
       id: 1,
       label: 'Users Management',
@@ -44,10 +46,10 @@ const UserManagementMainPage = () => {
 
   return(
     <>
-      <FullWidthTabs tabs={tabs} idTab={1} />
+      <FullWidthTabs tabs={tab} idTab={1} />
       <UserManagementPageMainContainer>
-        <TableComponent/>
-        {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
+        <TableComponent row={data}/>
+        {isRoot ? <TableComponent row={data} adminTable={isRoot}/> : <></>}
         <Button
           variant="contained"
           color="primary"
