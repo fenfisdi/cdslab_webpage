@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useStore } from '@store/storeContext'
 import { managementActions } from '@actions/managementActions'
 import { isNull } from 'lodash'
-import { getUsersList } from '../../../services/userManagementService'
 
 export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   const {

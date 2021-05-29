@@ -19,7 +19,7 @@ export const TableComponent=({adminTable, row}) => {
         </Grid>
         <Grid item>
           <TextField 
-            id="input-with-icon-grid" 
+            id="input-with-icon-grid"
             label="Search user"
             value={query}
             onChange={(e)=>{
