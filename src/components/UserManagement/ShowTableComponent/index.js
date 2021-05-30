@@ -27,7 +27,7 @@ export const TableComponent=({adminTable, row}) => {
             }}
           />
         </Grid>
-        <ShowTableComponent configAdmin={adminTable} rows={row} filter={query}/>
+        <ShowTableComponent configAdmin={adminTable} rows={row} fil={query}/>
       </Grid>
     </Grid>
   )

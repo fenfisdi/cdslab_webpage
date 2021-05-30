@@ -12,8 +12,30 @@ import { TableHeaderComponent } from './TableHeadComponent/index'
 import { useTableComponentStyles } from './styles'
 import {useTableComponentState} from './state'
 
+/* function createData(name, email, active) {
+  return { name, email, active }
+}
 
-export const ShowTableComponent = ({configAdmin, filter, rows }) => {
+const rows = [
+  createData('Andrea', 'andrea@example.com', false),
+  createData('Victoria', 'victoria@example.com', true),
+  createData('Clara', 'clara@example.com', true),
+  createData('Diana', 'diana@example.com', true),
+  createData('Alejandro', 'Alejandro@example.com', true),
+  createData('Ramiro', 'ramiro@example.com', false),
+  createData('Santiago', 'santiago@example.com', true),
+  createData('Edgar', 'edgar@example.com', true),
+  createData('Camilo', 'camilo@example.com', true),
+  createData('Johan', 'johan@example.com', false),
+  createData('Kiiron', 'kiiron@example.com', true),
+  createData('Sasha', 'sasha@example.com', true),
+  createData('Odin', 'odin@example.com', true),
+  createData('Dasha', 'dasha@example.com', false),
+  createData('Lola', 'lola@example.com', true),
+  
+] */
+
+export const ShowTableComponent = ({configAdmin, fil, rows }) => {
 
   const classes = useTableComponentStyles()
   const [order, setOrder] = useState('asc')
@@ -21,8 +43,8 @@ export const ShowTableComponent = ({configAdmin, filter, rows }) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const filterRows = rows.filter(row=>{
-    return row.name.includes(filter)
+  const filterRows = rows && rows.filter(row=>{
+    return row.name.includes(fil)
   })
 
   const functionsTable = useTableComponentState()
@@ -60,11 +82,11 @@ export const ShowTableComponent = ({configAdmin, filter, rows }) => {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={filterRows.length}
+              rowCount={rows && filterRows.length}
               changeAdmin={configAdmin}
             />
             <TableBody>
-              {stableSort(filterRows, getComparator(order, orderBy))
+              {rows && stableSort(filterRows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`
@@ -81,7 +103,7 @@ export const ShowTableComponent = ({configAdmin, filter, rows }) => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled}/></TableCell>
+                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled} list={rows}/></TableCell>
                     </TableRow>
                   )
                 })}
@@ -91,7 +113,7 @@ export const ShowTableComponent = ({configAdmin, filter, rows }) => {
         <TablePagination
           rowsPerPageOptions={[5]}
           component="div"
-          count={rows.length}
+          count={rows && rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
