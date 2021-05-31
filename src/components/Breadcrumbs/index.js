@@ -57,7 +57,6 @@ const Breadcrumbs = () => {
   
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
-      <Icon className={'fas fa-plus-circle'} style={{fontSize: '32px',color:'#00838F'}} />
       {path.map(({name,breadCrumbRoute,parameters}, index) => {
         const isLast = index === path.length - 1
         return isLast ? (
