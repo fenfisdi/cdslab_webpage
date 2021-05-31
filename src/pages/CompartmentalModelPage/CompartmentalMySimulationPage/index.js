@@ -7,6 +7,11 @@ import { useComparmentalMySimulationState } from './state'
 import { TableSimulationsComponent } from '../../../components/CompartmentalModels/mySimulationsForm/TableSimulationComponent'
 import { Alert } from '@material-ui/lab'
 import LoaderComponent from '../../../components/ui/Loader'
+import { ContainerTitle } from '../../SimulationModelPage/SimulationMainPage/styles'
+import TitleIcon from '../../../components/layouts/TitleIcon'
+import SupportComponent from '../../../components/SupportComponent'
+import notesPixelIcon from '../../../assets/images/notes_pixel_perfect.svg'
+import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 
 const CompartmentalMySimulationPage = () => {
   
@@ -36,7 +41,6 @@ const CompartmentalMySimulationPage = () => {
     
   }
   const handleCheck = (row) => {
-    console.log(row)
     rowsFiltered.map((elem) => {
       if(elem.identifier === row.identifier){
         elem.check = !elem.check
@@ -54,21 +58,16 @@ const CompartmentalMySimulationPage = () => {
         />)
         :
         (
-          <Grid container item xs={12} justify="center" alignItems="center" direction="column">
+          <Grid container item xs={12} justify="center" alignItems="center" direction="column" style={{marginTop:'20px'}}>
+            <ContainerTitle>
+              <TitleIcon title={'Simulations'} icon={notesPixelIcon}/>
+              <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+            </ContainerTitle>
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">
               <MySimulationsForm eventEmitter= {filterForm}/>
             </Grid>
             <br />
-            <Grid container item xs={12} justify="flex-end">
-              <Button
-                onClick={handleClickRemove}
-                variant="contained"
-                className={classes.buttonSearch}
-                startIcon={<DeleteOutlineIcon />}
-              >
-            Remove Selected
-              </Button>
-            </Grid>
+            
             <br />
             {
               alert &&
@@ -81,6 +80,16 @@ const CompartmentalMySimulationPage = () => {
               classes={classes} 
               handleCheck={handleCheck}
             />
+            <Grid container item xs={12} justify="flex-end">
+              <Button
+                onClick={handleClickRemove}
+                variant="contained"
+                className={classes.buttonSearch}
+                endIcon={<DeleteOutlineIcon />}
+              >
+            Remove Selected
+              </Button>
+            </Grid>
           </Grid>
         )
       }

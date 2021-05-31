@@ -57,12 +57,9 @@ export const TableSimulationsComponent = (props) => {
                   <TableCell>{row.status}</TableCell>
                   <TableCell>
                     <Link to='preview'  onClick={() => handleClickPreview(row)} >
-                      <TitleIcon
-                        icon={imgPreview} 
-                        width={20} 
-                        height={20}  
-                        fontSize='40px'
-                        className={classes.iconPreview}
+                      <img
+                        src={imgPreview} 
+                        width='30px'
                       />
                     </Link>
                   </TableCell>

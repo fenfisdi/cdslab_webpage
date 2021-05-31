@@ -8,6 +8,7 @@ export const useCompartamentalMySimulationForm = makeStyles(() => ({
     cursor: 'pointer'
   },
   buttonSearch: {
-    background: 'grey'
+    background: '#e2e2e2',
+    color: '#b93737'
   }
 }))

@@ -20,7 +20,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
   const handleEventEmitted = (cardData) => {
-    handlePathBreadCrums('chooseSimulation')
+    handlePathBreadCrums('chooseSimulation','Choose Simulation')
     setModelData(cardData) 
   }
   return (

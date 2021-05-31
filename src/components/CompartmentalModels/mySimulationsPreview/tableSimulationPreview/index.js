@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core'
 import { TableRow } from '@material-ui/core'
 import { Table } from '@material-ui/core'
 import React, { useState } from 'react'
-import TitleIcon from '../../../layouts/TitleIcon'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import imgCsv from'../../../../assets/images/csv_darius_dan.svg'
 import imgGrap from'../../../../assets/images/line-graph_pixelmeetup.svg'
@@ -23,10 +22,10 @@ export const TableMySimulationPreview = (props) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const { mySimulationFiles,handleDownloadCsv,handleDownloadHtml } = useMySimulationsPreviewState()
-  
+  console.log(mySimulationFiles )
   const classes = useTableSimulationPreview()
 
-  const handleChangePage = (newPage) => {
+  const handleChangePage = (event,newPage) => {
     setPage(newPage)
   }
   const handleChangeRowsPerPage = (event) => {
@@ -81,14 +80,12 @@ export const TableMySimulationPreview = (props) => {
                             (elem.ext === 'html') 
                               && (
                                 <Button onClick={() => setPlotJson(JSON.parse(elem.json_image))}>
-                                  <TitleIcon
+                                  <src
                                     icon={imgPreview} 
-                                    width={20} 
-                                    height={20}  
-                                    fontSize='40px'
+                                    width='30px'
                                   />
                                 </Button>
-                              )
+                              ) 
                           }
                         </TableCell>
                       </TableRow>

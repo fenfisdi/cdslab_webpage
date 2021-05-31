@@ -20,7 +20,7 @@ export const useSimulationsStyles = makeStyles((theme) => ({
   },
   buttonSearch: {
     float: 'rigth',
-    background:'grey'
+    background:'#e2e2e2'
   },
   selectComponent: {
     border: '1px solid #fff'

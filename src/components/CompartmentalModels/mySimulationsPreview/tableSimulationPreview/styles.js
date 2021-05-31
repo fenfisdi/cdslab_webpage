@@ -7,7 +7,7 @@ export const useTableSimulationPreview = makeStyles(() => ({
     fontSize: '50px'
   },
   textoDownload: {
-    fontSize: '16px',
+    fontSize: '10px',
     fontWeight: 'bold'
   },
   imgExt:{

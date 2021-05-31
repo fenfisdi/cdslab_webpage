@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => ({ 
   root: {
     flexGrow: 1,
+    marginTop: '30px',
+    width: '100%'
   },
   paper: {
     padding: theme.spacing(2),
@@ -22,7 +24,11 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
   variables : {
     textAlign: 'center',
     height: '52px',
-    overflow: 'auto'
+    overflow: 'auto',
+    display: 'flex',
+    'justify-content': 'center',
+    'align-content': 'center',
+    'flex-direction': 'column'
   },
   plot:{
     height: '200px'
@@ -41,5 +47,12 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
     width: '100%',
     color: '#929292',
     fontSize: '40px'
+  },
+  color: {
+    background: '#ECEFF1'
+  },
+  review:{
+    width: '100%',
+    display: 'inline-flex'
   }
 }))
