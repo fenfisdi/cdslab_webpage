@@ -1,24 +1,19 @@
 import React,{ useState } from 'react'
 import {TableComponent} from '../../../components/UserManagement/ShowTableComponent/index'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
-import SaveIcon from '@material-ui/icons/Save'
 import FullWidthTabs from '../../../components/Taps'
 import { UserManagementPageMainContainer } from './styles'
 import { userManagementMainPageState } from './state'
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
+import { Container } from '@material-ui/core'
+import userSvg from '../../../assets/images/management/users_color.svg'
+import toolsSVG from '../../../assets/images/management/tools-solid.svg'
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-}))
 const UserManagementMainPage = () => {
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { data } = userManagementMainPageState({ showSnack, setShowSnack })
 
 
-  const classes = useStyles()
   const isRoot = true
   
   const userAdmins = data && data.filter(itemData=>{
@@ -35,36 +30,35 @@ const UserManagementMainPage = () => {
       label: 'Users Management',
       path:  'usersManagement',
       disabled : false,
-      icon : 'fas fa-users',
-      iconType: 'icon'
+      icon: userSvg,
+      iconType: 'svg'
     },
     {
       id: 2,
       label: 'Sys Management',
       path: 'sysManagement',
       disabled : true,
-      icon: 'fas fa-tools',
-      iconType: 'icon'
+      icon: toolsSVG,
+      iconType: 'svg'
     },
   ]
 
   return(
     <>
       <FullWidthTabs tabs={tab} idTab={1} />
-      <UserManagementPageMainContainer>
-        <TableComponent row={users}/>
-        {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          className={classes.button}
-          startIcon={<SaveIcon />}
-          onClick={()=>{console.log(data)}}
-        >
-        Save
-        </Button>
-      </UserManagementPageMainContainer>
+      <Container maxWidth={'sm'}>
+        <UserManagementPageMainContainer>
+          <TableComponent row={users}/>
+          {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
+          <CompartmentalButton
+            justify='flex-end'
+            alignItems='center'
+            text='Save changes'
+            disabled={false}
+            icon='fas fa-save'
+          />
+        </UserManagementPageMainContainer>
+      </Container>
     </>
   )
 }

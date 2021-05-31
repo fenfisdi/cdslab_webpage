@@ -1,5 +1,6 @@
-import notesPixel from '../assets/images/notes_pixel_perfect.svg'
-import plusPixel from '../assets/images/plus__pixel_buddha.svg'
+import SvgNote from '../assets/icons/SvgNote'
+import SvgPlus from '../assets/icons/SvgPlus'
+
 
 export const COMPARTMENTAL_FIELDS = {
   SIR:{
@@ -314,9 +315,9 @@ export const INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION ={
 
 /********* CONST OPTIONS ***** */
 export const OPTIONS_PREDEFINED_MODELS = [
-  {name:'SIR',indetifier:MODEL_IDENTIFIERS.SIR},
-  {name:'SEIR',indetifier:MODEL_IDENTIFIERS.SEIR},
-  {name:'SEIRV',indetifier:MODEL_IDENTIFIERS.SEIRV}]
+  {name:'SIR',indetifier:MODEL_IDENTIFIERS.SIR,ruta:'chooseSimulation'},
+  {name:'SEIR',indetifier:MODEL_IDENTIFIERS.SEIR,ruta:'chooseSimulation'},
+  {name:'SEIRV',indetifier:MODEL_IDENTIFIERS.SEIRV,ruta:'chooseSimulation'}]
 
 
 export const OPTIONS_SIMULATION_TYPE = [
@@ -329,16 +330,18 @@ export const OPTIONS_ADJUST_PARAMETERS = [
 
 export const OPTIONS_COMPARTMENTAL_MAIN = [
   {
-    titleIcon:plusPixel,  
+    titleIcon: SvgPlus,  
     name: 'New simulation',
     indetifier: 'new_simulation',
     url: 'compartmentalModels/newSimulations',
+    ruta: 'newSimulations'
   },
   {
-    titleIcon:notesPixel,
+    titleIcon:SvgNote,
     name: 'My simulations',
     indetifier: 'my_simulations',
-    url: ''
+    url: '',
+    ruta: 'mySimulations'
   }
 ]
 
@@ -346,13 +349,15 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
   {
     name: 'Optimize parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
-    url: ''
+    url: '',
+    ruta: 'configureParameters'
   },
   {
     
     name: 'Fixed parameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
-    url: ''
+    url: '',
+    ruta: 'fixedParameters'
   }
 ]
 

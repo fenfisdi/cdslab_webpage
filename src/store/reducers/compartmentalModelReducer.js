@@ -19,7 +19,8 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_LOAD,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
-  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA
+  COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
+  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY
 } from '../../actions/types/compartmentalModelTypes'
 
 
@@ -64,6 +65,10 @@ export const initialState = {
       data: null,
       error: null,
       errorData: null,
+    },
+    chooseDataSource:{
+      nextStep:false,
+      pathname:''
     },
     loading: false
   }
@@ -154,6 +159,15 @@ export const compartmentalModelReducer = (state, action) => {
   case COMPARTMENTAL_MODEL_NEXT_STEP_FILE_UPLOAD_PROPERTY:
     return {
       ...state, loading: false, simulationFileUpload: { ...state.simulationFileUpload, nextStep:action.payload }
+    } 
+
+  case COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY:
+    return {
+      ...state, loading: false, 
+      chooseDataSource: { 
+        ...state.chooseDataSource, 
+        nextStep:action.payload.nextStep, 
+        pathname:action.payload.pathname }
     } 
 
   case COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA:

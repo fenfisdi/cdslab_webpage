@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
+import { usePath } from '../../../components/PathContext'
 
 export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) => {
 
@@ -19,11 +20,13 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
     },
     dispatch
   } = useStore()
-  
+  const {setPath}  = usePath()
+
   const {
     findCompartmentalSimulation,
     findPredefinedModel,
-    storeCompartmentalFileUpload } = useCompartmentalModelActions(dispatch)
+    storeCompartmentalFileUpload,
+    updateNextStepFileUploadProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
@@ -52,9 +55,10 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
         }
       )
       history.push({ 
-        pathname: '/compartmentalModels/reviewConfigurationInformation',
+        pathname: '/compartmentalModels/chooseDate',
         search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
       })
+      updateNextStepFileUploadProperty(false)
     } else if (simulationFileUpload.error && simulationFileUpload.errorData != null) {
       setShowSnack(
         {
@@ -85,6 +89,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
 
   const executeRequestUploadData = ({ formData }) => {
     const { name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
+    const { modelData: { identifier: model_id } } = predefinedModelSelected
+    const { identifier:indentifierParam} = dataCurrentSimulation
     state_variable_limits.map((stateVariable) => {
       const {label} = stateVariable
       if (label.toLowerCase() == formData.get('stateVariable').toLowerCase()){
@@ -100,6 +106,8 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
       'state_variable_limits':state_variable_limits,
       'parameter_type':parameter_type
     },identifier,formData)
+    
+    setPath([{name: 'compartmentalModels'},{name: 'reviewConfigurationInformation',parameters: `?simulation_identifier=${indentifierParam}&model_id=${model_id}`}])
   }
 
   return {

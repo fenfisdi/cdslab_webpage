@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useCompartmentalConfigureParametersPageState } from './state'
 import ConfigurableParametersForm from '../../../components/CompartmentalModels/ConfigurableParametersForm'
 import SnackbarComponent from '@components/ui/Snackbars'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
-import { CompartmentalConfigureParametersSection,CompartmentalConfigureParametersTitle } from './styles'
+import { CompartmentalConfigureParametersSection } from './styles'
+import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -30,11 +31,7 @@ const CompartmentalConfigureParametersPage = () => {
         <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
       </Grid>
 
-      <CompartmentalConfigureParametersTitle>
-        <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'18px', 'marginBottom':'18px'}}>
-          Configure parameters values 
-        </Typography>
-      </CompartmentalConfigureParametersTitle>
+      <SubtitleCommon text='Configure parameters values' />
 
       {modelData && modelData.parameters && <ConfigurableParametersForm
         parameters={modelData.parameters}

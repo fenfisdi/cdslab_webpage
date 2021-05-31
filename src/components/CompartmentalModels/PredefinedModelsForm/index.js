@@ -8,42 +8,47 @@ import {
   CompartmentalPredefinedModelFormTitle,
   CompartmentalPredefinedModelFormInput } from './styles'
 import { Input } from '../../ui/Input'
+import { usePathBreadCrums } from '../../../helpers'
 
 
 const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   const classes = usePredefinedModelsStyles()
+  const {handlePathBreadCrums } = usePathBreadCrums()
   const {
     setModelData,
     simulationName
   } = usePredefinedModelsState({ handleClickPredefinedModels })
 
+  const handleEventEmitted = (cardData) => {
+    handlePathBreadCrums('chooseSimulation')
+    setModelData(cardData) 
+  }
   return (
     <CompartmentalPredefinedModelForm>
-
-      <CompartmentalPredefinedModelFormTitle>
-        <Typography variant="body2" component="p" className={classes.title}>
-          Choose one of the predefined models
-        </Typography>
-      </CompartmentalPredefinedModelFormTitle>
-
       <CompartmentalPredefinedModelFormInput>
+        <span><strong>Name your simulation:</strong></span>
         <Input
           disabled={false}
           required
-          fullWidth
+          // fullWidth
           variant="outlined"
           margin="normal"
           autoComplete="simulationName"
           {...simulationName}
         />
       </CompartmentalPredefinedModelFormInput>
+      <CompartmentalPredefinedModelFormTitle>
+        <Typography variant="body2" component="p" className={classes.title}>
+          Choose one of the predefined models
+        </Typography>
+      </CompartmentalPredefinedModelFormTitle>
 
       {options && options.length>0 && <ModelCard
         justify="center"
         alignItems="center"
         direction="column"
         options={options}
-        eventEmitted={(data) => { setModelData(data) }}
+        eventEmitted={(cardData) => handleEventEmitted(cardData)}
         disabled={simulationName && simulationName.value ? false : true}
       />}
   

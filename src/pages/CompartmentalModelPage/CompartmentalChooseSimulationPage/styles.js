@@ -8,6 +8,15 @@ export const CompartmentalChooseSimulationSection = styled.section`
   align-items: center;
   width: 100%;`
 
+export const CompartmentalChooseSimulationForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top:5%;
+  `
+
 
 export const CompartmentalChooseSimulatioFormTitle = styled.section`
   display: flex;

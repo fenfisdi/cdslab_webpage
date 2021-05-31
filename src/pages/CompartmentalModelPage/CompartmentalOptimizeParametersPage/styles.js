@@ -15,3 +15,6 @@ export const CompartmentalOptimizeParametersTitle= styled.section`
   justify-content: center;
   align-items: center;
   width: 50%;`
+
+export const CompartmentalOptimizeParametersContainerModelCard= styled.div`
+margin-top: 30px;`

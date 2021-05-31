@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
-import { useParametersFormStyle } from './styles'
+import { useParametersFormStyle,ParametersFormHeader,ParametersFormHeaderItem } from './styles'
 
 
 const ParametersForm = ({fields, fieldParameters}) => {
@@ -15,23 +15,43 @@ const ParametersForm = ({fields, fieldParameters}) => {
       container
       item 
     >
+      <ParametersFormHeader>
+        <ParametersFormHeaderItem justifyContent="flex-end" alignItems="center">
+          <span>Parameter</span>
+        </ParametersFormHeaderItem>
+        <ParametersFormHeaderItem justifyContent="center" alignItems="center">
+          <span>Configuration Type</span>      
+        </ParametersFormHeaderItem>
+        <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
+          <span>Value</span>
+        </ParametersFormHeaderItem>
+      </ParametersFormHeader>
       {fieldParameters && fieldParameters.map((field,index)=>{
         const {label, representation, unit } = field
         const {helperText}= fields[label]
         delete fields[label]['helperText']
         
         return (
-          <Grid key={index}  item container xs={12} direction="column" justify="center" alignItems="center">
+          <Grid
+            key={index}  
+            item 
+            container xs={12} 
+            direction="column" 
+            justify="center" 
+            alignItems="center" 
+            style={{'background':' #ECEFF1',
+              'margin-top': '10px'}}>
             <Grid item container xs={12} key={index} direction="row" justify="center" alignItems="center" spacing={2}>
               <TitleComponent
                 xs={4}
                 justify='flex-end'
                 alignItems='center'
                 title={label}
-                unit={representation}
+                unit={`(${representation})`}
                 variant='h6'
                 key={index}
               />
+              <Grid xs={1}></Grid>
               <Grid item container xs={2}>
                 <Input
                   disabled={false}
@@ -41,7 +61,8 @@ const ParametersForm = ({fields, fieldParameters}) => {
                   autoComplete="name"
                   {...fields[label]}  
                 />              
-              </Grid>        
+              </Grid>  
+              <Grid xs={1}></Grid>      
               <Grid item container xs={4} justify="flex-start" alignItems="center">
                 {unit}
               </Grid>

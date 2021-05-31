@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-
+import styled from 'styled-components'
 export const useParametersFormStyle = makeStyles(() => ({
   helperText: {
     '&.error':{
@@ -14,3 +14,30 @@ export const useParametersFormStyle = makeStyles(() => ({
     }
   }
 }))
+
+export const ParametersFormHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background:#CFD8DC; 
+  margin-top:10px;
+  padding:10px;
+  `
+export const ParametersFormHeaderItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content:${props => props.justifyContent};
+  align-items:${props => props.alignItems};
+  width: 100%;
+  font-weight:400;
+  color:#000000;
+  `
+
+export const ParametersFormBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;`

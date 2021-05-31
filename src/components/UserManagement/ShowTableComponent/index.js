@@ -13,7 +13,7 @@ export const TableComponent=({adminTable, row}) => {
   return (
     
     <Grid className={classes.margin}>
-      <Grid container spacing={1} justify="center" alignItems="flex-end">
+      <Grid container spacing={1} justify="left" alignItems="flex-end">
         <Grid item>
           <SearchIcon />
         </Grid>

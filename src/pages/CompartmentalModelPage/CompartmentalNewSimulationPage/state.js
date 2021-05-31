@@ -9,8 +9,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
       compartmentalModel: { 
         loading, 
         predefinedModels:{data:predefinedModelsList,error,errorData}, 
-        predefinedModelSelected, 
-        currentSimulation }
+        predefinedModelSelected }
     },
     dispatch
   } = useStore()
@@ -28,14 +27,14 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
       getPredefinedModels()
     }
 
-    if(!isEmpty(predefinedModelSelected) && currentSimulation.data != null){
+    if(!isEmpty(predefinedModelSelected)){
       storePredefinedModelSelected({})
       setDefinitionCompartmentalSimulation(null)
       setDefinitionCompartmentalFolderSimulation(null)
       setDefinitionCompartmentalExecuteSimulation(null)
       setDefinitionFileDataProperty(null)
     }
-  }, [predefinedModelsList]) 
+  }, []) 
 
   useEffect(()=>{
     if(error == true){
