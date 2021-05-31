@@ -59,7 +59,7 @@ export const useCompartmentalChooseSimulationPageState = (
           show: true,
           success: false,
           error: true,
-          errorMessage: simulationFolderInformation.errorData.detail
+          errorMessage: simulationFolderInformation.errorData.message
         }
       )
     } else if (simulationFolderInformation.data !=null && currentSimulation.data != null) {

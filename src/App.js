@@ -17,6 +17,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { MiniLoader } from './components/layouts/MiniLoader'
 import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 import { PathProvider } from './components/PathContext'
+import SysManagementState from './context/SysManagement/sysManagementState'
 
 const App = () => {
   const {
@@ -87,7 +88,7 @@ const App = () => {
                 />
                 <PrivateRoute
                   path="/management"
-                  component={<UserManagementPage />}
+                  component={<SysManagementState><UserManagementPage /></SysManagementState>}
                 />
                 <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
                 <Route exact path="/accountRecovery" component={AccountRecoveryPage} />

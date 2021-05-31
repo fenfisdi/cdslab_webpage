@@ -12,6 +12,7 @@ import {  usePath } from '../PathContext'
 const useStyles = makeStyles(() => ({
   separador: {
     fontSize: '16px',
+    marginTop: '10px'
   },
 }))
 

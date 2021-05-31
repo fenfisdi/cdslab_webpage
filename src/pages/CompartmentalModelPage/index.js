@@ -5,7 +5,7 @@ import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
-import Breadcrumbs from '../../components/Breadcrumbs'
+
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
   const CompartmentalMainPage = React.lazy(() => import('./CompartmentalMainPage'))
@@ -45,7 +45,7 @@ const CompartmentalModelPage = () => {
     <>
       <FullWidthTabs tabs={tabs} idTab={1}/>
       <CompartmentalModelPageContainer>  
-        <Breadcrumbs  />      
+        {/* <Breadcrumbs  />       */}
         <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
           <Switch>
             <Route path={match.path} exact component={CompartmentalMainPage} />

@@ -3,9 +3,11 @@ import {TableComponent} from '../../../components/UserManagement/ShowTableCompon
 import FullWidthTabs from '../../../components/Taps'
 import { UserManagementPageMainContainer } from './styles'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
+import { Container } from '@material-ui/core'
+import userSvg from '../../../assets/images/management/users_color.svg'
+import toolsSVG from '../../../assets/images/management/tools-solid.svg'
 
 const UserManagementMainPage = () => {
-
   const isRoot = true
   
   const tabs = [
@@ -14,32 +16,35 @@ const UserManagementMainPage = () => {
       label: 'Users Management',
       path:  'usersManagement',
       disabled : false,
-      icon : 'fas fa-users',
-      iconType: 'icon'
+      icon: userSvg,
+      iconType: 'svg'
     },
     {
       id: 2,
       label: 'Sys Management',
       path: 'sysManagement',
       disabled : true,
-      icon: 'fas fa-tools',
-      iconType: 'icon'
+      icon: toolsSVG,
+      iconType: 'svg'
     },
   ]
+
   return(
     <>
       <FullWidthTabs tabs={tabs} idTab={1} />
-      <UserManagementPageMainContainer>
-        <TableComponent/>
-        {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
-        <CompartmentalButton
-          justify='center'
-          alignItems='center'
-          text='Save changes'
-          disabled={false}
-          icon='fas fa-save'
-        />
-      </UserManagementPageMainContainer>
+      <Container maxWidth={'sm'}>
+        <UserManagementPageMainContainer>
+          <TableComponent/>
+          {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
+          <CompartmentalButton
+            justify='flex-end'
+            alignItems='center'
+            text='Save changes'
+            disabled={false}
+            icon='fas fa-save'
+          />
+        </UserManagementPageMainContainer>
+      </Container>
     </>
   )
 }
