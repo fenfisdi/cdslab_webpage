@@ -19,7 +19,7 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   
   useEffect(() => {
     
-    if(isNull(data) && error!=true){
+    if(isNull(data) && !error){
       getUsersListData()
     }
     if(!isNull(data)){
@@ -28,7 +28,7 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   },[data])
 
   useEffect(()=>{
-    if(error == true){
+    if(error){
       setShowSnack(
         {
           ...showSnack,

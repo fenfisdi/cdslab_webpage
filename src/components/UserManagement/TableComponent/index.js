@@ -12,28 +12,6 @@ import { TableHeaderComponent } from './TableHeadComponent/index'
 import { useTableComponentStyles } from './styles'
 import {useTableComponentState} from './state'
 
-/* function createData(name, email, active) {
-  return { name, email, active }
-}
-
-const rows = [
-  createData('Andrea', 'andrea@example.com', false),
-  createData('Victoria', 'victoria@example.com', true),
-  createData('Clara', 'clara@example.com', true),
-  createData('Diana', 'diana@example.com', true),
-  createData('Alejandro', 'Alejandro@example.com', true),
-  createData('Ramiro', 'ramiro@example.com', false),
-  createData('Santiago', 'santiago@example.com', true),
-  createData('Edgar', 'edgar@example.com', true),
-  createData('Camilo', 'camilo@example.com', true),
-  createData('Johan', 'johan@example.com', false),
-  createData('Kiiron', 'kiiron@example.com', true),
-  createData('Sasha', 'sasha@example.com', true),
-  createData('Odin', 'odin@example.com', true),
-  createData('Dasha', 'dasha@example.com', false),
-  createData('Lola', 'lola@example.com', true),
-  
-] */
 
 export const ShowTableComponent = ({configAdmin, fil, rows }) => {
 
