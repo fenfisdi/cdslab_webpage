@@ -11,7 +11,7 @@ export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) =>
     dispatch
   } = useStore()
   const { requestQrBindingRecover, requestQrSecurityQuestions } = qrAccountRecoveryActions(dispatch)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const history = useHistory()
 
   const redirectToPage = (location) => {
@@ -30,8 +30,8 @@ export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) =>
     requestQrBindingRecover(userForm)
   }
 
-  const handleRequestQrSecurityQuestions = (userForm) => {
-    requestQrSecurityQuestions(userForm)
+  const handleRequestQrSecurityQuestions = (userForm, email) => {
+    requestQrSecurityQuestions(userForm, email)
   }
 
   const updateStep = (int) => {
@@ -71,6 +71,6 @@ export const useAccountRecoveryQrBindingState = ({ showSnack, setShowSnack }) =>
     loading,
     step,
     qrRecovery,
-    qrSecurityQuestions
+    qrSecurityQuestions,
   }
 }

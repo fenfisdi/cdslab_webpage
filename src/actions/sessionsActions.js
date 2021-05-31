@@ -13,7 +13,7 @@ export const useSessionActions = (dispatch) => {
  * @param {*} loginInfo {username, password}
  */
   const login = async (loginInfo) => {
-    console.log({ LOGIN_ENABLED })
+    
     if (!LOGIN_ENABLED) {
       dispatch({
         type: SESSION_LOGIN,

@@ -27,7 +27,7 @@ const categories = [
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/ModelSettingsPage' },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/profile' },
     ]
   }
 ]
