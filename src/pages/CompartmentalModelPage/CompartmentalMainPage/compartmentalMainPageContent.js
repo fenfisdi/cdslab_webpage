@@ -12,7 +12,7 @@ export const CompartmentalMainPageContent = () => {
   const {handlePathBreadCrums } = usePathBreadCrums()
 
   const handleEventEmitted = (cardData) => {
-    handlePathBreadCrums(cardData.ruta)
+    handlePathBreadCrums(cardData.ruta,cardData.name)
     cardData.url && history.push( cardData.url )
   }
 

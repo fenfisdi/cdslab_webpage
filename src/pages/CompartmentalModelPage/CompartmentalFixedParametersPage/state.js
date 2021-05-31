@@ -69,7 +69,7 @@ export const useCompartmentalFixedParametersPageState = ({showSnack, setShowSnac
   const executeRequestConfigureParametersFixed =(fieldsValues)=>{
     const {  name,identifier,parameter_type,state_variable_limits } = dataCurrentSimulation
     const {modelData:{identifier:model_id}}=predefinedModelSelected
-    handlePathBreadCrums('stateVariables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
+    handlePathBreadCrums('stateVariables','State Variables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
     fieldsValues.map((field)=>{
       field.type = 'fixed'
     })

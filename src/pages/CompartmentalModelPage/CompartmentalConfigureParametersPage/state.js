@@ -77,7 +77,7 @@ export const useCompartmentalConfigureParametersPageState = ({showSnack, setShow
   const executeRequestConfigureParameters =(option)=>{    
     const {  name,identifier,state_variable_limits,parameter_type } = dataCurrentSimulation
     const {modelData:{identifier:model_id}}=predefinedModelSelected
-    handlePathBreadCrums('stateVariables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
+    handlePathBreadCrums('stateVariables','State Variables',`?simulation_identifier=${identifier}&model_id=${model_id}`)
     updateCompartmentalSimulation({
       'name':name,
       'parameters_limits': option,
