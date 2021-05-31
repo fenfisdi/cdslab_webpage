@@ -103,7 +103,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled} list={rows}/></TableCell>
+                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled} list={rows} user={row}/></TableCell>
                     </TableRow>
                   )
                 })}
