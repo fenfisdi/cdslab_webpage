@@ -10,7 +10,7 @@ export const managementActions = (dispatch)=>{
     
     getUsersList()
       .then((response) => {
-        console.log(response)
+        
         dispatch({
           type: USERS_LIST_SUCCESS,
           payload: response.data.data

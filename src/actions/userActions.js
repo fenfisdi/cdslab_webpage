@@ -46,7 +46,7 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: VALIDATION_QR_LOADING })
     validateQrService(userQrValidation)
       .then((response) => {
-        console.log({ response })
+        
         dispatch({
           type: VALIDATION_QR_SUCCESS,
           payload: response.data

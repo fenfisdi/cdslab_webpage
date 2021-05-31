@@ -6,9 +6,8 @@ export const ActiveComponent = ({isActive, user}) => {
   const [state, setState] = useState({isActive})
 
   const changeActive=()=>{
-    console.log(user)
     user['is_enabled']=!user.is_enabled
-    console.log(user)
+  
   }
 
   const handleChange = (event) => {

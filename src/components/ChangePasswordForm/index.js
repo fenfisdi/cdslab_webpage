@@ -50,7 +50,7 @@ const ChangePasswordForm = () => {
             </Grid>
           </Grid>
           <Button
-            onClick={console.log(1)}
+            onClick={{}}
             variant="contained"
             color="primary"
           >

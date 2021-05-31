@@ -26,7 +26,7 @@ const QrBindingRecoverySecurityQuestions = ({loading, questions, handleEventEmit
     for (var key in fields) {
       
       isFormValid = fields[key].value?.length > 0 && fields[key].errors?.length > 0
-      console.log(isFormValid)
+      
       if(!isFormValid){
         break
       }
