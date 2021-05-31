@@ -37,10 +37,7 @@ export const useMySimulationActions = (dispatch) => {
       })
       .catch((error) => {
         const { response: { data } } = error
-        dispatch({
-          type: MY_SIMULATION_ERROR,
-          payload: data
-        })
+        errorSimulation(data)
       })
   }
 
@@ -69,10 +66,7 @@ export const useMySimulationActions = (dispatch) => {
       .catch((error) => {
         if(error.response) {
           const { response: { data } } = error
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload: data
-          })
+          errorSimulation(data)
         }else if (error.request) {
           dispatch({
             type: MY_SIMULATION_ERROR,
@@ -95,10 +89,7 @@ export const useMySimulationActions = (dispatch) => {
       .catch((error) => {
         if(error.response) {
           const { response: { data } } = error
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload: data
-          })
+          errorSimulation(data)
           
         }else if (error.request) {
           dispatch({
@@ -116,13 +107,16 @@ export const useMySimulationActions = (dispatch) => {
     requestDeleteSimulations(row.identifier).then(() => {
       dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
     })
-      .catch((error) => {
-        const { response: { data } } = error
-        dispatch({
-          type: MY_SIMULATION_ERROR,
-          payload: data
-        })
+      .catch(({ response: { data } }) => {
+        errorSimulation(data)
       })
+  }
+
+  const errorSimulation = (data) =>{
+    dispatch({
+      type: MY_SIMULATION_ERROR,
+      payload: data
+    })
   }
 
   const getExecution = async () => {
