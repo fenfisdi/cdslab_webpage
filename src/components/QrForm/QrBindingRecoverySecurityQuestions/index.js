@@ -36,7 +36,7 @@ const QrBindingRecoverySecurityQuestions = ({loading, questions, handleEventEmit
 
   const handleClickButton = () => {
     let answers = []
-    Object.keys(fields).map(function(key, index) {
+    Object.keys(fields).forEach(function(key, index) {
       const itemAnswer = {
         question:'',
         answer: ''
