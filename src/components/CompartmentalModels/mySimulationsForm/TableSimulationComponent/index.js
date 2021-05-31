@@ -1,5 +1,4 @@
-import { Table } from '@material-ui/core'
-import { TableRow,TableCell,TableBody,Grid,TableHead,TablePagination } from '@material-ui/core'
+import { TableRow,TableCell,TableBody,Grid,TableHead,TablePagination,Table } from '@material-ui/core'
 import React, { useState } from 'react'
 import { CheckBoxComponent } from '../CheckBoxComponent'
 import imgPreview from '../../../../assets/images/document_freepik.svg'

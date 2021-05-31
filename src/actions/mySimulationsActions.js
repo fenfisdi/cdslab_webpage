@@ -117,18 +117,11 @@ export const useMySimulationActions = (dispatch) => {
       dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
     })
       .catch((error) => {
-        if(error.response) {
-          const { response: { data } } = error
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload: data
-          })
-        }else if (error.request) {
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload:{ message:'The request was made but no response was received' }
-          })
-        }
+        const { response: { data } } = error
+        dispatch({
+          type: MY_SIMULATION_ERROR,
+          payload: data
+        })
       })
   }
 
