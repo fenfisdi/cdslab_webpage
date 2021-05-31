@@ -2,9 +2,7 @@ import { Button, makeStyles, Table, TableBody, TableRow } from '@material-ui/cor
 import React from 'react'
 import CompartmentalButton from '../CompartmentalButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import { 
-  ExtraParamsItem, 
-  ReviewSimulationSettingsBody,  } from './styles'
+import { ExtraParamsItem } from './styles'
 import { TableCell } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
@@ -17,7 +15,10 @@ const useStyles = makeStyles(() => ({
     padding: '7px',
     borderRadius: '6px',
     marginTop: '10px',
-    fontSize: '20px'
+    fontSize: '20px',
+    width: '25%',
+    display: 'block',
+    margin: '0 auto'
   }
 }))
 
@@ -72,7 +73,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   return (
 
-    <ReviewSimulationSettingsBody>
+    <div>
       <Table>
         <TableBody>
           <TableRow className={classes.rowColor}>
@@ -147,7 +148,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
         </div>  
       )
       }
-    </ReviewSimulationSettingsBody>
+    </div>
   )
 }
 

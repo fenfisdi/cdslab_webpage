@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles'
 export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => ({ 
   root: {
     flexGrow: 1,
-    marginTop: '30px',
     width: '100%'
   },
   paper: {
@@ -31,7 +30,7 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
     'flex-direction': 'column'
   },
   plot:{
-    height: '200px'
+    height: '400px'
   },
   imgExt:{
     width: '30px'
@@ -54,5 +53,9 @@ export const useCompartamentalMySimulationPreviewStyles = makeStyles((theme) => 
   review:{
     width: '100%',
     display: 'inline-flex'
+  },
+  contentReview: {
+    display: 'block',
+    margin: '0 auto'
   }
 }))
