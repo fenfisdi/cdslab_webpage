@@ -1,12 +1,9 @@
 import { Table } from '@material-ui/core'
-import { TableRow,TableCell,TableBody,Grid } from '@material-ui/core'
+import { TableRow,TableCell,TableBody,Grid,TableHead,TablePagination } from '@material-ui/core'
 import React, { useState } from 'react'
-import TitleIcon from '../../../layouts/TitleIcon'
 import { CheckBoxComponent } from '../CheckBoxComponent'
 import imgPreview from '../../../../assets/images/document_freepik.svg'
 import { Link } from 'react-router-dom'
-import { TablePagination } from '@material-ui/core'
-import { TableHead } from '@material-ui/core'
 
 export const TableSimulationsComponent = (props) => {
 

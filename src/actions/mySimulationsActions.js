@@ -14,7 +14,6 @@ import {
   requestListSimulations, 
   requestListSimulationsFiles 
 } from '../services/simulationsServices'
-const { convertCSVToArray } = require('convert-csv-to-array')
 
 export const useMySimulationActions = (dispatch) => {
 
@@ -37,18 +36,11 @@ export const useMySimulationActions = (dispatch) => {
         dispatch({ type: MY_SIMULATION_SET_LIST, payload: dataList })
       })
       .catch((error) => {
-        if(error.response) {
-          const { response: { data } } = error
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload: data
-          })
-        }else if (error.request) {
-          dispatch({
-            type: MY_SIMULATION_ERROR,
-            payload:{ message:'The request was made but no response was received' }
-          })
-        }
+        const { response: { data } } = error
+        dispatch({
+          type: MY_SIMULATION_ERROR,
+          payload: data
+        })
       })
   }
 
@@ -121,28 +113,23 @@ export const useMySimulationActions = (dispatch) => {
   const deleteSimulation = async (row) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
     dispatch({ type: MY_SIMULATION_LOADING })
-    try {
-      requestDeleteSimulations(row.identifier).then(() => {
-        dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
+    requestDeleteSimulations(row.identifier).then(() => {
+      dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
+    })
+      .catch((error) => {
+        if(error.response) {
+          const { response: { data } } = error
+          dispatch({
+            type: MY_SIMULATION_ERROR,
+            payload: data
+          })
+        }else if (error.request) {
+          dispatch({
+            type: MY_SIMULATION_ERROR,
+            payload:{ message:'The request was made but no response was received' }
+          })
+        }
       })
-        .catch((error) => {
-          if(error.response) {
-            const { response: { data } } = error
-            dispatch({
-              type: MY_SIMULATION_ERROR,
-              payload: data
-            })
-          }else if (error.request) {
-            dispatch({
-              type: MY_SIMULATION_ERROR,
-              payload:{ message:'The request was made but no response was received' }
-            })
-          }
-        })
-    } catch (err) {
-      const error = err.message
-      dispatch({ type: MY_SIMULATION_ERROR, payload: error })
-    }
   }
 
   const getExecution = async () => {

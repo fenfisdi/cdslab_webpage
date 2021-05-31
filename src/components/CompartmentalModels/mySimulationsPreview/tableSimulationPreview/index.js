@@ -1,9 +1,4 @@
-import { TableHead } from '@material-ui/core'
-import { TableCell } from '@material-ui/core'
-import { TableBody } from '@material-ui/core'
-import { Button } from '@material-ui/core'
-import { TableRow } from '@material-ui/core'
-import { Table } from '@material-ui/core'
+import { TableHead,TableCell,TableBody,TableRow,Table,Button,TablePagination,Grid } from '@material-ui/core'
 import React, { useState } from 'react'
 import TitleIcon from '../../../layouts/TitleIcon'
 import GetAppIcon from '@material-ui/icons/GetApp'
@@ -12,8 +7,6 @@ import imgGrap from'../../../../assets/images/line-graph_pixelmeetup.svg'
 import imgPreview from '../../../../assets/images/document_freepik.svg'
 import { useTableSimulationPreview } from './styles'
 import { useMySimulationsPreviewState } from './state'
-import { TablePagination } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
 
 export const TableMySimulationPreview = (props) => {
 

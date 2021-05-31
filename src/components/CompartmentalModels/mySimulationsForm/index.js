@@ -1,19 +1,17 @@
-import { Input } from '@material-ui/core'
-import { Button } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import { Input,Button,Grid } from '@material-ui/core'
+import React, {useState } from 'react'
 import theme from '../../../styles/cdslabTheme'
 import { SelectComponent } from '../../ui/Select'
 import { useMySimulationsForm } from './state'
 import { useSimulationsStyles } from './styles'
 
-export const MySimulationsForm = ({ eventEmitter, loading }) => {
+export const MySimulationsForm = ({ eventEmitter }) => {
 
   const classes = useSimulationsStyles(theme)
   const fieldsData = useMySimulationsForm()
   const [disabledMonth, setDisabledMonth] = useState(true)
   const [disabledDay, setDisabledDay] = useState(true)
-  const [isValid, setIsvalid] = useState(false)
+  const [isValid] = useState(false)
   const {
     search,
     modelType,

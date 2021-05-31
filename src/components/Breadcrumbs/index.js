@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Breadcrumbs as MUIBreadcrumbs,
-  Icon,
   Link,
   makeStyles,
   Typography

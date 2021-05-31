@@ -25,6 +25,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
       mySimulations: { mySimulationSelected }
     }
   } = useStore()
+
   const {
     name,
     model_name,
@@ -34,6 +35,20 @@ const CompartamentalMySimulationsPreviewPage = () => {
     state_variable_limits,
     parameters_limits
   } = mySimulationSelected
+
+  const renderChartPlot = () => (
+    plotJson ?
+      (<Grid  item xs={12} className={classes.plot}>
+        <Plot 
+          {...plotJson}
+        />
+      </Grid>)
+      :
+      (<Grid  item xs={12} className={classes.notPlot}>
+        <div className={classes.divPlot}>GRAPH</div>
+      </Grid>
+      )
+  )
 
   return (
     <div className={classes.root}>
@@ -74,19 +89,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
               <TableMySimulationPreview 
                 setPlotJson={setPlotJson}
               />
-              {
-                plotJson ?
-                  (<Grid  item xs={12} className={classes.plot}>
-                    <Plot 
-                      {...plotJson}
-                    />
-                  </Grid>)
-                  :
-                  (<Grid  item xs={12} className={classes.notPlot}>
-                    <div className={classes.divPlot}>GRAPH</div>
-                  </Grid>
-                  )
-              }
+              {renderChartPlot()}
             </Grid>
           </div>  
         )}

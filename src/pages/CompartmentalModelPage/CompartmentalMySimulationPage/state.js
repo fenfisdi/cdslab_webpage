@@ -74,8 +74,8 @@ export const useComparmentalMySimulationState = () => {
     getExecution()
     setActiveSimulation(row)
   }
-  const handleClickDelete = (rows) =>{
-    rows.map((elem) => {
+  const handleClickDelete = (rowsDelete) =>{
+    rowsDelete.map((elem) => {
       deleteSimulation(elem)
     })
   }

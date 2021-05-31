@@ -1,9 +1,8 @@
-import { Button, makeStyles, Table, TableBody, TableRow } from '@material-ui/core'
+import { Button, makeStyles, Table, TableBody, TableRow,TableCell } from '@material-ui/core'
 import React from 'react'
 import CompartmentalButton from '../CompartmentalButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import { ExtraParamsItem } from './styles'
-import { TableCell } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   rowColor: {

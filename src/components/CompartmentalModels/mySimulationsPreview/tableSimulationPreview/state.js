@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useMySimulationActions } from '../../../../actions/mySimulationsActions'
 import { useStore } from '../../../../store/storeContext'
-import fs from 'fs'
 
 export const useMySimulationsPreviewState = () => {
   const {
