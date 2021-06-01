@@ -7,7 +7,7 @@ import {
 
 export const initialState = {
   authQr: {
-    isValid: false,
+    isValid: localStorage.getItem('token')?true:false,
     loading: false,
     data: null,
     error: null,

@@ -1,21 +1,13 @@
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS } from './validators'
-import {useEffect, useState} from 'react'
 
 
 export const useQrBindingRecoverySecurityQuestionsState = ({numberQuestions}) => {
   /******* form fields  */
-  const [fields, setFields] = useState()
-
-  useEffect(()=>{
-    const fieldsAux = buildFields()
-    setFields(fieldsAux)
-
-  }, [numberQuestions])
   
   const buildFields=()=>{
     const fieldsAux = {}
-    for (let index = 0; index < numberQuestions; index++) {
+    for (let index = 0; index < numberQuestions.length; index++) {
       const email = useInputValue('', VALIDATORS_QR_BINDING_RECOVERY_SECURITY_QUESTIONS.alphabetic, {
         name: 'answer'+index,
         type: 'text',
@@ -23,8 +15,8 @@ export const useQrBindingRecoverySecurityQuestionsState = ({numberQuestions}) =>
       })
       fieldsAux['answer'+index]=email
     }
-    return fieldsAux
+    return fieldsAux 
   }
-   
-  return {fields}
+  
+  return {fields: buildFields()}
 }

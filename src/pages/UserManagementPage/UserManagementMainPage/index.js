@@ -1,16 +1,30 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import {TableComponent} from '../../../components/UserManagement/ShowTableComponent/index'
 import FullWidthTabs from '../../../components/Taps'
 import { UserManagementPageMainContainer } from './styles'
+import { userManagementMainPageState } from './state'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { Container } from '@material-ui/core'
 import userSvg from '../../../assets/images/management/users_color.svg'
 import toolsSVG from '../../../assets/images/management/tools-solid.svg'
 
 const UserManagementMainPage = () => {
+
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const { data } = userManagementMainPageState({ showSnack, setShowSnack })
+
+
   const isRoot = true
   
-  const tabs = [
+  const userAdmins = data && data.filter(itemData=>{
+    return itemData.role.includes('admin')
+  })
+  const users = data && data.filter(itemData=>{
+    return itemData.role.includes('user')
+  })
+ 
+
+  const tab = [
     {
       id: 1,
       label: 'Users Management',
@@ -31,11 +45,11 @@ const UserManagementMainPage = () => {
 
   return(
     <>
-      <FullWidthTabs tabs={tabs} idTab={1} />
+      <FullWidthTabs tabs={tab} idTab={1} />
       <Container maxWidth={'sm'}>
         <UserManagementPageMainContainer>
-          <TableComponent/>
-          {isRoot ? <TableComponent adminTable={isRoot}/> : <></>}
+          <TableComponent row={users}/>
+          {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
           <CompartmentalButton
             justify='flex-end'
             alignItems='center'
@@ -48,4 +62,5 @@ const UserManagementMainPage = () => {
     </>
   )
 }
+
 export default UserManagementMainPage
