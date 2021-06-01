@@ -37,7 +37,7 @@ export const TableSimulationsComponent = (props) => {
         <TableBody>
           {
             rowsFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row,index) => (
+              .map((row) => (
                 <TableRow key={row.name}> 
                   <TableCell padding="checkbox">
                     <CheckBoxComponent 
