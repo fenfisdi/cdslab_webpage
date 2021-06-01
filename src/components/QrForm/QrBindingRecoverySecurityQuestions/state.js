@@ -15,7 +15,7 @@ export const useQrBindingRecoverySecurityQuestionsState = ({numberQuestions}) =>
       })
       fieldsAux['answer'+index]=email
     }
-    return fieldsAux
+    return fieldsAux 
   }
   
   return {fields: buildFields()}
