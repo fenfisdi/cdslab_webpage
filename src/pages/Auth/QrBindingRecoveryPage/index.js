@@ -26,26 +26,24 @@ const RecoveryQrBindingPage = () => {
   const { t } = useContext(languageContext)
   const { data: dataRecovery } = qrRecovery || {}
   const { data: dataSecurityQuestions } = qrSecurityQuestions || {}
+
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
   
-  
   const handleClickRecoveryEmail = (formFields) => {
     const { email } = formFields
     handleRequestQrBindingRecover({
-      email,
+      email
     })
-    localStorage.setItem('email', email)
   }
 
-
   const handleClickSecurityQuestion = (formFields) => {
+    const { email } = dataRecovery || {}
     const { answers } = formFields
-    
     handleRequestQrSecurityQuestions({
-      answers,
-      email:localStorage.getItem('email')
+      email,
+      answers
     })
   }
 
@@ -69,14 +67,13 @@ const RecoveryQrBindingPage = () => {
         messageTitle={t('qrBindingRecovery.messageTitle')} />}
 
       {step == 1 && <QrBindingRecoverySecurityQuestions
-        email={localStorage.getItem('email')}
         loading={loading}
         questions={dataRecovery}
         handleEventEmitted={handleClickSecurityQuestion}
       />}
 
       {step == 2 && <QrBindingRecoveryShowLink
-        qrUrl={dataSecurityQuestions && dataSecurityQuestions.url}
+        qrUrl={dataSecurityQuestions && dataSecurityQuestions.urlPath}
         title={t('qrBindingRecovery.title')}
         handleClick={handleClickRedirect}
       />}

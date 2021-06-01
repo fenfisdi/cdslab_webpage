@@ -33,9 +33,9 @@ export const qrAccountRecoveryActions = (dispatch) => {
     
   }
 
-  const requestQrSecurityQuestions = (userForm, email) => {
+  const requestQrSecurityQuestions = (userForm) => {
     dispatch({ type: QR_ACCOUNT_RECOVERY_LOADING })
-    requestQrSecurityQuestionsService(userForm, email)
+    requestQrSecurityQuestionsService(userForm)
       .then((response) => {
         dispatch({
           type: QR_ACCOUNT_SECURITY_QUESTIONS_SUCCESS,

@@ -28,7 +28,6 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
   const handleClickButton = () => {
     handleClick({ email: email.value })
   }
-  
 
   return (
     <Paper className={classes.formBody}>

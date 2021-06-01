@@ -9,7 +9,7 @@ export const useSysManagementActions = (dispatch) => {
     dispatch({ type: SYS_MANAGEMENT_LOADING })
     getProcessTimeTableData()
       .then((response) => {
-        
+        console.log(response)
         dispatch({
           type: LOAD_SYS_MANAGEMENT_TABLE_DATA,
           payload: response
