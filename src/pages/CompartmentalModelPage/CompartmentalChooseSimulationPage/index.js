@@ -34,7 +34,6 @@ const CompartmentalChooseSimulationPage = () => {
         justify="space-between"
         alignItems="flex-start"
       >
-        <Grid></Grid>
         <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_CHOOSE_SIMULATIONS}/>
       </Grid>

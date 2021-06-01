@@ -3,18 +3,12 @@ import { usePath } from '../components/PathContext'
 export const usePathBreadCrums = () => {
   const {path, setPath} = usePath()
 
-  const handlePathBreadCrums = (ruta,parameters) => {
-    let containsPath = path.find(element => element.name === ruta)
+  const handlePathBreadCrums = (breadCrumbRoute,name,parameters) => {
+    let containsPath = path.find(element => element.breadCrumbRoute === breadCrumbRoute)
     if(!containsPath){
-      if(path){
-        const newPath = [...path,{name: ruta,parameters: parameters}]
-        handlePathSessionStorage(newPath)
-        setPath(newPath)
-      }else{
-        const newPath = [{name: ruta,parameters: parameters}]
-        handlePathSessionStorage(newPath)
-        setPath(newPath)
-      }
+      const newPath = [...path,{name: name,breadCrumbRoute: breadCrumbRoute,parameters: parameters}]
+      handlePathSessionStorage(newPath)
+      setPath(newPath)
     }
   }
 

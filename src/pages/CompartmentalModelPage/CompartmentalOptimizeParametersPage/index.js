@@ -8,6 +8,7 @@ import { useCompartmentalOptimizeParametersPageState } from './state'
 import { CompartmentalOptimizeParametersContainerModelCard, CompartmentalOptimizeParametersSection } from './styles'
 import SnackbarComponent from '@components/ui/Snackbars'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalOptimizeParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -22,7 +23,7 @@ const CompartmentalOptimizeParametersPage = () => {
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS}/>
       </Grid>
      

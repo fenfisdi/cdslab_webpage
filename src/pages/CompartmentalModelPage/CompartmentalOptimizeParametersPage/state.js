@@ -101,7 +101,7 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
         'data_source':dataSource
       },identifier) 
 
-      handlePathBreadCrums('uploadData',`?simulation_identifier=${identefierParam}&model_id=${model_id}`)
+      handlePathBreadCrums('uploadData','Upload Data',`?simulation_identifier=${identefierParam}&model_id=${model_id}`)
     }
     
   }

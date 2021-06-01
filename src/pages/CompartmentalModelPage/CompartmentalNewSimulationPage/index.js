@@ -29,7 +29,6 @@ const CompartmentalNewSimulationPage = ({pathParent}) => {
         direction="row"
         justify="space-between"
         alignItems="center">
-        <Grid></Grid>
         <Grid><Breadcrumbs /></Grid>
         <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
       </Grid>

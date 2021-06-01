@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   Breadcrumbs as MUIBreadcrumbs,
+  Icon,
   Link,
   makeStyles,
   Typography
@@ -42,13 +43,13 @@ const Breadcrumbs = () => {
     if(routeTo === 'chooseSimulation'){
       return false
     }
-    if(routeTo === 'newSimulations' && path.find(element => element.name === 'chooseSimulation')){
+    if(routeTo === 'newSimulations' && path.find(element => element.breadCrumbRoute === 'chooseSimulation')){
       return false
     }
-    if(routeTo === 'compartmentalModels' && path.find(element => element.name === 'chooseSimulation')){
+    if(routeTo === 'compartmentalModels' && path.find(element => element.breadCrumbRoute === 'chooseSimulation')){
       return false
     }
-    if(path.find(element => element.name === 'reviewConfigurationInformation')){
+    if(path.find(element => element.breadCrumbRoute === 'reviewConfigurationInformation')){
       return false
     }
     return true
@@ -56,13 +57,13 @@ const Breadcrumbs = () => {
   
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
-      {path.map(({name,parameters}, index) => {
+      <Icon className="fas fa-plus-circle" style={{ fontSize: 35, color: '#00838F', marginLeft:'10px' }} />
+      {path.map(({name,breadCrumbRoute,parameters}, index) => {
         const isLast = index === path.length - 1
-        
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
-          <Link key={name} onClick={() => handleHistory(name,parameters,index)}>
+          <Link key={name} onClick={() => handleHistory(breadCrumbRoute,parameters,index)}>
             {name}
           </Link>
         )

@@ -8,6 +8,7 @@ import { HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS } from '../../../cons
 import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalConfigureParametersSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -27,7 +28,7 @@ const CompartmentalConfigureParametersPage = () => {
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
       </Grid>
 

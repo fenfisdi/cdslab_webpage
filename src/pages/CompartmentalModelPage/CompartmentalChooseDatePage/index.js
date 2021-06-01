@@ -16,6 +16,7 @@ import { useCompartmentalChooseDatePageState } from './state'
 import { isEmpty } from 'lodash'
 import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalChooseDatePage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -56,7 +57,7 @@ const CompartmentalChooseDatePage = () => {
         justify="space-between"
         alignItems="flex-start"
       >
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS}/>
       </Grid>
 
