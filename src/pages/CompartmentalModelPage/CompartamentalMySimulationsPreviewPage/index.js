@@ -50,9 +50,9 @@ const CompartamentalMySimulationsPreviewPage = () => {
       )
   )
   
-  const handleNameLength = (name) => {
-    if(name.length > 15){
-      return name.substr(0,15) + '...'
+  const handleNameLength = (nameSimulation) => {
+    if(nameSimulation.length > 15){
+      return nameSimulation.substr(0,15) + '...'
     }
   }
   return (
