@@ -6,10 +6,10 @@ import {ShowTableComponent} from '../TableComponent/index'
 import {showTableStyles} from './styles'
 
 
-export const TableComponent=({adminTable, row}) => {
+export const TableComponent=({adminTable}) => {
   const classes = showTableStyles()
   const [ query, setQuery ] = useState('')
-  
+
   return (
     
     <Grid className={classes.margin}>
@@ -19,7 +19,7 @@ export const TableComponent=({adminTable, row}) => {
         </Grid>
         <Grid item>
           <TextField 
-            id="input-with-icon-grid"
+            id="input-with-icon-grid" 
             label="Search user"
             value={query}
             onChange={(e)=>{
@@ -27,7 +27,7 @@ export const TableComponent=({adminTable, row}) => {
             }}
           />
         </Grid>
-        <ShowTableComponent configAdmin={adminTable} rows={row} fil={query}/>
+        <ShowTableComponent configAdmin={adminTable} filter={query}/>
       </Grid>
     </Grid>
   )

@@ -10,7 +10,6 @@ import LoaderComponent from '../../../components/ui/Loader'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalNewSimulationPage = ({pathParent}) => {
-  
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { predefinedModelsList, storePredefinedModelSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
