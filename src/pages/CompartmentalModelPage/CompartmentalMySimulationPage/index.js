@@ -60,7 +60,7 @@ const CompartmentalMySimulationPage = () => {
         (
           <Grid container item xs={12} justify="center" alignItems="center" direction="column" style={{marginTop:'20px'}}>
             <ContainerTitle>
-              <TitleIcon title={'Simulations'} icon={notesPixelIcon}/>
+              <TitleIcon title={'My Simulations'} icon={notesPixelIcon}/>
               <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
             </ContainerTitle>
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">

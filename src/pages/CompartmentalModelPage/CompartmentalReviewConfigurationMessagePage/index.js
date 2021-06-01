@@ -4,6 +4,7 @@ import SupportComponent from '../../../components/SupportComponent'
 import {CompartmentalReviewConfigurationMessageContainer,CompartmentalReviewConfigurationMessageFormTitle,useCompartmentalReviewConfigurationMessageStyles} from './styles'
 import {HELP_INFORMATION_REVIEW_CONFIGURATION_MESSAGE_SIMULATIONS} from '../../../constants/helpInformation'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
  
 
 const CompartmentalReviewConfigurationMessagePage=()=>{
@@ -14,7 +15,7 @@ const CompartmentalReviewConfigurationMessagePage=()=>{
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_REVIEW_CONFIGURATION_MESSAGE_SIMULATIONS}/>
       </Grid>
       

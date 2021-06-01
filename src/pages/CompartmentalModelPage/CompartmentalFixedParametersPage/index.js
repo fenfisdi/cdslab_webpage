@@ -8,7 +8,7 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { useCompartmentalFixedParametersPageState } from './state'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
-
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalFixedParametersPage =()=>{
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -30,7 +30,7 @@ const CompartmentalFixedParametersPage =()=>{
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS}/>
       </Grid>
 

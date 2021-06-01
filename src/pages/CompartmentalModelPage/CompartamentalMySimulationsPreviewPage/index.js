@@ -49,9 +49,15 @@ const CompartamentalMySimulationsPreviewPage = () => {
       </Grid>
       )
   )
-
+  
+  const handleNameLength = (name) => {
+    if(name.length > 15){
+      return name.substr(0,15) + '...'
+    }
+  }
   return (
     <div className={classes.root}>
+
       {loading ? 
         (<LoaderComponent
           width={50}
@@ -61,12 +67,10 @@ const CompartamentalMySimulationsPreviewPage = () => {
         :
         (
           <div>
-            <Grid container xs='12'>
-              <ContainerTitle>
-                <TitleIcon title={name} icon={graphIcon} width={60} height={60} />
-                <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
-              </ContainerTitle>
-            </Grid>
+            <ContainerTitle style= {{width: '100%'}} title={name}>
+              <TitleIcon title={handleNameLength(name)} icon={graphIcon} width={50} height={50} />
+              <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+            </ContainerTitle>
             <Grid container xs='10' className= {classes.contentReview}>
               <ReviewSimulationSettings
                 className= {classes.review}

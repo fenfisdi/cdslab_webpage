@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   Breadcrumbs as MUIBreadcrumbs,
+  Icon,
   Link,
   makeStyles,
   Typography
@@ -56,6 +57,7 @@ const Breadcrumbs = () => {
   
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
+      <Icon className="fas fa-plus-circle" style={{ fontSize: 35, color: '#00838F', marginLeft:'10px' }} />
       {path.map(({name,breadCrumbRoute,parameters}, index) => {
         const isLast = index === path.length - 1
         return isLast ? (

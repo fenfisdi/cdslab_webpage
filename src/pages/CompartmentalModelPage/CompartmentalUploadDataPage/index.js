@@ -8,6 +8,7 @@ import { useCompartmentalUploadDataPageState } from './state'
 import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalUploadDataSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 
 const CompartmentalUploadDataPage = () => {
@@ -42,7 +43,7 @@ const CompartmentalUploadDataPage = () => {
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
 

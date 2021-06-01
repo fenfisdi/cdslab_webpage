@@ -11,6 +11,7 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import { isEmpty } from 'lodash'
 import ReviewSimulationSettings from '../../../components/CompartmentalModels/ReviewSimulationSettings'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalReviewConfigurationInformationPage =()=>{
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -32,7 +33,7 @@ const CompartmentalReviewConfigurationInformationPage =()=>{
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <p></p>
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS}/>
       </Grid>
 
