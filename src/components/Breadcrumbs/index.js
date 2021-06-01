@@ -42,13 +42,13 @@ const Breadcrumbs = () => {
     if(routeTo === 'chooseSimulation'){
       return false
     }
-    if(routeTo === 'newSimulations' && path.find(element => element.breadCrumbRoute === 'chooseSimulation')){
+    if(routeTo === 'newSimulations' && path.find(element => element.name === 'chooseSimulation')){
       return false
     }
-    if(routeTo === 'compartmentalModels' && path.find(element => element.breadCrumbRoute === 'chooseSimulation')){
+    if(routeTo === 'compartmentalModels' && path.find(element => element.name === 'chooseSimulation')){
       return false
     }
-    if(path.find(element => element.breadCrumbRoute === 'reviewConfigurationInformation')){
+    if(path.find(element => element.name === 'reviewConfigurationInformation')){
       return false
     }
     return true
@@ -56,12 +56,13 @@ const Breadcrumbs = () => {
   
   return (
     <MUIBreadcrumbs aria-label="breadcrumb" separator='›' maxItems={3} className={classes.separador} >
-      {path.map(({name,breadCrumbRoute,parameters}, index) => {
+      {path.map(({name,parameters}, index) => {
         const isLast = index === path.length - 1
+        
         return isLast ? (
           <Typography key={name}>{name}</Typography>
         ) : (
-          <Link key={name} onClick={() => handleHistory(breadCrumbRoute,parameters,index)}>
+          <Link key={name} onClick={() => handleHistory(name,parameters,index)}>
             {name}
           </Link>
         )

@@ -83,13 +83,10 @@ export const useCompartmentalChooseSimulationPageState = (
     const { modelData: { identifier: model_id }, simulationName: name } = predefinedModelSelected
     
     let parameter_type=''
-    let nameBreadCrumb = ''
     if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE) {
       parameter_type = SIMULATION_IDENTIFIERS.OPTIMIZE
-      nameBreadCrumb = 'Optimize Parameters'
     } else if (indetifier == INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED) {
       parameter_type = SIMULATION_IDENTIFIERS.FIXED
-      nameBreadCrumb = 'Fixed Parameters'
     }
     storeCompartmentalSimulation({
       'name': name,
@@ -97,7 +94,7 @@ export const useCompartmentalChooseSimulationPageState = (
       'model_id': model_id,
       'parameter_type':parameter_type.toLowerCase()
     })
-    handlePathBreadCrums(ruta,nameBreadCrumb,`?simulation_identifier=${indetifier}&model_id=${model_id}`)
+    handlePathBreadCrums(ruta,`?simulation_identifier=${indetifier}&model_id=${model_id}`)
   }
 
 

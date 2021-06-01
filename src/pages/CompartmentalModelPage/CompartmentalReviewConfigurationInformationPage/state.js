@@ -99,10 +99,7 @@ export const useCompartmentalReviewConfigurationInformationPageState = ({showSna
     
     const { identifier} = dataCurrentSimulation
     executeSimulation(identifier)
-    setPath([
-      {breadCrumbRoute: 'compartmentalModels',name: 'Compartmental Models'},
-      {breadCrumbRoute: 'executionSimulation',name: 'Execution Simulation'}
-    ])
+    setPath([{name: 'compartmentalModels'},{name: 'executionSimulation'}])
   }
 
   return {

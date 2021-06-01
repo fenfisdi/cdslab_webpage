@@ -53,6 +53,5 @@ export const ReviewSimulationSettingsBody = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  margin-top: 30px
+  width: 100%;
 `

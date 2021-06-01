@@ -88,13 +88,10 @@ export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, set
       'parameter_type':parameter_type
     },identifier) 
     if(parameter_type == SIMULATION_IDENTIFIERS.OPTIMIZE.toLowerCase()){
-      handlePathBreadCrums('optimizeParameters','Optimize Parameters',`?simulation_identifier=${identifier}&model_id=${model_id}`)
+      handlePathBreadCrums('optimizeParameters',`?simulation_identifier=${identifier}&model_id=${model_id}`)
     }
     else if(parameter_type == SIMULATION_IDENTIFIERS.FIXED.toLowerCase()){
-      setPath([
-        {breadCrumbRoute: 'compartmentalModels',name: 'Compartmental Models'},
-        {breadCrumbRoute: 'reviewConfigurationInformation',name: 'Review Configuration Information'}
-      ])
+      setPath([{name: 'compartmentalModels'},{name: 'reviewConfigurationInformation'}])
     }
     
     setIsSend(true)

@@ -75,7 +75,7 @@ const SimulationMainPage = () => {
   }
 
   const handleEventEmitted = (cardData) => {
-    handlePathBreadCrums('compartmentalModels','Compartmental Models')
+    handlePathBreadCrums('compartmentalModels')
     cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) 
   }
 

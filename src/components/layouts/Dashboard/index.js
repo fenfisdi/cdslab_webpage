@@ -47,8 +47,7 @@ const styles = {
   },
   footer: {
     padding: theme.spacing(2),
-    background: '#eaeff1',
-    bottom: '0'
+    background: '#eaeff1'
   }
 }
 

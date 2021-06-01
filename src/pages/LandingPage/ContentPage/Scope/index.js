@@ -34,7 +34,7 @@ const Scope = () => {
             <br />
             <div> { SCOPE_TWO_LICENSE } </div>
             <div className={classes.scopeLink} ><a href={SCOPE_TWO_lINK } target='_blank' rel="noreferrer">{ SCOPE_TWO_lINK }</a>  </div>
-            <div className={classes.divImgPython} > <img className={classes.imgPython} src={imgPython} /> </div>
+            <div className={classes.divImgPython} > <img  img className={classes.imgPython} src={imgPython} /> </div>
           </div>
         </div>
       </div>
