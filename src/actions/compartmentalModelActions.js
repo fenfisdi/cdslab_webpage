@@ -79,14 +79,18 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const  setDefinitionDataGetPredefinedModels = (data) => {
+    dispatch({
+      type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
+      payload: data
+    })
+  }
+
   const getPredefinedModels = () => {  
     
     getPredefinedModelsService()
       .then((response) => {
-        dispatch({
-          type: COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
-          payload: response.data.data
-        })
+        setDefinitionDataGetPredefinedModels(response.data.data)
       })
       .catch((error) => {
         if (error.response) {
@@ -274,7 +278,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     updateChooseDataSourceProperty,
     executeSimulation,
     setDefinitionCompartmentalExecuteSimulation,
-    setDefinitionFileDataProperty }
+    setDefinitionFileDataProperty,
+    setDefinitionDataGetPredefinedModels }
 
 
 }
