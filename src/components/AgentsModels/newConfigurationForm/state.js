@@ -34,10 +34,10 @@ export const useNewConfigurationForm = () => {
     label: t('newConfiguration.simulationFinalDate'),
   })
 
-  const iterationName = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.iterationName, {
-    name: 'iterationName',
+  const iterationTime = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.iterationTime, {
+    name: 'iterationTime',
     type: 'number',
-    label: t('newConfiguration.iterationName'),
+    label: t('newConfiguration.iterationTime'),
   })
 
   const populationSize = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.populationSize, {
@@ -78,7 +78,7 @@ export const useNewConfigurationForm = () => {
     nameConfiguration,
     simulationInitialDate,
     simulationFinalDate,
-    iterationName,
+    iterationTime,
     populationSize,
     boxHorizontalSize,
     boxVerticalSize,

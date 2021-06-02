@@ -22,7 +22,9 @@ const AgentsNewConfigurationPage = () => {
       </Grid>
 
       <Grid container item xs={12} >
-        <NewConfigurationForm />
+        <NewConfigurationForm 
+          eventEmitter = {(formValues) => {console.log(formValues)}}
+        />
       </Grid>
     </Grid>
   )
