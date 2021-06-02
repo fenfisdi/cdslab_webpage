@@ -21,7 +21,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
     nameConfiguration,
     simulationInitialDate,
     simulationFinalDate,
-    iterationName,
+    iterationTime,
     populationSize,
     boxHorizontalSize,
     boxVerticalSize,
@@ -37,7 +37,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
       nameConfiguration:nameConfiguration.value,
       simulationInitialDate:simulationInitialDate.value,
       simulationFinalDate:simulationFinalDate.value,
-      iterationName:iterationName.value,
+      iterationName:iterationTime.value,
       populationSize:populationSize.value,
       boxHorizontalSize:boxHorizontalSize.value,
       boxVerticalSize:boxVerticalSize.value,
@@ -103,7 +103,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
                   variant="outlined"
                   margin="normal"
                   autoComplete="off"
-                  {...iterationName}
+                  {...iterationTime}
                 />
               </Grid>
             </Grid>
