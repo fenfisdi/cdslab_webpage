@@ -18,6 +18,7 @@ import { MiniLoader } from './components/layouts/MiniLoader'
 import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 import { PathProvider } from './components/PathContext'
 import SysManagementState from './context/SysManagement/sysManagementState'
+import AgentsAgeGroups from './pages/AgentsBasedModelPage/AgentsAgeGroups'
 
 const App = () => {
   const {
@@ -82,6 +83,10 @@ const App = () => {
                 <PrivateRoute
                   path="/agentsModels"
                   component={<AgentsBasedModelPage />}
+                />
+                <PrivateRoute
+                  path="/agentsAgeGroups"
+                  component={<AgentsAgeGroups />}
                 />
                 <PrivateRoute
                   path="/simulationModels"
