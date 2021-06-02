@@ -12,6 +12,7 @@ const AgentsMainPage = () => {
   const {handlePathBreadCrums } = usePathBreadCrums()
 
   const handleEventEmitted = (cardData) => {
+    console.log(cardData)
     handlePathBreadCrums(cardData.ruta,cardData.name)
     cardData.url && history.push( cardData.url )
   }

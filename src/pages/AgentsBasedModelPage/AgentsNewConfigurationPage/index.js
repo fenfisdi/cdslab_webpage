@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
-import PredefinedModelsForm from '../../../components/CompartmentalModels/PredefinedModelsForm'
 import { useAgentsModelsPageState } from './state'
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import { NewConfigurationForm } from '../../../components/AgentsModels/newConfigurationForm'
 
 const AgentsNewConfigurationPage = () => {
 
@@ -21,9 +21,9 @@ const AgentsNewConfigurationPage = () => {
         <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
       </Grid>
 
-      {predefinedModelsList && <PredefinedModelsForm
-
-      />}
+      <Grid container item xs={12} >
+        <NewConfigurationForm />
+      </Grid>
     </Grid>
   )
 }
