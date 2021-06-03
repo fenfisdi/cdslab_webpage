@@ -65,7 +65,7 @@ const CompartmentalChooseDatePage = () => {
 
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
-          <Label htmlFor='initial'><strong>Simulation initial date</strong></Label>
+          <Label htmlFor='initial'>Simulation initial date</Label>
           <Input
             type='date'
             id='initial'
@@ -75,7 +75,7 @@ const CompartmentalChooseDatePage = () => {
         </Column>
 
         <Column>
-          <Label htmlFor='final'><strong>Simulation final date</strong></Label>
+          <Label htmlFor='final'>Simulation final date</Label>
           <Input
             type='date'
             id='final'

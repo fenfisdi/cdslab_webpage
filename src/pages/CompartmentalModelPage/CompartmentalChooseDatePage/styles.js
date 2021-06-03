@@ -33,6 +33,12 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  & input{
+    border-radius:0px ;
+    box-shadow:none ;
+    border-color:none ;
+    backgorund:red;
+  }
 `
 
 export const Label = styled.label`
