@@ -25,11 +25,11 @@ export const useContactStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '130px',
+    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '15px'
+    fontSize: '18px'
   },
   divContact:{
     width: '100%',
@@ -42,7 +42,7 @@ export const useContactStyles = makeStyles(() => ({
     position: 'relative',
     textAlign: 'left',
     width: '100%',
-    fontSize: '0.8rem'
+    fontSize: '16px'
   },
   textBold:{
     fontWeight: 'bold',

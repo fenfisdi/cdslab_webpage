@@ -4,10 +4,6 @@ import { useInputValue } from '../../ui/Input/useInputValue'
 import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { VALIDATORS_MY_SIMULATIONS_FORM } from './validators'
 
-const MODEL_TYPE_SIR = 'sir'
-const MODEL_TYPE_MOD_SEIRV = 'modSeirv'
-const MODEL_TYPE_SEIR = 'seir'
-
 const PARAMETER_TYPE_FIXED = 'fixed'
 const PARAMETER_TYPE_OPTIMIZE_PARAMETERS = 'optimized'
 
@@ -22,11 +18,6 @@ export const useMySimulationsForm = () => {
   const modelType = useSelectValue('', VALIDATORS_MY_SIMULATIONS_FORM.modelType, {
   })
 
-  const optionsModelType =[
-    {label:'Sir', value:MODEL_TYPE_SIR},
-    {label:'Mod Seirv', value:MODEL_TYPE_MOD_SEIRV},
-    {label:'Seir', value:MODEL_TYPE_SEIR}
-  ]
   const parameterType = useSelectValue('', VALIDATORS_MY_SIMULATIONS_FORM.modelType, {
   })
 
@@ -53,7 +44,6 @@ export const useMySimulationsForm = () => {
   return {
     search,
     modelType,
-    optionsModelType,
     parameterType,
     optionsParameterType,
     year,

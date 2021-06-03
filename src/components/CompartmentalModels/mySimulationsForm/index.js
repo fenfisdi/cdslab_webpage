@@ -5,7 +5,7 @@ import { SelectComponent } from '../../ui/Select'
 import { useMySimulationsForm } from './state'
 import { useSimulationsStyles } from './styles'
 
-export const MySimulationsForm = ({ eventEmitter }) => {
+export const MySimulationsForm = ({ eventEmitter,mySimulationsModels }) => {
 
   const classes = useSimulationsStyles(theme)
   const fieldsData = useMySimulationsForm()
@@ -15,7 +15,6 @@ export const MySimulationsForm = ({ eventEmitter }) => {
   const {
     search,
     modelType,
-    optionsModelType,
     parameterType,
     optionsParameterType,
     year,
@@ -58,7 +57,7 @@ export const MySimulationsForm = ({ eventEmitter }) => {
         container 
         spacing={3}
       >
-        <Grid container item xs={8}>
+        <Grid container item justify='space-between' xs={8}>
           <Input
             disabled={false}
             required
@@ -66,19 +65,19 @@ export const MySimulationsForm = ({ eventEmitter }) => {
             variant="outlined"
             margin="normal"
             autoComplete="off"
-            placeholder="KeyWord..."
+            placeholder="Keyword..."
             {...search}
           />
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <SelectComponent
-              title="Model Type"
+              title="Model type"
               {...modelType}
-              options={optionsModelType}
+              options={mySimulationsModels}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <SelectComponent
-              title="Parameter Type"
+              title="Parameter type"
               className={classes.selectComponent}
               {...parameterType}
               options= {optionsParameterType}

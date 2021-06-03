@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => ({
     width: '25%',
     display: 'block',
     margin: '0 auto'
+  },
+  textoDownload:{
+    marginLeft: '10px'
   }
 }))
 
@@ -27,6 +30,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
+      console.log(parameter)
       return(
         <Table key={parameter.label}>   
           <TableBody>
@@ -35,7 +39,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
                 {parameter.type=='fixed' 
                   ?
                   <ExtraParamsItem>
-                    <strong> {parameter.label} : </strong>{parameter.value}
+                    <strong> {capitalLetter(parameter.label)} : </strong>{parameter.value}
                   </ExtraParamsItem>
                   :
                   displayOptimizedParametersValue(parameter)}
@@ -53,7 +57,9 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
       <strong>max Value : </strong>{ parameter.max_value } 
     </ExtraParamsItem>)
   }
-
+  const capitalLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
   const displayStateVariables=(stateVariables)=>{
     return stateVariables.map( variable => {
       return(
@@ -61,7 +67,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           <TableBody>
             <TableRow>
               <TableCell>
-                <strong>{variable.label} :</strong> {variable.value}
+                <strong>{capitalLetter(variable.label)} :</strong> {variable.value}
               </TableCell>
             </TableRow>
           </TableBody>
@@ -93,7 +99,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Model:</strong>
+              <strong>Type Model:</strong>
             </TableCell>
             <TableCell>
               {simulation.modelName || ''}
@@ -142,7 +148,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
             download="simulation.json"
             title='Download Info'
           >
-            <GetAppIcon style={{color: '#2394BC',fontSize: '50px'}}/>
+            <GetAppIcon style={{color: '#2394BC',fontSize: '50px',marginLeft: '10px'}}/>
           </Button>
         </div>  
       )

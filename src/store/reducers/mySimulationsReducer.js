@@ -4,6 +4,8 @@ import {
   MY_SIMULATION_LOADING,
   MY_SIMULATION_SELECT,
   MY_SIMULATION_SET_LIST,
+  MY_SIMULATION_MODEL_LIST,
+  MY_SIMULATION_PARAMETER_LIST,
   MY_SIMULATION_SET_FILES,
   MY_SIMULATION_FILE_SELECT,
   MY_SIMULATION_EXECUTION_TRUE,
@@ -13,6 +15,8 @@ import {
 export const initialState = {
   mySimulations: {
     mySimulations: [],
+    mySimulationsModels: [],
+    mySimulationsParameter: [],
     mySimulationSelected: null,
     mySimulationFiles: [],
     mySimulationFileSelected: [],
@@ -31,7 +35,7 @@ export const mySimulationReducer = (state, action) => {
   case MY_SIMULATION_EXECUTION_FALSE:
     return { ...state, execution: false, error: null }
   case MY_SIMULATION_ERROR:
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, loading: false, error: action.payload,mySimulations:[] }
   case MY_SIMULATION_SET_LIST:
     return {
       ...state,
@@ -39,6 +43,20 @@ export const mySimulationReducer = (state, action) => {
       error: null,
       mySimulations: action.payload
     }
+  case MY_SIMULATION_MODEL_LIST:
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      mySimulationsModels: action.payload
+    }  
+  case MY_SIMULATION_PARAMETER_LIST:
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      mySimulationsParameter: action.payload
+    }    
   case MY_SIMULATION_SELECT:
     return {
       ...state,
@@ -59,6 +77,7 @@ export const mySimulationReducer = (state, action) => {
   case MY_SIMULATION_DELETE:
     return {
       ...state,
+      loading: false,
       mySimulations: [...state.mySimulations.slice(0, action.payload), ...state.mySimulations.slice(action.payload + 1)]
     }
   default:

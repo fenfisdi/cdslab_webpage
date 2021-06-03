@@ -11,7 +11,7 @@ const Cds = () => {
   const classes = useStepStyles(theme)
   return (
     <>
-      <h1 className={classes.title}>Compuesta Por:</h1>
+      <h1 className={classes.title}>Compuesta por:</h1>
       <div className={classes.containerCds}>
         <div className={classes.boxCds}>
           <img className={classes.imageLab} src={imgBoxCdsLab} />
