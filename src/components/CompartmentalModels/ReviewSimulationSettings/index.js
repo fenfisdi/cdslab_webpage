@@ -39,7 +39,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
                 {parameter.type=='fixed' 
                   ?
                   <ExtraParamsItem>
-                    <strong> {parameter.label} : </strong>{parameter.value}
+                    <strong> {capitalLetter(parameter.label)} : </strong>{parameter.value}
                   </ExtraParamsItem>
                   :
                   displayOptimizedParametersValue(parameter)}
@@ -57,7 +57,9 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
       <strong>max Value : </strong>{ parameter.max_value } 
     </ExtraParamsItem>)
   }
-
+  const capitalLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
   const displayStateVariables=(stateVariables)=>{
     return stateVariables.map( variable => {
       return(
@@ -65,7 +67,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           <TableBody>
             <TableRow>
               <TableCell>
-                <strong>{variable.label} :</strong> {variable.value}
+                <strong>{capitalLetter(variable.label)} :</strong> {variable.value}
               </TableCell>
             </TableRow>
           </TableBody>

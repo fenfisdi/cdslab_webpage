@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles'
@@ -10,13 +10,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
-import managementIcon from '../../../assets/images/management/management_color.svg'
+import managementIcon from '../../../assets/images/management/management_icon.svg'
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { Link, NavLink } from 'react-router-dom'
-import TitleIcon from '../TitleIcon'
 import { usePath } from '../../PathContext'
 import { useStore } from '@store/storeContext'
 import { Icon } from '@material-ui/core'
+import { languageContext } from '../../../config/languageContext'
 import {
   SESSION_LOGIN,
 } from '../../../actions/types/sessionTypes'
@@ -47,7 +47,7 @@ const styles =  (theme) => ({
     color: theme.palette.common.white
   },
   item: {
-    paddingTop: 1,
+    paddingTop: 10,
     paddingBottom: 1,
     color: '#fff'
   },
@@ -63,8 +63,10 @@ const styles =  (theme) => ({
     color: '#fff'
   },
   itemActiveItem: {
-    color: theme.palette.primary.main,
-    'text-decoration': 'underline !important',
+    background: '#000 !important',
+    '& > div' : {
+      color: '#18FFFF !important',
+    }
   },
   itemPrimary: {
     fontSize: '18px'
@@ -100,16 +102,29 @@ const styles =  (theme) => ({
   logout : {
     width: '100%',
     marginTop: '30px'
+  },
+  linkLenguage: {
+    color: '#fff',
+    '&:hover': {
+      cursor: 'pointer'
+    },
+    position: 'fixed',
+    right: '0',
+    bottom: '0',
+    width: '80%'
+  },
+  testLogout: {
+    marginLeft: '20px',
+    color: '#fff',
+    fontSize: '14px'
   }
 })
 
 function Navigator (props) {
   const { classes, ...other } = props
+  const {language,  changelanguage } = useContext(languageContext)
   const {setPath} = usePath()
   const {
-    state: {
-      session: {  user }
-    },
     dispatch
   } = useStore()
   const rol = localStorage.getItem('role')
@@ -153,6 +168,7 @@ function Navigator (props) {
                   <NavLink 
                     key={childId} 
                     activeClassName={classes.itemActiveItem} 
+                    activeStyle={{ background: 'red'}}
                     className={classes.link} 
                     to={href} 
                     variant='body2'
@@ -186,7 +202,11 @@ function Navigator (props) {
         <Link to='' onClick= {handleLogout} title='Logout'>
           <ListItem className={classes.logout}>
             <Icon className="fas fa-sign-out-alt" style={{ color: '#fff', fontSize:'30px' }} />
+            <span className={classes.testLogout}>Logout</span>
           </ListItem>
+        </Link>
+        <Link className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
+          {language ? 'ES':'EN' }
         </Link>
       </List>
     </Drawer>
