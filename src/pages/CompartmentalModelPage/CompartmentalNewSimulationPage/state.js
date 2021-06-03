@@ -44,7 +44,7 @@ export const useCompartmentalNewSimulationPageState = ({ showSnack, setShowSnack
           show: true,
           success: false,
           error: true,
-          errorMessage: errorData.detail
+          errorMessage: errorData.message
         }
       )
     }

@@ -1,25 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+
 import styled from 'styled-components'
-export const useParametersFormStyle = makeStyles(() => ({
-  helperText: {
-    '&.error':{
-      margin: 0,
-      'font-size': '0.90rem',
-      'margin-top': '3px',
-      'text-align':' left',
-      'font-family':' "Roboto", "Helvetica", "Arial", sans-serif',
-      'font-weight':' 400',
-      'line-height':' 1.66',
-      'letter-spacing':' 0.03333em',
-    }
-  },
-  Input:{
-    background:'#eceff1',
-    '& div':{
-      background:'white'
-    }
-  }
-}))
 
 export const ParametersFormHeader = styled.div`
   display: flex;

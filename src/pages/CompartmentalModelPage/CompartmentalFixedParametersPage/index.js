@@ -9,6 +9,7 @@ import { useCompartmentalFixedParametersPageState } from './state'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import FixedHeaderParameters from './children'
 
 const CompartmentalFixedParametersPage =()=>{
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -43,6 +44,7 @@ const CompartmentalFixedParametersPage =()=>{
         executeRequestConfigureStateVariables={(valuesPr)=>{
           executeRequestConfigureParametersFixed(valuesPr)
         }}
+        headersParams={FixedHeaderParameters}
       />}
 
       {fixedParametersFormFields && fixedParametersFormFields.length==0 && <LoaderComponent

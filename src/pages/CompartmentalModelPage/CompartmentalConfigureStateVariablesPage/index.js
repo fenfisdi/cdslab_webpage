@@ -9,6 +9,7 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalConfigureStateVariablesSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import ConfigureStateVariablesHeader from './children'
 
 const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -38,6 +39,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         fieldParameters={modelData.state_variables}
         executeRequestConfigureStateVariables={executeRequestConfigureStateVariables}
         valuesFieldParameters={currentSimulation && currentSimulation.state_variable_limits}
+        headersParams={ConfigureStateVariablesHeader}
       />}
 
       {!modelData  && <LoaderComponent
