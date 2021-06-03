@@ -55,6 +55,8 @@ const UserManagamentPage = () => {
       </ContainerTitle>
       <ModelCard
         options={options}
+        iconWith='170'
+        iconHeight='170'
         eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
       />
     </UserManagementContainer>
