@@ -25,11 +25,11 @@ export const useStepStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '130px',
+    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '15px'
+    fontSize: '18px'
   },
   divStep:{
     width: '100%',

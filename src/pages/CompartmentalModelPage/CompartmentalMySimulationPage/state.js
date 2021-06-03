@@ -6,12 +6,18 @@ import { useComparmentalMySimulationFilter } from './filter'
 export const useComparmentalMySimulationState = () => {
   const {
     state: {
-      mySimulations: { mySimulations, loading,execution }
+      mySimulations: { mySimulations,mySimulationsModels, loading,execution }
     },
     dispatch
   } = useStore()
 
-  const { getMySimulations,setActiveSimulation,deleteSimulation,getExecution } = useMySimulationActions(dispatch)
+  const { 
+    getMySimulations,
+    setActiveSimulation,
+    deleteSimulation,
+    getExecution,
+    getMySimulationsModels
+  } = useMySimulationActions(dispatch)
   const {
     filterSimulationName,
     filterModelType,
@@ -29,7 +35,10 @@ export const useComparmentalMySimulationState = () => {
   }, [])
   
   const mySimulationsList = () => {
-    if (execution) { getMySimulations() }
+    if (execution) { 
+      getMySimulations() 
+      getMySimulationsModels()
+    }
   }
 
 
@@ -86,6 +95,7 @@ export const useComparmentalMySimulationState = () => {
     columns,
     filterForm,
     handleClickPreview,
-    handleClickDelete
+    handleClickDelete,
+    mySimulationsModels
   }
 }

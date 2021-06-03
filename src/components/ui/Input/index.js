@@ -7,9 +7,9 @@ export const Input = (options) => {
 
   return (
     <TextField
-      {...options}
       className={classes.root}
       error={!!(options.helperText) || ( options.errors && options.errors.length>0)}
+      {...options}
     />
   )
 }

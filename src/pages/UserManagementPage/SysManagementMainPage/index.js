@@ -10,7 +10,7 @@ import { useSysManagementState } from './state'
 import FullWidthTabs from '../../../components/Taps'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import userSvg from '../../../assets/images/management/users_color.svg'
-import toolsSVG from '../../../assets/images/management/tools-solid.svg'
+import toolsSVG from '../../../assets/images/management/SYSManagement_SVG.svg'
 
 const SysManagementMainPage = () => {
 
