@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
-import TextFieldCommon from '../../ui/TextFieldCommon'
+import TextFieldCommon from '../../../ui/TextFieldCommon'
 
 const AgentsAgeGroupsItem = ({ index, inputClass, indexClass, iconClass }) => {
   return (

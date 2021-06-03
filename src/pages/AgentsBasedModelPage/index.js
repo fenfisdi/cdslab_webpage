@@ -13,6 +13,8 @@ const AgentsBasedModelPage = () => {
   const AgentsMainPage = React.lazy(() => import('./AgentsMainPage'))
   const AgentsNewConfigurationPage = React.lazy(() => import('./AgentsNewConfigurationPage'))
   const AgentsAgeGroupsPage = React.lazy(() => import('./AgentsAgeGroups'))
+  const AgentsMobilityGroups = React.lazy(() => import('./AgentsMobilityGroups'))
+  const AgentSusceptibilityGroups = React.lazy(() => import('./AgentSusceptibilityGroups'))
 
   const tabs = [
     {
@@ -45,6 +47,8 @@ const AgentsBasedModelPage = () => {
               <AgentsNewConfigurationPage {...props} pathParent={match.path} />
             )} />
             <Route path={`${match.path}/newConfiguration/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
+            <Route path={`${match.path}/newConfiguration/agentsAgeGroups/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
+            <Route path={`${match.path}/newConfiguration/agentsAgeGroups/agentsMobilityGroups/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>
