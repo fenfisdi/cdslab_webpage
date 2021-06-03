@@ -20,8 +20,7 @@ export const TableSimulationsComponent = (props) => {
   }
 
   const handleFormatDate = (date) => {
-    let dateNew = moment(date).format('MMMM DD YYYY, h:mm:ss a')
-    return dateNew
+    return  moment(date).format('MMMM DD YYYY, h:mm:ss a')
   }
 
   return (
