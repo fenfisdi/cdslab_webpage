@@ -18,7 +18,10 @@ const Sponsors = () => {
           <div className={classes.textMinCiencias}> <p>{ SPONSORS_TEXT_ONE }</p> </div>
         </div>
         <div className={classes.boxCds}>
-          <img className={classes.imageSena} src={imgSena} />
+          <div className={classes.question}> 
+            <img className={classes.imageSena} src={imgSena} /> 
+          </div>
+          
           <div className={classes.textSena}> <p>{ SPONSORS_TEXT_TWO }</p> </div>
         </div>
       </div>

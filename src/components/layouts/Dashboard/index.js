@@ -28,7 +28,8 @@ const drawerWidth = 256
 const styles = {
   root: {
     display: 'flex',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    'overflow-x': 'hidden'
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
