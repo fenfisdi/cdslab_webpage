@@ -21,6 +21,7 @@ const CompartmentalMySimulationPage = () => {
     loading,
     rowsFiltered,
     setRowsFiltered,
+    mySimulationsModels,
     columns,
     filterForm,
     handleClickPreview,
@@ -77,7 +78,7 @@ const CompartmentalMySimulationPage = () => {
             
             
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-              <MySimulationsForm eventEmitter= {filterForm}/>
+              <MySimulationsForm eventEmitter= {filterForm} mySimulationsModels={mySimulationsModels} />
             </Grid>
             <br />
             
