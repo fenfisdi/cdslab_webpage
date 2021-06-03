@@ -16,7 +16,10 @@ import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 import { usePath } from '../../PathContext'
 import { useStore } from '@store/storeContext'
-
+import { Icon } from '@material-ui/core'
+import {
+  SESSION_LOGIN,
+} from '../../../actions/types/sessionTypes'
 const categories = [
   {
     id: '',
@@ -28,7 +31,7 @@ const categories = [
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root'] },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 50 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root'] },
     ]
   }
 ]
@@ -53,6 +56,7 @@ const styles =  (theme) => ({
     boxShadow: '0 -1px 0 #404854 inset',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(2),
+    paddingLeft: 10,
   },
   firebase: {
     fontSize: 24,
@@ -72,6 +76,7 @@ const styles =  (theme) => ({
     'min-width': '18%',
     position: 'relative',
     top: '-5px',
+    left: '-11px',
     '& > div':{
       fontSize: '40px'
     }
@@ -91,18 +96,36 @@ const styles =  (theme) => ({
     transform: 'scale(1.5)',
     display: 'block',
     margin: '0 auto'
+  },
+  logout : {
+    width: '100%',
+    marginTop: '30px'
   }
 })
 
 function Navigator (props) {
   const { classes, ...other } = props
   const {setPath} = usePath()
+  const {
+    state: {
+      session: {  user }
+    },
+    dispatch
+  } = useStore()
   const rol = localStorage.getItem('role')
 
   const handleDeletePath = () => {
     setPath([])
   }
-  
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    dispatch({
+      type: SESSION_LOGIN,
+      payload: null
+    })
+  }
+
   return (
     <Drawer variant='permanent' {...other}>
       <List disablePadding>
@@ -142,7 +165,7 @@ function Navigator (props) {
                       <ListItemIcon className={classes.itemIcon}>
                         {
                           typeIcon === 'svg' 
-                            ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='10px' fontWeight='bold'/> )
+                            ? (<img src={icon} style={{width: '40px', marginLeft: '10px'}} /> )
                             : icon
                         }
                     
@@ -160,6 +183,11 @@ function Navigator (props) {
               )}
           </React.Fragment>
         ))}
+        <Link to='' onClick= {handleLogout} title='Logout'>
+          <ListItem className={classes.logout}>
+            <Icon className="fas fa-sign-out-alt" style={{ color: '#fff', fontSize:'30px' }} />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   )
