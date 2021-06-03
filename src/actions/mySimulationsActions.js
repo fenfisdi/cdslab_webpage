@@ -33,6 +33,7 @@ export const useMySimulationActions = (dispatch) => {
             ...elem
           })
         })
+        dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
         dispatch({ type: MY_SIMULATION_SET_LIST, payload: dataList })
       })
       .catch((error) => {
@@ -104,7 +105,8 @@ export const useMySimulationActions = (dispatch) => {
   const deleteSimulation = async (row) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
     dispatch({ type: MY_SIMULATION_LOADING })
-    requestDeleteSimulations(row.identifier).then(() => {
+    requestDeleteSimulations(row.identifier).then(async() => {
+      await getMySimulations()
       dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
     })
       .catch(({ response: { data } }) => {

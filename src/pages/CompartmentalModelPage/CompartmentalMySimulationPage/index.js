@@ -60,10 +60,22 @@ const CompartmentalMySimulationPage = () => {
         :
         (
           <Grid container item xs={12} justify="center" alignItems="center" direction="column" style={{marginTop:'20px'}}>
-            <ContainerTitle>
-              <TitleIcon title={'My simulations'} icon={<SvgNote />}/>
-              <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
-            </ContainerTitle>
+            <Grid container item xs={12}
+              direction="row"
+              justify="space-between"
+              alignItems="flex-start"
+            >
+              <Grid xs={11}>
+                <ContainerTitle>
+                  <TitleIcon title={'My simulations'} otherIconType={true} icon={<SvgNote fill='#006064' width={50} height={50}/>}/>
+                </ContainerTitle>
+              </Grid>
+              <Grid xs={1}>
+                <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+              </Grid>
+            </Grid>
+            
+            
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">
               <MySimulationsForm eventEmitter= {filterForm}/>
             </Grid>

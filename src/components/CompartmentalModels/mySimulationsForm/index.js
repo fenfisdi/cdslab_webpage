@@ -66,19 +66,19 @@ export const MySimulationsForm = ({ eventEmitter }) => {
             variant="outlined"
             margin="normal"
             autoComplete="off"
-            placeholder="KeyWord..."
+            placeholder="Keyword..."
             {...search}
           />
           <Grid item xs={5}>
             <SelectComponent
-              title="Model Type"
+              title="Model type"
               {...modelType}
               options={optionsModelType}
             />
           </Grid>
           <Grid item xs={5}>
             <SelectComponent
-              title="Parameter Type"
+              title="Parameter type"
               className={classes.selectComponent}
               {...parameterType}
               options= {optionsParameterType}

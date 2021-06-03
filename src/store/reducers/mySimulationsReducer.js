@@ -31,7 +31,7 @@ export const mySimulationReducer = (state, action) => {
   case MY_SIMULATION_EXECUTION_FALSE:
     return { ...state, execution: false, error: null }
   case MY_SIMULATION_ERROR:
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, loading: false, error: action.payload,mySimulations:[] }
   case MY_SIMULATION_SET_LIST:
     return {
       ...state,
@@ -59,6 +59,7 @@ export const mySimulationReducer = (state, action) => {
   case MY_SIMULATION_DELETE:
     return {
       ...state,
+      loading: false,
       mySimulations: [...state.mySimulations.slice(0, action.payload), ...state.mySimulations.slice(action.payload + 1)]
     }
   default:
