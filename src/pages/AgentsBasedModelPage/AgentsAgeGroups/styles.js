@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core'
 export const agentAgeGroupsStyles = makeStyles((theme) => ({
   ageContainer:{
     textAlign: 'center',
-    marginTop: '50%'
+    marginTop: '30%'
   },
 
   ageTitlesContainer:{

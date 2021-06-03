@@ -1,5 +1,6 @@
 import { Input,Button,Grid } from '@material-ui/core'
 import React, {useState } from 'react'
+import { useHistory, useRouteMatch } from 'react-router'
 import theme from '../../../styles/cdslabTheme'
 import { SelectComponent } from '../../ui/Select'
 import { useNewConfigurationForm } from './state'
@@ -16,6 +17,8 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
   const classes = useNewConfigurationStyles(theme)
   const fieldsData = useNewConfigurationForm()
   const [isValid] = useState(false)
+  const match = useRouteMatch()
+  const history = useHistory()
   
   const {
     nameConfiguration,
@@ -31,8 +34,10 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
     optionsDistanceUnits
   } = fieldsData
   
+  console.log(match.path)
 
   const handleClick = () => {
+    history.push(`${match.path}/agentsAgeGroups`)
     eventEmitter({
       nameConfiguration:nameConfiguration.value,
       simulationInitialDate:simulationInitialDate.value,
