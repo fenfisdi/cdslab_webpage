@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => ({
     width: '25%',
     display: 'block',
     margin: '0 auto'
+  },
+  textoDownload:{
+    marginLeft: '10px'
   }
 }))
 
@@ -27,6 +30,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
+      console.log(parameter)
       return(
         <Table key={parameter.label}>   
           <TableBody>
@@ -93,7 +97,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Model:</strong>
+              <strong>Type Model:</strong>
             </TableCell>
             <TableCell>
               {simulation.modelName || ''}
@@ -142,7 +146,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
             download="simulation.json"
             title='Download Info'
           >
-            <GetAppIcon style={{color: '#2394BC',fontSize: '50px'}}/>
+            <GetAppIcon style={{color: '#2394BC',fontSize: '50px',marginLeft: '10px'}}/>
           </Button>
         </div>  
       )
