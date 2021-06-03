@@ -15,19 +15,20 @@ import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.sv
 import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 import { usePath } from '../../PathContext'
+import { useStore } from '@store/storeContext'
 
 const categories = [
   {
     id: '',
     children: [
-      { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management' },
+      { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root'] },
+      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
     ]
   },
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/profile' },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root'] },
     ]
   }
 ]
@@ -96,9 +97,12 @@ const styles =  (theme) => ({
 function Navigator (props) {
   const { classes, ...other } = props
   const {setPath} = usePath()
+  const rol = localStorage.getItem('role')
+
   const handleDeletePath = () => {
     setPath([])
   }
+  
   return (
     <Drawer variant='permanent' {...other}>
       <List disablePadding>
@@ -118,40 +122,42 @@ function Navigator (props) {
               >
                 {id}
               </ListItemText>
-            </ListItem>
-            {children.map(({ id: childId, icon,typeIcon, active,href }) => (
-              <NavLink 
-                key={childId} 
-                activeClassName={classes.itemActiveItem} 
-                className={classes.link} 
-                to={href} 
-                variant='body2'
-                onClick={handleDeletePath}
-              >
-                <ListItem
-                  button
-                  className={clsx(classes.item, active && classes.itemActiveItem)}
-                >
-                  <ListItemIcon className={classes.itemIcon}>
-                    {
-                      typeIcon === 'svg' 
-                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='10px' fontWeight='bold'/> )
-                        : icon
-                    }
-                    
-                  </ListItemIcon>
-                  <ListItemText
-                    classes={{
-                      primary: classes.itemPrimary
-                    }}
+            </ListItem>{}
+            {children
+              .filter(x => { return x.rol.includes(rol) })
+              .map(({ id: childId, icon,typeIcon, active,href }) => 
+                (
+                  <NavLink 
+                    key={childId} 
+                    activeClassName={classes.itemActiveItem} 
+                    className={classes.link} 
+                    to={href} 
+                    variant='body2'
+                    onClick={handleDeletePath}
                   >
-                    {childId}
-                  </ListItemText>
-                </ListItem>
-              </NavLink>
-            ))}
-
-            
+                    <ListItem
+                      button
+                      className={clsx(classes.item, active && classes.itemActiveItem)}
+                    >
+                      <ListItemIcon className={classes.itemIcon}>
+                        {
+                          typeIcon === 'svg' 
+                            ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='10px' fontWeight='bold'/> )
+                            : icon
+                        }
+                    
+                      </ListItemIcon>
+                      <ListItemText
+                        classes={{
+                          primary: classes.itemPrimary
+                        }}
+                      >
+                        {childId}
+                      </ListItemText>
+                    </ListItem>
+                  </NavLink>
+                )
+              )}
           </React.Fragment>
         ))}
       </List>
