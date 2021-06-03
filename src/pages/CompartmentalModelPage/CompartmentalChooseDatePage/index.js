@@ -4,7 +4,6 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import {
   CompartmentalChooseDateSection,
   CompartmentalChooseDateDate,
-  Label,
   Input,
   Column,
   Error
@@ -65,7 +64,7 @@ const CompartmentalChooseDatePage = () => {
 
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
-          <Label htmlFor='initial'>Simulation initial date</Label>
+          <span htmlFor='initial'>Simulation initial date</span>
           <Input
             type='date'
             id='initial'
@@ -75,7 +74,7 @@ const CompartmentalChooseDatePage = () => {
         </Column>
 
         <Column>
-          <Label htmlFor='final'>Simulation final date</Label>
+          <span htmlFor='final'>Simulation final date</span>
           <Input
             type='date'
             id='final'

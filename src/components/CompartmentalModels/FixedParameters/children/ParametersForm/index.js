@@ -49,6 +49,7 @@ const ParametersForm = ({fields, fieldParameters,headersParams:HeadersParams}) =
                   variant="outlined"
                   margin="normal"
                   autoComplete="name"
+                  className={classes.Input}
                   {...fields[label]}  
                 />              
               </Grid>  

@@ -33,8 +33,13 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  & span{
+    margin-bottom:10px;
+    font-size: 16px;
+    font-weight: 400;
+  }
   & input{
-    border-radius:0px ;
+    padding:10px;
     box-shadow:none ;
     border-color:none ;
     backgorund:red;
