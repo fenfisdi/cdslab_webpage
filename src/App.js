@@ -37,7 +37,7 @@ const App = () => {
   const CompartmentalModelPage = React.lazy(() => import('./pages/CompartmentalModelPage'))
   const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
   const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage'))
-
+  const AgentsBasedModelPage = React.lazy(() => import('./pages/AgentsBasedModelPage'))
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
   // Dev enviroment
@@ -47,7 +47,7 @@ const App = () => {
       <Route
         {...rest}
         render={({ location }) =>
-          !isAuth ? (  
+          isAuth ? (  
             <Dashboard> {component} </Dashboard>
           ) : (
             <Redirect
@@ -78,6 +78,10 @@ const App = () => {
                 <PrivateRoute
                   path="/agents"
                   component={<AgentsPage />}
+                />
+                <PrivateRoute
+                  path="/agentsModels"
+                  component={<AgentsBasedModelPage />}
                 />
                 <PrivateRoute
                   path="/simulationModels"
