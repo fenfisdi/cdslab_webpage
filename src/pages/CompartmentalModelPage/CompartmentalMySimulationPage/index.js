@@ -12,6 +12,7 @@ import TitleIcon from '../../../components/layouts/TitleIcon'
 import SupportComponent from '../../../components/SupportComponent'
 import notesPixelIcon from '../../../assets/images/notes_pixel_perfect.svg'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import SvgNote from '../../../assets/icons/SvgNote'
 
 const CompartmentalMySimulationPage = () => {
   
@@ -60,7 +61,7 @@ const CompartmentalMySimulationPage = () => {
         (
           <Grid container item xs={12} justify="center" alignItems="center" direction="column" style={{marginTop:'20px'}}>
             <ContainerTitle>
-              <TitleIcon title={'My Simulations'} icon={notesPixelIcon}/>
+              <TitleIcon title={'My simulations'} icon={<SvgNote />}/>
               <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
             </ContainerTitle>
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">

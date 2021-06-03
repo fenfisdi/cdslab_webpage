@@ -58,7 +58,7 @@ export const MySimulationsForm = ({ eventEmitter }) => {
         container 
         spacing={3}
       >
-        <Grid container item xs={8}>
+        <Grid container item justify='space-between' xs={8}>
           <Input
             disabled={false}
             required
@@ -69,14 +69,14 @@ export const MySimulationsForm = ({ eventEmitter }) => {
             placeholder="KeyWord..."
             {...search}
           />
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <SelectComponent
               title="Model Type"
               {...modelType}
               options={optionsModelType}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <SelectComponent
               title="Parameter Type"
               className={classes.selectComponent}

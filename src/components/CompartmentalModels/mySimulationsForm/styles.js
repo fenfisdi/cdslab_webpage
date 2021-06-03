@@ -23,6 +23,7 @@ export const useSimulationsStyles = makeStyles((theme) => ({
     background:'#e2e2e2'
   },
   selectComponent: {
-    border: '1px solid #fff'
+    border: '1px solid #fff',
+    marginLeft: '10px'
   }
 }))
