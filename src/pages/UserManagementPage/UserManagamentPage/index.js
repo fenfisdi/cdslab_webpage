@@ -7,7 +7,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useSessionActions } from '@actions/sessionsActions'
 
 import userSvg from '../../../assets/images/management/users_color.svg'
-import toolsSVG from '../../../assets/images/management/tools-solid.svg'
+import toolsSVG from '../../../assets/images/management/SYSManagement_SVG.svg'
 import keySVG from '../../../assets/images/management/management_color.svg'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import TitleIcon from '../../../components/layouts/TitleIcon'

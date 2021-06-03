@@ -3,6 +3,11 @@ import styled from 'styled-components'
 export const usePredefinedModelsStyles = makeStyles((theme) => ({
   title:{
     ...theme.font.subtitle
+  },Input:{
+    background:'#ebf5f6',
+    '& div':{
+      background:'white'
+    }
   }
 }))
 

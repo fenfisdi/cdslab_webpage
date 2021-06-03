@@ -6,7 +6,7 @@ import { checkErrorsStateVariableForm } from './validators'
 import { creationResponseStateVariableForm } from './fieldsCreation'
 import { isEmpty } from 'lodash'
 
-const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameters,executeRequestConfigureStateVariables}) => {
+const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameters,executeRequestConfigureStateVariables,headersParams}) => {
   const [isValid,setIsValid] = useState(false)
   const fields = useParametersFormFieldsCreation({fieldParameters,valuesFieldParameters})
   
@@ -17,7 +17,7 @@ const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameter
   return (
     <Fragment>
       
-      {!isEmpty(fields) && <ParametersForm fields={fields} fieldParameters={fieldParameters} />}
+      {!isEmpty(fields) && <ParametersForm fields={fields} fieldParameters={fieldParameters} headersParams={headersParams}/>}
 
       <CompartmentalButton
         disabled={isValid?false:true }

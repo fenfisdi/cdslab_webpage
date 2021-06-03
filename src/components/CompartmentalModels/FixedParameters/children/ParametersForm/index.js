@@ -3,10 +3,10 @@ import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
-import { useParametersFormStyle,ParametersFormHeader,ParametersFormHeaderItem } from './styles'
+import { useParametersFormStyle } from './styles'
 
 
-const ParametersForm = ({fields, fieldParameters}) => {
+const ParametersForm = ({fields, fieldParameters,headersParams:HeadersParams}) => {
   const classes = useParametersFormStyle()
   
   return (
@@ -15,17 +15,7 @@ const ParametersForm = ({fields, fieldParameters}) => {
       container
       item 
     >
-      <ParametersFormHeader>
-        <ParametersFormHeaderItem justifyContent="flex-end" alignItems="center">
-          <span>Parameter</span>
-        </ParametersFormHeaderItem>
-        <ParametersFormHeaderItem justifyContent="center" alignItems="center">
-          <span>Configuration Type</span>      
-        </ParametersFormHeaderItem>
-        <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
-          <span>Value</span>
-        </ParametersFormHeaderItem>
-      </ParametersFormHeader>
+      <HeadersParams/>
       {fieldParameters && fieldParameters.map((field,index)=>{
         const {label, representation, unit } = field
         const {helperText}= fields[label]
@@ -59,6 +49,7 @@ const ParametersForm = ({fields, fieldParameters}) => {
                   variant="outlined"
                   margin="normal"
                   autoComplete="name"
+                  className={classes.Input}
                   {...fields[label]}  
                 />              
               </Grid>  

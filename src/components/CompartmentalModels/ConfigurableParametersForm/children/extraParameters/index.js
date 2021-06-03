@@ -4,10 +4,20 @@ import { Grid } from '@material-ui/core'
 import { Input } from '../../../../ui/Input'
 import { checkErrorsExtraParametersForm } from './validators'
 
+import { makeStyles } from '@material-ui/core/styles'
+
+export const useExtraParametersStyles = makeStyles(() => ({
+  Input:{
+    background:'#eceff1',
+    '& div':{
+      background:'white'
+    }
+  }
+}))
 
 
 const ExtraParameters = ({ extraParameters=[], handleShowError, xs, errorText }) => {
- 
+  const classes = useExtraParametersStyles()
  
   useEffect(()=>{
     checkErrorsExtraParametersForm({extraParameters,handleShowError})        
@@ -27,6 +37,7 @@ const ExtraParameters = ({ extraParameters=[], handleShowError, xs, errorText })
                 variant="outlined"
                 margin="normal"
                 autoComplete="name"
+                className={classes.Input}                
                 {...parameter}  
               />   
             
