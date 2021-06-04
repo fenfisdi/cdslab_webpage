@@ -15,7 +15,8 @@ export const AgentsMobilityGroupsStyles = makeStyles((theme) => ({
 
   inputClass: {
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderRadius: '20px'
   },
 
   addButton: {

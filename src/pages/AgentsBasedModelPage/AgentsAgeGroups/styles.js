@@ -20,7 +20,8 @@ export const agentAgeGroupsStyles = makeStyles((theme) => ({
 
   inputClass: {
     width: '90%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderRadius: '10px'
   },
 
   indexClass: {

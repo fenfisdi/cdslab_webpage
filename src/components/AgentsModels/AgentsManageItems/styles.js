@@ -20,7 +20,8 @@ export const AgentsManageItemsStyles = makeStyles((theme) => ({
 
   inputClass: {
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderRadius: '10px'
   },
 
   addButton: {

@@ -15,7 +15,8 @@ export const AgentSusceptibilityGroupsStyles = makeStyles((theme) => ({
 
   inputClass: {
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'black',
+    borderRadius: '10px'
   },
 
   addButton: {
