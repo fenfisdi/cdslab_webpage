@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { languageContext } from '../../../config/languageContext'
 
 
@@ -10,7 +10,14 @@ export const useInputValue = (
   const [value, setValue] = useState(val)
   const [errors, setErrors] = useState([])
   const [helperText, setHelperText] = useState(null)
-  const {t} = useContext(languageContext)
+  const {t,language} = useContext(languageContext)
+
+  useEffect(()=>{
+    errors.length>0 && onChange({target:{
+      value
+    }})
+  },[language])
+
 
   const onChange = e => {
     e.target ? setValue(e.target.value) : setValue(e)
@@ -37,7 +44,15 @@ export const useInputValue = (
   }
 
   const updateHelperText = (err) => {
-    err.length > 0 ? setHelperText(err.map(e => t(e.message))?.join('\n')) : setHelperText(null)
+    const newArray =  err.map(e =>
+    {
+      return {
+        type: e.type,
+        message:t(e.message)
+      }
+    }
+    )
+    newArray.length > 0 ? setHelperText(newArray.map(e => e.message)?.join('\n')) : setHelperText(null)
   }
 
   return {

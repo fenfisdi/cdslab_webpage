@@ -43,8 +43,8 @@
     "styled-components": "5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-app-rewired build",
+    "start": "react-app-rewired --max_old_space_size=4096 start",
+    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-app-rewired --max_old_space_size=4096 build",
     "eject": "react-app-rewired eject",
     "lint": "eslint",
     "test": "cross-env NODE_ENV=test jest --verbose --silent",

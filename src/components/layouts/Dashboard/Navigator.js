@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles'
@@ -15,13 +15,16 @@ import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.sv
 import { Link, NavLink } from 'react-router-dom'
 import TitleIcon from '../TitleIcon'
 import { usePath } from '../../PathContext'
+import { languageContext } from '../../../config/languageContext'
+
+
 
 const categories = [
   {
     id: '',
     children: [
-      { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management' },
+      { id: 'landingPage.simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
+      { id: 'landingPage.management', icon: managementIcon, typeIcon : 'svg', href: '/management' },
     ]
   },
   {
@@ -94,6 +97,7 @@ const styles =  (theme) => ({
 })
 
 function Navigator (props) {
+  const { t } = useContext(languageContext)
   const { classes, ...other } = props
   const {setPath} = usePath()
   const handleDeletePath = () => {
@@ -145,7 +149,7 @@ function Navigator (props) {
                       primary: classes.itemPrimary
                     }}
                   >
-                    {childId}
+                    {t(childId)}
                   </ListItemText>
                 </ListItem>
               </NavLink>

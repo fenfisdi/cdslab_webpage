@@ -53,7 +53,7 @@ const SimulationMainPage = () => {
       icon: agentsSVG,
       name: 'Agent based models',
       indetifier: 'agent_based_models',
-      url: '',
+      url: '/agents',
       tipo: 2,
       handleAction:(url)=>{
         history.push({ pathname: url })
