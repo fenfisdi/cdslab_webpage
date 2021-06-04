@@ -12,7 +12,7 @@ import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 
 const SimulationMainPage = () => {

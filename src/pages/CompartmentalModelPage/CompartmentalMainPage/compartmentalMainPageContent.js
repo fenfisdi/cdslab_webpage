@@ -3,7 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { useCompartmentalMainPageStyles } from './styles'
 
 export const CompartmentalMainPageContent = () => {

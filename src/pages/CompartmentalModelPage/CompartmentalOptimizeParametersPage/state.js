@@ -5,7 +5,7 @@ import { INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../.
 import { useStore } from '../../../store/storeContext'
 import { useEffect, useState } from 'react'
 import { getStateWithQueryparams } from '../common'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()

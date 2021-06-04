@@ -15,9 +15,9 @@ export const usePathBreadCrums = () => {
   const handlePathSessionStorage = (newPath) => {
     sessionStorage.setItem('path', JSON.stringify(newPath) )
   }
-
+  
   return{
-    handlePathBreadCrums
+    handlePathBreadCrums,
   }
 }
 

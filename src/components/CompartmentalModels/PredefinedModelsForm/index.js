@@ -8,7 +8,7 @@ import {
   CompartmentalPredefinedModelFormTitle,
   CompartmentalPredefinedModelFormInput } from './styles'
 import { Input } from '../../ui/Input'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 
 const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {

@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
 import { getStateWithQueryparams } from '../common'
 import { SIMULATION_IDENTIFIERS } from '../../../constants/compartmental'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { usePath } from '../../../components/PathContext'
 
 export const useCompartmentalConfigureStateVariablesPageState = ({showSnack, setShowSnack }) => {
