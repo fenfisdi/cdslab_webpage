@@ -1,5 +1,9 @@
+import { useHistory, useRouteMatch } from 'react-router'
+
 export const useAgentSusceptibilityGroups = () => {
-  
+  const history = useHistory()
+  const match = useRouteMatch()
+
   const handleDeleteItem = () => {
 
   }
@@ -15,11 +19,16 @@ export const useAgentSusceptibilityGroups = () => {
   const handleAddItem = () => {
     
   }
+
+  const redirectToInmunizationGroupNamePage = () => {
+    history.push(`${match.path}/agentsInmunizationGroupName`)
+  }
   
   return [
     handleDeleteItem,
     handleCheckItem,
     handleConfigItem,
-    handleAddItem
+    handleAddItem,
+    redirectToInmunizationGroupNamePage
   ]
 }

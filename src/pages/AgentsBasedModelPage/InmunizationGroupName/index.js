@@ -1,23 +1,28 @@
 import { Container } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import AgentsManageItems from '../../../components/AgentsModels/AgentsManageItems'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
+import LoaderComponent from '../../../components/ui/Loader'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
-import { useAgentSusceptibilityGroups } from './state'
-import { AgentSusceptibilityGroupsStyles } from './styles'
+import { useInmunizationGroupName } from './state'
+import { InmunizationGroupNameStyles } from './styles'
 
-const AgentSusceptibilityGroups = () => {
-  const classes = AgentSusceptibilityGroupsStyles()
+const InmunizationGroupName = () => {
+  const classes = InmunizationGroupNameStyles()
+  const [loading, setLoading] = useState(false)
   const [
     handleDeleteItem,
     handleCheckItem,
     handleConfigItem,
-    handleAddItem,
-    redirectToInmunizationGroupNamePage
-  ] = useAgentSusceptibilityGroups()
+    handleAddItem
+  ] = useInmunizationGroupName()
+
+  const switchLoader = () => {
+    setLoading(true)
+  }
 
   return (
     <>
@@ -31,7 +36,7 @@ const AgentSusceptibilityGroups = () => {
       <Container maxWidth={'sm'}>
         <div className={classes.manageItemsContainer}>
           <AgentsManageItems
-            title={'Susceptibility group name'}
+            title={'Immunization Group name'}
             handleDeleteItem={handleDeleteItem}
             handleCheckItem={handleCheckItem}
             handleConfigItem={handleConfigItem}
@@ -44,14 +49,15 @@ const AgentSusceptibilityGroups = () => {
             justify='flex-end'
             alignItems='center'
             text='Continue'
-            onClick={redirectToInmunizationGroupNamePage}
+            onClick={switchLoader}
             disabled={false}
             icon='fas fa-save'
           />
         </div>
       </Container>
+      {loading && <LoaderComponent width="100p%" height={10}/>}
     </>
   )
 }
 
-export default AgentSusceptibilityGroups
+export default InmunizationGroupName

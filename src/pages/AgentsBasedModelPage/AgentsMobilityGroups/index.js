@@ -1,7 +1,7 @@
 import { Container } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
 import React from 'react'
-import AgentsManageItems from '../../../components/AgentsModels/AgentsManageItems/AgentsManageItems'
+import AgentsManageItems from '../../../components/AgentsModels/AgentsManageItems'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'

@@ -1,6 +1,6 @@
 import { Input,Button,Grid } from '@material-ui/core'
 import React, {useState } from 'react'
-import { useHistory, useRouteMatch } from 'react-router'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import theme from '../../../styles/cdslabTheme'
 import { SelectComponent } from '../../ui/Select'
 import { useNewConfigurationForm } from './state'
@@ -33,8 +33,6 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
     distanceUnits,
     optionsDistanceUnits
   } = fieldsData
-  
-  console.log(match.path)
 
   const handleClick = () => {
     history.push(`${match.path}/agentsAgeGroups`)
