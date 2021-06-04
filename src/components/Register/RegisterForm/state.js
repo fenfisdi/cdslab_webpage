@@ -3,6 +3,7 @@ import { useInputValue } from '../../ui/Input/useInputValue'
 import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
 import { usePhoneNumberValue } from '../../ui/PhoneNumber/usePhoneNumberValue'
 import { languageContext } from '../../../config/languageContext'
+import { useDatePickerValue } from '../../ui/DatePicker/useDatePickerValue'
 
 export const useRegisterFormState = () => {
   const {t} = useContext(languageContext)
@@ -63,9 +64,8 @@ export const useRegisterFormState = () => {
     type: 'text',
     label: t('registerPage.answerQuestion2'),
   })
-  const dateBirth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
-    name: 'dateBirth',
-    type: 'date',
+  const dateBirth = useDatePickerValue(null, VALIDATORS_REGISTER_FORM.dateTime, {
+    name: 'dateBirth',    
     label: t('registerPage.birthDate'),
   })
   const phoneNumber = usePhoneNumberValue('', VALIDATORS_REGISTER_FORM.phone, {

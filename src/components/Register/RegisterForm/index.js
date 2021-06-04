@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
 import { languageContext } from '../../../config/languageContext'
-
+import DatePicker from '../../ui/DatePicker'
 
 const RegisterForm = ({ eventEmitter, loading }) => {
   
@@ -43,7 +43,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
     let notIsValid = false
     for (var key in fieldsData) {
       if (
-        (fieldsData[key] && !fieldsData[key].value.length > 0) ||
+        (fieldsData[key] && typeof fieldsData[key].value !='object' && !fieldsData[key].value.length > 0) ||
         (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)
       ) {
         notIsValid = true
@@ -143,16 +143,13 @@ const RegisterForm = ({ eventEmitter, loading }) => {
             </Grid>
 
             <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin="normal"
-                autoComplete="dateBirth"
+              <DatePicker
+                autoOk                                                 
+                format="dd/MM/yyyy"                
+                inputVariant="outlined"                
+                variant="inline"
+                lenguaje="es"
+                placeholder="dd/mm/yyyy"
                 {...dateBirth}
               />
             </Grid>
