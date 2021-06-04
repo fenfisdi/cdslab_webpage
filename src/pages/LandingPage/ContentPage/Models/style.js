@@ -25,11 +25,11 @@ export const useModelsStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '130px',
+    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '15px'
+    fontSize: '18px'
   },
   divModels:{
     width: '100%',
@@ -43,11 +43,12 @@ export const useModelsStyles = makeStyles(() => ({
     'flex-wrap': 'wrap',
     textAlign: 'justify',
     width: '60%',
-    fontSize: '0.7rem'
+    fontSize: '16px'
   },
   divModelsImg:{
     width: '40%',
-    position: 'relative'
+    position: 'relative',
+    marginTop: '100px'
   },
   imgSteps:{
     width: '100%',

@@ -5,7 +5,8 @@ export const useDevelopedByStyles = makeStyles(() => ({
   title : {
     textAlign: 'center',
     color: '#002060',
-    marginTop : '10px'
+    marginTop : '10px',
+    fontSize: '24px'
   },
   storyText:{
     fontSize: '13px',
@@ -23,7 +24,7 @@ export const useDevelopedByStyles = makeStyles(() => ({
     'flex-wrap': 'wrap',
     textAlign: 'justify',
     width: '70%',
-    fontSize: '0.7rem'
+    fontSize: '16px'
   },
   divDevelopedImg:{
     width: '20%',

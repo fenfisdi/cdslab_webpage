@@ -23,7 +23,7 @@ export const useHeaderStyles = makeStyles(() => ({
   title:{
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: '1.7rem'
+    fontSize: '30px'
   }
 }))
 
@@ -31,13 +31,14 @@ export const useContentStyles = makeStyles(() => ({
   title : {
     textAlign: 'center',
     color: '#002060',
-    marginTop : '10px'
+    marginTop : '10px',
+    fontSize: '24px'
   },
   storyText:{
     paddingTop: '5px',
     width: '90%',
     textAlign: 'justify',
-    fontSize: '0.7rem'
+    fontSize: '15px'
   },
   question:{
     top: '-30px',

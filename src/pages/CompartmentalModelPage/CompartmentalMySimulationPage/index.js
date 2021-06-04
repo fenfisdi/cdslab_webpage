@@ -12,6 +12,7 @@ import TitleIcon from '../../../components/layouts/TitleIcon'
 import SupportComponent from '../../../components/SupportComponent'
 import notesPixelIcon from '../../../assets/images/notes_pixel_perfect.svg'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import SvgNote from '../../../assets/icons/SvgNote'
 
 const CompartmentalMySimulationPage = () => {
   
@@ -20,6 +21,7 @@ const CompartmentalMySimulationPage = () => {
     loading,
     rowsFiltered,
     setRowsFiltered,
+    mySimulationsModels,
     columns,
     filterForm,
     handleClickPreview,
@@ -59,12 +61,24 @@ const CompartmentalMySimulationPage = () => {
         :
         (
           <Grid container item xs={12} justify="center" alignItems="center" direction="column" style={{marginTop:'20px'}}>
-            <ContainerTitle>
-              <TitleIcon title={'My Simulations'} icon={notesPixelIcon}/>
-              <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
-            </ContainerTitle>
+            <Grid container item xs={12}
+              direction="row"
+              justify="space-between"
+              alignItems="flex-start"
+            >
+              <Grid xs={11}>
+                <ContainerTitle>
+                  <TitleIcon title={'My simulations'} otherIconType={true} icon={<SvgNote fill='#006064' width={50} height={50}/>}/>
+                </ContainerTitle>
+              </Grid>
+              <Grid xs={1}>
+                <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+              </Grid>
+            </Grid>
+            
+            
             <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-              <MySimulationsForm eventEmitter= {filterForm}/>
+              <MySimulationsForm eventEmitter= {filterForm} mySimulationsModels={mySimulationsModels} />
             </Grid>
             <br />
             

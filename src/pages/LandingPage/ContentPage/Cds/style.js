@@ -5,7 +5,8 @@ export const useStepStyles = makeStyles(() => ({
   title : {
     textAlign: 'center',
     color: '#002060',
-    marginTop : '10px'
+    marginTop : '10px',
+    fontSize: '24px'
   },
   containerCds:{
     width: '100%',
@@ -22,6 +23,7 @@ export const useStepStyles = makeStyles(() => ({
     marginRight: '10px',
     marginBottom: '30px',
     fontSize: '0.7rem'
+
   },
   containerImageCds : {
     width: '100%'
@@ -34,11 +36,11 @@ export const useStepStyles = makeStyles(() => ({
     top: '-90px'
   },
   imageLib: {
-    width: '195px',
+    height: '150px',
     display: 'block',
     margin: '0 auto',
     position: 'relative',
-    top: '-73px'
+    top: '-74px'
   },
   textCdsLab:{
     position: 'relative',
@@ -46,14 +48,14 @@ export const useStepStyles = makeStyles(() => ({
     textAlign: 'justify',
     margin: '20px',
     'flex-wrap': 'wrap',
-    fontSize: '0.7rem'
+    fontSize: '16px'
   },
   textCdsLib:{
     position: 'relative',
-    top: '-95px',
+    top: '-110px',
     textAlign: 'justify',
     margin: '20px',
     'flex-wrap': 'wrap',
-    fontSize: '0.7rem'
+    fontSize: '16px'
   }
 }))

@@ -6,13 +6,16 @@ import {
   MY_SIMULATION_SET_FILES,
   MY_SIMULATION_SET_LIST,
   MY_SIMULATION_EXECUTION_TRUE,
-  MY_SIMULATION_EXECUTION_FALSE
+  MY_SIMULATION_EXECUTION_FALSE,
+  MY_SIMULATION_MODEL_LIST,
+  MY_SIMULATION_PARAMETER_LIST
 } from './types/mySimulationTypes'
 import { 
   downloadSimulationsFiles,
   requestDeleteSimulations, 
   requestListSimulations, 
-  requestListSimulationsFiles 
+  requestListSimulationsFiles, 
+  requestListSimulationsModels
 } from '../services/simulationsServices'
 
 export const useMySimulationActions = (dispatch) => {
@@ -33,7 +36,39 @@ export const useMySimulationActions = (dispatch) => {
             ...elem
           })
         })
+        dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
         dispatch({ type: MY_SIMULATION_SET_LIST, payload: dataList })
+      })
+      .catch((error) => {
+        const { response: { data } } = error
+        errorSimulation(data)
+      })
+  }
+
+  const getMySimulationsModels = async () => {
+    requestListSimulationsModels()
+      .then(({data}) => {
+        let dataList = []
+        if(data.data.length > 0){
+          data.data.map((elem) => {
+            dataList.push({
+              label : elem.name,
+              value: elem.name
+            })
+          })
+        }
+        dispatch({ type: MY_SIMULATION_MODEL_LIST, payload: dataList })
+      })
+      .catch((error) => {
+        const { response: { data } } = error
+        errorSimulation(data)
+      })
+  }
+
+  const getMySimulationsParameter = async () => {
+    requestListSimulations()
+      .then(({data}) => {
+        dispatch({ type: MY_SIMULATION_PARAMETER_LIST, payload: data.data })
       })
       .catch((error) => {
         const { response: { data } } = error
@@ -104,7 +139,8 @@ export const useMySimulationActions = (dispatch) => {
   const deleteSimulation = async (row) => {
     dispatch({ type: MY_SIMULATION_EXECUTION_FALSE })
     dispatch({ type: MY_SIMULATION_LOADING })
-    requestDeleteSimulations(row.identifier).then(() => {
+    requestDeleteSimulations(row.identifier).then(async() => {
+      await getMySimulations()
       dispatch({ type: MY_SIMULATION_DELETE, payload: row.identifier })
     })
       .catch(({ response: { data } }) => {
@@ -128,6 +164,8 @@ export const useMySimulationActions = (dispatch) => {
     deleteSimulation,
     getMySimulationsFiles,
     getMySimulationsDownloadFiles,
-    getExecution
+    getExecution,
+    getMySimulationsModels,
+    getMySimulationsParameter
   }
 }

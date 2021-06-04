@@ -14,7 +14,7 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
+      <Link color='inherit' href='/'>
         CDSLab
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,7 +28,8 @@ const drawerWidth = 256
 const styles = {
   root: {
     display: 'flex',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    'overflow-x': 'hidden'
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
