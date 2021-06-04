@@ -3,8 +3,8 @@ import { languageContext } from '../../../config/languageContext'
 
 
 export const useDatePickerValue = (
-  val=new Date(),
-  validators = [],
+  val,
+  validators,
   extras
 ) => {
   const [selectedDate, handleDateChange] = useState(val)
@@ -30,8 +30,8 @@ export const useDatePickerValue = (
     }
     const err = validators
       .filter(validator => !validator.check(value, validator.valueToCheck))
-      .map(val => {
-        return { type: val.type, message: val.message }
+      .map(valErr => {
+        return { type: valErr.type, message: valErr.message }
       })
     setErrors(err)
     updateHelperText(err)
