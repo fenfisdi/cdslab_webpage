@@ -53,5 +53,9 @@
     "minLength": "El número mínimo de carácteres es ?.",
     "validatePhone": "Este campo debe ser un número telefónico válido.",
     "validatePasswords": "Contraseñas no coinciden."
+  },
+  "landingPage": {
+    "simulations": "Simulaciones",
+    "management": "Administración"
   }
 }

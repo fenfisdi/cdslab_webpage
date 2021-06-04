@@ -21,6 +21,9 @@ import {
 import SvgChart from '../../../assets/icons/SvgChart'
 import SvgManagement from '../../../assets/icons/SvgManagement'
 
+
+
+
 const categories = [
   {
     id: '',
@@ -138,6 +141,7 @@ const styles =  (theme) => ({
 })
 
 function Navigator (props) {
+  const { t } = useContext(languageContext)
   const { classes, ...other } = props
   const {language,  changelanguage } = useContext(languageContext)
   const {setPath} = usePath()

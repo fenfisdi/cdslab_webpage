@@ -1,25 +1,52 @@
 import React, { Suspense } from 'react'
-import { AgentsContainer } from './styles'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { MiniLoader } from '@components/layouts/MiniLoader'
+import { AgentsPageContainer } from './styles'
+import FullWidthTabs from '../../components/Taps/'
+import LoaderComponent from '../../components/ui/Loader'
+import imgAgents from '../../assets/images/taps/agents_SVG.svg'
+import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+import { Breadcrumbs } from '@material-ui/core'
 
-const AgentsPage = () => {
+
+const AgentsModelPage = () => {
+
   const match = useRouteMatch()
-  const SimulationListPage = React.lazy(() => import('./SimulationListPage'))
-  const SimulationSettingPage = React.lazy(() => import('./SimulationSettingsPage'))
+  const AgentsMainPage = React.lazy(() => import('./AgentsMainPage'))
 
-  return (
-    <AgentsContainer>
-      <Suspense fallback={<MiniLoader />}>
-        <Switch>
-          <Route path={match.path} exact component={SimulationListPage} />
-          <Route path={`${match.path}/simulations/:id/settings`} exact component={SimulationSettingPage} />
-          <Route path={`${match.path}/simulations/add`} exact component={SimulationSettingPage} />
-          <Route path={`${match.path}/settings`} exact component={SimulationSettingPage} />
-        </Switch>
-      </Suspense>
-    </AgentsContainer>
+  const tabs = [
+    {
+      id: 1,
+      label: 'Compartmental',
+      path:  match.path,
+      disabled : true,
+      icon : imgCompartamental,
+      iconType: 'svg'
+    },
+    {
+      id: 2,
+      label: 'Agents',
+      path: match.path,
+      disabled : false,
+      icon: imgAgents,
+      iconType: 'svg'
+    },
+  ]
+
+  return(
+    <>
+      <FullWidthTabs tabs={tabs} idTab={2}>
+        <AgentsPageContainer>
+          <Breadcrumbs  />
+          <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+            <Switch>
+              <Route path={match.path} exact component={AgentsMainPage} />
+            </Switch>
+          </Suspense>
+        </AgentsPageContainer>
+      </FullWidthTabs>
+    </>
   )
+
 }
 
-export default AgentsPage
+export default AgentsModelPage
