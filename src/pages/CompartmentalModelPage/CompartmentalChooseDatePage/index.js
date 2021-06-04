@@ -33,21 +33,21 @@ const CompartmentalChooseDatePage = () => {
     executeRequest(dateData)
   }
 
+  const addDays = (date, days) => {
+    var result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return result
+  }
+
   const handleDate = (dateValue,key) => {
     setShowError(false)
     if(key=='initial'){
       setInitialDate(dateValue)
+      setFinalDate(null)
     }else if(key=='final'){
       setFinalDate(dateValue)
     }   
   }
-
-  useEffect(()=>{
-    if(finalDate!=null && finalDate < initialDate ){
-      setFinalDate(null)
-      setShowError(true)
-    }
-  },[initialDate,finalDate])
 
   return (
     <CompartmentalChooseDateSection>
@@ -91,6 +91,7 @@ const CompartmentalChooseDatePage = () => {
             id='final'
             placeholder="dd/mm/yyyy"
             error={showError}
+            minDate={initialDate!=null && addDays(initialDate,3)}
           />          
           {showError && (
             <Error>The final date must be greater than the initial date.</Error>
