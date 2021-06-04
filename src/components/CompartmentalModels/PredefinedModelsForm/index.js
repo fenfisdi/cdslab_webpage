@@ -34,6 +34,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
           variant="outlined"
           margin="normal"
           autoComplete="simulationName"
+          className={classes.Input}
           {...simulationName}
         />
       </CompartmentalPredefinedModelFormInput>

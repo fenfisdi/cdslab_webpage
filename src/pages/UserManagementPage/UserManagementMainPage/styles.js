@@ -7,4 +7,5 @@ export const UserManagementPageMainContainer = styled.section`
   align-items: center;
   width: 100%;
   padding: 10px;
+  margin-top: 10px;
 `

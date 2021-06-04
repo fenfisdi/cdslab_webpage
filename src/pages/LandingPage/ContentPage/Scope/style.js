@@ -5,7 +5,8 @@ export const useScopeStyles = makeStyles(() => ({
   title : {
     textAlign: 'center',
     color: '#002060',
-    marginTop : '10px'
+    marginTop : '10px',
+    fontSize: '24px'
   },
   containerScope:{
     width: '100%',
@@ -30,11 +31,11 @@ export const useScopeStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '130px',
+    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '15px'
+    fontSize: '18px'
   },
   textScope:{
     top: '-40px',
@@ -42,7 +43,7 @@ export const useScopeStyles = makeStyles(() => ({
     position: 'relative',
     'flex-wrap': 'wrap',
     textAlign: 'justify',
-    fontSize: '0.7rem'
+    fontSize: '16px'
   },
   divScopeImg:{
     width: '100%',

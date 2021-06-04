@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { CheckBoxComponent } from '../CheckBoxComponent'
 import imgPreview from '../../../../assets/images/document_freepik.svg'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 export const TableSimulationsComponent = (props) => {
 
@@ -16,6 +17,10 @@ export const TableSimulationsComponent = (props) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 5))
     setPage(0)
+  }
+
+  const handleFormatDate = (date) => {
+    return  moment(date).format('MMMM DD YYYY, h:mm:ss a')
   }
 
   return (
@@ -49,7 +54,7 @@ export const TableSimulationsComponent = (props) => {
                   <TableCell>{row.model_name}</TableCell>
                   <TableCell>{row.parameter_type}</TableCell>
                   <TableCell>{row.data_source}</TableCell>
-                  <TableCell>{row.inserted_at}</TableCell>
+                  <TableCell>{handleFormatDate(row.inserted_at)}</TableCell>
                   <TableCell>{row.status}</TableCell>
                   <TableCell>
                     <Link to='preview'  onClick={() => handleClickPreview(row)} >
