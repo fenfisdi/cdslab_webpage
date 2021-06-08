@@ -4,7 +4,6 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import {
   CompartmentalChooseDateSection,
   CompartmentalChooseDateDate,
-  Input,
   Column,
   Error
 } from './styles'
@@ -16,11 +15,12 @@ import { isEmpty } from 'lodash'
 import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import DatePicker from '../../../components/ui/DatePicker'
 
 const CompartmentalChooseDatePage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const [initialDate, setInitialDate] = useState('')
-  const [finalDate, setFinalDate] = useState('')
+  const [initialDate, setInitialDate] = useState(null)
+  const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
   const { executeRequest,currentSimulation } = useCompartmentalChooseDatePageState({showSnack,
     setShowSnack})
@@ -33,21 +33,21 @@ const CompartmentalChooseDatePage = () => {
     executeRequest(dateData)
   }
 
+  const addDays = (date, days) => {
+    var result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return result
+  }
+
   const handleDate = (dateValue,key) => {
     setShowError(false)
     if(key=='initial'){
       setInitialDate(dateValue)
+      setFinalDate(null)
     }else if(key=='final'){
       setFinalDate(dateValue)
     }   
   }
-
-  useEffect(()=>{
-    if(finalDate!='' && finalDate < initialDate ){
-      setFinalDate('')
-      setShowError(true)
-    }
-  },[initialDate,finalDate])
 
   return (
     <CompartmentalChooseDateSection>
@@ -65,23 +65,34 @@ const CompartmentalChooseDatePage = () => {
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
           <span htmlFor='initial'>Simulation initial date</span>
-          <Input
-            type='date'
+          <DatePicker
+            autoOk
+            value={initialDate}                               
+            format="dd/MM/yyyy"
+            onChange={e => handleDate(e,'initial')}
+            inputVariant="outlined"
+            variant="inline"
+            lenguaje="es"
             id='initial'
-            value={initialDate}
-            onChange={e => handleDate(e.target.value,'initial')}
-          />
+            placeholder="dd/mm/yyyy"                                    
+          />          
         </Column>
 
         <Column>
           <span htmlFor='final'>Simulation final date</span>
-          <Input
-            type='date'
+          <DatePicker
+            autoOk
+            value={finalDate}                                    
+            format="dd/MM/yyyy"
+            onChange={e => handleDate(e,'final')}
+            inputVariant="outlined"
+            variant="inline"
+            lenguaje="es"
             id='final'
-            value={finalDate}
-            onChange={e => handleDate(e.target.value,'final')}
+            placeholder="dd/mm/yyyy"
             error={showError}
-          />
+            minDate={initialDate!=null && addDays(initialDate,3)}
+          />          
           {showError && (
             <Error>The final date must be greater than the initial date.</Error>
           )}

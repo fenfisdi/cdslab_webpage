@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core'
 
 const TextFieldCommon = ({
   label, name, disabled, value, required, type,
-  inputClass, handleChange, maxLength, updateValue, regex, isRegex
+  inputClass, handleChange, maxLength, updateValue, regex, isRegex, variant
 }) => {
   const handleIpunt = (e) => {
     const { name, value } = e.target
@@ -18,6 +18,7 @@ const TextFieldCommon = ({
         id="outlined-basic"
         name={name}
         type={type}
+        variant={variant}
         label={label}
         margin="normal"
         size='small'
