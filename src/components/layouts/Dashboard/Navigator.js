@@ -168,8 +168,8 @@ function Navigator (props) {
               </ListItemText>
             </ListItem>{}
             {children
-              .filter(x => { return x.rol.includes('user') })
-              .map(({ id: childId, icon,typeIcon, active,href }) => 
+              .filter(x => { return x.rol.includes(rol) })
+              .map(({ id: childId, icon, active,href }) => 
                 (
                   <NavLink 
                     key={childId} 
