@@ -14,7 +14,7 @@ const FixedHeaderParameters =()=>{
         <strong>Value</strong>      
       </ParametersFormHeaderItem>
       <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
-        <strong>Unit</strong>
+        <strong>Units</strong>
       </ParametersFormHeaderItem>
     </ParametersFormHeader>
   )

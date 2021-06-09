@@ -10,7 +10,6 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { ContainerTitle } from '../../SimulationModelPage/SimulationMainPage/styles'
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import SupportComponent from '../../../components/SupportComponent'
-import notesPixelIcon from '../../../assets/images/notes_pixel_perfect.svg'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import SvgNote from '../../../assets/icons/SvgNote'
 

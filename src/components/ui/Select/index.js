@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   selectForm:{
-    'box-shadow': '0px 4px 5px 2px rgb(0 0 0 / 42%)',
+    'box-shadow': '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
     color: '#006064',    
     'background': '#E0F3FA'
   }
