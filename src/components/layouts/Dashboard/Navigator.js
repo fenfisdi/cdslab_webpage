@@ -117,7 +117,7 @@ const styles =  (theme) => ({
     position: 'fixed',
     right: '0',
     bottom: '0',
-    width: '80%'
+    width: '100%'
   },
   testLogout: {
     marginLeft: '20px',
