@@ -3,7 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_AGENTS_MAIN } from '../../../constants/agents'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { AgentslMainPageContainer,AgentsMainPageCards, useAgentsMainPageStyles } from './styles'
 
 const AgentsMainPage = () => {

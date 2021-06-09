@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { useCompartmentalMainPageState } from './state'
 import { useCompartmentalMainPageStyles, CompartmentalMainPageContainer,CompartmentalMainPageCards } from './styles'
 

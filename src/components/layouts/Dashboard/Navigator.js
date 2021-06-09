@@ -9,8 +9,6 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
-import managementIcon from '../../../assets/images/management/management_icon.svg'
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { Link, NavLink } from 'react-router-dom'
 import { usePath } from '../../PathContext'
@@ -20,12 +18,15 @@ import { languageContext } from '../../../config/languageContext'
 import {
   SESSION_LOGIN,
 } from '../../../actions/types/sessionTypes'
+import SvgChart from '../../../assets/icons/SvgChart'
+import SvgManagement from '../../../assets/icons/SvgManagement'
+
 const categories = [
   {
     id: '',
     children: [
-      { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root'] },
-      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
+      { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root'] },
+      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root','user'] },
     ]
   },
   {
@@ -35,12 +36,13 @@ const categories = [
     ]
   }
 ]
+
 const styles =  (theme) => ({
   paper:{
     border: 'none !important'
   },
   categoryHeader: {
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2)
   },
   categoryHeaderPrimary: {
@@ -63,9 +65,11 @@ const styles =  (theme) => ({
     color: '#fff'
   },
   itemActiveItem: {
-    background: '#000 !important',
     '& > div' : {
       color: '#18FFFF !important',
+    },
+    '& svg':{
+      fill: '#18FFFF !important',
     }
   },
   itemPrimary: {
@@ -75,10 +79,12 @@ const styles =  (theme) => ({
     border: '1px solid #fff'
   },
   itemIcon: {
-    'min-width': '18%',
-    position: 'relative',
     top: '-5px',
-    left: '-11px',
+    left: '-5px',
+    position: 'relative',
+    textAlign: 'center',
+    margin: '0 auto',
+    display: 'block',
     '& > div':{
       fontSize: '40px'
     }
@@ -163,7 +169,7 @@ function Navigator (props) {
             </ListItem>{}
             {children
               .filter(x => { return x.rol.includes(rol) })
-              .map(({ id: childId, icon,typeIcon, active,href }) => 
+              .map(({ id: childId, icon, active,href }) => 
                 (
                   <NavLink 
                     key={childId} 
@@ -180,11 +186,8 @@ function Navigator (props) {
                     >
                       <ListItemIcon className={classes.itemIcon}>
                         {
-                          typeIcon === 'svg' 
-                            ? (<img src={icon} style={{width: '40px', marginLeft: '10px'}} /> )
-                            : icon
-                        }
-                    
+                          icon
+                        }  
                       </ListItemIcon>
                       <ListItemText
                         classes={{
@@ -201,7 +204,7 @@ function Navigator (props) {
         ))}
         <Link to='' onClick= {handleLogout} title='Logout'>
           <ListItem className={classes.logout}>
-            <Icon className="fas fa-sign-out-alt" style={{ color: '#fff', fontSize:'30px' }} />
+            <Icon className="fas fa-sign-out-alt" style={{ color: '#fff', fontSize:'30px',marginLeft: '5px' }} />
             <span className={classes.testLogout}>Logout</span>
           </ListItem>
         </Link>

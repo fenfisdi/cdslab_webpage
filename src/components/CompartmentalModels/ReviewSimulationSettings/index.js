@@ -3,7 +3,7 @@ import React from 'react'
 import CompartmentalButton from '../CompartmentalButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import { ExtraParamsItem } from './styles'
-
+import { useDomParse } from '../../../helpers/useDomParse'
 const useStyles = makeStyles(() => ({
   rowColor: {
     background: '#ECEFF1',
@@ -27,6 +27,7 @@ const useStyles = makeStyles(() => ({
 const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', showButton=false,showButtonDownload=false})=>{
   
   const classes = useStyles()
+  const {handleDomParse } = useDomParse()
 
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
@@ -39,7 +40,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
                 {parameter.type=='fixed' 
                   ?
                   <ExtraParamsItem>
-                    <strong> {capitalLetter(parameter.label)} : </strong>{parameter.value}
+                    <strong> {capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) : </strong>{parameter.value}
                   </ExtraParamsItem>
                   :
                   displayOptimizedParametersValue(parameter)}
@@ -53,8 +54,10 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayOptimizedParametersValue =(parameter)=>{
     return (<ExtraParamsItem>
-      <strong>min Value : </strong>{ parameter.min_value } ,
-      <strong>max Value : </strong>{ parameter.max_value } 
+      <strong>{capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) = </strong>
+      <br />
+      <strong> min Value : </strong>{ parameter.min_value } ,
+      <strong> max Value : </strong>{ parameter.max_value } 
     </ExtraParamsItem>)
   }
   const capitalLetter = (str) => {
