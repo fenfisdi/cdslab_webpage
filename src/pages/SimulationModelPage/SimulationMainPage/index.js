@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useStore } from '@store/storeContext'
 
 import { SimulationContainer, ContainerTitle } from './styles'
@@ -13,9 +13,13 @@ import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
+import {languageContext} from '../../../config/languageContext'
 
 
 const SimulationMainPage = () => {
+
+  const {t} = useContext(languageContext)
+
   const {
     state: {
       simulations: { simulations, loading },
@@ -36,7 +40,7 @@ const SimulationMainPage = () => {
   const options = [
     {
       icon: cmodelsSvg,
-      name: 'Comparmental Models',
+      name: t('simulationsPage.CompartmentalButton'),
       indetifier: 'compar_models',
       url: '/compartmentalModels',
       ruta: 'compartmentalModels',
@@ -52,7 +56,7 @@ const SimulationMainPage = () => {
     },
     {
       icon: agentsSVG,
-      name: 'Agent based models',
+      name: t('simulationsPage.AgentsButton'),
       indetifier: 'agent_based_models',
       url: '/agents',
       tipo: 2,
@@ -87,7 +91,7 @@ const SimulationMainPage = () => {
   return (
     <SimulationContainer>
       <ContainerTitle>
-        <TitleIcon title={'Simulations'} icon={lineChartFreepik}/>
+        <TitleIcon title={t('simulationsPage.title')} icon={lineChartFreepik}/>
       </ContainerTitle>
       
       <ModelCard
