@@ -57,5 +57,10 @@
   "landingPage": {
     "simulations": "Simulaciones",
     "management": "Administración"
+  },
+  "simulationsPage": {
+    "title": "Simulaciones",
+    "CompartmentalButton": "Modelos compartimentales",
+    "AgentsButton": "Modelos basados en agentes"
   }
 }
