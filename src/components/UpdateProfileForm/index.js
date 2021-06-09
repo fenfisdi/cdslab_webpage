@@ -8,7 +8,7 @@ import { Input } from '../ui/Input'
 import { useUpdateProfileFormStyles } from './styles'
 import {useRegisterFormState} from '../Register/RegisterForm/state'
 import { TitleComponent } from '../ui/Title'
-import Button from '@material-ui/core/Button'
+import CompartmentalButton from '../CompartmentalModels/CompartmentalButton'
 
 const UpdateProfileForm = () => {
 
@@ -96,13 +96,14 @@ const UpdateProfileForm = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            onClick={console.log(1)}
-            variant="contained"
-            color="primary"
-          >
-            Save changes
-          </Button>
+          <CompartmentalButton
+            disabled={false }
+            onClick={()=>{}}
+            justify="flex-end"
+            alignItems="center"
+            text={'Save changes'}
+            icon='fas fa-save'
+          /> 
         </Fragment>
       </Grid>
     </Paper>

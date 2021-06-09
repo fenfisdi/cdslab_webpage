@@ -15,5 +15,10 @@ export const ContainerTitle = styled.div`
   align-items: center;
   width: 90%;
   margin-bottom: 5%;
-  margin-top: 7%;
+`
+
+export const ContainerModels = styled.div`
+  margin-top: 4%;
+  display: flex;
+  width:100%;
 `

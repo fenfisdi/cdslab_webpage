@@ -5,7 +5,7 @@ import { Input } from '../ui/Input'
 import { useChangePasswordFormStyles } from './styles'
 import {useRegisterFormState} from '../Register/RegisterForm/state'
 import { TitleComponent } from '../ui/Title'
-import Button from '@material-ui/core/Button'
+import CompartmentalButton from '../CompartmentalModels/CompartmentalButton'
 
 const ChangePasswordForm = () => {
 
@@ -49,13 +49,14 @@ const ChangePasswordForm = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            onClick={{}}
-            variant="contained"
-            color="primary"
-          >
-            Update password
-          </Button>
+          <CompartmentalButton
+            disabled={false }
+            onClick={()=>{}}
+            justify="center"
+            alignItems="center"
+            text={'Save changes'}
+            icon='fas fa-save'
+          /> 
         </Fragment>
       </Grid>
     </Paper>
