@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useStore } from '@store/storeContext'
 
-import { UserManagementContainer, ContainerTitle } from './styles'
+import { UserManagementContainer, ContainerTitle, ContainerModels } from './styles'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useSessionActions } from '@actions/sessionsActions'
 
@@ -53,12 +53,14 @@ const UserManagamentPage = () => {
       <ContainerTitle>
         <TitleIcon title={'Management'} icon={keySVG}/>
       </ContainerTitle>
-      <ModelCard
-        options={options}
-        iconWith='170'
-        iconHeight='170'
-        eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
-      />
+      <ContainerModels>
+        <ModelCard
+          options={options}
+          iconWith='140'
+          iconHeight='140'
+          eventEmitted={(cardData) => { cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) }}
+        />
+      </ContainerModels>
     </UserManagementContainer>
   )
 }

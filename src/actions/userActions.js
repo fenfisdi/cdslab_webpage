@@ -17,6 +17,18 @@ export const useUserActions = (dispatch) => {
    * @param {*} userForm {username, name, lastname}
    * @param {*} userQrValidation {username, name, lastname}
    */
+
+  const setDataValidationQR =(data)=>{
+    dispatch({
+      type: VALIDATION_QR_SUCCESS,
+      payload: data
+    })
+  }
+
+  const setDataValidateCode =(data)=>{
+    dispatch({ type: VALIDATION_QR_SUCCESS, payload: data })
+  }
+
   const registerUser = (userForm) => {
     dispatch({ type: REGISTER_LOADING })
     registerUserService(userForm)
@@ -46,11 +58,7 @@ export const useUserActions = (dispatch) => {
     dispatch({ type: VALIDATION_QR_LOADING })
     validateQrService(userQrValidation)
       .then((response) => {
-        
-        dispatch({
-          type: VALIDATION_QR_SUCCESS,
-          payload: response.data
-        })
+        setDataValidationQR(response.data)        
       })
       .catch((error) => {
         console.error({ error })
@@ -71,8 +79,8 @@ export const useUserActions = (dispatch) => {
         `${process.env.REACT_APP_AUTH_API_URL}/otp`,
         'POST'
         ,userQrValidation)
-      dispatch({ type: VALIDATION_QR_SUCCESS, payload: response.data })}
-    catch (error){
+      setDataValidateCode(response.data)
+    }catch (error){
       if (error.response) {
         const { response: { data } } = error
         dispatch({
@@ -83,5 +91,5 @@ export const useUserActions = (dispatch) => {
     }
   }
 
-  return { registerUser, validateQr, validateCode }
+  return { registerUser, validateQr, validateCode, setDataValidationQR }
 }
