@@ -9,8 +9,7 @@ import theme from '@styles/cdslabTheme'
 import SnackbarComponent from '@components/ui/Snackbars'
 import QRrender from '../Auth/QRPage'
 
-export const LoginPage = () => {
-  const LOGIN_ENABLED = process.env.REACT_APP_LOGIN_ENABLED === 'true'
+export const LoginPage = () => {  
   sessionStorage.removeItem('path')
   const classes = useLoginStyles(theme)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -31,7 +30,7 @@ export const LoginPage = () => {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           {step == 0 && <LoginForm onSubmit={handleSubmit} title={title} loading={loading} />}
-          {step == 1 && LOGIN_ENABLED && <QRrender location={'login'} urlPath={null} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
+          {step == 1 && <QRrender location={'login'} urlPath={null} email={email} sendStep={updateStep} showSnack={showSnack} setShowSnack={setShowSnack} />}
           {showSnack && showSnack.show && <SnackbarComponent
             snackDuration={3500}
             configData={showSnack}
