@@ -106,23 +106,37 @@ const styles =  (theme) => ({
     margin: '0 auto'
   },
   logout : {
-    width: '100%',
-    marginTop: '30px'
+    width: '70%'
   },
   linkLenguage: {
+    marginLeft: '50px',
     color: '#fff',
+    width: '30%',
     '&:hover': {
-      cursor: 'pointer'
-    },
+      cursor: 'pointer',
+      color:'#18FFFF !important'
+    }
+  },
+  testLogout: {
+    color: '#fff',
+    fontSize: '14px',
+    marginLeft: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  },
+  containerLogout:{
     position: 'fixed',
-    right: '0',
     bottom: '0',
     width: '100%'
   },
-  testLogout: {
-    marginLeft: '20px',
-    color: '#fff',
-    fontSize: '14px'
+  iconLogout:{
+    color: '#fff', 
+    fontSize:'25px',
+    marginLeft: '-10px',
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 })
 
@@ -202,15 +216,19 @@ function Navigator (props) {
               )}
           </React.Fragment>
         ))}
-        <Link to='' onClick= {handleLogout} title='Logout'>
-          <ListItem className={classes.logout}>
-            <Icon className="fas fa-sign-out-alt" style={{ color: '#fff', fontSize:'30px',marginLeft: '5px' }} />
-            <span className={classes.testLogout}>Logout</span>
-          </ListItem>
-        </Link>
-        <Link className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
-          {language ? 'ES':'EN' }
-        </Link>
+        <ListItem className={classes.containerLogout}>
+          <Link to='' onClick= {handleLogout} title='Logout'>
+            <ListItem className={classes.logout}>
+              <Icon 
+                className={clsx('fas fa-sign-out-alt',classes.iconLogout)} 
+              />
+              <span className={classes.testLogout}>Logout</span>
+            </ListItem>
+          </Link>
+          <Link className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
+            {language ? 'ES':'EN' }
+          </Link>
+        </ListItem>
       </List>
     </Drawer>
   )
