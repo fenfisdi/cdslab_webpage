@@ -33,7 +33,9 @@ const UserManagementMainPage = () => {
       path:  'usersManagement',
       disabled : false,
       icon: userSvg,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 30
     },
     {
       id: 2,
@@ -41,7 +43,9 @@ const UserManagementMainPage = () => {
       path: 'sysManagement',
       disabled : true,
       icon: toolsSVG,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 30
     },
   ]
 
