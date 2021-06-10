@@ -26,7 +26,7 @@ const categories = [
     id: '',
     children: [
       { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root','admin'] },
-      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
+      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root','user'] },
     ]
   },
   {
@@ -128,7 +128,7 @@ const styles =  (theme) => ({
   containerLogout:{
     position: 'fixed',
     bottom: '0',
-    width: '100%'
+    width: '18%'
   },
   iconLogout:{
     color: '#fff', 

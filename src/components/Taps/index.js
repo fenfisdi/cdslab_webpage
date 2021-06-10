@@ -27,7 +27,6 @@ const useStyles = makeStyles(() => ({
     background: '#F1F1F1'
   },
   img: {
-    height: '40px',
     position: 'relative',
     top: '6px'
   },
@@ -86,7 +85,7 @@ export default function FullWidthTabs(props) {
       {
         tab.iconType === 'svg'
           ? (
-            <img src={tab.icon} className={classes.img} />
+            <img src={tab.icon} className={classes.img} width={tab.width} height={tab.height} />
           )
           :
           (<Icon className={tab.icon} style={{ fontSize: 20, marginLeft:'-10px' }}/>)

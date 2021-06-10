@@ -25,11 +25,12 @@ export const useModelsStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '18px'
+    fontSize: '18px',
+    backgroundColor: '#fff',
+    width : '190px'
   },
   divModels:{
     width: '100%',
@@ -47,8 +48,9 @@ export const useModelsStyles = makeStyles(() => ({
   },
   divModelsImg:{
     width: '40%',
-    position: 'relative',
-    marginTop: '100px'
+    display: 'flex',
+    'align-items': 'center',
+    'justify-content': 'center'
   },
   imgSteps:{
     width: '100%',
