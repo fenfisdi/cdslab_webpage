@@ -22,7 +22,7 @@ const CompartmentalReviewConfigurationMessagePage=()=>{
       <SubtitleCommon text='' />
       <CompartmentalReviewConfigurationMessageFormTitle>
         <Typography variant="body2" component="p" style={{'fontWeight':'500', 'fontSize':'25px', 'marginBottom':'18px','color':'#00838F'}}>
-        Your simulations is being processed
+          Your simulation is being processed
         </Typography>
       </CompartmentalReviewConfigurationMessageFormTitle>
      

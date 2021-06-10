@@ -18,7 +18,7 @@ const TitleIcon = ({ title, otherIconType = false, icon, width = 60, height = 60
           icon
         }
       </CharterBody>
-      <Typography variant="body2" component="p" style={{'color':theme.palette.primary.colorTitle,fontSize:'45px', fontWeight: 'bold'}}>
+      <Typography variant="body2" component="p" style={{'color':theme.palette.primary.colorTitle,fontSize:'45px', fontWeight: 'bold', marginLeft:'20px'}}>
         {title}
       </Typography>
     </Grid>

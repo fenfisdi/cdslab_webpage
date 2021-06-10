@@ -40,7 +40,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
             <TableCell align="center">Parameter</TableCell>
             <TableCell align="center">Configuration Type</TableCell>
             <TableCell align="center">Value</TableCell>
-            <TableCell align="center">Unit</TableCell>
+            <TableCell align="center">Units</TableCell>
           </TableRow>
         </TableHead>
 

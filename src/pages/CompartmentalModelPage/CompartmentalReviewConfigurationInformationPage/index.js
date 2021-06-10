@@ -37,7 +37,7 @@ const CompartmentalReviewConfigurationInformationPage =()=>{
         <SupportComponent text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS}/>
       </Grid>
 
-      <SubtitleCommon text='Review configurations' />
+      <SubtitleCommon text='Review configuration' />
 
       {!isEmpty(currentSimulation) && !isEmpty(predefinedModelSelected) && <ReviewSimulationSettings 
         simulation={{

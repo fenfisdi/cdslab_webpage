@@ -2,6 +2,7 @@ import { useStore } from '@store/storeContext'
 import { useSessionActions } from '@actions/sessionsActions'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useUserActions } from '@actions/userActions'
 
 export const useLoginState = ({ showSnack, setShowSnack }) => {
   const {
@@ -12,6 +13,8 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
   } = useStore()
 
   const { login } = useSessionActions(dispatch)
+  const { setDataValidationQR  } = useUserActions(dispatch)
+
   const [step, setStep] = useState(0)
   const history = useHistory()
   const [title, setTitle] = useState('Sign in')
@@ -44,6 +47,7 @@ export const useLoginState = ({ showSnack, setShowSnack }) => {
         }
       )
       setStep(1)
+      setDataValidationQR(null)
     } else if (error) {
 
       setShowSnack(

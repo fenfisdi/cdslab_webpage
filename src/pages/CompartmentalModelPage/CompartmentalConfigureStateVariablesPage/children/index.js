@@ -8,13 +8,13 @@ const ConfigureStateVariablesHeader =()=>{
     
     <ParametersFormHeader>
       <ParametersFormHeaderItem justifyContent="flex-end" alignItems="center">
-        <strong>State</strong>
+        <strong>State variable</strong>
       </ParametersFormHeaderItem>
       <ParametersFormHeaderItem justifyContent="center" alignItems="center">
         <strong>Value</strong>      
       </ParametersFormHeaderItem>
       <ParametersFormHeaderItem justifyContent="flex-start" alignItems="center">
-        <strong>Unit</strong>
+        <strong>Units</strong>
       </ParametersFormHeaderItem>
     </ParametersFormHeader>
   )

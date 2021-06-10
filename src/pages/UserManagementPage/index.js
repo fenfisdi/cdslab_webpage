@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import LoaderComponent from '../../components/ui/Loader'
+import { UserManagementPageContainer } from './styles'
 
 const UserManagementPage = () => {
   const match = useRouteMatch()
@@ -9,7 +10,7 @@ const UserManagementPage = () => {
   const UserManagamentGeneralPage = React.lazy(() => import('./UserManagamentPage'))
 
   return (
-    <>
+    <UserManagementPageContainer>
       <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
         <Switch>
           <Route path={match.path} exact component={UserManagamentGeneralPage} />
@@ -17,7 +18,7 @@ const UserManagementPage = () => {
           <Route path={`${match.path}/SysManagement`} exact component={SysManagementMainPage} />
         </Switch>
       </Suspense>
-    </>
+    </UserManagementPageContainer>
   )
 }
 
