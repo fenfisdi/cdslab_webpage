@@ -74,7 +74,7 @@ const CompartamentalMySimulationsPreviewPage = () => {
             >
               <Grid xs={11}>
                 <ContainerTitle>
-                  <TitleIcon title={handleNameLength(name)} icon={graphIcon} width={50} height={50} />
+                  <TitleIcon title='Review' icon={graphIcon} width={50} height={50} />
                 </ContainerTitle>
               </Grid>
               <Grid xs={1}>

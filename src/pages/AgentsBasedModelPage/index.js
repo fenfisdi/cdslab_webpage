@@ -24,7 +24,9 @@ const AgentsBasedModelPage = () => {
       path:  match.path,
       disabled : true,
       icon : imgCompartamental,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 30
     },
     {
       id: 2,
@@ -32,7 +34,9 @@ const AgentsBasedModelPage = () => {
       path: match.path,
       disabled : false,
       icon: imgAgents,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 40
     },
   ]
 
