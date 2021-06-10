@@ -31,11 +31,12 @@ export const useScopeStyles = makeStyles(() => ({
     position: 'relative',
     background: '#fff',
     height: '60px',
-    width: '150px',
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '18px'
+    fontSize: '18px',
+    backgroundColor: '#fff',
+    width : '190px'
   },
   textScope:{
     top: '-40px',

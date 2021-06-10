@@ -29,7 +29,7 @@ export const useSponsorsStyles = makeStyles(() => ({
   },
   imageMinCiencias: {
     top: '-20px',
-    height: '45px',
+    height: '50px',
     display: 'block',
     margin: '0 auto',
     position: 'relative',
@@ -57,7 +57,7 @@ export const useSponsorsStyles = makeStyles(() => ({
     'flex-wrap': 'wrap',
     fontSize: '16px'
   },
-  question:{
+  questionSena:{
     top: '-10px',
     margin: '0 auto',
     display: 'block',
@@ -68,6 +68,21 @@ export const useSponsorsStyles = makeStyles(() => ({
     textAlign: 'center',
     color: '#002060',
     fontWeight: 'bold',
-    fontSize: '18px'
+    fontSize: '18px',
+    backgroundColor: '#FFF'
+  },
+  questionMin:{
+    top: '-10px',
+    margin: '0 auto',
+    display: 'block',
+    position: 'relative',
+    background: '#fff',
+    height: '60px',
+    width: '300px',
+    textAlign: 'center',
+    color: '#002060',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    backgroundColor: '#FFF'
   }
 }))
