@@ -25,14 +25,14 @@ const categories = [
   {
     id: '',
     children: [
-      { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root'] },
-      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root','user'] },
+      { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root','admin'] },
+      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
     ]
   },
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 50 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root'] },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 50 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root','admin'] },
     ]
   }
 ]
@@ -117,7 +117,7 @@ const styles =  (theme) => ({
     position: 'fixed',
     right: '0',
     bottom: '0',
-    width: '80%'
+    width: '100%'
   },
   testLogout: {
     marginLeft: '20px',
