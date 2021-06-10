@@ -56,7 +56,6 @@ export const useComparmentalMySimulationState = () => {
   
 
   const filterForm = (object) => {
-    console.log(object)
     let filtered = rows
     if(object.search !== ''){
       filtered = filtered.filter(x => filterSimulationName(x,object))
