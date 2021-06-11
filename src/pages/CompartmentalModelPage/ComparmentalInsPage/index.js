@@ -82,6 +82,10 @@ const ComparmentalInsPage = () => {
     { title: 'It\'s a Wonderful Life', year: 1946 },
     { title: 'Life Is Beautiful', year: 1997 }]
 
+  const selectOptions =[
+    {label:'option 1',name:'optio1'},{label:'option 2',name:'optio2'}
+  ]
+
   return (
     <CompartmentalComparmentalInsPageSection>
       <Grid container item xs={12}
@@ -100,7 +104,7 @@ const ComparmentalInsPage = () => {
           xs={3}
           title="Select Variable"
           {...stateVariable}
-          options={optionListDTO([{label:'option 1',name:'optio1'},{label:'option 2',name:'optio2'}])} />
+          options={optionListDTO(selectOptions)} />
 
         <ContainerSearchSection>
           <div>
