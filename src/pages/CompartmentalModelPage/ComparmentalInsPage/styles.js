@@ -9,31 +9,38 @@ export const CompartmentalComparmentalInsPageSection = styled.section`
   width: 100%;`
 
 
-export const CompartmentalComparmentalInsPageTitle= styled.section`
+export const ContianerTable = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction:column;
   align-items: center;
-  width: 50%;`
-
-  
-export const CompartmentalChooseDateSection = styled.section`
+  width: 40%;
+  margin: 20px 0 40px;
+  p{
+    margin-bottom:10px;
+  }
+  `
+export const ContainerSearchSection = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: center;
+width: 100%;
 align-items: center;
-width: 100%;`
+justify-content:center;
+flex-direction:column;
+margin: 20px 0 40px;
+margin-top:5%;
+div {
+  margin-bottom:10px;
+}
+`
 
-
-export const CompartmentalChooseDateFormTitle = styled.section`
+export const SearchSection = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: center;
+width: 300px;
 align-items: center;
-width: 100%
-& > p {
-  fontWeight:'500';
-  fontSize:'18px';
+justify-content:center;
+flex-direction:row;
+i{
+  font-size: 22px;
+  margin-right:10px;
 }
 `
 
