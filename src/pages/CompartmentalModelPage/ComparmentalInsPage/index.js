@@ -186,7 +186,7 @@ const ComparmentalInsPage = () => {
           <Typography>The data that is going to be used is:</Typography>    
           <TableFormatStatic Variable={stateVariable.value} />
         </ContianerTable> */}
-        
+
 
         <ContianerTable>
           <Typography>The data that is going to be used is:</Typography>    
@@ -211,8 +211,7 @@ const ComparmentalInsPage = () => {
           justify="flex-end"
           alignItems="center"
           text={'Continue'}
-        />
-        
+        />        
       </Grid>
 
       {false && <LoaderComponent

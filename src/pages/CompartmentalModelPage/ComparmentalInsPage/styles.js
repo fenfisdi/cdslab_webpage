@@ -28,7 +28,6 @@ width: 100%;
 align-items: center;
 justify-content:center;
 flex-direction:column;
-margin: 20px 0 40px;
 margin-top:5%;
 div {
   margin-bottom:10px;
@@ -50,7 +49,7 @@ i{
 export const ContainerChooseDate = styled.div`
 display: flex;
 width: 100%;
-margin: 20px 0 40px;
+margin: 20px 0 35px;
 `
 
 export const Column = styled.div`
