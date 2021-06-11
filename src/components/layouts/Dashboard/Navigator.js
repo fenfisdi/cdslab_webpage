@@ -42,16 +42,13 @@ const styles =  (theme) => ({
     border: 'none !important'
   },
   categoryHeader: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingTop: '14px',
   },
   categoryHeaderPrimary: {
     color: theme.palette.common.white
   },
   item: {
-    paddingTop: 10,
-    paddingBottom: 1,
-    color: '#fff'
+    color: '#fff',
   },
   itemCategory: {
     backgroundColor: '#fff',
