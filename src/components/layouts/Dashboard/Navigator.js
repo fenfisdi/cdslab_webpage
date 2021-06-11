@@ -26,7 +26,7 @@ const categories = [
     id: '',
     children: [
       { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root','admin'] },
-      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root',] },
+      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
     ]
   },
   {
