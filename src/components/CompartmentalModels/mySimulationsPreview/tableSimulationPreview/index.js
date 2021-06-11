@@ -61,11 +61,11 @@ export const TableMySimulationPreview = (props) => {
                         <TableCell>
                           {
                             elem.ext === 'csv'
-                              ? (<Button onClick={() => handleDownloadCsv(elem.body)}>
+                              ? (<Button onClick={() => handleDownloadCsv(elem.body,elem.name)}>
                                 <GetAppIcon className={classes.iconDownload}/>
                               </Button>)
                               : ( 
-                                <Button onClick={() => handleDownloadHtml(elem.body)}>
+                                <Button onClick={() => handleDownloadHtml(elem.body,elem.name)}>
                                   <GetAppIcon className={classes.iconDownload}/>
                                 </Button>
                               )

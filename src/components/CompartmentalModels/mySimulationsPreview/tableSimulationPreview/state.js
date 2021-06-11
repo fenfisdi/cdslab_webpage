@@ -24,20 +24,20 @@ export const useMySimulationsPreviewState = () => {
     if (execution) {getMySimulationsFiles(mySimulationSelected.identifier)}
   }
 
-  const handleDownloadHtml = (body) => {
+  const handleDownloadHtml = (body,name) => {
     body.then((data) => {
       const a = document.createElement('a')
       a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data) 
-      a.download = 'index.html'
+      a.download = name
       a.click()
       a.remove()
     })
   }
-  const handleDownloadCsv = (body) => {
+  const handleDownloadCsv = (body,name) => {
     body.then((data) => {
       const a = document.createElement('a')
       a.href = 'data:text/csv,' + encodeURIComponent(data) 
-      a.download = 'archivo.csv'
+      a.download = name
       a.click()
       a.remove()
     })
