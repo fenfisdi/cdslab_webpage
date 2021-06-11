@@ -35,7 +35,7 @@ const UserManagementMainPage = () => {
       icon: userSvg,
       iconType: 'svg',
       width: 70,
-      height: 30
+      height: 45
     },
     {
       id: 2,
@@ -45,7 +45,7 @@ const UserManagementMainPage = () => {
       icon: toolsSVG,
       iconType: 'svg',
       width: 70,
-      height: 30
+      height: 50
     },
   ]
 

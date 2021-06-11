@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
   containerTaps:{   
     display: 'inline-flex',
-    height: '50px',
+    height: '70px',
     textAlign: 'center',
     justifyContent: 'center'
   },
@@ -28,27 +28,27 @@ const useStyles = makeStyles(() => ({
   },
   img: {
     position: 'relative',
-    top: '6px'
+    top: '7px'
   },
   divImg :{
     width: '50%'
   },
   divLabel:{
     position: 'relative',
-    top: '10px',
+    top: '20px',
     fontSize: '18px'
   },
   link: {
     display: 'inline-flex',
     textDecoration : 'none',
     width: '100%',
-    height: '50px',
+    height: '70px',
   },
   linkDisabled: {
     display: 'inline-flex',
     textDecoration : 'none',
     width: '100%',
-    height: '50px',
+    height: '70px',
     color: '#808080'
   }
 }))

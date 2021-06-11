@@ -39,7 +39,7 @@ const SysManagementMainPage = () => {
       icon: userSvg,
       iconType: 'svg',
       width: 70,
-      height: 30
+      height: 45
     },
     {
       id: 2,
@@ -49,7 +49,7 @@ const SysManagementMainPage = () => {
       icon: toolsSVG,
       iconType: 'svg',
       width: 70,
-      height: 30
+      height: 50
     },
   ]
 
