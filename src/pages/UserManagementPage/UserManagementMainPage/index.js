@@ -60,7 +60,7 @@ const UserManagementMainPage = () => {
             severity={'info'}
           />
           <TableComponent row={users}/>
-          {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
+          {isRoot ? <TableComponent row={userAdmins} configAdmin={isRoot}/> : <></>}
           <CompartmentalButton
             justify='flex-end'
             alignItems='center'

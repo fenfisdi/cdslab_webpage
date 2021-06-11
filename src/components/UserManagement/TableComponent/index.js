@@ -13,6 +13,7 @@ import { useTableComponentStyles } from './styles'
 import {useTableComponentState} from './state'
 
 
+
 export const ShowTableComponent = ({configAdmin, fil, rows }) => {
 
   const classes = useTableComponentStyles()
@@ -21,10 +22,10 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const filterRows = rows && rows.filter(row=>{
+  const filterRows = rows?.filter(row=>{
     return row.name.includes(fil)
   })
-
+  
   const functionsTable = useTableComponentState()
   const {
     getComparator,
@@ -42,7 +43,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
   }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 5))
+    setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
   }
 
@@ -60,24 +61,24 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows && filterRows.length}
+              rowCount={filterRows?.length}
               changeAdmin={configAdmin}
             />
             <TableBody>
-              {rows && stableSort(filterRows, getComparator(order, orderBy))
+              {filterRows && stableSort(filterRows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
-
+                  
                   return (
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.email}
                     >
+                      {console.log(row.name)}
                       <TableCell padding="checkbox">
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell component="th" id={index} scope="row" padding="none">
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
@@ -91,7 +92,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
         <TablePagination
           rowsPerPageOptions={[5]}
           component="div"
-          count={rows && rows.length}
+          count={filterRows?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

@@ -23,7 +23,7 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
       getUsersListData()
     }
     if(!isNull(data)){
-      console.log(data)
+      /*  console.log(data) */
     }
   },[data])
 
