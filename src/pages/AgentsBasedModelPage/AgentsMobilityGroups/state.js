@@ -4,6 +4,7 @@ import { useHistory, useRouteMatch } from 'react-router'
 export const useAgentsMobilityGroups = () => {
   const history = useHistory()
   const match = useRouteMatch()
+  const [open, setOpen] = useState(false)
   const [mobility, setmobility] = useState([])
   const [weight, setWeight] = useState({
     bandwidth: '',
@@ -42,7 +43,11 @@ export const useAgentsMobilityGroups = () => {
 
   const handleConfigItem = () => {
     //open modal
-     
+    setOpen(true)
+  }
+  const handleCloseModal = () => {
+    //open modal
+    setOpen(false)
   }
 
   useEffect(() => {
@@ -70,6 +75,8 @@ export const useAgentsMobilityGroups = () => {
     handleCheckItem,
     handleConfigItem,
     handleAddItem,
-    redirectToSusceptibilityGroupsPage
+    redirectToSusceptibilityGroupsPage,
+    open,
+    handleCloseModal
   ]
 }

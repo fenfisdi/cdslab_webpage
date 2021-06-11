@@ -35,6 +35,7 @@
     "react-qrious": "2.4.5",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.1",
+    "react-spring": "^9.2.3",
     "react-swipeable-views": "^0.13.9",
     "web-vitals": "0.2.4",
     "xlsx": "^0.17.0"

@@ -2,6 +2,7 @@ import { Container } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import AgentsManageItems from '../../../components/AgentsModels/AgentsManageItems'
+import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
@@ -16,7 +17,9 @@ const AgentsMobilityGroups = () => {
     handleCheckItem,
     handleConfigItem,
     handleAddItem,
-    redirectToSusceptibilityGroupsPage
+    redirectToSusceptibilityGroupsPage,
+    open,
+    handleCloseModal
   ] = useAgentsMobilityGroups()
 
   return (
@@ -50,6 +53,7 @@ const AgentsMobilityGroups = () => {
           />
         </div>
       </Container>
+      <AgentsModalContainer open={open} handleCloseModal={handleCloseModal} />
     </>
   )
 }

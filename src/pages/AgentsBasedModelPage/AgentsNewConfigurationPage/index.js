@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import SupportComponent from '../../../components/SupportComponent'
 import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
-import { NewConfigurationForm } from '../../../components/AgentsModels/newConfigurationForm'
+import { NewConfigurationForm } from '../../../components/AgentsModels/AgentsNewConfigurationForm'
 
 const AgentsNewConfigurationPage = () => {
 
