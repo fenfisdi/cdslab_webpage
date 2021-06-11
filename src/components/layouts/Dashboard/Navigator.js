@@ -109,7 +109,7 @@ const styles =  (theme) => ({
     width: '70%'
   },
   linkLenguage: {
-    marginLeft: '50px',
+    marginLeft: '93px',
     color: '#fff',
     width: '30%',
     '&:hover': {
@@ -128,7 +128,7 @@ const styles =  (theme) => ({
   containerLogout:{
     position: 'fixed',
     bottom: '0',
-    width: '18%'
+    width: '24%'
   },
   iconLogout:{
     color: '#fff', 
