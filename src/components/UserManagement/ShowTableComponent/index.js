@@ -6,7 +6,7 @@ import {ShowTableComponent} from '../TableComponent/index'
 import {showTableStyles} from './styles'
 
 
-export const TableComponent=({row}) => {
+export const TableComponent=({row, configAdmin}) => {
   const classes = showTableStyles()
   const [ query, setQuery ] = useState('')
   
@@ -27,7 +27,7 @@ export const TableComponent=({row}) => {
             }}
           />
         </Grid>
-        <ShowTableComponent rows={row} fil={query}/>
+        <ShowTableComponent rows={row} fil={query} setAdmin={configAdmin} />
       </Grid>
     </Grid>
   )

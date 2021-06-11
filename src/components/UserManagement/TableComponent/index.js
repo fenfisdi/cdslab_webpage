@@ -14,7 +14,7 @@ import {useTableComponentState} from './state'
 
 
 
-export const ShowTableComponent = ({configAdmin, fil, rows }) => {
+export const ShowTableComponent = ({setAdmin, fil, rows }) => {
 
   const classes = useTableComponentStyles()
   const [order, setOrder] = useState('asc')
@@ -25,7 +25,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
   const filterRows = rows?.filter(row=>{
     return row.name.includes(fil)
   })
-  
+
   const functionsTable = useTableComponentState()
   const {
     getComparator,
@@ -62,7 +62,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
               rowCount={filterRows?.length}
-              changeAdmin={configAdmin}
+              changeAdmin={setAdmin}
             />
             <TableBody>
               {filterRows && stableSort(filterRows, getComparator(order, orderBy))
@@ -75,7 +75,7 @@ export const ShowTableComponent = ({configAdmin, fil, rows }) => {
                       tabIndex={-1}
                       key={row.email}
                     >
-                      {console.log(row.name)}
+                      
                       <TableCell padding="checkbox">
                       </TableCell>
                       <TableCell component="th" id={index} scope="row" padding="none">
