@@ -6,7 +6,7 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
-import { CompartmentalComparmentalInsPageSection, ContainerChooseDate, Column, Error, ContianerTable, ContainerSearchSection,SearchSection } from './styles'
+import { CompartmentalComparmentalInsPageSection, ContainerChooseDate, Column, Error, ContianerTable, ContainerSearchSection,SearchSection,ContianerButton } from './styles'
 import { SelectComponent } from '../../../components/ui/Select'
 import { useComparmentalInsPageState } from './state'
 import DatePicker from '../../../components/ui/DatePicker'
@@ -15,6 +15,7 @@ import CompartmentalButton from '../../../components/CompartmentalModels/Compart
 import ButtonCard from '../../../components/ButtonCard'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import TableFormatDynamic from '../../../components/CompartmentalModels/UploadDataForm/children/TableFormatDynamic'
 
 const ComparmentalInsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -22,6 +23,8 @@ const ComparmentalInsPage = () => {
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
+  const [headersTable, setHeadersTable] = useState([])
+  const [dataTable, setDataTable] = useState([])
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -170,15 +173,36 @@ const ComparmentalInsPage = () => {
 
         </ContainerChooseDate>
         
-        <ButtonCard        
-          name={'Retrieve data'}
-          indetifier={'indetifier'}
-          handleClick={()=>{}}
-        />
+        <ContianerButton>
+          <ButtonCard        
+            name={'Retrieve data'}
+            indetifier={'indetifier'}
+            handleClick={()=>{}}
+          />
+        </ContianerButton>
+
+
+        {/* <ContianerTable>
+          <Typography>The data that is going to be used is:</Typography>    
+          <TableFormatStatic Variable={stateVariable.value} />
+        </ContianerTable> */}
+        
 
         <ContianerTable>
           <Typography>The data that is going to be used is:</Typography>    
-          <TableFormatStatic Variable={stateVariable.value} />
+          <TableFormatDynamic
+            headersTable={[{name:'test 1'},{name:'test 2'}]}
+            dataTable={[
+              {
+                'test 1':'1',
+                'test 2':'2'
+              },
+              {
+                'test 1':'3',
+                'test 2':'4'
+              }
+            ]}
+          />
         </ContianerTable>
 
         <CompartmentalButton

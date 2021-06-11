@@ -14,10 +14,13 @@ export const ContianerTable = styled.div`
   flex-direction:column;
   align-items: center;
   width: 40%;
-  margin: 20px 0 40px;
-  p{
-    margin-bottom:10px;
-  }
+  `
+export const ContianerButton = styled.div`
+  display: flex;  
+  align-items: center;
+  justify-content:center;
+  margin-bottom:20px;
+  width: 100%;
   `
 export const ContainerSearchSection = styled.div`
 display: flex;
