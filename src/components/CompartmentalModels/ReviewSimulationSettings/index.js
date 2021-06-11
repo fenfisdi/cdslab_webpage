@@ -51,12 +51,26 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayOptimizedParametersValue =(parameter)=>{
     return (<ExtraParamsItem>
-      <strong>{capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) = </strong>
-      <br />
-      <strong> min Value : </strong> <span>&nbsp; { parameter.min_value } </span>,
-      <strong> max Value : </strong> <span>&nbsp; { parameter.max_value }</span> 
+      <div style={{width: '100%',textAlign:'left',
+        display: 'flex',
+        'align-items': 'center'}}>
+        <strong>{capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) </strong>
+      </div>
+      <Table>
+        <TableRow>
+          <TableCell>
+            <strong> min Value : </strong> <span> { parameter.min_value } </span>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <strong> max Value : </strong> <span> { parameter.max_value }</span> 
+          </TableCell>
+        </TableRow>
+      </Table>
     </ExtraParamsItem>)
   }
+  
   const capitalLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
