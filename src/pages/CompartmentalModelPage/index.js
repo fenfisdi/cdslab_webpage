@@ -42,7 +42,7 @@ const CompartmentalModelPage = () => {
       icon: imgAgents,
       iconType: 'svg',
       width: 100,
-      height: 40
+      height: 60
     },
   ]
 

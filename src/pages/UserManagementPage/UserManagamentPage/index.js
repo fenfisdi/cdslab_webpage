@@ -50,7 +50,7 @@ const UserManagamentPage = () => {
 
   return (
     <UserManagementContainer>
-      <ContainerTitle>
+      <ContainerTitle style= {{marginTop: '80px'}}>
         <TitleIcon title={'Management'} icon={keySVG}/>
       </ContainerTitle>
       <ContainerModels>

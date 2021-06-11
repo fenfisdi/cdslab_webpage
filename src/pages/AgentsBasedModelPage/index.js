@@ -26,7 +26,7 @@ const AgentsBasedModelPage = () => {
       icon : imgCompartamental,
       iconType: 'svg',
       width: 70,
-      height: 30
+      height: 40
     },
     {
       id: 2,
@@ -35,8 +35,8 @@ const AgentsBasedModelPage = () => {
       disabled : false,
       icon: imgAgents,
       iconType: 'svg',
-      width: 70,
-      height: 40
+      width: 100,
+      height: 60
     },
   ]
 
