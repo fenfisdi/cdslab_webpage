@@ -40,7 +40,6 @@ const AgentsBasedModelPage = () => {
     },
   ]
 
-  console.log(match.path)
 
   return (
     <>
