@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import Switch from '@material-ui/core/Switch'
 
-export const ActiveComponent = ({isActive, user, list}) => {
+export const ActiveComponent = ({isActive, user}) => {
   
   const [state, setState] = useState({isActive})
-  console.log(list)
+  
   const changeActive=()=>{
     user['is_enabled']=!user.is_enabled
   
