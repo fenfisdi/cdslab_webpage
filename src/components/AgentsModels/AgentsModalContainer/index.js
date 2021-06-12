@@ -1,70 +1,30 @@
-import { makeStyles, Modal } from '@material-ui/core'
 import React, { useState } from 'react'
-import { useSpring, animated } from 'react-spring'
-import Backdrop from '@material-ui/core/Backdrop'
+import { Dialog } from '@material-ui/core'
+import { DialogTitle } from '@material-ui/core'
+import { DialogContent } from '@material-ui/core'
+import { DialogActions } from '@material-ui/core'
+import { Button } from '@material-ui/core'
+import { AgentsDistribution } from './AgentsDistribution'
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}))
 
-const Fade = React.forwardRef(function Fade(props, ref) {
-  const { in: open, children, onEnter, onExited, ...other } = props
-  const style = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: open ? 1 : 0 },
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter()
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited()
-      }
-    },
-  })
+export const AgentsModalContainer = ({open,handleCloseModal,inputs}) => {
+
+  const [step, setStep] = useState(1)
+
 
   return (
-    <animated.div ref={ref} style={style} {...other}>
-      {children}
-    </animated.div>
-  )
-})
-
-export const AgentsModalContainer = ({open,handleCloseModal}) => {
-
-  const classes = useStyles()
-  return (
-    <div>
-      <Modal
-        aria-labelledby="spring-modal-title"
-        aria-describedby="spring-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleCloseModal}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="spring-modal-title">Spring modal</h2>
-            <p id="spring-modal-description">react-spring animates me.</p>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+    <Dialog onClose={handleCloseModal} maxWidth='lg' fullWidth={true} aria-labelledby="customized-dialog-title" open={open}>
+      <DialogTitle id="customized-dialog-title" onClose={handleCloseModal}>
+          Help information
+      </DialogTitle>
+      <DialogContent dividers>
+        <AgentsDistribution></AgentsDistribution>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCloseModal} style={{'color':'#333'}}>
+            Ok
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
