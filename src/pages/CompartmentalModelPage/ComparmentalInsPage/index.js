@@ -6,25 +6,28 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
-import { CompartmentalComparmentalInsPageSection, ContainerChooseDate, Column, Error, ContianerTable, ContainerSearchSection,SearchSection,ContianerButton } from './styles'
+import { CompartmentalComparmentalInsPageSection, ContainerChooseDate, Column, Error, ContianerTable, ContianerButton } from './styles'
 import { SelectComponent } from '../../../components/ui/Select'
 import { useComparmentalInsPageState } from './state'
 import DatePicker from '../../../components/ui/DatePicker'
-import TableFormatStatic from '../../../components/CompartmentalModels/UploadDataForm/children/TableFormatStatic'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import ButtonCard from '../../../components/ButtonCard'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import TableFormatDynamic from '../../../components/CompartmentalModels/UploadDataForm/children/TableFormatDynamic'
+import AutocompleteComponent from '../../../components/ui/Autocomplete'
+import { useComparmentalInsPageCreateFields } from './createFields'
+import { find } from 'lodash'
 
 const ComparmentalInsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { stateVariable } = useComparmentalInsPageState()
-  const [initialDate, setInitialDate] = useState(null)
-  const [finalDate, setFinalDate] = useState(null)
-  const [showError, setShowError] = useState(false)
-  const [headersTable, setHeadersTable] = useState([])
-  const [dataTable, setDataTable] = useState([])
+  const { stateVariable } = useComparmentalInsPageCreateFields()
+  const { 
+    dates:{initialDate, setInitialDate, finalDate, setFinalDate}, 
+    tableDate:{headersTable,dataTable}, 
+    messages:{ showError, setShowError, showMessage, setShowMessage }, 
+    optionsSearch,
+    regionChoose,
+    setRegionChoose,
+    selectOptions } = useComparmentalInsPageState({stateVariable})
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -43,7 +46,7 @@ const ComparmentalInsPage = () => {
   }
 
   const addDays = (date, days) => {
-    var result = new Date(date)
+    const result = new Date(date)
     result.setDate(result.getDate() + days)
     return result
   }
@@ -58,36 +61,6 @@ const ComparmentalInsPage = () => {
     }   
   }
 
-  const  top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: 'Schindler\'s List', year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
-    { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-    { title: 'The Good, the Bad and the Ugly', year: 1966 },
-    { title: 'Fight Club', year: 1999 },
-    { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
-    { title: 'Star Wars: Episode V - The Empire Strikes Back', year: 1980 },
-    { title: 'Forrest Gump', year: 1994 },
-    { title: 'Inception', year: 2010 },
-    { title: 'The Lord of the Rings: The Two Towers', year: 2002 },
-    { title: 'One Flew Over the Cuckoo\'s Nest', year: 1975 },
-    { title: 'Goodfellas', year: 1990 },
-    { title: 'The Matrix', year: 1999 },
-    { title: 'Seven Samurai', year: 1954 },
-    { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-    { title: 'City of God', year: 2002 },
-    { title: 'Se7en', year: 1995 },
-    { title: 'The Silence of the Lambs', year: 1991 },
-    { title: 'It\'s a Wonderful Life', year: 1946 },
-    { title: 'Life Is Beautiful', year: 1997 }]
-
-  const selectOptions =[
-    {label:'option 1',name:'optio1'},{label:'option 2',name:'optio2'}
-  ]
 
   return (
     <CompartmentalComparmentalInsPageSection>
@@ -95,7 +68,7 @@ const ComparmentalInsPage = () => {
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        <Grid><Breadcrumbs /></Grid>
+        {/* <Grid><Breadcrumbs /></Grid> */}
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
 
@@ -109,31 +82,42 @@ const ComparmentalInsPage = () => {
           {...stateVariable}
           options={optionListDTO(selectOptions)} />
 
-        <ContainerSearchSection>
-          <div>
-            <Typography>Choose region:</Typography>
-          </div>
-          <SearchSection>
-            <i className="fas fa-search"></i>
-            <div style={{ width: 300 }}>            
-              <Autocomplete
-                freeSolo
-                id="free-solo-2-demo"
-                disableClearable
-                options={top100Films.map((option) => option.title)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search"
-                    margin="normal"                
-                    InputProps={{ ...params.InputProps, type: 'search' }}
-                  />
-                )}
-              />
-            </div>
-          </SearchSection>
-          
-        </ContainerSearchSection>
+        <AutocompleteComponent 
+          optionsSearch={optionsSearch} 
+          title='Choose region:'
+          keyObject="title"
+          value={regionChoose}
+          onChange={(event,value)=>{              
+            if(!showMessage){
+              if(event.code=='Enter'){                
+                const shearchedObj = find(optionsSearch,(option)=>{                
+                  if(option['title'].toLowerCase() == value.toLowerCase()){
+                    return option
+                  }
+                })                
+                if(shearchedObj){
+                  setRegionChoose(shearchedObj['title'])
+                }else{                               
+                  setShowMessage(true)
+                }
+              }else{
+                setRegionChoose(value)
+              }
+            }                  
+          }}
+          filterOptions={(option,{inputValue})=>{
+            const findArray = option.filter(a =>a.toLowerCase().includes(inputValue.toLowerCase()))
+            if(findArray.length>0){                    
+              setShowMessage(false)
+              return findArray
+            }else{                    
+              setShowMessage(true)
+              return findArray
+            }                                                    
+          }}
+          showMessage={showMessage}
+        />
+        
 
         <ContainerChooseDate>
           <Column>
@@ -164,6 +148,7 @@ const ComparmentalInsPage = () => {
               id='final'
               placeholder="dd/mm/yyyy"
               error={showError}
+              maxDate={initialDate!=null && addDays(initialDate,3)}
               minDate={initialDate!=null && addDays(initialDate,3)}
             />          
             {showError && (
@@ -191,23 +176,16 @@ const ComparmentalInsPage = () => {
         <ContianerTable>
           <Typography>The data that is going to be used is:</Typography>    
           <TableFormatDynamic
-            headersTable={[{name:'test 1'},{name:'test 2'}]}
-            dataTable={[
-              {
-                'test 1':'1',
-                'test 2':'2'
-              },
-              {
-                'test 1':'3',
-                'test 2':'4'
-              }
-            ]}
+            headersTable={headersTable}
+            dataTable={dataTable}
           />
         </ContianerTable>
 
         <CompartmentalButton
           disabled={false}
-          onClick={()=>{}}
+          onClick={()=>{
+            
+          }}
           justify="flex-end"
           alignItems="center"
           text={'Continue'}
