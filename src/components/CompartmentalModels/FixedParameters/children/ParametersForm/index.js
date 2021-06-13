@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography'
 import { TitleComponent } from '../../../../ui/Title'
 import { Input } from '../../../../ui/Input'
 import { useParametersFormStyle } from './styles'
-
+import SupportComponent from '../../../../SupportComponent'
+import iconInfo from '../../../../../assets/images/information_freepik.svg'
 
 const ParametersForm = ({fields, fieldParameters,headersParams:HeadersParams}) => {
   const classes = useParametersFormStyle()
@@ -17,7 +18,7 @@ const ParametersForm = ({fields, fieldParameters,headersParams:HeadersParams}) =
     >
       <HeadersParams/>
       {fieldParameters && fieldParameters.map((field,index)=>{
-        const {label, representation, unit } = field
+        const {label, representation, unit,description } = field
         const {helperText}= fields[label]
         delete fields[label]['helperText']
         
@@ -54,8 +55,11 @@ const ParametersForm = ({fields, fieldParameters,headersParams:HeadersParams}) =
                 />              
               </Grid>  
               <Grid xs={1}></Grid>      
-              <Grid item container xs={4} justify="flex-start" alignItems="center">
+              <Grid item container xs={2} justify="flex-start" alignItems="center">
                 {unit}
+              </Grid>
+              <Grid item container xs={2} justify="flex-end" alignItems="center">
+                <SupportComponent text={description} icon={iconInfo} />
               </Grid>
             </Grid>
             <Typography variant="body1" component="p" className={helperText ? classes.helperText + ' error': classes.helperText}>

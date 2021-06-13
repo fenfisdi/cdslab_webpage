@@ -57,7 +57,7 @@ export const MySimulationsForm = ({ eventEmitter,mySimulationsModels }) => {
         container 
         spacing={3}
       >
-        <Grid container item justify='space-between' xs={8}>
+        <Grid container item justify='space-between' xs={7}>
           <Input
             disabled={false}
             required
@@ -84,13 +84,13 @@ export const MySimulationsForm = ({ eventEmitter,mySimulationsModels }) => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={4} container>
-          <Grid item xs={3}>
-            <div style={{textAlign: 'center', marginLeft: '-15px'}}>
-              <p><strong>Simulation date :</strong></p>
+        <Grid item xs={5} container>
+          <Grid item xs={4}>
+            <div style={{textAlign: 'center', marginLeft: '-15px',marginTop: '10px' }}>
+              <p><strong>Execution date :</strong></p>
             </div>
           </Grid>
-          <Grid item container xs={9}>
+          <Grid item container xs={8  }>
             
             <Grid item xs={4}>
               <Input

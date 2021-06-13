@@ -50,7 +50,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions)
 
-export default function SupportComponent({text}) {
+export default function SupportComponent({text, icon}) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -63,7 +63,13 @@ export default function SupportComponent({text}) {
   return (
     <div> 
       <IconButton style={{'color':'#75BCC3'}} aria-label=" Help information" onClick={handleClickOpen}>
-        <Icon className="far fa-question-circle"  style={{ fontSize: 35 }} /> 
+        {
+          icon ?
+            (<img src={icon} width={30} height={30}  />)
+            :
+            (<Icon className="far fa-question-circle"  style={{ fontSize: 35 }} /> )
+        }
+        
       </IconButton>
       
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
