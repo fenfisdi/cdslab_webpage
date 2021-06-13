@@ -42,16 +42,13 @@ const styles =  (theme) => ({
     border: 'none !important'
   },
   categoryHeader: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingTop: '14px',
   },
   categoryHeaderPrimary: {
     color: theme.palette.common.white
   },
   item: {
-    paddingTop: 10,
-    paddingBottom: 1,
-    color: '#fff'
+    color: '#fff',
   },
   itemCategory: {
     backgroundColor: '#fff',
@@ -109,7 +106,7 @@ const styles =  (theme) => ({
     width: '70%'
   },
   linkLenguage: {
-    marginLeft: '50px',
+    marginLeft: '93px',
     color: '#fff',
     width: '30%',
     '&:hover': {
@@ -128,7 +125,7 @@ const styles =  (theme) => ({
   containerLogout:{
     position: 'fixed',
     bottom: '0',
-    width: '18%'
+    width: '24%'
   },
   iconLogout:{
     color: '#fff', 

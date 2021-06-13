@@ -65,7 +65,7 @@ export const MySimulationsForm = ({ eventEmitter,mySimulationsModels }) => {
             variant="outlined"
             margin="normal"
             autoComplete="off"
-            placeholder="Keyword..."
+            placeholder="Simulation name..."
             {...search}
           />
           <Grid item xs={5}>
@@ -86,8 +86,8 @@ export const MySimulationsForm = ({ eventEmitter,mySimulationsModels }) => {
         </Grid>
         <Grid item xs={4} container>
           <Grid item xs={3}>
-            <div>
-              <p>Date :</p>
+            <div style={{textAlign: 'center', marginLeft: '-15px'}}>
+              <p><strong>Simulation date :</strong></p>
             </div>
           </Grid>
           <Grid item container xs={9}>

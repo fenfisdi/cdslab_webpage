@@ -25,10 +25,8 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
   
   const classes = useStyles()
   const {handleDomParse } = useDomParse()
-
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
-      console.log(parameter)
       return(
         <Table key={parameter.label}>   
           <TableBody>
@@ -37,7 +35,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
                 {parameter.type=='fixed' 
                   ?
                   <ExtraParamsItem>
-                    <strong> {capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) : </strong> <p> &nbsp; {parameter.value}</p> 
+                    <strong> {parameter.label} ({handleDomParse(parameter.representation)}) : </strong> <p> &nbsp; {parameter.value}</p> 
                   </ExtraParamsItem>
                   :
                   displayOptimizedParametersValue(parameter)}
@@ -51,15 +49,26 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayOptimizedParametersValue =(parameter)=>{
     return (<ExtraParamsItem>
-      <strong>{capitalLetter(parameter.label)} ({handleDomParse(parameter.representation)}) = </strong>
-      <br />
-      <strong> min Value : </strong> <span>&nbsp; { parameter.min_value } </span>,
-      <strong> max Value : </strong> <span>&nbsp; { parameter.max_value }</span> 
+      <div style={{width: '100%',textAlign:'left',
+        display: 'flex',
+        'align-items': 'center'}}>
+        <strong>{parameter.label} ({handleDomParse(parameter.representation)}) </strong>
+      </div>
+      <Table>
+        <TableRow>
+          <TableCell>
+            <strong> min Value : </strong> <span> { parameter.min_value } </span>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <strong> max Value : </strong> <span> { parameter.max_value }</span> 
+          </TableCell>
+        </TableRow>
+      </Table>
     </ExtraParamsItem>)
   }
-  const capitalLetter = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-  }
+
   const displayStateVariables=(stateVariables)=>{
     return stateVariables.map( variable => {
       return(
@@ -67,7 +76,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           <TableBody>
             <TableRow>
               <TableCell>
-                <strong>{capitalLetter(variable.label)} ({handleDomParse(variable.representation)}) : &nbsp; </strong> {variable.value}
+                <strong>{variable.label} ({handleDomParse(variable.representation)}) : &nbsp; </strong> {variable.value}
               </TableCell>
             </TableRow>
           </TableBody>
@@ -83,7 +92,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
         <TableBody>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Simulation Name:</strong>
+              <strong>Simulation name:</strong>
             </TableCell>
             <TableCell>
               {simulation.name || ''}
@@ -99,7 +108,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Type Model:</strong>
+              <strong>Type model:</strong>
             </TableCell>
             <TableCell>
               {simulation.modelName || ''}
@@ -115,7 +124,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>State Variable:</strong>
+              <strong>State variable:</strong>
             </TableCell>
             <TableCell>
               {displayStateVariables(simulation.state_variable_limits || [])}
@@ -123,7 +132,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow>
             <TableCell>
-              <strong>Data Source:</strong>
+              <strong>Data source:</strong>
             </TableCell>
             <TableCell>
               {simulation.fileName}
