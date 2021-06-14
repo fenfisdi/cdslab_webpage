@@ -27,7 +27,7 @@ export default function TableFormatStatic({Variable='Variable'}) {
   return (
     
     <TableContainer component={Paper} className={classes.TableContainer}>
-      <Table >
+      <Table>
         
         <TableHead>
           <TableRow>
@@ -38,13 +38,13 @@ export default function TableFormatStatic({Variable='Variable'}) {
 
         <TableBody>
           <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+            <TableCell align="center" className={classes.tableCell}> 1993-12-07  </TableCell>
+            <TableCell align="center" className={classes.tableCell}> 1000 </TableCell>                            
           </TableRow>
           
           <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+            <TableCell align="center" className={classes.tableCell}> 1993-12-07 </TableCell>
+            <TableCell align="center" className={classes.tableCell}> 1200 </TableCell>                            
           </TableRow>
         </TableBody>
       </Table>
