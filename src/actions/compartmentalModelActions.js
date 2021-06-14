@@ -9,7 +9,8 @@ import {
   executeSimulationService,
   getInsParametersVariablesService,
   getInsParametersRegionsService,
-  getInsParametersDatesService} from '../services/compartmentalModelServices'
+  getInsParametersDatesService,
+  getInformationInsService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -318,6 +319,10 @@ export const useCompartmentalModelActions = (dispatch) => {
     return getInsParametersDatesService(region)
   }
 
+  const getInformationIns = (data)=>{
+    return getInformationInsService(data)
+  }
+
 
   return {
     registerModelParameters,
@@ -339,7 +344,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     setDefinitionDataGetPredefinedModels,
     getInsParametersVariables,
     getInsParametersRegions,
-    getInsParametersDates }
+    getInsParametersDates,
+    getInformationIns }
 
 
 }

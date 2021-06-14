@@ -16,7 +16,7 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     dispatch
   } = useStore()
 
-  const { getInsParametersVariables, getInsParametersRegions, getInsParametersDates  } = useCompartmentalModelActions(dispatch)
+  const { getInsParametersVariables, getInsParametersRegions, getInsParametersDates, getInformationIns  } = useCompartmentalModelActions(dispatch)
 
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
@@ -93,6 +93,20 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     console.log('regionChoose',regionChoose)
     console.log('initialDate',initialDate)
     console.log('finalDate',finalDate)
+    getInformationIns({
+      stateVariable:stateVariable.value,
+      regionChoose,
+      initialDate,
+      finalDate
+    }).then((response)=>{
+      const {
+        headers,
+        body
+      } = response
+      console.log(response)
+      setHeadersTable(headers)
+      setDataTable(body)
+    })
   }
 
   return {

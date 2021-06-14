@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 })
 
 
-export default function TableFormatDynamic({headersTable=[],dataTable=[]}) {
+export default function TableFormatDynamic({headersTable=[],dataTable=[],useLabel=false}) {
   const classes = useStyles()
 
   return (
@@ -30,12 +30,10 @@ export default function TableFormatDynamic({headersTable=[],dataTable=[]}) {
       <Table>        
         <TableHead> 
           <TableRow >
-            {headersTable.map((row,index) => (
-            
-              <TableCell key={`${row.name}header${index}`} align="center" className={classes.tableCell}>
-                {row.name}
-              </TableCell>
-            
+            {headersTable.map((row,index) => (            
+              <TableCell key={useLabel? `${row.label}header${index}`: `${row.name}header${index}`} align="center" className={classes.tableCell}>
+                {useLabel ? row.label: row.name}
+              </TableCell>            
             ))}     
           </TableRow>       
         </TableHead>

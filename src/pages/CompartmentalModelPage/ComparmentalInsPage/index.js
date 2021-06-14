@@ -104,7 +104,7 @@ const ComparmentalInsPage = () => {
         direction="row"
         justify="space-between"
         alignItems="flex-start">
-        {/* <Grid><Breadcrumbs /></Grid> */}
+        <Grid><Breadcrumbs /></Grid>
         <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
       </Grid>
 
@@ -191,6 +191,7 @@ const ComparmentalInsPage = () => {
           <TableFormatDynamic
             headersTable={headersTable}
             dataTable={dataTable}
+            useLabel={true}
           />
         </ContianerTable>
 

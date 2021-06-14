@@ -86,3 +86,26 @@ export const getInsParametersDatesService = async (region) => {
     'finalDate':'Sun Jun 20 2021 10:50:00 GMT-0500'
   }
 }
+
+export const getInformationInsService = async (data) => {
+  return {
+    headers:[
+      {
+        label:'Variable Ins a',name:'varinsa'
+      },
+      {
+        label:'Variable Ins b',name:'varinsb'
+      }
+    ],
+    body:[
+      {
+        varinsa:'Valor de ins a fila 1',
+        varinsb:'Valor de ins b fila 1'
+      },
+      {
+        varinsa:'Valor de ins a fila 2',
+        varinsb:'Valor de ins b fila 2'
+      }
+    ]
+  }
+}
