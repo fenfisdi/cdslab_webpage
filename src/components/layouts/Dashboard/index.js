@@ -15,7 +15,7 @@ function Copyright() {
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' href='https://fenfisdi.github.io' target='_blank'>
-        FEnFisDi 
+        FEnFiSDi
       </Link>{' '}
       {new Date().getFullYear()}
       .

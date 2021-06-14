@@ -12,10 +12,10 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalConfigureParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { 
-    currentSimulation, 
-    predefinedModelSelected:{modelData}, 
-    executeRequestConfigureParameters } = useCompartmentalConfigureParametersPageState({showSnack, setShowSnack })
+  const {
+    currentSimulation,
+    predefinedModelSelected: { modelData },
+    executeRequestConfigureParameters } = useCompartmentalConfigureParametersPageState({ showSnack, setShowSnack })
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -23,13 +23,13 @@ const CompartmentalConfigureParametersPage = () => {
 
   return (
     <CompartmentalConfigureParametersSection>
-     
+
       <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS} />
       </Grid>
 
       <SubtitleCommon text='Configure parameters values' />
@@ -40,7 +40,7 @@ const CompartmentalConfigureParametersPage = () => {
         valuesFieldParameters={currentSimulation && currentSimulation.parameters_limits}
       />}
 
-      {!modelData  && <LoaderComponent
+      {!modelData && <LoaderComponent
         width={50}
         height={50}
         marginTop={5}

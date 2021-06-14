@@ -9,7 +9,10 @@ const Header = () => {
     <div className={classes.container}>
       <div><img src={cdsTitleSvg} className={classes.image} /></div>
       <h3 className={classes.title}>Plataforma de simulación de enfermedades contagiosas</h3>
-    </div>
+      <br />
+      <br />
+      <br />
+    </div >
   )
 }
 

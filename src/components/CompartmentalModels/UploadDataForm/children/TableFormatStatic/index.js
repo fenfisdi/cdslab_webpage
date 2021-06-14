@@ -10,41 +10,41 @@ import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
   tableCell: {
-    'border':'1px  solid #cebaba',
-    '&.red':{
-      color:'red'
+    'border': '1px  solid #cebaba',
+    '&.red': {
+      color: 'red'
     }
   },
-  TableContainer:{
+  TableContainer: {
     overflow: 'visible'
   }
 })
 
 
-export default function TableFormatStatic({Variable='Variable'}) {
+export default function TableFormatStatic({ Variable = 'Variable' }) {
   const classes = useStyles()
 
   return (
-    
+
     <TableContainer component={Paper} className={classes.TableContainer}>
-      <Table >
-        
+      <Table>
+
         <TableHead>
           <TableRow>
             <TableCell align="center" className={classes.tableCell}>Date</TableCell>
-            <TableCell align="center" className={`${classes.tableCell}`}>{Variable?Variable:'Variable'}</TableCell>
+            <TableCell align="center" className={`${classes.tableCell}`}>{Variable ? Variable : 'Variable'}</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
           <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+            <TableCell align="center" className={classes.tableCell}> 1993-12-07  </TableCell>
+            <TableCell align="center" className={classes.tableCell}> 1000 </TableCell>
           </TableRow>
-          
+
           <TableRow>
-            <TableCell align="center" className={classes.tableCell}></TableCell>
-            <TableCell align="center" className={classes.tableCell}></TableCell>                            
+            <TableCell align="center" className={classes.tableCell}> 1993-12-08 </TableCell>
+            <TableCell align="center" className={classes.tableCell}> 1200 </TableCell>
           </TableRow>
         </TableBody>
       </Table>

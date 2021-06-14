@@ -50,7 +50,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions)
 
-export default function SupportComponent({text}) {
+export default function SupportComponent({ title, text, icon }) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -61,14 +61,20 @@ export default function SupportComponent({text}) {
   }
 
   return (
-    <div> 
-      <IconButton style={{'color':'#75BCC3'}} aria-label=" Help information" onClick={handleClickOpen}>
-        <Icon className="far fa-question-circle"  style={{ fontSize: 35 }} /> 
+    <div>
+      <IconButton style={{ 'color': '#75BCC3' }} aria-label=" Help information" onClick={handleClickOpen}>
+        {
+          icon ?
+            (<img src={icon} width={30} height={30} />)
+            :
+            (<Icon className="far fa-question-circle" style={{ fontSize: 35 }} />)
+        }
+
       </IconButton>
-      
+
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Help information
+          {title}
         </DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
@@ -76,7 +82,7 @@ export default function SupportComponent({text}) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} style={{'color':'#333'}}>
+          <Button autoFocus onClick={handleClose} style={{ 'color': '#333' }}>
             Ok
           </Button>
         </DialogActions>
