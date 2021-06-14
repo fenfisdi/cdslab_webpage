@@ -29,12 +29,14 @@ export const LoginForm = ({
   const password = useInputValue('', VALIDATORS_LOGIN_FORM.password, {
     name: 'password',
     type: 'password',
-    label: t('loginPage.password')
+    label: t('loginPage.password'),
+    t: t
   })
   const email = useInputValue('', VALIDATORS_LOGIN_FORM.email, {
     name: 'email',
     type: 'email',
-    label: t('loginPage.email')
+    label: t('loginPage.email'),
+    t: t
   })
 
   if (password.helperText) {
@@ -74,7 +76,7 @@ export const LoginForm = ({
         </Grid>
         <Grid item xs={2}>
           <Link className={classes.link} variant='body2' onClick={changelanguage}>
-            {language ? 'ES':'EN' }
+            {language ? 'EN':'ES' }
           </Link>
         </Grid>
       </Grid>

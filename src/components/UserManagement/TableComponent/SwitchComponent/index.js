@@ -4,7 +4,7 @@ import Switch from '@material-ui/core/Switch'
 export const ActiveComponent = ({isActive, user}) => {
   
   const [state, setState] = useState({isActive})
-
+  
   const changeActive=()=>{
     user['is_enabled']=!user.is_enabled
   
