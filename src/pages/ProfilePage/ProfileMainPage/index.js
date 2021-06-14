@@ -1,22 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useHistory } from 'react-router'
 import { Grid } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
 import Switch from '../../../components/ui/Switch'
 import {ContainerTitle, ProfileContainer, useProfilePageStyles, ContainerButtonCard } from './styles'
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import SvgProfiles from '../../../assets/icons/SvgProfiles'
 import ButtonCard from '../../../components/ButtonCard'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
-
-export const ButtonCommon = ({ functionButton, classButton, name }) => (
-  <Button
-    onClick={functionButton}
-    className={classButton}
-  >
-    {name}
-  </Button>
-)
+import {userProfileMainPageState} from './state'
 
 const ProfileMainPage=()=>{
   const classes = useProfilePageStyles()
@@ -25,15 +16,18 @@ const ProfileMainPage=()=>{
     notifyFileRemoval: true,
   })
 
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const { data }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
-
+  console.log(data)
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked })
   }
 
   const redirectUpdateDataProfile = () => {
     history.push({ 
-      pathname: '/profile/UpdateDataProfile'
+      pathname: '/profile/UpdateDataProfile',
+      state: {detail: data}
     })
   }
 

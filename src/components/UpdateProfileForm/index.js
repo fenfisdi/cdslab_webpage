@@ -7,36 +7,27 @@ import { TitleComponent } from '../ui/Title'
 import theme from '../../styles/cdslabTheme'
 import { useUpdateProfileFormStyles } from './styles'
 import { PhoneNumber } from '../ui/PhoneNumber'
-import { PasswordChecker } from '../Register/PasswordChecker'
 import Button from '@material-ui/core/Button'
 import { userUpdateFormState } from './state'
 import LoaderComponent from '../ui/Loader'
 import { languageContext } from '../../config/languageContext'
-import CompartmentalButton from '../CompartmentalModels/CompartmentalButton'
 
-const UpdateProfileForm = (eventEmitter, loading) => {
+const UpdateProfileForm = ({ eventEmitter, loading }) => {
 
   const classes = useUpdateProfileFormStyles(theme)
-  const [isValid, setIsvalid] = useState(false)
-  const [verificationPassword, setVerificationPassword] = useState(false)
+  const [isvalid, setIsvalid] = useState(false)
   const fieldsData = userUpdateFormState()
   const [phonePrefix, setPrefix] = useState('57')
   const { t } = useContext(languageContext)
-
+  console.log(location)
   const {
     name,
     lastName,
-    email,
     dateBirth,
     phoneNumber,
     institution,
     institutionAffiliation,
     profession,
-    password,
-    securityQuestion1,
-    securityQuestion2,
-    securityAnswer1,
-    securityAnswer2
   } = fieldsData
 
   useEffect(() => {
@@ -55,7 +46,6 @@ const UpdateProfileForm = (eventEmitter, loading) => {
   const handleClick = () => {
 
     eventEmitter({
-      email: email.value,
       name: name.value,
       last_name: lastName.value,
       institution: institution.value,
@@ -63,18 +53,7 @@ const UpdateProfileForm = (eventEmitter, loading) => {
       profession: profession.value,
       birthday: new Date(dateBirth.value),
       phone: phoneNumber.value, //phoneNumber.value.trim(),
-      phone_prefix: `+${phonePrefix}`,
-      password: password.value,
-      security_questions: [
-        {
-          question:securityQuestion1.value,
-          answer:securityAnswer1.value
-        },
-        {
-          question:securityQuestion2.value,
-          answer:securityAnswer2.value
-        }
-      ]
+      phone_prefix: `+${phonePrefix}`
     })
   }
 
@@ -130,17 +109,6 @@ const UpdateProfileForm = (eventEmitter, loading) => {
             direction="row"
             justify="center"
           >
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="email"
-                {...email}
-              />
-            </Grid>
 
             <Grid item xs={5}>
               <Input
@@ -235,108 +203,11 @@ const UpdateProfileForm = (eventEmitter, loading) => {
             </Grid>
           </Grid>
 
-          <Grid
-            item
-            container
-            xs={12}
-            spacing={1}
-            direction="row"
-            justify="center"
-          >
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="security question 1"
-                {...securityQuestion1}
-              />
-            </Grid>
-
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="security answer 1"
-                {...securityAnswer1}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid
-            item
-            container
-            xs={12}
-            spacing={1}
-            direction="row"
-            justify="center"
-          >
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="security question 2"
-                {...securityQuestion2}
-              />
-            </Grid>
-
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="security answer 2"
-                {...securityAnswer2}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid
-            item
-            container
-            xs={12}
-            spacing={1}
-            direction="row"
-            justify="center"
-          >
-            <Grid item xs={5}>
-              <Input
-                disabled={false}
-                required
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                autoComplete="password"
-                {...password}
-              />
-            </Grid>
-            <Grid item xs={5}>
-              <PasswordChecker
-                checkValue={password.value}
-                errorText={t('validators.validatePasswords')}
-                eventEmitter={(value) => {
-                  const { success } = value
-                  setVerificationPassword(success)
-                }}
-              />
-            </Grid>
-          </Grid>
-
           <Button
             onClick={handleClick}
             variant="contained"
             color="primary"
-            disabled={!isValid && verificationPassword ? false : true}
+            disabled={false}
           >
             Continue
           </Button>
