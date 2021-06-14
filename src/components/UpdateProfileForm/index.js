@@ -6,7 +6,7 @@ import { PhoneNumber } from '../ui/PhoneNumber'
 import theme from '../../styles/cdslabTheme'
 import { Input } from '../ui/Input'
 import { useUpdateProfileFormStyles } from './styles'
-import {useRegisterFormState} from '../Register/RegisterForm/state'
+import {userUpdateFormState} from './state'
 import { TitleComponent } from '../ui/Title'
 import Button from '@material-ui/core/Button'
 import { languageContext } from '../../config/languageContext'
@@ -16,7 +16,7 @@ const UpdateProfileForm = ({eventEmitter, loading}) => {
 
   const classes = useUpdateProfileFormStyles(theme)
   const [isValid, setIsvalid] = useState(false)
-  const fieldsData = useRegisterFormState()
+  const fieldsData = userUpdateFormState()
   const [phonePrefix, setPrefix] = useState('57')
   const { t } = useContext(languageContext)
 
