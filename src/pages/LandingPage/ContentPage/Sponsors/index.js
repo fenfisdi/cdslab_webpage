@@ -14,11 +14,16 @@ const Sponsors = () => {
       <h1 className={classes.title}>Patrocinadores:</h1>
       <div className={classes.containerCds}>
         <div className={classes.boxCds}>
-          <img className={classes.imageMinCiencias} src={imgMinCiencia} />
+          <div className={classes.questionMin}> 
+            <img className={classes.imageMinCiencias} src={imgMinCiencia} />
+          </div>
           <div className={classes.textMinCiencias}> <p>{ SPONSORS_TEXT_ONE }</p> </div>
         </div>
         <div className={classes.boxCds}>
-          <img className={classes.imageSena} src={imgSena} />
+          <div className={classes.questionSena}> 
+            <img className={classes.imageSena} src={imgSena} /> 
+          </div>
+          
           <div className={classes.textSena}> <p>{ SPONSORS_TEXT_TWO }</p> </div>
         </div>
       </div>

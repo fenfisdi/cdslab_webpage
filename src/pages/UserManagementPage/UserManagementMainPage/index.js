@@ -6,7 +6,9 @@ import { userManagementMainPageState } from './state'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { Container } from '@material-ui/core'
 import userSvg from '../../../assets/images/management/users_color.svg'
-import toolsSVG from '../../../assets/images/management/tools-solid.svg'
+import toolsSVG from '../../../assets/images/management/SYSManagement_SVG.svg'
+import AlertCommon from '../../../components/ui/AlertCommon'
+import { userManagementMessage } from './constants'
 
 const UserManagementMainPage = () => {
 
@@ -31,15 +33,19 @@ const UserManagementMainPage = () => {
       path:  'usersManagement',
       disabled : false,
       icon: userSvg,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 40
     },
     {
       id: 2,
       label: 'Sys Management',
       path: 'sysManagement',
-      disabled : true,
+      disabled : false,
       icon: toolsSVG,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 45
     },
   ]
 
@@ -48,6 +54,11 @@ const UserManagementMainPage = () => {
       <FullWidthTabs tabs={tab} idTab={1} />
       <Container maxWidth={'sm'}>
         <UserManagementPageMainContainer>
+          <AlertCommon
+            title={userManagementMessage.title}
+            message={userManagementMessage.message}
+            severity={'info'}
+          />
           <TableComponent row={users}/>
           {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
           <CompartmentalButton

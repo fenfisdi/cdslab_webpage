@@ -9,7 +9,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.28",
     "@material-ui/icons": "4.11.2",
     "@material-ui/lab": "4.0.0-alpha.57",
-    "@material-ui/pickers": "3.2.10",
+    "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
@@ -43,8 +43,8 @@
     "styled-components": "5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-app-rewired build",
+    "start": "react-app-rewired --max_old_space_size=4096 start",
+    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-app-rewired --max_old_space_size=4096 build",
     "eject": "react-app-rewired eject",
     "lint": "eslint",
     "test": "cross-env NODE_ENV=test jest --verbose --silent",

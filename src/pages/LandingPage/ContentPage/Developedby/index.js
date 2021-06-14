@@ -8,7 +8,7 @@ const DevelopedBy = () => {
   const classes = useDevelopedByStyles(theme)
   return (
     <>
-      <h1 className={classes.title}>Desarrollado Por:</h1>
+      <h1 className={classes.title}>Desarrollado por:</h1>
       <div className={classes.storyText}>
         <div className={classes.divDeveloped}>
           <div className={classes.textDeveloped}>

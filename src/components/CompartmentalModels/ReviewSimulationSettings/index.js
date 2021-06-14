@@ -3,28 +3,28 @@ import React from 'react'
 import CompartmentalButton from '../CompartmentalButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import { ExtraParamsItem } from './styles'
-
+import { useDomParse } from '../../../helpers/useDomParse'
 const useStyles = makeStyles(() => ({
   rowColor: {
     background: '#ECEFF1',
   },
-  buttonDownload:{
-    background: '#ECEFF1',
-    color: '#00838F',
-    padding: '7px',
-    borderRadius: '6px',
-    marginTop: '10px',
-    fontSize: '20px',
-    width: '25%',
+  ContainerDownload: {
+    marginTop: '20px',
+    width: '20%',
     display: 'block',
-    margin: '0 auto'
+    margin: '0 auto',
+  },
+  buttonDownload:{
+  },
+  textoDownload:{
+    marginLeft: '10px'
   }
 }))
 
 const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', showButton=false,showButtonDownload=false})=>{
   
   const classes = useStyles()
-
+  const {handleDomParse } = useDomParse()
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
       return(
@@ -35,7 +35,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
                 {parameter.type=='fixed' 
                   ?
                   <ExtraParamsItem>
-                    <strong> {parameter.label} : </strong>{parameter.value}
+                    <strong> {parameter.label} ({handleDomParse(parameter.representation)}) : </strong> <p> &nbsp; {parameter.value}</p> 
                   </ExtraParamsItem>
                   :
                   displayOptimizedParametersValue(parameter)}
@@ -49,8 +49,23 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const displayOptimizedParametersValue =(parameter)=>{
     return (<ExtraParamsItem>
-      <strong>min Value : </strong>{ parameter.min_value } ,
-      <strong>max Value : </strong>{ parameter.max_value } 
+      <div style={{width: '100%',textAlign:'left',
+        display: 'flex',
+        'align-items': 'center'}}>
+        <strong>{parameter.label} ({handleDomParse(parameter.representation)}) </strong>
+      </div>
+      <Table>
+        <TableRow>
+          <TableCell>
+            <strong> min Value : </strong> <span> { parameter.min_value } </span>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <strong> max Value : </strong> <span> { parameter.max_value }</span> 
+          </TableCell>
+        </TableRow>
+      </Table>
     </ExtraParamsItem>)
   }
 
@@ -61,7 +76,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           <TableBody>
             <TableRow>
               <TableCell>
-                <strong>{variable.label} :</strong> {variable.value}
+                <strong>{variable.label} ({handleDomParse(variable.representation)}) : &nbsp; </strong> {variable.value}
               </TableCell>
             </TableRow>
           </TableBody>
@@ -77,7 +92,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
         <TableBody>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Simulation Name:</strong>
+              <strong>Simulation name:</strong>
             </TableCell>
             <TableCell>
               {simulation.name || ''}
@@ -93,7 +108,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Model:</strong>
+              <strong>Type model:</strong>
             </TableCell>
             <TableCell>
               {simulation.modelName || ''}
@@ -109,7 +124,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>State Variable:</strong>
+              <strong>State variable:</strong>
             </TableCell>
             <TableCell>
               {displayStateVariables(simulation.state_variable_limits || [])}
@@ -117,7 +132,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow>
             <TableCell>
-              <strong>Data Source:</strong>
+              <strong>Data source:</strong>
             </TableCell>
             <TableCell>
               {simulation.fileName}
@@ -133,18 +148,20 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
         text={buttonText}
       />}
       {showButtonDownload && (
-        <div className={classes.buttonDownload}>
-          <span className={classes.textoDownload}>Dowdload</span>
+        <div className={classes.ContainerDownload}>
           <Button
             href={`data:text/json;charset=utf-8,${encodeURIComponent(
               JSON.stringify(simulation)
             )}`}
             download="simulation.json"
             title='Download Info'
+            variant="contained"
+            className={classes.buttonDownload}
+            endIcon={<GetAppIcon style={{color: '#2394BC', fontSize:'20px'}}/>}
           >
-            <GetAppIcon style={{color: '#2394BC',fontSize: '50px'}}/>
+            Download
           </Button>
-        </div>  
+        </div>
       )
       }
     </div>

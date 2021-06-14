@@ -4,7 +4,7 @@ import { INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION, SIMULATION_IDENTIFIERS } fr
 import { useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 export const useCompartmentalChooseSimulationPageState = (
   {

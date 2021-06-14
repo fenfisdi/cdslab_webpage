@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button'
 import { userUpdateFormState } from './state'
 import LoaderComponent from '../ui/Loader'
 import { languageContext } from '../../config/languageContext'
+import CompartmentalButton from '../CompartmentalModels/CompartmentalButton'
 
 const UpdateProfileForm = (eventEmitter, loading) => {
 

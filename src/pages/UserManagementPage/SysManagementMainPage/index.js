@@ -10,7 +10,7 @@ import { useSysManagementState } from './state'
 import FullWidthTabs from '../../../components/Taps'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import userSvg from '../../../assets/images/management/users_color.svg'
-import toolsSVG from '../../../assets/images/management/tools-solid.svg'
+import toolsSVG from '../../../assets/images/management/SYSManagement_SVG.svg'
 
 const SysManagementMainPage = () => {
 
@@ -35,9 +35,11 @@ const SysManagementMainPage = () => {
       id: 1,
       label: 'Users Management',
       path:  'usersManagement',
-      disabled : true,
+      disabled : false,
       icon: userSvg,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 40
     },
     {
       id: 2,
@@ -45,7 +47,9 @@ const SysManagementMainPage = () => {
       path: 'sysManagement',
       disabled : false,
       icon: toolsSVG,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 45
     },
   ]
 

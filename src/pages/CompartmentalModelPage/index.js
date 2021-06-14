@@ -30,7 +30,9 @@ const CompartmentalModelPage = () => {
       path:  match.path,
       disabled : false,
       icon : imgCompartamental,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 70,
+      height: 40
     },
     {
       id: 2,
@@ -38,7 +40,9 @@ const CompartmentalModelPage = () => {
       path: `${match.path}/mySimulations`,
       disabled : true,
       icon: imgAgents,
-      iconType: 'svg'
+      iconType: 'svg',
+      width: 100,
+      height: 60
     },
   ]
 

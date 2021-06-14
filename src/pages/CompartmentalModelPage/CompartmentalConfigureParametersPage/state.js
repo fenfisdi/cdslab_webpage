@@ -4,7 +4,7 @@ import { getStateWithQueryparams } from '../common'
 import { useEffect, useState } from 'react'
 import { isEmpty } from 'lodash'
 import { useHistory } from 'react-router'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 export const useCompartmentalConfigureParametersPageState = ({showSnack, setShowSnack }) => {
   const history = useHistory()

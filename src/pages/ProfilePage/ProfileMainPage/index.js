@@ -1,14 +1,22 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import { Grid } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
-import Switch from '@material-ui/core/Switch'
-import SaveIcon from '@material-ui/icons/Save'
-import {useProfilePageStyles } from './styles'
+import Switch from '../../../components/ui/Switch'
+import {ContainerTitle, ProfileContainer, useProfilePageStyles, ContainerButtonCard } from './styles'
+import TitleIcon from '../../../components/layouts/TitleIcon'
+import SvgProfiles from '../../../assets/icons/SvgProfiles'
+import ButtonCard from '../../../components/ButtonCard'
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 
+export const ButtonCommon = ({ functionButton, classButton, name }) => (
+  <Button
+    onClick={functionButton}
+    className={classButton}
+  >
+    {name}
+  </Button>
+)
 
 const ProfileMainPage=()=>{
   const classes = useProfilePageStyles()
@@ -23,63 +31,84 @@ const ProfileMainPage=()=>{
     setState({ ...state, [event.target.name]: event.target.checked })
   }
 
+  const redirectUpdateDataProfile = () => {
+    history.push({ 
+      pathname: '/profile/UpdateDataProfile'
+    })
+  }
+
+  const redirectChangePassword = () => {
+    history.push({ 
+      pathname: '/profile/ChangePassword',
+    })
+  }
+
+  const handleChangeQRBindings = () => {
+    
+  }
+
   return(
-    <Grid container  className={classes.root}>
-      <Grid container  spacing={9}  direction="column" justify="center"  alignItems="center">
-        <Grid item>
-          <AccountCircleIcon style={{ fontSize: 80, color: '#827C02'}} />
-        </Grid>
-        <Grid item>
-          <Button onClick={()=>{
-            history.push({ 
-              pathname: '/profile/UpdateDataProfile',
-            })
-          }} color="inherit">
-          Update personal data
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button onClick={()=>{
-            history.push({ 
-              pathname: '/profile/ChangePassword',
-            })
-          }} color="inherit">
-          Change password
-          </Button>
-        </Grid>
-        <Grid item>
-          <Link href="#" onClick={console.log(1)} color="inherit">
-          Change QR bindings
-          </Link>
-        </Grid>
-      </Grid>
+    <ProfileContainer>
+      
+      <ContainerTitle>
+        <TitleIcon otherIconType={true} title={'Profile'} icon={<SvgProfiles />}/>
+      </ContainerTitle>
+
+      <ContainerButtonCard>
+        <ButtonCard        
+          name={'Update personal data'}
+          indetifier={'indetifier'}
+          handleClick={redirectUpdateDataProfile}
+        />
+
+        <ButtonCard        
+          name={'Change password'}
+          indetifier={'indetifier'}
+          handleClick={redirectChangePassword}
+        />
+
+        <ButtonCard        
+          name={'Change QR bindings'}
+          indetifier={'indetifier'}
+          handleClick={handleChangeQRBindings}       
+        />
+      </ContainerButtonCard>
+     
+
       <Grid container className={classes.root} spacing={2} direction='column' justify="flex-end" alignItems="flex-end">
         <Grid item className={classes.item}>
-          <FormControlLabel
-            control={<Switch checked={state.notifySmulations} onChange={handleChange} name="notifySmulations"/>}
-            label="Notify me when a simulation finishes"
-            labelPlacement="start" 
-          />
+          <Switch
+            value={state.notifySmulations}
+            handleChange={handleChange}
+            name='notifySmulations'
+            label='Notify me when a simulation finishes'
+            labelPlacement='start'            
+          />          
         </Grid>
+
         <Grid item className={classes.item}>
-          <FormControlLabel
-            control={<Switch checked={state.notifyFileRemoval} onChange={handleChange} name="notifyFileRemoval"/>}
-            label="Notify me before file removal"
-            labelPlacement="start"
-          />
+          <Switch
+            value={state.notifyFileRemoval}
+            handleChange={handleChange}
+            name='notifyFileRemoval'
+            label='Notify me before file removal'
+            labelPlacement='start'
+          />          
         </Grid>
+
         <Grid item className={classes.item}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<SaveIcon />}
-          >
-        Save changes
-          </Button>
+          <CompartmentalButton
+            disabled={false }
+            onClick={()=>{}}
+            justify="flex-end"
+            alignItems="center"
+            text={'Save changes'}
+            icon='fas fa-save'
+          />           
         </Grid>
+
       </Grid>
-    </Grid>
+    </ProfileContainer>
   )
 }
 

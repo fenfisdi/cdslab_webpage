@@ -6,12 +6,18 @@ import { useComparmentalMySimulationFilter } from './filter'
 export const useComparmentalMySimulationState = () => {
   const {
     state: {
-      mySimulations: { mySimulations, loading,execution }
+      mySimulations: { mySimulations,mySimulationsModels, loading,execution }
     },
     dispatch
   } = useStore()
 
-  const { getMySimulations,setActiveSimulation,deleteSimulation,getExecution } = useMySimulationActions(dispatch)
+  const { 
+    getMySimulations,
+    setActiveSimulation,
+    deleteSimulation,
+    getExecution,
+    getMySimulationsModels
+  } = useMySimulationActions(dispatch)
   const {
     filterSimulationName,
     filterModelType,
@@ -29,7 +35,10 @@ export const useComparmentalMySimulationState = () => {
   }, [])
   
   const mySimulationsList = () => {
-    if (execution) { getMySimulations() }
+    if (execution) { 
+      getMySimulations() 
+      getMySimulationsModels()
+    }
   }
 
 
@@ -38,7 +47,7 @@ export const useComparmentalMySimulationState = () => {
     { field: 'Simulation Name', headerName: 'ID', width: 70 },
     { field: 'Model Type', headerName: 'ID', width: 70 },
     { field: 'Parameter Type', headerName: 'ID', width: 70 },
-    { field: 'Data Src', headerName: 'ID', width: 70 },
+    { field: 'Data Source', headerName: 'ID', width: 70 },
     { field: 'Date', headerName: 'ID', width: 70 },
     { field: 'Status', headerName: 'ID', width: 70 },
     { field: 'Preview', headerName: 'ID', width: 70 },
@@ -47,7 +56,6 @@ export const useComparmentalMySimulationState = () => {
   
 
   const filterForm = (object) => {
-    console.log(object)
     let filtered = rows
     if(object.search !== ''){
       filtered = filtered.filter(x => filterSimulationName(x,object))
@@ -86,6 +94,7 @@ export const useComparmentalMySimulationState = () => {
     columns,
     filterForm,
     handleClickPreview,
-    handleClickDelete
+    handleClickDelete,
+    mySimulationsModels
   }
 }

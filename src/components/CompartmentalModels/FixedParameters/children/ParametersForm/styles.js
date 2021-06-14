@@ -12,6 +12,12 @@ export const useParametersFormStyle = makeStyles(() => ({
       'line-height':' 1.66',
       'letter-spacing':' 0.03333em',
     }
+  },
+  Input:{
+    background:'#eceff1',
+    '& div':{
+      background:'white'
+    }
   }
 }))
 
@@ -33,6 +39,9 @@ export const ParametersFormHeaderItem = styled.div`
   width: 100%;
   font-weight:400;
   color:#000000;
+  & span{
+    margin-right: 15px;
+  }
   `
 
 export const ParametersFormBody = styled.div`

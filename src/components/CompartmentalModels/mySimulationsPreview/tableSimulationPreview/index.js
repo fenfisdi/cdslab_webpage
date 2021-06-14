@@ -61,11 +61,11 @@ export const TableMySimulationPreview = (props) => {
                         <TableCell>
                           {
                             elem.ext === 'csv'
-                              ? (<Button onClick={() => handleDownloadCsv(elem.body)}>
+                              ? (<Button onClick={() => handleDownloadCsv(elem.body,elem.name)}>
                                 <GetAppIcon className={classes.iconDownload}/>
                               </Button>)
                               : ( 
-                                <Button onClick={() => handleDownloadHtml(elem.body)}>
+                                <Button onClick={() => handleDownloadHtml(elem.body,elem.name)}>
                                   <GetAppIcon className={classes.iconDownload}/>
                                 </Button>
                               )
@@ -76,8 +76,8 @@ export const TableMySimulationPreview = (props) => {
                                 <Button onClick={() => setPlotJson(JSON.parse(elem.json_image))}>
                                   <TitleIcon
                                     icon={imgPreview} 
-                                    width={20} 
-                                    height={20}  
+                                    width={30} 
+                                    height={30}  
                                     fontSize='40px'
                                   />
                                 </Button>

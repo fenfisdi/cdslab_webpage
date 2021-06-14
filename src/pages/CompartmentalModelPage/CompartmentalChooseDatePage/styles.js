@@ -32,7 +32,10 @@ export const Column = styled.div`
   width: 50%;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
+  & span{
+    font-size: 16px;
+  }  
 `
 
 export const Label = styled.label`

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles'
@@ -9,57 +9,65 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import graphIcon from '../../../assets/images/layout/line-chart_freepik.svg'
-import managementIcon from '../../../assets/images/management/management_color.svg'
 import cdsSvg from '../../../assets/images/ladingPage/Logo CDS Lab Iniciales_.svg'
 import { Link, NavLink } from 'react-router-dom'
-import TitleIcon from '../TitleIcon'
 import { usePath } from '../../PathContext'
+import { useStore } from '@store/storeContext'
+import { Icon } from '@material-ui/core'
+import { languageContext } from '../../../config/languageContext'
+import {
+  SESSION_LOGIN,
+} from '../../../actions/types/sessionTypes'
+import SvgChart from '../../../assets/icons/SvgChart'
+import SvgManagement from '../../../assets/icons/SvgManagement'
 
 const categories = [
   {
     id: '',
     children: [
-      { id: 'Simulations', icon: graphIcon , typeIcon : 'svg', href: '/simulationModels' },
-      { id: 'Management', icon: managementIcon, typeIcon : 'svg', href: '/management' },
+      { id: 'Simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root','admin'] },
+      { id: 'Management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
     ]
   },
   {
     id: '',
     children: [
-      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 30 }} />,typeIcon : 'material',href: '/profile' },
+      { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 50 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root','admin'] },
     ]
   }
 ]
+
 const styles =  (theme) => ({
   paper:{
     border: 'none !important'
   },
   categoryHeader: {
-    paddingTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
+    paddingTop: '14px',
   },
   categoryHeaderPrimary: {
     color: theme.palette.common.white
   },
   item: {
-    paddingTop: 1,
-    paddingBottom: 1,
-    color: '#fff'
+    color: '#fff',
   },
   itemCategory: {
     backgroundColor: '#fff',
     boxShadow: '0 -1px 0 #404854 inset',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(2),
+    paddingLeft: 10,
   },
   firebase: {
     fontSize: 24,
     color: '#fff'
   },
   itemActiveItem: {
-    color: theme.palette.primary.main,
-    'text-decoration': 'underline !important',
+    '& > div' : {
+      color: '#18FFFF !important',
+    },
+    '& svg':{
+      fill: '#18FFFF !important',
+    }
   },
   itemPrimary: {
     fontSize: '18px'
@@ -68,9 +76,12 @@ const styles =  (theme) => ({
     border: '1px solid #fff'
   },
   itemIcon: {
-    'min-width': '18%',
-    position: 'relative',
     top: '-5px',
+    left: '-5px',
+    position: 'relative',
+    textAlign: 'center',
+    margin: '0 auto',
+    display: 'block',
     '& > div':{
       fontSize: '40px'
     }
@@ -90,15 +101,63 @@ const styles =  (theme) => ({
     transform: 'scale(1.5)',
     display: 'block',
     margin: '0 auto'
+  },
+  logout : {
+    width: '70%'
+  },
+  linkLenguage: {
+    marginLeft: '93px',
+    color: '#fff',
+    width: '30%',
+    '&:hover': {
+      cursor: 'pointer',
+      color:'#18FFFF !important'
+    }
+  },
+  testLogout: {
+    color: '#fff',
+    fontSize: '14px',
+    marginLeft: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  },
+  containerLogout:{
+    position: 'fixed',
+    bottom: '0',
+    width: '24%'
+  },
+  iconLogout:{
+    color: '#fff', 
+    fontSize:'25px',
+    marginLeft: '-10px',
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 })
 
 function Navigator (props) {
   const { classes, ...other } = props
+  const {language,  changelanguage } = useContext(languageContext)
   const {setPath} = usePath()
+  const {
+    dispatch
+  } = useStore()
+  const rol = localStorage.getItem('role')
+
   const handleDeletePath = () => {
     setPath([])
   }
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    dispatch({
+      type: SESSION_LOGIN,
+      payload: null
+    })
+  }
+
   return (
     <Drawer variant='permanent' {...other}>
       <List disablePadding>
@@ -118,42 +177,55 @@ function Navigator (props) {
               >
                 {id}
               </ListItemText>
-            </ListItem>
-            {children.map(({ id: childId, icon,typeIcon, active,href }) => (
-              <NavLink 
-                key={childId} 
-                activeClassName={classes.itemActiveItem} 
-                className={classes.link} 
-                to={href} 
-                variant='body2'
-                onClick={handleDeletePath}
-              >
-                <ListItem
-                  button
-                  className={clsx(classes.item, active && classes.itemActiveItem)}
-                >
-                  <ListItemIcon className={classes.itemIcon}>
-                    {
-                      typeIcon === 'svg' 
-                        ? (<TitleIcon icon={icon} width={20} height={20}  fontSize='10px' fontWeight='bold'/> )
-                        : icon
-                    }
-                    
-                  </ListItemIcon>
-                  <ListItemText
-                    classes={{
-                      primary: classes.itemPrimary
-                    }}
+            </ListItem>{}
+            {children
+              .filter(x => { return x.rol.includes(rol) })
+              .map(({ id: childId, icon, active,href }) => 
+                (
+                  <NavLink 
+                    key={childId} 
+                    activeClassName={classes.itemActiveItem} 
+                    activeStyle={{ background: 'red'}}
+                    className={classes.link} 
+                    to={href} 
+                    variant='body2'
+                    onClick={handleDeletePath}
                   >
-                    {childId}
-                  </ListItemText>
-                </ListItem>
-              </NavLink>
-            ))}
-
-            
+                    <ListItem
+                      button
+                      className={clsx(classes.item, active && classes.itemActiveItem)}
+                    >
+                      <ListItemIcon className={classes.itemIcon}>
+                        {
+                          icon
+                        }  
+                      </ListItemIcon>
+                      <ListItemText
+                        classes={{
+                          primary: classes.itemPrimary
+                        }}
+                      >
+                        {childId}
+                      </ListItemText>
+                    </ListItem>
+                  </NavLink>
+                )
+              )}
           </React.Fragment>
         ))}
+        <ListItem className={classes.containerLogout}>
+          <Link to='' onClick= {handleLogout} title='Logout'>
+            <ListItem className={classes.logout}>
+              <Icon 
+                className={clsx('fas fa-sign-out-alt',classes.iconLogout)} 
+              />
+              <span className={classes.testLogout}>Logout</span>
+            </ListItem>
+          </Link>
+          <Link className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
+            {language ? 'ES':'EN' }
+          </Link>
+        </ListItem>
       </List>
     </Drawer>
   )

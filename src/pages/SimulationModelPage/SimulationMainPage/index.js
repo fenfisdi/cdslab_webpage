@@ -12,7 +12,7 @@ import lineChartFreepik from '../../../assets/images/line-chart_freepik.svg'
 
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
-import { usePathBreadCrums } from '../../../helpers'
+import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 
 
 const SimulationMainPage = () => {
@@ -39,6 +39,7 @@ const SimulationMainPage = () => {
       name: 'Comparmental Models',
       indetifier: 'compar_models',
       url: '/compartmentalModels',
+      ruta: 'compartmentalModels',
       tipo: 1,
       handleAction:(url)=>{
         history.push({ pathname: url })
@@ -53,7 +54,8 @@ const SimulationMainPage = () => {
       icon: agentsSVG,
       name: 'Agent based models',
       indetifier: 'agent_based_models',
-      url: '',
+      url: '/agentsModels',
+      ruta: 'agentsModels',
       tipo: 2,
       handleAction:(url)=>{
         history.push({ pathname: url })
@@ -75,7 +77,11 @@ const SimulationMainPage = () => {
   }
 
   const handleEventEmitted = (cardData) => {
-    handlePathBreadCrums('compartmentalModels','Compartmental Models')
+    if(cardData.ruta === 'compartmentalModels'){
+      handlePathBreadCrums(cardData.ruta,'Compartmental Models')
+    }else{
+      handlePathBreadCrums(cardData.ruta,'Agents Models')
+    }
     cardData.url && history.push({ pathname: cardData.url,state: { taps: options } }) 
   }
 

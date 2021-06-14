@@ -28,3 +28,10 @@ export const requestDeleteSimulations = async (uidSimulation) => {
   ) 
 }
 
+export const requestListSimulationsModels = async () => {
+  return  request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/model`,
+    'GET',
+  ) 
+}
+

@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
   containerTaps:{   
     display: 'inline-flex',
-    height: '50px',
+    height: '60px',
     textAlign: 'center',
     justifyContent: 'center'
   },
@@ -27,29 +27,31 @@ const useStyles = makeStyles(() => ({
     background: '#F1F1F1'
   },
   img: {
-    height: '40px',
     position: 'relative',
-    top: '6px'
+    display: 'block',
+    margin: '0 auto',
+    marginTop: '3px'
   },
   divImg :{
     width: '50%'
   },
   divLabel:{
     position: 'relative',
-    top: '10px',
-    fontSize: '18px'
+    top: '20px',
+    fontSize: '18px',
+    color: '#44605d'
   },
   link: {
     display: 'inline-flex',
     textDecoration : 'none',
     width: '100%',
-    height: '50px',
+    height: '60px',
   },
   linkDisabled: {
     display: 'inline-flex',
     textDecoration : 'none',
     width: '100%',
-    height: '50px',
+    height: '60px',
     color: '#808080'
   }
 }))
@@ -86,7 +88,7 @@ export default function FullWidthTabs(props) {
       {
         tab.iconType === 'svg'
           ? (
-            <img src={tab.icon} className={classes.img} />
+            <img src={tab.icon} className={classes.img} width={tab.width} height={tab.height} />
           )
           :
           (<Icon className={tab.icon} style={{ fontSize: 20, marginLeft:'-10px' }}/>)

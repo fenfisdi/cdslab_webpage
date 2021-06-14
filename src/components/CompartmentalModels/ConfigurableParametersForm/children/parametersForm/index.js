@@ -40,6 +40,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
             <TableCell align="center">Parameter</TableCell>
             <TableCell align="center">Configuration Type</TableCell>
             <TableCell align="center">Value</TableCell>
+            <TableCell align="center">Units</TableCell>
           </TableRow>
         </TableHead>
 
@@ -57,30 +58,38 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
             return (
               <Fragment  key={index}>
                 <StyledTableRow >
+                  
                   <TableCell  align="center">
                     <strong style={{marginRight:'10px'}}>{label}</strong>
                     ({decodedString})
                   </TableCell >
-                  <ParametersFormBodyItem>
-                    <SelectComponent
-                      xs={6} 
-                      title="Select Option"
-                      {...fieldsParametersForm[label]['SELECTInput']}  />
-                  </ParametersFormBodyItem >
-                  <TableCell style={{ width:'33%' }}>
+                  
+                  <TableCell >
+                    <ParametersFormBodyItem>
+                      <SelectComponent
+                        xs={6} 
+                        title="Select Option"
+                        {...fieldsParametersForm[label]['SELECTInput']}  />
+                    </ParametersFormBodyItem>
+                  </TableCell>
+
+                  <TableCell style={{ width:'20%' }}>
                     <ParametersFormBodyItem>
                       {value && <ExtraParameters                 
                         extraParameters={fieldsParametersForm[label][`${value}Input`]}
                         handleShowError={handleShowError}
                         xs={10}
                         errorText={errorText}
-                      /> } 
-                      <div>
-                        {unit}
-                      </div>
+                      /> }                       
                     </ParametersFormBodyItem>
-
                   </TableCell >
+
+                  <TableCell align="center">
+                    <div>
+                      {unit}
+                    </div>
+                  </TableCell >
+
                 </StyledTableRow>
               </Fragment>
             )})}
