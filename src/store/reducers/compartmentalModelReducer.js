@@ -20,7 +20,15 @@ import {
   COMPARTMENTAL_MODEL_STORE_SIMULATION_FOLDER_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
-  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY
+  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
+  COMPARTMENTAL_MODEL_GET_INS_DATES_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_DATES_ERROR,
+  COMPARTMENTAL_MODEL_GET_INS_SEARCH_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_SEARCH_ERROR
 } from '../../actions/types/compartmentalModelTypes'
 
 
@@ -54,6 +62,28 @@ export const initialState = {
       errorData: null,
       loadingSimulationFileUpload: false,
       nextStep:false
+    },
+    simulationInsData:{
+      insVariables:{
+        data: null,
+        error: null,
+        errorData: null,      
+      },
+      insRegions:{
+        data: null,
+        error: null,
+        errorData: null,
+      },
+      insDate:{
+        data: null,
+        error: null,
+        errorData: null,
+      },
+      insSearch:{
+        data: null,
+        error: null,
+        errorData: null,
+      }
     },
     fixedParametersFormFields:{
       data: null,
@@ -205,6 +235,110 @@ export const compartmentalModelReducer = (state, action) => {
     return {
       ...state, loading: false, 
       simulationExecuted: { ...state.simulationExecuted, error: false, data: action.payload }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: { 
+        ...state.simulationInsData, 
+        insVariables:{
+          data: action.payload,
+          error: false          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: { 
+        ...state.simulationInsData, 
+        insVariables:{
+          data:null,          
+          error: true          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: { 
+        ...state.simulationInsData, 
+        insRegions:{
+          data: action.payload,
+          error: false          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: {
+        ...state.simulationInsData, 
+        insRegions:{
+          data:null,          
+          error: true          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_DATES_SUCCESS:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: { 
+        ...state.simulationInsData, 
+        insDate:{
+          data: action.payload,
+          error: false          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_DATES_ERROR:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: {
+        ...state.simulationInsData, 
+        insDate:{
+          data:null,          
+          error: true          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_SEARCH_SUCCESS:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: { 
+        ...state.simulationInsData, 
+        insSearch:{
+          data: action.payload,
+          error: false          
+        }
+      }
+    }
+
+  case COMPARTMENTAL_MODEL_GET_INS_SEARCH_ERROR:
+    return {
+      ...state, 
+      loading: false, 
+      simulationInsData: {
+        ...state.simulationInsData, 
+        insSearch:{
+          data:null,          
+          error: true          
+        }
+      }
     }
     
 

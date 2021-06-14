@@ -67,3 +67,22 @@ export const executeSimulationService = async (idSimulation) => {
     'POST'
   )
 }
+
+export const getInsParametersVariablesService = async () => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/ins/variables`,
+    'GET')
+}
+
+export const getInsParametersRegionsService = async () => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/regions`,
+    'GET')
+}
+
+export const getInsParametersDatesService = async (region) => {
+  return  {
+    'initialDate':'Mon Jun 14 2021 10:50:00 GMT-0500',
+    'finalDate':'Sun Jun 20 2021 10:50:00 GMT-0500'
+  }
+}

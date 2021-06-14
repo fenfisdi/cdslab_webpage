@@ -24,10 +24,12 @@ const ComparmentalInsPage = () => {
     dates:{initialDate, setInitialDate, finalDate, setFinalDate}, 
     tableDate:{headersTable,dataTable}, 
     messages:{ showError, setShowError, showMessage, setShowMessage }, 
-    optionsSearch,
+    optionsRegions,
     regionChoose,
     setRegionChoose,
-    selectOptions } = useComparmentalInsPageState({stateVariable})
+    selectOptions,
+    handleExecuteIns,
+    isValid } = useComparmentalInsPageState({stateVariable})
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -38,7 +40,7 @@ const ComparmentalInsPage = () => {
     options.map((state)=>{      
       const stateObject = {}
       stateObject.label = state.label.toLowerCase()
-      stateObject.name  = state.name
+      stateObject.name  = state.representation
       stateObject.value = state.label.toLowerCase()
       arrayStateDto.push(stateObject)      
     })
@@ -59,6 +61,40 @@ const ComparmentalInsPage = () => {
     }else if(key=='final'){
       setFinalDate(dateValue)
     }   
+  }
+
+  const diffDays = (initialDate,finalDate)=>{
+    const date1 = new Date(initialDate)
+    const date2 = new Date(finalDate)
+    const diffTime = Math.abs(date2 - date1)
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) 
+    return diffDays
+  }
+
+  const onChangeAutocomplete =(_,value) => {              
+    if(!showMessage){
+      const shearchedObj = find(optionsRegions,(option)=>{                
+        if(option['name'].toLowerCase() == value.toLowerCase()){
+          return option
+        }
+      })
+      if(shearchedObj){
+        setRegionChoose(shearchedObj)
+      }else{                               
+        setShowMessage(true)
+      }
+    }                  
+  }
+
+  const filterOptions = (option,{inputValue}) => {
+    const findArray = option.filter(a =>a.toLowerCase().includes(inputValue.toLowerCase()))
+    if(findArray.length>0){                    
+      setShowMessage(false)
+      return findArray
+    }else{                    
+      setShowMessage(true)
+      return findArray
+    }                                                    
   }
 
 
@@ -83,38 +119,12 @@ const ComparmentalInsPage = () => {
           options={optionListDTO(selectOptions)} />
 
         <AutocompleteComponent 
-          optionsSearch={optionsSearch} 
+          optionsSearch={optionsRegions} 
           title='Choose region:'
-          keyObject="title"
-          value={regionChoose}
-          onChange={(event,value)=>{              
-            if(!showMessage){
-              if(event.code=='Enter'){                
-                const shearchedObj = find(optionsSearch,(option)=>{                
-                  if(option['title'].toLowerCase() == value.toLowerCase()){
-                    return option
-                  }
-                })                
-                if(shearchedObj){
-                  setRegionChoose(shearchedObj['title'])
-                }else{                               
-                  setShowMessage(true)
-                }
-              }else{
-                setRegionChoose(value)
-              }
-            }                  
-          }}
-          filterOptions={(option,{inputValue})=>{
-            const findArray = option.filter(a =>a.toLowerCase().includes(inputValue.toLowerCase()))
-            if(findArray.length>0){                    
-              setShowMessage(false)
-              return findArray
-            }else{                    
-              setShowMessage(true)
-              return findArray
-            }                                                    
-          }}
+          keyObject="name"
+          value={regionChoose!= null ? regionChoose['name'] : ''}
+          onChange={onChangeAutocomplete}
+          filterOptions={filterOptions}
           showMessage={showMessage}
         />
         
@@ -131,7 +141,9 @@ const ComparmentalInsPage = () => {
               variant="inline"
               lenguaje="es"
               id='initial'
-              placeholder="dd/mm/yyyy"                                    
+              placeholder="dd/mm/yyyy"
+              minDate={initialDate!=null && addDays(initialDate,0)} 
+              maxDate={initialDate!=null && addDays(initialDate,diffDays(initialDate,finalDate))} 
             />          
           </Column>
 
@@ -148,8 +160,8 @@ const ComparmentalInsPage = () => {
               id='final'
               placeholder="dd/mm/yyyy"
               error={showError}
-              maxDate={initialDate!=null && addDays(initialDate,3)}
-              minDate={initialDate!=null && addDays(initialDate,3)}
+              minDate={initialDate!=null && addDays(initialDate,0)} 
+              maxDate={initialDate!=null && addDays(initialDate,diffDays(initialDate,finalDate))}
             />          
             {showError && (
               <Error>The final date must be greater than the initial date.</Error>
@@ -159,10 +171,11 @@ const ComparmentalInsPage = () => {
         </ContainerChooseDate>
         
         <ContianerButton>
-          <ButtonCard        
+          <ButtonCard  
+            disabled={isValid?false:true}      
             name={'Retrieve data'}
             indetifier={'indetifier'}
-            handleClick={()=>{}}
+            handleClick={()=>{handleExecuteIns()}}
           />
         </ContianerButton>
 

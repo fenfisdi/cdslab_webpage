@@ -1,42 +1,55 @@
 import { useEffect, useState } from 'react'
+import { useStore } from '../../../store/storeContext'
+import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
 
 export const useComparmentalInsPageState = ({stateVariable}) => {
+
+  const {
+    state: {      
+      compartmentalModel: { 
+        simulationInsData:{
+          insVariables,
+          insRegions
+        }
+      }
+    },
+    dispatch
+  } = useStore()
+
+  const { getInsParametersVariables, getInsParametersRegions, getInsParametersDates  } = useCompartmentalModelActions(dispatch)
+
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
-  const [optionsSearch, setOptionsSearch] = useState([
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: 'Schindler\'s List', year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
-    { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-    { title: 'The Good, the Bad and the Ugly', year: 1966 },
-    { title: 'Fight Club', year: 1999 },
-    { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
-    { title: 'Star Wars: Episode V - The Empire Strikes Back', year: 1980 },
-    { title: 'Forrest Gump', year: 1994 },
-    { title: 'Inception', year: 2010 },
-    { title: 'The Lord of the Rings: The Two Towers', year: 2002 },
-    { title: 'One Flew Over the Cuckoo\'s Nest', year: 1975 },
-    { title: 'Goodfellas', year: 1990 },
-    { title: 'The Matrix', year: 1999 },
-    { title: 'Seven Samurai', year: 1954 },
-    { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-    { title: 'City of God', year: 2002 },
-    { title: 'Se7en', year: 1995 },
-    { title: 'The Silence of the Lambs', year: 1991 },
-    { title: 'It\'s a Wonderful Life', year: 1946 },
-    { title: 'Life Is Beautiful', year: 1997 }
-  ])
+  const [selectOptions, setSelectOptions] = useState([])
+  const [optionsRegions, setOptionsRegions] = useState([])
   const [regionChoose,setRegionChoose] = useState(null)
   const [headersTable, setHeadersTable] = useState([])
   const [dataTable, setDataTable] = useState([])
   const [showMessage,setShowMessage] = useState(false)
-  const [selectOptions, setSelectOptions] = useState([{label:'option 1',name:'optio1'},{label:'option 2',name:'optio2'}])
+  const [isValid,setIsValid] = useState(false)
   
+  /*******************Effects get data */
+  useEffect(()=>{    
+    if(insVariables.data == null && insVariables.error!=true){
+      getInsParametersVariables()
+    }else if(insVariables.data!=null  && insVariables.error!=true && selectOptions.length == 0){
+      setSelectOptions(insVariables.data)
+    }
+  },[insVariables])
+  
+
+  useEffect(()=>{
+    if(insRegions.data == null && insRegions.error!=true){
+      getInsParametersRegions()
+    }else if(insRegions.data!=null  && insRegions.error!=true && optionsRegions.length == 0){      
+      setOptionsRegions(insRegions.data)
+    }
+  },[insRegions])
+  /******************************* */
+
+  /************ hook fields ************** */
+
   useEffect(()=>{
     if(stateVariable.value){
       console.log('stateVariable:::::::::::::>',stateVariable.value)      
@@ -46,6 +59,13 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
   useEffect(()=>{
     if(!showMessage && regionChoose!=null){
       console.log('regionChoose:::::::::::::>',regionChoose)
+      setInitialDate(null)
+      setFinalDate(null)
+      getInsParametersDates(regionChoose).then((res)=>{
+        console.log('fecha obtenidoas:::::>',res)
+        setInitialDate(res.initialDate)
+        setFinalDate(res.finalDate)
+      })
     }
   },[regionChoose])
 
@@ -54,6 +74,26 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       setRegionChoose(null)
     }
   },[showError])
+
+  /********************************************/
+
+
+  useEffect(()=>{
+    if(stateVariable.value && regionChoose!=null && initialDate!=null && finalDate!=null){
+      setIsValid(true)
+    }else{
+      setIsValid(false)
+    }
+
+  },[stateVariable.value,regionChoose,initialDate,finalDate])
+
+
+  const handleExecuteIns = ()=>{
+    console.log('stateVariable',stateVariable)
+    console.log('regionChoose',regionChoose)
+    console.log('initialDate',initialDate)
+    console.log('finalDate',finalDate)
+  }
 
   return {
     dates:{
@@ -74,13 +114,14 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       showError,
       setShowError
     },    
-    optionsSearch,
-    setOptionsSearch,
+    optionsRegions, 
+    setOptionsRegions,
     regionChoose,
     setRegionChoose,
     selectOptions, 
-    setSelectOptions
-    
+    setSelectOptions,
+    handleExecuteIns,
+    isValid
   }
 
 }

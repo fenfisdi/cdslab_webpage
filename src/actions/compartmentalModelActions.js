@@ -6,7 +6,10 @@ import {
   updateCompartmentalSimulationService,
   storeCompartmentalSimulationFolderService, 
   storeCompartmentalFileUploadService,
-  executeSimulationService} from '../services/compartmentalModelServices'
+  executeSimulationService,
+  getInsParametersVariablesService,
+  getInsParametersRegionsService,
+  getInsParametersDatesService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -24,7 +27,11 @@ import {
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
-  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY
+  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -262,6 +269,56 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+
+  const getInsParametersVariables = ()=>{
+    getInsParametersVariablesService().then((response)=>{
+      dispatch({
+        type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error)=>{
+      if (error.response) {
+        const { response: { data } } = error
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+          payload: data
+        })
+      }else if(error.request) {
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+
+  const getInsParametersRegions = ()=>{
+    getInsParametersRegionsService().then((response)=>{
+      dispatch({
+        type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error)=>{
+      if (error.response) {
+        const { response: { data } } = error
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
+          payload: data
+        })
+      }else if(error.request) {
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+
+  const getInsParametersDates = (region)=>{
+    return getInsParametersDatesService(region)
+  }
+
+
   return {
     registerModelParameters,
     getPredefinedModels,
@@ -279,7 +336,10 @@ export const useCompartmentalModelActions = (dispatch) => {
     executeSimulation,
     setDefinitionCompartmentalExecuteSimulation,
     setDefinitionFileDataProperty,
-    setDefinitionDataGetPredefinedModels }
+    setDefinitionDataGetPredefinedModels,
+    getInsParametersVariables,
+    getInsParametersRegions,
+    getInsParametersDates }
 
 
 }
