@@ -141,9 +141,9 @@ const styles =  (theme) => ({
 })
 
 function Navigator (props) {
-  const { t } = useContext(languageContext)
+  
   const { classes, ...other } = props
-  const {language,  changelanguage } = useContext(languageContext)
+  const {language,  changelanguage, t } = useContext(languageContext)
   const {setPath} = usePath()
   const {
     dispatch
@@ -209,7 +209,7 @@ function Navigator (props) {
                           primary: classes.itemPrimary
                         }}
                       >
-                        {childId}
+                        {t(childId)}
                       </ListItemText>
                     </ListItem>
                   </NavLink>

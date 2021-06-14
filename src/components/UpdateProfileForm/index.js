@@ -1,5 +1,5 @@
 import { Grid, Paper } from '@material-ui/core'
-import React, { Fragment, useState, useContext, useEffect } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { PhoneNumber } from '../ui/PhoneNumber'
@@ -15,7 +15,6 @@ import LoaderComponent from '../ui/Loader'
 const UpdateProfileForm = ({eventEmitter, loading}) => {
 
   const classes = useUpdateProfileFormStyles(theme)
-  const [isValid, setIsvalid] = useState(false)
   const fieldsData = userUpdateFormState()
   const [phonePrefix, setPrefix] = useState('57')
   const { t } = useContext(languageContext)
@@ -34,19 +33,6 @@ const UpdateProfileForm = ({eventEmitter, loading}) => {
     securityAnswer1,
     securityAnswer2
   } = fieldsData
-
-  useEffect(() => {
-    let notIsValid = false
-    for (var key in fieldsData) {
-      if (
-        (fieldsData[key] && !fieldsData[key].value.length > 0) ||
-        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)
-      ) {
-        notIsValid = true
-      }
-    }
-    setIsvalid(notIsValid)
-  }, [fieldsData])
 
   const handleClick = () => {
 
