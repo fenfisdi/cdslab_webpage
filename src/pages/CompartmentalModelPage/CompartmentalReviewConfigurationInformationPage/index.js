@@ -1,10 +1,10 @@
 import { Grid } from '@material-ui/core'
 import React, { useState } from 'react'
 import SupportComponent from '../../../components/SupportComponent'
-import { 
+import {
   CompartmentalReviewConfigurationInformationContainer
 } from './styles'
-import {HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS} from '../../../constants/helpInformation'
+import { HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS } from '../../../constants/helpInformation'
 import { useCompartmentalReviewConfigurationInformationPageState } from './state'
 import LoaderComponent from '../../../components/ui/Loader'
 import SnackbarComponent from '@components/ui/Snackbars'
@@ -13,40 +13,40 @@ import ReviewSimulationSettings from '../../../components/CompartmentalModels/Re
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 
-const CompartmentalReviewConfigurationInformationPage =()=>{
+const CompartmentalReviewConfigurationInformationPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  
+
   const {
     executeRequestRunSimulation,
     currentSimulation,
     predefinedModelSelected,
-    fileName} = useCompartmentalReviewConfigurationInformationPageState({showSnack, setShowSnack})
- 
+    fileName } = useCompartmentalReviewConfigurationInformationPageState({ showSnack, setShowSnack })
+
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
-  return(
+  return (
     <CompartmentalReviewConfigurationInformationContainer>
-      
-      <Grid container item xs={12} 
+
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS} />
       </Grid>
 
       <SubtitleCommon text='Review configuration' />
 
-      {!isEmpty(currentSimulation) && !isEmpty(predefinedModelSelected) && <ReviewSimulationSettings 
+      {!isEmpty(currentSimulation) && !isEmpty(predefinedModelSelected) && <ReviewSimulationSettings
         simulation={{
-          name:currentSimulation.name,
-          parameter_type:currentSimulation.parameter_type,
-          modelName:predefinedModelSelected.modelData.name,
-          parameters_limits:currentSimulation.parameters_limits,
-          state_variable_limits:currentSimulation.state_variable_limits,
-          fileName:fileName
+          name: currentSimulation.name,
+          parameter_type: currentSimulation.parameter_type,
+          modelName: predefinedModelSelected.modelData.name,
+          parameters_limits: currentSimulation.parameters_limits,
+          state_variable_limits: currentSimulation.state_variable_limits,
+          fileName: fileName
         }}
         executeRequest={executeRequestRunSimulation}
         buttonText='Execute simulation'

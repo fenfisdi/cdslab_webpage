@@ -9,6 +9,7 @@ import { useRegisterFormStyles } from './styles'
 import { PhoneNumber } from '../../ui/PhoneNumber'
 import { PasswordChecker } from '../PasswordChecker'
 import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
 import { useRegisterFormState } from './state'
 import LoaderComponent from '../../ui/Loader'
 import { languageContext } from '../../../config/languageContext'
@@ -21,7 +22,7 @@ const RegisterForm = ({ eventEmitter, loading }) => {
   const [verificationPassword, setVerificationPassword] = useState(false)
   const fieldsData = useRegisterFormState()
   const [phonePrefix, setPrefix] = useState('57')
-  const { t } = useContext(languageContext)
+  const { t, changelanguage, language } = useContext(languageContext)
 
   const {
     name,
@@ -83,13 +84,32 @@ const RegisterForm = ({ eventEmitter, loading }) => {
       <Grid item container xs={12} justify="center" className={loading ? classes.loading : null}>
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
-          <TitleComponent
-            justify='center'
-            alignItems='center'
-            title={t('registerPage.title')}
-            variant='h5'
-          />
-
+          <Grid
+            item
+            container
+            xs={12}
+            spacing={9}
+            direction="row"
+            
+          >
+            <Grid item xs={11}>
+              <TitleComponent
+                justify='center'
+                alignItems='center'
+                title={t('registerPage.title')}
+                variant='h5'
+            
+              />
+            </Grid>
+            <Grid item xs={1} 
+              justify='flex-start'
+            >
+              <Link className={classes.link} variant='body2' onClick={changelanguage}>
+                {language ? 'EN':'ES' }
+              </Link>
+            </Grid>
+          </Grid>
+          
           <Grid
             item
             container

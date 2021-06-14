@@ -13,7 +13,7 @@ import { userManagementMessage } from './constants'
 const UserManagementMainPage = () => {
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { data } = userManagementMainPageState({ showSnack, setShowSnack })
+  const { data, sendUsersForm } = userManagementMainPageState({ showSnack, setShowSnack })
 
 
   const isRoot = true
@@ -24,8 +24,17 @@ const UserManagementMainPage = () => {
   const users = data && data.filter(itemData=>{
     return itemData.role.includes('user')
   })
- 
 
+  function createData (email, is_enabled) {
+    return { email, is_enabled}
+  }
+  
+  const handleClick=()=>{
+    const usersUpdated = users.map((user)=>
+      createData(user.email, user.is_enabled)
+    )
+    sendUsersForm(usersUpdated)
+  }
   const tab = [
     {
       id: 1,
@@ -59,15 +68,16 @@ const UserManagementMainPage = () => {
             message={userManagementMessage.message}
             severity={'info'}
           />
-          <TableComponent row={users}/>
-          {isRoot ? <TableComponent row={userAdmins} adminTable={isRoot}/> : <></>}
+          <TableComponent eventEmitter={sendUsersForm} row={users}/>
+          {isRoot ? <TableComponent row={userAdmins} configAdmin={isRoot}/> : <></>}
           <CompartmentalButton
             justify='flex-end'
             alignItems='center'
             text='Save changes'
             disabled={false}
             icon='fas fa-save'
-          />
+            onClick={handleClick}
+          />value
         </UserManagementPageMainContainer>
       </Container>
     </>

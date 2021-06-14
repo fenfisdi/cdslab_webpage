@@ -9,7 +9,8 @@ import ButtonCard from '../../../components/ButtonCard'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import {userProfileMainPageState} from './state'
 
-const ProfileMainPage=()=>{
+const ProfileMainPage = () => {
+
   const classes = useProfilePageStyles()
   const [state, setState] = React.useState({
     notifySmulations: true,
