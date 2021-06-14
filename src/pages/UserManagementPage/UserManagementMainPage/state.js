@@ -16,7 +16,7 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   const { getUsersListData, updateUserEnableState } = managementActions(dispatch)
   
   useEffect(() => {
-    console.log(userListRecovery.data)
+    
     if(isNull(userListRecovery.data) && !userListRecovery.error){
       getUsersListData()
     }
