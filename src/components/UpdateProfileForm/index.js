@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import { userUpdateFormState } from './state'
 import LoaderComponent from '../ui/Loader'
 import { languageContext } from '../../config/languageContext'
+import { useLocation } from 'react-router-dom'
 
 const UpdateProfileForm = ({ eventEmitter, loading }) => {
 
@@ -19,7 +20,10 @@ const UpdateProfileForm = ({ eventEmitter, loading }) => {
   const fieldsData = userUpdateFormState()
   const [phonePrefix, setPrefix] = useState('57')
   const { t } = useContext(languageContext)
-  console.log(location)
+  const location = useLocation()
+
+  console.log(location.state)
+
   const {
     name,
     lastName,
