@@ -1,36 +1,41 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useInputValue } from '../ui/Input/useInputValue'
 import { checkTypePhoneNumber, VALIDATORS_REGISTER_FORM } from './validators'
 import { usePhoneNumberValue } from '../ui/PhoneNumber/usePhoneNumberValue'
 import { languageContext } from '../../config/languageContext'
 
-export const userUpdateFormState = () => {
+export const userUpdateFormState = (userData) => {
+  console.log(userData)
   const {t} = useContext(languageContext)
+  
   /******* form fields  */
   const email = useInputValue('', VALIDATORS_REGISTER_FORM.email, {
     name: 'email',
     type: 'email',
     label: t('registerPage.email'),
+    
   })
-  const name = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+  const name = useInputValue(userData.name, VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'name',
     type: 'text',
     label: t('registerPage.name'),
+   
   })
-  const lastName = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+  const lastName = useInputValue(userData.last_name, VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'lastName',
     type: 'text',
     label: t('registerPage.lastName'),
+    
   })
 
 
-  const institution = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+  const institution = useInputValue(userData.institution, VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'institution',
     type: 'text',
     label: t('registerPage.institution'),
   })
   const institutionAffiliation = useInputValue(
-    '',
+    userData.institution_role,
     VALIDATORS_REGISTER_FORM.alphabetic,
     {
       name: 'institutionAffiliation',
@@ -38,7 +43,7 @@ export const userUpdateFormState = () => {
       label: t('registerPage.institutionAffiliation'),
     }
   )
-  const profession = useInputValue('', VALIDATORS_REGISTER_FORM.alphabetic, {
+  const profession = useInputValue(userData.profession, VALIDATORS_REGISTER_FORM.alphabetic, {
     name: 'profession',
     type: 'text',
     label: t('registerPage.profession'),
@@ -63,12 +68,12 @@ export const userUpdateFormState = () => {
     type: 'text',
     label: t('registerPage.answerQuestion2'),
   })
-  const dateBirth = useInputValue('', VALIDATORS_REGISTER_FORM.dateTime, {
+  const dateBirth = useInputValue(userData.birthday, VALIDATORS_REGISTER_FORM.dateTime, {
     name: 'dateBirth',
     type: 'date',
     label: t('registerPage.birthDate'),
   })
-  const phoneNumber = usePhoneNumberValue('', VALIDATORS_REGISTER_FORM.phone, {
+  const phoneNumber = usePhoneNumberValue(userData.phone, VALIDATORS_REGISTER_FORM.phone, {
     name: 'phoneNumber',
     type: 'text',
     label: t('registerPage.phoneNumber'),
@@ -76,7 +81,6 @@ export const userUpdateFormState = () => {
       return checkTypePhoneNumber(event)
     }
   })
-  
   const password = useInputValue('', VALIDATORS_REGISTER_FORM.password, {
     name: 'password',
     type: 'password',
