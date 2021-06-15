@@ -9,6 +9,8 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { ParametersFormBodyItem } from './styles'
+import SupportComponent from '../../../../SupportComponent'
+import iconInfo from '../../../../../assets/images/information_freepik.svg'
 
 const useStyles = makeStyles({
   table: {
@@ -41,12 +43,13 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
             <TableCell align="center">Configuration Type</TableCell>
             <TableCell align="center">Value</TableCell>
             <TableCell align="center">Units</TableCell>
+            <TableCell align="center"></TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
           {parameters && parameters.map((parameter,index)=> {
-            const { label, unit, representation } = parameter
+            const { label, unit, representation,description } = parameter
             const { value } = fieldsParametersForm[label]['SELECTInput'] 
             const [errorText,setErrorText] = useState('')
   
@@ -67,7 +70,7 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                   <TableCell >
                     <ParametersFormBodyItem>
                       <SelectComponent
-                        xs={6} 
+                        xs={8} 
                         title="Select Option"
                         {...fieldsParametersForm[label]['SELECTInput']}  />
                     </ParametersFormBodyItem>
@@ -90,6 +93,9 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
                     </div>
                   </TableCell >
 
+                  <TableCell align="center">
+                    <SupportComponent text={description} icon={iconInfo} />
+                  </TableCell >
                 </StyledTableRow>
               </Fragment>
             )})}
