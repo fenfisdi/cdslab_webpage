@@ -1,5 +1,6 @@
 import { Grid, Paper } from '@material-ui/core'
 import React, { Fragment, useState, useContext } from 'react'
+import { useHistory } from 'react-router'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Input } from '../ui/Input'
@@ -13,8 +14,9 @@ import LoaderComponent from '../ui/Loader'
 import { languageContext } from '../../config/languageContext'
 import { useLocation } from 'react-router-dom'
 
-const UpdateProfileForm = ({ eventEmitter, loading }) => {
+const UpdateProfileForm = ({  loading }) => {
 
+  const history = useHistory()
   const location = useLocation()
   const userData = location.state.detail
   const classes = useUpdateProfileFormStyles(theme)
@@ -36,16 +38,16 @@ const UpdateProfileForm = ({ eventEmitter, loading }) => {
   
 
   const handleClick = () => {
-
-    eventEmitter({
-      name: name.value,
-      last_name: lastName.value,
-      institution: institution.value,
-      institution_role: institutionAffiliation.value,
-      profession: profession.value,
-      birthday: new Date(dateBirth.value),
-      phone: phoneNumber.value, //phoneNumber.value.trim(),
-      phone_prefix: `+${phonePrefix}`
+    userData['name'] = name.value,
+    userData['last_name'] = lastName.value,
+    userData['birthday']= new Date(dateBirth.value),
+    userData['institution'] = institution.value,
+    userData['institution_role'] = institutionAffiliation.value,
+    userData['profession'] = profession.value,
+    userData['phone'] = phoneNumber.value,
+    userData['phone_prefix'] = `+${phonePrefix}`
+    history.push({
+      pathname: '/profile'
     })
   }
 
@@ -127,7 +129,7 @@ const UpdateProfileForm = ({ eventEmitter, loading }) => {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <PhoneInput
                 inputStyle={{ width:'90px' }}
                 country='co'

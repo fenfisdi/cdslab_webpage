@@ -10,7 +10,7 @@ export const TableHeaderComponent=({order, orderBy, onRequestSort, changeAdmin})
   const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
     { id: 'email', numeric: true, disablePadding: false, label: 'E-mail' },
-    { id: 'is_enabled', numeric: true, disablePadding: false, label: `${changeAdmin ? 'Admin' : 'Active'}`},  
+    { id: `${changeAdmin ? 'role' : 'is_enabled'}`, numeric: true, disablePadding: false, label: `${changeAdmin ? 'Admin' : 'Active'}`},  
   ]
   const classes = useTableHeadStyles()
   const createSortHandler = (property) => (event) => {

@@ -12,19 +12,23 @@ import {userProfileMainPageState} from './state'
 const ProfileMainPage = () => {
 
   const classes = useProfilePageStyles()
-  const [state, setState] = React.useState({
-    notifySmulations: true,
-    notifyFileRemoval: true,
-  })
+  
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { data }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
   console.log(data)
+
+  const [state, setState] = useState({
+    notifySmulations: true,
+    notifyFileRemoval: true
+  })
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked })
+    data['notify_removal'] = !state.notifyFileRemoval
+    data['notify_simulation_done'] = !state.notifySmulations
   }
-
+  
   const redirectUpdateDataProfile = () => {
     history.push({ 
       pathname: '/profile/UpdateDataProfile',
@@ -40,6 +44,10 @@ const ProfileMainPage = () => {
 
   const handleChangeQRBindings = () => {
     
+  }
+
+  const eventEmitter = () =>{
+    console.log(data)
   }
 
   return(
@@ -94,7 +102,7 @@ const ProfileMainPage = () => {
         <Grid item className={classes.item}>
           <CompartmentalButton
             disabled={false }
-            onClick={()=>{}}
+            onClick={eventEmitter}
             justify="flex-end"
             alignItems="center"
             text={'Save changes'}

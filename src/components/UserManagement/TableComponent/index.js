@@ -25,7 +25,8 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
   const filterRows = rows?.filter(row=>{
     return row.name.includes(fil)
   })
-
+  
+  console.log(rows)
   const functionsTable = useTableComponentState()
   const {
     getComparator,
@@ -82,7 +83,10 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled} list={rows} user={row}/></TableCell>
+                      <TableCell align="left">{
+                        setAdmin ? 
+                          <ActiveComponent isActive={row.role=='admin' ? true : false} role={row.role} user={row}/>
+                          :<ActiveComponent isActive={row.is_enabled} user={row}/>}</TableCell>
                     </TableRow>
                   )
                 })}
