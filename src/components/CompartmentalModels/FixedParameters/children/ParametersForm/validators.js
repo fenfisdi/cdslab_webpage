@@ -27,34 +27,7 @@ export const VALIDATORS_PARAMETERS_FORM = {
 
 export const parametersFormFieldsValidators =({minValue, maxValue})=>{  
   return [
-    {
-      type: 'pattern',
-      message: PATTERN_ERROR_MESSAGE,
-      check: checkPattern,
-      valueToCheck: PATTERN_REALS_NUMERIC
-    },
-    {
-      type: 'required',
-      message: REQUIRED_MESSAGE,
-      check: checkMinLength,
-      valueToCheck: 0
-    },
-    {
-      type: 'maxlength',
-      message: MAX_LENGTH_MESSAGE.replace('?', maxValue),
-      check: (value,comparativeValue)=>{        
-        return (value<=comparativeValue ) 
-      },
-      valueToCheck: maxValue
-    },
-    {
-      type: 'minlength',
-      message: MIN_LENGTH_MESSAGE.replace('?', minValue),
-      check: (value,comparativeValue)=>{
-        return (comparativeValue<=value) 
-      },
-      valueToCheck: minValue
-    }
+    
   ]
   
 }

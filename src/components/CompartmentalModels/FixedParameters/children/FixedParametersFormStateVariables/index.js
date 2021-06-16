@@ -20,7 +20,6 @@ const FixedParametersFormStateVariables = ({fieldParameters,valuesFieldParameter
       {!isEmpty(fields) && <ParametersForm fields={fields} fieldParameters={fieldParameters} headersParams={headersParams}/>}
 
       <CompartmentalButton
-        disabled={isValid?false:true }
         onClick={()=>{executeRequestConfigureStateVariables(creationResponseStateVariableForm ({fields}))}}
         justify="flex-end"
         alignItems="center"

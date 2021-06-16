@@ -1,6 +1,7 @@
 export const useTableComponentState=()=>{
 
   const descendingComparator=(a, b, orderBy)=>{
+    
     if (b[orderBy] < a[orderBy]) {
       return -1
     }
@@ -9,21 +10,26 @@ export const useTableComponentState=()=>{
     }
     return 0
   }
+
   const getComparator=(order, orderBy) => {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy)
   }
+
   const stableSort=(array, comparator) =>{
-    const stabilizedThis =array && array.map((el, index) => [el, index])
-    stabilizedThis && stabilizedThis.sort((a, b) => {
+    
+    const stabilizedThis = array?.map((el, index) => [el, index])
+    stabilizedThis.sort((a, b) => {
       const order = comparator(a[0], b[0])
       if (order !== 0) return order
       return a[1] - b[1]
     })
-    return stabilizedThis && stabilizedThis.map((el) => el[0])
+    
+    return stabilizedThis.map((el) => el[0])
 
   }
+  
   return{
     getComparator,
     stableSort

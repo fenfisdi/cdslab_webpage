@@ -18,7 +18,8 @@ export const ButtonCommon = ({ functionButton, classButton, name }) => (
   </Button>
 )
 
-const ProfileMainPage=()=>{
+const ProfileMainPage = () => {
+
   const classes = useProfilePageStyles()
   const [state, setState] = React.useState({
     notifySmulations: true,
