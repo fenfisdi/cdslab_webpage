@@ -27,8 +27,8 @@ import {
   COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
   COMPARTMENTAL_MODEL_GET_INS_DATES_SUCCESS,
   COMPARTMENTAL_MODEL_GET_INS_DATES_ERROR,
-  COMPARTMENTAL_MODEL_GET_INS_SEARCH_SUCCESS,
-  COMPARTMENTAL_MODEL_GET_INS_SEARCH_ERROR
+  COMPARTMENTAL_MODEL_POST_INS_SUCCESS,
+  COMPARTMENTAL_MODEL_POST_INS_ERROR
 } from '../../actions/types/compartmentalModelTypes'
 
 
@@ -79,7 +79,7 @@ export const initialState = {
         error: null,
         errorData: null,
       },
-      insSearch:{
+      insInformationSave:{
         data: null,
         error: null,
         errorData: null,
@@ -315,26 +315,26 @@ export const compartmentalModelReducer = (state, action) => {
       }
     }
 
-  case COMPARTMENTAL_MODEL_GET_INS_SEARCH_SUCCESS:
+  case COMPARTMENTAL_MODEL_POST_INS_SUCCESS:
     return {
       ...state, 
       loading: false, 
       simulationInsData: { 
         ...state.simulationInsData, 
-        insSearch:{
+        insInformationSave:{
           data: action.payload,
           error: false          
         }
       }
     }
 
-  case COMPARTMENTAL_MODEL_GET_INS_SEARCH_ERROR:
+  case COMPARTMENTAL_MODEL_POST_INS_ERROR:
     return {
       ...state, 
       loading: false, 
       simulationInsData: {
         ...state.simulationInsData, 
-        insSearch:{
+        insInformationSave:{
           data:null,          
           error: true          
         }

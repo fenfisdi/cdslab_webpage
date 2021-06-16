@@ -21,7 +21,13 @@ const ComparmentalInsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { stateVariable } = useComparmentalInsPageCreateFields()
   const { 
-    dates:{initialDate, setInitialDate, finalDate, setFinalDate}, 
+    dates:{
+      initialDate, 
+      setInitialDate, 
+      finalDate, 
+      setFinalDate,
+      initialDateRegion,
+      finalDateRegion}, 
     tableDate:{headersTable,dataTable}, 
     messages:{ showError, setShowError, showMessage, setShowMessage }, 
     optionsRegions,
@@ -29,7 +35,9 @@ const ComparmentalInsPage = () => {
     setRegionChoose,
     selectOptions,
     handleExecuteIns,
-    isValid } = useComparmentalInsPageState({stateVariable})
+    isValid,
+    handleExecuteContinue,
+    dataCurrentSimulation } = useComparmentalInsPageState({stateVariable})
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -56,8 +64,7 @@ const ComparmentalInsPage = () => {
   const handleDate = (dateValue,key) => {
     setShowError(false)
     if(key=='initial'){
-      setInitialDate(dateValue)
-      setFinalDate(null)
+      setInitialDate(dateValue)      
     }else if(key=='final'){
       setFinalDate(dateValue)
     }   
@@ -110,7 +117,7 @@ const ComparmentalInsPage = () => {
 
       <SubtitleCommon text='Choose variable time series from INS data' />
       
-      <Grid container item xs={12} alignItems="center" justify="center" direction="column">
+      { optionsRegions != null && selectOptions !=null && dataCurrentSimulation!=null && <Grid container item xs={12} alignItems="center" justify="center" direction="column">
         
         <SelectComponent
           xs={3}
@@ -142,8 +149,8 @@ const ComparmentalInsPage = () => {
               lenguaje="es"
               id='initial'
               placeholder="dd/mm/yyyy"
-              minDate={initialDate!=null && addDays(initialDate,0)} 
-              maxDate={initialDate!=null && addDays(initialDate,diffDays(initialDate,finalDate))} 
+              minDate={initialDateRegion!=null && addDays(initialDateRegion,0)} 
+              maxDate={initialDateRegion!=null && addDays(initialDateRegion,diffDays(initialDateRegion,finalDateRegion))} 
             />          
           </Column>
 
@@ -179,13 +186,6 @@ const ComparmentalInsPage = () => {
           />
         </ContianerButton>
 
-
-        {/* <ContianerTable>
-          <Typography>The data that is going to be used is:</Typography>    
-          <TableFormatStatic Variable={stateVariable.value} />
-        </ContianerTable> */}
-
-
         <ContianerTable>
           <Typography>The data that is going to be used is:</Typography>    
           <TableFormatDynamic
@@ -198,13 +198,13 @@ const ComparmentalInsPage = () => {
         <CompartmentalButton
           disabled={false}
           onClick={()=>{
-            
+            handleExecuteContinue()
           }}
           justify="flex-end"
           alignItems="center"
-          text={'Continue'}
+          text='Continue'
         />        
-      </Grid>
+      </Grid>}
 
       {false && <LoaderComponent
         width={50}

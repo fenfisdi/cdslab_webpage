@@ -1,70 +1,89 @@
 import { useEffect, useState } from 'react'
 import { useStore } from '../../../store/storeContext'
 import { useCompartmentalModelActions } from '@actions/compartmentalModelActions'
+import { getStateWithQueryparams } from '../common'
+import { isEmpty } from 'lodash'
+import { useHistory } from 'react-router'
+import { formatYmd } from '../../../utils/common'
 
 export const useComparmentalInsPageState = ({stateVariable}) => {
-
+  const history = useHistory()
+  const [isSend, setIsSend] = useState(false)
   const {
     state: {      
-      compartmentalModel: { 
+      compartmentalModel: {
+        predefinedModelSelected,
+        currentSimulation:{ data: dataCurrentSimulation, error },
         simulationInsData:{
           insVariables,
-          insRegions
+          insRegions          
         }
       }
     },
     dispatch
   } = useStore()
 
-  const { getInsParametersVariables, getInsParametersRegions, getInsParametersDates, getInformationIns  } = useCompartmentalModelActions(dispatch)
+  const { getInsParametersVariables, 
+    getInsParametersRegions, 
+    getInsParametersDates, 
+    getInformationIns,
+    postInformationIns, 
+    findCompartmentalSimulation,
+    findPredefinedModel,
+    updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
 
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
-  const [showError, setShowError] = useState(false)
-  const [selectOptions, setSelectOptions] = useState([])
-  const [optionsRegions, setOptionsRegions] = useState([])
+  
+  const [initialDateRegion,setInitialDateRegion] = useState(null)
+  const [finalDateRegion,setFinalDateRegion] = useState(null)
+
+
+  const [showError, setShowError] = useState(false)  
+  const [showMessage,setShowMessage] = useState(false)
   const [regionChoose,setRegionChoose] = useState(null)
+  
   const [headersTable, setHeadersTable] = useState([])
   const [dataTable, setDataTable] = useState([])
-  const [showMessage,setShowMessage] = useState(false)
-  const [isValid,setIsValid] = useState(false)
   
-  /*******************Effects get data */
-  useEffect(()=>{    
+  
+  const [isValid,setIsValid] = useState(false)
+
+  
+  /******************* useEffects get Informations **********/
+  useEffect(()=>{
+    const params = getStateWithQueryparams(history)    
+    if (dataCurrentSimulation != null &&  isEmpty(predefinedModelSelected)) {
+      const {name}=dataCurrentSimulation
+      findPredefinedModel({model_id:params.model_id,  simulationName:name})
+
+    } else if (!isEmpty(params) && dataCurrentSimulation == null && isEmpty(predefinedModelSelected)){
+      findCompartmentalSimulation(params.simulation_identifier)
+    }
+
     if(insVariables.data == null && insVariables.error!=true){
       getInsParametersVariables()
-    }else if(insVariables.data!=null  && insVariables.error!=true && selectOptions.length == 0){
-      setSelectOptions(insVariables.data)
     }
-  },[insVariables])
-  
 
-  useEffect(()=>{
     if(insRegions.data == null && insRegions.error!=true){
       getInsParametersRegions()
-    }else if(insRegions.data!=null  && insRegions.error!=true && optionsRegions.length == 0){      
-      setOptionsRegions(insRegions.data)
     }
-  },[insRegions])
+  },[dataCurrentSimulation,predefinedModelSelected,insVariables.data,insRegions.data])
+
   /******************************* */
 
-  /************ hook fields ************** */
-
+  
+  /************ useEffects fields validations ************** */
   useEffect(()=>{
-    if(stateVariable.value){
-      console.log('stateVariable:::::::::::::>',stateVariable.value)      
-    }
-  },[stateVariable.value])
-
-  useEffect(()=>{
-    if(!showMessage && regionChoose!=null){
-      console.log('regionChoose:::::::::::::>',regionChoose)
+    if(!showMessage && regionChoose!=null){      
       setInitialDate(null)
       setFinalDate(null)
-      getInsParametersDates(regionChoose).then((res)=>{
-        console.log('fecha obtenidoas:::::>',res)
-        setInitialDate(res.initialDate)
-        setFinalDate(res.finalDate)
+      getInsParametersDates(regionChoose).then((response)=>{
+        const { data:{data}} = response        
+        setInitialDateRegion(new Date(data.initialDate))
+        setInitialDate(new Date(data.initialDate))
+        setFinalDateRegion( new Date(data.finalDate))
+        setFinalDate(new Date(data.finalDate))
       })
     }
   },[regionChoose])
@@ -75,8 +94,16 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     }
   },[showError])
 
-  /********************************************/
-
+  useEffect(()=>{
+    if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected) && error!=true){      
+      const {modelData:{identifier:model_id}}=predefinedModelSelected
+      const { identifier} = dataCurrentSimulation
+      history.push({ 
+        pathname: '/compartmentalModels/chooseDate',
+        search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
+      })
+    }
+  },[isSend,dataCurrentSimulation])
 
   useEffect(()=>{
     if(stateVariable.value && regionChoose!=null && initialDate!=null && finalDate!=null){
@@ -86,27 +113,49 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     }
 
   },[stateVariable.value,regionChoose,initialDate,finalDate])
-
-
+  /********************************************/
+  
   const handleExecuteIns = ()=>{
-    console.log('stateVariable',stateVariable)
-    console.log('regionChoose',regionChoose)
-    console.log('initialDate',initialDate)
-    console.log('finalDate',finalDate)
     getInformationIns({
       stateVariable:stateVariable.value,
       regionChoose,
-      initialDate,
-      finalDate
+      initialDate:formatYmd(initialDate),
+      finalDate:formatYmd(finalDate)
     }).then((response)=>{
       const {
         headers,
         body
-      } = response
-      console.log(response)
+      } = response.data.data      
       setHeadersTable(headers)
       setDataTable(body)
     })
+  }
+
+
+  const handleExecuteContinue = ()=>{
+    postInformationIns({
+      variable:stateVariable.value,
+      regionName:regionChoose.name || '',
+      initialDate:formatYmd(initialDate),
+      finalDate:formatYmd(finalDate),
+      identifier:dataCurrentSimulation.identifier || '',
+      predefinedModelSelected
+    }).then((response)=>{
+      console.log(response.data.data)
+      if(!isEmpty(response.data.data)){
+        const {  name,identifier,state_variable_limits,parameter_type,parameters_limits } = dataCurrentSimulation
+        updateCompartmentalSimulation({
+          'name':name,
+          'parameters_limits': parameters_limits,
+          'state_variable_limits':state_variable_limits,
+          'parameter_type':parameter_type
+        },identifier) 
+        setIsSend(true)
+      }
+      /*    
+      */
+    })
+    /**/
   }
 
   return {
@@ -114,7 +163,9 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       initialDate,
       setInitialDate,
       finalDate,
-      setFinalDate
+      setFinalDate,
+      initialDateRegion,
+      finalDateRegion
     },
     tableDate:{
       headersTable,
@@ -128,14 +179,14 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       showError,
       setShowError
     },    
-    optionsRegions, 
-    setOptionsRegions,
+    optionsRegions:insRegions.data,
     regionChoose,
     setRegionChoose,
-    selectOptions, 
-    setSelectOptions,
+    selectOptions:insVariables.data, 
     handleExecuteIns,
-    isValid
+    isValid,
+    handleExecuteContinue,
+    dataCurrentSimulation
   }
 
 }

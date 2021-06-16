@@ -10,7 +10,8 @@ import {
   getInsParametersVariablesService,
   getInsParametersRegionsService,
   getInsParametersDatesService,
-  getInformationInsService} from '../services/compartmentalModelServices'
+  getInformationInsService,
+  postInformationInsService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -316,11 +317,23 @@ export const useCompartmentalModelActions = (dispatch) => {
   }
 
   const getInsParametersDates = (region)=>{
-    return getInsParametersDatesService(region)
+    const { hash } = region
+    return getInsParametersDatesService(hash)
   }
 
   const getInformationIns = (data)=>{
-    return getInformationInsService(data)
+    const {
+      finalDate,
+      initialDate,
+      regionChoose:{
+        hash 
+      }
+    } = data
+    return getInformationInsService(hash,initialDate,finalDate)
+  }
+
+  const postInformationIns = ({initialDate,finalDate,identifier,regionName,variable })=>{
+    return postInformationInsService(initialDate,finalDate,identifier,regionName,variable )
   }
 
 
@@ -345,7 +358,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     getInsParametersVariables,
     getInsParametersRegions,
     getInsParametersDates,
-    getInformationIns }
+    getInformationIns,
+    postInformationIns }
 
 
 }

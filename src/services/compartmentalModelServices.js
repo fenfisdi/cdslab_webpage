@@ -80,32 +80,30 @@ export const getInsParametersRegionsService = async () => {
     'GET')
 }
 
-export const getInsParametersDatesService = async (region) => {
-  return  {
-    'initialDate':'Mon Jun 14 2021 10:50:00 GMT-0500',
-    'finalDate':'Sun Jun 20 2021 10:50:00 GMT-0500'
-  }
+export const getInsParametersDatesService = async (hash) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/dates?file_id=${hash}`,
+    'GET')
 }
 
-export const getInformationInsService = async (data) => {
-  return {
-    headers:[
-      {
-        label:'Variable Ins a',name:'varinsa'
-      },
-      {
-        label:'Variable Ins b',name:'varinsb'
-      }
-    ],
-    body:[
-      {
-        varinsa:'Valor de ins a fila 1',
-        varinsb:'Valor de ins b fila 1'
-      },
-      {
-        varinsa:'Valor de ins a fila 2',
-        varinsb:'Valor de ins b fila 2'
-      }
-    ]
-  }
+export const getInformationInsService = async (hash,initialDate,finalDate) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/Data?file_id=${hash}&init_date=${initialDate}&final_date=${finalDate}`,
+    'GET')
+  
+}
+
+export const postInformationInsService = async (initialDate,finalDate,identifier,regionName,variable)=>{
+  
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/simulation/${identifier}`,
+    'POST',{
+      uuid:identifier,
+      init_date:initialDate,
+      final_date:finalDate,
+      region_name:regionName,
+      variable:variable
+    }) 
+ 
+
 }

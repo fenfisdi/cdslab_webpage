@@ -52,3 +52,5 @@ export const processData = dataString => {
     headers:columns
   }
 }
+
+export const formatYmd = date => date.toISOString().slice(0, 10)
