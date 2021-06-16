@@ -8,15 +8,17 @@ import SvgProfiles from '../../../assets/icons/SvgProfiles'
 import ButtonCard from '../../../components/ButtonCard'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import {userProfileMainPageState} from './state'
+import { useLocation } from 'react-router-dom'
 
 const ProfileMainPage = () => {
 
   const classes = useProfilePageStyles()
-  
-
+  const location = useLocation()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { data, sendForm }= userProfileMainPageState({ showSnack, setShowSnack })
+  const { data, sendForm, sendChangePassword }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
+  
+  const password = location.state && location.state.value
   
   const redirectUpdateDataProfile = () => {
     history.push({ 
@@ -24,7 +26,7 @@ const ProfileMainPage = () => {
       state: {detail: data}
     })
   }
-
+  
   const redirectChangePassword = () => {
     history.push({ 
       pathname: '/profile/ChangePassword',
@@ -34,6 +36,20 @@ const ProfileMainPage = () => {
   const handleChangeQRBindings = () => {
     
   }
+  
+  function createUpdatePasswordData(
+    email,
+    password,
+    verify_password
+  ){
+    return{
+      email,
+      password,
+      verify_password
+    }
+  }
+
+
   function createUpdatedData (
     name, 
     last_name, 
@@ -73,9 +89,18 @@ const ProfileMainPage = () => {
       new Date(data.birthday),
       data.notify_removal,
       data.notify_simulation_done)
+    
+    const newPassword = createUpdatePasswordData(
+      data.email,
+      password.password,
+      password.password
+    )
+
     sendForm(newUserData)
+    sendChangePassword(newPassword)
   }
 
+  
   return(
     <ProfileContainer>
       
