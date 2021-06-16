@@ -15,22 +15,22 @@ const CompartmentalConfigureStateVariablesPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const {
     currentSimulation,
-    predefinedModelSelected:{modelData},
-    executeRequestConfigureStateVariables }= useCompartmentalConfigureStateVariablesPageState({showSnack, setShowSnack })
-  
+    predefinedModelSelected: { modelData },
+    executeRequestConfigureStateVariables } = useCompartmentalConfigureStateVariablesPageState({ showSnack, setShowSnack })
+
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
   return (
-    <CompartmentalConfigureStateVariablesSection>  
+    <CompartmentalConfigureStateVariablesSection>
 
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS} />
       </Grid>
 
       <SubtitleCommon text='Configure initial values of the state variables' />
@@ -42,7 +42,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         headersParams={ConfigureStateVariablesHeader}
       />}
 
-      {!modelData  && <LoaderComponent
+      {!modelData && <LoaderComponent
         width={50}
         height={50}
         marginTop={5}

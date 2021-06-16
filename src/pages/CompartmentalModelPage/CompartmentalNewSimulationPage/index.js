@@ -3,34 +3,34 @@ import { Grid } from '@material-ui/core'
 import PredefinedModelsForm from '../../../components/CompartmentalModels/PredefinedModelsForm'
 import SnackbarComponent from '@components/ui/Snackbars'
 import { useCompartmentalNewSimulationPageState } from './state'
-import { useHistory  } from 'react-router'
+import { useHistory } from 'react-router'
 import SupportComponent from '../../../components/SupportComponent'
-import {HELP_INFORMATION_NEW_SIMULATIONS} from '../../../constants/helpInformation'
+import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 
-const CompartmentalNewSimulationPage = ({pathParent}) => {
-  
+const CompartmentalNewSimulationPage = ({ pathParent }) => {
+
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { predefinedModelsList, storePredefinedModelSelected  } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
+  const { predefinedModelsList, storePredefinedModelSelected } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
-  const setPredefinedModelSelected =(values)=>{
+  const setPredefinedModelSelected = (values) => {
     storePredefinedModelSelected(values)
     history.push({ pathname: `${pathParent}/chooseSimulation` })
   }
 
   return (
     <Grid container item xs={12} justify="center" alignItems="center" direction="column">
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
+        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
 
       {predefinedModelsList && <PredefinedModelsForm

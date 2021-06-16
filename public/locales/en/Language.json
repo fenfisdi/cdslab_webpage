@@ -52,5 +52,14 @@
     "minLength": "The minimum character width  is ?.",
     "validatePhone": "This field must be a phone number.",
     "validatePasswords": "Passwords don't match."
+  },
+  "landingPage": {
+    "simulations": "Simulations",
+    "management": "Management"
+  },
+  "simulationsPage": {
+    "title": "Simulations",
+    "CompartmentalButton": "Compartmental model",
+    "AgentsButton": "Agent based models"
   }
 }

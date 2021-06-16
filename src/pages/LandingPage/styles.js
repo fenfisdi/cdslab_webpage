@@ -12,15 +12,15 @@ export const LandingPageContainer = styled.section`
 
 export const useHeaderStyles = makeStyles(() => ({
   container: {
-    width : '100%'
+    width: '100%'
   },
-  image :{
+  image: {
     width: '100%',
-    transform: 'scale(1.5)',
-    height: '230px',
+    transform: 'scale(2.5)',
+    height: '35vh',
     textAlign: 'center'
   },
-  title:{
+  title: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: '30px'
@@ -28,19 +28,19 @@ export const useHeaderStyles = makeStyles(() => ({
 }))
 
 export const useContentStyles = makeStyles(() => ({
-  title : {
+  title: {
     textAlign: 'center',
     color: '#002060',
-    marginTop : '10px',
+    marginTop: '10px',
     fontSize: '24px'
   },
-  storyText:{
+  storyText: {
     paddingTop: '5px',
     width: '90%',
     textAlign: 'justify',
     fontSize: '15px'
   },
-  question:{
+  question: {
     top: '-30px',
     margin: '0 auto',
     display: 'block',
@@ -53,7 +53,7 @@ export const useContentStyles = makeStyles(() => ({
     fontWeight: 'bold',
     fontSize: '15px'
   },
-  containerImageCds : {
+  containerImageCds: {
     width: '100%'
   },
   image: {
@@ -63,7 +63,7 @@ export const useContentStyles = makeStyles(() => ({
     position: 'relative',
     top: '-80px'
   },
-  textCds:{
+  textCds: {
     position: 'relative',
     top: '-80px',
     textAlign: 'center',

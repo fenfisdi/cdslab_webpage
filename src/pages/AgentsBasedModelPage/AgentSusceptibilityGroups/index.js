@@ -21,12 +21,12 @@ const AgentSusceptibilityGroups = () => {
 
   return (
     <>
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
+        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
       <Container maxWidth={'sm'}>
         <div className={classes.manageItemsContainer}>
@@ -36,7 +36,7 @@ const AgentSusceptibilityGroups = () => {
             handleCheckItem={handleCheckItem}
             handleConfigItem={handleConfigItem}
             handleAddItem={handleAddItem}
-            itemArray={[{name: 'sd', value: 'sd', id: 'sdf'}, {name: 'sd', value: 'sd', id: 'sdf'}]}
+            itemArray={[{ name: 'sd', value: 'sd', id: 'sdf' }, { name: 'sd', value: 'sd', id: 'sdf' }]}
           />
         </div>
         <div className={classes.buttonContainer}>

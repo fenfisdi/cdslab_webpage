@@ -1,7 +1,10 @@
-import { getUsersList } from '../services/userManagementService'
+import { getUsersList, updateUserStateService } from '../services/userManagementService'
 import {
   USERS_LIST_SUCCESS,
-  USER_LIST_ERROR
+  USER_LIST_ERROR,
+  UPDATE_USERS_STATE_LOADING,
+  UPDATE_USERS_STATE_ERROR,
+  UPDATE_USERS_STATE_SUCCESS
 } from './types/userManagementTypes'
 
 export const managementActions = (dispatch)=>{
@@ -31,8 +34,35 @@ export const managementActions = (dispatch)=>{
         }
       })
   }
+
+  const updateUserEnableState = (managementForm) =>{
+    dispatch({ type: UPDATE_USERS_STATE_LOADING })
+    updateUserStateService(managementForm)
+      .then((response) => {
+        dispatch({
+          type: UPDATE_USERS_STATE_SUCCESS,
+          payload: response.data.data
+        })
+      })
+      .catch ((error) => {
+        if(error.response) {
+          const { response: { data } } = error
+          dispatch({
+            type: UPDATE_USERS_STATE_ERROR,
+            payload: data 
+          })
+        } else if (error.request){
+          dispatch({
+            type: UPDATE_USERS_STATE_ERROR,
+            payload:{ message:'The request was made but no response was received' }
+          })
+        }
+      })
+
+  }
   
   return {
-    getUsersListData
+    getUsersListData,
+    updateUserEnableState
   }
 }

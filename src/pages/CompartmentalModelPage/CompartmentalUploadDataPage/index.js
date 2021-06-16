@@ -17,19 +17,19 @@ const CompartmentalUploadDataPage = () => {
   const {
     stateVariables,
     executeRequestUploadData,
-    loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({showSnack, setShowSnack})
+    loadingSimulationFileUpload } = useCompartmentalUploadDataPageState({ showSnack, setShowSnack })
 
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
-  const optionListDTO =(options)=>{
+  const optionListDTO = (options) => {
     const arrayStateDto = []
-    options.map((state)=>{
-      if(state.can_fit){
+    options.map((state) => {
+      if (state.can_fit) {
         const stateObject = {}
         stateObject.label = state.label.toLowerCase()
-        stateObject.name  = state.name
+        stateObject.name = state.name
         stateObject.value = state.label.toLowerCase()
         arrayStateDto.push(stateObject)
       }
@@ -44,12 +44,12 @@ const CompartmentalUploadDataPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS} />
       </Grid>
 
       <SubtitleCommon text='Choose variable to fit model' />
-      
-      {!loadingSimulationFileUpload && stateVariables.length>0 && <Grid container item xs={12}>
+
+      {!loadingSimulationFileUpload && stateVariables.length > 0 && <Grid container item xs={12}>
         <UploadDataForm
           selectOptions={optionListDTO(stateVariables)}
           executeRequest={executeRequestUploadData}
