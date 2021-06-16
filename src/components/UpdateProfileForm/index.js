@@ -21,7 +21,7 @@ const UpdateProfileForm = ({  loading }) => {
   const userData = location.state.detail
   const classes = useUpdateProfileFormStyles(theme)
   const fieldsData = userUpdateFormState(userData)
-  const [phonePrefix, setPrefix] = useState(userData.phone_prefix)
+  const [phonePrefix, setPrefix] = useState(userData.phone_prefix.slice(1))
   const { t } = useContext(languageContext)
   
   const {
@@ -40,7 +40,7 @@ const UpdateProfileForm = ({  loading }) => {
   const handleClick = () => {
     userData['name'] = name.value,
     userData['last_name'] = lastName.value,
-    userData['birthday']= new Date(dateBirth.value),
+    userData['birthday']= dateBirth.value,
     userData['institution'] = institution.value,
     userData['institution_role'] = institutionAffiliation.value,
     userData['profession'] = profession.value,

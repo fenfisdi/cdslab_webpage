@@ -1,4 +1,4 @@
-import { getUserDataService, updateUserService } from '../services/userProficeServices'
+import { getUserDataService, updateUserService } from '../services/userProfileServices'
 import {
   USER_DATA_SUCCESS,
   USER_DATA_ERROR,

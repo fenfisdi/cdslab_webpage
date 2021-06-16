@@ -15,7 +15,7 @@ export const userProfileMainPageState = ({ showSnack, setShowSnack }) => {
     dispatch
   } = useStore()
 
-  const { getUserData } = userProfileActions(dispatch)
+  const { getUserData, updateUserData } = userProfileActions(dispatch)
 
   useEffect(()=>{
     if(isNull(data) && !error){
@@ -38,8 +38,13 @@ export const userProfileMainPageState = ({ showSnack, setShowSnack }) => {
     }
   },[error])
 
+  const sendForm =(updateUserForm) => {
+    updateUserData(updateUserForm)
+  }
+
   return{
     getUserData,
-    data
+    data,
+    sendForm
   }
 }

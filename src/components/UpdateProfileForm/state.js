@@ -5,7 +5,9 @@ import { usePhoneNumberValue } from '../ui/PhoneNumber/usePhoneNumberValue'
 import { languageContext } from '../../config/languageContext'
 
 export const userUpdateFormState = (userData) => {
-  console.log(userData)
+  
+  const birthday = userData.birthday.slice(0,10)
+  
   const {t} = useContext(languageContext)
   
   /******* form fields  */
@@ -68,7 +70,7 @@ export const userUpdateFormState = (userData) => {
     type: 'text',
     label: t('registerPage.answerQuestion2'),
   })
-  const dateBirth = useInputValue(userData.birthday, VALIDATORS_REGISTER_FORM.dateTime, {
+  const dateBirth = useInputValue(birthday, VALIDATORS_REGISTER_FORM.dateTime, {
     name: 'dateBirth',
     type: 'date',
     label: t('registerPage.birthDate'),

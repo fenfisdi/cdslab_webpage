@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router'
 import { Grid } from '@material-ui/core'
-import Switch from '../../../components/ui/Switch'
+import { ActiveComponent } from '../../../components/ProfilePage/SwitchComponent'
 import {ContainerTitle, ProfileContainer, useProfilePageStyles, ContainerButtonCard } from './styles'
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import SvgProfiles from '../../../assets/icons/SvgProfiles'
@@ -15,19 +15,8 @@ const ProfileMainPage = () => {
   
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { data }= userProfileMainPageState({ showSnack, setShowSnack })
+  const { data, sendForm }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
-  console.log(data)
-
-  const [state, setState] = useState({
-    notifySmulations: true,
-    notifyFileRemoval: true
-  })
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-    data['notify_removal'] = !state.notifyFileRemoval
-    data['notify_simulation_done'] = !state.notifySmulations
-  }
   
   const redirectUpdateDataProfile = () => {
     history.push({ 
@@ -45,9 +34,46 @@ const ProfileMainPage = () => {
   const handleChangeQRBindings = () => {
     
   }
+  function createUpdatedData (
+    name, 
+    last_name, 
+    phone, 
+    phone_prefix, 
+    institution, 
+    institution_role, 
+    profession,
+    birthday,
+    notify_removal,
+    notify_simulation_done) {
+
+    return {
+      name, 
+      last_name, 
+      phone, 
+      phone_prefix, 
+      institution, 
+      institution_role, 
+      profession,
+      birthday,
+      notify_removal,
+      notify_simulation_done
+    }
+  }
 
   const eventEmitter = () =>{
-    console.log(data)
+    const newUserData = createUpdatedData(
+
+      data.name, 
+      data.last_name, 
+      data.phone, 
+      data.phone_prefix, 
+      data.institution, 
+      data.institution_role, 
+      data.profession,
+      new Date(data.birthday),
+      data.notify_removal,
+      data.notify_simulation_done)
+    sendForm(newUserData)
   }
 
   return(
@@ -80,23 +106,20 @@ const ProfileMainPage = () => {
 
       <Grid container className={classes.root} spacing={2} direction='column' justify="flex-end" alignItems="flex-end">
         <Grid item className={classes.item}>
-          <Switch
-            value={state.notifySmulations}
-            handleChange={handleChange}
-            name='notifySmulations'
+          {data ? <ActiveComponent
+            isActive={data && data.notify_simulation_done}
+            user={data}
             label='Notify me when a simulation finishes'
-            labelPlacement='start'            
-          />          
+                        
+          />: <></>}          
         </Grid>
 
         <Grid item className={classes.item}>
-          <Switch
-            value={state.notifyFileRemoval}
-            handleChange={handleChange}
-            name='notifyFileRemoval'
+          { data? <ActiveComponent
+            isActive={data.notify_removal}
+            user={data}
             label='Notify me before file removal'
-            labelPlacement='start'
-          />          
+          />: <></>}          
         </Grid>
 
         <Grid item className={classes.item}>
