@@ -138,28 +138,29 @@ export const useCompartmentalModelActions = (dispatch) => {
 
   const storeCompartmentalFileUpload = (simulation,idSimulation,file)=>{
     registerLoaderCompartmentalSimulationFile(true)
-    updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
-      storeCompartmentalFileUploadService(idSimulation,file).then((responseFile)=>{
+    storeCompartmentalFileUploadService(idSimulation,file).then((responseFile)=>{
+      updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
         dispatch({
           type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
           payload: {fileStore:responseFile.data.data, simulationStore:responseSimulation.data.data}
         })
         registerLoaderCompartmentalSimulationFile(false)
-      }).catch((erroFile)=>{
-        registerLoaderCompartmentalSimulationFile(false)
-        if(erroFile.response) {          
-          const {response:{data}}=erroFile                    
-          dispatch({
-            type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
-            payload: data 
-          })
-        }else if(erroFile.request){
-          dispatch({
-            type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
-            payload:{detail:'The request was made but no response was received'}
-          })
-        }
       })
+        .catch((erroFile)=>{
+          registerLoaderCompartmentalSimulationFile(false)
+          if(erroFile.response) {          
+            const {response:{data}}=erroFile                    
+            dispatch({
+              type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
+              payload: data 
+            })
+          }else if(erroFile.request){
+            dispatch({
+              type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
+              payload:{detail:'The request was made but no response was received'}
+            })
+          }
+        })
     }).catch((error) => {
       registerLoaderCompartmentalSimulationFile(false)
       registerErrorCompartmentalSimulation(error)

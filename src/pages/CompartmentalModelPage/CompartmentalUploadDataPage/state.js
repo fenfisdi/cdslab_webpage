@@ -88,7 +88,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
   },[error])
 
 
-  const executeRequestUploadData = ({ formData }) => {
+  const executeRequestUploadData = async({ formData }) => {
     const { name,identifier,parameters_limits,state_variable_limits,parameter_type } = dataCurrentSimulation
     const { modelData: { identifier: model_id } } = predefinedModelSelected
     const { identifier:indentifierParam} = dataCurrentSimulation
@@ -101,19 +101,12 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
       }
     })
     formData.delete('stateVariable')
-    storeCompartmentalFileUpload({
+    await storeCompartmentalFileUpload({
       'name':name,
       'parameters_limits':parameters_limits,
       'state_variable_limits':state_variable_limits,
       'parameter_type':parameter_type
     },identifier,formData)
-    
-    updateCompartmentalSimulation({
-      'name':name,
-      'state_variable_limits': state_variable_limits,
-      'parameters_limits':parameters_limits,
-      'parameter_type':parameter_type
-    },identifier) 
     setPath([{name: 'compartmentalModels'},{name: 'reviewConfigurationInformation',parameters: `?simulation_identifier=${indentifierParam}&model_id=${model_id}`}])
   }
 
