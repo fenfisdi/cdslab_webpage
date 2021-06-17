@@ -15,3 +15,11 @@ export const updateUserStateService = async (managementForm) => {
   )
 }
 
+export const updateAdminsStateService = async (adminsForm) => {
+  return request(
+    `${process.env.REACT_APP_MANAGEMENT}/user/role`,
+    'POST',
+    adminsForm
+  )
+}
+

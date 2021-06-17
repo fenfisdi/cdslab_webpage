@@ -13,27 +13,35 @@ import { userManagementMessage } from './constants'
 const UserManagementMainPage = () => {
 
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { data, sendUsersForm } = userManagementMainPageState({ showSnack, setShowSnack })
+  const { data, sendUsersForm, sendAdminsForm } = userManagementMainPageState({ showSnack, setShowSnack })
 
 
   const isRoot = true
   
   const userAdmins = data && data.filter(itemData=>{
-    return itemData.role.includes('admin')
+    return itemData.is_enabled
   })
   const users = data && data.filter(itemData=>{
     return itemData.role.includes('user')
   })
 
-  function createData (email, is_enabled) {
+  function createUsersData (email, is_enabled) {
     return { email, is_enabled}
   }
-  
+
+  function createAdminsData (email, role) {
+    return { email, role}
+  }
+
   const handleClick=()=>{
     const usersUpdated = users.map((user)=>
-      createData(user.email, user.is_enabled)
+      createUsersData(user.email, user.is_enabled)
+    )
+    const adminsUpdated = userAdmins.map((user)=>
+      createAdminsData(user.email, user.role)
     )
     sendUsersForm(usersUpdated)
+    sendAdminsForm(adminsUpdated)
   }
   const tab = [
     {
