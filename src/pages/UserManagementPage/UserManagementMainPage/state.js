@@ -7,13 +7,13 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   const {
     state:{
       userManagement: { 
-        userListRecovery, updateUserStatus
+        userListRecovery
       }
     }, 
     dispatch
   } = useStore()
 
-  const { getUsersListData, updateUserEnableState } = managementActions(dispatch)
+  const { getUsersListData, updateUserEnableState, updateAdminsState } = managementActions(dispatch)
   
   useEffect(() => {
     
@@ -39,20 +39,20 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
     }
   },[userListRecovery.error])
 
-
-  useEffect(()=>{
-    console.log(updateUserStatus.data)
-
-  },[updateUserStatus.data])
-
-  const sendUsersForm = (object) => {
+  const sendUsersForm = (usersState) => {
     
-    updateUserEnableState(object)
+    updateUserEnableState(usersState)
+  }
+
+  const sendAdminsForm = (adminsState) =>{
+
+    updateAdminsState(adminsState)
   }
 
   return {
     getUsersListData,
     data:userListRecovery.data,
-    sendUsersForm
+    sendUsersForm,
+    sendAdminsForm
   }
 }

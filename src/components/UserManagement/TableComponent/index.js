@@ -25,7 +25,8 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
   const filterRows = rows?.filter(row=>{
     return row.name.includes(fil)
   })
-
+  
+  console.log(rows)
   const functionsTable = useTableComponentState()
   const {
     getComparator,
@@ -68,7 +69,11 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
               {filterRows && stableSort(filterRows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  
+
+                  const roleAdmin=()=>{
+                    return row.role=='admin'
+                  }
+
                   return (
                     <TableRow
                       hover
@@ -82,7 +87,11 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left"><ActiveComponent isActive={row.is_enabled} list={rows} user={row}/></TableCell>
+                      <TableCell align="left">{
+                        setAdmin ? 
+                          <ActiveComponent isActive={roleAdmin()} role={row.role} user={row}/>
+                          :<ActiveComponent isActive={row.is_enabled} user={row}/>}
+                      </TableCell>
                     </TableRow>
                   )
                 })}

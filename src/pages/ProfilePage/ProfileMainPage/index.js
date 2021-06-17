@@ -1,43 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useHistory } from 'react-router'
 import { Grid } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
-import Switch from '../../../components/ui/Switch'
+import { ActiveComponent } from '../../../components/ProfilePage/SwitchComponent'
 import {ContainerTitle, ProfileContainer, useProfilePageStyles, ContainerButtonCard } from './styles'
 import TitleIcon from '../../../components/layouts/TitleIcon'
 import SvgProfiles from '../../../assets/icons/SvgProfiles'
 import ButtonCard from '../../../components/ButtonCard'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
-
-export const ButtonCommon = ({ functionButton, classButton, name }) => (
-  <Button
-    onClick={functionButton}
-    className={classButton}
-  >
-    {name}
-  </Button>
-)
+import {userProfileMainPageState} from './state'
+import { useLocation } from 'react-router-dom'
 
 const ProfileMainPage = () => {
 
   const classes = useProfilePageStyles()
-  const [state, setState] = React.useState({
-    notifySmulations: true,
-    notifyFileRemoval: true,
-  })
-
+  const location = useLocation()
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const { data, sendForm, sendChangePassword }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-  }
-
+  
+  const get_password = location.state && location.state.value
+  console.log(data)
   const redirectUpdateDataProfile = () => {
     history.push({ 
-      pathname: '/profile/UpdateDataProfile'
+      pathname: '/profile/UpdateDataProfile',
+      state: {detail: data}
     })
   }
-
+  
   const redirectChangePassword = () => {
     history.push({ 
       pathname: '/profile/ChangePassword',
@@ -45,9 +34,95 @@ const ProfileMainPage = () => {
   }
 
   const handleChangeQRBindings = () => {
+    history.push({ 
+      pathname: '/profile/UpdateQRlink',
+      state: {detail: data.url}
+    })
+  }
+  
+  function createUpdatePasswordData(
+    email,
+    password,
+    verify_password
+  ){
+    return{
+      email,
+      password,
+      verify_password
+    }
+  }
+
+
+  function createUpdatedData (
+    name, 
+    last_name, 
+    phone, 
+    phone_prefix, 
+    institution, 
+    institution_role, 
+    profession,
+  ) {
+
+    return {
+      name, 
+      last_name, 
+      phone, 
+      phone_prefix, 
+      institution, 
+      institution_role, 
+      profession,
+    }
+  }
+
+  function createUpdateData2(
+    birthday,
+    notify_removal,
+    notify_simulation_done
+  ){
+
+    return {
+      birthday,
+      notify_removal,
+      notify_simulation_done
+    }
+  }
+
+  const eventEmitter = () =>{
+    const newUserData = createUpdatedData(
+
+      data.name, 
+      data.last_name, 
+      data.phone, 
+      data.phone_prefix, 
+      data.institution, 
+      data.institution_role, 
+      data.profession)
+      
+    
+    const UserData2 = createUpdateData2(
+      new Date(data.birthday),
+      data.notify_removal,
+      data.notify_simulation_done
+    )
+
+    const sendedData =  Object.assign(newUserData, UserData2)
+    
+    const newPassword = get_password ? createUpdatePasswordData(
+      data.email,
+      get_password.password,
+      get_password.password
+    ):''
+    sendForm(sendedData)
+    if(newPassword==''){
+      console.info('Password no sended')
+    }
+    else{
+      sendChangePassword(newPassword)
+    }
     
   }
 
+  
   return(
     <ProfileContainer>
       
@@ -78,29 +153,26 @@ const ProfileMainPage = () => {
 
       <Grid container className={classes.root} spacing={2} direction='column' justify="flex-end" alignItems="flex-end">
         <Grid item className={classes.item}>
-          <Switch
-            value={state.notifySmulations}
-            handleChange={handleChange}
-            name='notifySmulations'
+          {data ? <ActiveComponent
+            isActive={data && data.notify_simulation_done}
+            user={data}
             label='Notify me when a simulation finishes'
-            labelPlacement='start'            
-          />          
+                        
+          />: <></>}          
         </Grid>
 
         <Grid item className={classes.item}>
-          <Switch
-            value={state.notifyFileRemoval}
-            handleChange={handleChange}
-            name='notifyFileRemoval'
+          { data? <ActiveComponent
+            isActive={data.notify_removal}
+            user={data}
             label='Notify me before file removal'
-            labelPlacement='start'
-          />          
+          />: <></>}          
         </Grid>
 
         <Grid item className={classes.item}>
           <CompartmentalButton
             disabled={false }
-            onClick={()=>{}}
+            onClick={eventEmitter}
             justify="flex-end"
             alignItems="center"
             text={'Save changes'}
