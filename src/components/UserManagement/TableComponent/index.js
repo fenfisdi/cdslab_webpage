@@ -75,7 +75,7 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
                       return true
                     }
                     else{
-                      false
+                      return false
                     }
                   }
 
