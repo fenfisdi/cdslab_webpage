@@ -38,13 +38,13 @@ const UpdateProfileForm = ({  loading }) => {
   
 
   const handleClick = () => {
-    userData['name'] = name.value,
-    userData['last_name'] = lastName.value,
-    userData['birthday']= dateBirth.value,
-    userData['institution'] = institution.value,
-    userData['institution_role'] = institutionAffiliation.value,
-    userData['profession'] = profession.value,
-    userData['phone'] = phoneNumber.value,
+    userData['name'] = name.value
+    userData['last_name'] = lastName.value
+    userData['birthday']= dateBirth.value
+    userData['institution'] = institution.value
+    userData['institution_role'] = institutionAffiliation.value
+    userData['profession'] = profession.value
+    userData['phone'] = phoneNumber.value
     userData['phone_prefix'] = `+${phonePrefix}`
     history.push({
       pathname: '/profile'

@@ -18,7 +18,7 @@ const ProfileMainPage = () => {
   const { data, sendForm, sendChangePassword }= userProfileMainPageState({ showSnack, setShowSnack })
   const history = useHistory()
   
-  const password = location.state && location.state.value
+  const get_password = location.state && location.state.value
   console.log(data)
   const redirectUpdateDataProfile = () => {
     history.push({ 
@@ -61,9 +61,7 @@ const ProfileMainPage = () => {
     institution, 
     institution_role, 
     profession,
-    birthday,
-    notify_removal,
-    notify_simulation_done) {
+  ) {
 
     return {
       name, 
@@ -73,6 +71,16 @@ const ProfileMainPage = () => {
       institution, 
       institution_role, 
       profession,
+    }
+  }
+
+  function createUpdateData2(
+    birthday,
+    notify_removal,
+    notify_simulation_done
+  ){
+
+    return {
       birthday,
       notify_removal,
       notify_simulation_done
@@ -88,19 +96,30 @@ const ProfileMainPage = () => {
       data.phone_prefix, 
       data.institution, 
       data.institution_role, 
-      data.profession,
+      data.profession)
+      
+    
+    const UserData2 = createUpdateData2(
       new Date(data.birthday),
       data.notify_removal,
-      data.notify_simulation_done)
-    
-    const newPassword = createUpdatePasswordData(
-      data.email,
-      password.password,
-      password.password
+      data.notify_simulation_done
     )
 
-    sendForm(newUserData)
-    sendChangePassword(newPassword)
+    const sendedData =  Object.assign(newUserData, UserData2)
+    
+    const newPassword = get_password ? createUpdatePasswordData(
+      data.email,
+      get_password.password,
+      get_password.password
+    ):''
+    sendForm(sendedData)
+    if(newPassword==''){
+      console.info('Password no sended')
+    }
+    else{
+      sendChangePassword(newPassword)
+    }
+    
   }
 
   
