@@ -3,7 +3,6 @@ import { Grid, Typography } from '@material-ui/core'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS } from '../../../constants/helpInformation'
 import SnackbarComponent from '@components/ui/Snackbars'
-import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { CompartmentalComparmentalInsPageSection, ContainerChooseDate, Column, Error, ContianerTable, ContianerButton } from './styles'
@@ -70,12 +69,11 @@ const ComparmentalInsPage = () => {
     }   
   }
 
-  const diffDays = (initialDate,finalDate)=>{
-    const date1 = new Date(initialDate)
-    const date2 = new Date(finalDate)
+  const diffDays = (dateInit,dateFinit)=>{
+    const date1 = new Date(dateInit)
+    const date2 = new Date(dateFinit)
     const diffTime = Math.abs(date2 - date1)
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) 
-    return diffDays
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   }
 
   const onChangeAutocomplete =(_,value) => {              
@@ -97,11 +95,10 @@ const ComparmentalInsPage = () => {
     const findArray = option.filter(a =>a.toLowerCase().includes(inputValue.toLowerCase()))
     if(findArray.length>0){                    
       setShowMessage(false)
-      return findArray
     }else{                    
-      setShowMessage(true)
-      return findArray
-    }                                                    
+      setShowMessage(true)    
+    }
+    return findArray                                                    
   }
 
 
@@ -206,11 +203,6 @@ const ComparmentalInsPage = () => {
         />        
       </Grid>}
 
-      {false && <LoaderComponent
-        width={50}
-        height={50}
-        marginTop={5}
-      />}
 
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}

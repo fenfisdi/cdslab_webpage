@@ -60,11 +60,11 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       findCompartmentalSimulation(params.simulation_identifier)
     }
 
-    if(insVariables.data == null && insVariables.error!=true){
+    if(insVariables.data == null && !insVariables.error){
       getInsParametersVariables()
     }
 
-    if(insRegions.data == null && insRegions.error!=true){
+    if(insRegions.data == null && !insRegions.error){
       getInsParametersRegions()
     }
   },[dataCurrentSimulation,predefinedModelSelected,insVariables.data,insRegions.data])

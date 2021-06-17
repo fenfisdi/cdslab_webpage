@@ -247,6 +247,7 @@ export const useCompartmentalModelActions = (dispatch) => {
   const updateCompartmentalSimulation = (simulation,idSimulation, callback=null) => {
     updateCompartmentalSimulationService(simulation,idSimulation).then((response) => {
       registerCompartmentalSimulation(response.data.data)
+      console.log('holaaaaaaaaaaaaaa')
       if(callback){
         callback()
       }
