@@ -100,7 +100,7 @@ const CompartmentalChooseDatePage = () => {
       </CompartmentalChooseDateDate>}
 
       <CompartmentalButton
-        disabled={initialDate == '' || finalDate == ''}
+        disabled={initialDate == null  || finalDate == null}
         onClick={() => {
           handleClickButton({ initialDate, finalDate })
         }}
