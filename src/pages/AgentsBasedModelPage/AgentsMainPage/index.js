@@ -6,6 +6,7 @@ import { OPTIONS_AGENTS_MAIN } from '../../../constants/agents'
 import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { AgentslMainPageContainer,AgentsMainPageCards, useAgentsMainPageStyles } from './styles'
 
+
 const AgentsMainPage = () => {
   const classes = useAgentsMainPageStyles()
   const history = useHistory()
