@@ -71,12 +71,7 @@ export const ShowTableComponent = ({setAdmin, fil, rows }) => {
                 .map((row, index) => {
 
                   const roleAdmin=()=>{
-                    if(row.role=='admin'){
-                      return true
-                    }
-                    else{
-                      return false
-                    }
+                    return row.role=='admin'
                   }
 
                   return (
