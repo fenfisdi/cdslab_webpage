@@ -94,7 +94,7 @@ const CompartmentalChooseDatePage = () => {
             minDate={initialDate != null && addDays(initialDate, 3)}
           />
           {showError && (
-            <Error>The final date must be greater than the initial date.</Error>
+            <Error>The final date must be greater than the initial date</Error>
           )}
         </Column>
       </CompartmentalChooseDateDate>}
