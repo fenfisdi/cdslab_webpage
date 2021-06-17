@@ -19,7 +19,7 @@ const ProfileMainPage = () => {
   const history = useHistory()
   
   const password = location.state && location.state.value
-  
+  console.log(data)
   const redirectUpdateDataProfile = () => {
     history.push({ 
       pathname: '/profile/UpdateDataProfile',
@@ -34,7 +34,10 @@ const ProfileMainPage = () => {
   }
 
   const handleChangeQRBindings = () => {
-    
+    history.push({ 
+      pathname: '/profile/UpdateQRlink',
+      state: {detail: data.url}
+    })
   }
   
   function createUpdatePasswordData(
