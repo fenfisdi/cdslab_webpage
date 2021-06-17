@@ -20,7 +20,7 @@ import DatePicker from '../../../components/ui/DatePicker'
 const CompartmentalChooseDatePage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { executeRequest,currentSimulation } = useCompartmentalChooseDatePageState({showSnack,setShowSnack})
-  const [initialDate, setInitialDate] = useState(currentSimulation.interval_date.start || null)
+  const [initialDate, setInitialDate] = useState(currentSimulation?.interval_date?.start || null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
     
@@ -74,7 +74,7 @@ const CompartmentalChooseDatePage = () => {
             lenguaje="es"
             id='initial'
             placeholder="dd/mm/yyyy"   
-            disabled={currentSimulation.interval_date.start ? true : false}                                 
+            disabled={currentSimulation?.interval_date?.start ? true : false}                                 
           />          
         </Column>
 

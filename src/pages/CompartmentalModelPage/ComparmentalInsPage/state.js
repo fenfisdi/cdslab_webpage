@@ -29,7 +29,7 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     postInformationIns, 
     findCompartmentalSimulation,
     findPredefinedModel,
-    updateSimulationDate } = useCompartmentalModelActions(dispatch)
+    updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
 
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
@@ -103,6 +103,16 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
 
   },[stateVariable.value,regionChoose,initialDate,finalDate])
   /********************************************/
+
+
+  const nextStepRedirect =()=>{
+    const {modelData:{identifier:model_id}}=predefinedModelSelected
+    const { identifier} = dataCurrentSimulation
+    history.push({ 
+      pathname: '/compartmentalModels/chooseDate',
+      search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
+    })
+  }
   
   const handleExecuteIns = ()=>{
     getInformationIns({
@@ -133,12 +143,12 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     }).then( (response)=>{
       if(!isEmpty(response.data.data)){
         const {  name,identifier,state_variable_limits,parameter_type,parameters_limits } = dataCurrentSimulation
-        updateSimulationDate({
+        updateCompartmentalSimulation({
           'name':name,
           'parameters_limits':parameters_limits,
           'state_variable_limits':state_variable_limits,
           'parameter_type':parameter_type
-        },identifier)
+        },identifier,nextStepRedirect)
       }
     }) 
     

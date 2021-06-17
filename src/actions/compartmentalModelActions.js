@@ -244,9 +244,12 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
-  const updateCompartmentalSimulation = (simulation,idSimulation) => {
+  const updateCompartmentalSimulation = (simulation,idSimulation, callback=null) => {
     updateCompartmentalSimulationService(simulation,idSimulation).then((response) => {
       registerCompartmentalSimulation(response.data.data)
+      if(callback){
+        callback()
+      }
     }).catch((error) => {
       registerErrorCompartmentalSimulation(error)
     })
