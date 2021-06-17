@@ -8,12 +8,11 @@ import { formatYmd } from '../../../utils/common'
 
 export const useComparmentalInsPageState = ({stateVariable}) => {
   const history = useHistory()
-  const [isSend, setIsSend] = useState(false)
   const {
     state: {      
       compartmentalModel: {
         predefinedModelSelected,
-        currentSimulation:{ data: dataCurrentSimulation, error },
+        currentSimulation:{ data: dataCurrentSimulation },
         simulationInsData:{
           insVariables,
           insRegions          
@@ -30,7 +29,7 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     postInformationIns, 
     findCompartmentalSimulation,
     findPredefinedModel,
-    updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+    updateSimulationDate } = useCompartmentalModelActions(dispatch)
 
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
@@ -94,16 +93,6 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
     }
   },[showError])
 
-  useEffect(()=>{
-    if( isSend && dataCurrentSimulation!= null && !isEmpty(predefinedModelSelected) && error!=true){      
-      const {modelData:{identifier:model_id}}=predefinedModelSelected
-      const { identifier} = dataCurrentSimulation
-      history.push({ 
-        pathname: '/compartmentalModels/chooseDate',
-        search:  `?simulation_identifier=${identifier}&model_id=${model_id}`,
-      })
-    }
-  },[isSend,dataCurrentSimulation])
 
   useEffect(()=>{
     if(stateVariable.value && regionChoose!=null && initialDate!=null && finalDate!=null){
@@ -133,6 +122,7 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
 
 
   const handleExecuteContinue = ()=>{
+    
     postInformationIns({
       variable:stateVariable.value,
       regionName:regionChoose.name || '',
@@ -140,22 +130,18 @@ export const useComparmentalInsPageState = ({stateVariable}) => {
       finalDate:formatYmd(finalDate),
       identifier:dataCurrentSimulation.identifier || '',
       predefinedModelSelected
-    }).then((response)=>{
-      console.log(response.data.data)
+    }).then( (response)=>{
       if(!isEmpty(response.data.data)){
         const {  name,identifier,state_variable_limits,parameter_type,parameters_limits } = dataCurrentSimulation
-        updateCompartmentalSimulation({
+        updateSimulationDate({
           'name':name,
-          'parameters_limits': parameters_limits,
+          'parameters_limits':parameters_limits,
           'state_variable_limits':state_variable_limits,
           'parameter_type':parameter_type
-        },identifier) 
-        setIsSend(true)
+        },identifier)
       }
-      /*    
-      */
-    })
-    /**/
+    }) 
+    
   }
 
   return {

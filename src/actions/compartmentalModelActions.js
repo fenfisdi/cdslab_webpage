@@ -252,6 +252,10 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+  const updateSimulationDate =(simulation,idSimulation)=>{
+    return updateCompartmentalSimulationService(simulation,idSimulation)
+  }
+
   
   const executeSimulation =(idSimulation)=>{
     executeSimulationService(idSimulation).then((response)=>{      
@@ -360,7 +364,8 @@ export const useCompartmentalModelActions = (dispatch) => {
     getInsParametersRegions,
     getInsParametersDates,
     getInformationIns,
-    postInformationIns }
+    postInformationIns,
+    updateSimulationDate }
 
 
 }

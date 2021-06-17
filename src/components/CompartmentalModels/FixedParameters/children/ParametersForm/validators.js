@@ -25,7 +25,7 @@ export const VALIDATORS_PARAMETERS_FORM = {
   ]
 }
 
-export const parametersFormFieldsValidators =({minValue, maxValue})=>{  
+export const parametersFormFieldsValidators =()=>{  
   return [
     
   ]
