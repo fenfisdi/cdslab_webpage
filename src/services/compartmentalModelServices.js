@@ -67,3 +67,43 @@ export const executeSimulationService = async (idSimulation) => {
     'POST'
   )
 }
+
+export const getInsParametersVariablesService = async () => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_MODEL}/ins/variables`,
+    'GET')
+}
+
+export const getInsParametersRegionsService = async () => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/regions`,
+    'GET')
+}
+
+export const getInsParametersDatesService = async (hash) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/dates?file_id=${hash}`,
+    'GET')
+}
+
+export const getInformationInsService = async (hash,initialDate,finalDate) => {
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/Data?file_id=${hash}&init_date=${initialDate}&final_date=${finalDate}`,
+    'GET')
+  
+}
+
+export const postInformationInsService = async (initialDate,finalDate,identifier,regionName,variable)=>{
+  
+  return request(
+    `${process.env.REACT_APP_COMPARTMENTAL_FILE}/scrapping/simulation/${identifier}`,
+    'POST',{
+      uuid:identifier,
+      init_date:initialDate,
+      final_date:finalDate,
+      region_name:regionName,
+      variable:variable
+    }) 
+ 
+
+}
