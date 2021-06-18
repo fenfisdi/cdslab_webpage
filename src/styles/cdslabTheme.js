@@ -17,6 +17,12 @@ let theme = createMuiTheme({
       card: '#E0F3FA',
       cardFont: '#006064',
       cardSelect: '#E5E5E5'
+    },
+    grays: {
+      light: '#f5f6f7',
+      main: '#cfd8dc',
+      dark: '#333333',
+      contrastText: '#fff'
     }
   },
 
