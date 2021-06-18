@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import SnackbarComponent from '@components/ui/Snackbars'
 import {
@@ -16,8 +16,11 @@ import LoaderComponent from '../../../components/ui/Loader'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import DatePicker from '../../../components/ui/DatePicker'
+import {languageContext} from '../../../config/languageContext'
 
 const CompartmentalChooseDatePage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { executeRequest,currentSimulation } = useCompartmentalChooseDatePageState({showSnack,setShowSnack})
   const [initialDate, setInitialDate] = useState(currentSimulation?.interval_date?.start || null)
@@ -56,7 +59,7 @@ const CompartmentalChooseDatePage = () => {
         alignItems="flex-start"
       >
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS)} />
       </Grid>
 
       <SubtitleCommon text='Choose simulation dates' /> 
