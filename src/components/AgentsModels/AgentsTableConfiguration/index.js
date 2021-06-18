@@ -17,19 +17,14 @@ import { Button } from '../../ui/Buttons'
 
 const AgentsTableConfiguration = ({
   initialItems,
-  columns,
-  settingsComponent,
-  distributionType
+  columns
 }) => {
   const {
     items,
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
-    handleSettings,
-    openSettings,
-    handleCloseSettings,
-    currentIndex
+    handleSettings
   } = useAgentsTableConfigurationState({
     initialItems,
     columns
@@ -89,14 +84,7 @@ const AgentsTableConfiguration = ({
 
       <Button onClick={handleAddItem}>
         Add
-      </Button>
-      {/* <ModalRoot
-        distributionType={distributionType}
-        open={openSettings}
-        handleClose={handleCloseSettings}
-        children={settingsComponent}
-        currentItem={items[currentIndex]}
-      /> */}
+      </Button>      
     </>
   )
 }
