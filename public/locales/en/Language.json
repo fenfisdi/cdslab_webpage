@@ -61,5 +61,14 @@
     "title": "Simulations",
     "CompartmentalButton": "Compartmental model",
     "AgentsButton": "Agent based models"
+  },
+  "information": {
+    "title": "Help"
+  },
+  "helpInformationCompartmental": {
+    "newSimulation": "Compartmental models are useful dynamical models to describe the transmission of diseases and are very common in epidemiology. They divide the population into compartments or subgroups which correspond to state variables that indicate the number of individuals who are in a specific stage of the disease. According to the number of compartments, the name of the predefined model will change. For example, the SIR model has 3 compartments (Susceptible, Infected, Recovered) while the SEIRVmodel has 5 compartments (Susceptible, Exposed, Infected, Recovered, Virus). For more information visit https://fenfisdi.github.io/cdslab/compartimentales.html",
+    "chooseSimulation": "The user can choose between simulations with fixed parameters, and simulations with adjusted or optimized parameters, where the user designs the model according to available data and information. Note that it is possible to have some fixed parameters and others adjusted, since the user can choose which parameters will be adjusted to the data in use and which others will have a numerical value set by the user.",
+    "fixedParameters": "In this section, the user should assign a numerical value to each parameter in the model. These parameters should reflect the characteristics of disease as well as the scenario to be modeled. For further information use the help buttons in each parameter or go to https://fenfisdi.github.io/cdslab/compartimentales.html",
+    "stateVariables": "Assign to each population subgroup a numerical value corresponding to the number of individuals, and also to virus concentration in the environment in the SEIRV model, at the initial time of the simulation. Initial values represent moment 0 of the population in each of the compartments. For further information about each compartment (variables), go to the help buttons for every name or go to https://fenfisdi.github.io/cdslab/compartimentales.html"
   }
 }

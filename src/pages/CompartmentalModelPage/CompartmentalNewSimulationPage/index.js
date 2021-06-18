@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import PredefinedModelsForm from '../../../components/CompartmentalModels/PredefinedModelsForm'
 import SnackbarComponent from '@components/ui/Snackbars'
@@ -8,9 +8,11 @@ import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import LoaderComponent from '../../../components/ui/Loader'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import { languageContext } from '../../../config/languageContext'
 
 const CompartmentalNewSimulationPage = ({ pathParent }) => {
 
+  const {t} = useContext(languageContext)
   const history = useHistory()
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const { predefinedModelsList, storePredefinedModelSelected } = useCompartmentalNewSimulationPageState({ showSnack, setShowSnack })
@@ -30,7 +32,7 @@ const CompartmentalNewSimulationPage = ({ pathParent }) => {
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
+        <Grid><SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_NEW_SIMULATIONS)} /></Grid>
       </Grid>
 
       {predefinedModelsList && <PredefinedModelsForm

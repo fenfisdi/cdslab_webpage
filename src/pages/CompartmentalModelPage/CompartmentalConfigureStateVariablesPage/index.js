@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import SnackbarComponent from '@components/ui/Snackbars'
 import FixedParametersFormStateVariables from '../../../components/CompartmentalModels/FixedParameters/children/FixedParametersFormStateVariables'
@@ -10,8 +10,11 @@ import { CompartmentalConfigureStateVariablesSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import ConfigureStateVariablesHeader from './children'
+import { languageContext } from '../../../config/languageContext'
 
 const CompartmentalConfigureStateVariablesPage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const {
     currentSimulation,
@@ -30,7 +33,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS)} />
       </Grid>
 
       <SubtitleCommon text='Configure initial values of the state variables' />
