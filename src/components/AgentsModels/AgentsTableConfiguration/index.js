@@ -8,12 +8,10 @@ import {
   CountCell,
   CountTitle
 } from './styles'
-/* import { Button } from "../ui/Buttons" */
 import { TextField } from '@material-ui/core'
 import ActionsZone from './actionZone'
 import { useAgentsTableConfigurationState } from './state'
 import { Button } from '../../ui/Buttons'
-/* import ModalRoot from "./ModalRoot" */
 
 const AgentsTableConfiguration = ({
   initialItems,
