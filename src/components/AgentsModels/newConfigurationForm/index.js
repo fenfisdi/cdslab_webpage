@@ -1,7 +1,9 @@
-import { Input,Button,Grid } from '@material-ui/core'
-import React, {useState } from 'react'
+import { Button,Grid } from '@material-ui/core'
+import React, {useEffect, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import theme from '../../../styles/cdslabTheme'
+import DatePicker from '../../ui/DatePicker'
+import { Input } from '../../ui/Input'
 import { SelectComponent } from '../../ui/Select'
 import { useNewConfigurationForm } from './state'
 import { 
@@ -12,41 +14,88 @@ import {
   AgentsModelContainerInputsForm
 } from './styles'
 
-export const NewConfigurationForm = ({ eventEmitter }) => {
+export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,listConfigurationTime }) => {
 
   const classes = useNewConfigurationStyles(theme)
   const fieldsData = useNewConfigurationForm()
-  const [isValid] = useState(false)
+  const [isValid, setIsvalid] = useState(false)
   const match = useRouteMatch()
   const history = useHistory()
-  
+  const [initialDate, setInitialDate] = useState(null)
+  const [finalDate, setFinalDate] = useState(null)
+  const [showError, setShowError] = useState(false)
+
   const {
     nameConfiguration,
-    simulationInitialDate,
-    simulationFinalDate,
     iterationTime,
     populationSize,
     boxHorizontalSize,
     boxVerticalSize,
     timeUnits,
-    optionsTimeUnits,
     distanceUnits,
-    optionsDistanceUnits
   } = fieldsData
+
+  useEffect(() => {
+    let notIsValid = false
+    
+    for (var key in fieldsData) {
+      if(fieldsData[key].errors == undefined ||  !fieldsData[key].errors ){
+        fieldsData[key].errors = []
+      }
+      if(
+        (fieldsData[key].type != 'date') &&
+        (fieldsData[key] && typeof fieldsData[key].value !='object' && !fieldsData[key].value.length > 0) ||
+        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)
+        
+      ){
+        notIsValid = true
+      }
+      if(fieldsData[key].type == 'date'){
+        if(initialDate == null){
+          notIsValid = true
+        }
+        if(finalDate == null){
+          notIsValid = true
+        }
+      }
+    }
+    
+    setIsvalid(notIsValid)
+  }, [fieldsData])
 
   const handleClick = () => {
     history.push(`${match.path}/agentsAgeGroups`)
     eventEmitter({
-      nameConfiguration:nameConfiguration.value,
-      simulationInitialDate:simulationInitialDate.value,
-      simulationFinalDate:simulationFinalDate.value,
-      iterationName:iterationTime.value,
-      populationSize:populationSize.value,
-      boxHorizontalSize:boxHorizontalSize.value,
-      boxVerticalSize:boxVerticalSize.value,
-      timeUnits:timeUnits.value,
-      distanceUnits:distanceUnits.value,
+      name:nameConfiguration.value,
+      interval_date: {
+        start : initialDate,
+        end : finalDate
+      },
+      iteration_number:iterationTime.value,
+      population_number:populationSize.value,
+      box_size: {
+        horizontal : boxHorizontalSize.value,
+        vertical : boxVerticalSize.value
+      },
+      iteration_time_units:timeUnits.value,
+      distance_units:distanceUnits.value,
     })
+  }
+
+  const addDays = (date, days) => {
+    var result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return result
+  }
+
+  const handleDate = (dateValue, key) => {
+    setShowError(false)
+    if (key == 'initial') {
+      setInitialDate(dateValue)
+      setFinalDate(null)
+    } else if (key == 'final') {
+      setFinalDate(dateValue)
+    }
   }
 
   return (
@@ -60,36 +109,42 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
             fullWidth
             variant="outlined"
             margin="normal"
-            autoComplete="off"
+            autoComplete="nameConfiguration"
             {...nameConfiguration}
           />
         </AgentNameConfigurationFormInput>
         <AgentsModelContainerInputsForm>
           <AgentsModelCenterInputsForm>
             <strong>Simulation initial Date</strong>
-            <Input
+            <DatePicker
+              autoOk
               disabled={false}
+              onChange={e => handleDate(e, 'initial')}
+              value={initialDate}
               required
               fullWidth
               variant="outlined"
               margin="normal"
-              autoComplete="off"
-              placeholder="KeyWord..."
-              {...simulationInitialDate}
-            />
+              lenguaje="es"
+              id='initial'                            
+            />    
           </AgentsModelCenterInputsForm>
           <AgentsModelCenterInputsForm>
             <strong>Simulation Final Date</strong>
-            <Input
+            <DatePicker
+              autoOk
               disabled={false}
+              onChange={e => handleDate(e, 'final')}
+              value={finalDate}
               required
               fullWidth
               variant="outlined"
               margin="normal"
-              autoComplete="off"
-              placeholder="KeyWord..."
-              {...simulationFinalDate}
-            />
+              lenguaje="es"
+              id='final'
+              error={showError}      
+              minDate={initialDate != null && addDays(initialDate, 3)}                      
+            />   
           </AgentsModelCenterInputsForm>
         </AgentsModelContainerInputsForm>
         <AgentsModelContainerInputsForm>
@@ -105,7 +160,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
                   fullWidth
                   variant="outlined"
                   margin="normal"
-                  autoComplete="off"
+                  autoComplete="iterationTime"
                   {...iterationTime}
                 />
               </Grid>
@@ -113,9 +168,10 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
           </AgentsModelCenterInputsForm>
           <AgentsModelCenterInputsForm>
             <SelectComponent
-              title="Model Type"
+              required
+              title="Time Units"
               {...timeUnits}
-              options={optionsTimeUnits}
+              options={listConfigurationTime}
             />
           </AgentsModelCenterInputsForm>
         </AgentsModelContainerInputsForm>
@@ -132,7 +188,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
                   fullWidth
                   variant="outlined"
                   margin="normal"
-                  autoComplete="off"
+                  autoComplete="populationSize"
                   {...populationSize}
                 />
               </Grid>
@@ -152,7 +208,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
                   fullWidth
                   variant="outlined"
                   margin="normal"
-                  autoComplete="off"
+                  autoComplete="boxHorizontalSize"
                   {...boxHorizontalSize}
                 />
               </Grid>
@@ -172,7 +228,8 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
                   fullWidth
                   variant="outlined"
                   margin="normal"
-                  autoComplete="off"
+                  place
+                  autoComplete="boxVerticalSize"
                   {...boxVerticalSize}
                 />
               </Grid>
@@ -180,10 +237,11 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
           </AgentsModelCenterInputsForm>
           <AgentsModelCenterInputsForm>
             <SelectComponent
-              title="Parameter Type"
+              required
+              title="Distance Units"
               className={classes.selectComponent}
               {...distanceUnits}
-              options= {optionsDistanceUnits}
+              options= {listConfigurationDistance}
             />
           </AgentsModelCenterInputsForm>
         </AgentsModelContainerInputsForm>
@@ -194,7 +252,7 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
           variant="contained"
           color="primary"
           className={classes.buttonSearch}
-          disabled={!isValid ? false : true}
+          disabled={isValid}
         >
             Continue
         </Button>

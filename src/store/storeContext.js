@@ -10,6 +10,7 @@ import { qrAccountRecoveryReducer, initialState as qrAccountRecoveryInitialState
 import { compartmentalModelReducer, initialState as compartmentalModelInitialState  } from './reducers/compartmentalModelReducer'
 import { mySimulationReducer , initialState as mySimulationsInitialState } from './reducers/mySimulationsReducer'
 import { sysManagementReducer, initialState as sysManagementReducerInitialState } from './reducers/sysManagementReducer'
+import { configurationReducer, initialState as configurationInitialState } from './reducers/configurationReducer'
 
 export const StoreContext = createContext()
 
@@ -25,7 +26,8 @@ export const StoreProvider = ({ children }) => {
       qrAccountRecovery:qrAccountRecoveryReducer,
       compartmentalModel:compartmentalModelReducer,
       userManagement: userManagementReducer,
-      sysManagementReducer: sysManagementReducer
+      sysManagementReducer: sysManagementReducer,
+      configuration : configurationReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -36,7 +38,8 @@ export const StoreProvider = ({ children }) => {
       qrAccountRecoveryInitialState,
       compartmentalModelInitialState,
       userManagementInitialState,
-      sysManagementReducerInitialState)
+      sysManagementReducerInitialState,
+      configurationInitialState)
   )
   const value = { state, dispatch }
 
