@@ -11,6 +11,7 @@ import { compartmentalModelReducer, initialState as compartmentalModelInitialSta
 import { mySimulationReducer , initialState as mySimulationsInitialState } from './reducers/mySimulationsReducer'
 import { sysManagementReducer, initialState as sysManagementReducerInitialState } from './reducers/sysManagementReducer'
 import { configurationReducer, initialState as configurationInitialState } from './reducers/configurationReducer'
+import { userProfileReducer, initialState as userProfileReducerInitialState } from './reducers/userProfileReducer'
 
 export const StoreContext = createContext()
 
@@ -27,7 +28,8 @@ export const StoreProvider = ({ children }) => {
       compartmentalModel:compartmentalModelReducer,
       userManagement: userManagementReducer,
       sysManagementReducer: sysManagementReducer,
-      configuration : configurationReducer
+      configuration : configurationReducer,
+      userProfile: userProfileReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -39,7 +41,8 @@ export const StoreProvider = ({ children }) => {
       compartmentalModelInitialState,
       userManagementInitialState,
       sysManagementReducerInitialState,
-      configurationInitialState)
+      configurationInitialState,
+      userProfileReducerInitialState)
   )
   const value = { state, dispatch }
 

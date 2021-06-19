@@ -1,14 +1,18 @@
-import { useHistory, useRouteMatch } from 'react-router'
+import { useHistory } from 'react-router'
 
 export const useAgentsAgeGroups = () => {
   const history = useHistory()
-  const match = useRouteMatch()
-
+  
+  
   const redirectToMobilityGroupsPage = () => {
-    history.push(`${match.path}/agentsMobilityGroups`)
+    history.push({
+      pathname: 'agentsMobilityGroups'
+    })
   }
 
-  return [
+  return {
     redirectToMobilityGroupsPage
-  ]
+  }
+    
+  
 }

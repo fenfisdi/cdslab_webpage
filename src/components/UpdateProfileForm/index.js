@@ -1,24 +1,29 @@
 import { Grid, Paper } from '@material-ui/core'
 import React, { Fragment, useState, useContext } from 'react'
+import { useHistory } from 'react-router'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { PhoneNumber } from '../ui/PhoneNumber'
-import theme from '../../styles/cdslabTheme'
 import { Input } from '../ui/Input'
-import { useUpdateProfileFormStyles } from './styles'
-import {userUpdateFormState} from './state'
 import { TitleComponent } from '../ui/Title'
+import theme from '../../styles/cdslabTheme'
+import { useUpdateProfileFormStyles } from './styles'
+import { PhoneNumber } from '../ui/PhoneNumber'
 import Button from '@material-ui/core/Button'
-import { languageContext } from '../../config/languageContext'
+import { userUpdateFormState } from './state'
 import LoaderComponent from '../ui/Loader'
+import { languageContext } from '../../config/languageContext'
+import { useLocation } from 'react-router-dom'
 
-const UpdateProfileForm = ({eventEmitter, loading}) => {
+const UpdateProfileForm = ({  loading }) => {
 
+  const history = useHistory()
+  const location = useLocation()
+  const userData = location.state.detail
   const classes = useUpdateProfileFormStyles(theme)
-  const fieldsData = userUpdateFormState()
-  const [phonePrefix, setPrefix] = useState('57')
+  const fieldsData = userUpdateFormState(userData)
+  const [phonePrefix, setPrefix] = useState(userData.phone_prefix.slice(1))
   const { t } = useContext(languageContext)
-
+  
   const {
     name,
     lastName,
@@ -27,35 +32,22 @@ const UpdateProfileForm = ({eventEmitter, loading}) => {
     institution,
     institutionAffiliation,
     profession,
-    password,
-    securityQuestion1,
-    securityQuestion2,
-    securityAnswer1,
-    securityAnswer2
+
   } = fieldsData
 
-  const handleClick = () => {
+  
 
-    eventEmitter({
-      name: name.value,
-      last_name: lastName.value,
-      institution: institution.value,
-      institution_role: institutionAffiliation.value,
-      profession: profession.value,
-      birthday: new Date(dateBirth.value),
-      phone: phoneNumber.value, //phoneNumber.value.trim(),
-      phone_prefix: `+${phonePrefix}`,
-      password: password.value,
-      security_questions: [
-        {
-          question:securityQuestion1.value,
-          answer:securityAnswer1.value
-        },
-        {
-          question:securityQuestion2.value,
-          answer:securityAnswer2.value
-        }
-      ]
+  const handleClick = () => {
+    userData['name'] = name.value
+    userData['last_name'] = lastName.value
+    userData['birthday']= dateBirth.value
+    userData['institution'] = institution.value
+    userData['institution_role'] = institutionAffiliation.value
+    userData['profession'] = profession.value
+    userData['phone'] = phoneNumber.value
+    userData['phone_prefix'] = `+${phonePrefix}`
+    history.push({
+      pathname: '/profile'
     })
   }
 
@@ -64,25 +56,13 @@ const UpdateProfileForm = ({eventEmitter, loading}) => {
       <Grid item container xs={12} justify="center" className={loading ? classes.loading : null}>
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
-          <Grid
-            item
-            container
-            xs={12}
-            spacing={9}
-            direction="row"
-            
-          >
-            <Grid item xs={11}>
-              <TitleComponent
-                justify='center'
-                alignItems='center'
-                title={t('registerPage.title')}
-                variant='h5'
-            
-              />
-            </Grid>
-          </Grid>
-          
+          <TitleComponent
+            justify='center'
+            alignItems='center'
+            title={t('registerPage.title')}
+            variant='h5'
+          />
+
           <Grid
             item
             container
@@ -149,7 +129,7 @@ const UpdateProfileForm = ({eventEmitter, loading}) => {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <PhoneInput
                 inputStyle={{ width:'90px' }}
                 country='co'

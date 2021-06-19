@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { Button } from '@material-ui/core'
 
 export const NormalButton = styled(Button)`
-  background: ${(props) => props.background || 'palevioletred'};
   & svg {
     margin: 4px;
   }
@@ -10,6 +9,6 @@ export const NormalButton = styled(Button)`
     !props.canDisplay &&
       css`
         display: none;
-      `
+      `      
   }}
 `

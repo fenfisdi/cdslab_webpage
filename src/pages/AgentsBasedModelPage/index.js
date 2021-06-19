@@ -52,10 +52,10 @@ const AgentsBasedModelPage = () => {
             <Route path={`${match.path}/newConfiguration`} exact render={(props) => (
               <AgentsNewConfigurationPage {...props} pathParent={match.path} />
             )} />
-            <Route path={`${match.path}/newConfiguration/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
-            <Route path={`${match.path}/newConfiguration/agentsAgeGroups/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
-            <Route path={`${match.path}/newConfiguration/agentsAgeGroups/agentsMobilityGroups/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
-            <Route path={`${match.path}/newConfiguration/agentsAgeGroups/agentsMobilityGroups/agentSusceptibilityGroups/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />
+            <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
+            <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
+            <Route path={`${match.path}/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
+            <Route path={`${match.path}/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>

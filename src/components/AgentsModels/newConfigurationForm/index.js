@@ -64,7 +64,9 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
   }, [fieldsData])
 
   const handleClick = () => {
-    history.push(`${match.path}/agentsAgeGroups`)
+    history.push({
+      pathname: 'agentsAgeGroups'
+    })
     eventEmitter({
       name:nameConfiguration.value,
       interval_date: {

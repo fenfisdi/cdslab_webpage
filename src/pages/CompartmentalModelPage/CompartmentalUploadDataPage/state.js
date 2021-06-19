@@ -26,8 +26,7 @@ export const useCompartmentalUploadDataPageState = ({showSnack, setShowSnack }) 
     findCompartmentalSimulation,
     findPredefinedModel,
     storeCompartmentalFileUpload,
-    updateNextStepFileUploadProperty,
-    updateCompartmentalSimulation } = useCompartmentalModelActions(dispatch)
+    updateNextStepFileUploadProperty } = useCompartmentalModelActions(dispatch)
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)

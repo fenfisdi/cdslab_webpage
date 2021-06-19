@@ -4,7 +4,7 @@ import { useInputStyle } from './styles'
 
 export const Input = (options) => {
   const classes = useInputStyle()
-
+  
   return (
     <TextField
       className={classes.root}
