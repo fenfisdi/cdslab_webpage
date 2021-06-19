@@ -23,11 +23,7 @@ export const useConfigurationActions = (dispatch) => {
         dispatch({ type: CONFIGURATION_SET_LIST, payload: data.data })
       })
       .catch((error) => {
-        const { response: { data } } = error
-        dispatch({
-          type: CONFIGURATION_ERROR,
-          payload: data
-        })
+        dispathError(error)
       })
   }
 
@@ -37,16 +33,12 @@ export const useConfigurationActions = (dispatch) => {
       .then(({data}) => {
         const dataList = []
         for (const property in data.data) {
-          dataList.push({value: property,label: data.data[property]})
+          dataList.push({value: data.data[property],label: data.data[property]})
         }
         dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
       })
       .catch((error) => {
-        const { response: { data } } = error
-        dispatch({
-          type: CONFIGURATION_ERROR,
-          payload: data
-        })
+        dispathError(error)
       })
   }
 
@@ -56,16 +48,12 @@ export const useConfigurationActions = (dispatch) => {
       .then(({data}) => {
         const dataList = []
         for (const property in data.data) {
-          dataList.push({value: property,label: data.data[property]})
+          dataList.push({value: data.data[property],label: data.data[property]})
         }
         dispatch({ type: CONFIGURATION_TIME_LIST, payload: dataList })
       })
       .catch((error) => {
-        const { response: { data } } = error
-        dispatch({
-          type: CONFIGURATION_ERROR,
-          payload: data
-        })
+        dispathError(error)
       })
   }
 
@@ -76,14 +64,17 @@ export const useConfigurationActions = (dispatch) => {
         dispatch({ type: CONFIGURATION_ADD, payload: data.data })
       })
       .catch((error) => {
-        const { response: { data } } = error
-        dispatch({
-          type: CONFIGURATION_ERROR,
-          payload: data
-        })
+        dispathError(error)
       })
   }
 
+  const dispathError = (error) => {
+    const { response: { data } } = error
+    dispatch({
+      type: CONFIGURATION_ERROR,
+      payload: data
+    })
+  }
  
   return {
     getListConfiguration,

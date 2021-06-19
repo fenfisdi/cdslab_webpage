@@ -19,7 +19,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
   const classes = useNewConfigurationStyles(theme)
   const fieldsData = useNewConfigurationForm()
   const [isValid, setIsvalid] = useState(false)
-  const match = useRouteMatch()
   const history = useHistory()
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
@@ -37,7 +36,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
 
   useEffect(() => {
     let notIsValid = false
-    
     for (var key in fieldsData) {
       if(fieldsData[key].errors == undefined ||  !fieldsData[key].errors ){
         fieldsData[key].errors = []
@@ -45,24 +43,26 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
       if(
         (fieldsData[key].type != 'date') &&
         (fieldsData[key] && typeof fieldsData[key].value !='object' && !fieldsData[key].value.length > 0) ||
-        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)
-        
+        (fieldsData[key] && Array.isArray(fieldsData[key].errors) && fieldsData[key].errors.length > 0)       
       ){
         notIsValid = true
       }
-      if(fieldsData[key].type == 'date'){
-        if(initialDate == null){
-          notIsValid = true
-        }
-        if(finalDate == null){
-          notIsValid = true
-        }
-      }
+      validDate(fieldsData[key])
     }
     
     setIsvalid(notIsValid)
   }, [fieldsData])
 
+  const validDate = (fieldsData) => {
+    if(fieldsData.type == 'date'){
+      if(initialDate == null){
+        return true 
+      }
+      if(finalDate == null){
+        return true
+      }
+    }
+  }
   const handleClick = () => {
     history.push({
       pathname: 'agentsAgeGroups'
