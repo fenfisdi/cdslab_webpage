@@ -47,14 +47,14 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
       ){
         notIsValid = true
       }
-      validDate(fieldsData[key])
+      validDate(fieldsData[key].type)
     }
     
     setIsvalid(notIsValid)
   }, [fieldsData])
 
-  const validDate = (fieldsData) => {
-    if(fieldsData.type == 'date'){
+  const validDate = (fieldsDataType) => {
+    if(fieldsDataType == 'date'){
       if(initialDate == null){
         return true 
       }
