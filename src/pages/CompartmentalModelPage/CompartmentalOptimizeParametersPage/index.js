@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION } from '../../../constants/compartmental'
 import SupportComponent from '../../../components/SupportComponent'
-import {HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS} from '../../../constants/helpInformation'
+import { HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
 import { useCompartmentalOptimizeParametersPageState } from './state'
 import { CompartmentalOptimizeParametersContainerModelCard, CompartmentalOptimizeParametersSection } from './styles'
 import SnackbarComponent from '@components/ui/Snackbars'
@@ -12,22 +12,22 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 
 const CompartmentalOptimizeParametersPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { executeSelectedOption } = useCompartmentalOptimizeParametersPageState({showSnack, setShowSnack })
+  const { executeSelectedOption } = useCompartmentalOptimizeParametersPageState({ showSnack, setShowSnack })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
-  
+
   return (
     <CompartmentalOptimizeParametersSection>
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_OPTIMIZE_PARAMETERS_SIMULATIONS} />
       </Grid>
-     
-    
+
+
       <SubtitleCommon text='Choose data source' />
 
       <CompartmentalOptimizeParametersContainerModelCard>

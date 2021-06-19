@@ -7,43 +7,52 @@ export const userManagementMainPageState = ({ showSnack, setShowSnack }) =>{
   const {
     state:{
       userManagement: { 
-        userListRecovery:{
-          data, error, errorData
-        }
+        userListRecovery
       }
     }, 
     dispatch
   } = useStore()
 
-  const { getUsersListData } = managementActions(dispatch)
+  const { getUsersListData, updateUserEnableState, updateAdminsState } = managementActions(dispatch)
   
   useEffect(() => {
     
-    if(isNull(data) && !error){
+    if(isNull(userListRecovery.data) && !userListRecovery.error){
       getUsersListData()
     }
-    if(!isNull(data)){
-      console.log(data)
+    if(!isNull(userListRecovery.data)){
+      /*  console.log(data) */
     }
-  },[data])
+  },[userListRecovery.data])
 
   useEffect(()=>{
-    if(error){
+    if(userListRecovery.error){
       setShowSnack(
         {
           ...showSnack,
           show: true,
           success: false,
           error: true,
-          errorMessage: errorData.detail
+          errorMessage: userListRecovery.errorData.detail
         }
       )
     }
-  },[error])
+  },[userListRecovery.error])
 
+  const sendUsersForm = (usersState) => {
+    
+    updateUserEnableState(usersState)
+  }
+
+  const sendAdminsForm = (adminsState) =>{
+
+    updateAdminsState(adminsState)
+  }
 
   return {
     getUsersListData,
-    data
+    data:userListRecovery.data,
+    sendUsersForm,
+    sendAdminsForm
   }
 }

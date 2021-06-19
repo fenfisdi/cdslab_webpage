@@ -4,7 +4,8 @@ export const creationResponseStateVariableForm =({fields})=>{
     'label': '',
     'value': 0,
     'to_fit':true,
-    'representation':''
+    'representation':'',
+    'unit':''
   }
   
   for (const keyfields in fields) {
@@ -12,9 +13,10 @@ export const creationResponseStateVariableForm =({fields})=>{
     const value = fields[keyfields]['value']
     parameterResponse={}
     parameterResponse.label = keyfields
-    parameterResponse.value =  value
+    parameterResponse.value =  value || null
     parameterResponse.to_fit = false
     parameterResponse.representation = fields[keyfields]['representation'] || ''
+    parameterResponse.unit = fields[keyfields]['unit'] || ''
     arrayResponse.push(parameterResponse)
   }
   

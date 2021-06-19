@@ -9,7 +9,8 @@ export const useParametersFormFieldsCreation = ({fieldParameters=[],valuesFieldP
       label,
       representation='',
       max_value:maxValue= Number.MAX_SAFE_INTEGER, 
-      min_value:minValue=0
+      min_value:minValue=0,
+      unit=''
     }=fieldParameters[index] || {}
     const updateValuePersis = valuesFieldParameters[index]
     const field = useInputValue(updateValuePersis!=undefined?updateValuePersis['value']: '', parametersFormFieldsValidators({minValue, maxValue}), {
@@ -18,7 +19,8 @@ export const useParametersFormFieldsCreation = ({fieldParameters=[],valuesFieldP
       onKeyDown: (event) => {
         return checkTypePhoneNumber(event)
       },
-      representation:representation
+      representation:representation,
+      unit:unit
     })
     fields[label]=field        
   } 

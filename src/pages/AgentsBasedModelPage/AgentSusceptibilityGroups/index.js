@@ -1,55 +1,58 @@
-import { Container } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
 import React from 'react'
-import AgentsManageItems from '../../../components/AgentsModels/AgentsManageItems'
+import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import { useAgentSusceptibilityGroups } from './state'
-import { AgentSusceptibilityGroupsStyles } from './styles'
+
 
 const AgentSusceptibilityGroups = () => {
-  const classes = AgentSusceptibilityGroupsStyles()
-  const [
-    handleDeleteItem,
-    handleCheckItem,
-    handleConfigItem,
-    handleAddItem,
+  
+  const {    
     redirectToInmunizationGroupNamePage
-  ] = useAgentSusceptibilityGroups()
+  } = useAgentSusceptibilityGroups()
+
+  const tableColumns = [
+    { title: 'Susceptibility group name', att: 'suscepname', type: 'text' },
+    
+  ]
+  const initialItems = [
+    {
+      suscepname: '',      
+    }
+  ]
 
   return (
     <>
-      <Grid container item xs={12} 
+      <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/></Grid>
+        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
-      <Container maxWidth={'sm'}>
-        <div className={classes.manageItemsContainer}>
-          <AgentsManageItems
-            title={'Susceptibility group name'}
-            handleDeleteItem={handleDeleteItem}
-            handleCheckItem={handleCheckItem}
-            handleConfigItem={handleConfigItem}
-            handleAddItem={handleAddItem}
-            itemArray={[{name: 'sd', value: 'sd', id: 'sdf'}, {name: 'sd', value: 'sd', id: 'sdf'}]}
-          />
-        </div>
-        <div className={classes.buttonContainer}>
-          <CompartmentalButton
-            justify='flex-end'
-            alignItems='center'
-            text='Continue'
-            onClick={redirectToInmunizationGroupNamePage}
-            disabled={false}
-            icon='fas fa-save'
-          />
-        </div>
-      </Container>
+      <Grid 
+        justify='flex-start'
+        alignItems='center'
+        container 
+        item 
+        xs={10}>        
+        <AgentsTableConfiguration
+          distributionType="Susceptibility Group"
+          columns={tableColumns}
+          initialItems={initialItems}
+          settingsComponent={null}
+        />
+      </Grid>
+      <CompartmentalButton
+        justify='flex-end'
+        alignItems='center'
+        text='Continue'
+        onClick={redirectToInmunizationGroupNamePage}
+        disabled={false}        
+      />
     </>
   )
 }

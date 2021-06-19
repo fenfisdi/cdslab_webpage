@@ -6,7 +6,12 @@ import {
   updateCompartmentalSimulationService,
   storeCompartmentalSimulationFolderService, 
   storeCompartmentalFileUploadService,
-  executeSimulationService} from '../services/compartmentalModelServices'
+  executeSimulationService,
+  getInsParametersVariablesService,
+  getInsParametersRegionsService,
+  getInsParametersDatesService,
+  getInformationInsService,
+  postInformationInsService} from '../services/compartmentalModelServices'
 import {
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_ERROR,
   COMPARTMENTAL_MODEL_GET_PREDEFINED_MODELS_SUCCESS,
@@ -24,7 +29,11 @@ import {
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_SUCCESS,
   COMPARTMENTAL_MODEL_EXECUTE_SIMULATION_ERROR,
   COMPARTMENTAL_MODEL_STORE_SIMULATION_UPDATE_FILE_DATA,
-  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY
+  COMPARTMENTAL_MODEL_CHOOSE_DATA_SOURCE_UPLOAD_PROPERTY,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS,
+  COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR
 } from './types/compartmentalModelTypes'
 
 export const useCompartmentalModelActions = (dispatch) => {
@@ -138,28 +147,29 @@ export const useCompartmentalModelActions = (dispatch) => {
 
   const storeCompartmentalFileUpload = (simulation,idSimulation,file)=>{
     registerLoaderCompartmentalSimulationFile(true)
-    updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
-      storeCompartmentalFileUploadService(idSimulation,file).then((responseFile)=>{
+    storeCompartmentalFileUploadService(idSimulation,file).then((responseFile)=>{
+      updateCompartmentalSimulationService(simulation,idSimulation).then((responseSimulation)=>{ 
         dispatch({
           type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_SUCCESS,
           payload: {fileStore:responseFile.data.data, simulationStore:responseSimulation.data.data}
         })
         registerLoaderCompartmentalSimulationFile(false)
-      }).catch((erroFile)=>{
-        registerLoaderCompartmentalSimulationFile(false)
-        if(erroFile.response) {          
-          const {response:{data}}=erroFile                    
-          dispatch({
-            type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
-            payload: data 
-          })
-        }else if(erroFile.request){
-          dispatch({
-            type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
-            payload:{detail:'The request was made but no response was received'}
-          })
-        }
       })
+        .catch((erroFile)=>{
+          registerLoaderCompartmentalSimulationFile(false)
+          if(erroFile.response) {          
+            const {response:{data}}=erroFile                    
+            dispatch({
+              type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
+              payload: data 
+            })
+          }else if(erroFile.request){
+            dispatch({
+              type: COMPARTMENTAL_MODEL_STORE_SIMULATION_FILE_ERROR,
+              payload:{detail:'The request was made but no response was received'}
+            })
+          }
+        })
     }).catch((error) => {
       registerLoaderCompartmentalSimulationFile(false)
       registerErrorCompartmentalSimulation(error)
@@ -234,12 +244,20 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
-  const updateCompartmentalSimulation = (simulation,idSimulation) => {
+  const updateCompartmentalSimulation = (simulation,idSimulation, callback=null) => {
     updateCompartmentalSimulationService(simulation,idSimulation).then((response) => {
       registerCompartmentalSimulation(response.data.data)
+      console.log('holaaaaaaaaaaaaaa')
+      if(callback){
+        callback()
+      }
     }).catch((error) => {
       registerErrorCompartmentalSimulation(error)
     })
+  }
+
+  const updateSimulationDate =(simulation,idSimulation)=>{
+    return updateCompartmentalSimulationService(simulation,idSimulation)
   }
 
   
@@ -262,6 +280,72 @@ export const useCompartmentalModelActions = (dispatch) => {
     })
   }
 
+
+  const getInsParametersVariables = ()=>{
+    getInsParametersVariablesService().then((response)=>{
+      dispatch({
+        type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error)=>{
+      if (error.response) {
+        const { response: { data } } = error
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+          payload: data
+        })
+      }else if(error.request) {
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_VARIABLES_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+
+  const getInsParametersRegions = ()=>{
+    getInsParametersRegionsService().then((response)=>{
+      dispatch({
+        type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_SUCCESS,
+        payload: response.data.data
+      })
+    }).catch((error)=>{
+      if (error.response) {
+        const { response: { data } } = error
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
+          payload: data
+        })
+      }else if(error.request) {
+        dispatch({
+          type: COMPARTMENTAL_MODEL_GET_INS_PARAMETERS_REGIONS_ERROR,
+          payload:{detail:'The request was made but no response was received'}
+        })
+      }
+    })
+  }
+
+  const getInsParametersDates = (region)=>{
+    const { hash } = region
+    return getInsParametersDatesService(hash)
+  }
+
+  const getInformationIns = (data)=>{
+    const {
+      finalDate,
+      initialDate,
+      regionChoose:{
+        hash 
+      }
+    } = data
+    return getInformationInsService(hash,initialDate,finalDate)
+  }
+
+  const postInformationIns = ({initialDate,finalDate,identifier,regionName,variable })=>{
+    return postInformationInsService(initialDate,finalDate,identifier,regionName,variable )
+  }
+
+
   return {
     registerModelParameters,
     getPredefinedModels,
@@ -279,7 +363,13 @@ export const useCompartmentalModelActions = (dispatch) => {
     executeSimulation,
     setDefinitionCompartmentalExecuteSimulation,
     setDefinitionFileDataProperty,
-    setDefinitionDataGetPredefinedModels }
+    setDefinitionDataGetPredefinedModels,
+    getInsParametersVariables,
+    getInsParametersRegions,
+    getInsParametersDates,
+    getInformationIns,
+    postInformationIns,
+    updateSimulationDate }
 
 
 }

@@ -21,6 +21,9 @@ import {
 import SvgChart from '../../../assets/icons/SvgChart'
 import SvgManagement from '../../../assets/icons/SvgManagement'
 
+
+
+
 const categories = [
   {
     id: '',
@@ -42,16 +45,13 @@ const styles =  (theme) => ({
     border: 'none !important'
   },
   categoryHeader: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingTop: '14px',
   },
   categoryHeaderPrimary: {
     color: theme.palette.common.white
   },
   item: {
-    paddingTop: 10,
-    paddingBottom: 1,
-    color: '#fff'
+    color: '#fff',
   },
   itemCategory: {
     backgroundColor: '#fff',
@@ -141,8 +141,9 @@ const styles =  (theme) => ({
 })
 
 function Navigator (props) {
+  
   const { classes, ...other } = props
-  const {language,  changelanguage } = useContext(languageContext)
+  const {language,  changelanguage, t } = useContext(languageContext)
   const {setPath} = usePath()
   const {
     dispatch
@@ -208,7 +209,7 @@ function Navigator (props) {
                           primary: classes.itemPrimary
                         }}
                       >
-                        {childId}
+                        {t(childId)}
                       </ListItemText>
                     </ListItem>
                   </NavLink>

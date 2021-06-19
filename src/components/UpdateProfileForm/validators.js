@@ -2,10 +2,10 @@ import {
   checkMinLength,
   checkMaxLength,
   checkPattern
-} from '../../../components/Forms/validators/validatorsCheks'
+} from '../../components/Forms/validators/validatorsCheks'
 import {
   PATTERN_EMAIL,
-} from '../../../components/Forms/validators/patterns'
+} from '../../components/Forms/validators/patterns'
 
 export const REQUIRED_MESSAGE = 'validators.fieldRequired'
 export const PATTERN_ERROR_MESSAGE =

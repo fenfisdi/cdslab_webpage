@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import background from '../../../assets/images/Logo_CDS_Lab.jpg'
+import background from '../../../assets/images/Logo_CDS_Laboratory.svg'
 
 export const useLoginStyles = makeStyles((theme) => ({
   root: {
@@ -12,7 +12,7 @@ export const useLoginStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'contain',
     backgroundPosition: 'center',
-  
+
   },
   paper: {
     margin: theme.spacing(8, 4),

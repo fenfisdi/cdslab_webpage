@@ -14,5 +14,10 @@ export const useRegisterFormStyles = makeStyles((theme) => ({
   loading:{
     'min-height':' 500px',
     'align-items': 'center'
+  },
+  link: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }))

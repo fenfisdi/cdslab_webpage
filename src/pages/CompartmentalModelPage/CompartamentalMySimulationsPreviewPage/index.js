@@ -38,27 +38,22 @@ const CompartamentalMySimulationsPreviewPage = () => {
 
   const renderChartPlot = () => (
     plotJson ?
-      (<Grid  item xs={12} className={classes.plot}>
-        <Plot 
+      (<Grid item xs={12} className={classes.plot}>
+        <Plot
           {...plotJson}
         />
       </Grid>)
       :
-      (<Grid  item xs={12} className={classes.notPlot}>
+      (<Grid item xs={12} className={classes.notPlot}>
         <div className={classes.divPlot}>GRAPH</div>
       </Grid>
       )
   )
   
-  const handleNameLength = (nameSimulation) => {
-    if(nameSimulation.length > 12){
-      return nameSimulation.substr(0,12) + '...'
-    }
-  }
   return (
     <div className={classes.root}>
 
-      {loading ? 
+      {loading ?
         (<LoaderComponent
           width={50}
           height={50}
@@ -78,35 +73,35 @@ const CompartamentalMySimulationsPreviewPage = () => {
                 </ContainerTitle>
               </Grid>
               <Grid xs={1}>
-                <SupportComponent text={HELP_INFORMATION_NEW_SIMULATIONS}/>
+                <SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} />
               </Grid>
             </Grid>
-            
-            <Grid container xs='10' className= {classes.contentReview}>
+
+            <Grid container xs='10' className={classes.contentReview}>
               <ReviewSimulationSettings
-                className= {classes.review}
+                className={classes.review}
                 simulation={{
-                  name:name,
-                  parameter_type:parameter_type,
-                  modelName:model_name,
-                  parameters_limits:parameters_limits,
-                  state_variable_limits:state_variable_limits,
-                  fileName:data_source,
-                  status:status
+                  name: name,
+                  parameter_type: parameter_type,
+                  modelName: model_name,
+                  parameters_limits: parameters_limits,
+                  state_variable_limits: state_variable_limits,
+                  fileName: data_source,
+                  status: status
                 }}
                 showButton={false}
                 showButtonDownload={true}
               />
             </Grid>
-            <Grid container xs='10' className= {classes.contentReview}>
+            <Grid container xs='10' className={classes.contentReview}>
               <span className={classes.textoDownload}> Associated Files</span>
-             
-              <TableMySimulationPreview 
+
+              <TableMySimulationPreview
                 setPlotJson={setPlotJson}
               />
               {renderChartPlot()}
             </Grid>
-          </div>  
+          </div>
         )}
     </div>
   )

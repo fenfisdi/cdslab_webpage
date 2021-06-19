@@ -67,16 +67,17 @@ export const useAgentsMobilityGroups = () => {
   }
 
   const redirectToSusceptibilityGroupsPage = () => {
-    history.push(`${match.path}/agentSusceptibilityGroups`)
+    
+    history.push({
+      pathname: 'agentSusceptibilityGroups'
+    })
   }
   
-  return [
+  return {
     handleDeleteItem,
     handleCheckItem,
     handleConfigItem,
     handleAddItem,
-    redirectToSusceptibilityGroupsPage,
-    open,
-    handleCloseModal
-  ]
+    redirectToSusceptibilityGroupsPage}
+  
 }

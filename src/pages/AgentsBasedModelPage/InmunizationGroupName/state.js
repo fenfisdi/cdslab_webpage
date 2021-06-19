@@ -16,10 +16,10 @@ export const useInmunizationGroupName = () => {
     
   }
   
-  return [
+  return {
     handleDeleteItem,
     handleCheckItem,
     handleConfigItem,
     handleAddItem
-  ]
+  }
 }

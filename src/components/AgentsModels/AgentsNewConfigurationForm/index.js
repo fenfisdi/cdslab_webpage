@@ -35,7 +35,9 @@ export const NewConfigurationForm = ({ eventEmitter }) => {
   } = fieldsData
 
   const handleClick = () => {
-    history.push(`${match.path}/agentsAgeGroups`)
+    history.push({
+      pathname: 'agentsAgeGroups'
+    })
     eventEmitter({
       nameConfiguration:nameConfiguration.value,
       simulationInitialDate:simulationInitialDate.value,

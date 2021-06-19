@@ -1,19 +1,18 @@
-import { getUserDataService, updateUserDataService, getUserUrlToptService } from '../services/userProficeServices'
+import { getUserDataService, updateUserService } from '../services/userProfileServices'
 import {
   USER_DATA_SUCCESS,
   USER_DATA_ERROR,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
-  UPDATE_QR_BINDING_SUCCESS,
-  UPDATE_QR_BINDING_ERROR
 } from './types/userProfileTypes'
 
 export const userProfileActions = (dispatch) =>{
 
-  const getUserData=(email) => {
+  const getUserData=() => {
 
-    getUserDataService(email)
+    getUserDataService()
       .then((response)=>{
+        console.log(response)
         dispatch({
           type: USER_DATA_SUCCESS,
           payload: response.data.data
@@ -37,7 +36,7 @@ export const userProfileActions = (dispatch) =>{
 
   const updateUserData = (updateUserForm) => {
     
-    updateUserDataService(updateUserForm)
+    updateUserService(updateUserForm)
       .then((response) => {
         dispatch({
           type: UPDATE_USER_SUCCESS,
@@ -60,34 +59,8 @@ export const userProfileActions = (dispatch) =>{
       })
   }
 
-  const getUserUrlTopt=(email) => {
-
-    getUserUrlToptService(email)
-      .then((response)=>{
-        dispatch({
-          type: UPDATE_QR_BINDING_SUCCESS,
-          payload: response.data.data
-        })
-      })
-      .catch((error) => {
-        if (error.response) {
-          const { response: { data } } = error
-          dispatch({
-            type: UPDATE_QR_BINDING_ERROR,
-            payload: data
-          })
-        } else if (error.request) {
-          dispatch({
-            type: UPDATE_QR_BINDING_ERROR,
-            payload:{detail:'The request was made but no response was received'}
-          })
-        }
-      })
-  }
-
   return{
     getUserData,
     updateUserData,
-    getUserUrlTopt
   }
 }

@@ -58,7 +58,7 @@ export const checkErrorsExtraParametersForm = ({extraParameters,handleShowError}
     const {value:valueFirst,errors} = extraParameters[0]
     const {value:valueSecond } = extraParameters[1] 
     const setErrors = extraParameters[0]['custom-actions']['setErrors']
-    if(errors.length ==0 && valueFirst!='' && valueSecond!='' && parseInt(valueFirst)>=parseInt(valueSecond)){           
+    if(errors.length ==0 && valueFirst!='' && valueSecond!='' && parseFloat(valueFirst)>=parseFloat(valueSecond)){           
       setErrors([...errors,{message:'The minimum value must be less than maximum value'}])
     }
   }

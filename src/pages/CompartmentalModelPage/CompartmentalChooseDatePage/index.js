@@ -19,17 +19,16 @@ import DatePicker from '../../../components/ui/DatePicker'
 
 const CompartmentalChooseDatePage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const [initialDate, setInitialDate] = useState(null)
+  const { executeRequest,currentSimulation } = useCompartmentalChooseDatePageState({showSnack,setShowSnack})
+  const [initialDate, setInitialDate] = useState(currentSimulation?.interval_date?.start || null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
-  const { executeRequest,currentSimulation } = useCompartmentalChooseDatePageState({showSnack,
-    setShowSnack})
-
+    
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
 
-  const handleClickButton =(dateData)=>{
+  const handleClickButton = (dateData) => {
     executeRequest(dateData)
   }
 
@@ -39,14 +38,14 @@ const CompartmentalChooseDatePage = () => {
     return result
   }
 
-  const handleDate = (dateValue,key) => {
+  const handleDate = (dateValue, key) => {
     setShowError(false)
-    if(key=='initial'){
+    if (key == 'initial') {
       setInitialDate(dateValue)
       setFinalDate(null)
-    }else if(key=='final'){
+    } else if (key == 'final') {
       setFinalDate(dateValue)
-    }   
+    }
   }
 
   return (
@@ -57,24 +56,25 @@ const CompartmentalChooseDatePage = () => {
         alignItems="flex-start"
       >
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent text={HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS}/>
+        <SupportComponent title="Help" text={HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS} />
       </Grid>
 
-      <SubtitleCommon text='Choose simulation dates' />
+      <SubtitleCommon text='Choose simulation dates' /> 
 
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
           <span htmlFor='initial'>Simulation initial date</span>
           <DatePicker
             autoOk
-            value={initialDate}                               
+            value={initialDate}
             format="dd/MM/yyyy"
-            onChange={e => handleDate(e,'initial')}
+            onChange={e => handleDate(e, 'initial')}
             inputVariant="outlined"
             variant="inline"
             lenguaje="es"
             id='initial'
-            placeholder="dd/mm/yyyy"                                    
+            placeholder="dd/mm/yyyy"   
+            disabled={currentSimulation?.interval_date?.start ? true : false}                                 
           />          
         </Column>
 
@@ -82,27 +82,27 @@ const CompartmentalChooseDatePage = () => {
           <span htmlFor='final'>Simulation final date</span>
           <DatePicker
             autoOk
-            value={finalDate}                                    
+            value={finalDate}
             format="dd/MM/yyyy"
-            onChange={e => handleDate(e,'final')}
+            onChange={e => handleDate(e, 'final')}
             inputVariant="outlined"
             variant="inline"
             lenguaje="es"
             id='final'
             placeholder="dd/mm/yyyy"
             error={showError}
-            minDate={initialDate!=null && addDays(initialDate,3)}
-          />          
+            minDate={initialDate != null && addDays(initialDate, 3)}
+          />
           {showError && (
-            <Error>The final date must be greater than the initial date.</Error>
+            <Error>The final date must be greater than the initial date</Error>
           )}
         </Column>
-      </CompartmentalChooseDateDate> }
+      </CompartmentalChooseDateDate>}
 
       <CompartmentalButton
-        disabled={initialDate == '' || finalDate==''}
-        onClick={()=>{
-          handleClickButton({initialDate,finalDate})
+        disabled={initialDate == null  || finalDate == null}
+        onClick={() => {
+          handleClickButton({ initialDate, finalDate })
         }}
         justify="center"
         alignItems="center"
@@ -113,7 +113,7 @@ const CompartmentalChooseDatePage = () => {
         width={50}
         height={50}
         marginTop={5}
-      />} 
+      />}
 
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}

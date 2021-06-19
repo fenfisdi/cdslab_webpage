@@ -11,7 +11,7 @@ export const useConfigurableParametersFormFieldsCreation = ({parameters=[],value
   for (let index = 0; index < parameters.length; index++) {
    
     let field ={}
-    const { label, max_value:maxValue= Number.MAX_SAFE_INTEGER, min_value:minValue=0,representation='' }=parameters[index]
+    const { label, max_value:maxValue= Number.MAX_SAFE_INTEGER, min_value:minValue=0,representation='',unit='' }=parameters[index]
     const { type,max_value,min_value,value }  = valuesFieldParameters[index] || {}
 
     field['SELECTInput'] = useSelectValue(type?type.toUpperCase():'', VALIDATORS_CONFIGURABLE_PARAMETERS_FORM.selectors, 
@@ -56,7 +56,7 @@ export const useConfigurableParametersFormFieldsCreation = ({parameters=[],value
     ]
 
     field['representation'] = representation
-    
+    field['unit'] = unit
     fields[label]=field        
   } 
   
@@ -71,16 +71,19 @@ export const creationResponseConfigurableParametersForm =(fieldsParametersForm)=
     'value': 0,
     'min_value': 0,
     'max_value': 0,
-    'representation':''
+    'representation':'',
+    'unit':''
   }
   for (const keyfieldsParameter in fieldsParametersForm) {
     const selectValue = fieldsParametersForm[keyfieldsParameter]['SELECTInput']['value']
     const extraFields =  fieldsParametersForm[keyfieldsParameter][`${selectValue}Input`]
     const representation = fieldsParametersForm[keyfieldsParameter]['representation'] || ''
+    const unit = fieldsParametersForm[keyfieldsParameter]['unit'] || ''
     parameterResponse={}
     parameterResponse.label = keyfieldsParameter
     parameterResponse.type =  selectValue.toLowerCase()
     parameterResponse.representation = representation
+    parameterResponse.unit = unit
 
     if(selectValue == SIMULATION_IDENTIFIERS.OPTIMIZE){      
       parameterResponse.min_value = parseInt(extraFields[0]['value'])
