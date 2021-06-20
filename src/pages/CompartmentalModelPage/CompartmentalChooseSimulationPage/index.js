@@ -41,7 +41,7 @@ const CompartmentalChooseSimulationPage = () => {
         <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CHOOSE_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Choose simulation type' />
+      <SubtitleCommon text={t('chooseSimulationtype.title')} />
 
       {!loadingSimulationFolderInformation && <CompartmentalChooseSimulationForm>
         <ModelCard

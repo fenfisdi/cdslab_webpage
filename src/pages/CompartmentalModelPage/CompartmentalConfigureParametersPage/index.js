@@ -35,7 +35,7 @@ const CompartmentalConfigureParametersPage = () => {
         <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Configure parameters values' />
+      <SubtitleCommon text={t('configureParametersPage.title')} />
 
       {modelData && modelData.parameters && <ConfigurableParametersForm
         parameters={modelData.parameters}

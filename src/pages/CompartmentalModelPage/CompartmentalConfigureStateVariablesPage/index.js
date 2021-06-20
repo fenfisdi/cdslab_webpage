@@ -36,7 +36,7 @@ const CompartmentalConfigureStateVariablesPage = () => {
         <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CONFIGURE_STATE_VARIANLES_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Configure initial values of the state variables' />
+      <SubtitleCommon text={t('configureInitialVaulesPage.title')} />
 
       {modelData && modelData.state_variables && <FixedParametersFormStateVariables
         fieldParameters={modelData.state_variables}

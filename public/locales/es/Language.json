@@ -63,6 +63,67 @@
     "CompartmentalButton": "Modelos compartimentales",
     "AgentsButton": "Modelos basados en agentes"
   },
+  "compartmentalMainPage": {
+    "newSimulation": "Nueva simulación",
+    "mySimulations": "Mis simulaciones"
+  },
+  "chooseSimulation": {
+    "title": "Nombre su simulación:",
+    "instruction": "Elija uno de los modelos predefinidos"
+  },
+  "chooseSimulationtype": {
+    "title": "Elija tipo de simulación",
+    "optimizedParameters": "Parametros optimizados",
+    "fixedParameters": "Parametros fijos"
+  },
+  "configureParametersPage": {
+    "title": "Configurar valor de los parámetros",
+    "parameter": "Parámetro",
+    "configurationType": "Tipo de configuración",
+    "value": "Valor",
+    "units": "Unidades"
+  },
+  "uploadDataPage": {
+    "title": "Elija la variable que se ajuste al modelo",
+    "dataSource": "Elija la fuente de datos",
+    "select": "Seleccionar Variable",
+    "instructionCSV": "Cargue un archivo de datos de optimización CSV.",
+    "instructionCSVStructure": "El archivo cargado debe cumplir con la siguiente estructura:",
+    "dateFormat": "La columna Fecha debe tener el formato de fecha ISO: aaaa-mm-dd.",
+    "date": "Fecha",
+    "uploadFile": "Cargar archivo",
+    "uploadData": "Cargar Datos",
+    "useAvailableINS": "Usar datos disponibles (INS)"
+  },
+  "selectDatePage": {
+    "title": "Elija fechas de simulación",
+    "initialDate": "Fecha de inicio de la simulación",
+    "finalDate": "Fecha final de la simulación"
+  },
+  "reviewConfigurationPage": {
+    "title": "Detalle de configuración",
+    "simulationName": "Nombre de la simulación:",
+    "typeOfSimulation": "Tipo de simulación:",
+    "typeModel": "Tipo de modelo:",
+    "parameters": "Parámetros:",
+    "stateVariable": "Variable de estado",
+    "dataSource": "Fuente de datos"
+  },
+  "executedSimulation": {
+    "title": "Su simulación está siendo procesada",
+    "warning": "Las simulaciones pueden tardar varios minutos.",
+    "notification": "Se le notificará por correo electrónico cuando todo esté hecho. Después de recibir la notificación, visite `Mis simulaciones` para obtener una descripción general de los resultados y descargar el conjunto de datos completo."
+  },
+  "configureInitialVaulesPage": {
+    "title": "Configurar valores iniciales de las variables de estado",
+    "state": "Variable de estado",
+    "value": "Valor",
+    "units": "Unidades"
+  },
+  "compartmentalTabs": {
+    "compartmental": "Compartimental",
+    "agents": "Agentes"
+  },
   "information": {
     "title": "Ayuda"
   },

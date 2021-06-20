@@ -62,6 +62,67 @@
     "CompartmentalButton": "Compartmental model",
     "AgentsButton": "Agent based models"
   },
+  "compartmentalMainPage": {
+    "newSimulation": "New simulation",
+    "mySimulations": "My simulations"
+  },
+  "chooseSimulation": {
+    "title": "Name your simulation:",
+    "instruction": "Choose one of the predefined models"
+  },
+  "chooseSimulationtype": {
+    "title": "Choose simulation type",
+    "optimizedParameters": "Optimize parameters",
+    "fixedParameters": "Fixed Parameters"
+  },
+  "configureParametersPage": {
+    "title": "Configure parameters values",
+    "parameter": "Parameter",
+    "configurationType": "Configuration type",
+    "value": "Value",
+    "units": "Units"
+  },
+  "uploadDataPage": {
+    "title": "Choose variable to fit model",
+    "dataSource": "Choose data source",
+    "select": "Select Variable",
+    "instructionCSV": "Upload a CSV optimization data file.",
+    "instructionCSVStructure": "The uploaded file should meet the following structure:",
+    "dateFormat": "The Date column must be formatted using ISO date format: yyyy-mm-dd.",
+    "date": "Date",
+    "uploadFile": "Upload File",
+    "uploadData": "Upload Data",
+    "useAvailableINS": "Use available data (INS)"
+  },
+  "selectDatePage": {
+    "title": "Choose simulation dates",
+    "initialDate": "Simulation initial date",
+    "finalDate": "Simulation final date"
+  },
+  "reviewConfigurationPage": {
+    "title": "Review configuration",
+    "simulationName": "Simulation name:",
+    "typeOfSimulation": "Type of simulation:",
+    "typeModel": "Type Model:",
+    "parameters": "Parameters:",
+    "stateVariable": "State variable",
+    "dataSource": "Data source"
+  },
+  "executedSimulation": {
+    "title": "Your simulation is being processed",
+    "warning": "Simulations can take several minutes.",
+    "notification": "You’ll be notified via e-mail when everythings is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset."
+  },
+  "configureInitialVaulesPage": {
+    "title": "Configure initial values of the state variables",
+    "state": "State variable",
+    "value": "Value",
+    "units": "Units"
+  },
+  "compartmentalTabs": {
+    "compartmental": "Compartmental",
+    "agents": "Agents"
+  },
   "information": {
     "title": "Help"
   },

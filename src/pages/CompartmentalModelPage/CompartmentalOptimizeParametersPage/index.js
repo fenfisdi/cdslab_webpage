@@ -31,7 +31,7 @@ const CompartmentalOptimizeParametersPage = () => {
       </Grid>
 
 
-      <SubtitleCommon text='Choose data source' />
+      <SubtitleCommon text={t('uploadDataPage.dataSource')}/>
 
       <CompartmentalOptimizeParametersContainerModelCard>
         <Grid container item xs={12}>

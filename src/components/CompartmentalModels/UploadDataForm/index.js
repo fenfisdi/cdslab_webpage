@@ -1,5 +1,5 @@
 import { Typography, Grid } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { SelectComponent } from '../../ui/Select'
 import { UploadButton } from '../../ui/UploadButton'
 import CompartmentalButton from '../CompartmentalButton'
@@ -9,10 +9,12 @@ import { UploadDataFormSection, UploadDataFormTitle, useUploadDataFormStyles } f
 import TableFormatDynamic from './children/TableFormatDynamic'
 import { processData } from '../../../utils/common'
 import * as XLSX from 'xlsx'
+import {languageContext} from '../../../config/languageContext'
 
-const UploadDataForm =({selectOptions, executeRequest})=>{  
+const UploadDataForm =({selectOptions, executeRequest})=>{
   const classes = useUploadDataFormStyles()
-  
+
+  const {t} = useContext(languageContext) 
   const [headersTable, setHeadersTable] = useState([])
   const [dataTable, setDataTable] = useState([])
   const [isValid, setIsvalid] = useState(false)
@@ -65,16 +67,16 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
     <UploadDataFormSection>
       <SelectComponent
         xs={3}
-        title="Select Variable"
+        title={t('uploadDataPage.select')}
         {...stateVariable}
         options={selectOptions || []} />
 
       <UploadDataFormTitle>
         <Typography  className={classes.paragraph}>
-            Upload a CSV optimization data file.
+          {t('uploadDataPage.instructionCSV')}
         </Typography>
         <Typography className={classes.paragraph}>
-            The uploaded file should meet the following structure:
+          {t('uploadDataPage.instructionCSVStructure')}
         </Typography>
       </UploadDataFormTitle>
 
@@ -83,7 +85,7 @@ const UploadDataForm =({selectOptions, executeRequest})=>{
         <TableFormatStatic Variable={stateVariable.value} />
 
         <Typography className={`${classes.paragraph} sub`}>
-          The Date column must be formatted using ISO date format: yyyy-mm-dd.
+          {t('uploadDataPage.dateFormat')}
         </Typography>
 
       </Grid>

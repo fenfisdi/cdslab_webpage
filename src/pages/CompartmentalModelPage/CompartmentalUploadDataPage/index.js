@@ -50,7 +50,7 @@ const CompartmentalUploadDataPage = () => {
         <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Choose variable to fit model' />
+      <SubtitleCommon text={t('uploadDataPage.title')} />
 
       {!loadingSimulationFileUpload && stateVariables.length > 0 && <Grid container item xs={12}>
         <UploadDataForm

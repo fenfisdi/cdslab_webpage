@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import {languageContext} from '../../../../../config/languageContext'
 
 const useStyles = makeStyles({
   tableCell: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 export default function TableFormatStatic({ Variable = 'Variable' }) {
   const classes = useStyles()
 
+  const {t} = useContext(languageContext)
   return (
 
     <TableContainer component={Paper} className={classes.TableContainer}>
@@ -31,7 +33,7 @@ export default function TableFormatStatic({ Variable = 'Variable' }) {
 
         <TableHead>
           <TableRow>
-            <TableCell align="center" className={classes.tableCell}>Date</TableCell>
+            <TableCell align="center" className={classes.tableCell}>{t('uploadDataPage.date')}</TableCell>
             <TableCell align="center" className={`${classes.tableCell}`}>{Variable ? Variable : 'Variable'}</TableCell>
           </TableRow>
         </TableHead>

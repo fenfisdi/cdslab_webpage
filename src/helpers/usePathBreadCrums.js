@@ -2,6 +2,7 @@ import { usePath } from '../components/PathContext'
 
 export const usePathBreadCrums = () => {
   const {path, setPath} = usePath()
+  
 
   const handlePathBreadCrums = (breadCrumbRoute,name,parameters) => {
     let containsPath = path.find(element => element.breadCrumbRoute === breadCrumbRoute)

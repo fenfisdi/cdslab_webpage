@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Typography from '@material-ui/core/Typography'
 import ModelCard from '../ModelCard'
 import { usePredefinedModelsState } from './state'
@@ -9,9 +9,12 @@ import {
   CompartmentalPredefinedModelFormInput } from './styles'
 import { Input } from '../../ui/Input'
 import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
+import {languageContext} from '../../../config/languageContext'
 
 
 const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
+  
+  const {t} = useContext(languageContext)
   const classes = usePredefinedModelsStyles()
   const {handlePathBreadCrums } = usePathBreadCrums()
   const {
@@ -26,7 +29,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
   return (
     <CompartmentalPredefinedModelForm>
       <CompartmentalPredefinedModelFormInput>
-        <span><strong>Name your simulation:</strong></span>
+        <span><strong>{t('chooseSimulation.title')}</strong></span>
         <Input
           disabled={false}
           required
@@ -40,7 +43,7 @@ const PredefinedModelsForm = ({ handleClickPredefinedModels, options=[] }) => {
       </CompartmentalPredefinedModelFormInput>
       <CompartmentalPredefinedModelFormTitle>
         <Typography variant="body2" component="p" className={classes.title}>
-          Choose one of the predefined models
+          {t('chooseSimulation.instruction')}
         </Typography>
       </CompartmentalPredefinedModelFormTitle>
 

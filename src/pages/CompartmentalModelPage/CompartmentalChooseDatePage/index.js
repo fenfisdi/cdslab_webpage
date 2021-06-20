@@ -62,11 +62,11 @@ const CompartmentalChooseDatePage = () => {
         <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Choose simulation dates' /> 
+      <SubtitleCommon text={t('selectDatePage.title')} /> 
 
       {!isEmpty(currentSimulation) && <CompartmentalChooseDateDate>
         <Column>
-          <span htmlFor='initial'>Simulation initial date</span>
+          <span htmlFor='initial'>{t('selectDatePage.initialDate')}</span>
           <DatePicker
             autoOk
             value={initialDate}
@@ -82,7 +82,7 @@ const CompartmentalChooseDatePage = () => {
         </Column>
 
         <Column>
-          <span htmlFor='final'>Simulation final date</span>
+          <span htmlFor='final'>{t('selectDatePage.finalDate')}</span>
           <DatePicker
             autoOk
             value={finalDate}

@@ -25,17 +25,14 @@ const CompartmentalReviewConfigurationMessagePage = () => {
       <SubtitleCommon text='' />
       <CompartmentalReviewConfigurationMessageFormTitle>
         <Typography variant="body2" component="p" style={{ 'fontWeight': '500', 'fontSize': '25px', 'marginBottom': '18px', 'color': '#00838F' }}>
-          Your simulation is being processed
+          {t('executedSimulation.title')}
         </Typography>
       </CompartmentalReviewConfigurationMessageFormTitle>
 
       <Grid container item xs={8} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
-          <p>Simulations can take several minutes.</p>
-          <p>
-            You’ll be notified via e-mail when everythings is done.
-            After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset.
-          </p>
+          <p>{t('executedSimulation.warning')}</p>
+          <p>{t('executedSimulation.notification')}</p>
         </Paper>
       </Grid>
     </CompartmentalReviewConfigurationMessageContainer>
