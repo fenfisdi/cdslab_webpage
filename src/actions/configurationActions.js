@@ -22,8 +22,8 @@ export const useConfigurationActions = (dispatch) => {
       .then(({data}) => {
         dispatch({ type: CONFIGURATION_SET_LIST, payload: data.data })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
@@ -37,8 +37,8 @@ export const useConfigurationActions = (dispatch) => {
         }
         dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
@@ -52,8 +52,8 @@ export const useConfigurationActions = (dispatch) => {
         }
         dispatch({ type: CONFIGURATION_TIME_LIST, payload: dataList })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
@@ -63,8 +63,8 @@ export const useConfigurationActions = (dispatch) => {
       .then((response) => {
         dispatch({ type: CONFIGURATION_ADD, payload: response })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
