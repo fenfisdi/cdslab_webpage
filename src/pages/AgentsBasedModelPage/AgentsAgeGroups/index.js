@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import { Grid } from '@material-ui/core'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { useAgentsAgeGroups } from './state'
@@ -9,7 +9,9 @@ import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTab
 
 const AgentsAgeGroups = () => {
   
-  const { redirectToMobilityGroupsPage } = useAgentsAgeGroups()
+  const { redirectToMobilityGroupsPage,initialItems,setInitialItems } = useAgentsAgeGroups()
+ 
+
   const tableColumns = [
     {
       title: 'Name',
@@ -24,13 +26,7 @@ const AgentsAgeGroups = () => {
       inputProps: { min: 0, max: 200 } // Defatul min:0 and max:100
     }
   ]
-  const initialItems = [
-    {
-      name: 'I am the variable',
-      percentage: '',
-      state: ''
-    }
-  ]
+
 
   return (
     <Grid container xs={12} direction='column'>
@@ -50,11 +46,12 @@ const AgentsAgeGroups = () => {
         item 
         xs={10}>        
         <AgentsTableConfiguration
-          showConfig={true}
-          showCheck={true}
+          showConfig={false}
+          showCheck={false}
           distributionType="Age Group"
           columns={tableColumns}
           initialItems={initialItems}
+          setInitialItems={setInitialItems}
           settingsComponent={null}
         />
       </Grid>

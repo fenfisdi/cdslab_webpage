@@ -15,6 +15,7 @@ import TableInput from './TableInput'
 
 const AgentsTableConfiguration = ({
   initialItems,
+  setInitialItems,
   columns,
   showConfig = true,
   showCheck = true,
@@ -23,18 +24,18 @@ const AgentsTableConfiguration = ({
   selectOptions
 }) => {
   const {
-    items,
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
     handleSettings,
   } = useConfigTableState({
     initialItems,
+    setInitialItems,
     columns
   })
   
   const renderRows = () =>
-    items.map((item, i) => (
+    initialItems.map((item, i) => (
       <TableRow key={'item-' + i}>
         <CountCell>
           <p>#{i + 1} </p>
@@ -56,7 +57,7 @@ const AgentsTableConfiguration = ({
             showConfig={showConfig}
             showCheck={showCheck}
             showDelete={showDelete}
-            itemsCount={items.length}
+            itemsCount={initialItems.length}
             index={i}
             isConfigured={item.state === 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}

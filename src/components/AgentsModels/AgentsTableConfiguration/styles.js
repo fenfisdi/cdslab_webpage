@@ -1,5 +1,9 @@
 import styled from 'styled-components'
-
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`
 export const TableContainer = styled.div`
   display: flex;
   width: 100%;
@@ -23,8 +27,6 @@ export const ActionCell = styled.div`
   width: 100px;
 `
 export const CountCell = styled.div`
-  width: 50px;
-  margin: 0 10px;
   color: ${(props) => props.theme.palette.primary.dark};
 `
 export const TableHeaderRow = styled.div`
@@ -33,7 +35,8 @@ export const TableHeaderRow = styled.div`
   height: 30px;
   align-items: center;
   padding: 10px 20px;
-  justify-content: space-between;
+  justify-content: ${(props) =>
+    props.unique ? 'flex-start' : 'space-between'};
   background: ${(props) => props.theme.palette.grays.main};
 `
 export const ColumnTitle = styled.p`
@@ -43,14 +46,7 @@ export const ColumnTitle = styled.p`
   width: inherit;
   font-size: 0.8em;
   font-weight: normal;
+  width: 100%;
+  text-align: center;
 `
-export const CountTitle = styled.div`
-  width: 50px;
-  margin: 0 40px;
-`
-
-export const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100px;
-`
+export const CountTitle = styled.div``
