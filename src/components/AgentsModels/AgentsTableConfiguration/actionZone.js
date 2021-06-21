@@ -10,12 +10,19 @@ const ActionsZone = ({
   itemsCount,
   handleItemDeleted,
   handleSettings,
-  isConfigured
+  isConfigured,
+  setComponentChildren
 }) => {
+
+  const handleSettingsConfig = () => {
+    handleSettings(index)
+    setComponentChildren('distribution')
+  }
+
   return (
     <ButtonsContainer>
       <IconButton
-        onClick={() => handleSettings(index)}
+        onClick={() => handleSettingsConfig()}
         color="primary"
         aria-label="Sttings"
         component="span"

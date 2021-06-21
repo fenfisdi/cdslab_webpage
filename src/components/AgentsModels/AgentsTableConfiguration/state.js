@@ -34,6 +34,7 @@ export const useAgentsTableConfigurationState = ({ initialItems, columns }) => {
   }
 
   const handleCloseSettings = (item) => {
+    console.log(item)
     console.log('HANDLE CLOSED', item)
     const itemsCopy = [...items]
     const state = item?.state

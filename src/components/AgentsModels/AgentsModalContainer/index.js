@@ -1,30 +1,55 @@
-import React, { useState } from 'react'
-import { Dialog } from '@material-ui/core'
-import { DialogTitle } from '@material-ui/core'
-import { DialogContent } from '@material-ui/core'
-import { DialogActions } from '@material-ui/core'
-import { Button } from '@material-ui/core'
-import { AgentsDistribution } from './AgentsDistribution'
+import React from 'react'
+import { makeStyles } from '@material-ui/core'
+import Backdrop from '@material-ui/core/Backdrop'
+import { Modal } from '@material-ui/core'
+import { Fade } from '@material-ui/core'
 
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: '90%',
+    height: '90%'
+  }
+}))
 
-export const AgentsModalContainer = ({open,handleCloseModal,inputs}) => {
+export const AgentsModalContainer = (
+  {
+    children,
+    open,
+    handleClose,
+    currentItem,
+    distributionType
+  }) => {
 
-  const [step, setStep] = useState(1)
-
+  const classes = useStyles()
 
   return (
-    <Dialog onClose={handleCloseModal} maxWidth='lg' fullWidth={true} aria-labelledby="customized-dialog-title" open={open}>
-      <DialogTitle id="customized-dialog-title" onClose={handleCloseModal}>
-          Help information
-      </DialogTitle>
-      <DialogContent dividers>
-        <AgentsDistribution></AgentsDistribution>
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={handleCloseModal} style={{'color':'#333'}}>
-            Ok
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <Modal
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.modal}
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500
+      }}
+    >
+      <Fade in={open}>
+        <div className={classes.paper}>
+          <h2>{distributionType} distribution</h2>
+          {children({ handleClose: handleClose, item: currentItem })}
+        </div>
+      </Fade>
+    </Modal>
   )
 }
