@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const useAgentsTableConfigurationState = ({ initialItems, columns }) => {
+export const useConfigTableState = ({ initialItems, columns }) => {
   const [items, setItems] = useState(initialItems)
   const [currentIndex, setCurrentIndex] = useState(null)
   const [openSettings, setOpenSettings] = useState(false)
@@ -17,8 +17,11 @@ export const useAgentsTableConfigurationState = ({ initialItems, columns }) => {
   }
 
   const handleItemChanged = (i, event) => {
+    const name = event.target ? event.target.name : event.slider.name
+    const value = event.target ? event.target.value : event.slider.value
+    console.log(event.slider)
     const itemsCopy = [...items]
-    itemsCopy[i] = { ...itemsCopy[i], [event.target.name]: event.target.value }
+    itemsCopy[i] = { ...itemsCopy[i], [name]: value }
     setItems(itemsCopy)
   }
 

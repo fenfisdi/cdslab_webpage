@@ -11,18 +11,29 @@ const AgentsAgeGroups = () => {
   
   const { redirectToMobilityGroupsPage } = useAgentsAgeGroups()
   const tableColumns = [
-    { title: 'Age group name', att: 'agename', type: 'text' },
-    { title: '% of population', att: 'population', type: 'number' }
+    {
+      title: 'Name',
+      att: 'name',
+      type: 'text',
+      inputProps: { fullWidth: true } // use fullWidth when you have just 1 column
+    },
+    {
+      title: 'Percentage',
+      att: 'percentage',
+      type: 'slider',
+      inputProps: { min: 0, max: 200 } // Defatul min:0 and max:100
+    }
   ]
   const initialItems = [
     {
-      agename: '',
-      population: ''
+      name: 'I am the variable',
+      percentage: '',
+      state: ''
     }
   ]
 
   return (
-    <>
+    <Grid container xs={12} direction='column'>
       <Grid container item xs={12}
         direction="row"
         justify="space-between"
@@ -39,6 +50,8 @@ const AgentsAgeGroups = () => {
         item 
         xs={10}>        
         <AgentsTableConfiguration
+          showConfig={true}
+          showCheck={true}
           distributionType="Age Group"
           columns={tableColumns}
           initialItems={initialItems}
@@ -54,7 +67,7 @@ const AgentsAgeGroups = () => {
         disabled={false}            
       />
       
-    </>
+    </Grid>
   )
 }
 

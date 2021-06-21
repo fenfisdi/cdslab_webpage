@@ -10,12 +10,13 @@ import SnackbarComponent from '@components/ui/Snackbars'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import {languageContext} from '../../../config/languageContext'
+import LoaderComponent from '../../../components/ui/Loader'
 
 const CompartmentalOptimizeParametersPage = () => {
 
   const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const { executeSelectedOption } = useCompartmentalOptimizeParametersPageState({ showSnack, setShowSnack })
+  const { executeSelectedOption, loading } = useCompartmentalOptimizeParametersPageState({ showSnack, setShowSnack })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   }
@@ -33,7 +34,7 @@ const CompartmentalOptimizeParametersPage = () => {
 
       <SubtitleCommon text={t('uploadDataPage.dataSource')}/>
 
-      <CompartmentalOptimizeParametersContainerModelCard>
+      {!loading && <CompartmentalOptimizeParametersContainerModelCard>
         <Grid container item xs={12}>
           <ModelCard
             options={OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION}
@@ -42,7 +43,13 @@ const CompartmentalOptimizeParametersPage = () => {
             height='300px'
           />
         </Grid>
-      </CompartmentalOptimizeParametersContainerModelCard>
+      </CompartmentalOptimizeParametersContainerModelCard>}
+
+      {loading && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
+      />}
 
       {showSnack && showSnack.show && <SnackbarComponent
         snackDuration={3500}
