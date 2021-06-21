@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import SupportComponent from '../../../components/SupportComponent'
 import {
   CompartmentalReviewConfigurationInformationContainer
@@ -12,8 +12,11 @@ import { isEmpty } from 'lodash'
 import ReviewSimulationSettings from '../../../components/CompartmentalModels/ReviewSimulationSettings'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import {languageContext} from '../../../config/languageContext'
 
 const CompartmentalReviewConfigurationInformationPage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
 
   const {
@@ -34,10 +37,10 @@ const CompartmentalReviewConfigurationInformationPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Review configuration' />
+      <SubtitleCommon text={t('reviewConfigurationPage.title')} />
 
       {!isEmpty(currentSimulation) && !isEmpty(predefinedModelSelected) && <ReviewSimulationSettings
         simulation={{

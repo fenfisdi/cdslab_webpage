@@ -325,20 +325,20 @@ export const OPTIONS_SIMULATION_TYPE = [
   {name:'Fixed parameters',indetifier:SIMULATION_IDENTIFIERS.FIXED}]
 
 export const OPTIONS_ADJUST_PARAMETERS = [
-  {name:'Upload Data',indetifier:ADJUST_PARAMETERS.UPLOAD_DATA},
-  {name:'Use Available data (INS)',indetifier:ADJUST_PARAMETERS.USE_AVAILABLE}]
+  {name:'Upload data',indetifier:ADJUST_PARAMETERS.UPLOAD_DATA},
+  {name:'Use available data (INS)',indetifier:ADJUST_PARAMETERS.USE_AVAILABLE}]
 
 export const OPTIONS_COMPARTMENTAL_MAIN = [
   {
     titleIcon: SvgPlus,  
-    name: 'New simulation',
+    name: 'compartmentalMainPage.newSimulation',
     indetifier: 'new_simulation',
     url: 'compartmentalModels/newSimulations',
     ruta: 'newSimulations'
   },
   {
     titleIcon:SvgNote,
-    name: 'My simulations',
+    name: 'compartmentalMainPage.mySimulations',
     indetifier: 'my_simulations',
     url: 'compartmentalModels/mySimulations',
     ruta: 'mySimulations'
@@ -347,14 +347,14 @@ export const OPTIONS_COMPARTMENTAL_MAIN = [
 
 export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
   {
-    name: 'Optimize parameters',
+    name: 'chooseSimulationtype.optimizedParameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.OPTIMIZE,
     url: '',
     ruta: 'configureParameters'
   },
   {
     
-    name: 'Fixed parameters',
+    name: 'chooseSimulationtype.fixedParameters',
     indetifier: INDETIFIER_COMPARTMENTAL_CHOOSE_SIMULATION.FIXED,
     url: '',
     ruta: 'fixedParameters'
@@ -365,13 +365,13 @@ export const OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION = [
 export const OPTIONS_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION = [
   {
       
-    name: 'Upload data',
+    name: 'uploadDataPage.uploadData',
     indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.UPLOAD,
     url: ''
   },
   {
     
-    name: 'Use available data (INS)',
+    name: 'uploadDataPage.useAvailableINS',
     indetifier: INDETIFIER_COMPARTMENTAL_OPTIMIZE_PARAMETERS_SIMULATION.USEAVAILABLE,
     url: ''
   }

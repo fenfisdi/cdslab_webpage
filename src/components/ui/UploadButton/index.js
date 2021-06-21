@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {languageContext} from '../../../config/languageContext'
 import {
   Button,
   Grid
@@ -12,6 +13,8 @@ export const UploadButton = ({
   accept,
   fileName
 }) => {
+
+  const {t} = useContext(languageContext)
   const classes = useUploadButtonStyle()
   return (
     <Grid xs={xs} container item direction="column" justify="center" alignItems="center">
@@ -21,7 +24,7 @@ export const UploadButton = ({
           component="label"
           className={classes.root}
         >
-          Upload File
+          {t('uploadDataPage.uploadFile')}
           <input
             type="file"
             name="file"

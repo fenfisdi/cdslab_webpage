@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import { useCompartmentalChooseSimulationPageState } from './state'
 import { OPTIONS_COMPARTMENTAL_CHOOSE_SIMULATION } from '../../../constants/compartmental'
@@ -13,8 +13,11 @@ import {
 } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import { languageContext } from '../../../config/languageContext'
 
 const CompartmentalChooseSimulationPage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
 
   const {
@@ -35,10 +38,10 @@ const CompartmentalChooseSimulationPage = () => {
         alignItems="flex-start"
       >
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_CHOOSE_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CHOOSE_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Choose simulation type' />
+      <SubtitleCommon text={t('chooseSimulationtype.title')} />
 
       {!loadingSimulationFolderInformation && <CompartmentalChooseSimulationForm>
         <ModelCard

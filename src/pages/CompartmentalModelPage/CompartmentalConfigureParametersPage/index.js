@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import { useCompartmentalConfigureParametersPageState } from './state'
 import ConfigurableParametersForm from '../../../components/CompartmentalModels/ConfigurableParametersForm'
@@ -9,8 +9,11 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalConfigureParametersSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import {languageContext} from '../../../config/languageContext'
 
 const CompartmentalConfigureParametersPage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const {
     currentSimulation,
@@ -29,10 +32,10 @@ const CompartmentalConfigureParametersPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_CONFIGURE_PARAMETERS_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Configure parameters values' />
+      <SubtitleCommon text={t('configureParametersPage.title')} />
 
       {modelData && modelData.parameters && <ConfigurableParametersForm
         parameters={modelData.parameters}

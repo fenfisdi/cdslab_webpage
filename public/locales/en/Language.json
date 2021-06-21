@@ -61,5 +61,81 @@
     "title": "Simulations",
     "CompartmentalButton": "Compartmental model",
     "AgentsButton": "Agent based models"
+  },
+  "compartmentalMainPage": {
+    "newSimulation": "New simulation",
+    "mySimulations": "My simulations"
+  },
+  "chooseSimulation": {
+    "title": "Name your simulation:",
+    "instruction": "Choose one of the predefined models"
+  },
+  "chooseSimulationtype": {
+    "title": "Choose simulation type",
+    "optimizedParameters": "Optimize parameters",
+    "fixedParameters": "Fixed Parameters"
+  },
+  "configureParametersPage": {
+    "title": "Configure parameters values",
+    "parameter": "Parameter",
+    "configurationType": "Configuration type",
+    "value": "Value",
+    "units": "Units"
+  },
+  "uploadDataPage": {
+    "title": "Choose variable to fit model",
+    "dataSource": "Choose data source",
+    "select": "Select Variable",
+    "instructionCSV": "Upload a CSV optimization data file.",
+    "instructionCSVStructure": "The uploaded file should meet the following structure:",
+    "dateFormat": "The Date column must be formatted using ISO date format: yyyy-mm-dd.",
+    "date": "Date",
+    "uploadFile": "Upload File",
+    "uploadData": "Upload Data",
+    "useAvailableINS": "Use available data (INS)"
+  },
+  "selectDatePage": {
+    "title": "Choose simulation dates",
+    "initialDate": "Simulation initial date",
+    "finalDate": "Simulation final date"
+  },
+  "reviewConfigurationPage": {
+    "title": "Review configuration",
+    "simulationName": "Simulation name:",
+    "typeOfSimulation": "Type of simulation:",
+    "typeModel": "Type Model:",
+    "parameters": "Parameters:",
+    "stateVariable": "State variable",
+    "dataSource": "Data source"
+  },
+  "executedSimulation": {
+    "title": "Your simulation is being processed",
+    "warning": "Simulations can take several minutes.",
+    "notification": "You’ll be notified via e-mail when everythings is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset."
+  },
+  "configureInitialVaulesPage": {
+    "title": "Configure initial values of the state variables",
+    "state": "State variable",
+    "value": "Value",
+    "units": "Units"
+  },
+  "compartmentalTabs": {
+    "compartmental": "Compartmental",
+    "agents": "Agents"
+  },
+  "information": {
+    "title": "Help"
+  },
+  "helpInformationCompartmental": {
+    "newSimulation": "Compartmental models are useful dynamical models to describe the transmission of diseases and are very common in epidemiology. They divide the population into compartments or subgroups which correspond to state variables that indicate the number of individuals who are in a specific stage of the disease. According to the number of compartments, the name of the predefined model will change. For example, the SIR model has 3 compartments (Susceptible, Infected, Recovered) while the SEIRVmodel has 5 compartments (Susceptible, Exposed, Infected, Recovered, Virus). For more information visit https://fenfisdi.github.io/cdslab/compartimentales.html",
+    "chooseSimulation": "The user can choose between simulations with fixed parameters, and simulations with adjusted or optimized parameters, where the user designs the model according to available data and information. Note that it is possible to have some fixed parameters and others adjusted, since the user can choose which parameters will be adjusted to the data in use and which others will have a numerical value set by the user.",
+    "fixedParameters": "In this section, the user should assign a numerical value to each parameter in the model. These parameters should reflect the characteristics of disease as well as the scenario to be modeled. For further information use the help buttons in each parameter or go to https://fenfisdi.github.io/cdslab/compartimentales.html",
+    "configureParameters": "In this section you must choose, for each of the parameters, whether it will be optimized or fixed. In case of an optimized (adjusted) parameter you must choose a numerical range, i.e. a minimum and a maximum value within which the algorithm will search the optimal value according to the data set you choose later. If it is a fixed parameter, you must assign a numerical value to that parameter of the model. These parameters must account for the characteristics of the disease and the scenario to be modeled. For further information use the help buttons in each parameter or go to https://fenfisdi.github.io/cdslab/compartimentales.html  ",
+    "stateVariables": "Assign to each population subgroup a numerical value corresponding to the number of individuals, and also to virus concentration in the environment in the SEIRV model, at the initial time of the simulation. Initial values represent moment 0 of the population in each of the compartments. For further information about each compartment (variables), go to the help buttons for every name or go to https://fenfisdi.github.io/cdslab/compartimentales.html",
+    "setDates": "It is important to choose a range of dates in which your model will run as this will determine how long or how short the simulation time is. Here you need to consider how many days you want the disease to be simulated in the set scenario with the information entered in previous sections.",
+    "reviewConfiguration": "In this section you will find all the information that you supplied to the platform to run your simulation. If you agree with the data here displayed, continue with the simulation, otherwise you may change the values.",
+    "simulationExecuted": "Running your simulation can take several minutes. We ask for your patience in this process. Once the results of your simulation are available, you will be notified via email about the completion of the process and about the access to the relevant files. You can also see these results in the tab Simulations >> My Simulations.",
+    "optimizeParameters": "In this window you must choose whether you want to load from a local file the data that will be used to optimize the parameters you previously selected, or if you will use an available report from the National Institute of Health.",
+    "uploadData": "In this section you should: Choose the state variable (compartment) that will be used to optimize the parameters. This compartment must match the information you are providing, that is, if you have the data of infected people over time, you must choose the variable Infected. Load from a CSV file the data that you want to use to adjust the parameters and run your simulation. REMEMBER that the file must contain two columns. The first should contain the dates of the reports and the second the numbers corresponding to each report of the subgroup of interest."
   }
 }

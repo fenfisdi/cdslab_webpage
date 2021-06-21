@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useContext } from 'react'
 import { SelectComponent } from '../../../../ui/Select'
 import ExtraParameters from '../extraParameters'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow'
 import { ParametersFormBodyItem } from './styles'
 import SupportComponent from '../../../../SupportComponent'
 import iconInfo from '../../../../../assets/images/information_freepik.svg'
+import {languageContext} from '../../../../../config/languageContext'
 
 const useStyles = makeStyles({
   table: {
@@ -32,6 +33,8 @@ const StyledTableRow = withStyles(() => ({
 
 
 const ParametersForm = ({parameters,fieldsParametersForm}) => {
+
+  const {t} = useContext(languageContext)
   const classes = useStyles()
   return (
     <TableContainer >
@@ -39,10 +42,10 @@ const ParametersForm = ({parameters,fieldsParametersForm}) => {
         
         <TableHead style={{  background:'#CFD8DC'}}>
           <TableRow>
-            <TableCell align="center">Parameter</TableCell>
-            <TableCell align="center">Configuration Type</TableCell>
-            <TableCell align="center">Value</TableCell>
-            <TableCell align="center">Units</TableCell>
+            <TableCell align="center">{t('configureParametersPage.parameter')}</TableCell>
+            <TableCell align="center">{t('configureParametersPage.configurationType')}</TableCell>
+            <TableCell align="center">{t('configureParametersPage.value')}</TableCell>
+            <TableCell align="center">{t('configureParametersPage.units')}</TableCell>
             <TableCell align="center"></TableCell>
           </TableRow>
         </TableHead>

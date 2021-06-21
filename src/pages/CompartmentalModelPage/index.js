@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useContext } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
@@ -6,6 +6,7 @@ import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 import { Breadcrumbs } from '@material-ui/core'
+import {languageContext} from '../../config/languageContext'
 
 const CompartmentalModelPage = () => {
   const match = useRouteMatch()
@@ -24,10 +25,12 @@ const CompartmentalModelPage = () => {
   const CompartamentalMySimulationsPreviewPage = React.lazy(() => import('./CompartamentalMySimulationsPreviewPage'))
   const CompartmentalFixedParametersPage = React.lazy(()=>import('./CompartmentalFixedParametersPage'))
   
+  const {t} = useContext(languageContext)
+
   const tabs = [
     {
       id: 1,
-      label: 'Compartmental',
+      label: t('compartmentalTabs.compartmental'),
       path:  match.path,
       disabled : false,
       icon : imgCompartamental,
@@ -37,7 +40,7 @@ const CompartmentalModelPage = () => {
     },
     {
       id: 2,
-      label: 'Agents',
+      label: t('compartmentalTabs.agents'),
       path: `${match.path}/mySimulations`,
       disabled : true,
       icon: imgAgents,
