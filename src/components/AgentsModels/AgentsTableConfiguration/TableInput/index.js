@@ -7,11 +7,11 @@ export default function TableInput({
   type = 'text',
   min = 0,
   max = 100,
+  step,
   value = '',
   selectOptions,
   onChange,
-  fullWidth,
-  step
+  fullWidth
 }) {
   const renderTextField = () => (
     <TextField

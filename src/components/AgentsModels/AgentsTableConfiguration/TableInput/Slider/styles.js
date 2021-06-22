@@ -8,7 +8,7 @@ export const SliderContainer = styled.div`
     width: 65%;
   }
   & .input-slider {
-    width: 20%;
+    width: 25%;
     font-size: 0.8em;
   }
 `

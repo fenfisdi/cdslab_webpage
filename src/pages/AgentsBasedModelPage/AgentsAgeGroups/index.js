@@ -23,7 +23,7 @@ const AgentsAgeGroups = () => {
       title: 'Percentage',
       att: 'percentage',
       type: 'slider',
-      inputProps: { min: 0, max: 200 } // Defatul min:0 and max:100
+      inputProps: { min: 0, max: 1, step: 0.001 }// Defatul min:0 and max:100
     }
   ]
 

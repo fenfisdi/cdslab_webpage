@@ -9,7 +9,8 @@ const defaultMinMaxFormat = (value) => `${value}`
 export default function TableSlider({
   name,
   min = 0,
-  max = 100,
+  max = 1,
+  step = 0.1,
   value,
   minMaxFormat = defaultMinMaxFormat,
   valueLabelFormat = defaultValueLabelFormat,
@@ -42,6 +43,7 @@ export default function TableSlider({
         value={value}
         min={min}
         max={max}
+        step={step}
         getAriaValueText={valueLabelFormat}
         valueLabelFormat={valueLabelFormat}
         onChange={handleSliderChange(name)}
@@ -57,9 +59,9 @@ export default function TableSlider({
         margin="dense"
         onChange={handleSliderChange(name)}
         inputProps={{
-          step: 1,
+          step: step,
           min: 0,
-          max: 100,
+          max: 1,
           type: 'number',
           'aria-labelledby': 'input-slider'
         }}
