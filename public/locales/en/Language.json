@@ -30,7 +30,10 @@
   "qrForm": {
     "code": "Code",
     "enterCode": "Please enter the verification code",
-    "recoverQrBinding": "Lost your QR link?"
+    "continue": "Continue",
+    "recoverQrBinding": "Lost your QR link?",
+    "helpRegister": "To log in into your account you need to download Google Authentiator in your phone. Scan the QR code and then enter the code you receive in you phone. This 2-step verification process makes your account log-in secure and easy.",
+    "helperLogin": "Open your Google Authenticator application and enter the code corresponding to your email account"
   },
   "successRegister": "Please check your email to finish the process",
   "accountRecovery": {
