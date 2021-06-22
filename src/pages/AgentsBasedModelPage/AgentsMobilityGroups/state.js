@@ -45,9 +45,6 @@ export const useAgentsMobilityGroups = () => {
      
   }
 
-  useEffect(() => {
-    setmobility(mobilityArray)
-  }, [mobilityArray])
 
   const handleAddItem = () => {
     mobilityArray.push({

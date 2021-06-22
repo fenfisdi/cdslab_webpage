@@ -49,6 +49,7 @@ export const useAgentsAgeGroups = () => {
   const handleClickSaveAgentsAgeModel =(information)=>{    
     saveAgentsAgeModelInformation(information,'94257c90-d396-11eb-a821-02420a000520').then(()=>{      
       getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
+      redirectToMobilityGroupsPage()
     })
     
   }
