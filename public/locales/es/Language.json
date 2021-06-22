@@ -42,8 +42,10 @@
   "qrForm": {
     "code": "Codigo",
     "enterCode": "Por favor ingrese el código de verificación",
-    "continue": "Contimuar",
-    "recoverQrBinding": "¿Perdiste tu enlace QR?"
+    "continue": "Continuar",
+    "recoverQrBinding": "¿Perdiste tu enlace QR?",
+    "helpRegister": "Para acceder a tu cuenta, necesitas descargar Google Authenticator en tu celular. Escanea el código QR e ingresa el código asociado a tu cuenta. Esta verificación en dos pasos hace que  el acceso a su cuenta sea segura y fácil.",
+    "helperLogin": "Abra su aplicación Google Authenticator e ingrese el código correspondiente a su cuenta de email"
   },
   "validators": {
     "fieldRequired": "Este campo es obligatorio.",
