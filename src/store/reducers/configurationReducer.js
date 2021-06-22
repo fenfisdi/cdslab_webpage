@@ -11,7 +11,7 @@ import {
 
 export const initialState = {
   configuration: {
-    data: null,
+    data: {},
     listConfiguration: [],
     listConfigurationDistance:[],
     listConfigurationTime: [],

@@ -22,8 +22,8 @@ export const useConfigurationActions = (dispatch) => {
       .then(({data}) => {
         dispatch({ type: CONFIGURATION_SET_LIST, payload: data.data })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
@@ -37,8 +37,8 @@ export const useConfigurationActions = (dispatch) => {
         }
         dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
@@ -52,27 +52,26 @@ export const useConfigurationActions = (dispatch) => {
         }
         dispatch({ type: CONFIGURATION_TIME_LIST, payload: dataList })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
   const addConfiguration = (configurationForm) => {
     dispatch({ type: CONFIGURATION_LOADING })
     requestAddConfiguration(configurationForm)
-      .then(({data}) => {
-        dispatch({ type: CONFIGURATION_ADD, payload: data.data })
+      .then((response) => {
+        dispatch({ type: CONFIGURATION_ADD, payload: response })
       })
-      .catch((error) => {
-        dispathError(error)
+      .catch(() => {
+        dispathError()
       })
   }
 
-  const dispathError = (error) => {
-    const { response: { data } } = error
+  const dispathError = () => {
     dispatch({
       type: CONFIGURATION_ERROR,
-      payload: data
+      payload: 'Error configuration'
     })
   }
  
