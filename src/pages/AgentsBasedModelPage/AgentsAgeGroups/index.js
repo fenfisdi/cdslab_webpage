@@ -4,7 +4,7 @@ import CompartmentalButton from '../../../components/CompartmentalModels/Compart
 import { useAgentsAgeGroups } from './state'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import SupportComponent from '../../../components/SupportComponent'
-import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 
 const AgentsAgeGroups = () => {
@@ -35,7 +35,7 @@ const AgentsAgeGroups = () => {
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
+        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_AGE_MODELS} /></Grid>
       </Grid>
 
 
