@@ -26,11 +26,11 @@ export default function TableSlider({
     }
   ]
 
-  const handleSliderChange = (name) => (event, value) => {
-    let newVal = value ? value : event.target.value
+  const handleSliderChange = (nameSlider) => (event, valueSlider) => {
+    let newVal = valueSlider ? valueSlider : event.target.value
     newVal = newVal > max ? max : Number(newVal)
     newVal = newVal < min || isNaN(newVal) ? min : Number(newVal)
-    onChange({ slider: { name, value: newVal } })
+    onChange({ slider: { name:nameSlider, value: newVal } })
   }
 
   return (
