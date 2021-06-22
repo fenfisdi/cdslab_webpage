@@ -26,14 +26,14 @@ import SvgManagement from '../../../assets/icons/SvgManagement'
 
 const categories = [
   {
-    id: '',
+    id: '1',
     children: [
       { id: 'landingPage.simulations', icon: <SvgChart fill='#FFFFFF' style={{marginLeft: '15px'} } /> , typeIcon : 'svg', href: '/simulationModels', rol: ['user','root','admin'] },
       { id: 'landingPage.management', icon: <SvgManagement fill='#FFFFFF' style={{marginLeft: '15px'} }/>, typeIcon : 'svg', href: '/management', rol: ['admin','root'] },
     ]
   },
   {
-    id: '',
+    id: '2',
     children: [
       { id: 'Profile', icon: <AccountCircleIcon style={{ fontSize: 50 }} />,typeIcon : 'material',href: '/profile', rol: ['user','root','admin'] },
     ]
@@ -171,7 +171,7 @@ function Navigator (props) {
           </ListItem>
         </Link>
         {categories.map(({ id, children}) => (
-          <React.Fragment key={id}>
+          <React.Fragment key={`${id}-nav-bar`}>
             <Divider className={classes.divider} />
             <ListItem className={classes.categoryHeader}>
               <ListItemText
@@ -179,7 +179,7 @@ function Navigator (props) {
                   primary: classes.categoryHeaderPrimary
                 }}
               >
-                {id}
+                
               </ListItemText>
             </ListItem>{}
             {children
@@ -226,9 +226,9 @@ function Navigator (props) {
               <span className={classes.testLogout}>Logout</span>
             </ListItem>
           </Link>
-          <Link className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
+          <div className={classes.linkLenguage} variant='body2' onClick={changelanguage}>
             {language ? 'ES':'EN' }
-          </Link>
+          </div>
         </ListItem>
       </List>
     </Drawer>

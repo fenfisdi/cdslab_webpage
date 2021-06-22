@@ -9,21 +9,21 @@ import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTab
 
 const AgentsAgeGroups = () => {
   
-  const { redirectToMobilityGroupsPage,initialItems,setInitialItems } = useAgentsAgeGroups()
+  const { handleClickSaveAgentsAgeModel,initialItems,setInitialItems } = useAgentsAgeGroups()
  
 
   const tableColumns = [
     {
-      title: 'Name',
+      title: 'Age group name',
       att: 'name',
       type: 'text',
       inputProps: { fullWidth: true } // use fullWidth when you have just 1 column
     },
     {
-      title: 'Percentage',
-      att: 'percentage',
-      type: 'slider',
-      inputProps: { min: 0, max: 1, step: 0.001 }// Defatul min:0 and max:100
+      title: '% of population',
+      att: 'population_percentage',
+      type: 'slider',      
+      inputProps: { min: 0, max: 1, step: 0.001, initialValue:0 }// Defatul min:0 and max:100
     }
   ]
 
@@ -60,7 +60,7 @@ const AgentsAgeGroups = () => {
         justify='flex-end'
         alignItems='center'
         text='Continue'
-        onClick={redirectToMobilityGroupsPage}
+        onClick={()=>{handleClickSaveAgentsAgeModel(initialItems)}}
         disabled={false}            
       />
       

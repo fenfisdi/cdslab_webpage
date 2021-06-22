@@ -8,7 +8,8 @@ export const useConfigTableState = ({ initialItems, columns, setInitialItems }) 
     const itemsCopy = [...initialItems]
     const newItem = {}
     columns.forEach((column) => {
-      newItem[column.att] = ''
+      const {inputProps:{initialValue=''}=''} = column
+      newItem[column.att] = initialValue
     })
     itemsCopy.push(newItem)
 

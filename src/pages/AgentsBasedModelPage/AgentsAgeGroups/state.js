@@ -1,13 +1,14 @@
 import { useHistory } from 'react-router'
 import { useStore } from '../../../store/storeContext'
-import { useAgentsModelActions } from '@actions/agentsModelActions'
+import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
 import { useEffect, useState } from 'react'
 export const useAgentsAgeGroups = () => {
   const history = useHistory()
   const {
     state: {      
-      agentsModel: {
-        data
+      agentsAgeModel: {
+        data,
+        error
       }
     },
     dispatch
@@ -16,16 +17,28 @@ export const useAgentsAgeGroups = () => {
   const [ initialItems, setInitialItems ] = useState([
     {
       name: '',
-      percentage: ''      
+      population_percentage: 0    
     }
   ])
+  const { saveAgentsAgeModelInformation, getAgentsAgeModelInformation } = useAgentsAgeModelActions(dispatch)
 
-  const { saveAgentsInformation } = useAgentsModelActions(dispatch)
+  const parseInformationAgeModel =(arrayAges=[])=>{
+    return arrayAges.map((age)=>{
+      return {
+        name:age.name,
+        population_percentage:age.population_percentage
+      }
+    })
 
-  useEffect(()=>{
-    console.log(':::::::agentsModel>',data)
-    console.log('::::::::>initialItems',initialItems)
-  },[data,initialItems])
+  }
+  
+  useEffect(()=>{ 
+    if(data.length == 0 && !error){
+      getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
+    }else if(data.length > 0 && !error){
+      setInitialItems(parseInformationAgeModel(data))
+    }
+  },[data])
   
   const redirectToMobilityGroupsPage = () => {
     history.push({
@@ -33,13 +46,17 @@ export const useAgentsAgeGroups = () => {
     })
   }
 
-  const handleClickSaveAgentsModel =(information)=>{
-    saveAgentsInformation(information)
+  const handleClickSaveAgentsAgeModel =(information)=>{    
+    saveAgentsAgeModelInformation(information,'94257c90-d396-11eb-a821-02420a000520').then(()=>{      
+      getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
+      redirectToMobilityGroupsPage()
+    })
+    
   }
 
   return {
     redirectToMobilityGroupsPage,
-    handleClickSaveAgentsModel,
+    handleClickSaveAgentsAgeModel,
     setInitialItems,
     initialItems
   }
