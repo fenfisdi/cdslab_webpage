@@ -86,12 +86,12 @@ export const creationResponseConfigurableParametersForm =(fieldsParametersForm)=
     parameterResponse.unit = unit
 
     if(selectValue == SIMULATION_IDENTIFIERS.OPTIMIZE){      
-      parameterResponse.min_value = parseInt(extraFields[0]['value'])
-      parameterResponse.max_value = parseInt(extraFields[1]['value'])
+      parameterResponse.min_value = parseFloat(extraFields[0]['value'])
+      parameterResponse.max_value = parseFloat(extraFields[1]['value'])
       parameterResponse.value = 0
       
     }else if(selectValue == SIMULATION_IDENTIFIERS.FIXED){
-      parameterResponse.value = parseInt(extraFields[0]['value'])
+      parameterResponse.value = parseFloat(extraFields[0]['value'])
       parameterResponse.min_value = 0
       parameterResponse.max_value = 0
       

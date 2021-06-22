@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   ColumnTitle,
   TableContainer,
@@ -8,50 +8,56 @@ import {
   CountCell,
   CountTitle
 } from './styles'
-import { TextField } from '@material-ui/core'
 import ActionsZone from './actionZone'
-import { useAgentsTableConfigurationState } from './state'
+import { useConfigTableState } from './state'
 import { Button } from '../../ui/Buttons'
+import TableInput from './TableInput'
 
 const AgentsTableConfiguration = ({
   initialItems,
-  columns
+  setInitialItems,
+  columns,
+  showConfig = true,
+  showCheck = true,
+  showDelete = true,
+  showAddButton = true,
+  selectOptions
 }) => {
   const {
-    items,
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
-    handleSettings
-  } = useAgentsTableConfigurationState({
+    handleSettings,
+  } = useConfigTableState({
     initialItems,
+    setInitialItems,
     columns
   })
-  useEffect(() => {
-    renderRows()
-  }, [items])
-
+  
   const renderRows = () =>
-    items.map((item, i) => (
+    initialItems.map((item, i) => (
       <TableRow key={'item-' + i}>
         <CountCell>
           <p>#{i + 1} </p>
         </CountCell>
         {columns.map((column, j) => (
           <TableCell key={'cell-' + j}>
-            <TextField
-              style={{'background-color':'white'}}
-              variant="outlined"
+            <TableInput
               type={column.type}
               name={column.att}
               value={item[column.att]}
+              selectOptions={selectOptions}
               onChange={(event) => handleItemChanged(i, event)}
+              {...column.inputProps}
             />
           </TableCell>
         ))}
         <TableCell>
           <ActionsZone
-            itemsCount={items.length}
+            showConfig={showConfig}
+            showCheck={showCheck}
+            showDelete={showDelete}
+            itemsCount={initialItems.length}
             index={i}
             isConfigured={item.state === 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}
@@ -63,7 +69,7 @@ const AgentsTableConfiguration = ({
 
   const fillTableHeader = () => {
     return (
-      <TableHeaderRow>
+      <TableHeaderRow unique={columns.length === 1}>
         <CountTitle />
         {columns.map((column, i) => (
           <ColumnTitle key={'title-' + i}>{column.title}</ColumnTitle>
@@ -80,9 +86,11 @@ const AgentsTableConfiguration = ({
         {renderRows()}
       </TableContainer>
 
-      <Button onClick={handleAddItem}>
-        Add
-      </Button>      
+      {showAddButton && (
+        <Button onClick={handleAddItem} color="primary">
+          Add
+        </Button>
+      )}
     </>
   )
 }
