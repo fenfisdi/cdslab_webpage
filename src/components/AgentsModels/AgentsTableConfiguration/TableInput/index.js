@@ -11,10 +11,12 @@ export default function TableInput({
   value = '',
   selectOptions,
   onChange,
-  fullWidth
+  fullWidth,
+  style
 }) {
   const renderTextField = () => (
     <TextField
+      style={{'backgroundColor':'white'}}
       variant="outlined"
       type={type}
       name={name}
@@ -26,13 +28,14 @@ export default function TableInput({
 
   const renderSlider = () => (
     <TableSlider
+      style={style}
       name={name}
       id={name}
       value={value}
       min={min}
       max={max}
       step={step}
-      onChange={onChange}
+      onChange={onChange}      
     />
   )
 
@@ -42,6 +45,7 @@ export default function TableInput({
       value={value}
       onChange={onChange}
       options={selectOptions}
+      style={style}
     />
   )
 

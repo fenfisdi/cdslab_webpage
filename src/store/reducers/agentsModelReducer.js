@@ -1,30 +1,35 @@
 
-import { AGENTS_MODEL_REGISTER_ERROR, AGENTS_MODEL_REGISTER_SUCCESS } from '../../actions/types/agentsModelTypes'
+import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS } from '../../actions/types/agentsModelTypes'
 
 
 export const initialState = {
-  agentsModel: {
-    data:{},
-    error:{},
+  agentsAgeModel: {
+    data:[],
+    error:false,
+    errorData:null,
     loading: false
   }
 }
 
-export const agentsModelReducer = (state, action) => {
+export const agentsAgeModelReducer = (state, action) => {
   switch (action.type) { 
     
-  case AGENTS_MODEL_REGISTER_SUCCESS:
+  case AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS:
     return {
       ...state, 
       loading: false, 
-      data: action.payload
+      data: action.payload.data,
+      error:false,
+      errorData:null
     }
 
-  case AGENTS_MODEL_REGISTER_ERROR:
+  case AGENTS_AGE_MODEL_GET_INFORMATION_ERROR:
     return {
       ...state, 
-      loading: false, 
-      error:action.payload
+      loading: false,
+      data:[], 
+      error:true,
+      errorData:action.payload.message,
     }
         
   default:

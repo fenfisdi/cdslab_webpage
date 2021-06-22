@@ -12,7 +12,7 @@ import { mySimulationReducer , initialState as mySimulationsInitialState } from 
 import { sysManagementReducer, initialState as sysManagementReducerInitialState } from './reducers/sysManagementReducer'
 import { configurationReducer, initialState as configurationInitialState } from './reducers/configurationReducer'
 import { userProfileReducer, initialState as userProfileReducerInitialState } from './reducers/userProfileReducer'
-import { agentsModelReducer, initialState as agentsModelReducerInitialState } from './reducers/agentsModelReducer'
+import { agentsAgeModelReducer, initialState as agentsAgeModelReducerInitialState } from './reducers/agentsModelReducer'
 
 export const StoreContext = createContext()
 
@@ -31,7 +31,7 @@ export const StoreProvider = ({ children }) => {
       sysManagementReducer: sysManagementReducer,
       configuration : configurationReducer,
       userProfile: userProfileReducer,
-      agentsModel:agentsModelReducer
+      agentsAgeModel:agentsAgeModelReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -45,7 +45,7 @@ export const StoreProvider = ({ children }) => {
       sysManagementReducerInitialState,
       configurationInitialState,
       userProfileReducerInitialState,
-      agentsModelReducerInitialState)
+      agentsAgeModelReducerInitialState)
   )
   const value = { state, dispatch }
 
