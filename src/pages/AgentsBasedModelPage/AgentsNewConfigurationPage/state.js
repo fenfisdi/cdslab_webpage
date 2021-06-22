@@ -19,10 +19,11 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   } = useConfigurationActions(dispatch)
 
   useEffect(() => {
-    if (listConfigurationDistance.length == 0) { 
+    
+    if (listConfigurationDistance.length == 0 && error == null) { 
       getListConfigurationDistance()
     }
-    if (listConfigurationTime.length == 0) { 
+    if (listConfigurationTime.length == 0 && error == null) { 
       getListConfigurationTime()
     }
   }, [listConfigurationDistance])
@@ -42,7 +43,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   }, [data])
 
   useEffect(() => {
-    if (error) {
+    if (error != null) {
       setShowSnack(
         {
           ...showSnack,
