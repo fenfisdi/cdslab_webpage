@@ -22,7 +22,7 @@ const ActionsZone = ({
   return (
     <ButtonsContainer>
       <IconButton
-        onClick={() => handleSettingsConfig()}
+        onClick={() => handleSettingsConfig(index)}
         color="primary"
         aria-label="Sttings"
         component="span"

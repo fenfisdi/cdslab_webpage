@@ -15,7 +15,7 @@ import TableInput from './TableInput'
 
 const AgentsTableConfiguration = ({
   initialItems,
-  setInitialItems,
+  setItems,
   columns,
   showConfig = true,
   showCheck = true,
@@ -31,7 +31,7 @@ const AgentsTableConfiguration = ({
     handleAddItem,
   } = useConfigTableState({
     initialItems,
-    setInitialItems,
+    setItems,
     columns
   })
   const renderRows = () =>

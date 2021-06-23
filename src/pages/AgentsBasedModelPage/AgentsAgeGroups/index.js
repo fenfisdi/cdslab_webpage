@@ -20,7 +20,8 @@ const AgentsAgeGroups = () => {
     handleCloseSettings,
     currentIndex,
     items,
-    tableColumns
+    tableColumns,
+    setItems
   } = useAgentsAgeGroups()
 
   const renderComponentChildre = () => {
@@ -69,8 +70,8 @@ const AgentsAgeGroups = () => {
           showCheck={false}
           distributionType="Age Group"
           columns={tableColumns}
-          initialItems={items
-          }
+          initialItems={items}
+          setItems={setItems}
           handleSettings={handleSettings}
           setComponentChildren={setComponentChildren}
         />
