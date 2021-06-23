@@ -1,15 +1,14 @@
 import { Button } from '@material-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
 import AgentsDistributionCard from './AgentsDistributionCard'
 import { useAgentsDistributionState } from './state'
 import { Container } from './style'
 
-export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponentChildren, componentChildren }) => {
+export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponentChildren }) => {
   
-  const [currentIndex, setCurrentIndex] = useState(null)
-  const [openSettings, setOpenSettings] = useState(false)
 
-  const { loading,distributionList } = useAgentsDistributionState()
+
+  const { distributionList } = useAgentsDistributionState()
 
   const onFinishSettings = () => {
     /* const itemCopy = { ...modalSettings.item }
@@ -28,9 +27,8 @@ export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponen
   }
 
 
-  const handleSettings = (i) => {
-    setCurrentIndex(i)
-    setOpenSettings(true)
+  const handleNextStep = (nexStep) =>{
+    setComponentChildren(nexStep)
   }
   
   const renderCards = () => (
@@ -39,9 +37,8 @@ export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponen
         <AgentsDistributionCard
           key={i}
           item={item}
-          index={i}
-          handleSettings={handleSettings}
-          setComponentChildren={setComponentChildren}
+          index={i}          
+          handleNextStep={handleNextStep}
         />
       ))}
     </Container>
