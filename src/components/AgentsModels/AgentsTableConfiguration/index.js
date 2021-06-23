@@ -20,10 +20,10 @@ const AgentsTableConfiguration = ({
   showConfig = true,
   showCheck = true,
   showDelete = true,
-  selectOptions,
-  handleSettings,
-  setComponentChildren,
   showAddButton = true,
+  selectOptions,
+  schemaItems,
+  handleSettings
 }) => {
   const {
     handleItemChanged,
@@ -32,8 +32,10 @@ const AgentsTableConfiguration = ({
   } = useConfigTableState({
     initialItems,
     setItems,
-    columns
+    columns,
+    schemaItems
   })
+
   const renderRows = () =>
     initialItems.map((item, i) => (
       <TableRow key={'item-' + i}>
@@ -58,11 +60,11 @@ const AgentsTableConfiguration = ({
             showCheck={showCheck}
             showDelete={showDelete}
             itemsCount={initialItems.length}
+            item={item}
             index={i}
             isConfigured={item.state === 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}
             handleSettings={handleSettings}
-            setComponentChildren={setComponentChildren}
           />
         </TableCell>
       </TableRow>
@@ -91,7 +93,7 @@ const AgentsTableConfiguration = ({
         <Button onClick={handleAddItem} color="primary">
           Add
         </Button>
-      )}
+      )}      
     </>
   )
 }

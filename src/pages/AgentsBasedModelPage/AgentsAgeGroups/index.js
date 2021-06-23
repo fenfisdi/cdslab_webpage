@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { Grid } from '@material-ui/core'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { useAgentsAgeGroups } from './state'
@@ -6,46 +6,17 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
-import { AgentsDistribution } from '../../../components/AgentsModels/AgentsDistribution'
-import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
-const AgentsAgeGroups = () => {
 
-  
-  const [componentChildren, setComponentChildren] = useState('distribution')
+const AgentsAgeGroups = () => {
 
   const { 
     handleClickSaveAgentsAgeModel,
-    openSettings,
     handleSettings,
-    handleCloseSettings,
-    currentIndex,
     items,
     tableColumns,
     setItems
   } = useAgentsAgeGroups()
 
-  const renderComponentChildre = () => {
-    switch (componentChildren) {
-    case 'distribution':
-      return (
-        <AgentsDistribution 
-          setComponentChildren={setComponentChildren}
-          handleClose={handleCloseSettings}
-        />
-      )
-    case 'Empirical':
-      return (<h1>Empirical</h1>)
-    case 'Constant':
-      return (<h1>constant</h1>)
-    case 'Weigths':
-      return (<h1>Weigths</h1>) 
-    case 'Numpy':
-      return (<h1>Numpy</h1>) 
-    default:
-      return (<AgentsDistribution />)
-    }
-    
-  } 
 
 
   return (
@@ -73,17 +44,7 @@ const AgentsAgeGroups = () => {
           initialItems={items}
           setItems={setItems}
           handleSettings={handleSettings}
-          setComponentChildren={setComponentChildren}
         />
-
-        <AgentsModalContainer
-          distributionType="Age Group"
-          open={openSettings}
-          handleClose={handleCloseSettings}
-          currentItem={items[currentIndex]}
-        >
-          {renderComponentChildre}
-        </AgentsModalContainer>
       </Grid>
       
       <CompartmentalButton

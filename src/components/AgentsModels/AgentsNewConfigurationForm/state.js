@@ -1,20 +1,10 @@
-import { useContext} from 'react'
-import { languageContext } from '../../../config/languageContext'
 import { useInputValue } from '../../ui/Input/useInputValue'
 import { useSelectValue } from '../../ui/Select/useSelectValue'
 import { VALIDATORS_NEW_CONFIGURATION_FORM } from './validators'
 
-const MODEL_TYPE_SIR = 'sir'
-const MODEL_TYPE_MOD_SEIRV = 'modSeirv'
-const MODEL_TYPE_SEIR = 'seir'
-
-const PARAMETER_TYPE_FIXED = 'fixed'
-const PARAMETER_TYPE_OPTIMIZE_PARAMETERS = 'optimized'
-
-
 export const useNewConfigurationForm = () => {
 
-  const {t} = useContext(languageContext)
+
 
   const nameConfiguration = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.nameConfiguration, {
     name: 'nameConfiguration',

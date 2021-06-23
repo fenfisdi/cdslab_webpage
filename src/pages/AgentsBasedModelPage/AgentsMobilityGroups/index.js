@@ -1,25 +1,37 @@
 import { Grid } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
+import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import { renderComponentChildre } from '../../../utils/common'
 import { useAgentsMobilityGroups } from './state'
 
 const AgentsMobilityGroups = () => {
   const {
-    redirectToSusceptibilityGroupsPage
+    redirectToSusceptibilityGroupsPage,
+    tableColumns,
+    items, 
+    setItems,
+    schemaItems,
   }= useAgentsMobilityGroups()
-  const tableColumns = [
-    { title: 'Mobility group name', att: 'mobilityname', type: 'text' },
-    
-  ]
-  const initialItems = [
-    {
-      mobilityname: '',      
-    }
-  ]
+
+  const [componentChildren, setComponentChildren] = useState('distribution')
+  const [modalSettings,setModalSettings] = useState({
+    open:false,
+    item:{},
+    index:0
+  })
+  console.log(modalSettings)
+  const Component = renderComponentChildre(componentChildren,{
+    modalSettings,
+    componentChildren,
+    setComponentChildren:setComponentChildren,
+    setModalSettings:setModalSettings
+  })
+ 
   return (
     <>
       <Grid container item xs={12}
@@ -34,14 +46,33 @@ const AgentsMobilityGroups = () => {
         alignItems='center'
         container 
         item 
-        xs={10}>        
+        xs={10}>
         <AgentsTableConfiguration
+          showConfig={true}
+          showCheck={true}
           distributionType="Mobility Group"
           columns={tableColumns}
-          initialItems={initialItems}
-          settingsComponent={null}
-        />
+          initialItems={items}
+          setItems={setItems}
+          schemaItems={schemaItems}
+          handleSettings={({index,item})=>{
+            console.log(index)
+            console.log(item)
+            setModalSettings({...modalSettings,open:true,item,index})
+          }}          
+        />  
       </Grid>
+      <AgentsModalContainer
+        distributionType="Mobility Group"
+        open={modalSettings.open}
+        handleClose={()=>{
+          setModalSettings({...modalSettings,open:false})
+        }}
+        currentItem={null}
+        render={Component}
+      />
+        
+        
       <CompartmentalButton
         justify='flex-end'
         alignItems='center'

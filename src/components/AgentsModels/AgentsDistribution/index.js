@@ -4,27 +4,27 @@ import AgentsDistributionCard from './AgentsDistributionCard'
 import { useAgentsDistributionState } from './state'
 import { Container } from './style'
 
-export const AgentsDistribution = ({ handleClose, item,setComponentChildren }) => {
-
+export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponentChildren, componentChildren }) => {
+  
   const [currentIndex, setCurrentIndex] = useState(null)
   const [openSettings, setOpenSettings] = useState(false)
 
   const { loading,distributionList } = useAgentsDistributionState()
 
   const onFinishSettings = () => {
-    const itemCopy = { ...item }
+    /* const itemCopy = { ...modalSettings.item }
     itemCopy.state = 'CONFIGURED'
     itemCopy.distribution = {
       value1: 'uno',
       value2: 'dos'
-    }
-    handleClose(itemCopy)
+    } */
+    setModalSettings({...modalSettings,open:false})
   }
 
   const onClose = () => {
-    const itemCopy = { ...item }
-    itemCopy.state = ''
-    handleClose(itemCopy)
+    /* const itemCopy = { ...modalSettings.item }
+    itemCopy.state = '' */
+    setModalSettings({...modalSettings,open:false})
   }
 
 
@@ -49,7 +49,7 @@ export const AgentsDistribution = ({ handleClose, item,setComponentChildren }) =
 
   return (
     <div>
-      <p>I am the settings component for {item?.name}</p>
+      <p>I am the settings component for <strong>{modalSettings.item?.name}</strong></p>
       {renderCards()}
       <Button onClick={() => onFinishSettings()}>Save and finish</Button>
       <Button onClick={() => onClose()}>Cancel</Button>

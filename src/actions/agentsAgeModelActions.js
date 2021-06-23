@@ -22,7 +22,7 @@ export const useAgentsAgeModelActions = (dispatch) => {
 
   const getAgentsAgeModelInformation =(idConfiguration)=>{
     getAgentsAgeModelInformationService(idConfiguration).then((response)=>{ 
-      
+      console.log('aquie',response)
       dispatch({
         type: AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS,
         payload:DtoAgentsAgeModelSuccess(response.data.data)

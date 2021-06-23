@@ -22,13 +22,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const AgentsModalContainer = (
   {
-    children,
     open,
     handleClose,
-    currentItem,
-    distributionType
+    distributionType,
+    render
   }) => {
-
+  const Component  = render  
   const classes = useStyles()
 
   return (
@@ -37,7 +36,7 @@ export const AgentsModalContainer = (
       aria-describedby="transition-modal-description"
       className={classes.modal}
       open={open}
-      onClose={handleClose}
+      onClose={()=>{handleClose()}}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -47,7 +46,7 @@ export const AgentsModalContainer = (
       <Fade in={open}>
         <div className={classes.paper}>
           <h2>{distributionType} distribution</h2>
-          {children({ handleClose: handleClose, item: currentItem })}
+          <Component.container {...Component.props}/>
         </div>
       </Fade>
     </Modal>

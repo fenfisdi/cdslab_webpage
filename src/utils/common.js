@@ -1,3 +1,5 @@
+import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
+import React from 'react'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -54,3 +56,34 @@ export const processData = dataString => {
 }
 
 export const formatYmd = date => date.toISOString().slice(0, 10)
+
+
+
+export const renderComponentChildre = (componentChildren,props) => {
+  switch (componentChildren) {
+  case 'distribution':
+    return {
+      container:AgentsDistribution,
+      props
+    }        
+  case 'Empirical':
+    return {
+      Component:<h1>Empirical</h1>
+    }
+  case 'Constant':
+    return {
+      Component:<h1>Constant</h1>
+    }
+  case 'Weigths':
+    return {
+      Component:<h1>Weigths</h1>
+    }
+  case 'Numpy':
+    return {
+      Component:<h1>Numpy</h1>
+    }
+  default:
+    return null
+  }
+  
+} 

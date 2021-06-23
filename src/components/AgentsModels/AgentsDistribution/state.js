@@ -18,7 +18,7 @@ export const useAgentsDistributionState = () => {
     if(distributionList.length == 0 && error == null){
       getListDistribution()
     }
-  }, [])
+  }, [distributionList])
   
 
   return {

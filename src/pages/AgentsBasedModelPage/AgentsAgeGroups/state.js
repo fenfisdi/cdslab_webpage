@@ -8,13 +8,13 @@ export const useAgentsAgeGroups = () => {
 
   const initialItems = [
     {
-      agename: '',
-      population: ''
+      name: '',
+      population_percentage: ''
     }
   ]
   const tableColumns = [
-    { title: 'Age group name', att: 'agename', type: 'text' },
-    { title: '% of population', att: 'population', type: 'number' }
+    { title: 'Age group name', att: 'name', type: 'text',inputProps: { fullWidth: true }  },
+    { title: '% of population', att: 'population_percentage',type: 'slider',  inputProps: { min: 0, max: 1, step: 0.001, initialValue:0 }  }
   ]
   const [items, setItems] = useState(initialItems)
   const [currentIndex, setCurrentIndex] = useState(null)
@@ -40,7 +40,7 @@ export const useAgentsAgeGroups = () => {
 
   }
   
-  useEffect(()=>{ 
+  useEffect(()=>{     
     if(data.length == 0 && !error){
       getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
     }else if(data.length > 0 && !error){
@@ -60,9 +60,7 @@ export const useAgentsAgeGroups = () => {
     setOpenSettings(true)
   }
 
-  const handleCloseSettings = (item) => {
-    console.log(item)
-    console.log('HANDLE CLOSED', item)
+  const handleCloseSettings = (item) => {    
     const itemsCopy = [...items]
     const state = item?.state
     itemsCopy[currentIndex] = { ...itemsCopy[currentIndex], state: state }

@@ -7,45 +7,48 @@ import { ButtonsContainer } from './styles'
 
 const ActionsZone = ({
   index,
+  item,
   itemsCount,
   handleItemDeleted,
   handleSettings,
   isConfigured,
-  setComponentChildren
+  showConfig = true,
+  showCheck = true,
+  showDelete = true
 }) => {
-
-  const handleSettingsConfig = () => {
-    handleSettings(index)
-    setComponentChildren('distribution')
-  }
-
   return (
     <ButtonsContainer>
-      <IconButton
-        onClick={() => handleSettingsConfig(index)}
-        color="primary"
-        aria-label="Sttings"
-        component="span"
-      >
-        <SettingsOutlinedIcon />
-      </IconButton>
-      <IconButton
-        disabled={!isConfigured}
-        color="primary"
-        aria-label="Sttings"
-        component="span"
-      >
-        <CheckIcon />
-      </IconButton>
-      <IconButton
-        disabled={itemsCount === 1}
-        onClick={() => handleItemDeleted(index)}
-        color="primary"
-        aria-label="Delete"
-        component="span"
-      >
-        <DeleteOutlineIcon />
-      </IconButton>
+      {showConfig && (
+        <IconButton
+          onClick={() => handleSettings({index,item})}
+          color="primary"
+          aria-label="Sttings"
+          component="span"
+        >
+          <SettingsOutlinedIcon />
+        </IconButton>
+      )}
+      {showCheck && (
+        <IconButton
+          disabled={!isConfigured}
+          color="primary"
+          aria-label="Sttings"
+          component="span"
+        >
+          <CheckIcon />
+        </IconButton>
+      )}
+      {showDelete && (
+        <IconButton
+          disabled={itemsCount === 1}
+          onClick={() => handleItemDeleted(index)}
+          color="primary"
+          aria-label="Delete"
+          component="span"
+        >
+          <DeleteOutlineIcon />
+        </IconButton>
+      )}
     </ButtonsContainer>
   )
 }

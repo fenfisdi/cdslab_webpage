@@ -1,18 +1,19 @@
-import { useState } from 'react'
+import { isEmpty } from 'lodash'
 
-export const useConfigTableState = ({ initialItems, columns, setItems }) => {
+export const useConfigTableState = ({ initialItems, columns, setItems, schemaItems={} }) => {
   
-  const [openSettings, setOpenSettings] = useState(false)
-
   const handleAddItem = () => {
     const itemsCopy = [...initialItems]
-    const newItem = {}
-    columns.forEach((column) => {
-      const {inputProps:{initialValue=''}=''} = column
-      newItem[column.att] = initialValue
-    })
+    let newItem = {}
+    if(!isEmpty(schemaItems)){
+      newItem = {...schemaItems}
+    }else{
+      columns.forEach((column) => {
+        const {inputProps:{initialValue=''}=''} = column
+        newItem[column.att] = initialValue
+      })      
+    }
     itemsCopy.push(newItem)
-
     //setItems(itemsCopy)
     setItems(itemsCopy)
   }
@@ -37,8 +38,6 @@ export const useConfigTableState = ({ initialItems, columns, setItems }) => {
   return {
     handleAddItem,
     handleItemChanged,
-    handleItemDeleted,
-    openSettings,
-    setOpenSettings
+    handleItemDeleted
   }
 }
