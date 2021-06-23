@@ -10,8 +10,10 @@ import { qrAccountRecoveryReducer, initialState as qrAccountRecoveryInitialState
 import { compartmentalModelReducer, initialState as compartmentalModelInitialState  } from './reducers/compartmentalModelReducer'
 import { mySimulationReducer , initialState as mySimulationsInitialState } from './reducers/mySimulationsReducer'
 import { sysManagementReducer, initialState as sysManagementReducerInitialState } from './reducers/sysManagementReducer'
+import { configurationReducer, initialState as configurationInitialState } from './reducers/configurationReducer'
 import { userProfileReducer, initialState as userProfileReducerInitialState } from './reducers/userProfileReducer'
 import { distributionReducer, initialState as distributionInitialState } from './reducers/distributionReducer'
+import { agentsAgeModelReducer, initialState as agentsAgeModelReducerInitialState } from './reducers/agentsModelReducer'
 
 export const StoreContext = createContext()
 
@@ -28,8 +30,10 @@ export const StoreProvider = ({ children }) => {
       compartmentalModel:compartmentalModelReducer,
       userManagement: userManagementReducer,
       sysManagementReducer: sysManagementReducer,
+      configuration : configurationReducer,
       userProfile: userProfileReducer,
-      distribution: distributionReducer
+      distribution: distributionReducer,
+      agentsAgeModel:agentsAgeModelReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -42,7 +46,10 @@ export const StoreProvider = ({ children }) => {
       userManagementInitialState,
       sysManagementReducerInitialState,
       userProfileReducerInitialState,
-      distributionInitialState)
+      distributionInitialState,
+      configurationInitialState,
+      userProfileReducerInitialState,
+      agentsAgeModelReducerInitialState)
   )
   const value = { state, dispatch }
 

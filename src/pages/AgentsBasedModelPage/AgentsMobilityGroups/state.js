@@ -50,9 +50,6 @@ export const useAgentsMobilityGroups = () => {
     setOpen(false)
   }
 
-  useEffect(() => {
-    setmobility(mobilityArray)
-  }, [mobilityArray])
 
   const handleAddItem = () => {
     mobilityArray.push({

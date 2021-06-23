@@ -107,6 +107,7 @@ export const useCompartmentalOptimizeParametersPageState = ({showSnack, setShowS
   }
 
   return {
-    executeSelectedOption
+    executeSelectedOption,
+    loading:chooseDataSource.nextStep
   }
 }

@@ -4,7 +4,7 @@ import CompartmentalButton from '../../../components/CompartmentalModels/Compart
 import { useAgentsAgeGroups } from './state'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import SupportComponent from '../../../components/SupportComponent'
-import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import { AgentsDistribution } from '../../../components/AgentsModels/AgentsDistribution'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
@@ -14,7 +14,7 @@ const AgentsAgeGroups = () => {
   const [componentChildren, setComponentChildren] = useState('distribution')
 
   const { 
-    redirectToMobilityGroupsPage,
+    handleClickSaveAgentsAgeModel,
     openSettings,
     handleSettings,
     handleCloseSettings,
@@ -46,14 +46,15 @@ const AgentsAgeGroups = () => {
     
   } 
 
+
   return (
-    <>
+    <Grid container xs={12} direction='column'>
       <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="center">
         <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
+        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_AGE_MODELS} /></Grid>
       </Grid>
 
 
@@ -64,6 +65,8 @@ const AgentsAgeGroups = () => {
         item 
         xs={10}>        
         <AgentsTableConfiguration
+          showConfig={false}
+          showCheck={false}
           distributionType="Age Group"
           columns={tableColumns}
           initialItems={items
@@ -86,11 +89,11 @@ const AgentsAgeGroups = () => {
         justify='flex-end'
         alignItems='center'
         text='Continue'
-        onClick={redirectToMobilityGroupsPage}
+        onClick={()=>{handleClickSaveAgentsAgeModel(items)}}
         disabled={false}            
       />
       
-    </>
+    </Grid>
   )
 }
 

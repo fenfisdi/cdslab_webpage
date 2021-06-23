@@ -1,9 +1,11 @@
 import { Button, makeStyles, Table, TableBody, TableRow,TableCell } from '@material-ui/core'
-import React from 'react'
+import React, {useContext} from 'react'
 import CompartmentalButton from '../CompartmentalButton'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import { ExtraParamsItem } from './styles'
 import { useDomParse } from '../../../helpers/useDomParse'
+import {languageContext} from '../../../config/languageContext'
+
 const useStyles = makeStyles(() => ({
   rowColor: {
     background: '#ECEFF1',
@@ -23,6 +25,8 @@ const useStyles = makeStyles(() => ({
 
 const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', showButton=false,showButtonDownload=false,widthTable='100%'})=>{
   const classes = useStyles()
+
+  const {t} = useContext(languageContext)
   const {handleDomParse } = useDomParse()
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
@@ -92,7 +96,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
         <TableBody>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Simulation name:</strong>
+              <strong>{t('reviewConfigurationPage.simulationName')}</strong>
             </TableCell>
             <TableCell>
               {simulation.name || ''}
@@ -100,7 +104,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow>
             <TableCell>
-              <strong>Type of simulation:</strong>
+              <strong>{t('reviewConfigurationPage.typeOfSimulation')}</strong>
             </TableCell>
             <TableCell>
               {simulation.parameter_type || ''}
@@ -108,7 +112,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>Type model:</strong>
+              <strong>{t('reviewConfigurationPage.typeModel')}</strong>
             </TableCell>
             <TableCell>
               {simulation.modelName || ''}
@@ -116,7 +120,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow>
             <TableCell>
-              <strong>Parameters:</strong>
+              <strong>{t('reviewConfigurationPage.parameters')}</strong>
             </TableCell>
             <TableCell>
               {displayParameters(simulation.parameters_limits || [])}
@@ -124,7 +128,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow className={classes.rowColor}>
             <TableCell>
-              <strong>State variable:</strong>
+              <strong>{t('reviewConfigurationPage.stateVariable')}</strong>
             </TableCell>
             <TableCell>
               {displayStateVariables(simulation.state_variable_limits || [])}
@@ -132,7 +136,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
           </TableRow>
           <TableRow>
             <TableCell>
-              <strong>Data source:</strong>
+              <strong>{t('reviewConfigurationPage.dataSource')}</strong>
             </TableCell>
             <TableCell>
               {simulation.fileName}

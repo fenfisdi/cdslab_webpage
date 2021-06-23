@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS } from '../../../constants/helpInformation'
 import { CompartmentalFixedParametersSection } from './styles'
@@ -10,10 +10,13 @@ import FixedParametersFormStateVariables from '../../../components/Compartmental
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import FixedHeaderParameters from './children'
+import { languageContext }  from '../../../config/languageContext'
 
 const CompartmentalFixedParametersPage = () => {
+
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
 
+  const {t} = useContext(languageContext)
   const {
     currentSimulation,
     fixedParametersFormFields,
@@ -32,7 +35,7 @@ const CompartmentalFixedParametersPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS)} />
       </Grid>
 
 

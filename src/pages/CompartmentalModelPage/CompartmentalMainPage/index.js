@@ -1,21 +1,24 @@
 import { Grid, Paper } from '@material-ui/core'
 import { isNull } from 'lodash'
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { useHistory } from 'react-router'
 import ModelCard from '../../../components/CompartmentalModels/ModelCard'
 import { OPTIONS_COMPARTMENTAL_MAIN } from '../../../constants/compartmental'
 import { usePathBreadCrums } from '../../../helpers/usePathBreadCrums'
 import { useCompartmentalMainPageState } from './state'
 import { useCompartmentalMainPageStyles, CompartmentalMainPageContainer, CompartmentalMainPageCards } from './styles'
+import {languageContext} from '../../../config/languageContext'
 
 const CompartmentalMainPage = () => {
+
   const classes = useCompartmentalMainPageStyles()
   const history = useHistory()
   const { predefinedModelsList } = useCompartmentalMainPageState()
   const { handlePathBreadCrums } = usePathBreadCrums()
+  const {t} = useContext(languageContext)
 
   const handleEventEmitted = (cardData) => {
-    handlePathBreadCrums(cardData.ruta, cardData.name)
+    handlePathBreadCrums(cardData.ruta, t(cardData.name))
     cardData.url && history.push(cardData.url)
   }
   return (

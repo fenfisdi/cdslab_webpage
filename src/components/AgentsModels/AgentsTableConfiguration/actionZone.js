@@ -1,10 +1,10 @@
 import React from 'react'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import IconButton from '@material-ui/core/IconButton'
-
 import CheckIcon from '@material-ui/icons/Check'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import { ButtonsContainer } from './styles'
+
 const ActionsZone = ({
   index,
   itemsCount,

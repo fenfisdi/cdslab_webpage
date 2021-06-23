@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   ColumnTitle,
   TableContainer,
@@ -8,40 +8,41 @@ import {
   CountCell,
   CountTitle
 } from './styles'
-import { TextField } from '@material-ui/core'
 import ActionsZone from './actionZone'
-import { useAgentsTableConfigurationState } from './state'
+import { useConfigTableState } from './state'
 import { Button } from '../../ui/Buttons'
-import { AgentsModalContainer } from '../AgentsModalContainer'
+import TableInput from './TableInput'
 
 const AgentsTableConfiguration = ({
   initialItems,
+  setInitialItems,
   columns,
   showConfig = true,
   showCheck = true,
   showDelete = true,
   selectOptions,
   handleSettings,
-  setComponentChildren
+  setComponentChildren,
+  showAddButton = true,
 }) => {
   const {
-    items,
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
-  } = useAgentsTableConfigurationState({
+  } = useConfigTableState({
     initialItems,
+    setInitialItems,
     columns
   })
   const renderRows = () =>
-    items.map((item, i) => (
+    initialItems.map((item, i) => (
       <TableRow key={'item-' + i}>
         <CountCell>
           <p>#{i + 1} </p>
         </CountCell>
         {columns.map((column, j) => (
           <TableCell key={'cell-' + j}>
-            <TextField
+            <TableInput
               type={column.type}
               name={column.att}
               value={item[column.att]}
@@ -56,7 +57,7 @@ const AgentsTableConfiguration = ({
             showConfig={showConfig}
             showCheck={showCheck}
             showDelete={showDelete}
-            itemsCount={items.length}
+            itemsCount={initialItems.length}
             index={i}
             isConfigured={item.state === 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}
@@ -86,10 +87,11 @@ const AgentsTableConfiguration = ({
         {renderRows()}
       </TableContainer>
 
-      <Button onClick={handleAddItem} color="primary">
-        Add
-      </Button>
-      
+      {showAddButton && (
+        <Button onClick={handleAddItem} color="primary">
+          Add
+        </Button>
+      )}
     </>
   )
 }

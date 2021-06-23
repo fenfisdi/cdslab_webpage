@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid } from '@material-ui/core'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS } from '../../../constants/helpInformation'
@@ -9,9 +9,12 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { CompartmentalUploadDataSection } from './styles'
 import SubtitleCommon from '../../../components/ui/SubtitleCommon'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import {languageContext} from '../../../config/languageContext'
 
 
 const CompartmentalUploadDataPage = () => {
+
+  const {t} = useContext(languageContext)
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
 
   const {
@@ -44,10 +47,10 @@ const CompartmentalUploadDataPage = () => {
         justify="space-between"
         alignItems="flex-start">
         <Grid><Breadcrumbs /></Grid>
-        <SupportComponent title="Help" text={HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS} />
+        <SupportComponent title={t('information.title')} text={t(HELP_INFORMATION_UPLOAD_DATA_SIMULATIONS)} />
       </Grid>
 
-      <SubtitleCommon text='Choose variable to fit model' />
+      <SubtitleCommon text={t('uploadDataPage.title')} />
 
       {!loadingSimulationFileUpload && stateVariables.length > 0 && <Grid container item xs={12}>
         <UploadDataForm

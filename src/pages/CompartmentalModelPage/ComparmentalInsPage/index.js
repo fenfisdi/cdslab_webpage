@@ -15,6 +15,7 @@ import TableFormatDynamic from '../../../components/CompartmentalModels/UploadDa
 import AutocompleteComponent from '../../../components/ui/Autocomplete'
 import { useComparmentalInsPageCreateFields } from './createFields'
 import { find } from 'lodash'
+import LoaderComponent from '../../../components/ui/Loader'
 
 const ComparmentalInsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -202,6 +203,12 @@ const ComparmentalInsPage = () => {
           text='Continue'
         />        
       </Grid>}
+
+      {optionsRegions == null || selectOptions == null || dataCurrentSimulation == null && <LoaderComponent
+        width={50}
+        height={50}
+        marginTop={5}
+      />}
 
 
       {showSnack && showSnack.show && <SnackbarComponent

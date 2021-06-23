@@ -16,6 +16,12 @@ export const VALIDATORS_NEW_CONFIGURATION_FORM = {
       message: REQUIRED_MESSAGE,
       check: checkMinLength,
       valueToCheck: 0
+    },
+    {
+      type: 'minlength',
+      message: MIN_LENGTH_MESSAGE.replace('?', 3),
+      check: checkMinLength,
+      valueToCheck: 3
     }
   ],
   simulationInitialDate: [
@@ -24,7 +30,7 @@ export const VALIDATORS_NEW_CONFIGURATION_FORM = {
       message: REQUIRED_MESSAGE,
       check: checkMinLength,
       valueToCheck: 0
-    }
+    },
   ],
   simulationFinalDate: [
     {
@@ -32,7 +38,7 @@ export const VALIDATORS_NEW_CONFIGURATION_FORM = {
       message: REQUIRED_MESSAGE,
       check: checkMinLength,
       valueToCheck: 0
-    }
+    },
   ],
   iterationTime: [
     {
