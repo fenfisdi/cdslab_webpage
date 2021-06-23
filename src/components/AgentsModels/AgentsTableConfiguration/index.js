@@ -21,8 +21,7 @@ const AgentsTableConfiguration = ({
   showCheck = true,
   showDelete = true,
   selectOptions,
-  settingsComponent,
-  distributionType,
+  handleSettings,
   setComponentChildren
 }) => {
   const {
@@ -30,10 +29,6 @@ const AgentsTableConfiguration = ({
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
-    handleSettings,
-    openSettings,
-    handleCloseSettings,
-    currentIndex
   } = useAgentsTableConfigurationState({
     initialItems,
     columns
@@ -94,15 +89,7 @@ const AgentsTableConfiguration = ({
       <Button onClick={handleAddItem} color="primary">
         Add
       </Button>
-      <AgentsModalContainer
-        distributionType={distributionType}
-        open={openSettings}
-        handleClose={handleCloseSettings}
-        currentItem={items[currentIndex]}
-        setComponentChildren={setComponentChildren}
-      >
-        {settingsComponent}
-      </AgentsModalContainer>
+      
     </>
   )
 }

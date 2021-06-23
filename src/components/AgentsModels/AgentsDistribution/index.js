@@ -1,12 +1,16 @@
 import { Button } from '@material-ui/core'
 import React, { useState } from 'react'
 import AgentsDistributionCard from './AgentsDistributionCard'
+import { useAgentsDistributionState } from './state'
 import { Container } from './style'
 
 export const AgentsDistribution = ({ handleClose, item,setComponentChildren }) => {
 
   const [currentIndex, setCurrentIndex] = useState(null)
   const [openSettings, setOpenSettings] = useState(false)
+
+  const { loading,distributionList } = useAgentsDistributionState()
+
   const onFinishSettings = () => {
     const itemCopy = { ...item }
     itemCopy.state = 'CONFIGURED'
@@ -23,24 +27,6 @@ export const AgentsDistribution = ({ handleClose, item,setComponentChildren }) =
     handleClose(itemCopy)
   }
 
-  const initialItemsDistribution = [
-    {
-      name: 'constant',
-      description:
-        'this is a dummy description for Diagnosis, this is a dummy description for Diagnosis, this is a dummy description for Diagnosis',
-      state: ''
-    },
-    {
-      name: 'otro',
-      description: 'this is a dummy description for Quarentine',
-      state: ''
-    },
-    {
-      name: 'Hospitalization',
-      description: 'this is a dummy description for Hospitalization',
-      state: ''
-    }
-  ]
 
   const handleSettings = (i) => {
     setCurrentIndex(i)
@@ -49,7 +35,7 @@ export const AgentsDistribution = ({ handleClose, item,setComponentChildren }) =
   
   const renderCards = () => (
     <Container>
-      {initialItemsDistribution.map((item, i) => (
+      {distributionList.map((item, i) => (
         <AgentsDistributionCard
           key={i}
           item={item}

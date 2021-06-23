@@ -7,28 +7,39 @@ import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import { AgentsDistribution } from '../../../components/AgentsModels/AgentsDistribution'
+import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 const AgentsAgeGroups = () => {
+
+  
   const [componentChildren, setComponentChildren] = useState('distribution')
-  const { redirectToMobilityGroupsPage } = useAgentsAgeGroups()
-  const tableColumns = [
-    { title: 'Age group name', att: 'agename', type: 'text' },
-    { title: '% of population', att: 'population', type: 'number' }
-  ]
-  const initialItems = [
-    {
-      agename: '',
-      population: ''
-    }
-  ]
+
+  const { 
+    redirectToMobilityGroupsPage,
+    openSettings,
+    handleSettings,
+    handleCloseSettings,
+    currentIndex,
+    items,
+    tableColumns
+  } = useAgentsAgeGroups()
 
   const renderComponentChildre = () => {
     switch (componentChildren) {
     case 'distribution':
-      return (<AgentsDistribution setComponentChildren={setComponentChildren} />)
-    case 'constant':
+      return (
+        <AgentsDistribution 
+          setComponentChildren={setComponentChildren}
+          handleClose={handleCloseSettings}
+        />
+      )
+    case 'Empirical':
+      return (<h1>Empirical</h1>)
+    case 'Constant':
       return (<h1>constant</h1>)
-    case 'otro':
-      return (<h1>otro</h1>) 
+    case 'Weigths':
+      return (<h1>Weigths</h1>) 
+    case 'Numpy':
+      return (<h1>Numpy</h1>) 
     default:
       return (<AgentsDistribution />)
     }
@@ -55,10 +66,20 @@ const AgentsAgeGroups = () => {
         <AgentsTableConfiguration
           distributionType="Age Group"
           columns={tableColumns}
-          initialItems={initialItems}
-          settingsComponent={renderComponentChildre}
+          initialItems={items
+          }
+          handleSettings={handleSettings}
           setComponentChildren={setComponentChildren}
         />
+
+        <AgentsModalContainer
+          distributionType="Age Group"
+          open={openSettings}
+          handleClose={handleCloseSettings}
+          currentItem={items[currentIndex]}
+        >
+          {renderComponentChildre}
+        </AgentsModalContainer>
       </Grid>
       
       <CompartmentalButton

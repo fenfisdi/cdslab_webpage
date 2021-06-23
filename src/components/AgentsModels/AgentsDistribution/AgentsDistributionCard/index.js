@@ -9,14 +9,15 @@ import Zoom from '@material-ui/core/Zoom'
 
 
 export default function AgentsDistributionCard({ item, index, handleSettings,setComponentChildren }) {
-  const getInformation = () =>
-    item.description ? item.description : 'No info'
+  
+  // const getInformation = () =>
+  //   item.description ? item.description : 'No info'
 
   return (
     <Container>
-      <StyledCard onClick={() => setComponentChildren(item.name)}>
+      <StyledCard onClick={() => setComponentChildren(item)}>
         <CardContent>
-          <Title>{item.name}</Title>
+          <Title>{item}</Title>
           {/* <ActionsZone
             showDelete={false}
             showCheck={false} 
@@ -27,7 +28,7 @@ export default function AgentsDistributionCard({ item, index, handleSettings,set
           /> */}
         </CardContent>
       </StyledCard>
-      <Tooltip
+      {/* <Tooltip
         TransitionComponent={Zoom}
         title={
           <h1 style={{ 'font-size': '12px', 'line=height': '15px' }}>
@@ -38,7 +39,7 @@ export default function AgentsDistributionCard({ item, index, handleSettings,set
         <IconButton color="primary" aria-label="Information" component="span">
           <InfoOutlinedIcon />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
     </Container>
   )
 }
