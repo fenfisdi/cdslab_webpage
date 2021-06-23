@@ -37,6 +37,8 @@ const App = () => {
   const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
   const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage'))
   const AgentsBasedModelPage = React.lazy(() => import('./pages/AgentsBasedModelPage'))
+
+  const NestingComponent = React.lazy(() => import('./components/AgentsModels/AgentsNaturalHistory/NestingComponent'))
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
   // Dev enviroment
@@ -100,6 +102,7 @@ const App = () => {
                 <Route exact path="/register" component={RegisterPage} />
                 <Route exact path="/qr_code" component={QRrender} />
                 <Route exact path="/qr_validation" component={QRAuthentication} />
+                <Route exact path="/nesting" component={NestingComponent} />
                 <Route component={NotFoundPage} />
               </Switch>
             </Layout>
