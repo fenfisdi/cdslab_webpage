@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash'
 import { useEffect } from 'react'
+import { useHistory } from 'react-router'
 import { useConfigurationActions } from '../../../actions/configurationActions'
 import { useStore } from '../../../store/storeContext'
 
@@ -11,7 +12,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     },
     dispatch
   } = useStore()
-
+  const history = useHistory()
   const { 
     getListConfigurationDistance,
     getListConfigurationTime,
@@ -39,6 +40,9 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
           error: false
         }
       )
+      history.push({
+        pathname: `agentsAgeGroups?idConfiguration=${data.identifier}`
+      })
     } 
   }, [data])
 

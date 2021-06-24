@@ -19,7 +19,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
   const classes = useNewConfigurationStyles(theme)
   const fieldsData = useNewConfigurationForm()
   const [isValid, setIsvalid] = useState(false)
-  const history = useHistory()
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
@@ -64,9 +63,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
     }
   }
   const handleClick = () => {
-    history.push({
-      pathname: 'agentsAgeGroups'
-    })
     eventEmitter({
       name:nameConfiguration.value,
       interval_date: {
