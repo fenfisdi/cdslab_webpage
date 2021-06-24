@@ -33,6 +33,7 @@ const AgentsMobilityGroups = () => {
   })
   
   const Component = renderComponentChildre(componentChildren,{
+    distributionList,
     modalSettings,
     componentChildren,
     setComponentChildren:setComponentChildren,

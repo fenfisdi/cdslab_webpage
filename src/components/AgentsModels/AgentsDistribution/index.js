@@ -4,12 +4,8 @@ import AgentsDistributionCard from './AgentsDistributionCard'
 import { useAgentsDistributionState } from './state'
 import { Container } from './style'
 
-export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponentChildren }) => {
+export const AgentsDistribution = ({ setModalSettings, modalSettings, setComponentChildren, distributionList }) => {
   
-
-
-  const { distributionList } = useAgentsDistributionState()
-
   const onFinishSettings = () => {
     /* const itemCopy = { ...modalSettings.item }
     itemCopy.state = 'CONFIGURED'

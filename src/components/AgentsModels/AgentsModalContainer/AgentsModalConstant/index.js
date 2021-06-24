@@ -39,8 +39,9 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren }) => 
   }
   
   const handleSaveInformation =(item)=>{
-    console.log(item)
-    console.log(name)
+    const { distribution: {distribution_extra_arguments} } = item
+    distribution_extra_arguments['type_constant'] = name.value
+    setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
   
   return (
