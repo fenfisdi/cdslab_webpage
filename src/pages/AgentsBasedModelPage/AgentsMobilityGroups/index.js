@@ -9,7 +9,7 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { OPTIONS_MODAL } from '../../../constants/agents'
 import { HELP_INFORMATION_MOBILITY_MODELS } from '../../../constants/helpInformation'
 import AgentsBaseContext from '../../../context/agentsBase.context'
-import agentsBaseHOC from '../../../utils/agentsBaseHOC'
+import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { renderComponentChildre } from '../../../utils/common'
 import { useAgentsMobilityGroups } from './state'
 
@@ -96,4 +96,4 @@ const AgentsMobilityGroups = () => {
   )
 }
 
-export default agentsBaseHOC(AgentsMobilityGroups)
+export default whitAgentsBaseHOC(AgentsMobilityGroups)

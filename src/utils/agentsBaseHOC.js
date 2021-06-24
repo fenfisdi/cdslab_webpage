@@ -5,7 +5,7 @@ import { useDistributionActions } from '@actions/distributionAction'
 
 
 
-export default WrappedComponent => {
+const whitAgentsBaseHOC = (WrappedComponent) => {
   const agentsBaseHOC = ({
     ...props
   }) => {
@@ -36,7 +36,10 @@ export default WrappedComponent => {
         <WrappedComponent {...props} />
       </AgentsBaseContext.Provider>
     )
+    
   }
 
   return agentsBaseHOC
 }
+
+export default whitAgentsBaseHOC
