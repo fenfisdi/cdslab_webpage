@@ -28,7 +28,7 @@ export const AgentsDistribution = ({ setModalSettings, modalSettings,setComponen
 
 
   const handleNextStep = (nexStep) =>{
-    setComponentChildren(nexStep)
+    setComponentChildren(nexStep.toUpperCase())
   }
   
   const renderCards = () => (

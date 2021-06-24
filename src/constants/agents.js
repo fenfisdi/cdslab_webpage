@@ -19,9 +19,9 @@ export const OPTIONS_AGENTS_MAIN = [
 ]
 
 export const OPTIONS_MODAL = {
-  Distribution:'Distribution',
-  Empirical:'Empirical',
-  Constant:'Constant',
-  Weigths:'Weigths',
-  Numpy:'Numpy'
+  DISTRIBUTION:'DISTRIBUTION',
+  EMPIRICAL:'EMPIRICAL',
+  CONSTANT:'CONSTANT',
+  WEIGTHS:'WEIGTHS',
+  NUMPY:'NUMPY'
 }

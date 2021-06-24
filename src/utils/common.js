@@ -63,25 +63,29 @@ export const formatYmd = date => date.toISOString().slice(0, 10)
 
 export const renderComponentChildre = (componentChildren,props) => {
   switch (componentChildren) {
-  case OPTIONS_MODAL.Distribution:
+  case OPTIONS_MODAL.DISTRIBUTION:
     return {
       container:AgentsDistribution,
-      props
+      props,
+      width:'50%',
+      height:'50%'
     }        
-  case OPTIONS_MODAL.Empirical:
+  case OPTIONS_MODAL.EMPIRICAL:
     return {
       Component:<h1>Empirical</h1>
     }
-  case OPTIONS_MODAL.Constant:
+  case OPTIONS_MODAL.CONSTANT:
     return {
       container:AgentsModalConstant,
-      props
+      props,
+      width:'30%',
+      height:'30%'
     }   
-  case OPTIONS_MODAL.Weigths:
+  case OPTIONS_MODAL.WEIGTHS:
     return {
       Component:<h1>Weigths</h1>
     }
-  case OPTIONS_MODAL.Numpy:
+  case OPTIONS_MODAL.NUMPY:
     return {
       Component:<h1>Numpy</h1>
     }

@@ -25,7 +25,7 @@ const AgentsMobilityGroups = () => {
     schemaItems,
   }= useAgentsMobilityGroups()
 
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.Distribution)
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
   const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
@@ -68,7 +68,7 @@ const AgentsMobilityGroups = () => {
             handleSettings={({index,item})=>{
               console.log(index)
               console.log(item)
-              setComponentChildren('Distribution')
+              setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
               setModalSettings({...modalSettings,open:true,item,index})
             }}          
           />  

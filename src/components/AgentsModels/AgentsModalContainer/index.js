@@ -4,19 +4,22 @@ import Backdrop from '@material-ui/core/Backdrop'
 import { Modal } from '@material-ui/core'
 import { Fade } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,    
-    padding: theme.spacing(2, 4, 3),
-    width: '50%',
-    height: '50%'
+const useStyles = ({width,height}) => makeStyles((theme) => {
+  
+  return {
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,    
+      padding: theme.spacing(2, 4, 3),
+      width: width?width:'50%' ,
+      height: height?height:'50%'
+    }
   }
-}))
+})
 
 export const AgentsModalContainer = (
   {
@@ -25,7 +28,7 @@ export const AgentsModalContainer = (
     render
   }) => {
   const Component  = render  
-  const classes = useStyles()
+  const classes = useStyles({width:Component?.width,height:Component?.height})()
 
   return (
     <Modal
@@ -42,7 +45,7 @@ export const AgentsModalContainer = (
     >
       <Fade in={open}>
         <div className={classes.paper}>          
-          <Component.container {...Component.props}/>
+          {Component?.container &&  <Component.container {...Component.props}/>}
         </div>
       </Fade>
     </Modal>
