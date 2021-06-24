@@ -17,3 +17,11 @@ export const OPTIONS_AGENTS_MAIN = [
     ruta: 'mySimulations'
   }
 ]
+
+export const OPTIONS_MODAL = {
+  Distribution:'Distribution',
+  Empirical:'Empirical',
+  Constant:'Constant',
+  Weigths:'Weigths',
+  Numpy:'Numpy'
+}

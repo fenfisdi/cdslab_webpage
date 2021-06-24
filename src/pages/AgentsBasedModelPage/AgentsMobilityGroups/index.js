@@ -1,12 +1,14 @@
 import { Grid } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
+import { Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
 import LoaderComponent from '../../../components/ui/Loader'
-import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
+import { OPTIONS_MODAL } from '../../../constants/agents'
+import { HELP_INFORMATION_MOBILITY_MODELS } from '../../../constants/helpInformation'
 import AgentsBaseContext from '../../../context/agentsBase.context'
 import agentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { renderComponentChildre } from '../../../utils/common'
@@ -23,7 +25,7 @@ const AgentsMobilityGroups = () => {
     schemaItems,
   }= useAgentsMobilityGroups()
 
-  const [componentChildren, setComponentChildren] = useState('Distribution')
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.Distribution)
   const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
@@ -38,14 +40,15 @@ const AgentsMobilityGroups = () => {
   })
 
   return (
-    <Grid container xs={12}>
-      {distributionList.length > 0 && <Grid container item xs={12}>
-        <Grid container item xs={12}
+    <Fragment>
+      {distributionList.length > 0 && <Grid container item xs={12} justify='center' alignItems='center'>
+        
+        <Grid container item xs={10}
           direction="row"
           justify="space-between"
           alignItems="center">
           <Grid><Breadcrumbs /></Grid>
-          <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
+          <Grid><SupportComponent title="Help" text={HELP_INFORMATION_MOBILITY_MODELS} /></Grid>
         </Grid>
 
         <Grid 
@@ -71,8 +74,7 @@ const AgentsMobilityGroups = () => {
           />  
         </Grid>
 
-        <AgentsModalContainer
-          distributionType="Mobility Group"
+        <AgentsModalContainer          
           open={modalSettings.open}
           handleClose={()=>{
             setModalSettings({...modalSettings,open:false})
@@ -90,7 +92,7 @@ const AgentsMobilityGroups = () => {
       </Grid>}
       
       {distributionList.length == 0 && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
-    </Grid>
+    </Fragment>
   )
 }
 

@@ -11,12 +11,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
+    backgroundColor: theme.palette.background.paper,    
     padding: theme.spacing(2, 4, 3),
-    width: '90%',
-    height: '90%'
+    width: '50%',
+    height: '50%'
   }
 }))
 
@@ -24,7 +22,6 @@ export const AgentsModalContainer = (
   {
     open,
     handleClose,
-    distributionType,
     render
   }) => {
   const Component  = render  
@@ -44,8 +41,7 @@ export const AgentsModalContainer = (
       }}
     >
       <Fade in={open}>
-        <div className={classes.paper}>
-          <h2>{distributionType} distribution</h2>
+        <div className={classes.paper}>          
           <Component.container {...Component.props}/>
         </div>
       </Fade>
