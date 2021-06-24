@@ -8,24 +8,15 @@ import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 
 const AgentsAgeGroups = () => {
-  
-  const { handleClickSaveAgentsAgeModel,initialItems,setInitialItems } = useAgentsAgeGroups()
- 
 
-  const tableColumns = [
-    {
-      title: 'Age group name',
-      att: 'name',
-      type: 'text',
-      inputProps: { fullWidth: true } // use fullWidth when you have just 1 column
-    },
-    {
-      title: '% of population',
-      att: 'population_percentage',
-      type: 'slider',      
-      inputProps: { min: 0, max: 1, step: 0.001, initialValue:0 }// Defatul min:0 and max:100
-    }
-  ]
+  const { 
+    handleClickSaveAgentsAgeModel,
+    handleSettings,
+    items,
+    tableColumns,
+    setItems
+  } = useAgentsAgeGroups()
+
 
 
   return (
@@ -50,9 +41,9 @@ const AgentsAgeGroups = () => {
           showCheck={false}
           distributionType="Age Group"
           columns={tableColumns}
-          initialItems={initialItems}
-          setInitialItems={setInitialItems}
-          settingsComponent={null}
+          initialItems={items}
+          setItems={setItems}
+          handleSettings={handleSettings}
         />
       </Grid>
       
@@ -60,7 +51,7 @@ const AgentsAgeGroups = () => {
         justify='flex-end'
         alignItems='center'
         text='Continue'
-        onClick={()=>{handleClickSaveAgentsAgeModel(initialItems)}}
+        onClick={()=>{handleClickSaveAgentsAgeModel(items)}}
         disabled={false}            
       />
       

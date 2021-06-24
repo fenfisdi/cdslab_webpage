@@ -1,62 +1,35 @@
 import { useEffect, useState } from 'react'
-import { useHistory, useRouteMatch } from 'react-router'
+import { useHistory } from 'react-router'
 
 export const useAgentsMobilityGroups = () => {
   const history = useHistory()
-  const match = useRouteMatch()
-  const [mobility, setmobility] = useState([])
-  const [weight, setWeight] = useState({
-    bandwidth: '',
-    algorithm: '',
-    kernel: '',
-    metric: '',
-    atol: '',
-    rtol: '',
-    breadthFirst: '',
-    leafSize: '',
-    metricParams: ''
-  })
-  const [numpy, setNumpy] = useState({
-    parameter: ''
-  })
-  const [empirical, setEmpirical] = useState({
-    bandwidth: '',
-    algorithm: '',
-    kernel: '',
-    metric: '',
-    atol: '',
-    rtol: '',
-    breadthFirst: '',
-    leafSize: '',
-    metricParams: ''
-  })
-  const mobilityArray = []
 
-  const handleDeleteItem = (index) => {
-    mobilityArray.splice(1, index)
+  const schemaItems={
+    name: '',
+    distribution: {
+      'identifier':'',
+      'name':'',
+      'distribution_type':'',
+      'distribution_name':'',
+      'distribution_filename':'',
+      'distribution_extra_arguments': {}
+    },      
   }
+ 
+  const initialItems = [{...schemaItems}]
 
-  const handleCheckItem = () => {
-    
-  }
+  const tableColumns = [
+    { title: 'Mobility group name', att: 'name', type: 'text',inputProps: { fullWidth: true }  },
+  ]
 
-  const handleConfigItem = () => {
-    //open modal
-     
-  }
+  const [items, setItems] = useState(initialItems)
 
+  
 
-  const handleAddItem = () => {
-    mobilityArray.push({
-      name: '',
-      id: '',
-      distributionType: '',
-      constant: '',
-      weight: weight,
-      numpy: numpy,
-      empirical: empirical
-    })
-  }
+  useEffect(()=>{
+    console.log(items)
+  },[items])
+  
 
   const redirectToSusceptibilityGroupsPage = () => {
     
@@ -66,10 +39,11 @@ export const useAgentsMobilityGroups = () => {
   }
   
   return {
-    handleDeleteItem,
-    handleCheckItem,
-    handleConfigItem,
-    handleAddItem,
-    redirectToSusceptibilityGroupsPage}
+    tableColumns,
+    items, 
+    setItems,
+    schemaItems,
+    redirectToSusceptibilityGroupsPage
+  }
   
 }

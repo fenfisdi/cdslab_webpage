@@ -7,7 +7,6 @@ import { ButtonsContainer } from './styles'
 
 const ActionsZone = ({
   index,
-  item,
   itemsCount,
   handleItemDeleted,
   handleSettings,
@@ -20,7 +19,7 @@ const ActionsZone = ({
     <ButtonsContainer>
       {showConfig && (
         <IconButton
-          onClick={() => handleSettings({index,item})}
+          onClick={() => handleSettings(index)}
           color="primary"
           aria-label="Sttings"
           component="span"

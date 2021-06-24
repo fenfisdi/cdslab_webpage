@@ -1,3 +1,7 @@
+import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
+import React from 'react'
+import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
+import { OPTIONS_MODAL } from '../constants/agents'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -54,3 +58,39 @@ export const processData = dataString => {
 }
 
 export const formatYmd = date => date.toISOString().slice(0, 10)
+
+
+
+export const renderComponentChildre = (componentChildren,props) => {
+  switch (componentChildren) {
+  case OPTIONS_MODAL.DISTRIBUTION:
+    return {
+      container:AgentsDistribution,
+      props,
+      width:'50%',
+      height:'50%'
+    }        
+  case OPTIONS_MODAL.EMPIRICAL:
+    return {
+      Component:<h1>Empirical</h1>
+    }
+  case OPTIONS_MODAL.CONSTANT:
+    return {
+      container:AgentsModalConstant,
+      props,
+      width:'30%',
+      height:'30%'
+    }   
+  case OPTIONS_MODAL.WEIGTHS:
+    return {
+      Component:<h1>Weigths</h1>
+    }
+  case OPTIONS_MODAL.NUMPY:
+    return {
+      Component:<h1>Numpy</h1>
+    }
+  default:
+    return null
+  }
+  
+} 
