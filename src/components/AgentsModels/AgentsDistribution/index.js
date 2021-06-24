@@ -1,24 +1,17 @@
 import { Button } from '@material-ui/core'
 import React from 'react'
 import AgentsDistributionCard from './AgentsDistributionCard'
-import { useAgentsDistributionState } from './state'
 import { Container } from './style'
 
 export const AgentsDistribution = ({ setModalSettings, modalSettings, setComponentChildren, distributionList }) => {
   
   const onFinishSettings = () => {
-    /* const itemCopy = { ...modalSettings.item }
-    itemCopy.state = 'CONFIGURED'
-    itemCopy.distribution = {
-      value1: 'uno',
-      value2: 'dos'
-    } */
+    
     setModalSettings({...modalSettings,open:false})
   }
 
   const onClose = () => {
-    /* const itemCopy = { ...modalSettings.item }
-    itemCopy.state = '' */
+    
     setModalSettings({...modalSettings,open:false})
   }
 

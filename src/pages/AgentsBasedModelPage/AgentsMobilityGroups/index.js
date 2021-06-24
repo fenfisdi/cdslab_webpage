@@ -1,6 +1,5 @@
 import { Grid } from '@material-ui/core'
-import React, { useContext, useState } from 'react'
-import { Fragment } from 'react'
+import React, { useContext, useState, Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import Breadcrumbs from '../../../components/Breadcrumbs'
