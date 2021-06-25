@@ -57,12 +57,13 @@ export const useAgentsAgeGroups = () => {
     }else if(data.length > 0 && !error){
       setItems(parseInformationAgeModel(data))
     }
-  },[data])
+  },[data,error,idConfiguration])
 
   
   const redirectToMobilityGroupsPage = () => {
     history.push({
-      pathname: 'agentsMobilityGroups'
+      pathname: 'agentsMobilityGroups',
+      search: `?idConfiguration=${idConfiguration}`
     })
   }
 

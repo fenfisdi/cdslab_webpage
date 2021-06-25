@@ -2,6 +2,7 @@ import { Grid, makeStyles } from '@material-ui/core'
 import React from 'react'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
+import { titleCase } from '../../../../utils/common'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { Input } from '../../../ui/Input'
@@ -26,9 +27,10 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings, setComponentChildren, parameterList }) => {
+export const AgentsModalConstant = ({ modalSettings, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
-  console.log('parameterList constant::::>',parameterList)
+  const {type:fields} = parameterList[titleCase(componentChildren)]
+  console.log(fields)
   const {type_constant} = modalSettings?.item?.distribution?.distribution_extra_arguments
   const name = useInputValue(type_constant?type_constant:'', [], {
     name: 'name',

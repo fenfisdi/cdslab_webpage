@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useAgentsMobilityGroupsActions } from '@actions/agentsMobilityGroupsActions'
 import { useStore } from '../../../store/storeContext'
+import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
+import { isEmpty } from 'lodash'
 
 export const useAgentsMobilityGroups = () => {
   const history = useHistory()
+  const [idConfiguration, setIdConfiguration] = useState('')
+
   const {
     state: {      
       agentsMobilityGroupsModel: {
@@ -42,14 +46,20 @@ export const useAgentsMobilityGroups = () => {
     console.log(items)
   },[items])
 
+  useEffect(()=>{
+    const params = getStateWithQueryparams(history)    
+    if(!isEmpty(params)){
+      setIdConfiguration(params.idConfiguration)
+    }
+  },[history])
 
   useEffect(()=>{     
-    if(data.length == 0 && !error){
-      getMobilityGroupsInformation('94257c90-d396-11eb-a821-02420a000520')
+    if(data.length == 0 && !error && idConfiguration!=''){
+      getMobilityGroupsInformation(idConfiguration)
     }else if(data.length > 0 && !error){
       console.log('hola::::::::::::::::::::::>',data)
     }
-  },[data,error])
+  },[data,error,idConfiguration])
   
 
   const redirectToSusceptibilityGroupsPage = () => {
@@ -60,8 +70,8 @@ export const useAgentsMobilityGroups = () => {
   }
 
   const handleClickSaveMobilityGroups =(information)=>{    
-    saveMobilityGroupsInformation(information,'94257c90-d396-11eb-a821-02420a000520').then(()=>{      
-      getMobilityGroupsInformation('94257c90-d396-11eb-a821-02420a000520')
+    saveMobilityGroupsInformation(information,idConfiguration).then(()=>{      
+      getMobilityGroupsInformation(idConfiguration)
       redirectToSusceptibilityGroupsPage()
     })
     
