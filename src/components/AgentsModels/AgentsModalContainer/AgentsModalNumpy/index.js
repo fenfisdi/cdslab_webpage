@@ -26,9 +26,8 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings, setComponentChildren, parameterList }) => {
+export const AgentsModalNumpy = ({ modalSettings, setComponentChildren }) => {
   const classes = useAgentsModalConstantStyles()
-  console.log('parameterList constant::::>',parameterList)
   const {type_constant} = modalSettings?.item?.distribution?.distribution_extra_arguments
   const name = useInputValue(type_constant?type_constant:'', [], {
     name: 'name',
@@ -55,7 +54,7 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
         direction="row"
         justify="space-evenly"
         alignItems="center">
-        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Constant</span></Grid>
+        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Numpy</span></Grid>
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   

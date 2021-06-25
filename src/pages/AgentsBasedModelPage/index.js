@@ -5,6 +5,7 @@ import FullWidthTabs from '../../components/Taps'
 import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+import whitAgentsBaseHOC from '../../utils/agentsBaseHOC'
 
 const AgentsBasedModelPage = () => {
   const match = useRouteMatch()
@@ -61,4 +62,4 @@ const AgentsBasedModelPage = () => {
   )
 }
 
-export default AgentsBasedModelPage
+export default whitAgentsBaseHOC(AgentsBasedModelPage)

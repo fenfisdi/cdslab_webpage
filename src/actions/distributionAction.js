@@ -23,16 +23,14 @@ export const useDistributionActions = (dispatch) => {
         errorSimulation(data)
       })
   }
-  const getListParameters = async () => {
-    dispatch({ type: DISTRIBUTION_LOADING })
-    requestListParemters()
-      .then(({data}) => {
-        dispatch({ type: DISTRIBUTION_PARAMETERS_SET_LIST, payload: data.data })
-      })
-      .catch((error) => {
-        const { response: { data } } = error
-        errorSimulation(data)
-      })
+
+  const getListParameters = async (name) => {
+    requestListParemters(name).then((response)=>{      
+      dispatch({ type: DISTRIBUTION_PARAMETERS_SET_LIST, payload: response.data.data })
+    }) .catch((error) => {
+      const { response: { data } } = error
+      errorSimulation(data)
+    }) 
   }
 
   const errorSimulation = (data) =>{
