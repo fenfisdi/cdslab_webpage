@@ -41,7 +41,8 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
         }
       )
       history.push({
-        pathname: `agentsAgeGroups?idConfiguration=${data.identifier}`
+        pathname: 'agentsAgeGroups',
+        search: `?idConfiguration=${data.identifier}`
       })
     } 
   }, [data])
