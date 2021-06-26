@@ -30,7 +30,7 @@ const whitAgentsBaseHOC = (WrappedComponent) => {
           getListParameters(distribution)
         })
       }
-    }, [distributionList])
+    }, [distributionList,parameterList])
   
 
     return (

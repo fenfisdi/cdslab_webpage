@@ -1,12 +1,13 @@
 import { Grid, makeStyles } from '@material-ui/core'
-import React from 'react'
+import { isEmpty } from 'lodash'
+import React, { useEffect, useState } from 'react'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
 import { titleCase } from '../../../../utils/common'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { Input } from '../../../ui/Input'
-import { useInputValue } from '../../../ui/Input/useInputValue'
+import { useAgentsModalConstantFieldsCreation } from './fieldsCreation'
 
 export const useAgentsModalConstantStyles = makeStyles(() => ({
   Input:{
@@ -29,22 +30,36 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
 
 export const AgentsModalConstant = ({ modalSettings, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
-  const {type:fields} = parameterList[titleCase(componentChildren)]
-  console.log(fields)
-  const {type_constant} = modalSettings?.item?.distribution?.distribution_extra_arguments
-  const name = useInputValue(type_constant?type_constant:'', [], {
-    name: 'name',
-    type: 'text',
-    label: 'name',
-  })
+  const [isValid,setIsValid] = useState(false)
+  const parameters = parameterList[componentChildren.toLowerCase()]
+  console.log(componentChildren)
+  console.log(parameterList)
+  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item})
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
+
+  useEffect(()=>{
+    if(!isEmpty(fields)){
+      let validation = false
+      Object.keys(fields).map((fieldType)=>{        
+        if(fields[fieldType]['input']['value'] == ''){
+          validation = true
+          return
+        }
+      })
+      setIsValid(validation)
+    }
+    
+  },[fields])
   
-  const handleSaveInformation =(item)=>{
-    const { distribution: {distribution_extra_arguments} } = item
-    distribution_extra_arguments['type_constant'] = name.value
+  const handleSaveInformation =(item)=>{    
+    const {  distribution, distribution: {distribution_extra_arguments} } = item
+    distribution.distribution_type = parameterList[titleCase(componentChildren)]?.name 
+    Object.keys(fields).map((fieldType)=>{      
+      distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
+    })
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
   
@@ -61,24 +76,28 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   
-      <Grid container item xs={12} justify='center' alignItems='center' direction='row'>
-        <div className={classes.text}>
-          <strong>Type constant:</strong>
-        </div>
-        <Input
-          disabled={false}
-          required
-          variant="outlined"
-          margin="normal"
-          autoComplete="name"
-          className={classes.Input}
-          {...name}
-        />
+      <Grid container item xs={12} justify='center' alignItems='center' direction='column'>
+        {Object.keys(fields).map((fieldType,index)=>{
+          const {label, input} = fields[fieldType]
+          return <div key={index} style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+            <div className={classes.text}>
+              <strong>{label}:</strong>
+            </div>
+            <Input
+              disabled={false}
+              required
+              variant="outlined"
+              margin="normal"
+              autoComplete="name"
+              className={classes.Input}
+              {...input}
+            /> 
+          </div>
+        })}       
       </Grid>
-
         
       <Grid container item xs={12} justify='flex-end' alignItems='center' direction='row'>
-        <Button color="primary" onClick={() => handleSaveInformation(modalSettings?.item)}>Done</Button>
+        <Button color="primary" disabled={isValid?true:false}  onClick={() =>handleSaveInformation(modalSettings?.item)}>Done</Button>
         <Button onClick={() => handleGoBack()}>Cancel</Button>
       </Grid>
       

@@ -24,7 +24,6 @@ export const useAgentsMobilityGroups = () => {
   const schemaItems={
     name: '',
     distribution: {
-      'identifier':'',
       'name':'',
       'distribution_type':'',
       'distribution_name':'',
