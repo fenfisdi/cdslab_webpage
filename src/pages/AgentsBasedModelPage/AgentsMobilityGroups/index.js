@@ -95,7 +95,7 @@ const AgentsMobilityGroups = () => {
         />
       </Grid>}
       
-      {distributionList.length == 0 && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
+      {isEmpty(parameterList) &&  <LoaderComponent width="100px" height={100} marginTop="100px" />}
     </Fragment>
   )
 }
