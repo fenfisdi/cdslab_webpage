@@ -1,4 +1,5 @@
 import { Grid } from '@material-ui/core'
+import { isEmpty } from 'lodash'
 import React, { useContext, useState, Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
@@ -9,6 +10,7 @@ import LoaderComponent from '../../../components/ui/Loader'
 import { OPTIONS_MODAL } from '../../../constants/agents'
 import { HELP_INFORMATION_MOBILITY_MODELS } from '../../../constants/helpInformation'
 import AgentsBaseContext from '../../../context/agentsBase.context'
+import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { renderComponentChildre } from '../../../utils/common'
 import { useAgentsMobilityGroups } from './state'
 
@@ -41,7 +43,7 @@ const AgentsMobilityGroups = () => {
 
   return (
     <Fragment>
-      {distributionList.length > 0 && <Grid container item xs={12} justify='center' alignItems='center'>
+      {distributionList.length > 0 && items.length>0 && !isEmpty(parameterList) && <Grid container item xs={12} justify='center' alignItems='center'>
         
         <Grid container item xs={10}
           direction="row"
@@ -98,4 +100,4 @@ const AgentsMobilityGroups = () => {
   )
 }
 
-export default AgentsMobilityGroups
+export default whitAgentsBaseHOC(AgentsMobilityGroups)

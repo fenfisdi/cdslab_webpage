@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, {Suspense}  from 'react'
 import Layout from './components/layouts/Layout'
 import { useStore } from './store/storeContext'
 import { GlobalStyles } from './styles/GlobalStyles'
@@ -17,6 +17,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 import { PathProvider } from './components/PathContext'
 import SysManagementState from './context/SysManagement/sysManagementState'
+import LoaderComponent from './components/ui/Loader'
 
 const App = () => {
   const {
@@ -62,49 +63,49 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      
-      <PathProvider>
-        <Router>
-          <GlobalStyles />
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={LoginPage} />
-              <PrivateRoute
-                path="/landingPage"
-                component={<LandingPage />}
-              />
-              <PrivateRoute
-                path="/agentsModels"
-                component={<AgentsBasedModelPage />}
-              />
-              <PrivateRoute
-                path="/simulationModels"
-                component={<SimulationModelPage />}
-              />
-              <PrivateRoute
-                path="/compartmentalModels"
-                component={<CompartmentalModelPage />}
-              />
-              <PrivateRoute
-                path="/profile"
-                component={<ProfilePage />}
-              />
-              <PrivateRoute
-                path="/management"
-                component={<SysManagementState><UserManagementPage /></SysManagementState>}
-              />
-              <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
-              <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
-              <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <Route exact path="/qr_code" component={QRrender} />
-              <Route exact path="/qr_validation" component={QRAuthentication} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </Layout>
-        </Router>
-      </PathProvider>
-      
+      <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
+        <PathProvider>
+          <Router>
+            <GlobalStyles />
+            <Layout>
+              <Switch>
+                <Route exact path="/" component={LoginPage} />
+                <PrivateRoute
+                  path="/landingPage"
+                  component={<LandingPage />}
+                />
+                <PrivateRoute
+                  path="/agentsModels"
+                  component={<AgentsBasedModelPage />}
+                />
+                <PrivateRoute
+                  path="/simulationModels"
+                  component={<SimulationModelPage />}
+                />
+                <PrivateRoute
+                  path="/compartmentalModels"
+                  component={<CompartmentalModelPage />}
+                />
+                <PrivateRoute
+                  path="/profile"
+                  component={<ProfilePage />}
+                />
+                <PrivateRoute
+                  path="/management"
+                  component={<SysManagementState><UserManagementPage /></SysManagementState>}
+                />
+                <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
+                <Route exact path="/accountRecovery" component={AccountRecoveryPage} />
+                <Route exact path="/qrBindingRecovery" component={RecoveryQrBindingPage} />
+                <Route exact path="/register" component={RegisterPage} />
+                <Route exact path="/qr_code" component={QRrender} />
+                <Route exact path="/qr_validation" component={QRAuthentication} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </Layout>
+          </Router>
+        </PathProvider>
+      </Suspense>
     </ErrorBoundary>
   )
 }

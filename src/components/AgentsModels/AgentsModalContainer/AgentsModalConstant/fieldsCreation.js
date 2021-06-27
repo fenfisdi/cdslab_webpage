@@ -14,7 +14,7 @@ export const useAgentsModalConstantFieldsCreation = ({parameters=[],valueSet={}}
     const { Parameter='', Field:fieldValues=[] }=parameters[index]     
     field['label']=Parameter
     field['input']=
-      {...useInputValue(fieldValues[0]!=''?fieldValues[0]:'', [], {
+      {...useInputValue(initialValue(distribution_extra_arguments), [], {
         name: Parameter,
         type: 'text',
         label:Parameter,

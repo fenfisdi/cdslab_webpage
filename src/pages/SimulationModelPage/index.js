@@ -1,7 +1,6 @@
 import React  from 'react'
 import { CompartmentalContainer } from './styles'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import whitAgentsBaseHOC from '../../utils/agentsBaseHOC'
 
 const SimulationModelPage = () => {
   const match = useRouteMatch()
@@ -19,4 +18,4 @@ const SimulationModelPage = () => {
   )
 }
 
-export default whitAgentsBaseHOC(SimulationModelPage)
+export default SimulationModelPage

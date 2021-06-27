@@ -18,6 +18,16 @@ export const useAgentsMobilityGroups = () => {
     },
     dispatch
   } = useStore()
+
+  const parseInformationMobilityGroupsModel =(arrayMobility=[])=>{
+    return arrayMobility.map((mobility)=>{
+      return {
+        name:mobility.name,
+        distribution:mobility.distribution        
+      }
+    })
+
+  }
   
   const { saveMobilityGroupsInformation, getMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
   
@@ -56,7 +66,8 @@ export const useAgentsMobilityGroups = () => {
     if(data.length == 0 && !error && idConfiguration!=''){
       getMobilityGroupsInformation(idConfiguration)
     }else if(data.length > 0 && !error){
-      console.log('hola::::::::::::::::::::::>',data)
+      console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)
+      setItems(parseInformationMobilityGroupsModel(data))
     }
   },[data,error,idConfiguration])
   

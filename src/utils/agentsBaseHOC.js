@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AgentsBaseContext from '../context/agentsBase.context'
 import { useStore } from '../store/storeContext'
 import { useDistributionActions } from '@actions/distributionAction'
 import { isEmpty } from 'lodash'
-
-
 
 const whitAgentsBaseHOC = (WrappedComponent) => {
   const agentsBaseHOC = ({
@@ -12,32 +10,34 @@ const whitAgentsBaseHOC = (WrappedComponent) => {
   }) => {
     const {
       state: {
-        distribution: { distributionList,error:errorDistributionList,parameterList }
+        distribution: { distributionList,error:errorDistributionList }
       },
       dispatch
     } = useStore()
   
     const { 
       getListDistribution,
-      getListParameters
+      getParametersOptions
     } = useDistributionActions(dispatch)
+
+    const[parametersOptions,setParametersOptions]=useState({})
   
     useEffect(() => {
-      if(distributionList.length == 0 && errorDistributionList == null  && isEmpty(parameterList)){
+      if(distributionList.length == 0 && errorDistributionList == null && isEmpty(parametersOptions)){
         getListDistribution()
-      }else if(distributionList.length > 0 && errorDistributionList == null && isEmpty(parameterList)){
-        distributionList.forEach(distribution => {          
-          getListParameters(distribution)
-        })
+      }else if(distributionList.length == 4 && errorDistributionList == null && isEmpty(parametersOptions)){
+        getParametersOptions(distributionList).then((response)=>{          
+          setParametersOptions(response)
+        })                
       }
-    }, [distributionList,parameterList])
+    }, [distributionList,errorDistributionList])
   
 
     return (
       <AgentsBaseContext.Provider
         value={{
           distributionList,
-          parameterList          
+          parameterList:parametersOptions        
         }}
       >
         <WrappedComponent {...props} />

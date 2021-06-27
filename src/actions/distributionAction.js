@@ -33,6 +33,20 @@ export const useDistributionActions = (dispatch) => {
     }) 
   }
 
+  const getParametersOptions = async (distributionList=[]) => {
+    const parametersWhitOptions = {}
+    const parametersOptionsList = new Promise((resolve,reject) => {
+      distributionList.forEach(async(distribution, index, array) => {         
+        const response = await requestListParemters(distribution).catch(()=>{
+          reject({})
+        })         
+        parametersWhitOptions[distribution] = response.data.data
+        if (index === array.length -1) resolve(parametersWhitOptions)      
+      })
+    })
+    return parametersOptionsList  
+  }
+
   const errorSimulation = (data) =>{
     dispatch({
       type: DISTRIBUTION_ERROR,
@@ -42,6 +56,7 @@ export const useDistributionActions = (dispatch) => {
   
   return { 
     getListDistribution, 
-    getListParameters
+    getListParameters,
+    getParametersOptions
   }
 }

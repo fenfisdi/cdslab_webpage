@@ -1,10 +1,10 @@
-import React  from 'react'
+import React, {Suspense}  from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { AgentsModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
-import whitAgentsBaseHOC from '../../utils/agentsBaseHOC'
+import LoaderComponent from '../../components/ui/Loader'
 
 const AgentsBasedModelPage = () => {
   const match = useRouteMatch()
@@ -15,7 +15,7 @@ const AgentsBasedModelPage = () => {
   const AgentsMobilityGroups = React.lazy(() => import('./AgentsMobilityGroups'))
   const AgentSusceptibilityGroups = React.lazy(() => import('./AgentSusceptibilityGroups'))
   const InmunizationGroupName = React.lazy(() => import('./InmunizationGroupName'))
-
+ 
   const tabs = [
     {
       id: 1,
@@ -44,21 +44,21 @@ const AgentsBasedModelPage = () => {
     <>
       <FullWidthTabs tabs={tabs} idTab={2}/>
       <AgentsModelPageContainer>          
-        
-        <Switch>
-          <Route path={match.path} exact component={AgentsMainPage} />
-          <Route path={`${match.path}/newConfiguration`} exact render={(props) => (
-            <AgentsNewConfigurationPage {...props} pathParent={match.path} />
-          )} />
-          <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
-          <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
-          <Route path={`${match.path}/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
-          <Route path={`${match.path}/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />
-        </Switch>
-        
+        <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
+          <Switch>
+            <Route path={match.path} exact component={AgentsMainPage} />
+            <Route path={`${match.path}/newConfiguration`} exact render={(props) => (
+              <AgentsNewConfigurationPage {...props} pathParent={match.path} />
+            )} />
+            <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
+            <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
+            <Route path={`${match.path}/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
+            <Route path={`${match.path}/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />
+          </Switch>
+        </Suspense>
       </AgentsModelPageContainer>
     </>
   )
 }
 
-export default whitAgentsBaseHOC(AgentsBasedModelPage)
+export default AgentsBasedModelPage

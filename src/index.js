@@ -16,7 +16,7 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <StoreProvider>
-          <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+          <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
             <LanguageContextProvider>
               <App />
             </LanguageContextProvider>

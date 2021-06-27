@@ -34,6 +34,7 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   const parameters = parameterList[componentChildren.toLowerCase()]
   console.log(componentChildren)
   console.log(parameterList)
+  console.log(componentChildren)
   const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item})
 
   const handleGoBack = () =>{
@@ -56,7 +57,8 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   
   const handleSaveInformation =(item)=>{    
     const {  distribution, distribution: {distribution_extra_arguments} } = item
-    distribution.distribution_type = parameterList[titleCase(componentChildren)]?.name 
+    console.log(':::::>distribution',distribution)
+    distribution.distribution_type = componentChildren.toLowerCase()
     Object.keys(fields).map((fieldType)=>{      
       distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
     })
