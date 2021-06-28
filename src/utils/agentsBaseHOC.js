@@ -25,7 +25,7 @@ const whitAgentsBaseHOC = (WrappedComponent) => {
     useEffect(() => {
       if(distributionList.length == 0 && errorDistributionList == null && isEmpty(parametersOptions)){
         getListDistribution()
-      }else if(distributionList.length == 4 && errorDistributionList == null && isEmpty(parametersOptions)){
+      }else if(distributionList.length >= 4 && errorDistributionList == null && isEmpty(parametersOptions)){
         getParametersOptions(distributionList).then((response)=>{          
           setParametersOptions(response)
         })                

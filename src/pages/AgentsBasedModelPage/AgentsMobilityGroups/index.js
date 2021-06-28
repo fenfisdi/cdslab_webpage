@@ -78,7 +78,8 @@ const AgentsMobilityGroups = () => {
           />  
         </Grid>
 
-        <AgentsModalContainer          
+        <AgentsModalContainer
+          modalTitle='Mobility profile'       
           open={modalSettings.open}
           handleClose={()=>{
             setModalSettings({...modalSettings,open:false})
