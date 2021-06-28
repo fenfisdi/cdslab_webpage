@@ -14,6 +14,7 @@ const AgentsBasedModelPage = () => {
   const AgentsAgeGroupsPage = React.lazy(() => import('./AgentsAgeGroups'))
   const AgentsMobilityGroupsPage = React.lazy(() => import('./AgentsMobilityGroupsPage'))
   const AgentsSusceptibilityGroupsPage = React.lazy(() => import('./AgentsSusceptibilityGroupsPage'))
+  const AgentsVulnerabilityGroupsPage = React.lazy(() => import('./AgentsVulnerabilityGroupsPage'))
   
  
   const tabs = [
@@ -53,6 +54,7 @@ const AgentsBasedModelPage = () => {
             <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
             <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroupsPage} />
             <Route path={`${match.path}/agentsSusceptibilityGroups`} exact component={AgentsSusceptibilityGroupsPage} />
+            <Route path={`${match.path}/agentsVulnerabilityGroupsPage`} exact component={AgentsVulnerabilityGroupsPage} />
             
           </Switch>
         </Suspense>

@@ -88,10 +88,10 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
   
 
   const redirectToSusceptibilityGroupsPage = () => {
-    console.log('redireccionar')
-    /* history.push({
-      pathname: 'agentSusceptibilityGroups'
-    }) */
+    history.push({
+      pathname: 'agentsVulnerabilityGroupsPage',
+      search: `?idConfiguration=${idConfiguration}`
+    })
   }
 
   const handleClickSaveMobilityGroups =(information)=>{    
