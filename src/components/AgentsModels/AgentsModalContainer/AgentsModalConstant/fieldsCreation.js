@@ -1,4 +1,4 @@
-import { checkTypePhoneNumber } from '../../../../utils/common'
+import { checkTypePhoneNumber, replaceString, titleCase } from '../../../../utils/common'
 import { useInputValue } from '../../../ui/Input/useInputValue'
 
 
@@ -22,7 +22,7 @@ export const useAgentsModalConstantFieldsCreation = ({parameters=[],valueSet={}}
           return checkTypePhoneNumber(event)
         }}),
       }
-    fields[Parameter]=field        
+    fields[titleCase(replaceString(Parameter,' ','_'))]=field        
   } 
   
   return fields

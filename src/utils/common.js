@@ -109,3 +109,7 @@ export const titleCase = (str)=> {
   // Directly return the joined string
   return splitStr.join(' ') 
 }
+
+export const replaceString = (str,charactertoSearch,characterReplace)=>{
+  return str.split(charactertoSearch).join(characterReplace)
+}

@@ -41,12 +41,15 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   useEffect(()=>{
     if(!isEmpty(fields)){
       let validation = false
-      Object.keys(fields).map((fieldType)=>{        
-        if(fields[fieldType]['input']['value'] == ''){
+      Object.keys(fields).every(field => {        
+        if (fields[field]['input']['value']=='' || fields[field]['input']['errors'].length>0) {
           validation = true
-          return
-        }
+          return false
+        }                  
+        validation = false        
+        return true
       })
+
       setIsValid(validation)
     }
     
@@ -55,9 +58,9 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   const handleSaveInformation =(item)=>{    
     const { distribution, distribution: {distribution_extra_arguments} } = item
     distribution.distribution_type = componentChildren.toLowerCase()
-    Object.keys(fields).map((fieldType)=>{      
-      distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
-    })
+    for (const field in fields) {      
+      distribution_extra_arguments[field] = fields[field]['input']['value']
+    }
     item.state = 'CONFIGURED'
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
