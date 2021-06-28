@@ -3,7 +3,6 @@ import { isEmpty } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
-import { titleCase } from '../../../../utils/common'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { Input } from '../../../ui/Input'
@@ -32,9 +31,7 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
-  console.log(componentChildren)
-  console.log(parameterList)
-  console.log(componentChildren)
+  
   const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item})
 
   const handleGoBack = () =>{
@@ -57,7 +54,6 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   
   const handleSaveInformation =(item)=>{    
     const {  distribution, distribution: {distribution_extra_arguments} } = item
-    console.log(':::::>distribution',distribution)
     distribution.distribution_type = componentChildren.toLowerCase()
     Object.keys(fields).map((fieldType)=>{      
       distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
