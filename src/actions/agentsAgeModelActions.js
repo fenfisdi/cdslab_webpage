@@ -1,5 +1,5 @@
 import { getAgentsAgeModelInformationService, saveAgentsAgeModelInformationService } from '../services/agentsModelServices'
-import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS } from './types/agentsModelTypes'
+import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS, AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsModelTypes'
 
 export const useAgentsAgeModelActions = (dispatch) => {
   
@@ -43,8 +43,15 @@ export const useAgentsAgeModelActions = (dispatch) => {
     })
   }
 
+  const setAgeModelInformation = () => {
+    dispatch({
+      type: AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS,
+    })
+  }
+
   return {
     saveAgentsAgeModelInformation,
-    getAgentsAgeModelInformation
+    getAgentsAgeModelInformation,
+    setAgeModelInformation
   }
 }

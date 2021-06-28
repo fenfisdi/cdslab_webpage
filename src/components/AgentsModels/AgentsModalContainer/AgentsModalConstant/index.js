@@ -53,11 +53,12 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   },[fields])
   
   const handleSaveInformation =(item)=>{    
-    const {  distribution, distribution: {distribution_extra_arguments} } = item
+    const { distribution, distribution: {distribution_extra_arguments} } = item
     distribution.distribution_type = componentChildren.toLowerCase()
     Object.keys(fields).map((fieldType)=>{      
       distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
     })
+    item.state = 'CONFIGURED'
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
   

@@ -17,22 +17,24 @@ import { useAgentsMobilityGroups } from './state'
 const AgentsMobilityGroups = () => {
   const context = useContext(AgentsBaseContext)
   const { distributionList,parameterList } = context
+  const [modalSettings,setModalSettings] = useState({
+    open:false,
+    item:{},
+    index:0
+  })
   const {
     handleClickSaveMobilityGroups,
     tableColumns,
     items, 
     setItems,
     schemaItems,
-  }= useAgentsMobilityGroups()
+    isValid
+  }= useAgentsMobilityGroups({modalSettings})
 
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
-  const [modalSettings,setModalSettings] = useState({
-    open:false,
-    item:{},
-    index:0
-  })
   
   const Component = renderComponentChildre(componentChildren,{
+    optionsConfigured:items,
     distributionList,
     parameterList,
     modalSettings,
@@ -91,7 +93,7 @@ const AgentsMobilityGroups = () => {
           onClick={()=>{
             handleClickSaveMobilityGroups(items)
           }}
-          disabled={false}            
+          disabled={!isValid?true:false}
         />
       </Grid>}
       

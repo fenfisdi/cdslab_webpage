@@ -1,5 +1,5 @@
 import { getMobilityGroupsInformationService, saveMobilityGroupsInformationService } from '../services/agentsMobilityGroupServices'
-import { AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS } from './types/agentsMobilityGroupsTypes'
+import { AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS, AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsMobilityGroupsTypes'
 
 
 export const useAgentsMobilityGroupsActions = (dispatch) => {
@@ -44,8 +44,15 @@ export const useAgentsMobilityGroupsActions = (dispatch) => {
     }) 
   }
 
+  const setResetMobilityGroupsInformation = () => {
+    dispatch({
+      type: AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS,
+    })
+  }
+
   return {
     saveMobilityGroupsInformation,
-    getMobilityGroupsInformation
+    getMobilityGroupsInformation,
+    setResetMobilityGroupsInformation
   }
 }

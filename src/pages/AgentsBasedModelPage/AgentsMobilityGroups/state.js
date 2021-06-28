@@ -5,10 +5,11 @@ import { useStore } from '../../../store/storeContext'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
 
-export const useAgentsMobilityGroups = () => {
+export const useAgentsMobilityGroups = ({modalSettings}) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
-
+  const [isValid, setIsValid] = useState(false)
+  
   const {
     state: {      
       agentsMobilityGroupsModel: {
@@ -23,10 +24,19 @@ export const useAgentsMobilityGroups = () => {
     return arrayMobility.map((mobility)=>{
       return {
         name:mobility.name,
-        distribution:mobility.distribution        
+        distribution:mobility.distribution,
+        state: 'CONFIGURED'       
       }
     })
 
+  }
+
+  const checkMobilityGroupsList = (mobilityGroupsList)=>{
+    const itemsConfigured =[]
+    mobilityGroupsList.forEach((item) => {         
+      item.state == 'CONFIGURED' && itemsConfigured.push(true)            
+    })      
+    return itemsConfigured.length == mobilityGroupsList.length 
   }
   
   const { saveMobilityGroupsInformation, getMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
@@ -39,7 +49,8 @@ export const useAgentsMobilityGroups = () => {
       'distribution_name':'',
       'distribution_filename':'',
       'distribution_extra_arguments': {}
-    },      
+    },     
+    state: ''
   }
  
   const initialItems = [{...schemaItems}]
@@ -50,10 +61,13 @@ export const useAgentsMobilityGroups = () => {
 
   const [items, setItems] = useState(initialItems)
 
-  
+
   useEffect(()=>{
-    console.log(items)
-  },[items])
+    if(items.length>0){
+           
+      setIsValid(checkMobilityGroupsList(items)) 
+    }
+  },[modalSettings,items])
 
   useEffect(()=>{
     const params = getStateWithQueryparams(history)    
@@ -66,7 +80,7 @@ export const useAgentsMobilityGroups = () => {
     if(data.length == 0 && !error && idConfiguration!=''){
       getMobilityGroupsInformation(idConfiguration)
     }else if(data.length > 0 && !error){
-      console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)
+      console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)      
       setItems(parseInformationMobilityGroupsModel(data))
     }
   },[data,error,idConfiguration])
@@ -92,7 +106,8 @@ export const useAgentsMobilityGroups = () => {
     items, 
     setItems,
     schemaItems,
-    handleClickSaveMobilityGroups
+    handleClickSaveMobilityGroups,
+    isValid
   }
   
 }

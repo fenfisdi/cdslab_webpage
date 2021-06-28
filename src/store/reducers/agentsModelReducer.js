@@ -1,5 +1,5 @@
 
-import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS } from '../../actions/types/agentsModelTypes'
+import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS, AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS } from '../../actions/types/agentsModelTypes'
 
 
 export const initialState = {
@@ -30,6 +30,15 @@ export const agentsAgeModelReducer = (state, action) => {
       data:[], 
       error:true,
       errorData:action.payload.message,
+    }
+
+  case AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS:
+    return {
+      ...state, 
+      data:[],
+      error:false,
+      errorData:null,
+      loading: false
     }
         
   default:
