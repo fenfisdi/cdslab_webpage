@@ -3,12 +3,15 @@ import { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useConfigurationActions } from '../../../actions/configurationActions'
 import { useStore } from '../../../store/storeContext'
-
+import { useAgentsMobilityGroupsActions } from '@actions/agentsMobilityGroupsActions'
+import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
 export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
   const {
     state: {
-      configuration: { data,listConfigurationDistance,listConfigurationTime, loading,error }
+      configuration: { data,listConfigurationDistance,listConfigurationTime, loading,error },
+      agentsMobilityGroupsModel: {  data:agentsMobilityList },
+      agentsAgeModel: { data:agentsAgeModelList }
     },
     dispatch
   } = useStore()
@@ -19,8 +22,19 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     addConfiguration,
   } = useConfigurationActions(dispatch)
 
-  useEffect(() => {
-    
+  const { setResetMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
+  const { setAgeModelInformation } = useAgentsAgeModelActions(dispatch)
+
+  useEffect(()=>{
+    if(agentsMobilityList.length>0){
+      setResetMobilityGroupsInformation()
+    }
+    if(agentsAgeModelList.length>0){
+      setAgeModelInformation()
+    }
+  },[agentsMobilityList,agentsAgeModelList])
+
+  useEffect(() => {    
     if (listConfigurationDistance.length == 0 && error == null) { 
       getListConfigurationDistance()
     }
@@ -41,7 +55,8 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
         }
       )
       history.push({
-        pathname: `agentsAgeGroups?idConfiguration=${data.identifier}`
+        pathname: 'agentsAgeGroups',
+        search: `?idConfiguration=${data.identifier}`
       })
     } 
   }, [data])

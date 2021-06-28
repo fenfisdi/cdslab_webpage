@@ -22,6 +22,7 @@ const useStyles = ({width,height}) => makeStyles((theme) => {
 
 export const AgentsModalContainer = (
   {
+    modalTitle,
     open,
     handleClose,
     render
@@ -44,7 +45,7 @@ export const AgentsModalContainer = (
     >
       <Fade in={open}>
         <div className={classes.paper}>          
-          {Component?.container &&  <Component.container {...Component.props}/>}
+          {Component?.container &&  <Component.container {...Component.props} modalTitle={modalTitle}/>}
         </div>
       </Fade>
     </Modal>

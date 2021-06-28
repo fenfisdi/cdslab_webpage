@@ -1,8 +1,7 @@
-import React, { Suspense, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { CompartmentalModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
-import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
 import { Breadcrumbs } from '@material-ui/core'
@@ -55,28 +54,28 @@ const CompartmentalModelPage = () => {
       <FullWidthTabs tabs={tabs} idTab={1}/>
       <CompartmentalModelPageContainer>  
         <Breadcrumbs  />   
-        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
-          <Switch>
-            <Route path={match.path} exact component={CompartmentalMainPage} />
-            <Route path={`${match.path}/newSimulations`} exact render={(props) => (
-              <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
-            )} />
-            <Route path={`${match.path}/mySimulations`} exact render={(props) => (
-              <CompartmentalMySimulationPage {...props} pathParent={match.path} />
-            )} />
-            <Route path={`${match.path}/preview`} exact component={CompartamentalMySimulationsPreviewPage} />
-            <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
-            <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
-            <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
-            <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
-            <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
-            <Route path={`${match.path}/ins`} exact component={ComparmentalInsPage} />
-            <Route path={`${match.path}/chooseDate`} exact component={CompartmentalChooseDatePage} />
-            <Route path={`${match.path}/reviewConfigurationInformation`} exact component={CompartmentalReviewConfigurationInformationPage} />
-            <Route path={`${match.path}/reviewConfigurationMessage`} exact component={CompartmentalReviewConfigurationMessagePage} />
-            <Route path={`${match.path}/fixedParameters`} exact component={CompartmentalFixedParametersPage} />
-          </Switch>
-        </Suspense>
+        
+        <Switch>
+          <Route path={match.path} exact component={CompartmentalMainPage} />
+          <Route path={`${match.path}/newSimulations`} exact render={(props) => (
+            <CompartmentalNewSimulationPage {...props} pathParent={match.path} />
+          )} />
+          <Route path={`${match.path}/mySimulations`} exact render={(props) => (
+            <CompartmentalMySimulationPage {...props} pathParent={match.path} />
+          )} />
+          <Route path={`${match.path}/preview`} exact component={CompartamentalMySimulationsPreviewPage} />
+          <Route path={`${match.path}/chooseSimulation`} exact component={CompartmentalChooseSimulationPage} />
+          <Route path={`${match.path}/configureParameters`} exact component={CompartmentalConfigureParametersPage} />          
+          <Route path={`${match.path}/stateVariables`} exact component={CompartmentalConfigureStateVariablesPage} />
+          <Route path={`${match.path}/optimizeParameters`} exact component={CompartmentalOptimizeParametersPage} />
+          <Route path={`${match.path}/uploadData`} exact component={CompartmentalUploadDataPage} />
+          <Route path={`${match.path}/ins`} exact component={ComparmentalInsPage} />
+          <Route path={`${match.path}/chooseDate`} exact component={CompartmentalChooseDatePage} />
+          <Route path={`${match.path}/reviewConfigurationInformation`} exact component={CompartmentalReviewConfigurationInformationPage} />
+          <Route path={`${match.path}/reviewConfigurationMessage`} exact component={CompartmentalReviewConfigurationMessagePage} />
+          <Route path={`${match.path}/fixedParameters`} exact component={CompartmentalFixedParametersPage} />
+        </Switch>
+        
       </CompartmentalModelPageContainer>
     </>
   )

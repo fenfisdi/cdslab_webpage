@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import React, {Suspense}  from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { AgentsModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
-import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
+import LoaderComponent from '../../components/ui/Loader'
 
 const AgentsBasedModelPage = () => {
   const match = useRouteMatch()
@@ -15,7 +15,7 @@ const AgentsBasedModelPage = () => {
   const AgentsMobilityGroups = React.lazy(() => import('./AgentsMobilityGroups'))
   const AgentSusceptibilityGroups = React.lazy(() => import('./AgentSusceptibilityGroups'))
   const InmunizationGroupName = React.lazy(() => import('./InmunizationGroupName'))
-
+ 
   const tabs = [
     {
       id: 1,
@@ -44,13 +44,13 @@ const AgentsBasedModelPage = () => {
     <>
       <FullWidthTabs tabs={tabs} idTab={2}/>
       <AgentsModelPageContainer>          
-        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+        <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
           <Switch>
             <Route path={match.path} exact component={AgentsMainPage} />
             <Route path={`${match.path}/newConfiguration`} exact render={(props) => (
               <AgentsNewConfigurationPage {...props} pathParent={match.path} />
             )} />
-            <Route path={`${match.path}/agentsAgeGroups:idConfiguration`} exact component={AgentsAgeGroupsPage} />
+            <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
             <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
             <Route path={`${match.path}/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
             <Route path={`${match.path}/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />

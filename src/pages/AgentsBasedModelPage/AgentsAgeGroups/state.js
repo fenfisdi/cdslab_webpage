@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { useStore } from '../../../store/storeContext'
 import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
+import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
+import { isEmpty } from 'lodash'
 export const useAgentsAgeGroups = () => {
 
   const history = useHistory()
@@ -19,6 +21,7 @@ export const useAgentsAgeGroups = () => {
   const [items, setItems] = useState(initialItems)
   const [currentIndex, setCurrentIndex] = useState(null)
   const [openSettings, setOpenSettings] = useState(false)
+  const [idConfiguration, setIdConfiguration] = useState('')
   const {
     state: {      
       agentsAgeModel: {
@@ -39,19 +42,28 @@ export const useAgentsAgeGroups = () => {
     })
 
   }
+
+  useEffect(()=>{
+    const params = getStateWithQueryparams(history)
+    if(!isEmpty(params)){
+      setIdConfiguration(params.idConfiguration)
+
+    }
+  },[history])
   
   useEffect(()=>{     
-    if(data.length == 0 && !error){
-      getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
+    if(data.length == 0 && !error && idConfiguration!=''){      
+      getAgentsAgeModelInformation(idConfiguration)
     }else if(data.length > 0 && !error){
       setItems(parseInformationAgeModel(data))
     }
-  },[data])
+  },[data,error,idConfiguration])
 
   
   const redirectToMobilityGroupsPage = () => {
     history.push({
-      pathname: 'agentsMobilityGroups'
+      pathname: 'agentsMobilityGroups',
+      search: `?idConfiguration=${idConfiguration}`
     })
   }
 
@@ -70,8 +82,8 @@ export const useAgentsAgeGroups = () => {
   }
   
   const handleClickSaveAgentsAgeModel =(information)=>{    
-    saveAgentsAgeModelInformation(information,'94257c90-d396-11eb-a821-02420a000520').then(()=>{      
-      getAgentsAgeModelInformation('94257c90-d396-11eb-a821-02420a000520')
+    saveAgentsAgeModelInformation(information,idConfiguration).then(()=>{      
+      getAgentsAgeModelInformation(idConfiguration)
       redirectToMobilityGroupsPage()
     })
     

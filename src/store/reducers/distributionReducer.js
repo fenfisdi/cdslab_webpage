@@ -8,7 +8,7 @@ import {
 export const initialState = {
   distribution: {
     distributionList: [],
-    parameterList: [],
+    parameterList: {},
     loading: false,
     error: null
   }
@@ -28,7 +28,7 @@ export const distributionReducer = (state, action) => {
       ...state,
       loading: false,
       error: null,
-      parameterList: action.payload
+      parameterList: {...state.parameterList,[action.payload.name]:action.payload}
     }  
   case DISTRIBUTION_LOADING:
     return { ...state, loading: true, error: null }   

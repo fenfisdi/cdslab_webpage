@@ -62,7 +62,7 @@ const AgentsTableConfiguration = ({
             itemsCount={initialItems.length}
             item={item}
             index={i}
-            isConfigured={item.state === 'CONFIGURED'}
+            isConfigured={item.state == 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}
             handleSettings={handleSettings}
           />

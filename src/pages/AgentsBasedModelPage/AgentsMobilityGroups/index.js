@@ -1,4 +1,5 @@
 import { Grid } from '@material-ui/core'
+import { isEmpty } from 'lodash'
 import React, { useContext, useState, Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
@@ -15,24 +16,27 @@ import { useAgentsMobilityGroups } from './state'
 
 const AgentsMobilityGroups = () => {
   const context = useContext(AgentsBaseContext)
-  const { distributionList } = context
-  const {
-    redirectToSusceptibilityGroupsPage,
-    tableColumns,
-    items, 
-    setItems,
-    schemaItems,
-  }= useAgentsMobilityGroups()
-
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+  const { distributionList,parameterList } = context
   const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
     index:0
   })
+  const {
+    handleClickSaveMobilityGroups,
+    tableColumns,
+    items, 
+    setItems,
+    schemaItems,
+    isValid
+  }= useAgentsMobilityGroups({modalSettings})
+
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
   
   const Component = renderComponentChildre(componentChildren,{
+    optionsConfigured:items,
     distributionList,
+    parameterList,
     modalSettings,
     componentChildren,
     setComponentChildren:setComponentChildren,
@@ -41,7 +45,7 @@ const AgentsMobilityGroups = () => {
 
   return (
     <Fragment>
-      {distributionList.length > 0 && <Grid container item xs={12} justify='center' alignItems='center'>
+      {distributionList.length > 0 && items.length>0 && !isEmpty(parameterList) && <Grid container item xs={12} justify='center' alignItems='center'>
         
         <Grid container item xs={10}
           direction="row"
@@ -74,7 +78,8 @@ const AgentsMobilityGroups = () => {
           />  
         </Grid>
 
-        <AgentsModalContainer          
+        <AgentsModalContainer
+          modalTitle='Mobility profile'       
           open={modalSettings.open}
           handleClose={()=>{
             setModalSettings({...modalSettings,open:false})
@@ -86,12 +91,14 @@ const AgentsMobilityGroups = () => {
           justify='flex-end'
           alignItems='center'
           text='Continue'
-          onClick={redirectToSusceptibilityGroupsPage}
-          disabled={false}            
+          onClick={()=>{
+            handleClickSaveMobilityGroups(items)
+          }}
+          disabled={!isValid?true:false}
         />
       </Grid>}
       
-      {distributionList.length == 0 && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
+      {isEmpty(parameterList) &&  <LoaderComponent width="100px" height={100} marginTop="100px" />}
     </Fragment>
   )
 }
