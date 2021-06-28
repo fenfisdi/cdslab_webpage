@@ -79,7 +79,7 @@ const AgentSusceptibilityGroups = () => {
         </Grid>
 
         <AgentsModalContainer
-          modalTitle='Mobility profile'       
+          modalTitle='Susceptibility distribution'       
           open={modalSettings.open}
           handleClose={()=>{
             setModalSettings({...modalSettings,open:false})
