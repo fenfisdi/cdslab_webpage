@@ -24,15 +24,11 @@ export const useAgentsMobilityGroups = () => {
 
   const [items, setItems] = useState(initialItems)
 
-  
-
   useEffect(()=>{
     console.log(items)
   },[items])
-  
 
   const redirectToSusceptibilityGroupsPage = () => {
-    
     history.push({
       pathname: 'agentSusceptibilityGroups'
     })

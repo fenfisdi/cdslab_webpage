@@ -2,6 +2,7 @@ import { AgentsDistribution } from '../components/AgentsModels/AgentsDistributio
 import React from 'react'
 import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
 import { OPTIONS_MODAL } from '../constants/agents'
+import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -61,9 +62,10 @@ export const formatYmd = date => date.toISOString().slice(0, 10)
 
 
 
-export const renderComponentChildre = (componentChildren,props) => {
+export const renderComponentChildre = (componentChildren, props) => {
   switch (componentChildren) {
   case OPTIONS_MODAL.DISTRIBUTION:
+    console.log(AgentsDistribution)
     return {
       container:AgentsDistribution,
       props,
@@ -88,6 +90,14 @@ export const renderComponentChildre = (componentChildren,props) => {
   case OPTIONS_MODAL.NUMPY:
     return {
       Component:<h1>Numpy</h1>
+    }
+  case OPTIONS_MODAL.DISEASE_STATE:
+    console.log(AgentDiseaseState)
+    return {
+      Component: AgentDiseaseState,
+      props,
+      width:'50%',
+      height:'50%'
     }
   default:
     return null
