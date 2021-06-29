@@ -2,7 +2,6 @@ import { Button } from '@material-ui/core'
 import React, {useState} from 'react'
 import DiseaseState from '../../../pages/AgentsBasedModelPage/DiseaseState'
 import { DiseaseStateList } from '../../../pages/AgentsBasedModelPage/DiseaseState/state'
-
 import AgentsDistributionCard from './AgentsDistributionCard'
 import { Container, Columm, Row } from './style'
 
