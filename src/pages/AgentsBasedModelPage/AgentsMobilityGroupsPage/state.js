@@ -89,7 +89,8 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   const redirectToSusceptibilityGroupsPage = () => {
     
     history.push({
-      pathname: 'agentSusceptibilityGroups'
+      pathname: 'agentsSusceptibilityGroups',
+      search: `?idConfiguration=${idConfiguration}`
     })
   }
 
