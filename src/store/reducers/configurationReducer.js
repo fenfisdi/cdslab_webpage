@@ -7,6 +7,7 @@ import {
   CONFIGURATION_SET_LIST,
   CONFIGURATION_DISTANCE_LIST,
   CONFIGURATION_TIME_LIST,
+  CONFIGURATION_DISEASE_STATE
 } from '../../actions/types/configurationTypes'
 
 export const initialState = {
@@ -17,7 +18,8 @@ export const initialState = {
     listConfigurationTime: [],
     configurationSelected: null,
     loading: false,
-    error: null
+    error: null,
+    listDiseaseState:[]
   }
 }
 
@@ -55,6 +57,13 @@ export const configurationReducer = (state, action) => {
       loading: false,
       error: null,
       listConfigurationTime: action.payload
+    }    
+  case CONFIGURATION_DISEASE_STATE :
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      listDiseaseState: action.payload
     }    
   case CONFIGURATION_SELECT:
     return {
