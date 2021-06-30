@@ -4,7 +4,7 @@ import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATIO
 
 export const initialState = {
   agentsAgeModel: {
-    data:[],
+    data:null,
     error:false,
     errorData:null,
     loading: false
@@ -27,7 +27,7 @@ export const agentsAgeModelReducer = (state, action) => {
     return {
       ...state, 
       loading: false,
-      data:[], 
+      data:null, 
       error:true,
       errorData:action.payload.message,
     }
@@ -35,7 +35,7 @@ export const agentsAgeModelReducer = (state, action) => {
   case AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS:
     return {
       ...state, 
-      data:[],
+      data:null,
       error:false,
       errorData:null,
       loading: false

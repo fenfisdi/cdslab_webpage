@@ -3,7 +3,7 @@ import { AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_MOBILITY_GRO
 
 export const initialState = {
   agentsMobilityGroupsModel: {
-    data:[],
+    data:null,
     error:false,
     errorData:null,
     loading: false
@@ -26,7 +26,7 @@ export const agentsMobilityGroupsModelReducer = (state, action) => {
     return {
       ...state, 
       loading: false,
-      data:[], 
+      data:null, 
       error:true,
       errorData:action.payload.message,
     }
@@ -34,7 +34,7 @@ export const agentsMobilityGroupsModelReducer = (state, action) => {
   case AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS:
     return {
       ...state, 
-      data:[],
+      data:null,
       error:false,
       errorData:null,
       loading: false

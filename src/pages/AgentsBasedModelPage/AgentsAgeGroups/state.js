@@ -52,9 +52,9 @@ export const useAgentsAgeGroups = () => {
   },[history])
   
   useEffect(()=>{     
-    if(data.length == 0 && !error && idConfiguration!=''){      
+    if(data == null && !error && idConfiguration!=''){      
       getAgentsAgeModelInformation(idConfiguration)
-    }else if(data.length > 0 && !error){
+    }else if(data != null && data.length > 0 && !error){
       setItems(parseInformationAgeModel(data))
     }
   },[data,error,idConfiguration])

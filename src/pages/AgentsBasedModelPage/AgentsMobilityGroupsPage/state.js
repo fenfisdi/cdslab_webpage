@@ -25,7 +25,7 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
       return {
         name:mobility.name,
         distribution:mobility.distribution,
-        state: 'CONFIGURED'       
+        state: 'CONFIGURED'     
       }
     })
 
@@ -77,9 +77,9 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   },[history])
 
   useEffect(()=>{     
-    if(data.length == 0 && !error && idConfiguration!=''){
+    if(data == null && !error && idConfiguration!=''){
       getMobilityGroupsInformation(idConfiguration)
-    }else if(data.length > 0 && !error){
+    }else if(data != null && data.length > 0 && !error){
       console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)      
       setItems(parseInformationMobilityGroupsModel(data))
     }
