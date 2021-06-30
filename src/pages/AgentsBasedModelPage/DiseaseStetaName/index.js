@@ -1,6 +1,5 @@
 import { Breadcrumbs } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
-import { CompassCalibrationOutlined } from '@material-ui/icons'
 import React, { useContext, useState, Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
@@ -22,11 +21,21 @@ const DiseaseStateNamePage=()=>{
       inputProps: { fullWidth: true }
     },
   ]
-  
-  const initialItems = [{}]
+  const schemaItems={
+    name: '',
+    distribution: {
+      'identifier':'',
+      'name':'',
+      'distribution_type':'',
+      'distribution_name':'',
+      'distribution_filename':'',
+      'distribution_extra_arguments': {}
+    },      
+  }
+  const initialItems = [{...schemaItems}]
 
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISEASE_STATE)
-  const [modalSettings, setModalSettings] = useState({
+  const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
     index:0
@@ -36,9 +45,9 @@ const DiseaseStateNamePage=()=>{
     modalSettings,
     componentChildren,
     setComponentChildren:setComponentChildren,
-    setModalSettings:setModalSettings
+    setModalSettings:setModalSettings,
   })
-  const [items, setItems] = useState()
+  const [items, setItems] = useState(initialItems)
   const redirectToSusceptibilityGroupsPage = () => {
     history.push({
       pathname: 'DiseaseStetaName' 
@@ -67,12 +76,13 @@ const DiseaseStateNamePage=()=>{
           distributionType="Mobility"
           columns={tableColumns}
           initialItems={initialItems}
-          // setItems={setItems}
-          // schemaItems={schemaItems}
-          handleSettings={({index,item})=>{
-            console.log(item)
+          setItems={setItems}
+          schemaItems={schemaItems}
+          handleSettings={({index,item}) => {
             setComponentChildren(OPTIONS_MODAL.DISEASE_STATE)
-            setModalSettings({...modalSettings, open:true, item, index})
+            setModalSettings(
+              {...modalSettings, open:true, item, index}
+            )
           }}          
         />  
         <AgentsModalContainer          
@@ -90,7 +100,6 @@ const DiseaseStateNamePage=()=>{
           disabled={false}            
         />
       </Grid>
-      
       {distributionList.length == 0 && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
     </Fragment>
   )
