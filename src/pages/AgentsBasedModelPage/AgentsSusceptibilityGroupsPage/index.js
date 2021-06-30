@@ -6,6 +6,7 @@ import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTab
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../components/SupportComponent'
+import LoaderComponent from '../../../components/ui/Loader'
 import { OPTIONS_MODAL } from '../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import AgentsBaseContext from '../../../context/agentsBase.context'
@@ -96,7 +97,8 @@ const AgentSusceptibilityGroups = () => {
           }}
           disabled={!isValid?true:false}
         />                
-      </Grid>}              
+      </Grid>}
+      {isEmpty(parameterList) &&  <LoaderComponent width="100px" height={100} marginTop="100px" />}   
     </Fragment>
   )
 }
