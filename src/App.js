@@ -37,6 +37,7 @@ const App = () => {
   const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
   const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage'))
   const AgentsBasedModelPage = React.lazy(() => import('./pages/AgentsBasedModelPage'))
+  const Vulnerability = React.lazy(() => import('./pages/AgentsBasedModelPage/VulnerabilityGroup'))
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
   // Dev enviroment
@@ -93,6 +94,10 @@ const App = () => {
                 <PrivateRoute
                   path="/management"
                   component={<SysManagementState><UserManagementPage /></SysManagementState>}
+                />
+                <PrivateRoute
+                  path="/vulnerability"
+                  component={<Vulnerability />}
                 />
                 <Route exact path="/ModelSettingsPage" component={ModelSettingsPage} />
                 <Route exact path="/accountRecovery" component={AccountRecoveryPage} />

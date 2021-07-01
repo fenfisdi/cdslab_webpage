@@ -6,7 +6,8 @@ import {
   makeStyles, 
   FormControl, 
   Grid, 
-  MenuItem 
+  MenuItem, 
+  InputLabel
 } from '@material-ui/core'
 import React,{useState} from 'react'
 import { 
@@ -59,6 +60,11 @@ export default function TableTextInput({ data, onchange }) {
       margin: '3px',
       marginTop: '5px',
       marginBottom: '8px',
+      color: '#006064'
+    },
+    labelInput: {
+      color: '#006064',
+      zIndex: 10
     },
     selectEmpty: {
       marginTop: theme.spacing(5),
@@ -91,7 +97,7 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if(item.type === 'label-valid' && viewState){
+            if(item.type === 'label-valid' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
@@ -122,7 +128,7 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if(item.type === 'input' && viewState){
+            if(item.type === 'input' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
@@ -137,7 +143,7 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if (item.type === 'select' && viewState){
+            if (item.type === 'select' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
@@ -147,6 +153,7 @@ export default function TableTextInput({ data, onchange }) {
                           <FormControl
                             className={classes.formControl}
                           >
+                            <InputLabel className={classes.labelInput} id={item.placeholder}>{item.placeholder}</InputLabel>
                             <Select
                               id={`selectComponent-simple${idItem}`}
                               value={valueChangeSelect||''}
@@ -167,7 +174,7 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if(item.type === 'slider' && viewState){
+            if(item.type === 'slider' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <Slider
