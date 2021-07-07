@@ -8,20 +8,20 @@ export const useSwitchInputValue = (
   extras
 ) => {
   console.log('ccccccccccccccccccccccccc',val)
-  const [value, setValue] = useState(val)
+  const [checked, setChecked] = useState(val)
   const [errors, setErrors] = useState([])
   const [helperText, setHelperText] = useState(null)
   const {t,language} = useContext(languageContext)
 
-  useEffect(()=>{
-    errors.length>0 && onChange({target:{
-      value
-    }})
-  },[language])
+  // useEffect(()=>{
+  //   errors.length>0 && onChange({target:{
+  //     value
+  //   }})
+  // },[language])
 
 
   const onChange = e => {
-    setValue(e.target.checked)
+    setChecked(e.target.checked)
   }
 
   /**
@@ -56,7 +56,7 @@ export const useSwitchInputValue = (
   }
 
   return {
-    value,
+    checked,
     errors,
     validators,
     helperText,

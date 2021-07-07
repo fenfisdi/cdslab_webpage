@@ -21,7 +21,7 @@ export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, para
   const { fieldsFormat,uploadButton } = useAgentsModalEmpiricalState()
 
   const fieldsForm = fieldsFormat(modalSettings.item,parameters.type)
-
+  console.log(fieldsForm)
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
