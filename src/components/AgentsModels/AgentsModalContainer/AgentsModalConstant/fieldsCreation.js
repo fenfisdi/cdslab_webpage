@@ -7,14 +7,14 @@ const initialValue = (distribution_extra_arguments,key)=>{
 }
 
 export const useAgentsModalConstantFieldsCreation = ({parameters=[],valueSet={}}) => {
-  const { distribution:{distribution_extra_arguments}} = valueSet
+  const { distribution:{kwargs}} = valueSet
   let fields = {}
   for (let parameterObject of parameters) {    
     let field ={}
     const { parameter='', }=parameterObject     
     field['label']=parameter
     field['input']=
-      {...useInputValue(initialValue(distribution_extra_arguments,titleCase(replaceString(parameter,' ','_'))), [], {
+      {...useInputValue(initialValue(kwargs,titleCase(replaceString(parameter,' ','_'))), [], {
         name: parameter,
         type: 'text',
         label:parameter,

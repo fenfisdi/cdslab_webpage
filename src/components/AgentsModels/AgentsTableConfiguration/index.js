@@ -23,11 +23,11 @@ const AgentsTableConfiguration = ({
   showAddButton = true,
   selectOptions,
   schemaItems,
-  handleSettings
+  handleSettings,
+  handleItemDeleted
 }) => {
   const {
-    handleItemChanged,
-    handleItemDeleted,
+    handleItemChanged,    
     handleAddItem,
   } = useConfigTableState({
     initialItems,

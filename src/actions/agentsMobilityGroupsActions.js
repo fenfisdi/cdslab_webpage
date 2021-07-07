@@ -1,4 +1,4 @@
-import { getMobilityGroupsInformationService, saveMobilityGroupsInformationService } from '../services/agentsMobilityGroupServices'
+import { deleteMobilityGroupsItemService, getMobilityGroupsInformationService, saveMobilityGroupsInformationService, saveMobilityGroupsItemFileService, saveMobilityGroupsItemService } from '../services/agentsMobilityGroupServices'
 import { AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS, AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsMobilityGroupsTypes'
 
 
@@ -50,9 +50,29 @@ export const useAgentsMobilityGroupsActions = (dispatch) => {
     })
   }
 
+  const saveMobilityGroupsItemAction =(mobilityGroup,idConfiguration)=>{
+    return saveMobilityGroupsItemService(mobilityGroup,idConfiguration)
+  }
+
+  const deleteMobilityGroupsItemAction =(idConfiguration,idMobilityGroup)=>{
+    return deleteMobilityGroupsItemService(idConfiguration,idMobilityGroup)
+  }
+
+  const getMobilityGroups =(idConfiguration)=>{
+    return  getMobilityGroupsInformationService(idConfiguration)
+  }
+
+  const saveMobilityGroupsItemFile=(idConfiguration,idMobilityGroup,mobilityGroupFile)=>{
+    return saveMobilityGroupsItemFileService(idConfiguration,idMobilityGroup,mobilityGroupFile)
+  }
+
   return {
     saveMobilityGroupsInformation,
     getMobilityGroupsInformation,
-    setResetMobilityGroupsInformation
+    setResetMobilityGroupsInformation,
+    saveMobilityGroupsItemAction,
+    deleteMobilityGroupsItemAction,
+    getMobilityGroups,
+    saveMobilityGroupsItemFile
   }
 }
