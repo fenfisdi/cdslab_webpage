@@ -7,8 +7,8 @@ import { UploadButton } from '../../../../ui/UploadButton'
 import CompartmentalButton from '../../../CompartmentalButton'
 
 
-const AdjustParametersFormDataUpload = ({ parameters, selectValues, eventEmitter }) => {
-  console.log(':::::::::::::::>parameters', parameters)
+const AdjustParametersFormDataUpload = ({  selectValues, eventEmitter }) => {
+  
   const fieldsData = useAdjustParametersFormDataUploadState()
   const { rangePicker, stateVariable, uploadButton } = fieldsData
   const [isValid, setIsvalid] = useState(false)

@@ -1,20 +1,9 @@
-import { Button } from '@material-ui/core'
 import React from 'react'
 import AgentsDistributionCard from './AgentsDistributionCard'
-import { Container } from './style'
+import { BodyContainer, Container } from './style'
 
-export const AgentsDistribution = ({ setModalSettings, modalSettings, setComponentChildren, distributionList }) => {
+export const AgentsDistribution = ({  modalSettings, setComponentChildren, distributionList, modalTitle }) => {
   
-  const onFinishSettings = () => {
-    
-    setModalSettings({...modalSettings,open:false})
-  }
-
-  const onClose = () => {
-    
-    setModalSettings({...modalSettings,open:false})
-  }
-
 
   const handleNextStep = (nexStep) =>{
     setComponentChildren(nexStep.toUpperCase())
@@ -34,11 +23,10 @@ export const AgentsDistribution = ({ setModalSettings, modalSettings, setCompone
   )
 
   return (
-    <div>
+    <BodyContainer>
+      <span>{modalTitle}</span>
       <p>I am the settings component for <strong>{modalSettings.item?.name}</strong></p>
-      {renderCards()}
-      <Button onClick={() => onFinishSettings()}>Save and finish</Button>
-      <Button onClick={() => onClose()}>Cancel</Button>
-    </div>
+      {renderCards()}      
+    </BodyContainer>
   )
 }

@@ -1,11 +1,10 @@
-import React, { Suspense } from 'react'
+import React, {Suspense}  from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { AgentsModelPageContainer } from './styles'
 import FullWidthTabs from '../../components/Taps'
-import LoaderComponent from '../../components/ui/Loader'
 import imgAgents from '../../assets/images/taps/agents_SVG.svg'
 import imgCompartamental from '../../assets/images/taps/cmodels_SVG.svg'
-import { Breadcrumbs } from '@material-ui/core'
+import LoaderComponent from '../../components/ui/Loader'
 
 const AgentsBasedModelPage = () => {
   const match = useRouteMatch()
@@ -13,12 +12,11 @@ const AgentsBasedModelPage = () => {
   const AgentsMainPage = React.lazy(() => import('./AgentsMainPage'))
   const AgentsNewConfigurationPage = React.lazy(() => import('./AgentsNewConfigurationPage'))
   const AgentsAgeGroupsPage = React.lazy(() => import('./AgentsAgeGroups'))
-  const AgentsMobilityGroups = React.lazy(() => import('./AgentsMobilityGroups'))
-  const AgentSusceptibilityGroups = React.lazy(() => import('./AgentSusceptibilityGroups'))
-  const InmunizationGroupName = React.lazy(() => import('./InmunizationGroupName'))
+  const AgentsMobilityGroupsPage = React.lazy(() => import('./AgentsMobilityGroupsPage'))
+  const AgentsSusceptibilityGroupsPage = React.lazy(() => import('./AgentsSusceptibilityGroupsPage'))
+  const AgentsVulnerabilityGroupsPage = React.lazy(() => import('./AgentsVulnerabilityGroupsPage'))
   const DiseaseStetaName = React.lazy(() => import('./DiseaseStetaName'))
-  // const DiseaseStete = React.lazy(() => import('./DiseaseState'))
-
+ 
   const tabs = [
     {
       id: 1,
@@ -46,20 +44,18 @@ const AgentsBasedModelPage = () => {
   return (
     <>
       <FullWidthTabs tabs={tabs} idTab={2}/>
-      <AgentsModelPageContainer>  
-        <Breadcrumbs  />   
-        <Suspense fallback={<LoaderComponent width={50} height={50} marginTop={5}/>}>
+      <AgentsModelPageContainer>          
+        <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
           <Switch>
             <Route path={match.path} exact component={AgentsMainPage} />
             <Route path={`${match.path}/newConfiguration`} exact render={(props) => (
               <AgentsNewConfigurationPage {...props} pathParent={match.path} />
             )} />
             <Route path={`${match.path}/agentsAgeGroups`} exact component={AgentsAgeGroupsPage} />
-            <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroups} />
-            <Route path={`${match.path}/agentSusceptibilityGroups`} exact component={AgentSusceptibilityGroups} />
-            <Route path={`${match.path}/agentsInmunizationGroupName`} exact component={InmunizationGroupName} />
+            <Route path={`${match.path}/agentsMobilityGroups`} exact component={AgentsMobilityGroupsPage} />
+            <Route path={`${match.path}/agentsSusceptibilityGroups`} exact component={AgentsSusceptibilityGroupsPage} />
+            <Route path={`${match.path}/agentsVulnerabilityGroupsPage`} exact component={AgentsVulnerabilityGroupsPage} />
             <Route path={`${match.path}/DiseaseStetaName`} exact component={DiseaseStetaName} />
-            {/* <Route path={`${match.path}/DiseaseSteta`} exact component={DiseaseStete} /> */}
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>

@@ -66,8 +66,8 @@ export const useConfigurationActions = (dispatch) => {
   const addConfiguration = (configurationForm) => {
     dispatch({ type: CONFIGURATION_LOADING })
     requestAddConfiguration(configurationForm)
-      .then((response) => {
-        dispatch({ type: CONFIGURATION_ADD, payload: response })
+      .then(({data}) => {
+        dispatch({ type: CONFIGURATION_ADD, payload: data.data })
       })
       .catch(() => {
         dispathError()

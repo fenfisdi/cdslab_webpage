@@ -1,11 +1,12 @@
 import { Grid, makeStyles } from '@material-ui/core'
-import React from 'react'
+import { isEmpty } from 'lodash'
+import React, { useEffect, useState } from 'react'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { Input } from '../../../ui/Input'
-import { useInputValue } from '../../../ui/Input/useInputValue'
+import { useAgentsModalConstantFieldsCreation } from './fieldsCreation'
 
 export const useAgentsModalConstantStyles = makeStyles(() => ({
   Input:{
@@ -26,22 +27,42 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings, setComponentChildren }) => {
+export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
-  const name = useInputValue('', [], {
-    name: 'name',
-    type: 'text',
-    label: 'name',
-  })
+  const [isValid,setIsValid] = useState(false)
+  const parameters = parameterList[componentChildren.toLowerCase()]
+  
+  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item})
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
+
+  useEffect(()=>{
+    if(!isEmpty(fields)){
+      let validation = false
+      Object.keys(fields).every(field => {        
+        if (fields[field]['input']['value']=='' || fields[field]['input']['errors'].length>0) {
+          validation = true
+          return false
+        }                  
+        validation = false        
+        return true
+      })
+
+      setIsValid(validation)
+    }
+    
+  },[fields])
   
-  const handleSaveInformation =(item)=>{
-    const { distribution: {distribution_extra_arguments} } = item
-    distribution_extra_arguments['type_constant'] = name.value
-    setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+  const handleSaveInformation =(item)=>{    
+    const { distribution, distribution: {kwargs} } = item
+    distribution.type = componentChildren.toLowerCase()
+    for (const field in fields) {      
+      kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
+    }
+    item.state = 'CONFIGURED'
+    handlerDataStorage(item)    
   }
   
   return (
@@ -57,24 +78,28 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren }) => 
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   
-      <Grid container item xs={12} justify='center' alignItems='center' direction='row'>
-        <div className={classes.text}>
-          <strong>Type constant:</strong>
-        </div>
-        <Input
-          disabled={false}
-          required
-          variant="outlined"
-          margin="normal"
-          autoComplete="name"
-          className={classes.Input}
-          {...name}
-        />
+      <Grid container item xs={12} justify='center' alignItems='center' direction='column'>
+        {Object.keys(fields).map((fieldType,index)=>{
+          const {label, input} = fields[fieldType]
+          return <div key={index} style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+            <div className={classes.text}>
+              <strong>{label}:</strong>
+            </div>
+            <Input
+              disabled={false}
+              required
+              variant="outlined"
+              margin="normal"
+              autoComplete="name"
+              className={classes.Input}
+              {...input}
+            /> 
+          </div>
+        })}       
       </Grid>
-
         
       <Grid container item xs={12} justify='flex-end' alignItems='center' direction='row'>
-        <Button color="primary" onClick={() => handleSaveInformation(modalSettings?.item)}>Done</Button>
+        <Button color="primary" disabled={isValid?true:false}  onClick={() =>handleSaveInformation(modalSettings?.item)}>Done</Button>
         <Button onClick={() => handleGoBack()}>Cancel</Button>
       </Grid>
       

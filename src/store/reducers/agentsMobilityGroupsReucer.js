@@ -1,9 +1,8 @@
 
-import { AGENTS_AGE_MODEL_GET_INFORMATION_ERROR, AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS, AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS } from '../../actions/types/agentsModelTypes'
-
+import { AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS, AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS } from '../../actions/types/agentsMobilityGroupsTypes'
 
 export const initialState = {
-  agentsAgeModel: {
+  agentsMobilityGroupsModel: {
     data:null,
     error:false,
     errorData:null,
@@ -11,10 +10,10 @@ export const initialState = {
   }
 }
 
-export const agentsAgeModelReducer = (state, action) => {
+export const agentsMobilityGroupsModelReducer = (state, action) => {
   switch (action.type) { 
     
-  case AGENTS_AGE_MODEL_GET_INFORMATION_SUCCESS:
+  case AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS:
     return {
       ...state, 
       loading: false, 
@@ -23,7 +22,7 @@ export const agentsAgeModelReducer = (state, action) => {
       errorData:null
     }
 
-  case AGENTS_AGE_MODEL_GET_INFORMATION_ERROR:
+  case AGENTS_MOBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR:
     return {
       ...state, 
       loading: false,
@@ -32,7 +31,7 @@ export const agentsAgeModelReducer = (state, action) => {
       errorData:action.payload.message,
     }
 
-  case AGENTS_AGE_MODEL_RESET_INFORMATION_SUCCESS:
+  case AGENTS_MOBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS:
     return {
       ...state, 
       data:null,

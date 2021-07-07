@@ -1,6 +1,5 @@
 import { Button,Grid } from '@material-ui/core'
 import React, {useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import theme from '../../../styles/cdslabTheme'
 import DatePicker from '../../ui/DatePicker'
 import { Input } from '../../ui/Input'
@@ -19,7 +18,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
   const classes = useNewConfigurationStyles(theme)
   const fieldsData = useNewConfigurationForm()
   const [isValid, setIsvalid] = useState(false)
-  const history = useHistory()
   const [initialDate, setInitialDate] = useState(null)
   const [finalDate, setFinalDate] = useState(null)
   const [showError, setShowError] = useState(false)
@@ -64,9 +62,6 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
     }
   }
   const handleClick = () => {
-    history.push({
-      pathname: 'agentsAgeGroups'
-    })
     eventEmitter({
       name:nameConfiguration.value,
       interval_date: {

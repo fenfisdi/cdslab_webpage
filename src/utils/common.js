@@ -3,6 +3,7 @@ import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalConta
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
+import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -68,8 +69,8 @@ export const renderComponentChildre = (componentChildren, props) => {
     return {
       container:AgentsDistribution,
       props,
-      width:'50%',
-      height:'50%'
+      width:'70%',
+      height:'70%'
     }        
   case OPTIONS_MODAL.EMPIRICAL:
     return {
@@ -88,7 +89,10 @@ export const renderComponentChildre = (componentChildren, props) => {
     }
   case OPTIONS_MODAL.NUMPY:
     return {
-      Component:<h1>Numpy</h1>
+      container:AgentsModalNumpy,
+      props,
+      width:'40%',
+      height:'40%'
     }
   case OPTIONS_MODAL.DISEASE_STATE:
     return {
@@ -101,4 +105,19 @@ export const renderComponentChildre = (componentChildren, props) => {
     return null
   }
   
-} 
+}
+
+export const titleCase = (str)=> {
+  var splitStr = str.toLowerCase().split(' ')
+  for (var i = 0; i < splitStr.length; i++) {
+    // You do not need to check if i is larger than splitStr length, as your for does that for you
+    // Assign it back to the array
+    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)     
+  }
+  // Directly return the joined string
+  return splitStr.join(' ') 
+}
+
+export const replaceString = (str,charactertoSearch,characterReplace)=>{
+  return str.split(charactertoSearch).join(characterReplace)
+}

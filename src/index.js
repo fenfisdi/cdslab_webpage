@@ -5,10 +5,10 @@ import { StoreProvider } from './store/storeContext'
 import { ThemeProvider } from 'styled-components'
 import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles'
 import { LanguageContextProvider } from './config/languageContext'
-import { MiniLoader } from './components/layouts/MiniLoader'
 import theme from './styles/cdslabTheme'
 import App from './App'
 import './config/languageSettings'
+import LoaderComponent from './components/ui/Loader'
 
 ReactDOM.render(
   
@@ -16,7 +16,7 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <StoreProvider>
-          <Suspense fallback={<MiniLoader/>}>
+          <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
             <LanguageContextProvider>
               <App />
             </LanguageContextProvider>
