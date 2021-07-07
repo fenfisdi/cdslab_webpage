@@ -30,10 +30,10 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   const { setResetSusceptibilityGroupsInformation } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
 
   useEffect(()=>{
-    if(agentsMobilityList.length>0){
+    if(agentsMobilityList!=null && agentsMobilityList.length>0){
       setResetMobilityGroupsInformation()
     }
-    if(agentsAgeModelList.length>0){
+    if(agentsAgeModelList!=null && agentsAgeModelList.length>0){
       setAgeModelInformation()
     }
     if(agentsSusceptibilityGroupsList.length>0){

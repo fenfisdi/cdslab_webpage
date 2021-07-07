@@ -27,7 +27,7 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
@@ -56,13 +56,13 @@ export const AgentsModalConstant = ({ modalSettings, setComponentChildren, param
   },[fields])
   
   const handleSaveInformation =(item)=>{    
-    const { distribution, distribution: {distribution_extra_arguments} } = item
-    distribution.distribution_type = componentChildren.toLowerCase()
+    const { distribution, distribution: {kwargs} } = item
+    distribution.type = componentChildren.toLowerCase()
     for (const field in fields) {      
-      distribution_extra_arguments[field] = fields[field]['input']['value']
+      kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
     }
     item.state = 'CONFIGURED'
-    setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+    handlerDataStorage(item)    
   }
   
   return (

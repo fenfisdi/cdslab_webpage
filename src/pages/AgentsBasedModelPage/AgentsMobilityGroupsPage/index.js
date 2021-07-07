@@ -22,16 +22,20 @@ const AgentsMobilityGroups = () => {
     item:{},
     index:0
   })
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+
   const {
     handleClickSaveMobilityGroups,
     tableColumns,
     items, 
     setItems,
     schemaItems,
-    isValid
-  }= useAgentsMobilityGroups({modalSettings})
+    isValid,
+    saveMobilityGroupsItem,
+    deleteMobilityGroupsItem
+  }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren})
 
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+  
   
   const Component = renderComponentChildre(componentChildren,{
     optionsConfigured:items,
@@ -39,6 +43,7 @@ const AgentsMobilityGroups = () => {
     parameterList,
     modalSettings,
     componentChildren,
+    handlerDataStorage:saveMobilityGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings
   })
@@ -69,12 +74,13 @@ const AgentsMobilityGroups = () => {
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
-            handleSettings={({index,item})=>{
-              console.log(index)
-              console.log(item)
+            handleSettings={({index,item})=>{              
               setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
               setModalSettings({...modalSettings,open:true,item,index})
-            }}          
+            }}
+            handleItemDeleted={({item})=>{                            
+              deleteMobilityGroupsItem(item)
+            }}    
           />  
         </Grid>
 

@@ -25,7 +25,8 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
       return {
         name:mobility.name,
         distribution:mobility.distribution,
-        state: 'CONFIGURED'       
+        state: 'CONFIGURED',
+        identifier:mobility.identifier   
       }
     })
 
@@ -39,16 +40,17 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     return itemsConfigured.length == mobilityGroupsList.length 
   }
   
-  const { saveMobilityGroupsInformation, getMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
+  const { saveMobilityGroupsInformation, 
+    getMobilityGroupsInformation, 
+    saveMobilityGroupsItemAction,
+    deleteMobilityGroupsItemAction,
+    saveMobilityGroupsItemFile } = useAgentsMobilityGroupsActions(dispatch)
   
   const schemaItems={
     name: '',
     distribution: {
-      'name':'',
-      'distribution_type':'',
-      'distribution_name':'',
-      'distribution_filename':'',
-      'distribution_extra_arguments': {}
+      'type':'',
+      'kwargs': {}
     },     
     state: ''
   }
@@ -77,9 +79,9 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   },[history])
 
   useEffect(()=>{     
-    if(data.length == 0 && !error && idConfiguration!=''){
+    if(data == null && !error && idConfiguration!=''){
       getMobilityGroupsInformation(idConfiguration)
-    }else if(data.length > 0 && !error){
+    }else if(data != null && data.length > 0 && !error){
       console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)      
       setItems(parseInformationMobilityGroupsModel(data))
     }
@@ -98,8 +100,29 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     saveMobilityGroupsInformation(information,idConfiguration).then(()=>{      
       getMobilityGroupsInformation(idConfiguration)
       redirectToSusceptibilityGroupsPage()
+    })    
+  }
+
+  const saveMobilityGroupsItem =(mobilityGroup,file='',isFile=false)=>{    
+    saveMobilityGroupsItemAction(mobilityGroup,idConfiguration).then((mobilityGroupResponse)=>{      
+      if(isFile){
+        const idMobilityGroup = mobilityGroupResponse?.data?.data?.identifier
+        const formData = new FormData()
+        formData.append('file',file)
+        saveMobilityGroupsItemFile(idConfiguration,idMobilityGroup,formData).then(()=>{ 
+          getMobilityGroupsInformation(idConfiguration)
+        })
+      }else{
+        getMobilityGroupsInformation(idConfiguration)
+      }      
     })
-    
+  }
+
+  const deleteMobilityGroupsItem =(mobilityGroup)=>{    
+    const {identifier}=mobilityGroup || {}    
+    deleteMobilityGroupsItemAction(idConfiguration,identifier).then(()=>{      
+      getMobilityGroupsInformation(idConfiguration)      
+    })
   }
   
   return {
@@ -108,7 +131,10 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     setItems,
     schemaItems,
     handleClickSaveMobilityGroups,
-    isValid
+    isValid,
+    saveMobilityGroupsItem,
+    idConfiguration,
+    deleteMobilityGroupsItem
   }
   
 }
