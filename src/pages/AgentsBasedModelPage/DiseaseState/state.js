@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import { useEffect } from 'react'
 import { useConfigurationActions } from '../../../actions/configurationActions'
 import { useStore } from '../../../store/storeContext'
 
@@ -18,5 +18,5 @@ export const DiseaseStateList = (list) =>{
     }
   },[listDiseaseState])
 
-  return {listDiseaseState}
+  return { listDiseaseState }
 }

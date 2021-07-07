@@ -24,37 +24,11 @@ import {
   ContentSelect
 } from './styles'
 
-export default function TableTextInput({ data, onchange }) {
-  const [state, setState] = useState()
-  const [valueChangeSelect, setValueChangeSelect] = useState(0)
-  const [valueChange, setValueChange] = useState(0)
+export default function TableObjDinamic({ data }) {
   const [viewState, setViewState] = useState(false)
   const titles = data && data.length > 0 ? data[0] : []
   const rows = data && data.length > 0 ? data[1] : []
 
-
-  const handleChange =(event)=>{
-    setState(event.target.checked)
-    if(event.target.value === 'Can spread?') {
-      setViewState(event.target.checked)
-    }
-  }
-
-  const clone = items => items.map(item => (Array.isArray(item) ? clone(item) : item))
-  const handleInput = (e, idRow, idItem) => {
-    const { value } = e.target
-    const newRows = clone(rows)
-    newRows[idRow][idItem].value = value
-    onchange([titles, newRows])
-  }
-
-  const handelChangeSelect = (e, value)=>{
-    setValueChangeSelect(value.props.value)
-  }
-
-  const handleSliderChange=(event, value)=>{
-    setValueChange(value)
-  }
   const useStyles = makeStyles((theme) => ({
     formControl: {
       width: '100%',
@@ -88,7 +62,7 @@ export default function TableTextInput({ data, onchange }) {
       {rows.map((row, idRow) => (
         <Row key={idRow}>
           {row.map((item, idItem) => {
-            if(item.type === 'label'){
+            if(item.type === 'label' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
@@ -105,18 +79,15 @@ export default function TableTextInput({ data, onchange }) {
             }
 
             if(item.type === 'check'){
-              // if(item.value){
-              //   setState(item.value)
-              // }
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
                     <FormControlLabel
                       control={
                         <Switch 
-                          checked={state} 
-                          value={row[0].content} 
-                          onChange={handleChange} 
+                          checked={item.checked||false} 
+                          value={item.value} 
+                          onChange={item.handleChange} 
                           name={`Item${idRow}`} 
                           color="primary"
                         />
@@ -176,16 +147,15 @@ export default function TableTextInput({ data, onchange }) {
             }
 
             if(item.type === 'slider' && (viewState || item.show)){
-              console.log(idItem)
               return (
                 <Content key={`${idItem}${item.name}`}>
                   <Slider
                     id={`${idItem}${item.name}`}
                     key={`${idItem}${item.name}`}
                     value={item.value}
-                    min={0}
-                    max={1.00}
-                    step={0.001}
+                    min={item.min}
+                    max={item.max}
+                    step={item.step}
                     onChange={item.handleOnChange}
                   />
                   <InputTex
