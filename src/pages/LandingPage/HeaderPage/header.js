@@ -31,10 +31,11 @@ const Header = () => {
         disableBackdropClick={true}
         title={'Cancelar solicitud'}
         handleConfirm={''}
-        cancel={'Cancelar'}
-        confirm={'Aceptar'}
+        cancel={''}
+        confirm={'Done'}
       >
-        <VulnerabilityGroup />
+        <VulnerabilityGroup
+        />
       </ModalCommon>
     </div >
   )
