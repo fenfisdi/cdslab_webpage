@@ -6,7 +6,8 @@ import {
   makeStyles, 
   FormControl, 
   Grid, 
-  MenuItem 
+  MenuItem, 
+  InputLabel
 } from '@material-ui/core'
 import React,{useState} from 'react'
 import { 
@@ -19,7 +20,8 @@ import {
   RowCenter, 
   RoWhite, 
   Input, 
-  InputTex
+  InputTex,
+  ContentSelect
 } from './styles'
 
 export default function TableTextInput({ data, onchange }) {
@@ -59,13 +61,18 @@ export default function TableTextInput({ data, onchange }) {
       margin: '3px',
       marginTop: '5px',
       marginBottom: '8px',
+      color: '#006064'
+    },
+    labelInput: {
+      color: '#006064',
+      zIndex: 10
     },
     selectEmpty: {
       marginTop: theme.spacing(5),
     },
     selectForm:{
       'box-shadow': '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
-      color: '#006064',    
+      color: '#006064',
       'background': '#E0F3FA'
     }
   }))
@@ -74,9 +81,7 @@ export default function TableTextInput({ data, onchange }) {
     <Table>
       <TitleRow>
         {titles.map((title, id) => (
-          <Content key={id}>
-            <Title key={id}>{title}</Title>
-          </Content>
+          <Title key={id}>{title}</Title>
         ))}
       </TitleRow>
 
@@ -91,7 +96,7 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if(item.type === 'label-valid' && viewState){
+            if(item.type === 'label-valid' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
@@ -122,14 +127,15 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if(item.type === 'input' && viewState){
+            if(item.type === 'input' && (viewState || item.show)){
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
                     <Input
                       placeholder={item.placeholder}
                       value={item.value}
-                      onChange={(e) => handleInput(e, idRow, idItem)}
+                      name={item.name}
+                      onChange={item.handleOnChange}
                       disabled ={item.disabled}
                     />
                   </RowCenter>
@@ -137,9 +143,9 @@ export default function TableTextInput({ data, onchange }) {
               )
             }
 
-            if (item.type === 'select' && viewState){
+            if (item.type === 'select' && (viewState || item.show)){
               return (
-                <Content key={idItem}>
+                <ContentSelect key={idItem}>
                   <RowCenter key={idItem}>
                     <RoWhite key={idItem}>
                       <RowCenter key={idItem}>
@@ -147,10 +153,12 @@ export default function TableTextInput({ data, onchange }) {
                           <FormControl
                             className={classes.formControl}
                           >
+                            <InputLabel className={classes.labelInput} id={item.placeholder}>{item.placeholder}</InputLabel>
                             <Select
                               id={`selectComponent-simple${idItem}`}
-                              value={valueChangeSelect||''}
-                              onChange={handelChangeSelect}
+                              value={item.value}
+                              name={item.name}
+                              onChange={item.handleOnChange}
                               className={classes.selectForm}
                             >
                               {item.options.map((option) => {
@@ -163,30 +171,40 @@ export default function TableTextInput({ data, onchange }) {
                       </RowCenter>
                     </RoWhite>
                   </RowCenter>
-                </Content>
+                </ContentSelect>
               )
             }
 
-            if(item.type === 'slider' && viewState){
+            if(item.type === 'slider' && (viewState || item.show)){
+              console.log(idItem)
               return (
-                <Content key={idItem}>
+                <Content key={`${idItem}${item.name}`}>
                   <Slider
-                    className="range-slider"
-                    name={'ejemplo'}
-                    id={'ejemplo'}
-                    value={valueChange}
+                    id={`${idItem}${item.name}`}
+                    key={`${idItem}${item.name}`}
+                    value={item.value}
                     min={0}
                     max={1.00}
                     step={0.001}
-                    onChange={handleSliderChange}
+                    onChange={item.handleOnChange}
                   />
                   <InputTex
                     className="input-slider"
-                    id={idItem}
-                    name ={idItem}
-                    value={valueChange}
-                    disabled={true}
+                    id={`${idItem}${item.name}`}
+                    key={`${idItem}${item.name}`}
+                    name ={item.name}
+                    value={item.value}
+                    disabled={item.disabled}
                   />
+                </Content>
+              )
+            }
+            if(item.type === 'component' && (viewState || item.show)){
+              const { component } = item
+              const Component = component[0]
+              return (
+                <Content key={idItem}>
+                  <Component />
                 </Content>
               )
             }

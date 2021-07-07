@@ -4,6 +4,7 @@ export const Table = styled.ul`
   display: flex;
   flex-direction: column;
   width: max-content;
+  margin: 0 auto;
 `
 
 export const TitleRow = styled.li`
@@ -18,9 +19,10 @@ export const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: #CFD8DC;
   height: 100%;
-  width: 150px;
+  width: 200px;
 `
 
 export const Row = styled.li`
@@ -50,10 +52,21 @@ export const RoWhite = styled.div`
 export const Content = styled.div`
   display: flex;
   height: 100%;
-  width: 150px;
+  width: 200px;
   align-items: center;
   border: 1px solid white;
   background-color: #ECEFF1;
+  padding: 10px;
+`
+
+export const ContentSelect = styled.div`
+  display: flex;
+  height: 60%;
+  width: 200px;
+  align-items: center;
+  border: 1px solid white;
+  background-color: white;
+  // padding: 10px;
 `
 
 
