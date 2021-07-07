@@ -5,13 +5,16 @@ import { useConfigurationActions } from '../../../actions/configurationActions'
 import { useStore } from '../../../store/storeContext'
 import { useAgentsMobilityGroupsActions } from '@actions/agentsMobilityGroupsActions'
 import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
+import { useAgentsSusceptibilityGroupsActionsActions } from '@actions/agentsSusceptibilityGroupsActions'
+
 export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
   const {
     state: {
       configuration: { data,listConfigurationDistance,listConfigurationTime, loading,error },
       agentsMobilityGroupsModel: {  data:agentsMobilityList },
-      agentsAgeModel: { data:agentsAgeModelList }
+      agentsAgeModel: { data:agentsAgeModelList },
+      agentsSusceptibilityGroups: { data:agentsSusceptibilityGroupsList }
     },
     dispatch
   } = useStore()
@@ -24,6 +27,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
   const { setResetMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
   const { setAgeModelInformation } = useAgentsAgeModelActions(dispatch)
+  const { setResetSusceptibilityGroupsInformation } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
 
   useEffect(()=>{
     if(agentsMobilityList.length>0){
@@ -32,7 +36,10 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     if(agentsAgeModelList.length>0){
       setAgeModelInformation()
     }
-  },[agentsMobilityList,agentsAgeModelList])
+    if(agentsSusceptibilityGroupsList.length>0){
+      setResetSusceptibilityGroupsInformation()
+    }
+  },[agentsMobilityList,agentsAgeModelList,agentsSusceptibilityGroupsList])
 
   useEffect(() => {    
     if (listConfigurationDistance.length == 0 && error == null) { 

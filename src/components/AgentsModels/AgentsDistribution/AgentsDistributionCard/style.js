@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   max-width: 300px;
   margin: 5px 0;
