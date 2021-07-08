@@ -7,9 +7,12 @@ const useStyles = ({width,height}) => makeStyles((theme) => {
   
   return {
     modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      position:'absolute',
+      top:'10%',
+      left:'10%',
+      overflow:'scroll',
+      height:'100%',
+      display:'block'
     },
     paper: {
       backgroundColor: theme.palette.background.paper,    
