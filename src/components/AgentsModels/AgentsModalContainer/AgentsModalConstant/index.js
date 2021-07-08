@@ -32,7 +32,7 @@ export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setCompo
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
   
-  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item})
+  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item,key:componentChildren.toLowerCase()})
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
