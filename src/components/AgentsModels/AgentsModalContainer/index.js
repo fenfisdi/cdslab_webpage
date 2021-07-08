@@ -7,18 +7,16 @@ const useStyles = ({width,height}) => makeStyles((theme) => {
   
   return {
     modal: {
-      position:'absolute',
-      top:'10%',
-      left:'10%',
-      overflow:'scroll',
-      height:'100%',
-      display:'block'
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
     },
     paper: {
       backgroundColor: theme.palette.background.paper,    
       padding: theme.spacing(2, 4, 3),
       width: width?width:'50%' ,
-      height: height?height:'50%'
+      height: height?height:'50%',
+      overflow:'auto',
     }
   }
 })

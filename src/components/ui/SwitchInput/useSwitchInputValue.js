@@ -7,21 +7,21 @@ export const useSwitchInputValue = (
   validators = [],
   extras
 ) => {
-  console.log('ccccccccccccccccccccccccc',val)
   const [checked, setChecked] = useState(val)
   const [errors, setErrors] = useState([])
   const [helperText, setHelperText] = useState(null)
   const {t,language} = useContext(languageContext)
 
-  // useEffect(()=>{
-  //   errors.length>0 && onChange({target:{
-  //     value
-  //   }})
-  // },[language])
+  useEffect(()=>{
+    errors.length>0 && onChange({target:{
+      checked
+    }})
+  },[language])
 
 
   const onChange = e => {
     setChecked(e.target.checked)
+    e.target ? validateInput(e.target.checked) : validateInput(e)
   }
 
   /**

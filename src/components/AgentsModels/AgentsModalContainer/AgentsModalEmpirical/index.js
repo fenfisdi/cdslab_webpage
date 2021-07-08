@@ -68,7 +68,7 @@ export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, para
         xs={12}
         justify="space-evenly"
         alignItems="center">
-        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Constant</span></Grid>
+        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Empirical</span></Grid>
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const Table = styled.ul`
   display: flex;
   flex-direction: column;
-  width: max-content;
 `
 
 export const TitleRow = styled.li`
