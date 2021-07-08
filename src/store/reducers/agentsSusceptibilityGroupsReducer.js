@@ -2,7 +2,7 @@ import { AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_SUSCEP
 
 export const initialState = {
   agentsSusceptibilityGroups: {
-    data:[],
+    data:null,
     error:false,
     errorData:null,
     loading: false
@@ -25,7 +25,7 @@ export const agentsSusceptibilityGroupsReducer = (state, action) => {
     return {
       ...state, 
       loading: false,
-      data:[], 
+      data:null, 
       error:true,
       errorData:action.payload.message,
     }
@@ -33,7 +33,7 @@ export const agentsSusceptibilityGroupsReducer = (state, action) => {
   case AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS:
     return {
       ...state, 
-      data:[],
+      data:null,
       error:false,
       errorData:null,
       loading: false

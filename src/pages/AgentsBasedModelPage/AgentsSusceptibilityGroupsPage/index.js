@@ -19,21 +19,27 @@ const AgentSusceptibilityGroups = () => {
   
   const context = useContext(AgentsBaseContext)
   const { distributionList,parameterList } = context
+  
   const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
     index:0
   })
+  
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+  
   const {
-    handleClickSaveMobilityGroups,
+    handleClickSaveSusceptibilityGroups,
     tableColumns,
     items, 
     setItems,
     schemaItems,
-    isValid
-  }= useAgentSusceptibilityGroups({modalSettings})
+    isValid,
+    saveSusceptibilityGroupItem,    
+    deleteSusceptibilityGroupItem
+  }= useAgentSusceptibilityGroups({modalSettings,setModalSettings,setComponentChildren})
 
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+  
   
   const Component = renderComponentChildre(componentChildren,{
     optionsConfigured:items,
@@ -41,6 +47,7 @@ const AgentSusceptibilityGroups = () => {
     parameterList,
     modalSettings,
     componentChildren,
+    handlerDataStorage:saveSusceptibilityGroupItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings
   })
@@ -70,12 +77,13 @@ const AgentSusceptibilityGroups = () => {
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
-            handleSettings={({index,item})=>{
-              console.log(index)
-              console.log(item)
+            handleSettings={({index,item})=>{              
               setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
               setModalSettings({...modalSettings,open:true,item,index})
-            }}          
+            }}  
+            handleItemDeleted={({item})=>{
+              deleteSusceptibilityGroupItem(item)
+            }}            
           />  
         </Grid>
 
@@ -93,7 +101,7 @@ const AgentSusceptibilityGroups = () => {
           alignItems='center'
           text='Continue'
           onClick={()=>{
-            handleClickSaveMobilityGroups(items)
+            handleClickSaveSusceptibilityGroups(items)
           }}
           disabled={!isValid?true:false}
         />                

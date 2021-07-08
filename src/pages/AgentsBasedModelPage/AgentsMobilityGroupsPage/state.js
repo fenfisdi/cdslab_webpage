@@ -40,11 +40,12 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     return itemsConfigured.length == mobilityGroupsList.length 
   }
   
-  const { saveMobilityGroupsInformation, 
+  const {  
     getMobilityGroupsInformation, 
     saveMobilityGroupsItemAction,
     deleteMobilityGroupsItemAction,
-    saveMobilityGroupsItemFile } = useAgentsMobilityGroupsActions(dispatch)
+    saveMobilityGroupsItemFile 
+  } = useAgentsMobilityGroupsActions(dispatch)
   
   const schemaItems={
     name: '',
@@ -96,11 +97,8 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     })
   }
 
-  const handleClickSaveMobilityGroups =(information)=>{    
-    saveMobilityGroupsInformation(information,idConfiguration).then(()=>{      
-      getMobilityGroupsInformation(idConfiguration)
-      redirectToSusceptibilityGroupsPage()
-    })    
+  const handleClickSaveMobilityGroups =()=>{    
+    redirectToSusceptibilityGroupsPage()  
   }
 
   const saveMobilityGroupsItem =(mobilityGroup,file='',isFile=false)=>{    
