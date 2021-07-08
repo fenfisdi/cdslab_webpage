@@ -4,6 +4,7 @@ import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalConta
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
+import { AgentsModalWeigsths } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeigsths'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -88,8 +89,11 @@ export const renderComponentChildre = (componentChildren,props) => {
     }   
   case OPTIONS_MODAL.WEIGTHS:
     return {
-      Component:<h1>Weigths</h1>
-    }
+      container:AgentsModalWeigsths,
+      props,
+      width:'30%',
+      height:'30%'
+    }   
   case OPTIONS_MODAL.NUMPY:
     return {
       container:AgentsModalNumpy,
