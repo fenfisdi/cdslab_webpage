@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, {Fragment}  from 'react'
 import { Grid } from '@material-ui/core'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { useAgentsAgeGroups } from './state'
@@ -6,6 +6,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
+import LoaderComponent from '../../../components/ui/Loader'
 
 const AgentsAgeGroups = () => {
 
@@ -29,31 +30,34 @@ const AgentsAgeGroups = () => {
         <Grid><SupportComponent title="Help" text={HELP_INFORMATION_AGE_MODELS} /></Grid>
       </Grid>
 
-
-      <Grid 
-        justify='flex-start'
-        alignItems='center'
-        container 
-        item 
-        xs={10}>        
-        <AgentsTableConfiguration
-          showConfig={false}
-          showCheck={false}
-          distributionType="Age Group"
-          columns={tableColumns}
-          initialItems={items}
-          setItems={setItems}
-          handleSettings={handleSettings}
-        />
-      </Grid>
+      {items.length>0 && <Fragment>
+        <Grid 
+          justify='flex-start'
+          alignItems='center'
+          container 
+          item 
+          xs={10}>        
+          <AgentsTableConfiguration
+            showConfig={false}
+            showCheck={false}
+            distributionType="Age Group"
+            columns={tableColumns}
+            initialItems={items}
+            setItems={setItems}
+            handleSettings={handleSettings}
+          />
+        </Grid>
       
-      <CompartmentalButton
-        justify='flex-end'
-        alignItems='center'
-        text='Continue'
-        onClick={()=>{handleClickSaveAgentsAgeModel(items)}}
-        disabled={false}            
-      />
+        <CompartmentalButton
+          justify='flex-end'
+          alignItems='center'
+          text='Continue'
+          onClick={()=>{handleClickSaveAgentsAgeModel(items)}}
+          disabled={false}            
+        />
+      </Fragment>}
+
+      {items.length == 0 && <LoaderComponent width="100px" height={100} marginTop="100px" />}
       
     </Grid>
   )

@@ -41,7 +41,7 @@ const ActionsZone = ({
       {showDelete && (
         <IconButton
           disabled={itemsCount === 1}
-          onClick={() => handleItemDeleted(index)}
+          onClick={() => handleItemDeleted({index,item})}
           color="primary"
           aria-label="Delete"
           component="span"
