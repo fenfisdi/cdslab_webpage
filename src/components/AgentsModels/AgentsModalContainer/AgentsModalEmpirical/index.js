@@ -6,14 +6,13 @@ import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInfo
 import SupportComponent from '../../../SupportComponent'
 import TableTextInput from '../../../TableTextInput'
 import { Button } from '../../../ui/Buttons'
-import { Input } from '../../../ui/Input'
 import { UploadButton } from '../../../ui/UploadButton'
 import { useAgentsModalConstantStyles } from '../AgentsModalNumpy'
 import { useAgentsModalEmpiricalState } from './state'
 
 
 
-export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
@@ -21,7 +20,7 @@ export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, para
   const { fieldsFormat,uploadButton } = useAgentsModalEmpiricalState()
 
   const fieldsForm = fieldsFormat(modalSettings.item,parameters.type)
-
+  console.log(fieldsForm)
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
@@ -35,29 +34,37 @@ export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, para
     }
   }
   
-  // useEffect(()=>{
-  //   if(!isEmpty(items)){
-  //     let validation = false
-  //     Object.keys(items).map((fieldType)=>{        
-  //       if(items[fieldType]['input']['value'] == ''){
-  //         validation = true
-  //         return
-  //       }
-  //     })
-  //     setIsValid(validation)
-  //   }
-  // },[items])
+  useEffect(()=>{
+    if(!isEmpty(fieldsForm)){
+      let validation = false
+      Object.keys(fieldsForm).map((fieldType)=>{        
+        if(fieldsForm[fieldType]['input']['props']['value'] == ''){
+          validation = true
+          return
+        }
+      })
+      setIsValid(validation)
+    }
+  },[fieldsForm])
     
   
-  const handleSaveInformation =(item)=>{    
-    // const { distribution, distribution: {distribution_extra_arguments} } = item
-    // distribution.distribution_type = componentChildren.toLowerCase()
-    // Object.keys(fields).map((fieldType)=>{      
-    //   distribution_extra_arguments['type_constants']= fields[fieldType]['input']['value']
-    // })
-    // item.state = 'CONFIGURED'
-    // setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
-    console.log(fieldsFormat)
+  const handleSaveInformation =(item)=>{
+    const { distribution, distribution: {kwargs} } = item
+    distribution.type = componentChildren.toLowerCase()
+    for (const field in fieldsForm) {     
+      if(fieldsForm[field]['type'] != 'boolean'){
+        kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['value']
+      }else{
+        kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['checked']
+      }
+        
+    }
+    item.state = 'CONFIGURED'
+    if(uploadButton.value){
+      handlerDataStorage(item,uploadButton.value,true)
+    }else{
+      handlerDataStorage(item) 
+    }
   }
   
   return (
@@ -68,7 +75,7 @@ export const AgentsModalEmpirical = ({ modalSettings, setComponentChildren, para
         xs={12}
         justify="space-evenly"
         alignItems="center">
-        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Constant</span></Grid>
+        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Empirical</span></Grid>
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   
