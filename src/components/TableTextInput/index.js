@@ -1,9 +1,9 @@
 import React from 'react'
 import { Table, TitleRow, Row, Content, Input, Title } from './styles'
 
-export default function TableTextInput({ data, onchange }) {
-  const titles = data[0]
-  const rows = data[1]
+export default function TableTextInput({ data,columns, onchange }) {
+  const titles = columns
+  const rows = data
 
   const clone = items => items.map(item => (Array.isArray(item) ? clone(item) : item))
 
@@ -11,7 +11,7 @@ export default function TableTextInput({ data, onchange }) {
     const { value } = e.target
     const newRows = clone(rows)
     newRows[idRow][idItem].value = value
-    onchange([titles, newRows])
+    onchange(newRows)
   }
 
   return (
@@ -22,8 +22,20 @@ export default function TableTextInput({ data, onchange }) {
         ))}
       </TitleRow>
 
+      {Object.keys(rows).map((fieldType,index)=>{
+        const {label,type, input} = rows[fieldType]
+        return <Row key={index}>
+          <Content >{label}</Content>
+          <Content>{type}</Content>
+          <Content>
+            {input}
+          </Content>
+        </Row>
+      })}       
+      {/* 
       {rows.map((row, idRow) => (
         <Row key={idRow}>
+          <Content key={idItem}>{item.content}</Content>
           {row.map((item, idItem) => {
             if (item.type === 'text') {
               return (
@@ -41,7 +53,7 @@ export default function TableTextInput({ data, onchange }) {
             )
           })}
         </Row>
-      ))}
+      ))} */}
     </Table>
   )
 }
