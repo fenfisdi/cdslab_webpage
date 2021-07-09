@@ -20,35 +20,38 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     dispatch
   } = useStore()
 
-  const parseInformationSusceptibilityGroupsModel =(arrayMobility=[])=>{
-    return arrayMobility.map((mobility)=>{
+  const parseInformationSusceptibilityGroupsModel =(arraySusceptibility=[])=>{
+    return arraySusceptibility.map((susceptibility)=>{
       return {
-        name:mobility.name,
-        distribution:mobility.distribution,
-        state: 'CONFIGURED'       
+        name:susceptibility.name,
+        distribution:susceptibility.distribution,
+        state: 'CONFIGURED',
+        identifier:susceptibility.identifier    
       }
     })
 
   }
 
-  const checkSusceptibilityGroupsList = (mobilityGroupsList)=>{
+  const checkSusceptibilityGroupsList = (susceptibilityGroupList)=>{
     const itemsConfigured =[]
-    mobilityGroupsList.forEach((item) => {       
+    susceptibilityGroupList.forEach((item) => {       
       item.state == 'CONFIGURED' && item.name.trim().length>0 && itemsConfigured.push(true)            
     })      
-    return itemsConfigured.length == mobilityGroupsList.length 
+    return itemsConfigured.length == susceptibilityGroupList.length 
   }
   
-  const { saveSusceptibilityGroupsInformation, getSusceptibilityGroupsInformation } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
+  const { 
+    saveSusceptibilityGroupsItemAction,
+    deleteSusceptibilityGroupsItemAction,
+    saveSusceptibilityGroupsItemFile,
+    getSusceptibilityGroupsInformation    
+  } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
   
   const schemaItems={
     name: '',
     distribution: {
-      'name':'',
-      'distribution_type':'',
-      'distribution_name':'',
-      'distribution_filename':'',
-      'distribution_extra_arguments': {}
+      'type':'',
+      'kwargs': {}
     },     
     state: ''
   }
@@ -78,9 +81,9 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
   },[history])
 
   useEffect(()=>{     
-    if(data.length == 0 && !error && idConfiguration!=''){
+    if(data == null && !error && idConfiguration!=''){
       getSusceptibilityGroupsInformation(idConfiguration)
-    }else if(data.length > 0 && !error){
+    }else if(data != null && data.length > 0 && !error){
       console.log('ARRAYR SusceptibilityGroups::::::::::::::::::::::>',data)      
       setItems(parseInformationSusceptibilityGroupsModel(data))
     }
@@ -94,12 +97,30 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     })
   }
 
-  const handleClickSaveMobilityGroups =(information)=>{    
-    saveSusceptibilityGroupsInformation(information,idConfiguration).then(()=>{      
-      getSusceptibilityGroupsInformation(idConfiguration)
-      redirectToSusceptibilityGroupsPage()
+  const handleClickSaveSusceptibilityGroups = () =>{        
+    redirectToSusceptibilityGroupsPage()
+  }
+
+  const saveSusceptibilityGroupItem =(susceptibilityGroup,file='',isFile=false)=>{    
+    saveSusceptibilityGroupsItemAction(susceptibilityGroup,idConfiguration).then((susceptibilityGroupResponse)=>{      
+      if(isFile){
+        const idSusceptibilityGroup = susceptibilityGroupResponse?.data?.data?.identifier
+        const formData = new FormData()
+        formData.append('file',file)
+        saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroup,formData).then(()=>{ 
+          getSusceptibilityGroupsInformation(idConfiguration)
+        })
+      }else{
+        getSusceptibilityGroupsInformation(idConfiguration)
+      }      
     })
-    
+  }
+
+  const deleteSusceptibilityGroupItem =(susceptibilityGroup)=>{    
+    const {identifier}=susceptibilityGroup || {}    
+    deleteSusceptibilityGroupsItemAction(idConfiguration,identifier).then(()=>{      
+      getSusceptibilityGroupsInformation(idConfiguration)      
+    })
   }
   
   return {
@@ -107,8 +128,11 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     items, 
     setItems,
     schemaItems,
-    handleClickSaveMobilityGroups,
-    isValid
+    handleClickSaveSusceptibilityGroups,
+    isValid,
+    saveSusceptibilityGroupItem,
+    idConfiguration,
+    deleteSusceptibilityGroupItem
   }
     
   

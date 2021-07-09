@@ -36,7 +36,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     if(agentsAgeModelList!=null && agentsAgeModelList.length>0){
       setAgeModelInformation()
     }
-    if(agentsSusceptibilityGroupsList.length>0){
+    if(agentsSusceptibilityGroupsList!=null &&  agentsSusceptibilityGroupsList.length>0){
       setResetSusceptibilityGroupsInformation()
     }
   },[agentsMobilityList,agentsAgeModelList,agentsSusceptibilityGroupsList])
