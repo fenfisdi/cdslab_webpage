@@ -113,3 +113,13 @@ export const titleCase = (str)=> {
 export const replaceString = (str,charactertoSearch,characterReplace)=>{
   return str.split(charactertoSearch).join(characterReplace)
 }
+
+
+export const deleteItemsConfigureTable =(item,items,index)=>{
+  if(item.state == 'CONFIGURED'){
+    return item
+  }else if(item.state.trim() == ''){                
+    items.splice(index,1)
+    return items
+  }
+}

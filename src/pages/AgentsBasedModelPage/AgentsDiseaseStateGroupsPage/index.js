@@ -11,7 +11,7 @@ import { OPTIONS_MODAL } from '../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../constants/helpInformation'
 import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
-import { renderComponentChildre } from '../../../utils/common'
+import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentsDiseaseStateGroups } from './state'
 
 
@@ -82,9 +82,14 @@ const AgentsDiseaseStateGroupsPage = () => {
               setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
               setModalSettings({...modalSettings,open:true,item,index})
             }}  
-            handleItemDeleted={({item})=>{
-              deleteDiseaseStateGroupItem(item)
-            }}            
+            handleItemDeleted={({index,item})=>{
+              const itemToDelete = deleteItemsConfigureTable(item,items,index)              
+              if(Array.isArray(itemToDelete)){
+                setItems([...itemToDelete])
+              }else {
+                deleteDiseaseStateGroupItem(itemToDelete)              
+              }
+            }}             
           />  
         </Grid>
 

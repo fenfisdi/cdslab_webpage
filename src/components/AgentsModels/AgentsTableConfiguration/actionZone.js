@@ -11,6 +11,7 @@ const ActionsZone = ({
   itemsCount,
   handleItemDeleted,
   handleSettings,
+  sttingsConfigured,
   isConfigured,
   showConfig = true,
   showCheck = true,
@@ -20,6 +21,7 @@ const ActionsZone = ({
     <ButtonsContainer>
       {showConfig && (
         <IconButton
+          disabled={!sttingsConfigured}
           onClick={() => handleSettings({index,item})}
           color="primary"
           aria-label="Sttings"

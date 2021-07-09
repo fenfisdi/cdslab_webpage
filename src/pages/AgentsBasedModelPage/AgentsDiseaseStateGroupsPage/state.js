@@ -49,10 +49,13 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
   
   const schemaItems={
     name: '',
-    distribution: {
-      'type':'',
-      'kwargs': {}
-    },     
+    can_infected: false,
+    is_infected: false,
+    can_spread: false,
+    spread_radius: 0,
+    spread_radius_unit: '',
+    spread_probability: 0,
+    distributions:{},
     state: ''
   }
  
