@@ -8,6 +8,7 @@ import { Button } from '../../../ui/Buttons'
 import { useConfigTableState } from './state'
 import ActionsZone from '../ActionsZone'
 import TableInput from './TableInput'
+import ModalRoot from '../ModalRoot'
 
 const ConfigTable = ({
   initialItems,
@@ -17,6 +18,8 @@ const ConfigTable = ({
   showDelete = true,
   showAddButton = true,
   selectOptions,
+  settingsComponent,
+  distributionType
 }) => {
   const {
     items,
@@ -24,6 +27,9 @@ const ConfigTable = ({
     handleItemDeleted,
     handleAddItem,
     handleSettings,
+    openSettings,
+    handleCloseSettings,
+    currentIndex,
   } = useConfigTableState({
     initialItems,
     columns
@@ -70,7 +76,13 @@ const ConfigTable = ({
           Add
         </Button>
       )}
-      
+      <ModalRoot
+        distributionType={distributionType}
+        open={openSettings}
+        handleClose={handleCloseSettings}
+        children={settingsComponent}
+        currentItem={items[currentIndex]}
+      />
     </>
   )
 }

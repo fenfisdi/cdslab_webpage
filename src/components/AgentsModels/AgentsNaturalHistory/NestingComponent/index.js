@@ -28,7 +28,8 @@ const NestingComponent = () =>{
   const vulnerabilityGroups= [
     'VulnerabilityGroup1',
     'VulnerabilityGroup2',
-    'VulnerabilityGroup3'
+    'VulnerabilityGroup3',
+    'VulnerabilityGroup4'
   
   ]
   const states=[
@@ -50,6 +51,10 @@ const NestingComponent = () =>{
     },
     {
       name: 'State 5',
+      state: ''
+    },
+    {
+      name: 'State 6',
       state: ''
     },
   ]
