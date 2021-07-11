@@ -128,7 +128,7 @@ export default function TableObjDinamic({ data }) {
                             <Select
                               id={`selectComponent-simple${idItem}`}
                               value={item.value}
-                              name={item.name}
+                              name={item.name || item.label}
                               onChange={item.handleOnChange}
                               className={classes.selectForm}
                             >

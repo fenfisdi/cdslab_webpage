@@ -25,7 +25,7 @@ export const AgentDiseaseState = () => {
       state: ''
     }
   ]
-  const {listDiseaseState} = DiseaseStateList(true)
+  const {listConfigurationDistance} = DiseaseStateList(true)
   const [valueChangeSelect, setValueChangeSelect] = useState(0)
   const [viewState, setViewState] = useState(false)
   const [valueSlider, setValueSlider] = useState(0)
@@ -86,7 +86,7 @@ export const AgentDiseaseState = () => {
           name: 'distance',
           value: valueChangeSelect,
           title: 'Distance Unit',
-          options: listDiseaseState.data != undefined ? listDiseaseState.data : [],
+          options: listConfigurationDistance != undefined ? listConfigurationDistance : [],
           placeholder:'Distance Unit',
           handleOnChange: handelChangeSelect
         }
