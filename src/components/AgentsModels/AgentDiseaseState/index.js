@@ -1,10 +1,10 @@
-import { Paper, Grid } from '@material-ui/core'
-import React, { Fragment, useState } from 'react'
+import {  Grid } from '@material-ui/core'
+import React, {  useState } from 'react'
 import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
 
 export const AgentDiseaseState = ({modalSettings}) => {
-  console.log('soy yo:::::::::::::>',modalSettings)
+
   const listConfigurationDistance = []
   const [valueChangeSelect, setValueChangeSelect] = useState(0)
   const [viewState, setViewState] = useState(false)
