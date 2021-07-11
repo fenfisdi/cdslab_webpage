@@ -6,6 +6,7 @@ import { useStore } from '../../../store/storeContext'
 import { useAgentsMobilityGroupsActions } from '@actions/agentsMobilityGroupsActions'
 import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
 import { useAgentsSusceptibilityGroupsActionsActions } from '@actions/agentsSusceptibilityGroupsActions'
+import { useAgentsDiseaseStateGroupsActions } from '@actions/agentsDiseaseStateGroupsActions'
 
 export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
@@ -14,7 +15,8 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
       configuration: { data,listConfigurationDistance,listConfigurationTime, loading,error },
       agentsMobilityGroupsModel: {  data:agentsMobilityList },
       agentsAgeModel: { data:agentsAgeModelList },
-      agentsSusceptibilityGroups: { data:agentsSusceptibilityGroupsList }
+      agentsSusceptibilityGroups: { data:agentsSusceptibilityGroupsList },
+      agentsDiseaseStateGroups: { data:agentsDiseaseStateGroupsList }
     },
     dispatch
   } = useStore()
@@ -28,6 +30,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   const { setResetMobilityGroupsInformation } = useAgentsMobilityGroupsActions(dispatch)
   const { setAgeModelInformation } = useAgentsAgeModelActions(dispatch)
   const { setResetSusceptibilityGroupsInformation } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
+  const { setResetDiseaseStateGroupsInformation } = useAgentsDiseaseStateGroupsActions(dispatch)
 
   useEffect(()=>{
     if(agentsMobilityList!=null && agentsMobilityList.length>0){
@@ -38,6 +41,9 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     }
     if(agentsSusceptibilityGroupsList!=null &&  agentsSusceptibilityGroupsList.length>0){
       setResetSusceptibilityGroupsInformation()
+    }
+    if(agentsDiseaseStateGroupsList!=null && agentsDiseaseStateGroupsList.length>0){
+      setResetDiseaseStateGroupsInformation()
     }
   },[agentsMobilityList,agentsAgeModelList,agentsSusceptibilityGroupsList])
 
