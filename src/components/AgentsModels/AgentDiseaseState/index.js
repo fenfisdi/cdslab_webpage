@@ -1,8 +1,7 @@
-import { Paper } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { Paper, Grid } from '@material-ui/core'
 import React, { Fragment, useState } from 'react'
 import DiseaseState from './DiseaseState'
-
+import { DiseaseStateList } from './DiseaseState/state'
 import SupportComponent from '../../SupportComponent'
 import DistributionsSettings from './DistributionsSettings'
 import SettingsComponent from './SettingsComponent'
@@ -26,7 +25,7 @@ export const AgentDiseaseState = () => {
       state: ''
     }
   ]
-  
+  const {listDiseaseState} = DiseaseStateList(true)
   const [valueChangeSelect, setValueChangeSelect] = useState(0)
   const [viewState, setViewState] = useState(false)
   const [valueSlider, setValueSlider] = useState(0)
@@ -81,7 +80,16 @@ export const AgentDiseaseState = () => {
         }, {
           type: 'input', placeholder: 'Spread Radius', value: valueText, show: viewState,
           handleOnChange: onChangeText
-        },
+        }, {
+          type: 'select',
+          show: viewState,
+          name: 'distance',
+          value: valueChangeSelect,
+          title: 'Distance Unit',
+          options: listDiseaseState.data != undefined ? listDiseaseState.data : [],
+          placeholder:'Distance Unit',
+          handleOnChange: handelChangeSelect
+        }
       ], [
         {
           type: 'label-valid',
