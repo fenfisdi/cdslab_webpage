@@ -24,12 +24,21 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     return arrayDiseaseStateGroup.map((diseaseStateGroup)=>{
       return {
         name:diseaseStateGroup.name,
-        distribution:diseaseStateGroup.distribution,
+        distribution:diseaseStateGroup.distribution || {},
         state: 'CONFIGURED',
         identifier:diseaseStateGroup.identifier    
       }
     })
 
+  }
+
+  const parseInformationDiseaseStateItem = (diseaseStateGroup={})=>{
+    return {
+      name:diseaseStateGroup.name,
+      distribution:diseaseStateGroup.distribution || {},
+      state: 'CONFIGURED',
+      identifier:diseaseStateGroup.identifier  
+    }
   }
 
   const checkDiseaseStateGroupsList = (diseaseStateGroupList)=>{
@@ -44,25 +53,25 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     getDiseaseStateGroupsInformation,    
     saveDiseaseStateGroupsItemAction,
     deleteDiseaseStateGroupsItemAction,
-    saveDiseaseStateGroupsItemFile  
+    getDiseaseStateGroups     
   } = useAgentsDiseaseStateGroupsActions(dispatch)
   
   const schemaItems={
-    name: '',
-    can_infected: false,
-    is_infected: false,
-    can_spread: false,
-    spread_radius: 0,
-    spread_radius_unit: '',
-    spread_probability: 0,
-    distributions:{},
-    state: ''
+    'name': '',
+    'can_infected': false,
+    'is_infected': false,
+    'can_spread': false,
+    'spread_radius': 0,
+    'spread_radius_unit': null,
+    'spread_probability': 0,
+    'distributions': {},
+    'state':''
   }
  
   const initialItems = [{...schemaItems}]
 
   const tableColumns = [
-    { title: 'Disease group name', att: 'name', type: 'text',inputProps: { fullWidth: true }  },
+    { title: 'Disease state name', att: 'name', type: 'text',inputProps: { fullWidth: true }  },
   ]
 
   const [items, setItems] = useState(initialItems)
@@ -70,10 +79,13 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
 
   useEffect(()=>{
     console.log(items)
-    if(items.length>0){
-           
+    console.log(modalSettings)
+    if(items.length>0){           
       setIsValid(checkDiseaseStateGroupsList(items)) 
     }
+    if(!modalSettings.open && idConfiguration!='' && !isEmpty(modalSettings.item)){
+      getDiseaseStateGroupsInformation(idConfiguration)
+    } 
   },[modalSettings,items])
 
   useEffect(()=>{
@@ -105,19 +117,13 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     redirectToNaturalHistoryPage()
   }
 
-  const saveDiseaseStateGroupsItem =(diseaseStateGroup,file='',isFile=false)=>{    
-    saveDiseaseStateGroupsItemAction(diseaseStateGroup,idConfiguration).then((diseaseStateGroupResponse)=>{      
-      if(isFile){
-        const idDiseaseStateGroup = diseaseStateGroupResponse?.data?.data?.identifier
-        const formData = new FormData()
-        formData.append('file',file)
-        saveDiseaseStateGroupsItemFile(idConfiguration,idDiseaseStateGroup,formData).then(()=>{ 
-          getDiseaseStateGroupsInformation(idConfiguration)
-        })
-      }else{
-        getDiseaseStateGroupsInformation(idConfiguration)
-      }      
+  const saveDiseaseStateGroupsItem = (diseaseStateGroup) => {
+    return new Promise((resolve) => {      
+      saveDiseaseStateGroupsItemAction(diseaseStateGroup,idConfiguration).then((diseaseStateGroupResponse)=>{        
+        resolve({diseaseStateGroup:diseaseStateGroupResponse.data.data})           
+      })
     })
+    
   }
 
   const deleteDiseaseStateGroupItem =(diseaseStateGroup)=>{    
@@ -136,7 +142,9 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     isValid,
     saveDiseaseStateGroupsItem,
     idConfiguration,
-    deleteDiseaseStateGroupItem
+    deleteDiseaseStateGroupItem,
+    parseInformationDiseaseStateItem,
+    getDiseaseStateGroups
   }
     
   

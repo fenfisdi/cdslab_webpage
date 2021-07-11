@@ -37,7 +37,8 @@ const AgentsDiseaseStateGroupsPage = () => {
     schemaItems,
     isValid,
     saveDiseaseStateGroupsItem,    
-    deleteDiseaseStateGroupItem
+    deleteDiseaseStateGroupItem,
+    parseInformationDiseaseStateItem
   }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren})
 
   
@@ -72,15 +73,23 @@ const AgentsDiseaseStateGroupsPage = () => {
           xs={10}>
           <AgentsTableConfiguration
             showConfig={true}
-            showCheck={true}
-            distributionType="Disease state name"
+            showCheck={true}            
             columns={tableColumns}
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
             handleSettings={({index,item})=>{              
-              setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
-              setModalSettings({...modalSettings,open:true,item,index})
+              if(item.state.trim().length == 0){
+                saveDiseaseStateGroupsItem(item).then((diseaseStateGroupResponse)=>{
+                  const { diseaseStateGroup } = diseaseStateGroupResponse || {}                  
+                  items[index] = parseInformationDiseaseStateItem(diseaseStateGroup)
+                  setItems([...items])
+                  setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+                  setModalSettings({...modalSettings,open:true,item:diseaseStateGroup,index})
+                })
+              }else{
+                setModalSettings({...modalSettings,open:true,item:item,index})
+              }                       
             }}  
             handleItemDeleted={({index,item})=>{
               const itemToDelete = deleteItemsConfigureTable(item,items,index)              
