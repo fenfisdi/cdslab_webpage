@@ -1,31 +1,11 @@
 import { Paper, Grid } from '@material-ui/core'
 import React, { Fragment, useState } from 'react'
 import DiseaseState from './DiseaseState'
-import { DiseaseStateList } from './DiseaseState/state'
 import SupportComponent from '../../SupportComponent'
-import DistributionsSettings from './DistributionsSettings'
-import SettingsComponent from './SettingsComponent'
 
-export const AgentDiseaseState = () => {
-  const initialItemsDistribution = [
-    {
-      name: 'Diagnosis',
-      description:
-        'Tooltips Diagnosis',
-      state:''
-    },
-    {
-      name: 'Quarentine',
-      description: 'Tooltips Quarentine',
-      state: ''
-    },
-    {
-      name: 'Hospitalization',
-      description: 'Tooltips Hospitalization',
-      state: ''
-    }
-  ]
-  const {listConfigurationDistance} = DiseaseStateList(true)
+export const AgentDiseaseState = ({modalSettings}) => {
+  console.log('soy yo:::::::::::::>',modalSettings)
+  const listConfigurationDistance = []
   const [valueChangeSelect, setValueChangeSelect] = useState(0)
   const [viewState, setViewState] = useState(false)
   const [valueSlider, setValueSlider] = useState(0)
@@ -109,34 +89,23 @@ export const AgentDiseaseState = () => {
     ]
   ]
   const diseaseStateCard = () => (
-    <Fragment>
-      <Grid container item xs={12} justify={'center'} alignItems='center'>
-        <Grid container item xs={12} direction="row">
-          <Grid contairner item xs={11} alignContent='center'><Paper>Disease State Name</Paper></Grid>
-          <Grid contairner item xs={1}>
-            <Grid><SupportComponent title="Help" text={'Contenido de ayuda'} /></Grid>
-          </Grid>          
+    
+    <Grid container item xs={12} justify='center' alignItems='center'>
+        
+      <Grid container item xs={12} direction="row">
+        <Grid container item xs={11} alignContent='center' justify='center' style={{color:'#006064'}}>
+            Disease State {modalSettings?.item?.name}
         </Grid>
-
-        <Grid container item xs={12} direction="row">
-          <Grid>
-            <DiseaseState data={jsonComponets}/>
-          </Grid>
-        </Grid>
-
-        <Grid container item xs={12} direction="row">
-
-        </Grid>
-
-        <Grid container item xs={12} direction="row">
-          <DistributionsSettings
-            distributionType="Disease State"
-            initialItems={initialItemsDistribution}
-            settingsComponent={SettingsComponent}
-          />
-        </Grid>
+        <Grid container item xs={1}>
+          <Grid><SupportComponent title="Help" text={'Contenido de ayuda'} /></Grid>
+        </Grid>          
       </Grid>
-    </Fragment>
+        
+      <DiseaseState data={jsonComponets}/>
+                  
+
+    </Grid>
+    
   )
   return (
     <div>
