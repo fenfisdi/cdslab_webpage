@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, {Suspense}  from 'react'
 import Layout from './components/layouts/Layout'
 import { useStore } from './store/storeContext'
 import { GlobalStyles } from './styles/GlobalStyles'
@@ -14,10 +14,10 @@ import { NotFoundPage } from './pages/NotFoundPage'
 
 import Dashboard from './components/layouts/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
-import { MiniLoader } from './components/layouts/MiniLoader'
 import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 import { PathProvider } from './components/PathContext'
 import SysManagementState from './context/SysManagement/sysManagementState'
+import LoaderComponent from './components/ui/Loader'
 
 const App = () => {
   const {
@@ -65,7 +65,7 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<MiniLoader />}>
+      <Suspense fallback={<LoaderComponent  marginTop={50}/>}>
         <PathProvider>
           <Router>
             <GlobalStyles />

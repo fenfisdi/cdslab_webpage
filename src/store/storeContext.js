@@ -12,7 +12,11 @@ import { mySimulationReducer , initialState as mySimulationsInitialState } from 
 import { sysManagementReducer, initialState as sysManagementReducerInitialState } from './reducers/sysManagementReducer'
 import { configurationReducer, initialState as configurationInitialState } from './reducers/configurationReducer'
 import { userProfileReducer, initialState as userProfileReducerInitialState } from './reducers/userProfileReducer'
-import { agentsModelReducer, initialState as agentsModelReducerInitialState } from './reducers/agentsModelReducer'
+import { distributionReducer, initialState as distributionInitialState } from './reducers/distributionReducer'
+import { agentsAgeModelReducer, initialState as agentsAgeModelReducerInitialState } from './reducers/agentsModelReducer'
+import { agentsMobilityGroupsModelReducer, initialState as agentsMobilityGroupsModelInitialState } from './reducers/agentsMobilityGroupsReucer'
+import { agentsSusceptibilityGroupsReducer, initialState as agentsSusceptibilityGroupsInitialState} from './reducers/agentsSusceptibilityGroupsReducer'
+import { agentsVulnerabilityGroupsReducer, initialState as agentsVulnerabilityGroupsInitialState } from './reducers/agentsVulnerabilityGroupsReducer'
 
 export const StoreContext = createContext()
 
@@ -31,7 +35,11 @@ export const StoreProvider = ({ children }) => {
       sysManagementReducer: sysManagementReducer,
       configuration : configurationReducer,
       userProfile: userProfileReducer,
-      agentsModel:agentsModelReducer
+      distribution: distributionReducer,
+      agentsAgeModel:agentsAgeModelReducer,
+      agentsMobilityGroupsModel:agentsMobilityGroupsModelReducer,
+      agentsSusceptibilityGroups:agentsSusceptibilityGroupsReducer,
+      agentsVulnerabilityGroups:agentsVulnerabilityGroupsReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -43,9 +51,14 @@ export const StoreProvider = ({ children }) => {
       compartmentalModelInitialState,
       userManagementInitialState,
       sysManagementReducerInitialState,
+      userProfileReducerInitialState,
+      distributionInitialState,
       configurationInitialState,
       userProfileReducerInitialState,
-      agentsModelReducerInitialState)
+      agentsAgeModelReducerInitialState,
+      agentsMobilityGroupsModelInitialState,
+      agentsSusceptibilityGroupsInitialState,
+      agentsVulnerabilityGroupsInitialState)
   )
   const value = { state, dispatch }
 

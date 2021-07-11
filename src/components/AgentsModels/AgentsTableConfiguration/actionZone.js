@@ -7,6 +7,7 @@ import { ButtonsContainer } from './styles'
 
 const ActionsZone = ({
   index,
+  item,
   itemsCount,
   handleItemDeleted,
   handleSettings,
@@ -19,7 +20,7 @@ const ActionsZone = ({
     <ButtonsContainer>
       {showConfig && (
         <IconButton
-          onClick={() => handleSettings(index)}
+          onClick={() => handleSettings({index,item})}
           color="primary"
           aria-label="Sttings"
           component="span"
@@ -40,7 +41,7 @@ const ActionsZone = ({
       {showDelete && (
         <IconButton
           disabled={itemsCount === 1}
-          onClick={() => handleItemDeleted(index)}
+          onClick={() => handleItemDeleted({index,item})}
           color="primary"
           aria-label="Delete"
           component="span"

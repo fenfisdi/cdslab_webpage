@@ -1,6 +1,6 @@
 import {
   checkMinLength,
-} from '../../../components/Forms/validators/validatorsCheks'
+} from '../../Forms/validators/validatorsCheks'
 
 export const REQUIRED_MESSAGE = 'This field is requiered.'
 export const PATTERN_ERROR_MESSAGE =

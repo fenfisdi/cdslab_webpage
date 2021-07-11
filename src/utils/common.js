@@ -1,3 +1,8 @@
+import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
+import React from 'react'
+import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
+import { OPTIONS_MODAL } from '../constants/agents'
+import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -54,3 +59,57 @@ export const processData = dataString => {
 }
 
 export const formatYmd = date => date.toISOString().slice(0, 10)
+
+
+
+export const renderComponentChildre = (componentChildren,props) => {
+  switch (componentChildren) {
+  case OPTIONS_MODAL.DISTRIBUTION:
+    return {
+      container:AgentsDistribution,
+      props,
+      width:'70%',
+      height:'70%'
+    }        
+  case OPTIONS_MODAL.EMPIRICAL:
+    return {
+      Component:<h1>Empirical</h1>
+    }
+  case OPTIONS_MODAL.CONSTANT:
+    return {
+      container:AgentsModalConstant,
+      props,
+      width:'30%',
+      height:'30%'
+    }   
+  case OPTIONS_MODAL.WEIGTHS:
+    return {
+      Component:<h1>Weigths</h1>
+    }
+  case OPTIONS_MODAL.NUMPY:
+    return {
+      container:AgentsModalNumpy,
+      props,
+      width:'40%',
+      height:'40%'
+    }
+  default:
+    return null
+  }
+  
+}
+
+export const titleCase = (str)=> {
+  var splitStr = str.toLowerCase().split(' ')
+  for (var i = 0; i < splitStr.length; i++) {
+    // You do not need to check if i is larger than splitStr length, as your for does that for you
+    // Assign it back to the array
+    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)     
+  }
+  // Directly return the joined string
+  return splitStr.join(' ') 
+}
+
+export const replaceString = (str,charactertoSearch,characterReplace)=>{
+  return str.split(charactertoSearch).join(characterReplace)
+}

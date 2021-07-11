@@ -5,7 +5,7 @@ let theme = createMuiTheme({
     primary: {
       light: '#79e2e1',
       main: '#66c2c1',
-      dark: '#4f9695',
+      dark: '#006064',
       contrastText: '#fff',
       colorTitle: '#006064'
     },

@@ -1,19 +1,21 @@
-import { useState } from 'react'
+import { isEmpty } from 'lodash'
 
-export const useConfigTableState = ({ initialItems, columns, setInitialItems }) => {
-  const [currentIndex, setCurrentIndex] = useState(null)
-  const [openSettings, setOpenSettings] = useState(false)
-
+export const useConfigTableState = ({ initialItems, columns, setItems, schemaItems={} }) => {
+  
   const handleAddItem = () => {
     const itemsCopy = [...initialItems]
-    const newItem = {}
-    columns.forEach((column) => {
-      newItem[column.att] = ''
-    })
+    let newItem = {}
+    if(!isEmpty(schemaItems)){
+      newItem = {...schemaItems}
+    }else{
+      columns.forEach((column) => {
+        const {inputProps:{initialValue=''}=''} = column
+        newItem[column.att] = initialValue
+      })      
+    }
     itemsCopy.push(newItem)
-
     //setItems(itemsCopy)
-    setInitialItems(itemsCopy)
+    setItems(itemsCopy)
   }
 
   const handleItemChanged = (i, event) => {
@@ -23,39 +25,19 @@ export const useConfigTableState = ({ initialItems, columns, setInitialItems }) 
     const itemsCopy = [...initialItems]
     itemsCopy[i] = { ...itemsCopy[i], [name]: value }
     //setItems(itemsCopy)
-    setInitialItems(itemsCopy)
+    setItems(itemsCopy)
   }
 
   const handleItemDeleted = (i) => {
     const itemsCopy = [...initialItems]
     itemsCopy.splice(i, 1)
     //setItems(itemsCopy)
-    setInitialItems(itemsCopy)
-  }
-
-  const handleSettings = (i) => {
-    setCurrentIndex(i)
-    setOpenSettings(true)
-  }
-
-  const handleCloseSettings = (item) => {
-    console.log('HANDLE CLOSED', item)
-    const itemsCopy = [...initialItems]
-    const state = item?.state
-    itemsCopy[currentIndex] = { ...itemsCopy[currentIndex], state: state }
-    //setItems(itemsCopy)
-    setInitialItems(itemsCopy)
-    setOpenSettings(false)    
+    setItems(itemsCopy)
   }
 
   return {
     handleAddItem,
     handleItemChanged,
-    handleItemDeleted,
-    handleSettings,
-    openSettings,
-    setOpenSettings,
-    handleCloseSettings,
-    currentIndex
+    handleItemDeleted
   }
 }
