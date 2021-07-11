@@ -3,6 +3,7 @@ import React from 'react'
 import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
+import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -92,6 +93,13 @@ export const renderComponentChildre = (componentChildren,props) => {
       props,
       width:'40%',
       height:'40%'
+    }
+  case OPTIONS_MODAL.DISEASESTATE:
+    return {
+      container:AgentDiseaseState,
+      props,
+      width:'50%',
+      height:'50%'
     }
   default:
     return null

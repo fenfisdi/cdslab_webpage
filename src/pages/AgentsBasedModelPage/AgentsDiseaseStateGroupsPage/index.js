@@ -27,7 +27,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     index:0
   })
   
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISEASESTATE)
   
   const {
     handleClickSaveDiseaseStateGroups,
@@ -84,7 +84,7 @@ const AgentsDiseaseStateGroupsPage = () => {
                   const { diseaseStateGroup } = diseaseStateGroupResponse || {}                  
                   items[index] = parseInformationDiseaseStateItem(diseaseStateGroup)
                   setItems([...items])
-                  setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+                  setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
                   setModalSettings({...modalSettings,open:true,item:diseaseStateGroup,index})
                 })
               }else{
