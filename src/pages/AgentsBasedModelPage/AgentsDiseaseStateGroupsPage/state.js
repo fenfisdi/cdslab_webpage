@@ -22,22 +22,21 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
 
   const parseInformationDiseaseStateGroupsModel =(arrayDiseaseStateGroup=[])=>{
     return arrayDiseaseStateGroup.map((diseaseStateGroup)=>{
-      return {
-        name:diseaseStateGroup.name,
-        distribution:diseaseStateGroup.distribution || {},
-        state: 'CONFIGURED',
-        identifier:diseaseStateGroup.identifier    
-      }
+      return shcemaInformationParseDiseaseState(diseaseStateGroup)
     })
 
   }
 
   const parseInformationDiseaseStateItem = (diseaseStateGroup={})=>{
+    return shcemaInformationParseDiseaseState(diseaseStateGroup)
+  }
+
+  const shcemaInformationParseDiseaseState = (diseaseStateGroup)=>{
     return {
       name:diseaseStateGroup.name,
       distribution:diseaseStateGroup.distribution || {},
       state: 'CONFIGURED',
-      identifier:diseaseStateGroup.identifier  
+      identifier:diseaseStateGroup.identifier    
     }
   }
 
