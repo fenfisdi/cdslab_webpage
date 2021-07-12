@@ -1,11 +1,11 @@
-import { Grid, makeStyles } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
+import { Table,TableRow,TableCell,Grid, makeStyles, TextField } from '@material-ui/core'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
-import { Input } from '../../../ui/Input'
-import { useInputValue } from '../../../ui/Input/useInputValue'
+import { SelectComponent } from '../../../ui/Select'
+import { useAgentsModalNumpyState } from './state'
 
 export const useAgentsModalConstantStyles = makeStyles(() => ({
   Input:{
@@ -26,23 +26,34 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalNumpy = ({ modalSettings, setComponentChildren }) => {
+export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
-  const {type_constant} = modalSettings?.item?.distribution?.distribution_extra_arguments
-  const name = useInputValue(type_constant?type_constant:'', [], {
-    name: 'name',
-    type: 'text',
-    label: 'name',
-  })
+  const parameterNumpy = parameterList[componentChildren.toLowerCase()]
+  const {numpySelect,optionsSelectNumpy,fieldsFormat} = useAgentsModalNumpyState()
+  const fieldsForm = fieldsFormat(parameterNumpy.type)
+  console.log(fieldsForm)
+  const optionsNumpy = optionsSelectNumpy(parameterNumpy.type)
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
-  
+
   const handleSaveInformation =(item)=>{
-    const { distribution: {distribution_extra_arguments} } = item
-    distribution_extra_arguments['type_constant'] = name.value
-    setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+    const { distribution, distribution: {kwargs} } = item
+    distribution.type = componentChildren.toLowerCase()
+    const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
+    if(FieldsSelect){
+      for (let i = 0; i <FieldsSelect.length; i++) {
+        let value = FieldsSelect[i]?.input?.props?.value
+        if(value.indexOf(',') != '-1'){
+          value = value.split(',')
+        } 
+        kwargs[FieldsSelect[i].name.toLowerCase()] = value
+      }
+    }
+    item.numpy_type = numpySelect.value
+    item.state = 'CONFIGURED'
+    handlerDataStorage(item)
   }
   
   return (
@@ -59,18 +70,45 @@ export const AgentsModalNumpy = ({ modalSettings, setComponentChildren }) => {
       </Grid>
   
       <Grid container item xs={12} justify='center' alignItems='center' direction='row'>
-        <div className={classes.text}>
-          <strong>Type constant:</strong>
-        </div>
-        <Input
-          disabled={false}
+        <SelectComponent
           required
-          variant="outlined"
-          margin="normal"
-          autoComplete="name"
-          className={classes.Input}
-          {...name}
+          title="Numpy"
+          {...numpySelect}
+          options={optionsNumpy}
         />
+      </Grid>
+      <Grid container item xs={12} justify='center' alignItems='center' direction='row'>
+        <Table>
+          <TableRow>
+            <TableCell>
+              Parameter
+            </TableCell>
+            <TableCell>
+              Value
+            </TableCell>
+          </TableRow>
+          {
+            numpySelect.value ?
+              fieldsForm.filter(element => element.parameter == numpySelect.value)
+                .map((row,index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {row.name}
+                    </TableCell>
+                    <TableCell>
+                      {row.input}
+                    </TableCell>
+                  </TableRow>
+                ))
+              : (
+                <TableRow>
+                  <TableCell>
+                    Seleccione un numpy
+                  </TableCell>
+                </TableRow>
+              )
+          }
+        </Table>
       </Grid>
 
         
