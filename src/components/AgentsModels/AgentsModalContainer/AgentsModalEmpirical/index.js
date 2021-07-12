@@ -33,7 +33,6 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
   }
   
   useEffect(()=>{
-    console.log(fieldsForm)
     if(fieldsForm){
       for (const fieldType in fieldsForm) {   
         if(fieldsForm[fieldType]['input']['props']['value'] == ''){
