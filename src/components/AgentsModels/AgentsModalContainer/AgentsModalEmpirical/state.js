@@ -16,14 +16,14 @@ export const useAgentsModalEmpiricalState = () => {
   const uploadButton = useUploadButtonValue(null, { accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' })
   const fieldsFormat = (valueSet,parameters) => {
     let fields = {}
-    for (let index = 0; index < parameters.length; index++) {   
+    for (let params of parameters) {
       let field ={}
-      const { parameter='',type='',default_value = '',values =[] }=parameters[index]     
+      const { parameter='',type='',default_value = '',values =[] }=params     
       field['label']=parameter
       field['type']=type                               
       field['input'] = renderInput(type,values,parameter,default_value)
-      fields[parameter]=field        
-    } 
+      fields[parameter]=field     
+    }
     return fields
   }
   
@@ -67,21 +67,22 @@ export const useAgentsModalEmpiricalState = () => {
   }
   
   const formatSelectOption = (FieldOptions) => {
-    let options = []
-    for (let i = 0; i < FieldOptions.length; i++) {
-      options.push({
-        value: FieldOptions[i],
-        label: FieldOptions[i]
+    let optionsS = []
+    
+    for (let options of FieldOptions) {
+      optionsS.push({
+        value: options,
+        label: options
       })
     }
-    return options
+    return optionsS
   }
 
   const renderInput = (type,values,parameter,default_value) => {
     let value = null
     let component = null
     if(type == 'str'){
-      const input = inputText(parameter,default_value)
+      const inputTextParam = inputText(parameter,default_value)
       value = values[0]
       component = 
         <Input
@@ -91,10 +92,10 @@ export const useAgentsModalEmpiricalState = () => {
           variant="outlined"
           margin="normal"
           autoComplete="name"
-          {...input}
+          {...inputTextParam}
         />
     }else if(type == 'float' || type == 'int' || type == 'dict') {
-      const input = inputNumber(parameter,default_value)
+      const inputNumberParam = inputNumber(parameter,default_value)
       component = 
         <Input
           disabled={false}
@@ -103,23 +104,23 @@ export const useAgentsModalEmpiricalState = () => {
           variant="outlined"
           margin="normal"
           autoComplete="name"
-          {...input}
+          {...inputNumberParam}
         />
     } else if(type == 'boolean'){
-      const input = inputSwitch(parameter,default_value)
+      const inputSwitchParam = inputSwitch(parameter,default_value)
       component =  <SwitchInput  
         color="primary" 
-        {...input}
+        {...inputSwitchParam}
       />
     } 
     else {
-      const value = formatSelectOption(values,parameter)
-      const input = inputSelect(parameter,default_value)
+      const valueSelectParam= formatSelectOption(values,parameter)
+      const inputSelectParam = inputSelect(parameter,default_value)
       component = 
         <SelectComponent
           required
-          {...input}
-          options={value}
+          {...inputSelectParam}
+          options={valueSelectParam}
         />
     }
     return component

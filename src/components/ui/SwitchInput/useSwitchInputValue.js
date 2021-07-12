@@ -4,8 +4,8 @@ import { languageContext } from '../../../config/languageContext'
 
 export const useSwitchInputValue = (
   val,
-  validators = [],
-  extras
+  extras,
+  validators = []
 ) => {
   const [checked, setChecked] = useState(val)
   const [errors, setErrors] = useState([])
@@ -35,8 +35,8 @@ export const useSwitchInputValue = (
     }
     const err = validators
       .filter(validator => !validator.check(value, validator.valueToCheck))
-      .map(val => {
-        return { type: val.type, message: val.message }
+      .map(valu => {
+        return { type: valu.type, message: valu.message }
       })
     setErrors(err)
     updateHelperText(err)
