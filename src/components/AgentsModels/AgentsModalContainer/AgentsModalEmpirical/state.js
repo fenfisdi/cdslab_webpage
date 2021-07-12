@@ -20,8 +20,7 @@ export const useAgentsModalEmpiricalState = () => {
   const fieldsFormat = (valueSet,parameters) => {
     const { distribution:{distribution_extra_arguments}} = valueSet
     let fields = {}
-    for (let index = 0; index < parameters.length; index++) {    
-      console.log(parameters[index])
+    for (let index = 0; index < parameters.length; index++) {   
       let field ={}
       const { parameter='',type='',default_value = '',values =[] }=parameters[index]     
       field['label']=parameter
@@ -71,8 +70,7 @@ export const useAgentsModalEmpiricalState = () => {
     })} 
   }
   
-  const formatSelectOption = (FieldOptions,parameter  ) => {
-    console.log('============>',parameter,FieldOptions)
+  const formatSelectOption = (FieldOptions) => {
     let options = []
     for (let i = 0; i < FieldOptions.length; i++) {
       options.push({
