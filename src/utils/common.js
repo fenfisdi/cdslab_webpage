@@ -1,10 +1,9 @@
 import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
-import React from 'react'
 import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
-import { AgentsModalWeigsths } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeigsths'
+import { AgentsModalWeigshts } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeigshts'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
@@ -88,9 +87,9 @@ export const renderComponentChildre = (componentChildren,props) => {
       width:'30%',
       height:'30%'
     }   
-  case OPTIONS_MODAL.WEIGTHS:
+  case OPTIONS_MODAL.WEIGHTS:
     return {
-      container:AgentsModalWeigsths,
+      container:AgentsModalWeigshts,
       props,
       width:'30%',
       height:'30%'

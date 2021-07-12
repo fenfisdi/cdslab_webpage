@@ -10,7 +10,7 @@ import { useAgentsModalWeigsthsState } from './state'
 
 
 
-export const AgentsModalWeigsths = ({ modalSettings,handlerDataStorage, setComponentChildren,componentChildren }) => {
+export const AgentsModalWeigshts = ({ modalSettings,handlerDataStorage, setComponentChildren,componentChildren }) => {
   const classes = useAgentsModalWeigsthsStyles()
   const [isValid,setIsValid] = useState(false)
   
@@ -56,7 +56,7 @@ export const AgentsModalWeigsths = ({ modalSettings,handlerDataStorage, setCompo
         xs={12}
         justify="space-evenly"
         alignItems="center">
-        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Weigsths</span></Grid>
+        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Weights</span></Grid>
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   
