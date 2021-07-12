@@ -11,11 +11,11 @@ import LoaderComponent from '../../../components/ui/Loader'
 const AgentsAgeGroups = () => {
 
   const { 
-    handleClickSaveAgentsAgeModel,
-    handleSettings,
+    handleClickSaveAgentsAgeModel,    
     items,
     tableColumns,
-    setItems
+    setItems,
+    isValid
   } = useAgentsAgeGroups()
 
 
@@ -43,8 +43,11 @@ const AgentsAgeGroups = () => {
             distributionType="Age Group"
             columns={tableColumns}
             initialItems={items}
-            setItems={setItems}
-            handleSettings={handleSettings}
+            setItems={setItems}            
+            handleItemDeleted={({index})=>{                             
+              items.splice(index,1)
+              setItems([...items])              
+            }}
           />
         </Grid>
       
@@ -53,7 +56,7 @@ const AgentsAgeGroups = () => {
           alignItems='center'
           text='Continue'
           onClick={()=>{handleClickSaveAgentsAgeModel(items)}}
-          disabled={false}            
+          disabled={!isValid?true:false}           
         />
       </Fragment>}
 

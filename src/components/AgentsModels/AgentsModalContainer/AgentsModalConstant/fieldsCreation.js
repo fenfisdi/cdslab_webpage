@@ -7,7 +7,7 @@ const initialValue = (distribution_extra_arguments,key)=>{
 }
 
 export const useAgentsModalConstantFieldsCreation = ({parameters=[],valueSet={},key=''}) => {  
-  const { distribution:{kwargs}} = valueSet
+  const { distribution:{kwargs={}}={}} = valueSet || {}
   let fields = {}
   for (let parameterObject of parameters) {    
     let field ={}

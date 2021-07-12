@@ -41,6 +41,16 @@ export const useNewConfigurationForm = () => {
     type: 'number',
   })
 
+  const hospitalCapacity = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.hospitalCapacity, {
+    name: 'hospitalCapacity',
+    type: 'number',
+  })
+
+  const icuCapacity = useInputValue('', VALIDATORS_NEW_CONFIGURATION_FORM.icuCapacity, {
+    name: 'icuCapacity',
+    type: 'number',
+  })
+
   const timeUnits = useSelectValue('', VALIDATORS_NEW_CONFIGURATION_FORM.timeUnits, {
   })
 
@@ -58,5 +68,7 @@ export const useNewConfigurationForm = () => {
     boxVerticalSize,
     timeUnits,
     distanceUnits,
+    hospitalCapacity,
+    icuCapacity
   }
 }
