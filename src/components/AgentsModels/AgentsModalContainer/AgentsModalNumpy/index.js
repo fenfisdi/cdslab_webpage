@@ -57,18 +57,17 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
   },[fieldsForm])
 
   const handleSaveInformation =(item)=>{
-    const { distribution, distribution: {kwargs} } = item
+    const { distribution } = item
+    distribution.kwargs = {}
     distribution.type = componentChildren.toLowerCase()
     const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
     if(FieldsSelect){
-      console.log(FieldsSelect) 
       for (const field of FieldsSelect) {
-        
         let value = field?.input?.props?.value
         if(value.indexOf(',') != '-1'){
           value = value.split(',')
         } 
-        kwargs[field.name.toLowerCase()] = value
+        distribution.kwargs[field.name.toLowerCase()] = value
       }
     }
     item.numpy_type = numpySelect.value

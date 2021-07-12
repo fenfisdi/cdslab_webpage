@@ -16,7 +16,7 @@ const AgentsBasedModelPage = () => {
   const AgentsSusceptibilityGroupsPage = React.lazy(() => import('./AgentsSusceptibilityGroupsPage'))
   const AgentsVulnerabilityGroupsPage = React.lazy(() => import('./AgentsVulnerabilityGroupsPage'))
   const AgentsDiseaseStateGroupsPage = React.lazy(()=> import('./AgentsDiseaseStateGroupsPage'))
- 
+  const AgentsConfigurationMessageExecution = React.lazy(()=> import('./AgentsConfigurationMessageExecution'))
   const tabs = [
     {
       id: 1,
@@ -56,7 +56,7 @@ const AgentsBasedModelPage = () => {
             <Route path={`${match.path}/agentsSusceptibilityGroups`} exact component={AgentsSusceptibilityGroupsPage} />
             <Route path={`${match.path}/agentsVulnerabilityGroupsPage`} exact component={AgentsVulnerabilityGroupsPage} />
             <Route path={`${match.path}/agentsDiseaseStateGroupsPage`} exact component={AgentsDiseaseStateGroupsPage} />
-            
+            <Route path={`${match.path}/agentsConfigurationMessage`} exact component={AgentsConfigurationMessageExecution} />
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>

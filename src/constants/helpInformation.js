@@ -14,6 +14,8 @@ export const HELP_INFORMATION_CHOOSE_DATE_SIMULATIONS = 'helpInformationCompartm
 
 export const HELP_INFORMATION_REVIEW_CONFIGURATION_MESSAGE_SIMULATIONS = 'helpInformationCompartmental.simulationExecuted'
 
+export const HELP_INFORMATION_REVIEW_CONFIGURATION_MESSAGE = 'helpInformationCompartmental.simulationExecuted'
+
 export const HELP_INFORMATION_REVIEW_CONFIGURATION_INFORMATION_SIMULATIONS = 'helpInformationCompartmental.reviewConfiguration'
 
 export const HELP_INFORMATION_FIXED_PARAMETERS_SIMULATIONS = 'helpInformationCompartmental.fixedParameters'

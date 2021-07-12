@@ -48,13 +48,14 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
     
   
   const handleSaveInformation =(item)=>{
-    const { distribution, distribution: {kwargs} } = item
+    const { distribution} = item
+    distribution.kwargs = {}
     distribution.type = componentChildren.toLowerCase()
     for (const field in fieldsForm) {     
       if(fieldsForm[field]['type'] != 'boolean'){
-        kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['value']
+        distribution.kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['value']
       }else{
-        kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['checked']
+        distribution.kwargs[field.toLowerCase()] = fieldsForm[field]['input']['props']['checked']
       }
         
     }
