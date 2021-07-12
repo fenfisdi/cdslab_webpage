@@ -1,7 +1,11 @@
-import { AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS, AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS } from '../../actions/types/agentsSusceptibilityGroupsTypes'
+import { 
+  AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_ERROR, 
+  AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_SUCCESS, 
+  AGENTS_DISEASE_STATE_MODEL_RESET_INFORMATION_SUCCESS } from '../../actions/types/agentsDiseaseStateGroupsTypes'
+
 
 export const initialState = {
-  agentsSusceptibilityGroups: {
+  agentsDiseaseStateGroups: {
     data:null,
     error:false,
     errorData:null,
@@ -9,10 +13,10 @@ export const initialState = {
   }
 }
 
-export const agentsSusceptibilityGroupsReducer = (state, action) => {
+export const agentsDiseaseStatesGroupsReducer = (state, action) => {
   switch (action.type) { 
     
-  case AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS:
+  case AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_SUCCESS:
     return {
       ...state, 
       loading: false, 
@@ -21,7 +25,7 @@ export const agentsSusceptibilityGroupsReducer = (state, action) => {
       errorData:null
     }
 
-  case AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR:
+  case AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_ERROR:
     return {
       ...state, 
       loading: false,
@@ -30,7 +34,7 @@ export const agentsSusceptibilityGroupsReducer = (state, action) => {
       errorData:action.payload.message,
     }
 
-  case AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS:
+  case AGENTS_DISEASE_STATE_MODEL_RESET_INFORMATION_SUCCESS:
     return {
       ...state, 
       data:null,
