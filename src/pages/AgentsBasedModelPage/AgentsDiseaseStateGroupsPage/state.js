@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useStore } from '../../../store/storeContext'
 import { useAgentsDiseaseStateGroupsActions } from '@actions/agentsDiseaseStateGroupsActions'
+import { useConfigurationActions } from '@actions/configurationActions'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
 
@@ -15,7 +16,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
       agentsDiseaseStateGroups: {
         data,
         error
-      }
+      },
+      configuration: { listConfigurationDistance, error:errorListConfigurationDistance }
     },
     dispatch
   } = useStore()
@@ -35,7 +37,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     return {
       name:diseaseStateGroup.name,
       distribution:diseaseStateGroup.distribution || {},
-      state: 'CONFIGURED',
+      state: !isEmpty(diseaseStateGroup.distribution)?'CONFIGURED':'SAVE',
       identifier:diseaseStateGroup.identifier    
     }
   }
@@ -54,6 +56,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     deleteDiseaseStateGroupsItemAction,
     getDiseaseStateGroups     
   } = useAgentsDiseaseStateGroupsActions(dispatch)
+
+  const { getListConfigurationDistance } = useConfigurationActions(dispatch)
   
   const schemaItems={
     'name': '',
@@ -102,6 +106,12 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
       setItems(parseInformationDiseaseStateGroupsModel(data))
     }
   },[data,error,idConfiguration])
+
+  useEffect(() => {    
+    if (listConfigurationDistance.length == 0 && errorListConfigurationDistance == null) {       
+      getListConfigurationDistance()
+    }
+  },[listConfigurationDistance])
   
 
   const redirectToNaturalHistoryPage = () => {
@@ -143,7 +153,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     idConfiguration,
     deleteDiseaseStateGroupItem,
     parseInformationDiseaseStateItem,
-    getDiseaseStateGroups
+    getDiseaseStateGroups,
+    listConfigurationDistance
   }
     
   

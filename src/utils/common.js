@@ -131,7 +131,7 @@ export const replaceString = (str,charactertoSearch,characterReplace)=>{
 
 
 export const deleteItemsConfigureTable =(item,items,index)=>{
-  if(item.state == 'CONFIGURED'){
+  if(item.state.trim().length>0){
     return item
   }else if(item.state.trim() == ''){                
     items.splice(index,1)

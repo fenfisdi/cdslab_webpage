@@ -1,5 +1,4 @@
 import { Grid } from '@material-ui/core'
-import { isEmpty } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
@@ -20,7 +19,6 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
   const { fieldsFormat,uploadButton } = useAgentsModalEmpiricalState()
 
   const fieldsForm = fieldsFormat(modalSettings.item,parameters.type)
-  console.log(fieldsForm)
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
@@ -35,15 +33,16 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
   }
   
   useEffect(()=>{
-    if(!isEmpty(fieldsForm)){
-      let validation = false
-      Object.keys(fieldsForm).map((fieldType)=>{        
+    if(fieldsForm){
+      for (const fieldType in fieldsForm) {   
         if(fieldsForm[fieldType]['input']['props']['value'] == ''){
-          validation = true
-          return
+          setIsValid(true)
+          return false
+        }else{
+          setIsValid(false)
+          return true
         }
-      })
-      setIsValid(validation)
+      }
     }
   },[fieldsForm])
     

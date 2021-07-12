@@ -3,9 +3,8 @@ import React, {  useState } from 'react'
 import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
 
-export const AgentDiseaseState = ({modalSettings}) => {
-
-  const listConfigurationDistance = []
+export const AgentDiseaseState = ({modalSettings,listConfigurationDistance}) => {
+  
   const [valueChangeSelect, setValueChangeSelect] = useState(0)
   const [viewState, setViewState] = useState(false)
   const [valueSlider, setValueSlider] = useState(0)
@@ -66,7 +65,7 @@ export const AgentDiseaseState = ({modalSettings}) => {
           name: 'distance',
           value: valueChangeSelect,
           title: 'Distance Unit',
-          options: listConfigurationDistance != undefined ? listConfigurationDistance : [],
+          options: listConfigurationDistance && listConfigurationDistance.length>0 ? listConfigurationDistance : [],
           placeholder:'Distance Unit',
           handleOnChange: handelChangeSelect
         }
