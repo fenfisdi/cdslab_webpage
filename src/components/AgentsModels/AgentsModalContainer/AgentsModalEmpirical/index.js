@@ -34,9 +34,10 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
   }
   
   useEffect(()=>{
-    if(!isEmpty(fieldsForm)){
+    console.log(fieldsForm)
+    if(fieldsForm){
       let validation = false
-      Object.keys(fieldsForm).map((fieldType)=>{        
+      for (const fieldType in fieldsForm) {   
         if(fieldsForm[fieldType]['input']['props']['value'] == ''){
           validation = true
           return false
@@ -44,7 +45,7 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
           validation = false
           return false
         }
-      })
+      }
       setIsValid(validation)
     }
   },[fieldsForm])
