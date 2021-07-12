@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { makeStyles } from '@material-ui/core/styles'
-export const AgentsConfigurationMesajeExecutionContainer = styled.section`
+export const AgentsConfigurationMessageExecutionContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@ export const AgentsConfigurationMesajeExecutionContainer = styled.section`
   width: 100%;
 `
 
-export const AgentsConfigurationMesajeExecutionFormTitle = styled.section`
+export const AgentsConfigurationMessageExecutionFormTitle = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@ export const AgentsConfigurationMesajeExecutionFormTitle = styled.section`
   }
 `
 
-export const AgentsConfigurationMesajeExecutionStyles = makeStyles((theme) => ({
+export const AgentsConfigurationMessageExecutionStyles = makeStyles((theme) => ({
   formBody: {
     marginTop: '10px',
     marginBottom: '20px',
