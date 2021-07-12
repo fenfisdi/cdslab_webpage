@@ -3,7 +3,7 @@ import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalConta
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
-import { AgentsModalWeigsths } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeigsths'
+import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
@@ -87,9 +87,9 @@ export const renderComponentChildre = (componentChildren,props) => {
       width:'30%',
       height:'30%'
     }   
-  case OPTIONS_MODAL.WEIGTHS:
+  case OPTIONS_MODAL.WEIGHTS:
     return {
-      container:AgentsModalWeigsths,
+      container:AgentsModalWeights,
       props,
       width:'30%',
       height:'30%'
@@ -131,7 +131,7 @@ export const replaceString = (str,charactertoSearch,characterReplace)=>{
 
 
 export const deleteItemsConfigureTable =(item,items,index)=>{
-  if(item.state == 'CONFIGURED'){
+  if(item.state.trim().length>0){
     return item
   }else if(item.state.trim() == ''){                
     items.splice(index,1)

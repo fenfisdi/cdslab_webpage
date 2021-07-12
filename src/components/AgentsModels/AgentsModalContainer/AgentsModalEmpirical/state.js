@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { checkTypePhoneNumber } from '../../../../utils/common'
 import { Input } from '../../../ui/Input'
 import { useInputValue } from '../../../ui/Input/useInputValue'
 import { useSelectValue } from '../../../ui/Select/useSelectValue'
 import { SelectComponent } from '../../../ui/Select'
 import { useUploadButtonValue } from '../../../ui/UploadButton/useUploadButtonValue'
-import { Switch } from '@material-ui/core'
 import { useSwitchInputValue } from '../../../ui/SwitchInput/useSwitchInputValue'
 import { SwitchInput } from '../../../ui/SwitchInput'
 
@@ -15,20 +14,16 @@ import { SwitchInput } from '../../../ui/SwitchInput'
 export const useAgentsModalEmpiricalState = () => {
 
   const uploadButton = useUploadButtonValue(null, { accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' })
-  const [value, setValue] = useState()
-
   const fieldsFormat = (valueSet,parameters) => {
-    const { distribution:{distribution_extra_arguments}} = valueSet
     let fields = {}
-    for (let index = 0; index < parameters.length; index++) {    
-      console.log(parameters[index])
+    for (let params of parameters) {
       let field ={}
-      const { parameter='',type='',default_value = '',values =[] }=parameters[index]     
+      const { parameter='',type='',default_value = '',values =[] }=params     
       field['label']=parameter
       field['type']=type                               
-      field['input'] = renderInput(type,values,parameter,default_value,distribution_extra_arguments)
-      fields[parameter]=field        
-    } 
+      field['input'] = renderInput(type,values,parameter,default_value)
+      fields[parameter]=field     
+    }
     return fields
   }
   
@@ -71,27 +66,23 @@ export const useAgentsModalEmpiricalState = () => {
     })} 
   }
   
-  const formatSelectOption = (FieldOptions,parameter  ) => {
-    console.log('============>',parameter,FieldOptions)
-    let options = []
-    for (let i = 0; i < FieldOptions.length; i++) {
-      options.push({
-        value: FieldOptions[i],
-        label: FieldOptions[i]
+  const formatSelectOption = (FieldOptions) => {
+    let optionsS = []
+    
+    for (let options of FieldOptions) {
+      optionsS.push({
+        value: options,
+        label: options
       })
     }
-    return options
+    return optionsS
   }
 
-  const onChange = (e) => {
-    e && setValue(e.target.value)
-  }
-
-  const renderInput = (type,values,parameter,default_value,distribution_extra_arguments) => {
+  const renderInput = (type,values,parameter,default_value) => {
     let value = null
     let component = null
     if(type == 'str'){
-      const input = inputText(parameter,default_value,distribution_extra_arguments)
+      const inputTextParam = inputText(parameter,default_value)
       value = values[0]
       component = 
         <Input
@@ -101,10 +92,10 @@ export const useAgentsModalEmpiricalState = () => {
           variant="outlined"
           margin="normal"
           autoComplete="name"
-          {...input}
+          {...inputTextParam}
         />
     }else if(type == 'float' || type == 'int' || type == 'dict') {
-      const input = inputNumber(parameter,default_value,distribution_extra_arguments)
+      const inputNumberParam = inputNumber(parameter,default_value)
       component = 
         <Input
           disabled={false}
@@ -113,23 +104,23 @@ export const useAgentsModalEmpiricalState = () => {
           variant="outlined"
           margin="normal"
           autoComplete="name"
-          {...input}
+          {...inputNumberParam}
         />
     } else if(type == 'boolean'){
-      const input = inputSwitch(parameter,default_value,distribution_extra_arguments)
+      const inputSwitchParam = inputSwitch(parameter,default_value)
       component =  <SwitchInput  
         color="primary" 
-        {...input}
+        {...inputSwitchParam}
       />
     } 
     else {
-      const value = formatSelectOption(values,parameter)
-      const input = inputSelect(parameter,default_value,distribution_extra_arguments)
+      const valueSelectParam= formatSelectOption(values)
+      const inputSelectParam = inputSelect(parameter,default_value)
       component = 
         <SelectComponent
           required
-          {...input}
-          options={value}
+          {...inputSelectParam}
+          options={valueSelectParam}
         />
     }
     return component

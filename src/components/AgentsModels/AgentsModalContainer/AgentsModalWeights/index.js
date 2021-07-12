@@ -5,16 +5,16 @@ import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInfo
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { UploadButton } from '../../../ui/UploadButton'
-import { useAgentsModalWeigsthsStyles } from './style'
-import { useAgentsModalWeigsthsState } from './state'
+import { useAgentsModalWeightsStyles } from './style'
+import { useAgentsModalWeightsState } from './state'
 
 
 
-export const AgentsModalWeigsths = ({ modalSettings,handlerDataStorage, setComponentChildren,componentChildren }) => {
-  const classes = useAgentsModalWeigsthsStyles()
+export const AgentsModalWeights = ({ modalSettings,handlerDataStorage, setComponentChildren,componentChildren }) => {
+  const classes = useAgentsModalWeightsStyles()
   const [isValid,setIsValid] = useState(false)
   
-  const { uploadButton } = useAgentsModalWeigsthsState()
+  const { uploadButton } = useAgentsModalWeightsState()
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
@@ -29,13 +29,12 @@ export const AgentsModalWeigsths = ({ modalSettings,handlerDataStorage, setCompo
     }
   }
   
-  useEffect(()=>{
-    let validation = false      
+  useEffect(()=>{     
     if(!uploadButton.value){
-      validation = true
-      return
+      setIsValid(true)
+    }else{
+      setIsValid(false)
     }
-    setIsValid(validation)
   },[uploadButton])
     
   
@@ -56,7 +55,7 @@ export const AgentsModalWeigsths = ({ modalSettings,handlerDataStorage, setCompo
         xs={12}
         justify="space-evenly"
         alignItems="center">
-        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Weigsths</span></Grid>
+        <Grid xs={11} container item justify='center' alignItems='center'><span className={classes.title}>Weights</span></Grid>
         <Grid xs={1}  container   item justify='flex-end'><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
   
