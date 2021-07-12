@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   TableContainer,
   TableCell,
@@ -8,7 +8,9 @@ import { Button } from '../../../ui/Buttons'
 import { useConfigTableState } from './state'
 import ActionsZone from '../ActionsZone'
 import TableInput from './TableInput'
-import ModalRoot from '../ModalRoot'
+import { renderComponentChildre } from '../../../../utils/common'
+import { OPTIONS_MODAL } from '../../../../constants/agents'
+import { AgentsModalContainer } from '../../AgentsModalContainer'
 
 const ConfigTable = ({
   initialItems,
@@ -33,6 +35,18 @@ const ConfigTable = ({
   } = useConfigTableState({
     initialItems,
     columns
+  })
+  const [modalSettings,setModalSettings] = useState({
+    open:true,
+    item:{},
+    index:0
+  })
+
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.WEIGTHS)
+
+  const Component = renderComponentChildre(componentChildren,{
+
+
   })
 
   const renderRows = () =>
@@ -76,12 +90,13 @@ const ConfigTable = ({
           Add
         </Button>
       )}
-      <ModalRoot
-        distributionType={distributionType}
+      <AgentsModalContainer
+        modalTitle='Mobility profile'       
         open={openSettings}
-        handleClose={handleCloseSettings}
-        children={settingsComponent}
-        currentItem={items[currentIndex]}
+        handleClose={()=>{
+          setModalSettings({...modalSettings,open:false})
+        }}          
+        render={Component}
       />
     </>
   )
