@@ -29,16 +29,17 @@ const AgentsDiseaseStateGroupsPage = () => {
   
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISEASESTATE)
   
-  const {
-    handleClickSaveDiseaseStateGroups,
+  const {    
     tableColumns,
     items, 
-    setItems,
+    listConfigurationDistance,    
     schemaItems,
     isValid,
+    handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,    
     deleteDiseaseStateGroupItem,
-    parseInformationDiseaseStateItem
+    parseInformationDiseaseStateItem,
+    setItems
   }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren})
 
   
@@ -49,6 +50,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     parameterList,
     modalSettings,
     componentChildren,
+    listConfigurationDistance,
     handlerDataStorage:saveDiseaseStateGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings
