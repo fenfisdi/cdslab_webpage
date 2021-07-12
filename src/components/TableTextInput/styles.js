@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const Table = styled.ul`
   display: flex;
   flex-direction: column;
-  width: max-content;
 `
 
 export const TitleRow = styled.li`
@@ -21,7 +20,7 @@ export const Row = styled.li`
   display: flex;
   list-style: none;
   background-color: #ECEFF1;
-  height: 35px;
+  height: 65px;
   font-weight: 400;
   color: #000;
 `

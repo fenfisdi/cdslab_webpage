@@ -3,6 +3,7 @@ import React from 'react'
 import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
+import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
@@ -74,8 +75,11 @@ export const renderComponentChildre = (componentChildren,props) => {
     }        
   case OPTIONS_MODAL.EMPIRICAL:
     return {
-      Component:<h1>Empirical</h1>
-    }
+      container:AgentsModalEmpirical,
+      props,
+      width:'80%',
+      height:'80%'
+    } 
   case OPTIONS_MODAL.CONSTANT:
     return {
       container:AgentsModalConstant,
