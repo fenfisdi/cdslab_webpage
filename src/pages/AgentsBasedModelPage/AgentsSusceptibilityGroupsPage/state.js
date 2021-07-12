@@ -113,7 +113,7 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
 
   const storeSusceptibilityGroup= (isFile,susceptibilityGroupResponse,file)=>{
     if(isFile){
-      storeFile(susceptibilityGroupResponse,file,idConfiguration)
+      storeFile(susceptibilityGroupResponse,file)
     }else{
       getSusceptibilityGroupsInformation(idConfiguration)       
     }

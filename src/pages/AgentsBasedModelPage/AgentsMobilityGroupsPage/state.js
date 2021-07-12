@@ -114,7 +114,7 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
 
   const storeMobility = (isFile,mobilityGroupResponse,file)=>{
     if(isFile){
-      storeFile(mobilityGroupResponse,file,idConfiguration)
+      storeFile(mobilityGroupResponse,file)
     }else{
       getMobilityGroupsInformation(idConfiguration)       
     }
