@@ -40,6 +40,7 @@ export const AgentsModalWeights = ({ modalSettings,handlerDataStorage, setCompon
   
   const handleSaveInformation =(item)=>{
     const { distribution } = item
+    distribution.kwargs = {}
     distribution.type = componentChildren.toLowerCase()
     item.state = 'CONFIGURED'
     if(uploadButton.value){
