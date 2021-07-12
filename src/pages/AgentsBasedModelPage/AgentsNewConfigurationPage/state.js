@@ -7,6 +7,7 @@ import { useAgentsMobilityGroupsActions } from '@actions/agentsMobilityGroupsAct
 import { useAgentsAgeModelActions } from '@actions/agentsAgeModelActions'
 import { useAgentsSusceptibilityGroupsActionsActions } from '@actions/agentsSusceptibilityGroupsActions'
 import { useAgentsDiseaseStateGroupsActions } from '@actions/agentsDiseaseStateGroupsActions'
+import { useAgentsVulnerabilityGroupsActions } from '@actions/agentsVulnerabilityGroupsActions'
 
 export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
@@ -16,7 +17,8 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
       agentsMobilityGroupsModel: {  data:agentsMobilityList },
       agentsAgeModel: { data:agentsAgeModelList },
       agentsSusceptibilityGroups: { data:agentsSusceptibilityGroupsList },
-      agentsDiseaseStateGroups: { data:agentsDiseaseStateGroupsList }
+      agentsDiseaseStateGroups: { data:agentsDiseaseStateGroupsList },
+      agentsVulnerabilityGroups: { data:agentsVulnerabilityGroups }
     },
     dispatch
   } = useStore()
@@ -31,6 +33,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   const { setAgeModelInformation } = useAgentsAgeModelActions(dispatch)
   const { setResetSusceptibilityGroupsInformation } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
   const { setResetDiseaseStateGroupsInformation } = useAgentsDiseaseStateGroupsActions(dispatch)
+  const { setResetVulnerabilityGroupsInformation } = useAgentsVulnerabilityGroupsActions(dispatch)
 
   useEffect(()=>{
     if(agentsMobilityList!=null && agentsMobilityList.length>0){
@@ -45,7 +48,10 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
     if(agentsDiseaseStateGroupsList!=null && agentsDiseaseStateGroupsList.length>0){
       setResetDiseaseStateGroupsInformation()
     }
-  },[agentsMobilityList,agentsAgeModelList,agentsSusceptibilityGroupsList])
+    if(agentsVulnerabilityGroups!=null && agentsVulnerabilityGroups.length>0){
+      setResetVulnerabilityGroupsInformation()
+    }
+  },[agentsMobilityList,agentsAgeModelList,agentsSusceptibilityGroupsList,agentsDiseaseStateGroupsList,agentsVulnerabilityGroups])
 
   useEffect(() => {    
     if (listConfigurationDistance.length == 0 && error == null) { 
