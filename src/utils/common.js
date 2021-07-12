@@ -3,7 +3,7 @@ import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalConta
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
-import { AgentsModalWeigshts } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeigshts'
+import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
@@ -89,7 +89,7 @@ export const renderComponentChildre = (componentChildren,props) => {
     }   
   case OPTIONS_MODAL.WEIGHTS:
     return {
-      container:AgentsModalWeigshts,
+      container:AgentsModalWeights,
       props,
       width:'30%',
       height:'30%'

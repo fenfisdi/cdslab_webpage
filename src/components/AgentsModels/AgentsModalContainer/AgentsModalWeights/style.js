@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 
-export const useAgentsModalWeigsthsStyles = makeStyles(() => ({
+export const useAgentsModalWeightsStyles = makeStyles(() => ({
   Input:{
     background:'#eceff1',
     '& div':{
