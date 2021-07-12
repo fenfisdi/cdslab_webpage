@@ -98,8 +98,8 @@ export const renderComponentChildre = (componentChildren,props) => {
     return {
       container:AgentsModalNumpy,
       props,
-      width:'40%',
-      height:'40%'
+      width:'70%',
+      height:'70%'
     }
   case OPTIONS_MODAL.DISEASESTATE:
     return {
