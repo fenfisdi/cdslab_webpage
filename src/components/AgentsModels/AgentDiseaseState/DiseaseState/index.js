@@ -9,7 +9,7 @@ export default function TableObjDinamic() {
   return (
     <Grid container item xs={12} direction="column" justify='center' alignItems='center'>
       <Grid container item xs={10} direction="column" justify='center' alignItems='center'>
-          Modal in process of implementation 
+        Modal in process of compilation this may take a few minutes...
       </Grid>
       <Grid container item xs={10} direction="column" justify='center' alignItems='center'>
         <LoaderComponent width="100px" height={50} marginTop="50px" />
