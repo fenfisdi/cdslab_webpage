@@ -34,8 +34,8 @@ const AgentsConfigurationMessageExecution = () => {
 
       <Grid container item xs={8} justify="center" alignItems="center">
         <Paper className={classes.formBody}>
-          <p>{t('executedConfiguration.warning')}</p>
-          <p>{t('executedConfiguration.notification')}</p>
+          <p>Simulation can take several minutes.</p>
+          <p>You’ll be notified via e-mail when everything is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset.</p>
         </Paper>
       </Grid>
     </AgentsConfigurationMessageExecutionContainer>

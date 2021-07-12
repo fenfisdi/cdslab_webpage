@@ -22,6 +22,14 @@ export const saveMobilityGroupsItemService = async (mobilityGroup,idConfiguratio
   )
 }
 
+export const updateMobilityGroupsItemService = async (idConfiguration,idMobilityGroups,mobilityGroup) => {
+  return request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/mobility_group/${idMobilityGroups}`,
+    'PUT',
+    mobilityGroup
+  )
+}
+
 export const saveMobilityGroupsItemFileService = async (idConfiguration,idMobilityGroup,mobilityGroupFile) => {
   return request(
     `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/mobility_group/${idMobilityGroup}/file`,

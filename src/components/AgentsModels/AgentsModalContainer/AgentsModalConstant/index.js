@@ -56,10 +56,11 @@ export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setCompo
   },[fields])
   
   const handleSaveInformation =(item)=>{    
-    const { distribution, distribution: {kwargs} } = item
+    const { distribution } = item
     distribution.type = componentChildren.toLowerCase()
+    distribution.kwargs={}
     for (const field in fields) {      
-      kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
+      distribution.kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
     }
     item.state = 'CONFIGURED'
     handlerDataStorage(item)    

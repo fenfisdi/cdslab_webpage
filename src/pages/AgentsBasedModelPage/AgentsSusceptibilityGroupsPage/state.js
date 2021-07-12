@@ -44,7 +44,8 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     saveSusceptibilityGroupsItemAction,
     deleteSusceptibilityGroupsItemAction,
     saveSusceptibilityGroupsItemFile,
-    getSusceptibilityGroupsInformation    
+    getSusceptibilityGroupsInformation,
+    updateSusceptibilityGroupsItemAction    
   } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
   
   const schemaItems={
@@ -101,19 +102,38 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     redirectToSusceptibilityGroupsPage()
   }
 
-  const saveSusceptibilityGroupItem =(susceptibilityGroup,file='',isFile=false)=>{    
-    saveSusceptibilityGroupsItemAction(susceptibilityGroup,idConfiguration).then((susceptibilityGroupResponse)=>{      
-      if(isFile){
-        const idSusceptibilityGroup = susceptibilityGroupResponse?.data?.data?.identifier
-        const formData = new FormData()
-        formData.append('file',file)
-        saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroup,formData).then(()=>{ 
-          getSusceptibilityGroupsInformation(idConfiguration)
-        })
-      }else{
-        getSusceptibilityGroupsInformation(idConfiguration)
-      }      
+  const storeFile = (susceptibilityGroupResponse,file)=>{
+    const idSusceptibilityGroup = susceptibilityGroupResponse?.data?.data?.identifier
+    const formData = new FormData()
+    formData.append('file',file)
+    saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroup,formData).then(()=>{ 
+      getSusceptibilityGroupsInformation(idConfiguration)
     })
+  }
+
+  const storeSusceptibilityGroup= (isFile,susceptibilityGroupResponse,file)=>{
+    if(isFile){
+      storeFile(susceptibilityGroupResponse,file)
+    }else{
+      getSusceptibilityGroupsInformation(idConfiguration)       
+    }
+  }
+
+  const saveSusceptibilityGroupItem =(susceptibilityGroup,file='',isFile=false)=>{
+    
+    if(susceptibilityGroup.identifier){
+      
+      updateSusceptibilityGroupsItemAction(idConfiguration,susceptibilityGroup.identifier,susceptibilityGroup).then((susceptibilityGroupResponse)=>{
+        storeSusceptibilityGroup(isFile,susceptibilityGroupResponse,file)       
+      })
+
+    } else{
+      
+      saveSusceptibilityGroupsItemAction(susceptibilityGroup,idConfiguration).then((susceptibilityGroupResponse)=>{      
+        storeSusceptibilityGroup(isFile,susceptibilityGroupResponse,file)      
+      })
+
+    }    
   }
 
   const deleteSusceptibilityGroupItem =(susceptibilityGroup)=>{    
