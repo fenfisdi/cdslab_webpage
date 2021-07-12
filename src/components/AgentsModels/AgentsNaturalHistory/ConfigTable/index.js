@@ -8,9 +8,13 @@ import { Button } from '../../../ui/Buttons'
 import { useConfigTableState } from './state'
 import ActionsZone from '../ActionsZone'
 import TableInput from './TableInput'
+import theme from '@styles/cdslabTheme'
 import { renderComponentChildre } from '../../../../utils/common'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { AgentsModalContainer } from '../../AgentsModalContainer'
+import VulnerabilityGroup from '../../../../pages/AgentsBasedModelPage/VulnerabilityGroup'
+import ModalCommon from '../../../ui/ModalCommon'
+import { useHeaderStyles } from '../../../../pages/LandingPage/styles'
 
 const ConfigTable = ({
   initialItems,
@@ -42,12 +46,22 @@ const ConfigTable = ({
     index:0
   })
 
+  const [openModalCancel, setOpenModalCancel] = useState(false)
+  const classes = useHeaderStyles(theme)
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.WEIGTHS)
 
   const Component = renderComponentChildre(componentChildren,{
 
 
   })
+
+  const handleCloseModalCancel = () => {
+    setOpenModalCancel(false)
+  }
+
+  const openModal = () => {
+    setOpenModalCancel(true)
+  }
 
   const renderRows = () =>
     items.map((item, i) => (
@@ -90,14 +104,20 @@ const ConfigTable = ({
           Add
         </Button>
       )}
-      <AgentsModalContainer
-        modalTitle='Mobility profile'       
+      <ModalCommon
+        classes={classes}
+        handleOptions={''}
+        handleClose={handleCloseSettings}
         open={openSettings}
-        handleClose={()=>{
-          setModalSettings({...modalSettings,open:false})
-        }}          
-        render={Component}
-      />
+        disableBackdropClick={true}
+        title={'Cancelar solicitud'}
+        handleConfirm={''}
+        cancel={''}
+        confirm={'Done'}
+      >
+        <VulnerabilityGroup
+        />
+      </ModalCommon>
     </>
   )
 }

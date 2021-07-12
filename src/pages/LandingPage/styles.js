@@ -10,7 +10,7 @@ export const LandingPageContainer = styled.section`
   background: #fff
 `
 
-export const useHeaderStyles = makeStyles(() => ({
+export const useHeaderStyles = makeStyles((theme) => ({
   container: {
     width: '100%'
   },
@@ -24,7 +24,21 @@ export const useHeaderStyles = makeStyles(() => ({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: '30px'
-  }
+  },
+
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: '5px',
+    textAlign: 'center',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 2, 2)
+  },
+
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 }))
 
 export const useContentStyles = makeStyles(() => ({
