@@ -141,6 +141,41 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
       getDiseaseStateGroupsInformation(idConfiguration)      
     })
   }
+
+  const fieldsToDiseaseModal = () =>{
+    return{
+      headers:[
+        {label:'Parameter',attr:'paramater'},
+        {label:'Value',attr:'value'}
+      ],
+      body:[
+        {
+          paramater:'Can get infected?',
+          type:'switch',
+          value:''
+        },{
+          paramater:'Is infected?',
+          type:'switch',
+          value:''
+        },
+        {
+          paramater:'Can spread?',
+          type:'switch',
+          value:''
+        },
+        {
+          paramater:'Spread radius',
+          type:'switch',
+          value:''
+        },
+        {
+          paramater:'Spread probability',
+          type:'switch',
+          value:''
+        }
+      ]
+    }
+  }
   
   return {
     tableColumns,
@@ -154,7 +189,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     deleteDiseaseStateGroupItem,
     parseInformationDiseaseStateItem,
     getDiseaseStateGroups,
-    listConfigurationDistance
+    listConfigurationDistance,
+    fieldsToDiseaseModal
   }
     
   

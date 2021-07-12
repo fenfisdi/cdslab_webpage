@@ -5,6 +5,7 @@ import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContaine
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
 import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
+import Switch from '../components/ui/Switch'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -108,6 +109,20 @@ export const renderComponentChildre = (componentChildren,props) => {
       width:'50%',
       height:'50%'
     }
+  default:
+    return null
+  }
+  
+}
+
+
+export const renderComponentElement = (typeComponent,props) => {
+  switch (typeComponent) {
+  case 'switch':
+    return {
+      container:Switch,
+      props,
+    }        
   default:
     return null
   }
