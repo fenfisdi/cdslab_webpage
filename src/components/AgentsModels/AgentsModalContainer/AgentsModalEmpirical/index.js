@@ -39,7 +39,10 @@ export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComp
       Object.keys(fieldsForm).map((fieldType)=>{        
         if(fieldsForm[fieldType]['input']['props']['value'] == ''){
           validation = true
-          return
+          return false
+        }else{
+          validation = false
+          return false
         }
       })
       setIsValid(validation)
