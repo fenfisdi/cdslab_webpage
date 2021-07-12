@@ -5,7 +5,7 @@ import { useStore } from '../../../store/storeContext'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
 
-export const useAgentsMobilityGroups = ({modalSettings,setModalSettings}) => {
+export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnack, setShowSnack }) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
@@ -36,7 +36,10 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings}) => {
   const shcemaInformationParseMobilityGroups = (mobility)=>{
     return {
       name:mobility.name,
-      distribution:mobility.distribution? mobility.distribution: {},
+      distribution:mobility.distribution? mobility.distribution: {
+        'type': '',
+        'kwargs': {}
+      },
       state: !isEmpty(mobility.distribution)?'CONFIGURED':'SAVE',
       identifier:mobility.identifier    
     }
@@ -118,11 +121,22 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings}) => {
     const idMobilityGroup = mobilityGroup?.identifier
     if(isFile){      
       const formData = new FormData()
+      console.log(file)
       formData.append('file',file)
       saveMobilityGroupsItemFile(idConfiguration,idMobilityGroup,formData).then(()=>{ 
         updateMobilityGroupsItem(idConfiguration,idMobilityGroup,mobilityGroup).then(()=>{
           setModalSettings({...modalSettings,open:false})
         })
+      }).catch(()=>{        
+        setShowSnack(
+          {
+            ...showSnack,
+            show: true,
+            success: false,
+            error: true,
+            errorMessage: 'Error al subir el archivo, verifique que sea un archivo valido.!'
+          }
+        )
       })
     }else{
       updateMobilityGroupsItem(idConfiguration,idMobilityGroup,mobilityGroup).then(()=>{

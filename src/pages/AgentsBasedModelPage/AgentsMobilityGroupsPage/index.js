@@ -13,6 +13,7 @@ import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentsMobilityGroups } from './state'
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const AgentsMobilityGroups = () => {
   const context = useContext(AgentsBaseContext)
@@ -22,6 +23,10 @@ const AgentsMobilityGroups = () => {
     item:{},
     index:0
   })
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
 
   const {
@@ -36,7 +41,7 @@ const AgentsMobilityGroups = () => {
     deleteMobilityGroupsItem,
     parseInformationMobilityGroupsItem,
     saveMobilityGroupItem
-  }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren})
+  }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren, showSnack, setShowSnack })
 
   
   
@@ -88,7 +93,7 @@ const AgentsMobilityGroups = () => {
                   setModalSettings({...modalSettings,open:true,item:newItem,index})
                 })
               }else{
-                setModalSettings({...modalSettings,open:true,item:item,index})
+                setModalSettings({...modalSettings,open:true,item:parseInformationMobilityGroupsItem(item),index})
               }              
             }}
             handleItemDeleted={({index,item})=>{
@@ -110,6 +115,13 @@ const AgentsMobilityGroups = () => {
           }}          
           render={Component}
         />
+
+        {showSnack && showSnack.show && <SnackbarComponent
+          snackDuration={3500}
+          configData={showSnack}
+          handleCloseSnack={handleCloseSnack}
+          successMessage={showSnack.successMessage}
+          errorMessage={showSnack.errorMessage} />}
 
         <CompartmentalButton
           justify='flex-end'
