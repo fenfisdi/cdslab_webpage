@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table,TableRow,TableCell,Grid, makeStyles, TextField } from '@material-ui/core'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
@@ -6,6 +6,7 @@ import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { SelectComponent } from '../../../ui/Select'
 import { useAgentsModalNumpyState } from './state'
+import { isEmpty } from 'lodash'
 
 export const useAgentsModalConstantStyles = makeStyles(() => ({
   Input:{
@@ -28,6 +29,7 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
 
 export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
   const classes = useAgentsModalConstantStyles()
+  const [isValid,setIsValid] = useState(false)
   const parameterNumpy = parameterList[componentChildren.toLowerCase()]
   const {numpySelect,optionsSelectNumpy,fieldsFormat} = useAgentsModalNumpyState()
   const fieldsForm = fieldsFormat(parameterNumpy.type)
@@ -37,6 +39,23 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
+
+  useEffect(()=>{
+    if(!isEmpty(fieldsForm)){
+      let validation = false
+      const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
+      if(FieldsSelect){
+        for (let i = 0; i <FieldsSelect.length; i++) {
+          let value = FieldsSelect[i]?.input?.props?.value
+          if(value == ''){
+            validation = true
+            return
+          }
+        }
+      }
+      setIsValid(validation)
+    }
+  },[fieldsForm])
 
   const handleSaveInformation =(item)=>{
     const { distribution, distribution: {kwargs} } = item
@@ -113,7 +132,7 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
 
         
       <Grid container item xs={12} justify='flex-end' alignItems='center' direction='row'>
-        <Button color="primary" onClick={() => handleSaveInformation(modalSettings?.item)}>Done</Button>
+        <Button color="primary" disabled={isValid?true:false} onClick={() => handleSaveInformation(modalSettings?.item)}>Done</Button>
         <Button onClick={() => handleGoBack()}>Cancel</Button>
       </Grid>
       
