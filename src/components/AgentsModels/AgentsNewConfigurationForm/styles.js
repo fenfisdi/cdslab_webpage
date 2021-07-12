@@ -33,10 +33,20 @@ export const AgentsModelCenterInputsForm = styled.section`
   padding: 10px;
 `
 
+export const AgentsModelContainerTitleSystem = styled.section`
+  margin: 0 auto;
+  width: 100%;
+  height: 24px;
+  background: #eee;
+  text-align: center;
+  font-size: 16px;
+  color: black;
+`
+
 export const useNewConfigurationStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    marginTop: '50px' 
+    marginTop: '50px'
   },
   buttonSearch: {
     float: 'rigth',
