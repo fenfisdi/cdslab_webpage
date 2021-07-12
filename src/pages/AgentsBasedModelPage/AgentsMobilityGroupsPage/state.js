@@ -5,7 +5,7 @@ import { useStore } from '../../../store/storeContext'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
 
-export const useAgentsMobilityGroups = ({modalSettings}) => {
+export const useAgentsMobilityGroups = ({modalSettings,setModalSettings}) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
@@ -22,14 +22,24 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
 
   const parseInformationMobilityGroupsModel =(arrayMobility=[])=>{
     return arrayMobility.map((mobility)=>{
-      return {
-        name:mobility.name,
-        distribution:mobility.distribution,
-        state: 'CONFIGURED',
-        identifier:mobility.identifier   
-      }
+      return shcemaInformationParseMobilityGroups(mobility)
     })
 
+  }
+
+
+  const parseInformationMobilityGroupsItem = (MobilityGroup={})=>{
+    return shcemaInformationParseMobilityGroups(MobilityGroup)
+  }
+
+
+  const shcemaInformationParseMobilityGroups = (mobility)=>{
+    return {
+      name:mobility.name,
+      distribution:mobility.distribution? mobility.distribution: {},
+      state: !isEmpty(mobility.distribution)?'CONFIGURED':'SAVE',
+      identifier:mobility.identifier    
+    }
   }
 
   const checkMobilityGroupsList = (mobilityGroupsList)=>{
@@ -44,7 +54,8 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     getMobilityGroupsInformation, 
     saveMobilityGroupsItemAction,
     deleteMobilityGroupsItemAction,
-    saveMobilityGroupsItemFile 
+    saveMobilityGroupsItemFile,
+    updateMobilityGroupsItem
   } = useAgentsMobilityGroupsActions(dispatch)
   
   const schemaItems={
@@ -65,10 +76,12 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   const [items, setItems] = useState(initialItems)
 
 
-  useEffect(()=>{
-    if(items.length>0){
-           
+  useEffect(()=>{    
+    if(items.length>0){           
       setIsValid(checkMobilityGroupsList(items)) 
+    }
+    if(!modalSettings.open && idConfiguration!='' && !isEmpty(modalSettings.item)){
+      getMobilityGroupsInformation(idConfiguration)
     }
   },[modalSettings,items])
 
@@ -102,18 +115,32 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   }
 
   const saveMobilityGroupsItem =(mobilityGroup,file='',isFile=false)=>{    
-    saveMobilityGroupsItemAction(mobilityGroup,idConfiguration).then((mobilityGroupResponse)=>{      
-      if(isFile){
-        const idMobilityGroup = mobilityGroupResponse?.data?.data?.identifier
-        const formData = new FormData()
-        formData.append('file',file)
-        saveMobilityGroupsItemFile(idConfiguration,idMobilityGroup,formData).then(()=>{ 
-          getMobilityGroupsInformation(idConfiguration)
+    const idMobilityGroup = mobilityGroup?.identifier
+    if(isFile){      
+      const formData = new FormData()
+      formData.append('file',file)
+      saveMobilityGroupsItemFile(idConfiguration,idMobilityGroup,formData).then(()=>{ 
+        updateMobilityGroupsItem(idConfiguration,idMobilityGroup,mobilityGroup).then(()=>{
+          setModalSettings({...modalSettings,open:false})
         })
-      }else{
-        getMobilityGroupsInformation(idConfiguration)
-      }      
-    })
+      })
+    }else{
+      updateMobilityGroupsItem(idConfiguration,idMobilityGroup,mobilityGroup).then(()=>{
+        setModalSettings({...modalSettings,open:false})
+      })
+    }    
+  }
+
+  const saveMobilityGroupItem =(mobilityGroup)=>{
+    const schemaPost = {
+      distribution:null,
+      name:mobilityGroup.name
+    }
+    return new Promise((resolve) => {      
+      saveMobilityGroupsItemAction(schemaPost,idConfiguration).then((mobilityGroupResponse)=>{        
+        resolve({mobilityGroup:mobilityGroupResponse.data.data})           
+      })
+    })    
   }
 
   const deleteMobilityGroupsItem =(mobilityGroup)=>{    
@@ -125,14 +152,16 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
   
   return {
     tableColumns,
-    items, 
-    setItems,
-    schemaItems,
-    handleClickSaveMobilityGroups,
-    isValid,
-    saveMobilityGroupsItem,
+    items,     
+    schemaItems,    
+    isValid,    
     idConfiguration,
-    deleteMobilityGroupsItem
+    setItems,
+    handleClickSaveMobilityGroups,
+    saveMobilityGroupsItem,
+    deleteMobilityGroupsItem,
+    parseInformationMobilityGroupsItem,
+    saveMobilityGroupItem
   }
   
 }

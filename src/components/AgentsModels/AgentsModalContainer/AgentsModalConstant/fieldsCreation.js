@@ -2,19 +2,20 @@ import { checkTypePhoneNumber, replaceString, titleCase } from '../../../../util
 import { useInputValue } from '../../../ui/Input/useInputValue'
 
 
-const initialValue = (distribution_extra_arguments,key)=>{
-  return distribution_extra_arguments[key]?distribution_extra_arguments[key]:''
+const initialValue = (kwargs,key)=>{  
+  return kwargs[key]?kwargs[key]:''
 }
 
 export const useAgentsModalConstantFieldsCreation = ({parameters=[],valueSet={},key=''}) => {  
-  const { distribution:{kwargs={}}={}} = valueSet || {}
+  const { distribution ={} } = valueSet || {}
+  distribution['kwargs']=distribution['kwargs']?distribution['kwargs']:{}
   let fields = {}
   for (let parameterObject of parameters) {    
     let field ={}
     const { parameter='', }=parameterObject     
     field['label']=parameter
     field['input']=
-      {...useInputValue(initialValue(kwargs,key), [], {
+      {...useInputValue(initialValue(distribution?.kwargs,key), [], {
         name: parameter,
         type: 'text',
         label:parameter,

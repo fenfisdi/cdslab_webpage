@@ -25,14 +25,17 @@ const AgentsMobilityGroups = () => {
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
 
   const {
-    handleClickSaveMobilityGroups,
+    
     tableColumns,
-    items, 
-    setItems,
+    items,     
     schemaItems,
     isValid,
+    setItems,
+    handleClickSaveMobilityGroups,
     saveMobilityGroupsItem,
-    deleteMobilityGroupsItem
+    deleteMobilityGroupsItem,
+    parseInformationMobilityGroupsItem,
+    saveMobilityGroupItem
   }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren})
 
   
@@ -74,9 +77,19 @@ const AgentsMobilityGroups = () => {
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
-            handleSettings={({index,item})=>{              
-              setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
-              setModalSettings({...modalSettings,open:true,item,index})
+            handleSettings={({index,item})=>{
+              if(item.state.trim().length == 0){
+                saveMobilityGroupItem(item).then((mobilityGroupResponse)=>{
+                  const { mobilityGroup } = mobilityGroupResponse || {}
+                  const newItem =  parseInformationMobilityGroupsItem(mobilityGroup)          
+                  items[index] = newItem
+                  setItems([...items])
+                  setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+                  setModalSettings({...modalSettings,open:true,item:newItem,index})
+                })
+              }else{
+                setModalSettings({...modalSettings,open:true,item:item,index})
+              }              
             }}
             handleItemDeleted={({index,item})=>{
               const itemToDelete = deleteItemsConfigureTable(item,items,index)              
