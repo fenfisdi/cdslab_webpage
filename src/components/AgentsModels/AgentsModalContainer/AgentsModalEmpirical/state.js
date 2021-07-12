@@ -114,7 +114,7 @@ export const useAgentsModalEmpiricalState = () => {
       />
     } 
     else {
-      const valueSelectParam= formatSelectOption(values,parameter)
+      const valueSelectParam= formatSelectOption(values)
       const inputSelectParam = inputSelect(parameter,default_value)
       component = 
         <SelectComponent
