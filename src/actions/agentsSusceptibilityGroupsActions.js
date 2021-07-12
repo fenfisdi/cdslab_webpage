@@ -1,4 +1,4 @@
-import { deleteSusceptibilityGroupsItemService, getSusceptibilityGroupsInformationService, saveSusceptibilityGroupsInformationService, saveSusceptibilityGroupsItemFileService, saveSusceptibilityGroupsItemService } from '../services/agentsSusceptibilityGroupsServices'
+import { deleteSusceptibilityGroupsItemService, getSusceptibilityGroupsInformationService, saveSusceptibilityGroupsInformationService, saveSusceptibilityGroupsItemFileService, saveSusceptibilityGroupsItemService, updateSusceptibilityGroupsItemService } from '../services/agentsSusceptibilityGroupsServices'
 import { AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_ERROR, AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_GET_INFORMATION_SUCCESS, AGENTS_SUSCEPTIBILITY_GROUPS_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsSusceptibilityGroupsTypes'
 
 
@@ -66,12 +66,17 @@ export const useAgentsSusceptibilityGroupsActionsActions = (dispatch) => {
     return saveSusceptibilityGroupsItemFileService(idConfiguration,idSusceptibilityGroup,susceptibilityGroup)
   }
 
+  const updateSusceptibilityGroupsItemAction = (idConfiguration,idSusceptibilityGroups,susceptibilityGroups) =>{
+    return updateSusceptibilityGroupsItemService(idConfiguration,idSusceptibilityGroups,susceptibilityGroups)
+  }
+
   return {
     saveSusceptibilityGroupsItemAction,
     deleteSusceptibilityGroupsItemAction,
     saveSusceptibilityGroupsItemFile,
     getSusceptibilityGroupsInformation,
     setResetSusceptibilityGroupsInformation,
-    saveSusceptibilityGroupsInformation
+    saveSusceptibilityGroupsInformation,
+    updateSusceptibilityGroupsItemAction
   }
 }

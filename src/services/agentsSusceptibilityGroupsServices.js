@@ -22,6 +22,14 @@ export const saveSusceptibilityGroupsItemService = async (susceptibilityGroup,id
   )
 }
 
+export const updateSusceptibilityGroupsItemService = async (idConfiguration,idSusceptibilityGroups,susceptibilityGroups) => {
+  return request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/susceptibility_group/${idSusceptibilityGroups}`,
+    'PUT',
+    susceptibilityGroups
+  )
+}
+
 export const saveSusceptibilityGroupsItemFileService = async (idConfiguration,idSusceptibilityGroup,susceptibilityGroup) => {
   return request(
     `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/susceptibility_group/${idSusceptibilityGroup}/file`,
