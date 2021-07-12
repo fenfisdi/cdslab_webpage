@@ -102,7 +102,7 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     redirectToSusceptibilityGroupsPage()
   }
 
-  const storeFile = (susceptibilityGroupResponse,file,idConfiguration)=>{
+  const storeFile = (susceptibilityGroupResponse,file)=>{
     const idSusceptibilityGroup = susceptibilityGroupResponse?.data?.data?.identifier
     const formData = new FormData()
     formData.append('file',file)
@@ -111,26 +111,26 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     })
   }
 
+  const storeSusceptibilityGroup= (isFile,susceptibilityGroupResponse,file)=>{
+    if(isFile){
+      storeFile(susceptibilityGroupResponse,file,idConfiguration)
+    }else{
+      getSusceptibilityGroupsInformation(idConfiguration)       
+    }
+  }
+
   const saveSusceptibilityGroupItem =(susceptibilityGroup,file='',isFile=false)=>{
     
     if(susceptibilityGroup.identifier){
       
       updateSusceptibilityGroupsItemAction(idConfiguration,susceptibilityGroup.identifier,susceptibilityGroup).then((susceptibilityGroupResponse)=>{
-        if(isFile){
-          storeFile(susceptibilityGroupResponse,file,idConfiguration)
-        }else{
-          getSusceptibilityGroupsInformation(idConfiguration)       
-        }        
+        storeSusceptibilityGroup(isFile,susceptibilityGroupResponse,file)       
       })
 
     } else{
       
       saveSusceptibilityGroupsItemAction(susceptibilityGroup,idConfiguration).then((susceptibilityGroupResponse)=>{      
-        if(isFile){
-          storeFile(susceptibilityGroupResponse,file,idConfiguration)
-        }else{
-          getSusceptibilityGroupsInformation(idConfiguration)
-        }      
+        storeSusceptibilityGroup(isFile,susceptibilityGroupResponse,file)      
       })
 
     }    

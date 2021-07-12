@@ -103,7 +103,7 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     redirectToSusceptibilityGroupsPage()  
   }
 
-  const storeFile = (mobilityGroupResponse,file,idConfiguration)=>{
+  const storeFile = (mobilityGroupResponse,file)=>{
     const idMobilityGroup = mobilityGroupResponse?.data?.data?.identifier
     const formData = new FormData()
     formData.append('file',file)
@@ -112,26 +112,25 @@ export const useAgentsMobilityGroups = ({modalSettings}) => {
     })
   }
 
+  const storeMobility = (isFile,mobilityGroupResponse,file)=>{
+    if(isFile){
+      storeFile(mobilityGroupResponse,file,idConfiguration)
+    }else{
+      getMobilityGroupsInformation(idConfiguration)       
+    }
+  }
+
   const saveMobilityGroupsItem =(mobilityGroup,file='',isFile=false)=>{
     if(mobilityGroup.identifier){      
       
-      updateMobilityGroupsItemAction(idConfiguration,mobilityGroup.identifier,mobilityGroup).then((mobilityGroupResponse)=>{
-        if(isFile){
-          storeFile(mobilityGroupResponse,file,idConfiguration)
-        }else{
-          getMobilityGroupsInformation(idConfiguration)       
-        }
-        
+      updateMobilityGroupsItemAction(idConfiguration,mobilityGroup.identifier,mobilityGroup).then((mobilityGroupResponse)=>{       
+        storeMobility(isFile,mobilityGroupResponse,file)
       })
 
     }else{
 
       saveMobilityGroupsItemAction(mobilityGroup,idConfiguration).then((mobilityGroupResponse)=>{      
-        if(isFile){
-          storeFile(mobilityGroupResponse,file,idConfiguration)
-        }else{
-          getMobilityGroupsInformation(idConfiguration)
-        }      
+        storeMobility(isFile,mobilityGroupResponse,file)      
       })
 
     }
