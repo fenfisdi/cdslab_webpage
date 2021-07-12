@@ -9,13 +9,13 @@ export const useAgentsModalNumpyState = () => {
 
   const fieldsFormat = (parameters) => {
     let fields = []
-    for (let index = 0; index < parameters.length; index++) {
-      for (let j = 0; j < parameters[index].values.length; j++){
+    for (let params of parameters) {
+      for (let paramsValue of params['values']){
         fields.push({
-          parameter : parameters[index].parameter,
-          name: parameters[index].values[j].name,
-          type: parameters[index].values[j].type,
-          input: renderInput(parameters[index].values[j].name)
+          parameter : params['parameter'],
+          name: paramsValue['name'],
+          type:paramsValue['type'],
+          input: renderInput(paramsValue['name'])
         })
       }        
     }
