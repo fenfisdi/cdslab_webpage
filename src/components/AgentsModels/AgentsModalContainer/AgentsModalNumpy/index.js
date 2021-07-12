@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Table,TableRow,TableCell,Grid, makeStyles, TextField } from '@material-ui/core'
+import { Table,TableRow,TableCell,Grid, makeStyles } from '@material-ui/core'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
 import SupportComponent from '../../../SupportComponent'
 import { Button } from '../../../ui/Buttons'
 import { SelectComponent } from '../../../ui/Select'
 import { useAgentsModalNumpyState } from './state'
-import { isEmpty } from 'lodash'
 
 export const useAgentsModalConstantStyles = makeStyles(() => ({
   Input:{
@@ -33,7 +32,6 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
   const parameterNumpy = parameterList[componentChildren.toLowerCase()]
   const {numpySelect,optionsSelectNumpy,fieldsFormat} = useAgentsModalNumpyState()
   const fieldsForm = fieldsFormat(parameterNumpy.type)
-  console.log(fieldsForm)
   const optionsNumpy = optionsSelectNumpy(parameterNumpy.type)
 
   const handleGoBack = () =>{
@@ -41,19 +39,20 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
   }
 
   useEffect(()=>{
-    if(!isEmpty(fieldsForm)){
-      let validation = false
-      const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
-      if(FieldsSelect){
-        for (let i = 0; i <FieldsSelect.length; i++) {
-          let value = FieldsSelect[i]?.input?.props?.value
+    if(!numpySelect.value){
+      setIsValid(true)
+    }else{
+      if(fieldsForm){
+        const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
+        for (const fieldType in FieldsSelect) {   
+          let value = fieldType?.input?.props?.value
           if(value == ''){
-            validation = true
-            return
+            setIsValid(true)
+          }else{
+            setIsValid(false)
           }
         }
       }
-      setIsValid(validation)
     }
   },[fieldsForm])
 
