@@ -61,12 +61,14 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
     distribution.type = componentChildren.toLowerCase()
     const FieldsSelect = fieldsForm.filter(element => element.parameter == numpySelect.value)
     if(FieldsSelect){
-      for (let i = 0; i <FieldsSelect.length; i++) {
-        let value = FieldsSelect[i]?.input?.props?.value
+      console.log(FieldsSelect) 
+      for (const field of FieldsSelect) {
+        
+        let value = field?.input?.props?.value
         if(value.indexOf(',') != '-1'){
           value = value.split(',')
         } 
-        kwargs[FieldsSelect[i].name.toLowerCase()] = value
+        kwargs[field.name.toLowerCase()] = value
       }
     }
     item.numpy_type = numpySelect.value

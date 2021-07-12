@@ -32,7 +32,7 @@ export const useAgentsModalNumpyState = () => {
         return checkFloat(event)
       }
     })
-    const component = <Input
+    return <Input
       disabled={false}
       required
       variant="outlined"
@@ -40,8 +40,6 @@ export const useAgentsModalNumpyState = () => {
       autoComplete="name"
       {...input}
     />
-
-    return component
   }
 
   const checkFloat = (event) => {
@@ -53,10 +51,10 @@ export const useAgentsModalNumpyState = () => {
 
   const optionsSelectNumpy = (parameters) => {
     let options = []
-    for(let i = 0; i<parameters.length; i++){
+    for(let params of parameters){
       options.push({
-        label: parameters[i].parameter,
-        value: parameters[i].parameter
+        label: params.parameter,
+        value: params.parameter
       })
     }
     return options
