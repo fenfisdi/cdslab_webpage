@@ -180,16 +180,16 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
   return {
     tableColumns,
     items, 
-    setItems,
-    schemaItems,
-    handleClickSaveDiseaseStateGroups,
-    isValid,
-    saveDiseaseStateGroupsItem,
-    idConfiguration,
-    deleteDiseaseStateGroupItem,
-    parseInformationDiseaseStateItem,
     getDiseaseStateGroups,
     listConfigurationDistance,
+    schemaItems,
+    isValid,
+    idConfiguration,
+    setItems,
+    handleClickSaveDiseaseStateGroups,
+    saveDiseaseStateGroupsItem,
+    deleteDiseaseStateGroupItem,
+    parseInformationDiseaseStateItem,
     fieldsToDiseaseModal
   }
     

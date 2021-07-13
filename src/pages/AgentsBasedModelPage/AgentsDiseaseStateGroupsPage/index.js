@@ -13,7 +13,7 @@ import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentsDiseaseStateGroups } from './state'
-
+import SnackbarComponent from '@components/ui/Snackbars'
 
 
 const AgentsDiseaseStateGroupsPage = () => {
@@ -26,7 +26,10 @@ const AgentsDiseaseStateGroupsPage = () => {
     item:{},
     index:0
   })
-  
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISEASESTATE)
   
   const {    
@@ -41,7 +44,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     parseInformationDiseaseStateItem,
     setItems,
     fieldsToDiseaseModal
-  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren})
+  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren, showSnack, setShowSnack })
 
   
   
@@ -115,6 +118,13 @@ const AgentsDiseaseStateGroupsPage = () => {
           render={Component}
         />
 
+        {showSnack && showSnack.show && <SnackbarComponent
+          snackDuration={3500}
+          configData={showSnack}
+          handleCloseSnack={handleCloseSnack}
+          successMessage={showSnack.successMessage}
+          errorMessage={showSnack.errorMessage} />}
+          
         <CompartmentalButton
           justify='flex-end'
           alignItems='center'

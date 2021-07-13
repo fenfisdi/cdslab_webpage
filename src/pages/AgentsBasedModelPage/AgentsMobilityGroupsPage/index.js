@@ -13,6 +13,7 @@ import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentsMobilityGroups } from './state'
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const AgentsMobilityGroups = () => {
   const context = useContext(AgentsBaseContext)
@@ -22,18 +23,25 @@ const AgentsMobilityGroups = () => {
     item:{},
     index:0
   })
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
 
   const {
-    handleClickSaveMobilityGroups,
+    
     tableColumns,
-    items, 
-    setItems,
+    items,     
     schemaItems,
     isValid,
+    setItems,
+    handleClickSaveMobilityGroups,
     saveMobilityGroupsItem,
-    deleteMobilityGroupsItem
-  }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren})
+    deleteMobilityGroupsItem,
+    parseInformationMobilityGroupsItem,
+    saveMobilityGroupItem
+  }= useAgentsMobilityGroups({modalSettings,setModalSettings,setComponentChildren, showSnack, setShowSnack })
 
   
   
@@ -74,9 +82,19 @@ const AgentsMobilityGroups = () => {
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
-            handleSettings={({index,item})=>{              
-              setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
-              setModalSettings({...modalSettings,open:true,item,index})
+            handleSettings={({index,item})=>{
+              if(item.state.trim().length == 0){
+                saveMobilityGroupItem(item).then((mobilityGroupResponse)=>{
+                  const { mobilityGroup } = mobilityGroupResponse || {}
+                  const newItem =  parseInformationMobilityGroupsItem(mobilityGroup)          
+                  items[index] = newItem
+                  setItems([...items])
+                  setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+                  setModalSettings({...modalSettings,open:true,item:newItem,index})
+                })
+              }else{
+                setModalSettings({...modalSettings,open:true,item:parseInformationMobilityGroupsItem(item),index})
+              }              
             }}
             handleItemDeleted={({index,item})=>{
               const itemToDelete = deleteItemsConfigureTable(item,items,index)              
@@ -97,6 +115,13 @@ const AgentsMobilityGroups = () => {
           }}          
           render={Component}
         />
+
+        {showSnack && showSnack.show && <SnackbarComponent
+          snackDuration={3500}
+          configData={showSnack}
+          handleCloseSnack={handleCloseSnack}
+          successMessage={showSnack.successMessage}
+          errorMessage={showSnack.errorMessage} />}
 
         <CompartmentalButton
           justify='flex-end'
