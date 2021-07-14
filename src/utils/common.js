@@ -6,6 +6,9 @@ import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalCont
 import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
 import Switch from '../components/ui/Switch'
+import { Input } from '../components/ui/Input'
+import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/TableInput/Slider'
+import { SelectComponent } from '../components/ui/Select'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -106,8 +109,8 @@ export const renderComponentChildre = (componentChildren,props) => {
     return {
       container:AgentDiseaseState,
       props,
-      width:'50%',
-      height:'50%'
+      width:'70%',
+      height:'70%'
     }
   default:
     return null
@@ -116,13 +119,28 @@ export const renderComponentChildre = (componentChildren,props) => {
 }
 
 
-export const renderComponentElement = (typeComponent,props) => {
+export const renderComponentElement = (typeComponent) => {
   switch (typeComponent) {
   case 'switch':
     return {
       container:Switch,
-      props,
-    }        
+      props:{},
+    }
+  case 'input':
+    return {
+      container:Input,
+      props:{}
+    }
+  case 'slider':
+    return{
+      container:TableSlider,
+      props:{}
+    }
+  case 'select':
+    return {
+      container:SelectComponent,
+      props:{}
+    }
   default:
     return null
   }

@@ -43,8 +43,9 @@ const AgentsDiseaseStateGroupsPage = () => {
     deleteDiseaseStateGroupItem,
     parseInformationDiseaseStateItem,
     setItems,
-    fieldsToDiseaseModal
-  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren, showSnack, setShowSnack })
+    fieldsToDiseaseModal,
+    updateDiseaseStateGroupsItem
+  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren,componentChildren, showSnack, setShowSnack })
 
   
   
@@ -55,7 +56,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     modalSettings,
     componentChildren,
     listConfigurationDistance,
-    handlerDataStorage:saveDiseaseStateGroupsItem,
+    handlerDataStorage:updateDiseaseStateGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings,
     fieldsToDiseaseModal

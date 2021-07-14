@@ -9,6 +9,9 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import { Fragment } from 'react'
+import { renderComponentElement } from '../../../../utils/common'
+import { isEmpty } from 'lodash'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -35,7 +38,6 @@ const useStyles = makeStyles({
 })
 
 export default function TableObjDinamic({tableFields}) {
-  console.log(':::::::::::::::::::::>tableFields',tableFields)
   const classes = useStyles()
   return (
     <Grid container item xs={12} direction="column" justify='center' alignItems='center'>
@@ -52,12 +54,47 @@ export default function TableObjDinamic({tableFields}) {
             <TableBody>
               {tableFields?.body?.map((rowBody,indexBody) => {
                 return (<StyledTableRow key={indexBody}>
-                  {tableFields?.headers?.map((rowHeader,indexHeader)=>{
-                    console.log(':rowBody[rowHeader]',rowHeader)
-                    console.log('::rowBody',rowBody)
+                  {tableFields?.headers?.map((rowHeader,indexHeader)=>{                                        
+                    const Component = renderComponentElement(rowBody[rowHeader.attr])
+                   
+                    const { showOption={} }=rowBody || {}                    
                     
-                    return(                                          
-                      <StyledTableCell align="center" key={indexHeader}>{rowBody[rowHeader.attr]}</StyledTableCell>                                          
+                    const handleShowInformation =(dependence)=>{
+                      const isFound = tableFields?.body.find((tableField)=>tableField?.name==dependence)                
+                      return isFound.props.canSpread.value
+                    }
+
+                    const elementRow =(Component,rowBody,rowHeader)=>{
+                      return Component!=null ?
+                        <Component.container {...Component.props} {...rowBody.props}/>:rowBody[rowHeader.attr]
+                    }
+
+                    const extraElementRow =(extraProps)=>{                      
+                      const Component = renderComponentElement(extraProps.type)
+                      return <Component.container {...extraProps.props}/>
+                    }
+                   
+                    return(
+                      <Fragment  key={indexHeader}>
+                        {isEmpty(showOption) && rowHeader.attr!='extra' && <StyledTableCell align="center">
+                          {
+                            elementRow(Component,rowBody,rowHeader)
+                          }
+                        </StyledTableCell>}
+                        {
+                          !isEmpty(showOption) && handleShowInformation(showOption.dependence) && rowHeader.attr!='extra' && <StyledTableCell align="center">
+                            {
+                              elementRow(Component,rowBody,rowHeader)
+                            }
+                          </StyledTableCell>
+                        }
+                        {
+                          !isEmpty(showOption) && handleShowInformation(showOption.dependence) && rowHeader.attr == 'extra' && rowBody[rowHeader.attr] && <StyledTableCell align="center">
+                            {extraElementRow(rowBody[rowHeader.attr])}
+                          </StyledTableCell>
+                        }
+                        
+                      </Fragment>                                          
                     )
                   })}
                 </StyledTableRow>)

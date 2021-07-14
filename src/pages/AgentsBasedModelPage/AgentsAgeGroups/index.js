@@ -60,7 +60,7 @@ const AgentsAgeGroups = () => {
           snackDuration={3500}
           handleCloseSnack={handleCloseSnack}
           configData={{show:counterPopulation, error:counterPopulation}}                   
-          errorMessage={'Error la suma total de la poblacion debe ser menor o igual a 1'} />}
+          errorMessage={'la suma total de la poblacion debe ser menor o igual a 1'} />}
           
         <CompartmentalButton
           justify='flex-end'

@@ -5,18 +5,26 @@ import { useAgentsDiseaseStateGroupsActions } from '@actions/agentsDiseaseStateG
 import { useConfigurationActions } from '@actions/configurationActions'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
+import useFieldsCreation from './fieldsCreation'
+import { OPTIONS_MODAL } from '../../../constants/agents'
 
-export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
+export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,showSnack, setShowSnack,setComponentChildren, componentChildren}) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
-  
+  const modalsFields = useFieldsCreation()
+  const{
+    spreadRadius,
+    canGetinfected,
+    isInfected,
+    canSpread,
+    distanceUnits,
+    spreadProbability
+  } = modalsFields
+
   const {
     state: {      
-      agentsDiseaseStateGroups: {
-        data,
-        error
-      },
+      agentsDiseaseStateGroups: { data, error },
       configuration: { listConfigurationDistance, error:errorListConfigurationDistance }
     },
     dispatch
@@ -54,7 +62,9 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     getDiseaseStateGroupsInformation,    
     saveDiseaseStateGroupsItemAction,
     deleteDiseaseStateGroupsItemAction,
-    getDiseaseStateGroups     
+    getDiseaseStateGroups,
+    saveDiseaseStateGroupsItemFile,
+    updateDiseaseStateGroupsItemAction   
   } = useAgentsDiseaseStateGroupsActions(dispatch)
 
   const { getListConfigurationDistance } = useConfigurationActions(dispatch)
@@ -81,8 +91,6 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
 
 
   useEffect(()=>{
-    console.log(items)
-    console.log(modalSettings)
     if(items.length>0){           
       setIsValid(checkDiseaseStateGroupsList(items)) 
     }
@@ -126,6 +134,35 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     redirectToNaturalHistoryPage()
   }
 
+  const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false)=>{    
+    const idDiseaseStateGroups = diseaseStateGroups?.identifier
+    if(isFile){      
+      const formData = new FormData()
+      console.log(file)
+      formData.append('file',file)
+      updateDiseaseStateGroupsItemAction(idConfiguration,idDiseaseStateGroups,diseaseStateGroups).then(()=>{        
+        saveDiseaseStateGroupsItemFile(idConfiguration,idDiseaseStateGroups,formData).then(()=>{ 
+          setModalSettings({...modalSettings,open:false})
+        }).catch(()=>{        
+          setShowSnack(
+            {
+              ...showSnack,
+              show: true,
+              success: false,
+              error: true,
+              errorMessage: 'Error al subir el archivo, verifique que sea un archivo valido.!'
+            }
+          )
+        })
+      })
+      
+    }else{
+      updateDiseaseStateGroupsItemAction(idConfiguration,idDiseaseStateGroups,diseaseStateGroups).then(()=>{
+        setModalSettings({...modalSettings,open:false})
+      })
+    }    
+  }
+
   const saveDiseaseStateGroupsItem = (diseaseStateGroup) => {
     return new Promise((resolve) => {      
       saveDiseaseStateGroupsItemAction(diseaseStateGroup,idConfiguration).then((diseaseStateGroupResponse)=>{        
@@ -146,32 +183,82 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     return{
       headers:[
         {label:'Parameter',attr:'paramater'},
-        {label:'Value',attr:'value'}
+        {label:'Value',attr:'type'},
+        {label:'',attr:'extra'}
       ],
       body:[
         {
           paramater:'Can get infected?',
           type:'switch',
-          value:''
-        },{
-          paramater:'Is infected?',
-          type:'switch',
-          value:''
+          props:{
+            ...canGetinfected,
+            handleChange:canGetinfected.onChange                               
+          }
         },
         {
+          paramater:'Is infected?',
+          type:'switch',
+          props:{
+            ...isInfected,
+            handleChange:isInfected.onChange
+          }
+        },
+        {          
           paramater:'Can spread?',
           type:'switch',
-          value:''
+          name:'canspread',
+          props:{
+            canSpread,
+            handleChange:canSpread.onChange            
+          }
         },
         {
           paramater:'Spread radius',
-          type:'switch',
-          value:''
+          type:'input',
+          showOption:{
+            dependence:'canspread'
+          },
+          props:{
+            ...spreadRadius,
+            disabled:false,
+            required:true,
+            fullWidth:false,
+            variant:'outlined',            
+            styles:{'padding':'0px'}
+          },
+          extra:{          
+            paramater:'distance units',
+            type:'select',
+            label:'distance units',            
+            props:{
+              ...distanceUnits,
+              title:'distance units',
+              options:listConfigurationDistance
+            }            
+          },
         },
         {
           paramater:'Spread probability',
-          type:'switch',
-          value:''
+          type:'slider',
+          showOption:{
+            dependence:'canspread'
+          },
+          props:{
+            ...spreadProbability,
+            name:'Spread probability',
+            min: 0, 
+            max: 1, 
+            step: 0.001, 
+            initialValue:0,
+            styles:{
+              range:{
+                width:'30%'
+              },
+              input:{
+                width:'10%'
+              },
+            }                                
+          },
         }
       ]
     }
@@ -188,6 +275,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings}) => {
     setItems,
     handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,
+    updateDiseaseStateGroupsItem,
     deleteDiseaseStateGroupItem,
     parseInformationDiseaseStateItem,
     fieldsToDiseaseModal

@@ -7,7 +7,6 @@ const defaultValueLabelFormat = (value) => `${value}`
 const defaultMinMaxFormat = (value) => `${value}`
 
 export default function TableSlider({
-  styles,
   name,
   min = 0,
   max = 1,
@@ -36,7 +35,7 @@ export default function TableSlider({
   }
 
   return (
-    <SliderContainer styles={styles}>
+    <SliderContainer>
       <Slider
         className="range-slider"
         name={name}
@@ -51,7 +50,6 @@ export default function TableSlider({
         valueLabelDisplay="auto"
         aria-labelledby={`label-${name}`}
         marks={marks}
-        style={styles}
       />
       <Input
         className="input-slider"
