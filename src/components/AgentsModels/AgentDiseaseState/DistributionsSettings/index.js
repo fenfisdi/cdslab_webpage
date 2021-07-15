@@ -11,13 +11,14 @@ const DistributionsSettings = ({
 }) => {
     
   const renderCards = (itemsCards) => {
+    
     return (
       <Container>
-        {Object.keys(itemsCards).map((item,index) =>{
+        {Object.keys(itemsCards).map((item,index) =>{          
           const cardSchema ={
             name:itemsCards[item],
             description:'here info help',
-            state:''
+            state:itemConfiguration.distributions[itemsCards[item]] && 'CONFIGURED'
           }
           return <DistributionCard 
             item={cardSchema} 

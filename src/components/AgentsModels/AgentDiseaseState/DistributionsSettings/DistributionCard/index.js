@@ -26,7 +26,7 @@ export default function DistributionCard({ item, index, handleSettings }) {
       <Tooltip
         TransitionComponent={Zoom}
         title={
-          <h1 style={{ 'font-size': '12px', 'line=height': '15px' }}>
+          <h1 style={{ 'fontSize': '12px', 'line=height': '15px' }}>
             {getInformation()}
           </h1>
         }

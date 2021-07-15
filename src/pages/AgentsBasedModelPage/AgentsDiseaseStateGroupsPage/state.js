@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash'
 import useFieldsCreation from './fieldsCreation'
 import { OPTIONS_MODAL } from '../../../constants/agents'
 
-export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,showSnack, setShowSnack,setComponentChildren, componentChildren}) => {
+export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,showSnack, setShowSnack,setComponentChildren}) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
@@ -110,8 +110,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
       getDiseaseStateGroupsInformation(idConfiguration)
     }
     if(modalSettings.open && idConfiguration!='') { 
-      console.log('items:::::::::::::::>',items)
-      console.log('modalSettings::::::::::::::>',modalSettings)
+      
       canGetinfected.onChange({target:{checked:modalSettings.item.can_infected}})
       spreadRadius.onChange({target:{value:modalSettings.item.spread_radius!=null?modalSettings.item.spread_radius:0}})
       isInfected.onChange({target:{checked:modalSettings.item.is_infected}})
@@ -149,9 +148,6 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     }
   },[listConfigurationDistance,diseaseStateGroupsDistributions])
   
-  useEffect(()=>{
-    console.log('modalsFields:::::::::::::>',modalsFields)   
-  },[modalsFields])
 
   const redirectToNaturalHistoryPage = () => {
     console.log('redirect to:::::>HistoryNatulra')
@@ -166,8 +162,11 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   }
 
   const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false)=>{    
+    console.log('modalsFields:::::::::::::>',modalsFields)
     console.log('diseaseStateGroups::::::::::::::>',diseaseStateGroups)
     console.log('configDistributtions::::::::::::::::::::>',configDistributtions)
+    console.log('items:::::::::::::::>',items)
+    console.log('modalSettings::::::::::::::>',modalSettings)
     const { diseaseState } = configDistributtions
     const schemaUpdate = {
       'identifier': diseaseStateGroups.identifier,
@@ -185,29 +184,14 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
         }        
       }
     }
-    console.log('schemaUpdate::::::::::>',schemaUpdate)
-    console.log('items:::::::::::::>',items)
-    const pos = items.map(function(e) { return e.identifier }).indexOf(schemaUpdate.identifier)
-    console.log('pos:::>',pos)
-    const schemaParse = parseInformationDiseaseStateItem(schemaUpdate)
-    items[pos] = schemaParse 
-    setItems([...items])
-    setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
-    setModalSettings({...modalSettings,item:schemaParse})
-    /* updateDiseaseStateGroupsItemAction(idConfiguration,diseaseStateGroups.identifier,schemaUpdate).then((diseaseStateGroupItemResponse)=>{
-      console.log('diseaseStateGroupItemResponse::::>',diseaseStateGroupItemResponse)
-      setModalSettings({...modalSettings, item:diseaseStateGroupItemResponse.data.data})
-      setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
-    }) */
-    
-    /*const idDiseaseStateGroups = diseaseStateGroups?.identifier
+    console.log('schemaUpdate::::::::::>',schemaUpdate) 
     if(isFile){      
       const formData = new FormData()
       console.log(file)
       formData.append('file',file)
-      updateDiseaseStateGroupsItemAction(idConfiguration,idDiseaseStateGroups,diseaseStateGroups).then(()=>{        
-        saveDiseaseStateGroupsItemFile(idConfiguration,idDiseaseStateGroups,formData).then(()=>{ 
-          setModalSettings({...modalSettings,open:false})
+      updateDiseaseStateGroupsItemAction(idConfiguration,schemaUpdate.identifier,schemaUpdate).then((diseaseStateGroupItemResponse)=>{        
+        saveDiseaseStateGroupsItemFile(idConfiguration,schemaUpdate.identifier,formData).then(()=>{ 
+          handleResponseNextItems(diseaseStateGroupItemResponse,schemaUpdate)
         }).catch(()=>{        
           setShowSnack(
             {
@@ -222,25 +206,27 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
       })
       
     }else{
-      updateDiseaseStateGroupsItemAction(idConfiguration,idDiseaseStateGroups,diseaseStateGroups).then(()=>{
-        setModalSettings({...modalSettings,open:false})
+      updateDiseaseStateGroupsItemAction(idConfiguration,schemaUpdate.identifier,schemaUpdate).then((diseaseStateGroupItemResponse)=>{ 
+        handleResponseNextItems(diseaseStateGroupItemResponse,schemaUpdate)
       })
-    }*/    
+    }
+  }
+
+  const handleResponseNextItems =(diseaseStateGroupItemResponse,schemaUpdate)=>{
+    const diseaseCurrent = diseaseStateGroupItemResponse.data.data
+    const pos = items.map(function(e) { return e.identifier }).indexOf(schemaUpdate.identifier)      
+    const schemaParse = parseInformationDiseaseStateItem(diseaseCurrent)
+    items[pos] = schemaParse 
+    setItems([...items])
+    setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
+    setModalSettings({...modalSettings,item:schemaParse})
   }
 
   const handleDiseaseItem = ({cardSchema}) =>{
     setConfigDistributtions({
       diseaseState:cardSchema,
     })
-    /* console.log('modalSettings:::>',modalSettings)
-    console.log('cardSchema:::>',cardSchema)
-    console.log('itemConfiguration::>',itemConfiguration)
-    const schemaDistribution = {}
-    schemaDistribution[cardSchema.name]={
-      'type': '',
-      'kwargs': {}
-    }
-    console.log('schemaDistribution::::>',schemaDistribution) */
+   
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
 
@@ -354,6 +340,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     isValid,
     idConfiguration,
     diseaseStateGroupsDistributions,
+    configDistributtions,
     setItems,
     handleDiseaseItem,
     handleClickSaveDiseaseStateGroups,

@@ -39,6 +39,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     schemaItems,
     isValid,
     diseaseStateGroupsDistributions,
+    configDistributtions,
     handleDiseaseItem,
     handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,    
@@ -59,11 +60,14 @@ const AgentsDiseaseStateGroupsPage = () => {
     componentChildren,
     listConfigurationDistance,
     diseaseStateGroupsDistributions,
+    multiple:true, 
+    currentMultipleName:configDistributtions?.diseaseState,
     handlerDataStorage:updateDiseaseStateGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings,
     fieldsToDiseaseModal,
-    handleDiseaseItem
+    handleDiseaseItem,
+    
   })
 
   return (
@@ -93,11 +97,12 @@ const AgentsDiseaseStateGroupsPage = () => {
             handleSettings={({index,item})=>{              
               if(item.state.trim().length == 0){
                 saveDiseaseStateGroupsItem(item).then((diseaseStateGroupResponse)=>{
-                  const { diseaseStateGroup } = diseaseStateGroupResponse || {}                  
-                  items[index] = parseInformationDiseaseStateItem(diseaseStateGroup)
+                  const { diseaseStateGroup } = diseaseStateGroupResponse || {}                      
+                  const schemaParse = parseInformationDiseaseStateItem(diseaseStateGroup)          
+                  items[index] = schemaParse
                   setItems([...items])
                   setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
-                  setModalSettings({...modalSettings,open:true,item:diseaseStateGroup,index})
+                  setModalSettings({...modalSettings,open:true,item:schemaParse,index})
                 })
               }else{
                 setModalSettings({...modalSettings,open:true,item:item,index})
