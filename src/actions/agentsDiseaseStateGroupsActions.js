@@ -1,4 +1,4 @@
-import { deleteDiseaseStateGroupsItemService, getDiseaseStateGroupsInformationService, saveDiseaseStateGroupsItemFileService, saveDiseaseStateGroupsItemService, updateDiseaseStateGroupsItemService } from '../services/agentsDiseaseStateGroupsServices'
+import { deleteDiseaseStateGroupsItemService, getDiseaseStateGroupsDistributionsService, getDiseaseStateGroupsInformationService, saveDiseaseStateGroupsItemFileService, saveDiseaseStateGroupsItemService, updateDiseaseStateGroupsItemService } from '../services/agentsDiseaseStateGroupsServices'
 import { AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_ERROR, AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_SUCCESS, AGENTS_DISEASE_STATE_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsDiseaseStateGroupsTypes'
 
 
@@ -73,6 +73,11 @@ export const useAgentsDiseaseStateGroupsActions = (dispatch) => {
     return getDiseaseStateGroupsInformationService(idConfiguration)
   }
 
+  const getDiseaseStateGroupsDistributions = ()=>{
+    return getDiseaseStateGroupsDistributionsService()
+  }
+  
+
   return {
     getDiseaseStateGroupsInformation,
     setResetDiseaseStateGroupsInformation,
@@ -80,6 +85,7 @@ export const useAgentsDiseaseStateGroupsActions = (dispatch) => {
     updateDiseaseStateGroupsItemAction,
     deleteDiseaseStateGroupsItemAction,
     saveDiseaseStateGroupsItemFile,
-    getDiseaseStateGroups
+    getDiseaseStateGroups,
+    getDiseaseStateGroupsDistributions
   }
 }

@@ -60,8 +60,8 @@ export default function TableObjDinamic({tableFields}) {
                     const { showOption={} }=rowBody || {}                    
                     
                     const handleShowInformation =(dependence)=>{
-                      const isFound = tableFields?.body.find((tableField)=>tableField?.name==dependence)                
-                      return isFound.props.canSpread.value
+                      const isFound = tableFields?.body.find((tableField)=>tableField?.name==dependence)                       
+                      return isFound?.props?.value
                     }
 
                     const elementRow =(Component,rowBody,rowHeader)=>{

@@ -2,10 +2,9 @@ import {  Grid } from '@material-ui/core'
 import React from 'react'
 import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
+import DistributionsSettings from './DistributionsSettings'
 
-export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal}) => {
-  
-
+export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem}) => {
   
   const diseaseStateCard = () => (
     
@@ -20,8 +19,8 @@ export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal}) => {
         </Grid>          
       </Grid>
         
-      <DiseaseState tableFields={fieldsToDiseaseModal()}/>
-                  
+      <DiseaseState tableFields={fieldsToDiseaseModal()} itemConfiguration={modalSettings.item}/>
+      <DistributionsSettings items={diseaseStateGroupsDistributions} itemConfiguration={modalSettings.item} handleConfig={handleDiseaseItem}/>  
 
     </Grid>
     

@@ -12,6 +12,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
+  const [diseaseStateGroupsDistributions,setDiseaseStateGroupsDistributions] = useState({})
+  const [configDistributtions,setConfigDistributtions] = useState({})
   const modalsFields = useFieldsCreation()
   const{
     spreadRadius,
@@ -43,10 +45,18 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
 
   const shcemaInformationParseDiseaseState = (diseaseStateGroup)=>{
     return {
-      name:diseaseStateGroup.name,
-      distribution:diseaseStateGroup.distribution || {},
-      state: !isEmpty(diseaseStateGroup.distribution)?'CONFIGURED':'SAVE',
-      identifier:diseaseStateGroup.identifier    
+      'identifier': diseaseStateGroup.identifier,
+      'name': diseaseStateGroup.name,
+      'can_infected': diseaseStateGroup.can_infected,
+      'is_infected': diseaseStateGroup.is_infected,
+      'can_spread': diseaseStateGroup.can_spread,
+      'spread_radius': diseaseStateGroup.spread_radius,
+      'spread_radius_unit': diseaseStateGroup.spread_radius_unit,
+      'spread_probability': diseaseStateGroup.spread_probability,
+      distribution:{},
+      distributions:diseaseStateGroup.distributions || {},
+      state: !isEmpty(diseaseStateGroup.distributions) && Object.keys(diseaseStateGroup.distributions).length == 4?'CONFIGURED':'SAVE',
+         
     }
   }
 
@@ -64,7 +74,8 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     deleteDiseaseStateGroupsItemAction,
     getDiseaseStateGroups,
     saveDiseaseStateGroupsItemFile,
-    updateDiseaseStateGroupsItemAction   
+    updateDiseaseStateGroupsItemAction,
+    getDiseaseStateGroupsDistributions  
   } = useAgentsDiseaseStateGroupsActions(dispatch)
 
   const { getListConfigurationDistance } = useConfigurationActions(dispatch)
@@ -91,12 +102,23 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
 
 
   useEffect(()=>{
+    
     if(items.length>0){           
       setIsValid(checkDiseaseStateGroupsList(items)) 
     }
     if(!modalSettings.open && idConfiguration!='' && !isEmpty(modalSettings.item)){
       getDiseaseStateGroupsInformation(idConfiguration)
-    } 
+    }
+    if(modalSettings.open && idConfiguration!='') { 
+      console.log('items:::::::::::::::>',items)
+      console.log('modalSettings::::::::::::::>',modalSettings)
+      canGetinfected.onChange({target:{checked:modalSettings.item.can_infected}})
+      spreadRadius.onChange({target:{value:modalSettings.item.spread_radius!=null?modalSettings.item.spread_radius:0}})
+      isInfected.onChange({target:{checked:modalSettings.item.is_infected}})
+      canSpread.onChange({target:{checked:modalSettings.item.can_spread}}) 
+      distanceUnits.onChange({target:{value:modalSettings.item.spread_radius_unit!=null? modalSettings.item.spread_radius_unit:''}})
+      spreadProbability.onChange({slider:{value:modalSettings.item.spread_probability}})   
+    }
   },[modalSettings,items])
 
   useEffect(()=>{
@@ -119,8 +141,17 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     if (listConfigurationDistance.length == 0 && errorListConfigurationDistance == null) {       
       getListConfigurationDistance()
     }
-  },[listConfigurationDistance])
+    if(isEmpty(diseaseStateGroupsDistributions)){
+      getDiseaseStateGroupsDistributions().then((diseaseStateGroupsDistributionsResponse)=>{
+        const {data}=diseaseStateGroupsDistributionsResponse.data
+        setDiseaseStateGroupsDistributions(data)
+      })
+    }
+  },[listConfigurationDistance,diseaseStateGroupsDistributions])
   
+  useEffect(()=>{
+    console.log('modalsFields:::::::::::::>',modalsFields)   
+  },[modalsFields])
 
   const redirectToNaturalHistoryPage = () => {
     console.log('redirect to:::::>HistoryNatulra')
@@ -135,7 +166,41 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   }
 
   const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false)=>{    
-    const idDiseaseStateGroups = diseaseStateGroups?.identifier
+    console.log('diseaseStateGroups::::::::::::::>',diseaseStateGroups)
+    console.log('configDistributtions::::::::::::::::::::>',configDistributtions)
+    const { diseaseState } = configDistributtions
+    const schemaUpdate = {
+      'identifier': diseaseStateGroups.identifier,
+      'name': diseaseStateGroups.name,
+      'can_infected': canGetinfected.value,
+      'is_infected': isInfected.value,
+      'can_spread': canSpread.value,
+      'spread_radius': spreadRadius.value!=''?spreadRadius.value:null,
+      'spread_radius_unit': distanceUnits.value!='' ? distanceUnits.value: null,
+      'spread_probability': spreadProbability.value,
+      'distributions': {
+        ...diseaseStateGroups.distributions,
+        [diseaseState['name']]: {
+          ...diseaseStateGroups.distribution
+        }        
+      }
+    }
+    console.log('schemaUpdate::::::::::>',schemaUpdate)
+    console.log('items:::::::::::::>',items)
+    const pos = items.map(function(e) { return e.identifier }).indexOf(schemaUpdate.identifier)
+    console.log('pos:::>',pos)
+    const schemaParse = parseInformationDiseaseStateItem(schemaUpdate)
+    items[pos] = schemaParse 
+    setItems([...items])
+    setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
+    setModalSettings({...modalSettings,item:schemaParse})
+    /* updateDiseaseStateGroupsItemAction(idConfiguration,diseaseStateGroups.identifier,schemaUpdate).then((diseaseStateGroupItemResponse)=>{
+      console.log('diseaseStateGroupItemResponse::::>',diseaseStateGroupItemResponse)
+      setModalSettings({...modalSettings, item:diseaseStateGroupItemResponse.data.data})
+      setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
+    }) */
+    
+    /*const idDiseaseStateGroups = diseaseStateGroups?.identifier
     if(isFile){      
       const formData = new FormData()
       console.log(file)
@@ -160,7 +225,23 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
       updateDiseaseStateGroupsItemAction(idConfiguration,idDiseaseStateGroups,diseaseStateGroups).then(()=>{
         setModalSettings({...modalSettings,open:false})
       })
-    }    
+    }*/    
+  }
+
+  const handleDiseaseItem = ({cardSchema}) =>{
+    setConfigDistributtions({
+      diseaseState:cardSchema,
+    })
+    /* console.log('modalSettings:::>',modalSettings)
+    console.log('cardSchema:::>',cardSchema)
+    console.log('itemConfiguration::>',itemConfiguration)
+    const schemaDistribution = {}
+    schemaDistribution[cardSchema.name]={
+      'type': '',
+      'kwargs': {}
+    }
+    console.log('schemaDistribution::::>',schemaDistribution) */
+    setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }
 
   const saveDiseaseStateGroupsItem = (diseaseStateGroup) => {
@@ -208,7 +289,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
           type:'switch',
           name:'canspread',
           props:{
-            canSpread,
+            ...canSpread,
             handleChange:canSpread.onChange            
           }
         },
@@ -272,7 +353,9 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     schemaItems,
     isValid,
     idConfiguration,
+    diseaseStateGroupsDistributions,
     setItems,
+    handleDiseaseItem,
     handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,
     updateDiseaseStateGroupsItem,

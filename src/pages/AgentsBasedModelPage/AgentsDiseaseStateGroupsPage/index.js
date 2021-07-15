@@ -38,6 +38,8 @@ const AgentsDiseaseStateGroupsPage = () => {
     listConfigurationDistance,    
     schemaItems,
     isValid,
+    diseaseStateGroupsDistributions,
+    handleDiseaseItem,
     handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,    
     deleteDiseaseStateGroupItem,
@@ -56,10 +58,12 @@ const AgentsDiseaseStateGroupsPage = () => {
     modalSettings,
     componentChildren,
     listConfigurationDistance,
+    diseaseStateGroupsDistributions,
     handlerDataStorage:updateDiseaseStateGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings,
-    fieldsToDiseaseModal
+    fieldsToDiseaseModal,
+    handleDiseaseItem
   })
 
   return (

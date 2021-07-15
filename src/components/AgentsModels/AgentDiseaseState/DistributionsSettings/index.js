@@ -1,49 +1,41 @@
-/* eslint-disable react/jsx-key */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container } from './styles'
-import { useDistributionsConfigState } from './state'
 import DistributionCard from './DistributionCard'
-import ModalRoot from './ModalRoot'
+import {isEmpty } from 'lodash'
+
 
 const DistributionsSettings = ({
-  initialItems,
-  settingsComponent,
-  distributionType
+  items,
+  itemConfiguration,
+  handleConfig
 }) => {
-  const {
-    items,
-    handleSettings,
-    openSettings,
-    handleCloseSettings,
-    currentIndex
-  } = useDistributionsConfigState({
-    initialItems
-  })
-
-  useEffect(() => {
-    renderCards()
-  }, [items])
-
-  const renderCards = () => (
-    <Container>
-      {items.map((item, i) => {
-        return <DistributionCard item={item} index={i} handleSettings={handleSettings}/>
-      })}
-    </Container>
-  )
+    
+  const renderCards = (itemsCards) => {
+    return (
+      <Container>
+        {Object.keys(itemsCards).map((item,index) =>{
+          const cardSchema ={
+            name:itemsCards[item],
+            description:'here info help',
+            state:''
+          }
+          return <DistributionCard 
+            item={cardSchema} 
+            index={index} 
+            key={index} 
+            handleSettings={()=>{              
+              handleConfig({cardSchema,itemConfiguration})                          
+            }}/>
+        })}
+      </Container>
+    )
+  }
 
   return (
-    <>
-      {renderCards()}
-      <ModalRoot
-        distributionType={distributionType}
-        open={openSettings}
-        handleClose={handleCloseSettings}
-        // eslint-disable-next-line react/no-children-prop
-        children={settingsComponent} 
-        currentItem={items[currentIndex]}
-      />
-    </>
+    <div>
+      {!isEmpty(items) && renderCards(items)}
+
+    </div>
   )
 }
 
