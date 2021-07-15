@@ -176,7 +176,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     }
   }
 
-  const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false,type)=>{    
+  const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false,type='')=>{    
     
     const { diseaseState } = configDistributtions
     const schemaUpdate = {
