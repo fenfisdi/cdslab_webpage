@@ -65,8 +65,8 @@ export const useAgentsDiseaseStateGroupsActions = (dispatch) => {
   }
 
 
-  const saveDiseaseStateGroupsItemFile=(idConfiguration,idDiseaseStateGroups,diseaseStateGroups)=>{
-    return saveDiseaseStateGroupsItemFileService(idConfiguration,idDiseaseStateGroups,diseaseStateGroups)
+  const saveDiseaseStateGroupsItemFile=(idConfiguration,idDiseaseStateGroups,diseaseStateGroups,diseaseState)=>{
+    return saveDiseaseStateGroupsItemFileService(idConfiguration,idDiseaseStateGroups,diseaseStateGroups,diseaseState)
   }
 
   const  getDiseaseStateGroups=(idConfiguration)=>{

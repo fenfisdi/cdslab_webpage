@@ -162,11 +162,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   }
 
   const updateDiseaseStateGroupsItem =(diseaseStateGroups,file='',isFile=false)=>{    
-    console.log('modalsFields:::::::::::::>',modalsFields)
-    console.log('diseaseStateGroups::::::::::::::>',diseaseStateGroups)
-    console.log('configDistributtions::::::::::::::::::::>',configDistributtions)
-    console.log('items:::::::::::::::>',items)
-    console.log('modalSettings::::::::::::::>',modalSettings)
+    
     const { diseaseState } = configDistributtions
     const schemaUpdate = {
       'identifier': diseaseStateGroups.identifier,
@@ -184,13 +180,13 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
         }        
       }
     }
-    console.log('schemaUpdate::::::::::>',schemaUpdate) 
+    
     if(isFile){      
       const formData = new FormData()
       console.log(file)
       formData.append('file',file)
-      updateDiseaseStateGroupsItemAction(idConfiguration,schemaUpdate.identifier,schemaUpdate).then((diseaseStateGroupItemResponse)=>{        
-        saveDiseaseStateGroupsItemFile(idConfiguration,schemaUpdate.identifier,formData).then(()=>{ 
+      updateDiseaseStateGroupsItemAction(idConfiguration,schemaUpdate.identifier,schemaUpdate).then(()=>{        
+        saveDiseaseStateGroupsItemFile(idConfiguration,schemaUpdate.identifier,formData,diseaseState['name']).then((diseaseStateGroupItemResponse)=>{ 
           handleResponseNextItems(diseaseStateGroupItemResponse,schemaUpdate)
         }).catch(()=>{        
           setShowSnack(

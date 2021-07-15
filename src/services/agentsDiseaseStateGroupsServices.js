@@ -28,9 +28,9 @@ export const saveDiseaseStateGroupsItemService = async (diseaseStateGroup,idConf
   )
 }
 
-export const saveDiseaseStateGroupsItemFileService = async (idConfiguration,idSusceptibilityGroup,diseaseStateGroup) => {
+export const saveDiseaseStateGroupsItemFileService = async (idConfiguration,idSusceptibilityGroup,diseaseStateGroup,diseaseState) => {
   return request(
-    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/disease_state/${idSusceptibilityGroup}/file`,
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/disease_state/${idSusceptibilityGroup}/file?distribution=${diseaseState}`,
     'PUT',
     diseaseStateGroup
   )
