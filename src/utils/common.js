@@ -109,8 +109,8 @@ export const renderComponentChildre = (componentChildren,props) => {
     return {
       container:AgentDiseaseState,
       props,
-      width:'70%',
-      height:'70%'
+      width:'80%',
+      height:'80%'
     }
   default:
     return null
@@ -169,5 +169,32 @@ export const deleteItemsConfigureTable =(item,items,index)=>{
   }else if(item.state.trim() == ''){                
     items.splice(index,1)
     return items
+  }
+}
+
+export const isNumberKeyDecimal =(txt, evt)=> {
+  var charCode = (evt.which) ? evt.which : evt.keyCode
+  if (charCode == 46) {
+    //Check if the text already contains the . character
+    if (txt.value.indexOf('.') === -1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    if (charCode > 31 &&
+      (charCode < 48 || charCode > 57))
+      return false
+  }
+  return true
+}
+
+export const checkTypeDecimal = (event) => {
+  const keyCod = event.keyCode
+  const key = event.key
+  
+  if (![8, 9, 35, 36, 37, 39, 46, 190].includes(keyCod) && isNaN(Number(key))) {
+    event.preventDefault()
+    event.stopPropagation()
   }
 }

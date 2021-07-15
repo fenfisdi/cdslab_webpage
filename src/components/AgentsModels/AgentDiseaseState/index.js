@@ -1,10 +1,11 @@
-import {  Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import React from 'react'
 import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
 import DistributionsSettings from './DistributionsSettings'
+import CompartmentalButton from '../../CompartmentalModels/CompartmentalButton'
 
-export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem}) => {
+export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem,handleDone}) => {
   
   const diseaseStateCard = () => (
     
@@ -21,6 +22,14 @@ export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseSta
         
       <DiseaseState tableFields={fieldsToDiseaseModal()} itemConfiguration={modalSettings.item}/>
       <DistributionsSettings items={diseaseStateGroupsDistributions} itemConfiguration={modalSettings.item} handleConfig={handleDiseaseItem}/>  
+
+      <CompartmentalButton
+        justify='flex-end'
+        alignItems='center'
+        text='Done'
+        onClick={handleDone}
+        disabled={false}
+      />  
 
     </Grid>
     

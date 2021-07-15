@@ -1,6 +1,6 @@
 
 import { Grid } from '@material-ui/core'
-import React from 'react'
+import React, {Fragment} from 'react'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -9,32 +9,41 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { Fragment } from 'react'
 import { renderComponentElement } from '../../../../utils/common'
 import { isEmpty } from 'lodash'
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(() => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: '#CFD8DC',
+    color: '#000000',
   },
   body: {
     fontSize: 14,
   },
 }))(TableCell)
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
   root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
+    background:'#ECEFF1',
+    marginBottom:'10px',
+    '& > td':{
+      border:'0px'
+    }
   },
 }))(TableRow)
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 700,    
+    'border-collapse': 'separate',
+    'border-spacing': '0 10px',
+    '& tr':{      
+      '& td:nth-child(3)':{
+        background:'white'
+      }
+    }   
   },
+ 
 })
 
 export default function TableObjDinamic({tableFields}) {
@@ -64,14 +73,14 @@ export default function TableObjDinamic({tableFields}) {
                       return isFound?.props?.value
                     }
 
-                    const elementRow =(Component,rowBody,rowHeader)=>{
-                      return Component!=null ?
-                        <Component.container {...Component.props} {...rowBody.props}/>:rowBody[rowHeader.attr]
+                    const elementRow =(ComponentElement,rowBodyElement,rowHeaderElement)=>{
+                      return ComponentElement!=null ?
+                        <ComponentElement.container {...ComponentElement.props} {...rowBodyElement.props}/>:rowBodyElement[rowHeaderElement.attr]
                     }
 
                     const extraElementRow =(extraProps)=>{                      
-                      const Component = renderComponentElement(extraProps.type)
-                      return <Component.container {...extraProps.props}/>
+                      const ComponentElement = renderComponentElement(extraProps.type)
+                      return <ComponentElement.container {...extraProps.props}/>
                     }
                    
                     return(

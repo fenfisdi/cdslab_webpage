@@ -67,7 +67,9 @@ const AgentsDiseaseStateGroupsPage = () => {
     setModalSettings:setModalSettings,
     fieldsToDiseaseModal,
     handleDiseaseItem,
-    
+    handleDone:()=>{    
+      updateDiseaseStateGroupsItem(modalSettings.item,'',false,'close')
+    }
   })
 
   return (
