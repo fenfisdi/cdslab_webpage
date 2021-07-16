@@ -19,8 +19,12 @@ export const useDistributionActions = (dispatch) => {
         dispatch({ type: DISTRIBUTION_SET_LIST, payload: data.data })
       })
       .catch((error) => {
-        const { response: { data } } = error
-        errorSimulation(data)
+        if (error.response) {
+          const { response: { data } } = error
+          errorSimulation(data)
+        }else if(error.request) {
+          errorSimulation('The request was made but no response was received')
+        }                
       })
   }
 

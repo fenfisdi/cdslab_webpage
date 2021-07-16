@@ -1,49 +1,57 @@
-/* eslint-disable react/jsx-key */
-import React, { useEffect } from 'react'
-import { Container } from './styles'
-import { useDistributionsConfigState } from './state'
+import React from 'react'
 import DistributionCard from './DistributionCard'
-import ModalRoot from './ModalRoot'
+import {isEmpty } from 'lodash'
+import TitleIcon from '../../../layouts/TitleIcon'
+import { Grid } from '@material-ui/core'
+
 
 const DistributionsSettings = ({
-  initialItems,
-  settingsComponent,
-  distributionType
+  items,
+  itemConfiguration,
+  handleConfig
 }) => {
-  const {
-    items,
-    handleSettings,
-    openSettings,
-    handleCloseSettings,
-    currentIndex
-  } = useDistributionsConfigState({
-    initialItems
-  })
-
-  useEffect(() => {
-    renderCards()
-  }, [items])
-
-  const renderCards = () => (
-    <Container>
-      {items.map((item, i) => {
-        return <DistributionCard item={item} index={i} handleSettings={handleSettings}/>
-      })}
-    </Container>
-  )
+    
+  const renderCards = (itemsCards) => {
+    
+    return (
+      <Grid container item xs={6} direction='column' justify="center" alignItems="center">
+        {Object.keys(itemsCards).map((item,index) =>{          
+          const cardSchema ={
+            name:itemsCards[item],
+            description:'here info help',
+            state:itemConfiguration.distributions[itemsCards[item]] && 'CONFIGURED'
+          }
+          return <DistributionCard 
+            item={cardSchema} 
+            index={index} 
+            key={index} 
+            handleSettings={()=>{              
+              handleConfig({cardSchema,itemConfiguration})                          
+            }}/>
+        })}
+      </Grid>
+    )
+  }
 
   return (
-    <>
-      {renderCards()}
-      <ModalRoot
-        distributionType={distributionType}
-        open={openSettings}
-        handleClose={handleCloseSettings}
-        // eslint-disable-next-line react/no-children-prop
-        children={settingsComponent} 
-        currentItem={items[currentIndex]}
+    <Grid 
+      container 
+      item xs={12} 
+      direction='column' 
+      justify="center" 
+      alignItems="center"
+      style={{marginTop:'4%'}}>
+      <TitleIcon
+        style={{'marginRight':'11%'}} 
+        title={'Disease State Distributions'} 
+        otherIconType={true} 
+        icon={''} 
+        fontSize='20px'        
       />
-    </>
+      
+      {!isEmpty(items) && renderCards(items)}
+
+    </Grid>
   )
 }
 

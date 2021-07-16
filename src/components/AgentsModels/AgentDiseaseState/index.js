@@ -1,92 +1,12 @@
-import {  Grid } from '@material-ui/core'
-import React, {  useState } from 'react'
+import { Grid } from '@material-ui/core'
+import React from 'react'
 import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
+import DistributionsSettings from './DistributionsSettings'
+import CompartmentalButton from '../../CompartmentalModels/CompartmentalButton'
 
-export const AgentDiseaseState = ({modalSettings,listConfigurationDistance}) => {
+export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem,handleDone}) => {
   
-  const [valueChangeSelect, setValueChangeSelect] = useState(0)
-  const [viewState, setViewState] = useState(false)
-  const [valueSlider, setValueSlider] = useState(0)
-  const [valueText, setValueText] = useState()
-  const [canIsInfected, setCanInfected] = useState(false)
-  const [isInfected, setInfected] = useState(false)
-  
-  const handelChangeSelect = (e, value)=>{
-    setValueChangeSelect(value.props.value)
-  }
-  const spreadChecked = (e, value) => {
-    setViewState(value)
-  }
-  const onChangeText=(e, value)=>{
-    setValueText(value)
-  }
-  const onCahngeSlider = (e, value)=>{
-    setValueSlider(value)
-  }
-  const canGetInfected =(e, value)=>{
-    setCanInfected(value)
-  }
-  const onchageIsInfected = (e, value)=>{
-    setInfected(value)
-  }
-  const jsonComponets = [
-    ['Parameter', 'Value'],
-    [
-      [
-        {
-          type: 'label', content: 'Can get infected?', show: true
-        },
-        {
-          type: 'check', value: canIsInfected, checked: canIsInfected, show: true, handleChange:canGetInfected
-        }
-      ], [
-        {
-          type: 'label', show: true, content: 'Is infected?'
-        },{
-          type: 'check', value: isInfected, checked: isInfected, show: true, handleChange:onchageIsInfected
-        }
-      ], [
-        {
-          type: 'label', show: true, content: 'Can spread?'
-        },
-        {
-          type: 'check', value: viewState, checked: viewState, handleChange: spreadChecked        
-        }
-      ], [
-        {
-          type: 'label-valid', content: 'Spread Radius', value: false, show: viewState,
-        }, {
-          type: 'input', placeholder: 'Spread Radius', value: valueText, show: viewState,
-          handleOnChange: onChangeText
-        }, {
-          type: 'select',
-          show: viewState,
-          name: 'distance',
-          value: valueChangeSelect,
-          title: 'Distance Unit',
-          options: listConfigurationDistance && listConfigurationDistance.length>0 ? listConfigurationDistance : [],
-          placeholder:'Distance Unit',
-          handleOnChange: handelChangeSelect
-        }
-      ], [
-        {
-          type: 'label-valid',
-          content: 'Spread probability',
-          show: viewState
-        }, {
-          type: 'slider',
-          placeholder: 'value',
-          value: valueSlider,
-          show: viewState,
-          min:0,
-          max:1,
-          step:0.001,
-          handleOnChange: onCahngeSlider
-        }
-      ]
-    ]
-  ]
   const diseaseStateCard = () => (
     
     <Grid container item xs={12} justify='center' alignItems='center'>
@@ -100,8 +20,16 @@ export const AgentDiseaseState = ({modalSettings,listConfigurationDistance}) => 
         </Grid>          
       </Grid>
         
-      <DiseaseState data={jsonComponets}/>
-                  
+      <DiseaseState tableFields={fieldsToDiseaseModal()} itemConfiguration={modalSettings.item}/>
+      <DistributionsSettings items={diseaseStateGroupsDistributions} itemConfiguration={modalSettings.item} handleConfig={handleDiseaseItem}/>  
+
+      <CompartmentalButton
+        justify='flex-end'
+        alignItems='center'
+        text='Done'
+        onClick={handleDone}
+        disabled={false}
+      />  
 
     </Grid>
     

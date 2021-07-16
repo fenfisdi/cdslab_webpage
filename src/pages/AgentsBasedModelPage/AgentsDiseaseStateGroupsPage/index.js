@@ -13,7 +13,7 @@ import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentsDiseaseStateGroups } from './state'
-
+import SnackbarComponent from '@components/ui/Snackbars'
 
 
 const AgentsDiseaseStateGroupsPage = () => {
@@ -26,7 +26,10 @@ const AgentsDiseaseStateGroupsPage = () => {
     item:{},
     index:0
   })
-  
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISEASESTATE)
   
   const {    
@@ -35,12 +38,17 @@ const AgentsDiseaseStateGroupsPage = () => {
     listConfigurationDistance,    
     schemaItems,
     isValid,
+    diseaseStateGroupsDistributions,
+    configDistributtions,
+    handleDiseaseItem,
     handleClickSaveDiseaseStateGroups,
     saveDiseaseStateGroupsItem,    
     deleteDiseaseStateGroupItem,
     parseInformationDiseaseStateItem,
-    setItems
-  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren})
+    setItems,
+    fieldsToDiseaseModal,
+    updateDiseaseStateGroupsItem
+  }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren,componentChildren, showSnack, setShowSnack })
 
   
   
@@ -51,9 +59,17 @@ const AgentsDiseaseStateGroupsPage = () => {
     modalSettings,
     componentChildren,
     listConfigurationDistance,
-    handlerDataStorage:saveDiseaseStateGroupsItem,
+    diseaseStateGroupsDistributions,
+    multiple:true, 
+    currentMultipleName:configDistributtions?.diseaseState,
+    handlerDataStorage:updateDiseaseStateGroupsItem,
     setComponentChildren:setComponentChildren,
-    setModalSettings:setModalSettings
+    setModalSettings:setModalSettings,
+    fieldsToDiseaseModal,
+    handleDiseaseItem,
+    handleDone:()=>{    
+      updateDiseaseStateGroupsItem(modalSettings.item,'',false,'close')
+    }
   })
 
   return (
@@ -83,11 +99,12 @@ const AgentsDiseaseStateGroupsPage = () => {
             handleSettings={({index,item})=>{              
               if(item.state.trim().length == 0){
                 saveDiseaseStateGroupsItem(item).then((diseaseStateGroupResponse)=>{
-                  const { diseaseStateGroup } = diseaseStateGroupResponse || {}                  
-                  items[index] = parseInformationDiseaseStateItem(diseaseStateGroup)
+                  const { diseaseStateGroup } = diseaseStateGroupResponse || {}                      
+                  const schemaParse = parseInformationDiseaseStateItem(diseaseStateGroup)          
+                  items[index] = schemaParse
                   setItems([...items])
                   setComponentChildren(OPTIONS_MODAL.DISEASESTATE)
-                  setModalSettings({...modalSettings,open:true,item:diseaseStateGroup,index})
+                  setModalSettings({...modalSettings,open:true,item:schemaParse,index})
                 })
               }else{
                 setModalSettings({...modalSettings,open:true,item:item,index})
@@ -113,6 +130,13 @@ const AgentsDiseaseStateGroupsPage = () => {
           render={Component}
         />
 
+        {showSnack && showSnack.show && <SnackbarComponent
+          snackDuration={3500}
+          configData={showSnack}
+          handleCloseSnack={handleCloseSnack}
+          successMessage={showSnack.successMessage}
+          errorMessage={showSnack.errorMessage} />}
+          
         <CompartmentalButton
           justify='flex-end'
           alignItems='center'

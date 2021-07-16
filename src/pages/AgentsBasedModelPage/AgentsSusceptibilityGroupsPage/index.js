@@ -13,7 +13,7 @@ import AgentsBaseContext from '../../../context/agentsBase.context'
 import whitAgentsBaseHOC from '../../../utils/agentsBaseHOC'
 import { deleteItemsConfigureTable, renderComponentChildre } from '../../../utils/common'
 import { useAgentSusceptibilityGroups } from './state'
-
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const AgentSusceptibilityGroups = () => {
   
@@ -25,19 +25,25 @@ const AgentSusceptibilityGroups = () => {
     item:{},
     index:0
   })
-  
+  const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  const handleCloseSnack = () => {
+    setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
+  }
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.DISTRIBUTION)
   
   const {
-    handleClickSaveSusceptibilityGroups,
     tableColumns,
     items, 
-    setItems,
     schemaItems,
     isValid,
+    handleClickSaveSusceptibilityGroups,
+    setItems,
     saveSusceptibilityGroupItem,    
-    deleteSusceptibilityGroupItem
-  }= useAgentSusceptibilityGroups({modalSettings,setModalSettings,setComponentChildren})
+    deleteSusceptibilityGroupItem,
+    parseInformationSusceptibilityGroupsItem,
+    saveSusceptibilityGroupsItem
+
+  }= useAgentSusceptibilityGroups({modalSettings,setModalSettings,setComponentChildren, showSnack, setShowSnack})
 
   
   
@@ -47,7 +53,7 @@ const AgentSusceptibilityGroups = () => {
     parameterList,
     modalSettings,
     componentChildren,
-    handlerDataStorage:saveSusceptibilityGroupItem,
+    handlerDataStorage:saveSusceptibilityGroupsItem,
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings
   })
@@ -77,9 +83,19 @@ const AgentSusceptibilityGroups = () => {
             initialItems={items}
             setItems={setItems}
             schemaItems={schemaItems}
-            handleSettings={({index,item})=>{              
-              setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
-              setModalSettings({...modalSettings,open:true,item,index})
+            handleSettings={({index,item})=>{
+              if(item.state.trim().length == 0){
+                saveSusceptibilityGroupItem(item).then((susceptibilityResponse)=>{
+                  const { susceptibilityGroup } = susceptibilityResponse || {}
+                  const newItem =  parseInformationSusceptibilityGroupsItem(susceptibilityGroup)          
+                  items[index] = newItem
+                  setItems([...items])
+                  setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
+                  setModalSettings({...modalSettings,open:true,item:newItem,index})
+                })
+              }else{
+                setModalSettings({...modalSettings,open:true,item:parseInformationSusceptibilityGroupsItem(item),index})
+              }              
             }}  
             handleItemDeleted={({index,item})=>{
               const itemToDelete = deleteItemsConfigureTable(item,items,index)              
@@ -100,6 +116,13 @@ const AgentSusceptibilityGroups = () => {
           }}          
           render={Component}
         />
+
+        {showSnack && showSnack.show && <SnackbarComponent
+          snackDuration={3500}
+          configData={showSnack}
+          handleCloseSnack={handleCloseSnack}
+          successMessage={showSnack.successMessage}
+          errorMessage={showSnack.errorMessage} />}
 
         <CompartmentalButton
           justify='flex-end'

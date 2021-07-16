@@ -27,12 +27,12 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren, multiple, currentMultipleName }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
   
-  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item,key:componentChildren.toLowerCase()})
+  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item,key:componentChildren.toLowerCase(),multiple, currentMultipleName})
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)

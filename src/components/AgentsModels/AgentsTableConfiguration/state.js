@@ -20,8 +20,7 @@ export const useConfigTableState = ({ initialItems, columns, setItems, schemaIte
 
   const handleItemChanged = (i, event) => {
     const name = event.target ? event.target.name : event.slider.name
-    const value = event.target ? event.target.value : event.slider.value
-    console.log(event.slider)
+    const value = event.target ? event.target.value : event.slider.value    
     const itemsCopy = [...initialItems]
     itemsCopy[i] = { ...itemsCopy[i], [name]: value }
     //setItems(itemsCopy)

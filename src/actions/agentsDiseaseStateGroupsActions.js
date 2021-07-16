@@ -1,4 +1,4 @@
-import { deleteDiseaseStateGroupsItemService, getDiseaseStateGroupsInformationService, saveDiseaseStateGroupsItemFileService, saveDiseaseStateGroupsItemService, updateDiseaseStateGroupsItemService } from '../services/agentsDiseaseStateGroupsServices'
+import { deleteDiseaseStateGroupsItemService, getDiseaseStateGroupsDistributionsService, getDiseaseStateGroupsInformationService, saveDiseaseStateGroupsItemFileService, saveDiseaseStateGroupsItemService, updateDiseaseStateGroupsItemService } from '../services/agentsDiseaseStateGroupsServices'
 import { AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_ERROR, AGENTS_DISEASE_STATE_MODEL_GET_INFORMATION_SUCCESS, AGENTS_DISEASE_STATE_MODEL_RESET_INFORMATION_SUCCESS } from './types/agentsDiseaseStateGroupsTypes'
 
 
@@ -65,13 +65,18 @@ export const useAgentsDiseaseStateGroupsActions = (dispatch) => {
   }
 
 
-  const saveDiseaseStateGroupsItemFile=(idConfiguration,idDiseaseStateGroups,diseaseStateGroups)=>{
-    return saveDiseaseStateGroupsItemFileService(idConfiguration,idDiseaseStateGroups,diseaseStateGroups)
+  const saveDiseaseStateGroupsItemFile=(idConfiguration,idDiseaseStateGroups,diseaseStateGroups,diseaseState)=>{
+    return saveDiseaseStateGroupsItemFileService(idConfiguration,idDiseaseStateGroups,diseaseStateGroups,diseaseState)
   }
 
   const  getDiseaseStateGroups=(idConfiguration)=>{
     return getDiseaseStateGroupsInformationService(idConfiguration)
   }
+
+  const getDiseaseStateGroupsDistributions = ()=>{
+    return getDiseaseStateGroupsDistributionsService()
+  }
+  
 
   return {
     getDiseaseStateGroupsInformation,
@@ -80,6 +85,7 @@ export const useAgentsDiseaseStateGroupsActions = (dispatch) => {
     updateDiseaseStateGroupsItemAction,
     deleteDiseaseStateGroupsItemAction,
     saveDiseaseStateGroupsItemFile,
-    getDiseaseStateGroups
+    getDiseaseStateGroups,
+    getDiseaseStateGroupsDistributions
   }
 }

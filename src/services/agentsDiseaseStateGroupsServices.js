@@ -14,6 +14,12 @@ export const getDiseaseStateGroupsInformationService = async (idConfiguration)=>
     'GET')
 }
 
+export const getDiseaseStateGroupsDistributionsService = async ()=>{
+  return request(
+    `${process.env.REACT_APP_AGENTS}/distributions/disease_state`,
+    'GET')
+}
+
 export const saveDiseaseStateGroupsItemService = async (diseaseStateGroup,idConfiguration) => {
   return request(
     `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/disease_state`,
@@ -22,9 +28,9 @@ export const saveDiseaseStateGroupsItemService = async (diseaseStateGroup,idConf
   )
 }
 
-export const saveDiseaseStateGroupsItemFileService = async (idConfiguration,idSusceptibilityGroup,diseaseStateGroup) => {
+export const saveDiseaseStateGroupsItemFileService = async (idConfiguration,idSusceptibilityGroup,diseaseStateGroup,diseaseState) => {
   return request(
-    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/disease_state/${idSusceptibilityGroup}/file`,
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/disease_state/${idSusceptibilityGroup}/file?distribution=${diseaseState}`,
     'PUT',
     diseaseStateGroup
   )

@@ -1,4 +1,4 @@
-import React, {Fragment}  from 'react'
+import React, { Fragment }  from 'react'
 import { Grid } from '@material-ui/core'
 import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
 import { useAgentsAgeGroups } from './state'
@@ -7,18 +7,23 @@ import SupportComponent from '../../../components/SupportComponent'
 import { HELP_INFORMATION_AGE_MODELS } from '../../../constants/helpInformation'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
 import LoaderComponent from '../../../components/ui/Loader'
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const AgentsAgeGroups = () => {
-
+  
   const { 
-    handleClickSaveAgentsAgeModel,    
+    counterPopulation,
+    isValid,
     items,
     tableColumns,
+    handleClickSaveAgentsAgeModel,    
     setItems,
-    isValid
+    setCounterPopulation
   } = useAgentsAgeGroups()
 
-
+  const handleCloseSnack =()=>{
+    setCounterPopulation(false)
+  }
 
   return (
     <Grid container xs={12} direction='column'>
@@ -51,6 +56,12 @@ const AgentsAgeGroups = () => {
           />
         </Grid>
       
+        {counterPopulation && <SnackbarComponent
+          snackDuration={3500}
+          handleCloseSnack={handleCloseSnack}
+          configData={{show:counterPopulation, error:counterPopulation}}                   
+          errorMessage={'la suma total de la poblacion debe ser menor o igual a 1'} />}
+          
         <CompartmentalButton
           justify='flex-end'
           alignItems='center'
