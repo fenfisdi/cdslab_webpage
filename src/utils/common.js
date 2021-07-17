@@ -144,7 +144,7 @@ export const renderComponentElement = (typeComponent) => {
   case OPTIONS_MODAL.DISEASE_STATE:
     return {
       container:AgentDiseaseState,
-      props,
+      props:{},
       width:'30%',
       height:'60%'
     }
