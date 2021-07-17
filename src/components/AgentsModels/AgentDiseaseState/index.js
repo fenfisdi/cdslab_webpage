@@ -1,61 +1,38 @@
-// AgentDiseaseState
-
-import { Paper } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
-import React, { Fragment } from 'react'
-import DiseaseState from '../../../pages/AgentsBasedModelPage/DiseaseState'
-import { DiseaseStateList } from '../../../pages/AgentsBasedModelPage/DiseaseState/state'
+import React from 'react'
+import DiseaseState from './DiseaseState'
 import SupportComponent from '../../SupportComponent'
 import DistributionsSettings from './DistributionsSettings'
-import SettingsComponent from './SettingsComponent'
+import CompartmentalButton from '../../CompartmentalModels/CompartmentalButton'
 
-export const AgentDiseaseState = () => {
-  const {listDiseaseState} = DiseaseStateList(true)
-  const initialItemsDistribution = [
-    {
-      name: 'Diagnosis',
-      description:
-        'this is a dummy description for Diagnosis, this is a dummy description for Diagnosis, this is a dummy description for Diagnosis',
-      state:''
-    },
-    {
-      name: 'Quarentine',
-      description: 'this is a dummy description for Quarentine',
-      state: ''
-    },
-    {
-      name: 'Hospitalization',
-      description: 'this is a dummy description for Hospitalization',
-      state: ''
-    }
-  ]
+export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem,handleDone}) => {
+  
   const diseaseStateCard = () => (
-    <Fragment>
-      <Grid container item xs={12} justify={'center'} alignItems='center'>
-        <Grid container item xs={12} direction="row">
-          <Grid contairner item xs={11} alignContent='center'><Paper>Disease State Name</Paper></Grid>
-          <Grid contairner item xs={1}>
-            <Grid><SupportComponent title="Help" text={'Contenido de ayuda'} /></Grid>
-          </Grid>          
+    
+    <Grid container item xs={12} justify='center' alignItems='center'>
+        
+      <Grid container item xs={12} direction="row">
+        <Grid container item xs={11} alignContent='center' justify='center' style={{color:'#006064'}}>
+            Disease State {modalSettings?.item?.name}
         </Grid>
-
-        <Grid container item xs={12} direction="row">
-          <Grid><DiseaseState data={listDiseaseState.data} onchange={()=>{}}/></Grid>
-        </Grid>
-
-        <Grid container item xs={12} direction="row">
-
-        </Grid>
-
-        <Grid container item xs={12} direction="row">
-          <DistributionsSettings
-            distributionType="Disease State"
-            initialItems={initialItemsDistribution}
-            settingsComponent={SettingsComponent}
-          />
-        </Grid>
+        <Grid container item xs={1}>
+          <Grid><SupportComponent title="Help" text={'Contenido de ayuda'} /></Grid>
+        </Grid>          
       </Grid>
-    </Fragment>
+        
+      <DiseaseState tableFields={fieldsToDiseaseModal()} itemConfiguration={modalSettings.item}/>
+      <DistributionsSettings items={diseaseStateGroupsDistributions} itemConfiguration={modalSettings.item} handleConfig={handleDiseaseItem}/>  
+
+      <CompartmentalButton
+        justify='flex-end'
+        alignItems='center'
+        text='Done'
+        onClick={handleDone}
+        disabled={false}
+      />  
+
+    </Grid>
+    
   )
   return (
     <div>

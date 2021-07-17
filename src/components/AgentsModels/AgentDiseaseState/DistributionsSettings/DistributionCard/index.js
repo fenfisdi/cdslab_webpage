@@ -1,27 +1,21 @@
 import React from 'react'
-import { Container, CardContent, Helper, StyledCard, Title } from './styles'
+import { Container, CardContent, StyledCard, Title } from './styles'
 import IconButton from '@material-ui/core/IconButton'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import Tooltip from '@material-ui/core/Tooltip'
 import Zoom from '@material-ui/core/Zoom'
-import { makeStyles } from '@material-ui/core/styles'
 import ActionsZone from '../ActionsZone'
+import { titleCase } from '../../../../../utils/common'
 
-const useStyles = makeStyles((theme) => ({
-  tooltip: {
-    fontSize: '20px'
-  }
-}))
 
-export default function DistributionCard({ item, index, handleSettings }) {
-  const classes = useStyles()
-  const getInformation = () => item.description ? item.description : 'No info'
+export default function DistributionCard({ item, index, handleSettings }) {  
+  const getInformation = () => item.description ? titleCase(item.description) : 'No info'
 
   return (
     <Container>
       <StyledCard>
         <CardContent>
-          <Title>{item.name}</Title>
+          <Title>{titleCase(item.name)}</Title>
           <ActionsZone
             showDelete={false}
             index={index}
@@ -33,7 +27,7 @@ export default function DistributionCard({ item, index, handleSettings }) {
       <Tooltip
         TransitionComponent={Zoom}
         title={
-          <h1 style={{ 'font-size': '12px', 'line=height': '15px' }}>
+          <h1 style={{ 'fontSize': '12px', 'line=height': '15px' }}>
             {getInformation()}
           </h1>
         }

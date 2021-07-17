@@ -7,7 +7,9 @@ import { isEmpty } from 'lodash'
 export const useAgentsAgeGroups = () => {
 
   const history = useHistory()
-
+  const [idConfiguration, setIdConfiguration] = useState('')
+  const [isValid, setIsValid] = useState(false)
+  const [counterPopulation, setCounterPopulation] = useState(false)
   const initialItems = [
     {
       name: '',
@@ -21,7 +23,6 @@ export const useAgentsAgeGroups = () => {
   const [items, setItems] = useState(initialItems)
   const [currentIndex, setCurrentIndex] = useState(null)
   const [openSettings, setOpenSettings] = useState(false)
-  const [idConfiguration, setIdConfiguration] = useState('')
   const {
     state: {      
       agentsAgeModel: {
@@ -43,6 +44,29 @@ export const useAgentsAgeGroups = () => {
 
   }
 
+  const checkAgesGroupsList = (agesGroupsList)=>{
+    const itemsConfigured =[]
+    agesGroupsList.forEach((item) => {       
+      item.name.trim().length>0 && itemsConfigured.push(true)            
+    })      
+    return itemsConfigured.length == agesGroupsList.length 
+  }
+
+  const checkCounterPopulationList = (agesGroupsList)=>{    
+    let counter = 0
+    console.log(agesGroupsList)
+    agesGroupsList.forEach((item) => {      
+      counter = counter + item.population_percentage       
+    })
+    return counter <= 1    
+  }
+
+  useEffect(()=>{    
+    if(items.length>0){           
+      setIsValid(checkAgesGroupsList(items)) 
+    }
+  },[items])
+
   useEffect(()=>{
     const params = getStateWithQueryparams(history)
     if(!isEmpty(params)){
@@ -50,6 +74,8 @@ export const useAgentsAgeGroups = () => {
 
     }
   },[history])
+
+ 
   
   useEffect(()=>{     
     if(data == null && !error && idConfiguration!=''){      
@@ -81,25 +107,34 @@ export const useAgentsAgeGroups = () => {
 
   }
   
-  const handleClickSaveAgentsAgeModel =(information)=>{    
-    saveAgentsAgeModelInformation(information,idConfiguration).then(()=>{      
-      getAgentsAgeModelInformation(idConfiguration)
-      redirectToMobilityGroupsPage()
-    })
-    
+  const handleClickSaveAgentsAgeModel =(information)=>{   
+    const isValidPopulation = checkCounterPopulationList(information) 
+    console.log(isValidPopulation)
+    if(!isValidPopulation){
+      setCounterPopulation(true)
+    }else{
+      saveAgentsAgeModelInformation(information,idConfiguration).then(()=>{      
+        getAgentsAgeModelInformation(idConfiguration)
+        redirectToMobilityGroupsPage()
+      })
+    }
   }
 
   return {
-    redirectToMobilityGroupsPage,
+    isValid,
     items,
-    setItems,
-    handleSettings,
-    openSettings,
-    setOpenSettings,
-    handleCloseSettings,
+    counterPopulation,    
+    openSettings,    
     currentIndex,
     tableColumns,
+    setCounterPopulation,
+    setOpenSettings,
+    handleCloseSettings,
+    setItems,
+    handleSettings,
+    redirectToMobilityGroupsPage,
     handleClickSaveAgentsAgeModel,
+    
   }
     
   

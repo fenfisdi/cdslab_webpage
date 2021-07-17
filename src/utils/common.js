@@ -1,9 +1,14 @@
-import React from 'react'
+import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
 import { AgentsModalConstant } from '../components/AgentsModels/AgentsModalContainer/AgentsModalConstant'
 import { OPTIONS_MODAL } from '../constants/agents'
 import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContainer/AgentsModalNumpy'
+import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
+import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
-import { AgentsDistribution } from '../components/AgentsModels/AgentsDistribution'
+import Switch from '../components/ui/Switch'
+import { Input } from '../components/ui/Input'
+import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/TableInput/Slider'
+import { SelectComponent } from '../components/ui/Select'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -74,8 +79,11 @@ export const renderComponentChildre = (componentChildren, props) => {
     }        
   case OPTIONS_MODAL.EMPIRICAL:
     return {
-      Component:<h1>Empirical</h1>
-    }
+      container:AgentsModalEmpirical,
+      props,
+      width:'80%',
+      height:'80%'
+    } 
   case OPTIONS_MODAL.CONSTANT:
     return {
       container:AgentsModalConstant,
@@ -83,16 +91,55 @@ export const renderComponentChildre = (componentChildren, props) => {
       width:'30%',
       height:'30%'
     }   
-  case OPTIONS_MODAL.WEIGTHS:
+  case OPTIONS_MODAL.WEIGHTS:
     return {
-      Component:<h1>Weigths</h1>
-    }
+      container:AgentsModalWeights,
+      props,
+      width:'30%',
+      height:'30%'
+    }   
   case OPTIONS_MODAL.NUMPY:
     return {
       container:AgentsModalNumpy,
       props,
-      width:'40%',
-      height:'40%'
+      width:'70%',
+      height:'70%'
+    }
+  case OPTIONS_MODAL.DISEASESTATE:
+    return {
+      container:AgentDiseaseState,
+      props,
+      width:'80%',
+      height:'80%'
+    }
+  default:
+    return null
+  }
+  
+}
+
+
+export const renderComponentElement = (typeComponent) => {
+  switch (typeComponent) {
+  case 'switch':
+    return {
+      container:Switch,
+      props:{},
+    }
+  case 'input':
+    return {
+      container:Input,
+      props:{}
+    }
+  case 'slider':
+    return{
+      container:TableSlider,
+      props:{}
+    }
+  case 'select':
+    return {
+      container:SelectComponent,
+      props:{}
     }
   case OPTIONS_MODAL.DISEASE_STATE:
     return {
@@ -120,4 +167,14 @@ export const titleCase = (str)=> {
 
 export const replaceString = (str,charactertoSearch,characterReplace)=>{
   return str.split(charactertoSearch).join(characterReplace)
+}
+
+
+export const deleteItemsConfigureTable =(item,items,index)=>{
+  if(item.state.trim().length>0){
+    return item
+  }else if(item.state.trim() == ''){                
+    items.splice(index,1)
+    return items
+  }
 }

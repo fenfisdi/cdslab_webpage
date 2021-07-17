@@ -17,6 +17,7 @@ import { agentsAgeModelReducer, initialState as agentsAgeModelReducerInitialStat
 import { agentsMobilityGroupsModelReducer, initialState as agentsMobilityGroupsModelInitialState } from './reducers/agentsMobilityGroupsReucer'
 import { agentsSusceptibilityGroupsReducer, initialState as agentsSusceptibilityGroupsInitialState} from './reducers/agentsSusceptibilityGroupsReducer'
 import { agentsVulnerabilityGroupsReducer, initialState as agentsVulnerabilityGroupsInitialState } from './reducers/agentsVulnerabilityGroupsReducer'
+import { agentsDiseaseStatesGroupsReducer, initialState as agentsDiseaseStateGroupsInitialState } from './reducers/agentsDiseaseStatesGroupsReducer'
 
 export const StoreContext = createContext()
 
@@ -39,7 +40,8 @@ export const StoreProvider = ({ children }) => {
       agentsAgeModel:agentsAgeModelReducer,
       agentsMobilityGroupsModel:agentsMobilityGroupsModelReducer,
       agentsSusceptibilityGroups:agentsSusceptibilityGroupsReducer,
-      agentsVulnerabilityGroups:agentsVulnerabilityGroupsReducer
+      agentsVulnerabilityGroups:agentsVulnerabilityGroupsReducer,
+      agentsDiseaseStateGroups:agentsDiseaseStatesGroupsReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -58,7 +60,8 @@ export const StoreProvider = ({ children }) => {
       agentsAgeModelReducerInitialState,
       agentsMobilityGroupsModelInitialState,
       agentsSusceptibilityGroupsInitialState,
-      agentsVulnerabilityGroupsInitialState)
+      agentsVulnerabilityGroupsInitialState,
+      agentsDiseaseStateGroupsInitialState)
   )
   const value = { state, dispatch }
 

@@ -10,7 +10,8 @@ import {
   AgentsModelForm,
   useNewConfigurationStyles, 
   AgentsModelCenterInputsForm,
-  AgentsModelContainerInputsForm
+  AgentsModelContainerInputsForm,
+  AgentsModelContainerTitleSystem
 } from './styles'
 
 export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,listConfigurationTime }) => {
@@ -30,6 +31,8 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
     boxVerticalSize,
     timeUnits,
     distanceUnits,
+    hospitalCapacity,
+    icuCapacity
   } = fieldsData
 
   useEffect(() => {
@@ -76,6 +79,8 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
       },
       iteration_time_units:timeUnits.value,
       distance_units:distanceUnits.value,
+      hospital_capacity:hospitalCapacity.value,
+      icu_capacity:icuCapacity.value,
     })
   }
 
@@ -240,6 +245,50 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
               {...distanceUnits}
               options= {listConfigurationDistance}
             />
+          </AgentsModelCenterInputsForm>
+        </AgentsModelContainerInputsForm>
+
+        <AgentsModelContainerTitleSystem>
+          Heatlh system information
+        </AgentsModelContainerTitleSystem> 
+        <AgentsModelContainerInputsForm>
+          <AgentsModelCenterInputsForm>
+            <Grid container xs='12'>
+              <Grid container xs='5' style={{marginTop: '10px'}}>
+                <strong>Hospital capacity</strong>
+              </Grid> 
+              <Grid container xs='3'>
+                <Input
+                  disabled={false}
+                  required
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  autoComplete="boxHorizontalSize"
+                  {...hospitalCapacity}
+                />
+              </Grid>
+            </Grid>
+          </AgentsModelCenterInputsForm>
+        </AgentsModelContainerInputsForm>
+        <AgentsModelContainerInputsForm>
+          <AgentsModelCenterInputsForm>
+            <Grid container xs='12'>
+              <Grid container xs='5' style={{marginTop: '10px'}}>
+                <strong>ICU capacity </strong>
+              </Grid> 
+              <Grid container xs='3'>
+                <Input
+                  disabled={false}
+                  required
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  autoComplete="boxHorizontalSize"
+                  {...icuCapacity}
+                />
+              </Grid>
+            </Grid>
           </AgentsModelCenterInputsForm>
         </AgentsModelContainerInputsForm>
       </AgentsModelForm>

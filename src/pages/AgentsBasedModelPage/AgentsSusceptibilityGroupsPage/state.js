@@ -5,7 +5,7 @@ import { useAgentsSusceptibilityGroupsActionsActions } from '@actions/agentsSusc
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
 import { isEmpty } from 'lodash'
 
-export const useAgentSusceptibilityGroups = ({modalSettings}) => {
+export const useAgentSusceptibilityGroups = ({modalSettings,setModalSettings,showSnack, setShowSnack}) => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
   const [isValid, setIsValid] = useState(false)
@@ -20,16 +20,30 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     dispatch
   } = useStore()
 
+
   const parseInformationSusceptibilityGroupsModel =(arraySusceptibility=[])=>{
     return arraySusceptibility.map((susceptibility)=>{
-      return {
-        name:susceptibility.name,
-        distribution:susceptibility.distribution,
-        state: 'CONFIGURED',
-        identifier:susceptibility.identifier    
-      }
+      return shcemaInformationParseSusceptibilityGroups(susceptibility)
     })
 
+  }
+
+
+  const parseInformationSusceptibilityGroupsItem = (susceptibilityGroup={})=>{
+    return shcemaInformationParseSusceptibilityGroups(susceptibilityGroup)
+  }
+
+
+  const shcemaInformationParseSusceptibilityGroups = (susceptibility)=>{
+    return {
+      name:susceptibility.name,
+      distribution:susceptibility.distribution? susceptibility.distribution: {
+        'type': '',
+        'kwargs': {}
+      },
+      state: !isEmpty(susceptibility.distribution)?'CONFIGURED':'SAVE',
+      identifier:susceptibility.identifier    
+    }
   }
 
   const checkSusceptibilityGroupsList = (susceptibilityGroupList)=>{
@@ -44,7 +58,8 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     saveSusceptibilityGroupsItemAction,
     deleteSusceptibilityGroupsItemAction,
     saveSusceptibilityGroupsItemFile,
-    getSusceptibilityGroupsInformation    
+    getSusceptibilityGroupsInformation,
+    updateSusceptibilityGroupsItemAction    
   } = useAgentsSusceptibilityGroupsActionsActions(dispatch)
   
   const schemaItems={
@@ -65,11 +80,12 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
   const [items, setItems] = useState(initialItems)
 
 
-  useEffect(()=>{
-    console.log(items)
-    if(items.length>0){
-           
+  useEffect(()=>{    
+    if(items.length>0){           
       setIsValid(checkSusceptibilityGroupsList(items)) 
+    }
+    if(!modalSettings.open && idConfiguration!='' && !isEmpty(modalSettings.item)){
+      getSusceptibilityGroupsInformation(idConfiguration)
     }
   },[modalSettings,items])
 
@@ -101,19 +117,45 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
     redirectToSusceptibilityGroupsPage()
   }
 
-  const saveSusceptibilityGroupItem =(susceptibilityGroup,file='',isFile=false)=>{    
-    saveSusceptibilityGroupsItemAction(susceptibilityGroup,idConfiguration).then((susceptibilityGroupResponse)=>{      
-      if(isFile){
-        const idSusceptibilityGroup = susceptibilityGroupResponse?.data?.data?.identifier
-        const formData = new FormData()
-        formData.append('file',file)
-        saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroup,formData).then(()=>{ 
-          getSusceptibilityGroupsInformation(idConfiguration)
+  const saveSusceptibilityGroupsItem =(susceptibilityGroups,file='',isFile=false)=>{    
+    const idSusceptibilityGroups = susceptibilityGroups?.identifier
+    if(isFile){      
+      const formData = new FormData()
+      console.log(file)
+      formData.append('file',file)
+      updateSusceptibilityGroupsItemAction(idConfiguration,idSusceptibilityGroups,susceptibilityGroups).then(()=>{        
+        saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroups,formData).then(()=>{ 
+          setModalSettings({...modalSettings,open:false})
+        }).catch(()=>{        
+          setShowSnack(
+            {
+              ...showSnack,
+              show: true,
+              success: false,
+              error: true,
+              errorMessage: 'Error al subir el archivo, verifique que sea un archivo valido.!'
+            }
+          )
         })
-      }else{
-        getSusceptibilityGroupsInformation(idConfiguration)
-      }      
-    })
+      })
+      
+    }else{
+      updateSusceptibilityGroupsItemAction(idConfiguration,idSusceptibilityGroups,susceptibilityGroups).then(()=>{
+        setModalSettings({...modalSettings,open:false})
+      })
+    }    
+  }
+
+  const saveSusceptibilityGroupItem =(SusceptibilityGroups)=>{
+    const schemaPost = {
+      distribution:null,
+      name:SusceptibilityGroups.name
+    }
+    return new Promise((resolve) => {      
+      saveSusceptibilityGroupsItemAction(schemaPost,idConfiguration).then((susceptibilityGroupsResponse)=>{        
+        resolve({susceptibilityGroup:susceptibilityGroupsResponse.data.data})           
+      })
+    })    
   }
 
   const deleteSusceptibilityGroupItem =(susceptibilityGroup)=>{    
@@ -125,14 +167,16 @@ export const useAgentSusceptibilityGroups = ({modalSettings}) => {
   
   return {
     tableColumns,
-    items, 
-    setItems,
-    schemaItems,
-    handleClickSaveSusceptibilityGroups,
-    isValid,
-    saveSusceptibilityGroupItem,
+    items,     
+    schemaItems,    
+    isValid,    
     idConfiguration,
-    deleteSusceptibilityGroupItem
+    setItems,
+    handleClickSaveSusceptibilityGroups,
+    saveSusceptibilityGroupItem,
+    saveSusceptibilityGroupsItem,
+    deleteSusceptibilityGroupItem,
+    parseInformationSusceptibilityGroupsItem
   }
     
   

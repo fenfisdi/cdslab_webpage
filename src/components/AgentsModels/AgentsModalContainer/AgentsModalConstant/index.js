@@ -27,12 +27,12 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren, multiple, currentMultipleName }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
   
-  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item,key:componentChildren.toLowerCase()})
+  const fields = useAgentsModalConstantFieldsCreation({parameters:parameters.type,valueSet:modalSettings.item,key:componentChildren.toLowerCase(),multiple, currentMultipleName})
 
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
@@ -56,10 +56,11 @@ export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setCompo
   },[fields])
   
   const handleSaveInformation =(item)=>{    
-    const { distribution, distribution: {kwargs} } = item
+    const { distribution } = item
     distribution.type = componentChildren.toLowerCase()
+    distribution.kwargs={}
     for (const field in fields) {      
-      kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
+      distribution.kwargs[componentChildren.toLowerCase()] = fields[field]['input']['value']
     }
     item.state = 'CONFIGURED'
     handlerDataStorage(item)    

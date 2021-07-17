@@ -116,6 +116,11 @@
     "warning": "Simulations can take several minutes.",
     "notification": "You’ll be notified via e-mail when everythings is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset."
   },
+  "executedConfiguration": {
+    "title": "Your simulation is being processed",
+    "warning": "Simulation can take several minutes.",
+    "notification": "You’ll be notified via e-mail when everything is done. After you get notified, visit `My Simulations` to obtain an overview of the results and download the complete dataset."
+  },
   "configureInitialVaulesPage": {
     "title": "Configure initial values of the state variables",
     "state": "State variable",
