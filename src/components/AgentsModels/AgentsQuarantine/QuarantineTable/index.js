@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 })
 
-const QuarantineTable = ({dataInfo,handlerConfiguration}) => {
+const QuarantineTable = ({dataInfo,handlerConfiguration,tableTitle}) => {
   const classes = useStyles()
 
   return (
@@ -47,7 +47,7 @@ const QuarantineTable = ({dataInfo,handlerConfiguration}) => {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="lefth">Quarantine Groups</StyledTableCell>
+            <StyledTableCell align="left">{tableTitle}</StyledTableCell>
             <StyledTableCell align="right"> </StyledTableCell>
             
           </TableRow>
@@ -56,7 +56,7 @@ const QuarantineTable = ({dataInfo,handlerConfiguration}) => {
           {dataInfo.map((row) => (
             <StyledTableRow key={row.name}>
 
-              <StyledTableCell component="th" align="lefth" scope="row">
+              <StyledTableCell component="th" align="left" scope="row">
                 {row.name}
               </StyledTableCell>
 

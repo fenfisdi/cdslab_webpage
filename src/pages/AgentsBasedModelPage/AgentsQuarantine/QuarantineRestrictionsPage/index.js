@@ -46,13 +46,13 @@ const QuarantineRestrictionsPage = () => {
   }
 
   return (
-    <Grid  container xs={12} justify='center' alignItems='center'>
+    <Grid  container item xs={12} justify='center' alignItems='center'>
       <Grid container item xs={12}
         direction="row"
         justify="space-between"
         alignItems="center">
-        <Grid><Breadcrumbs /></Grid>
-        <Grid><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
+        <Grid item><Breadcrumbs /></Grid>
+        <Grid item><SupportComponent title="Help" text={HELP_INFORMATION_NEW_SIMULATIONS} /></Grid>
       </Grid>
       
       <SectionCyclicQuarantineRestrictions>
@@ -163,9 +163,13 @@ const QuarantineRestrictionsPage = () => {
 
         </RestrictionsItems>
 
-      </SectionCyclicQuarantineRestrictions>
+      </SectionCyclicQuarantineRestrictions> 
 
-      <QuarantineTable dataInfo={[{name:'Quarantine group 1', state:'CONFIGURED' },{name:'Quarantine group 2'}]} handlerConfiguration={handlerConfiguration}/>
+      <QuarantineTable 
+        dataInfo={[{name:'Quarantine group 1', state:'CONFIGURED' },{name:'Quarantine group 2'}]} 
+        handlerConfiguration={handlerConfiguration}
+        tableTitle='Quarantine Groups'
+      />
 
       <AgentsModalContainer
         modalTitle='Mobility profile'       
