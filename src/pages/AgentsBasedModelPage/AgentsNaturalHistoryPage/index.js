@@ -1,14 +1,15 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import {makeStyles} from '@material-ui/core/styles'
-import ConfigTable from '../ConfigTable/index'
+import ConfigTable from '../../../components/AgentsModels/AgentsNaturalHistory/ConfigTable/index'   /* /ConfigTable/index */
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
-import CompartmentalButton from '../../../../components/CompartmentalModels/CompartmentalButton' 
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton' /* components */
+import { useAgentsNaturalHistoryPageState } from './state'
 
 
 const useStyles = makeStyles((theme)=>({
@@ -25,13 +26,17 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 const NestingComponent = () =>{
+
+  const {data} = useAgentsNaturalHistoryPageState()
+  console.log(':::::::::::::', data)
+  
   const classes = useStyles()
 
   const vulnerabilityGroups= [
-    'VulnerabilityGroup1',
-    'VulnerabilityGroup2',
-    'VulnerabilityGroup3',
-    'VulnerabilityGroup4'
+    {name: 'VulnerabilityGroup1'},
+    {name: 'VulnerabilityGroup2'},
+    {name: 'VulnerabilityGroup3'},
+    {name: 'VulnerabilityGroup4'},
   
   ]
   const states=[
@@ -69,10 +74,10 @@ const NestingComponent = () =>{
     }
   ]
   const renderRows = ()=>
-    vulnerabilityGroups.map((vulnerabilityGroup)=> (
-      <TableRow className={classes.row} key={vulnerabilityGroup}>
+    data.map((item)=> (
+      <TableRow className={classes.row} key={name}>
         <TableCell className={classes.cell} align="center">
-          {vulnerabilityGroup}
+          {item.name}
         </TableCell>
         <TableCell>
           <ConfigTable
@@ -97,15 +102,16 @@ const NestingComponent = () =>{
         </TableHead>
         <TableBody>
           {renderRows()}
-        </TableBody>
+        </TableBody> 
       </Table>
+      
       <CompartmentalButton
         justify='flex-end'
         alignItems='center'
         text='Continue'
         onClick={()=>{}}
         disabled={false}
-      /> 
+      />  
     </TableContainer>
   )
 }

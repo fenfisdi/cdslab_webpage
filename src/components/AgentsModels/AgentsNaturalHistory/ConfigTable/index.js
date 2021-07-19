@@ -8,13 +8,11 @@ import { Button } from '../../../ui/Buttons'
 import { useConfigTableState } from './state'
 import ActionsZone from '../ActionsZone'
 import TableInput from './TableInput'
-import theme from '@styles/cdslabTheme'
 import { renderComponentChildre } from '../../../../utils/common'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
-import { AgentsModalContainer } from '../../AgentsModalContainer'
-import VulnerabilityGroup from '../../../../pages/AgentsBasedModelPage/VulnerabilityGroup'
-import ModalCommon from '../../../ui/ModalCommon'
-import { useHeaderStyles } from '../../../../pages/LandingPage/styles'
+import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
+import CompartmentalButton from '../../../CompartmentalModels/CompartmentalButton/'
+
 
 const ConfigTable = ({
   initialItems,
@@ -24,8 +22,6 @@ const ConfigTable = ({
   showDelete = true,
   showAddButton = true,
   selectOptions,
-  settingsComponent,
-  distributionType
 }) => {
   const {
     items,
@@ -35,33 +31,15 @@ const ConfigTable = ({
     handleSettings,
     openSettings,
     handleCloseSettings,
-    currentIndex,
   } = useConfigTableState({
     initialItems,
     columns
   })
-  const [modalSettings,setModalSettings] = useState({
-    open:true,
-    item:{},
-    index:0
-  })
+  
+  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.VULNERABILITYGROUP)
 
-  const [openModalCancel, setOpenModalCancel] = useState(false)
-  const classes = useHeaderStyles(theme)
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.WEIGTHS)
+  const Component = renderComponentChildre(componentChildren)
 
-  const Component = renderComponentChildre(componentChildren,{
-
-
-  })
-
-  const handleCloseModalCancel = () => {
-    setOpenModalCancel(false)
-  }
-
-  const openModal = () => {
-    setOpenModalCancel(true)
-  }
 
   const renderRows = () =>
     items.map((item, i) => (
@@ -104,20 +82,12 @@ const ConfigTable = ({
           Add
         </Button>
       )}
-      <ModalCommon
-        classes={classes}
-        handleOptions={''}
-        handleClose={handleCloseSettings}
+      <AgentsModalContainer
+        modalTitle='Vulnerability Groups'       
         open={openSettings}
-        disableBackdropClick={true}
-        title={'Cancelar solicitud'}
-        handleConfirm={''}
-        cancel={''}
-        confirm={'Done'}
-      >
-        <VulnerabilityGroup
-        />
-      </ModalCommon>
+        handleClose={handleCloseSettings}           
+        render={Component}
+      />  
     </>
   )
 }

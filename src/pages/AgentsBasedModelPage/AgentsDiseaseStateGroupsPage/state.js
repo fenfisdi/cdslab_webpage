@@ -151,10 +151,10 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
 
   const redirectToNaturalHistoryPage = () => {
     console.log('redirect to:::::>HistoryNatulra')
-    /*history.push({
-      pathname: 'agentsVulnerabilityGroupsPage',
+    history.push({
+      pathname: 'agentsNaturalHistoryPage',
       search: `?idConfiguration=${idConfiguration}`
-    })*/
+    })
   }
 
   const handleClickSaveDiseaseStateGroups = () =>{        
