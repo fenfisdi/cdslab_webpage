@@ -112,6 +112,14 @@ export const renderComponentChildre = (componentChildren,props) => {
       width:'80%',
       height:'80%'
     }
+
+  case OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS:
+    return {
+      container:null,
+      props,
+      width:'80%',
+      height:'80%'
+    }
   default:
     return null
   }

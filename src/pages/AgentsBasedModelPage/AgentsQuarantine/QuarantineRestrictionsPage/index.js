@@ -9,6 +9,13 @@ import { Input } from '../../../../components/ui/Input'
 import DatePicker from '../../../../components/ui/DatePicker'
 import { useQuarantineRestrictionsPageState } from './state'
 import { SelectComponent } from '../../../../components/ui/Select'
+import QuarantineTable from '../../../../components/AgentsModels/AgentsQuarantine/QuarantineTable'
+import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
+import { renderComponentChildre } from '../../../../utils/common'
+import CompartmentalButton from '../../../../components/CompartmentalModels/CompartmentalButton'
+import { OPTIONS_MODAL } from '../../../../constants/agents'
+
+
 const QuarantineRestrictionsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const {
@@ -20,6 +27,23 @@ const QuarantineRestrictionsPage = () => {
     timeWithoutRestrictionsSelect,
     timeWithoutRestrictionsInput
   } = useQuarantineRestrictionsPageState({showSnack, setShowSnack})
+  
+  const [modalSettings,setModalSettings] = useState({
+    open:false,
+    item:{},
+    index:0
+  })
+
+  const Component = renderComponentChildre(OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS,{    
+    globalCuarantineTimeInput,
+    modalSettings,
+    setModalSettings
+  })
+
+
+  const handlerConfiguration =({configuration})=>{    
+    setModalSettings({...modalSettings,item:configuration,open:true})
+  }
 
   return (
     <Grid  container xs={12} justify='center' alignItems='center'>
@@ -75,8 +99,7 @@ const QuarantineRestrictionsPage = () => {
           <RestrictionsItem>
             <RestrictionsSelectItem>
               <SelectComponent
-                {...globalCuarantineTimeSelect}
-                options={[]}
+                {...globalCuarantineTimeSelect}                
                 title='Units'
 
               />
@@ -103,8 +126,7 @@ const QuarantineRestrictionsPage = () => {
           
           <RestrictionsItem width='60%'>
             <RestrictionsSelectItem>
-              <SelectComponent
-                options={[]}
+              <SelectComponent                
                 title='Mode'
                 {...timeWithoutRestrictionsModeSelect}
               />
@@ -132,8 +154,7 @@ const QuarantineRestrictionsPage = () => {
           <RestrictionsItem>
             <RestrictionsSelectItem>
               <SelectComponent
-                {...timeWithoutRestrictionsSelect}
-                options={[]}
+                {...timeWithoutRestrictionsSelect}                
                 title='Units'
 
               />
@@ -144,9 +165,27 @@ const QuarantineRestrictionsPage = () => {
 
       </SectionCyclicQuarantineRestrictions>
 
+      <QuarantineTable dataInfo={[{name:'Quarantine group 1', state:'CONFIGURED' },{name:'Quarantine group 2'}]} handlerConfiguration={handlerConfiguration}/>
+
+      <AgentsModalContainer
+        modalTitle='Mobility profile'       
+        open={modalSettings.open}
+        handleClose={()=>{
+          setModalSettings({...modalSettings,open:false})
+        }}          
+        render={Component}
+      />
 
 
-
+      <CompartmentalButton
+        justify='flex-end'
+        alignItems='center'
+        text='Continue'
+        onClick={()=>{
+          console.log('continuar')
+        }}
+        disabled={false}
+      />
 
     </Grid>
   )

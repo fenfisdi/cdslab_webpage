@@ -1,5 +1,6 @@
-import { useInputValue } from '../../../components/ui/Input/useInputValue'
-import { useSelectValue } from '../../../components/ui/Select/useSelectValue'
+import { useInputValue } from '../../../../components/ui/Input/useInputValue'
+import { useSelectValue } from '../../../../components/ui/Select/useSelectValue'
+
 
 const checkTypeDecimal = (event) => {
   const keyCod = event.keyCode
@@ -11,31 +12,32 @@ const checkTypeDecimal = (event) => {
   }
 }
 
-const useFieldsCreation = ()=>{
+const useFieldsCreation = ({dataGlobalCuarantineTimeSelect,dataTimeWithoutRestrictionsModeSelect,dataTimeWithoutRestrictionsSelect})=>{
   
 
   const globalCuarantineTimeSelect = useSelectValue('', [], {
+    options:dataGlobalCuarantineTimeSelect
   })
 
   const globalCuarantineTimeInput = useInputValue('', [], {
     name: 'globalCuarantineTimeInput',
-    type: 'text',
-    label: 'globalCuarantineTime',
+    type: 'text',    
     onKeyDown: (event) => {
       return checkTypeDecimal(event)
     }
   })
 
   const timeWithoutRestrictionsModeSelect = useSelectValue('', [], {
+    options:dataTimeWithoutRestrictionsModeSelect
   })
 
   const timeWithoutRestrictionsSelect = useSelectValue('', [], {
+    options:dataTimeWithoutRestrictionsSelect
   })
 
   const timeWithoutRestrictionsInput = useInputValue('', [], {
     name: 'timeWithoutRestrictionsInput',
-    type: 'text',
-    label: 'timeWithoutRestrictions',
+    type: 'text',    
     onKeyDown: (event) => {
       return checkTypeDecimal(event)
     }
