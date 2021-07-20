@@ -1,21 +1,40 @@
 import { isEmpty } from 'lodash'
 import {  useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
+import { useConfigurationActions } from '../../../../actions/configurationActions'
+import { useStore } from '../../../../store/storeContext'
 import { getStateWithQueryparams } from '../../../CompartmentalModelPage/common'
 import useFieldsCreation from './fieldsCreation'
 
 
 
 export  const useQuarantineRestrictionsPageState = () => {
-
   const history = useHistory()
+  const {
+    state: {
+      configuration: { listConfigurationTime, error }
+    },
+    dispatch
+  } = useStore()
+
+  const { 
+    getConfigurationAction,
+    getListConfigurationTime
+  } = useConfigurationActions(dispatch)
+
+  const dataTimeWithoutRestrictionsModeSelect = [
+    {label:'fixed',value:'fixed'},
+    {label:'random',value:'random'}
+  ]
+
   const [initialDate, setInitialDate] = useState(null)
   const [idConfiguration, setIdConfiguration] = useState('')
-  const dataGlobalCuarantineTimeSelect =[{label:'uni 1',value:'uni 1'},{label:'uni 2',value:'uni 2'}]
-  const dataTimeWithoutRestrictionsModeSelect =[{label:'mode uni 1',value:'mode uni 1'},{label:'mode uni 2',value:'mode uni 2'}]
-  const dataTimeWithoutRestrictionsSelect =[{label:'res uni 1',value:'res uni 1'},{label:'res uni 2',value:'res uni 2'}]
-
-  const fields = useFieldsCreation({dataGlobalCuarantineTimeSelect,dataTimeWithoutRestrictionsModeSelect,dataTimeWithoutRestrictionsSelect})
+ 
+  const fields = useFieldsCreation({
+    dataGlobalCuarantineTimeSelect:listConfigurationTime,
+    dataTimeWithoutRestrictionsModeSelect,
+    dataTimeWithoutRestrictionsSelect:listConfigurationTime
+  })
 
   const {
     globalCuarantineTimeSelect,
@@ -24,6 +43,12 @@ export  const useQuarantineRestrictionsPageState = () => {
     timeWithoutRestrictionsSelect,
     timeWithoutRestrictionsInput
   } = fields
+
+  useEffect(()=>{
+    if(listConfigurationTime && listConfigurationTime.length == 0 && error == null){
+      getListConfigurationTime()
+    }
+  },[listConfigurationTime])
 
   const handleDate = (dateValue) => {
     setInitialDate(dateValue)
@@ -56,6 +81,7 @@ export  const useQuarantineRestrictionsPageState = () => {
     timeWithoutRestrictionsModeSelect,
     timeWithoutRestrictionsSelect,
     timeWithoutRestrictionsInput,
+    listConfigurationTime,
     setInitialDate,
     handleDate,
     redirectToSusceptibilityGroupsPage
