@@ -135,7 +135,7 @@ const QuarantineRestrictionsPage = () => {
 
         </RestrictionsItems>
 
-        <RestrictionsItems>
+        {timeWithoutRestrictionsModeSelect.value == 'random' && <RestrictionsItems>
           <RestrictionsItem>
             <p>Time without restrictions</p>
           </RestrictionsItem>
@@ -161,7 +161,7 @@ const QuarantineRestrictionsPage = () => {
             </RestrictionsSelectItem>
           </RestrictionsItem>
 
-        </RestrictionsItems>
+        </RestrictionsItems>}
 
       </SectionCyclicQuarantineRestrictions> 
 
