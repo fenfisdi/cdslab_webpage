@@ -1,10 +1,18 @@
+import { isEmpty } from 'lodash'
 import React from 'react'
 import { Input } from '../../../ui/Input'
 import { useInputValue } from '../../../ui/Input/useInputValue'
 import { useSelectValue } from '../../../ui/Select/useSelectValue'
-export const useAgentsModalNumpyState = () => {
+export const useAgentsModalNumpyState = (initialValues,multiple, currentMultipleName) => {
 
-  const numpySelect = useSelectValue('', {}, {
+  console.log('initialValues=====>',initialValues )
+  const valueSelect = (initialValues,multiple, currentMultipleName) => {
+    console.log('Type=======>',initialValues.distribution.type)   
+    return initialValues.distribution.type == '' ? '' : initialValues.distribution.type
+    
+  }
+
+  const numpySelect = useSelectValue(valueSelect(initialValues), {}, {
   })
 
   const fieldsFormat = (parameters) => {

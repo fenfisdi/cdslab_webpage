@@ -11,14 +11,14 @@ import { useAgentsModalEmpiricalState } from './state'
 
 
 
-export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalEmpirical = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren, multiple, currentMultipleName }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
   
   const { fieldsFormat,uploadButton } = useAgentsModalEmpiricalState()
 
-  const fieldsForm = fieldsFormat(modalSettings.item,parameters.type)
+  const fieldsForm = fieldsFormat(modalSettings.item,parameters.type,multiple, currentMultipleName)
   const handleGoBack = () =>{
     setComponentChildren(OPTIONS_MODAL.DISTRIBUTION)
   }

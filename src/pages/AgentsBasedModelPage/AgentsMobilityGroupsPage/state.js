@@ -41,6 +41,7 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnac
         'kwargs': {}
       },
       state: !isEmpty(mobility.distribution)?'CONFIGURED':'SAVE',
+      numpy_type: mobility?.numpy_type,
       identifier:mobility.identifier    
     }
   }
@@ -65,7 +66,8 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnac
     name: '',
     distribution: {
       'type':'',
-      'kwargs': {}
+      'kwargs': {},
+      'numpy_type':''
     },     
     state: ''
   }
