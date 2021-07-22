@@ -9,6 +9,7 @@ import Switch from '../components/ui/Switch'
 import { Input } from '../components/ui/Input'
 import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/TableInput/Slider'
 import { SelectComponent } from '../components/ui/Select'
+import { QuarantineModalRestrictions } from '../components/AgentsModels/AgentsModalContainer/QuarantineModalRestrictions'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -108,6 +109,14 @@ export const renderComponentChildre = (componentChildren,props) => {
   case OPTIONS_MODAL.DISEASESTATE:
     return {
       container:AgentDiseaseState,
+      props,
+      width:'80%',
+      height:'80%'
+    }
+
+  case OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS:
+    return {
+      container:QuarantineModalRestrictions,
       props,
       width:'80%',
       height:'80%'
