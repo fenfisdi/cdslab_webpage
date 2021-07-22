@@ -84,6 +84,7 @@ const AgentsMobilityGroups = () => {
             schemaItems={schemaItems}
             handleSettings={({index,item})=>{
               if(item.state.trim().length == 0){
+                console.log('item======>',item)
                 saveMobilityGroupItem(item).then((mobilityGroupResponse)=>{
                   const { mobilityGroup } = mobilityGroupResponse || {}
                   const newItem =  parseInformationMobilityGroupsItem(mobilityGroup)          

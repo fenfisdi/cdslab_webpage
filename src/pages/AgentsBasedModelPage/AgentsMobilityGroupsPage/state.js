@@ -34,6 +34,7 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnac
 
 
   const shcemaInformationParseMobilityGroups = (mobility)=>{
+    console.log('mobility===========>',mobility)
     return {
       name:mobility.name,
       distribution:mobility?.distribution!=undefined && mobility?.distribution!=null ? mobility.distribution: {
