@@ -19,7 +19,7 @@ export const useAgentsModalEmpiricalState = () => {
   const handleKwargsReturn =(initialValues,default_value,multiple,currentMultipleName,parameter,type)=>{
     if(multiple){      
       return  !isEmpty(initialValues.distributions) && initialValues.distributions[currentMultipleName.name] ? 
-        (type == 'boolean' && initialValues.distributions[currentMultipleName.name]?.kwargs[parameter] == true ? 'True' :initialValues.distributions[currentMultipleName.name]?.kwargs[parameter])
+        typeBooleanKwargsMultiple(initialValues,currentMultipleName,parameter,type)
         : default_value
     }else if(!isEmpty(initialValues.distribution.kwargs)){      
       return type == 'boolean' && initialValues.distribution.kwargs[parameter] == true ? 'True' :initialValues.distribution.kwargs[parameter]
@@ -28,6 +28,11 @@ export const useAgentsModalEmpiricalState = () => {
     }
   }
   
+  const typeBooleanKwargsMultiple = (initialValues,currentMultipleName,parameter,type) => {
+    return (type == 'boolean' && initialValues.distributions[currentMultipleName.name]?.kwargs[parameter] == true ? 'True' :initialValues.distributions[currentMultipleName.name]?.kwargs[parameter])
+  }
+
+
   const fieldsFormat = (valueSet,parameters,multiple, currentMultipleName) => {
     let fields = {}
     for (let params of parameters) {

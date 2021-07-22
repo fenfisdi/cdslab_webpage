@@ -16,7 +16,7 @@ export const useAgentsModalNumpyState = (initialValues,multiple, currentMultiple
     }
   }
 
-  const numpySelect = useSelectValue(valueSelect(initialValues), {}, {
+  const numpySelect = useSelectValue(valueSelect(), {}, {
   })
 
   const handleKwargsReturn =(parameterName)=>{
