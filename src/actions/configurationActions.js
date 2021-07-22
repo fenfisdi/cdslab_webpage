@@ -70,7 +70,7 @@ export const useConfigurationActions = (dispatch) => {
   }
 
   const getConfigurationAction =(idConfiguration)=>{
-    getConfigurationService(idConfiguration)
+    return getConfigurationService(idConfiguration)
   }
 
   const dispathError = () => {

@@ -18,26 +18,34 @@ import { OPTIONS_MODAL } from '../../../../constants/agents'
 
 const QuarantineRestrictionsPage = () => {
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
-  const {
-    initialDate,
-    handleDate,
-    globalCuarantineTimeSelect,
-    globalCuarantineTimeInput,
-    timeWithoutRestrictionsModeSelect,
-    timeWithoutRestrictionsSelect,
-    timeWithoutRestrictionsInput
-  } = useQuarantineRestrictionsPageState({showSnack, setShowSnack})
-  
   const [modalSettings,setModalSettings] = useState({
     open:false,
     item:{},
     index:0
   })
 
+  const {
+    initialDate,    
+    globalCuarantineTimeSelect,
+    globalCuarantineTimeInput,
+    timeWithoutRestrictionsModeSelect,
+    timeWithoutRestrictionsSelect,
+    timeWithoutRestrictionsInput,
+    quarantineGroups,
+    isValid,
+    handleDate,
+    fieldsToQuarantineRestrictionModal,
+    handleGroupQuarantineRestrictions
+  } = useQuarantineRestrictionsPageState({showSnack, setShowSnack,modalSettings,setModalSettings})
+  
+  
+
   const Component = renderComponentChildre(OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS,{    
     globalCuarantineTimeInput,
     modalSettings,
-    setModalSettings
+    setModalSettings,
+    fieldsToQuarantineRestrictionModal,
+    hanldeDone:handleGroupQuarantineRestrictions
   })
 
 
@@ -77,7 +85,9 @@ const QuarantineRestrictionsPage = () => {
               variant="inline"
               lenguaje="es"
               id='initial'
-              placeholder="dd/mm/yyyy"              
+              placeholder="dd/mm/yyyy"
+              minDate='Jul 20 2021 23:53:00 GMT-0500'
+              maxDate='Jul 30 2021 23:53:00 GMT-0500'        
             />            
           </RestrictionsItem>
         </RestrictionsItems>
@@ -135,7 +145,7 @@ const QuarantineRestrictionsPage = () => {
 
         </RestrictionsItems>
 
-        {timeWithoutRestrictionsModeSelect.value == 'random' && <RestrictionsItems>
+        {timeWithoutRestrictionsModeSelect.value == 'fixed' && <RestrictionsItems>
           <RestrictionsItem>
             <p>Time without restrictions</p>
           </RestrictionsItem>
@@ -166,7 +176,7 @@ const QuarantineRestrictionsPage = () => {
       </SectionCyclicQuarantineRestrictions> 
 
       <QuarantineTable 
-        dataInfo={[{name:'Quarantine group 1', state:'CONFIGURED' },{name:'Quarantine group 2'}]} 
+        dataInfo={quarantineGroups} 
         handlerConfiguration={handlerConfiguration}
         tableTitle='Quarantine Groups'
       />
@@ -188,7 +198,7 @@ const QuarantineRestrictionsPage = () => {
         onClick={()=>{
           console.log('continuar')
         }}
-        disabled={false}
+        disabled={!isValid}
       />
 
     </Grid>

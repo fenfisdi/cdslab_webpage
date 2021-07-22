@@ -44,13 +44,61 @@ const useFieldsCreation = ({dataGlobalCuarantineTimeSelect,dataTimeWithoutRestri
   })
 
 
+  const restrictionsDelayInputModal = useInputValue('', [], {
+    name: 'delay',
+    type: 'text',
+    label: '',
+    onKeyDown: (event) => {
+      return checkTypeDecimal(event)
+    }
+  })
+
+  
+  const restrictionsDelaySelectModal = useSelectValue('', [], {
+    options:dataGlobalCuarantineTimeSelect
+  })
+
+  const restrictionsQuarantinelInputModal = useInputValue('', [], {
+    name: 'Quarantinel',
+    type: 'text',
+    label: '',
+    onKeyDown: (event) => {
+      return checkTypeDecimal(event)
+    }
+  })
+
+  
+  const restrictionsQuarantinelSelectModal = useSelectValue('', [], {
+    options:dataGlobalCuarantineTimeSelect
+  })
+
+  const restrictionsUnrestrictedInputModal = useInputValue('', [], {
+    name: 'Unrestricted',
+    type: 'text',
+    label: '',
+    onKeyDown: (event) => {
+      return checkTypeDecimal(event)
+    }
+  })
+
+  
+  const restrictionsUnrestrictedSelectModal = useSelectValue('', [], {
+    options:dataGlobalCuarantineTimeSelect
+  })
+
 
   return {
     globalCuarantineTimeSelect,
     globalCuarantineTimeInput,
     timeWithoutRestrictionsModeSelect,
     timeWithoutRestrictionsSelect,
-    timeWithoutRestrictionsInput
+    timeWithoutRestrictionsInput,
+    restrictionsDelayInputModal,
+    restrictionsDelaySelectModal,
+    restrictionsQuarantinelInputModal,
+    restrictionsQuarantinelSelectModal,
+    restrictionsUnrestrictedInputModal,
+    restrictionsUnrestrictedSelectModal
   }
 }
 
