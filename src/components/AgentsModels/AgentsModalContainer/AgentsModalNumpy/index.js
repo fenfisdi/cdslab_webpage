@@ -26,11 +26,11 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
   }
 }))
 
-export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren }) => {
+export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren, multiple, currentMultipleName }) => {
   const classes = useAgentsModalConstantStyles()
   const [isValid,setIsValid] = useState(false)
   const parameterNumpy = parameterList[componentChildren.toLowerCase()]
-  const {numpySelect,optionsSelectNumpy,fieldsFormat} = useAgentsModalNumpyState()
+  const {numpySelect,optionsSelectNumpy,fieldsFormat} = useAgentsModalNumpyState(modalSettings.item,multiple, currentMultipleName)
   const fieldsForm = fieldsFormat(parameterNumpy.type)
   const optionsNumpy = optionsSelectNumpy(parameterNumpy.type)
 
@@ -70,7 +70,7 @@ export const AgentsModalNumpy = ({ modalSettings,handlerDataStorage, setComponen
         distribution.kwargs[field.name.toLowerCase()] = value
       }
     }
-    item.numpy_type = numpySelect.value
+    distribution.numpy_type = numpySelect.value
     item.state = 'CONFIGURED'
     handlerDataStorage(item)
   }
