@@ -22,14 +22,14 @@ export const useAgentsModalEmpiricalState = () => {
         typeBooleanKwargsMultiple(initialValues,currentMultipleName,parameter,type)
         : default_value
     }else if(!isEmpty(initialValues.distribution.kwargs)){      
-      return type == 'boolean' && initialValues.distribution.kwargs[parameter] == true ? 'True' :initialValues.distribution.kwargs[parameter]
+      return type == 'boolean' && initialValues.distribution.kwargs[parameter] ? 'True' :initialValues.distribution.kwargs[parameter]
     }else {
       return default_value
     }
   }
   
   const typeBooleanKwargsMultiple = (initialValues,currentMultipleName,parameter,type) => {
-    return (type == 'boolean' && initialValues.distributions[currentMultipleName.name]?.kwargs[parameter] == true ? 'True' :initialValues.distributions[currentMultipleName.name]?.kwargs[parameter])
+    return (type == 'boolean' && initialValues.distributions[currentMultipleName.name]?.kwargs[parameter] ? 'True' :initialValues.distributions[currentMultipleName.name]?.kwargs[parameter])
   }
 
 
