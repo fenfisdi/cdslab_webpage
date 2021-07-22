@@ -20,8 +20,7 @@ export const useAgentsModalNumpyState = (initialValues,multiple, currentMultiple
   })
 
   const handleKwargsReturn =(parameterName)=>{
-    if(multiple){  
-      console.log('kwargs======>',initialValues.distributions[currentMultipleName.name]?.kwargs)  
+    if(multiple){   
       return  !isEmpty(initialValues.distributions) && initialValues.distributions[currentMultipleName.name] ? 
         initialValues.distributions[currentMultipleName.name]?.kwargs[parameterName] : ''
     }else{

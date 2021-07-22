@@ -29,7 +29,6 @@ export const useAgentsModalEmpiricalState = () => {
   }
   
   const fieldsFormat = (valueSet,parameters,multiple, currentMultipleName) => {
-    console.log(valueSet)
     let fields = {}
     for (let params of parameters) {
       let field ={}

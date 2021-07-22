@@ -29,8 +29,6 @@ export const useAgentsModalConstantStyles = makeStyles(() => ({
 
 export const AgentsModalConstant = ({ modalSettings,handlerDataStorage, setComponentChildren, parameterList,componentChildren, multiple, currentMultipleName }) => {
   const classes = useAgentsModalConstantStyles()
-  console.log('multiple=======>',multiple)
-  console.log('currentMultipleName=======>',currentMultipleName)
   const [isValid,setIsValid] = useState(false)
   const parameters = parameterList[componentChildren.toLowerCase()]
   
