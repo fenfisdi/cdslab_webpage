@@ -1,4 +1,4 @@
-import { getQuarantineGroupsService } from '../services/quarantineGroupsServices'
+import { getQuarantineGroupsService,saveQuarantineGroups } from '../services/quarantineGroupsServices'
 
 export const useQuarantineActions = () => {
 
@@ -6,8 +6,13 @@ export const useQuarantineActions = () => {
     return getQuarantineGroupsService(idConfiguration)
   }
   
+  const saveQuarantineGroupsForm =(quarantineGroups,idConfiguration)=>{
+    return saveQuarantineGroups(quarantineGroups,idConfiguration)
+  }
+
   return {
-    getQuarantineGroupsAction
+    getQuarantineGroupsAction,
+    saveQuarantineGroupsForm
   }
   
 }
