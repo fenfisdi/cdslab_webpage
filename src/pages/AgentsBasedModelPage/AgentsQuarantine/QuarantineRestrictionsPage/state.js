@@ -1,4 +1,4 @@
-import { find, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 import {  useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useConfigurationActions } from '../../../../actions/configurationActions'
@@ -6,19 +6,18 @@ import { useQuarantineActions } from '../../../../actions/quarantineGroupsAction
 import { useStore } from '../../../../store/storeContext'
 import { getStateWithQueryparams } from '../../../CompartmentalModelPage/common'
 import useFieldsCreation from './fieldsCreation'
+import fieldsToQuarantineRestrictionModal from './tableFieldsCreations'
 
 export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSettings}) => {
   const history = useHistory()
-  const {
-    state: {
-      configuration: { listConfigurationTime, error }
-    },
+  const {   
     dispatch
   } = useStore()
 
   const { 
     getConfigurationAction,
-    getListConfigurationTime
+    getListConfigurationTimeAction,
+    getQuarantineInformationAction
   } = useConfigurationActions(dispatch)
 
   const {
@@ -32,45 +31,22 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
 
   const [initialDate, setInitialDate] = useState(null)
   const [idConfiguration, setIdConfiguration] = useState('')
-  const [quarantineGroups,setQuarantineGroups] = useState([
-    {
-      name:'Quarantine group 1', 
-      state:'CONFIGURED', 
-      groupInfo:{
-        delay:{
-          value:'',
-          units:''
-        },
-        quarantine:{
-          value:'',
-          units:''
-        },
-        unrestricted:{
-          value:'',
-          units:''
-        }
-      }
-    },
-    {
-      name:'Quarantine group 2',
-      groupInfo:{
-        delay:{
-          value:'',
-          units:''
-        },
-        quarantine:{
-          value:'',
-          units:''
-        },
-        unrestricted:{
-          value:'',
-          units:''
-        }
-      }}
-  ])
+  const [quarantineGroups,setQuarantineGroups] = useState([])
+  const [listConfigurationTime,setListConfigurationTime] = useState([])
   const [isValid,setValid] = useState(false)
   const [configuration,setConfiguration] = useState({})
- 
+  const [quarantineConfig,setQuarantineConfig] = useState({})
+
+  const schemaCyclicRestrictions = {        
+    'grace_time': '',
+    'global_quarantine': 0,
+    'global_quarantine_units': '',
+    'restriction_mode': '',
+    'time_without_restrictions': 0,
+    'time_without_restrictions_units': '',
+    'variables': {}
+  }
+
   const fields = useFieldsCreation({
     dataGlobalCuarantineTimeSelect:listConfigurationTime,
     dataTimeWithoutRestrictionsModeSelect,
@@ -91,35 +67,79 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     restrictionsUnrestrictedSelectModal
   } = fields
 
+  const fieldsToModal = fieldsToQuarantineRestrictionModal({
+    restrictionsDelayInputModal,
+    globalCuarantineTimeInput,
+    restrictionsDelaySelectModal,
+    restrictionsQuarantinelInputModal,
+    restrictionsQuarantinelSelectModal,
+    restrictionsUnrestrictedInputModal,
+    restrictionsUnrestrictedSelectModal
+  })
+
+
+  const parseInformationuseQuarantineRestrictionsModel =(arrayQuarantineRestrictionsGroup=[])=>{
+    return arrayQuarantineRestrictionsGroup.map((quarantineRestrictionsGroup)=>{
+      return shcemaInformationParseQuarantineRestrictionsModel(quarantineRestrictionsGroup)
+    })
+
+  }
+
+  const shcemaInformationParseQuarantineRestrictionsModel = (quarantineRestrictionsGroup)=>{
+    return {
+      identifier:quarantineRestrictionsGroup?.identifier,
+      name: quarantineRestrictionsGroup?.name,
+      quarantine: quarantineRestrictionsGroup?.quarantine,
+      state:'', 
+      groupInfo:{
+        delay:{
+          value:'',
+          units:''
+        },
+        quarantine:{
+          value:'',
+          units:''
+        },
+        unrestricted:{
+          value:'',
+          units:''
+        }
+      }         
+    }
+  }
+
+
   useEffect(()=>{
-    if(listConfigurationTime && listConfigurationTime.length == 0 && error == null){
-      getListConfigurationTime()
+    if(listConfigurationTime.length == 0){
+      getListConfigurationTimeAction().then((response)=>{ 
+        const dataList = []          
+        for (const property in response.data.data) {
+          dataList.push({value: response.data.data[property],label: response.data.data[property]})
+        }    
+        setListConfigurationTime([...dataList])
+      })
     }
   },[listConfigurationTime])
 
 
-  useEffect(()=>{
+  useEffect(()=>{    
     if (isEmpty(configuration) && idConfiguration!=''){
       getConfigurationAction(idConfiguration).then((response)=>{
         setConfiguration({...response.data.data})
       })
     }
     if(quarantineGroups.length == 0 && idConfiguration!=''){
-      getQuarantineGroupsAction(idConfiguration).then((response)=>{
-        setQuarantineGroups([...response.data.data])
+      getQuarantineGroupsAction(idConfiguration).then((response)=>{        
+        setQuarantineGroups([...parseInformationuseQuarantineRestrictionsModel(response.data.data)])
       })
     }
-  },[configuration,idConfiguration])
-
-
-  useEffect(()=>{
-    if(quarantineGroups && quarantineGroups.length>0){
-      console.log('quarantineGroups:::::>',quarantineGroups)
-      const isConfigured = find(quarantineGroups,(o) => { return o.state == 'CONFIGURED' })
-      !isEmpty(isConfigured) && setValid(true)
-      isEmpty(isConfigured) && setValid(false)
+    if(isEmpty(quarantineConfig) && idConfiguration!=''){
+      getQuarantineInformationAction(idConfiguration).then((response)=>{
+        setQuarantineConfig({...response.data.data})
+      })
     }
-  },[quarantineGroups])
+  },[configuration,idConfiguration,quarantineGroups,quarantineConfig])
+
   
   useEffect(()=>{
     const params = getStateWithQueryparams(history)    
@@ -130,12 +150,31 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
 
 
   useEffect(()=>{
-    console.log('fields',fields)
-    console.log('initialDate',initialDate)
-  },[fields,initialDate])
+    let validationForm = false
+    if(!isEmpty(fields)){
+      if(globalCuarantineTimeInput.value=='' || globalCuarantineTimeSelect.value=='' || initialDate==null || timeWithoutRestrictionsModeSelect.value == '' ){
+        validationForm =false
+      }else if(timeWithoutRestrictionsModeSelect.value == 'fixed' && (timeWithoutRestrictionsInput.value == '' || timeWithoutRestrictionsSelect.value == '')) {
+        validationForm =false
+      }else{
+        validationForm = true
+      }
+    }
+    if(validationForm){
+      const isFound = quarantineGroups.find((quarantineGroup)=>quarantineGroup.state == 'CONFIGURED')
+      if(isFound){
+        setValid(validationForm)
+      }else{
+        setValid(false)
+      }      
+    }else{
+      setValid(false)
+    }
+
+  },[fields,initialDate,quarantineGroups])
 
   useEffect(()=>{
-    console.log('modalsetting:::>',modalSettings)
+    /* console.log('modalsetting:::>',modalSettings) */
     if(modalSettings.open && !isEmpty(modalSettings.item)) {       
       const groupQuarantineUpdate = modalSettings.item
       const { groupInfo:{delay,quarantine,unrestricted}={} } = groupQuarantineUpdate
@@ -195,134 +234,46 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     restrictionsUnrestrictedSelectModal.onChange({target:{value:''}})    
   }
 
-  const fieldsToQuarantineRestrictionModal = () =>{
-    return{
-      headers:[
-        {label:'Parameter',attr:'parameter'},
-        {label:'Value',attr:'type'},
-        {label:'Units',attr:'units'}
-      ],
-      body:[
-        {
-          parameter:{
-            label:'Delay',
-            name:'delay'
-          },
-          type:{      
-            name:'type',
-            label:'',
-            type:'input',
-            props:{
-              disabled:false,
-              required:true,
-              fullWidth:false,
-              variant:'outlined',            
-              styles:{'padding':'0px'},
-              ...restrictionsDelayInputModal              
-            },
-            validators:[
-              {
-                name:'minValue',
-                value:globalCuarantineTimeInput.value,
-                check(valueCompare){
-                  return parseInt(valueCompare) <= parseInt(globalCuarantineTimeInput.value)
-                },
-                message:`valor debe ser menor o igual ${globalCuarantineTimeInput.value}`
-              }
-            ],            
-          },         
-          units:{            
-            name:'distanceunits',
-            type:'select',
-            label:'time units',            
-            props:{              
-              title:'time units',
-              options:[{label:'prueba',value:'prueba'}],
-              ...restrictionsDelaySelectModal
-            } 
-          }
-        },
-        {
-          parameter:{
-            label:'Quarantine length',
-            name:'quarantinelength'
-          },
-          type:{      
-            name:'type',
-            label:'',
-            type:'input',
-            props:{
-              disabled:false,
-              required:true,
-              fullWidth:false,
-              variant:'outlined',            
-              styles:{'padding':'0px'},
-              ...restrictionsQuarantinelInputModal           
-            },
-            validators:[
-              {
-                name:'minValue',
-                value:globalCuarantineTimeInput.value,
-                check(valueCompare){
-                  return parseInt(valueCompare) <= parseInt(globalCuarantineTimeInput.value)
-                },
-                message:`valor debe ser menor o igual ${globalCuarantineTimeInput.value}`
-              }
-            ]            
-          },         
-          units:{            
-            name:'distanceunits',
-            type:'select',
-            label:'time units',            
-            props:{              
-              title:'time units',
-              options:[{label:'prueba',value:'prueba'}],
-              ...restrictionsQuarantinelSelectModal
-            } 
-          }
-        },
-        {
-          parameter:{
-            label:'Unrestricted time',
-            name:'unrestrictedtime'
-          },
-          type:{      
-            name:'type',
-            label:'',
-            type:'input',
-            props:{
-              disabled:false,
-              required:true,
-              fullWidth:false,
-              variant:'outlined',            
-              styles:{'padding':'0px'},
-              ...restrictionsUnrestrictedInputModal              
-            },
-            validators:[
-              {
-                name:'minValue',
-                value:globalCuarantineTimeInput.value,
-                check(valueCompare){
-                  return parseInt(valueCompare) <= parseInt(globalCuarantineTimeInput.value)
-                },
-                message:`valor debe ser menor o igual ${globalCuarantineTimeInput.value}`
-              }
-            ]            
-          },         
-          units:{            
-            name:'distanceunits',
-            type:'select',
-            label:'time units',            
-            props:{              
-              title:'time units',
-              options:[{label:'prueba',value:'prueba'}],
-              ...restrictionsUnrestrictedSelectModal
-            } 
-          }
-        }             
-      ]
-    }
+  const convertArrayToObject = (array, key) => {
+    const initialValue = {}
+    return array.reduce((obj, item) => {      
+      return {
+        ...obj,
+        [item[key]]: {...item[item[key]]},
+      }
+    }, initialValue)
   }
+
+  const schemaQuarantineGroups =(quarantineGroupsCurrent)=>{
+    return quarantineGroupsCurrent.map((quarantineGroup)=>{
+      const {delay, quarantine, unrestricted} = quarantineGroup.groupInfo      
+      return {
+        [quarantineGroup['identifier']]: {
+          'delay': delay?.value,
+          'delay_units': delay?.units,
+          'length': quarantine?.value,
+          'length_units': quarantine?.units,
+          'unrestricted_time': unrestricted?.value,
+          'unrestricted_time_units': unrestricted?.units
+        },
+        identifier:quarantineGroup['identifier']
+      }
+    })
+  }
+
+  const handlerSaveInformation =()=>{    
+    let newCycle = schemaCyclicRestrictions
+    newCycle.grace_time = initialDate 
+    newCycle.global_quarantine = globalCuarantineTimeInput.value
+    newCycle.global_quarantine_units = globalCuarantineTimeSelect.value
+    newCycle.restriction_mode = timeWithoutRestrictionsModeSelect.value
+    newCycle.time_without_restrictions = timeWithoutRestrictionsInput.value
+    newCycle.time_without_restrictions_units = timeWithoutRestrictionsSelect.value
+    const newVariables = schemaQuarantineGroups(quarantineGroups)
+    newCycle.variables = convertArrayToObject(newVariables,'identifier')
+    console.log({...quarantineConfig,cyclic_restrictions:newCycle})
+  }
+
 
   return {
     initialDate,
@@ -334,6 +285,9 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     listConfigurationTime,
     quarantineGroups,
     isValid,
+    fieldsToModal,
+    configuration,
+    handlerSaveInformation,
     setInitialDate,
     handleDate,
     redirectToSusceptibilityGroupsPage,

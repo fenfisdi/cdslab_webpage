@@ -9,13 +9,13 @@ import AgentsTable from '../../AgentsTable'
 
 
 
-export const QuarantineModalRestrictions = ({modalSettings,fieldsToQuarantineRestrictionModal,hanldeDone,globalCuarantineTimeInput}) => {
+export const QuarantineModalRestrictions = ({modalSettings,hanldeDone,globalCuarantineTimeInput,fieldsToModal}) => {
   const[isValid,setIsValid] = useState(false)
-  const fields = fieldsToQuarantineRestrictionModal()
+  
   useEffect(()=>{
     let validation = false
-    fields?.body.every(field => {        
-      if (field?.type?.props?.value == '' || field?.type?.props?.value > globalCuarantineTimeInput.value) {
+    fieldsToModal?.body.every(field => {      
+      if (field?.type?.props?.value == '' || parseInt(field?.type?.props?.value) > parseInt(globalCuarantineTimeInput.value) || field?.units?.props?.value == '' ) {
         validation = true
         return false
       }                  
@@ -23,7 +23,7 @@ export const QuarantineModalRestrictions = ({modalSettings,fieldsToQuarantineRes
       return true
     })
     setIsValid(validation)    
-  },[fields])
+  },[fieldsToModal])
 
 
   return (
@@ -47,7 +47,7 @@ export const QuarantineModalRestrictions = ({modalSettings,fieldsToQuarantineRes
         
         <Typography align="center" style={{marginRight:'60px', color:'#006064', fontSize:'22px', fontWeight:'600'}}>{modalSettings?.item?.name}</Typography>
 
-        <AgentsTable tableFields={fields} />
+        <AgentsTable tableFields={fieldsToModal} />
 
         <CompartmentalButton
           justify='flex-end'
