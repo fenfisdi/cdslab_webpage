@@ -1,5 +1,4 @@
-import { Typography } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { Typography, Grid  } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import CompartmentalButton from '../../../CompartmentalModels/CompartmentalButton'
 import SupportComponent from '../../../SupportComponent'

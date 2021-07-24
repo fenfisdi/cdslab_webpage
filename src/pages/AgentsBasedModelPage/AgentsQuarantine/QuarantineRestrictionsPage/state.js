@@ -250,11 +250,11 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     const groupQuarantineUpdate = modalSettings.item
     const { groupInfo:{delay,quarantine,unrestricted}={} } = groupQuarantineUpdate
     
-    delay.value = restrictionsDelayInputModal.value,
-    delay.units = restrictionsDelaySelectModal.value,
-    quarantine.value = restrictionsQuarantinelInputModal.value,
-    quarantine.units = restrictionsQuarantinelSelectModal.value,
-    unrestricted.value = restrictionsUnrestrictedInputModal.value,
+    delay.value = restrictionsDelayInputModal.value
+    delay.units = restrictionsDelaySelectModal.value
+    quarantine.value = restrictionsQuarantinelInputModal.value
+    quarantine.units = restrictionsQuarantinelSelectModal.value
+    unrestricted.value = restrictionsUnrestrictedInputModal.value
     unrestricted.units = restrictionsUnrestrictedSelectModal.value
     groupQuarantineUpdate.state = 'CONFIGURED'
     const pos = quarantineGroups.map((e)=> e.name ).indexOf(groupQuarantineUpdate.name)
