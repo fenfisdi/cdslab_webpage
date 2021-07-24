@@ -154,22 +154,28 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
   useEffect(()=>{
     const quarantineGroupsToSave = updateInformationQuarantineGroups.length>0 ? updateInformationQuarantineGroups:quarantineGroups
     let validationForm = false
+    
     if(!isEmpty(fields)){
       if(globalCuarantineTimeInput.value=='' || globalCuarantineTimeSelect.value=='' || initialDate==null || timeWithoutRestrictionsModeSelect.value == '' ){
-        validationForm =false
+        validationForm = false
       }else if(timeWithoutRestrictionsModeSelect.value == 'fixed' && (timeWithoutRestrictionsInput.value == '' || timeWithoutRestrictionsSelect.value == '')) {
-        validationForm =false
+        validationForm = false
       }else{
         validationForm = true
       }
     }
-    if(validationForm){
-      const isFound = quarantineGroupsToSave.find((quarantineGroup)=>quarantineGroup.state == 'CONFIGURED')
-      if(isFound){
-        setValid(validationForm)
-      }else{
-        setValid(false)
-      }      
+
+    if(validationForm){     
+      quarantineGroupsToSave.map((quarantineGroupToSave)=>{        
+        const {groupInfo:{delay, quarantine, unrestricted},state} = quarantineGroupToSave
+        if(
+          state != 'CONFIGURED' || parseInt(delay.value) > parseInt(globalCuarantineTimeInput.value) || 
+          parseInt(quarantine.value)>parseInt(globalCuarantineTimeInput.value) || 
+          parseInt(unrestricted.value)>parseInt(globalCuarantineTimeInput.value)){
+          validationForm = false
+        }
+      })
+      setValid(validationForm)  
     }else{
       setValid(false)
     }
@@ -177,7 +183,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
   },[fields,initialDate,quarantineGroups])
 
   useEffect(()=>{
-        
+
     if(modalSettings.open && !isEmpty(modalSettings.item)) {       
       const groupQuarantineUpdate = modalSettings.item
       const { groupInfo:{delay,quarantine,unrestricted}={} } = groupQuarantineUpdate
