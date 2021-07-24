@@ -14,7 +14,6 @@ import {
   requestAddConfiguration,
   getConfigurationService
 } from '../services/configurationServices'
-import { getQuarantineInformationService, putQuarantineInformationService } from '../services/quarantineGroupsServices'
 
 export const useConfigurationActions = (dispatch) => {
 
@@ -78,14 +77,6 @@ export const useConfigurationActions = (dispatch) => {
     return requestListConfigurationTime()
   }
 
-  const getQuarantineInformationAction =(idConfiguration)=>{
-    return getQuarantineInformationService(idConfiguration)
-  }
-
-  const putQuarantineInformationAction =(idConfiguration,data)=>{
-    return putQuarantineInformationService(idConfiguration,data)
-  }
-
   const dispathError = () => {
     dispatch({
       type: CONFIGURATION_ERROR,
@@ -99,9 +90,7 @@ export const useConfigurationActions = (dispatch) => {
     getListConfigurationTime,
     addConfiguration,
     getConfigurationAction,
-    getListConfigurationTimeAction,
-    getQuarantineInformationAction,
-    putQuarantineInformationAction
+    getListConfigurationTimeAction    
 
   }
 }

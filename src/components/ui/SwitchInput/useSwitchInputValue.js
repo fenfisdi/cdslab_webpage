@@ -9,7 +9,7 @@ export const useSwitchInputValue = (
 ) => {
   const [checked, setChecked] = useState(val)
   const [errors, setErrors] = useState([])
-  const {t,language} = useContext(languageContext)
+  const {language} = useContext(languageContext)
 
   useEffect(()=>{
     errors.length>0 && onChange({target:{
