@@ -11,7 +11,8 @@ import {
   requestListConfiguration,
   requestListConfigurationDistance,
   requestListConfigurationTime,
-  requestAddConfiguration
+  requestAddConfiguration,
+  getConfigurationService
 } from '../services/configurationServices'
 
 export const useConfigurationActions = (dispatch) => {
@@ -68,6 +69,14 @@ export const useConfigurationActions = (dispatch) => {
       })
   }
 
+  const getConfigurationAction =(idConfiguration)=>{
+    return getConfigurationService(idConfiguration)
+  }
+
+  const getListConfigurationTimeAction=()=>{
+    return requestListConfigurationTime()
+  }
+
   const dispathError = () => {
     dispatch({
       type: CONFIGURATION_ERROR,
@@ -79,6 +88,9 @@ export const useConfigurationActions = (dispatch) => {
     getListConfiguration,
     getListConfigurationDistance,
     getListConfigurationTime,
-    addConfiguration
+    addConfiguration,
+    getConfigurationAction,
+    getListConfigurationTimeAction    
+
   }
 }
