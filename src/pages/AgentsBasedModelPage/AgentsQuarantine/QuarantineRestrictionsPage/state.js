@@ -207,6 +207,8 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
       globalCuarantineTimeSelect.onChange({target:{value:global_quarantine_units}})
       timeWithoutRestrictionsModeSelect.onChange({target:{value:restriction_mode}})
       setInitialDate(grace_time)
+      timeWithoutRestrictionsInput.onChange({target:{value:quarantineConfig.cyclic_restrictions?.time_without_restrictions}})
+      timeWithoutRestrictionsSelect.onChange({target:{value:quarantineConfig.cyclic_restrictions?.time_without_restrictions_units}})    
       
       const newArray = Object.keys(variables).map(variableIdentifier => {
         let isFound = quarantineGroups.find((quarantineGroup)=> quarantineGroup.identifier == variableIdentifier)
