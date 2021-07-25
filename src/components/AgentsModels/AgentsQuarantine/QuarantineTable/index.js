@@ -72,7 +72,7 @@ const QuarantineTable = ({dataInfo,handlerConfiguration,tableTitle}) => {
                 </IconButton>
 
                 <IconButton
-                  disabled={!(row.state == 'CONFIGURED')}
+                  disabled={row.state != 'CONFIGURED'}
                   color="primary"
                   aria-label="Sttings"
                   component="span"

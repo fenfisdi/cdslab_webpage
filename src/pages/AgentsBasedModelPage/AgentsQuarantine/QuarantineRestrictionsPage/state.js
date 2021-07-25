@@ -16,12 +16,13 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
 
   const { 
     getConfigurationAction,
-    getListConfigurationTimeAction,
-    getQuarantineInformationAction
+    getListConfigurationTimeAction
   } = useConfigurationActions(dispatch)
 
   const {
-    getQuarantineGroupsAction
+    getQuarantineGroupsAction,
+    getQuarantineInformationAction,
+    putQuarantineInformationAction
   } = useQuarantineActions()
 
   const dataTimeWithoutRestrictionsModeSelect = [
@@ -36,6 +37,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
   const [isValid,setValid] = useState(false)
   const [configuration,setConfiguration] = useState({})
   const [quarantineConfig,setQuarantineConfig] = useState({})
+  const [updateInformationQuarantineGroups,setUpdateInformationQuarantineGroups] = useState([])
 
   const schemaCyclicRestrictions = {        
     'grace_time': '',
@@ -150,23 +152,30 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
 
 
   useEffect(()=>{
+    const quarantineGroupsToSave = updateInformationQuarantineGroups.length>0 ? updateInformationQuarantineGroups:quarantineGroups
     let validationForm = false
+    
     if(!isEmpty(fields)){
       if(globalCuarantineTimeInput.value=='' || globalCuarantineTimeSelect.value=='' || initialDate==null || timeWithoutRestrictionsModeSelect.value == '' ){
-        validationForm =false
+        validationForm = false
       }else if(timeWithoutRestrictionsModeSelect.value == 'fixed' && (timeWithoutRestrictionsInput.value == '' || timeWithoutRestrictionsSelect.value == '')) {
-        validationForm =false
+        validationForm = false
       }else{
         validationForm = true
       }
     }
-    if(validationForm){
-      const isFound = quarantineGroups.find((quarantineGroup)=>quarantineGroup.state == 'CONFIGURED')
-      if(isFound){
-        setValid(validationForm)
-      }else{
-        setValid(false)
-      }      
+
+    if(validationForm){     
+      quarantineGroupsToSave.map((quarantineGroupToSave)=>{        
+        const {groupInfo:{delay, quarantine, unrestricted},state} = quarantineGroupToSave
+        if(
+          state != 'CONFIGURED' || parseInt(delay.value) > parseInt(globalCuarantineTimeInput.value) || 
+          parseInt(quarantine.value)>parseInt(globalCuarantineTimeInput.value) || 
+          parseInt(unrestricted.value)>parseInt(globalCuarantineTimeInput.value)){
+          validationForm = false
+        }
+      })
+      setValid(validationForm)  
     }else{
       setValid(false)
     }
@@ -174,7 +183,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
   },[fields,initialDate,quarantineGroups])
 
   useEffect(()=>{
-    /* console.log('modalsetting:::>',modalSettings) */
+
     if(modalSettings.open && !isEmpty(modalSettings.item)) {       
       const groupQuarantineUpdate = modalSettings.item
       const { groupInfo:{delay,quarantine,unrestricted}={} } = groupQuarantineUpdate
@@ -190,6 +199,39 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
       setModalSettings({...newModalSettings})
     }
   },[modalSettings])
+
+  useEffect(()=>{
+    if(!isEmpty(quarantineConfig) && quarantineConfig.cyclic_restrictions!=null && quarantineGroups.length>0 && updateInformationQuarantineGroups.length == 0){      
+      const { cyclic_restrictions:{global_quarantine,global_quarantine_units,restriction_mode,grace_time,variables} = {} } = quarantineConfig || {}
+      globalCuarantineTimeInput.onChange({target:{value:global_quarantine}})
+      globalCuarantineTimeSelect.onChange({target:{value:global_quarantine_units}})
+      timeWithoutRestrictionsModeSelect.onChange({target:{value:restriction_mode}})
+      setInitialDate(grace_time)
+      
+      const newArray = Object.keys(variables).map(variableIdentifier => {
+        let isFound = quarantineGroups.find((quarantineGroup)=> quarantineGroup.identifier == variableIdentifier)
+        const cloneFound = Object.assign({}, isFound)
+        if(!isEmpty(cloneFound)){
+          cloneFound.groupInfo.delay.value = variables[variableIdentifier].delay
+          cloneFound.groupInfo.delay.units = variables[variableIdentifier].delay_units
+          cloneFound.groupInfo.quarantine.value = variables[variableIdentifier].length
+          cloneFound.groupInfo.quarantine.units = variables[variableIdentifier].length_units
+          cloneFound.groupInfo.unrestricted.value  = variables[variableIdentifier].unrestricted_time
+          cloneFound.groupInfo.unrestricted.units  = variables[variableIdentifier].unrestricted_time_units
+          cloneFound.state = 'CONFIGURED'
+          return cloneFound
+        }
+      })
+     
+      newArray.forEach(newElement=>{
+        const pos = quarantineGroups.map((e)=> e.identifier ).indexOf(newElement.identifier)        
+        quarantineGroups[pos] = newElement
+      }) 
+
+      setUpdateInformationQuarantineGroups(quarantineGroups)
+            
+    }
+  },[quarantineConfig,quarantineGroups])
 
   const handleDate = (dateValue) => {
     setInitialDate(dateValue)
@@ -208,15 +250,15 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     const groupQuarantineUpdate = modalSettings.item
     const { groupInfo:{delay,quarantine,unrestricted}={} } = groupQuarantineUpdate
     
-    delay.value = restrictionsDelayInputModal.value,
-    delay.units = restrictionsDelaySelectModal.value,
-    quarantine.value = restrictionsQuarantinelInputModal.value,
-    quarantine.units = restrictionsQuarantinelSelectModal.value,
-    unrestricted.value = restrictionsUnrestrictedInputModal.value,
+    delay.value = restrictionsDelayInputModal.value
+    delay.units = restrictionsDelaySelectModal.value
+    quarantine.value = restrictionsQuarantinelInputModal.value
+    quarantine.units = restrictionsQuarantinelSelectModal.value
+    unrestricted.value = restrictionsUnrestrictedInputModal.value
     unrestricted.units = restrictionsUnrestrictedSelectModal.value
     groupQuarantineUpdate.state = 'CONFIGURED'
     const pos = quarantineGroups.map((e)=> e.name ).indexOf(groupQuarantineUpdate.name)
-    //const schemaParse = parseInformationDiseaseStateItem(diseaseCurrent)
+    
     quarantineGroups[pos] = groupQuarantineUpdate 
     setQuarantineGroups([...quarantineGroups]) 
     const newModalSettings = {...modalSettings,item:{},open:false}
@@ -233,14 +275,29 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     restrictionsUnrestrictedInputModal.onChange({target:{value:''}})
     restrictionsUnrestrictedSelectModal.onChange({target:{value:''}})    
   }
+  
+  const checkProperties = (obj)=> {
+    for (var key in obj) {
+      if (obj[key] !== null && obj[key] != '')
+        return false
+    }
+    return true
+  }
 
   const convertArrayToObject = (array, key) => {
     const initialValue = {}
-    return array.reduce((obj, item) => {      
-      return {
-        ...obj,
-        [item[key]]: {...item[item[key]]},
+    return array.reduce((obj, item) => { 
+      if(!checkProperties(item[item[key]])){
+        return {
+          ...obj,
+          [item[key]]: {...item[item[key]]},
+        }
+      }else{
+        return{
+          ...obj,
+        }
       }
+      
     }, initialValue)
   }
 
@@ -261,17 +318,26 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     })
   }
 
-  const handlerSaveInformation =()=>{    
+  const handlerSaveInformation =()=>{
+    
+    const quarantineGroupsToSave = updateInformationQuarantineGroups.length>0 ? updateInformationQuarantineGroups:quarantineGroups
     let newCycle = schemaCyclicRestrictions
     newCycle.grace_time = initialDate 
     newCycle.global_quarantine = globalCuarantineTimeInput.value
     newCycle.global_quarantine_units = globalCuarantineTimeSelect.value
     newCycle.restriction_mode = timeWithoutRestrictionsModeSelect.value
-    newCycle.time_without_restrictions = timeWithoutRestrictionsInput.value
-    newCycle.time_without_restrictions_units = timeWithoutRestrictionsSelect.value
-    const newVariables = schemaQuarantineGroups(quarantineGroups)
-    newCycle.variables = convertArrayToObject(newVariables,'identifier')
-    console.log({...quarantineConfig,cyclic_restrictions:newCycle})
+    newCycle.time_without_restrictions = timeWithoutRestrictionsInput.value!=''?timeWithoutRestrictionsInput.value:null
+    newCycle.time_without_restrictions_units = timeWithoutRestrictionsSelect.value!=''?timeWithoutRestrictionsSelect.value:null
+    const newVariables = schemaQuarantineGroups(quarantineGroupsToSave)
+    newCycle.variables = convertArrayToObject(newVariables,'identifier')    
+    putQuarantineInformationAction(idConfiguration,
+      {...quarantineConfig,cyclic_restrictions:newCycle}).then((response)=>{
+      console.log(response.data.data)
+      history.push({
+        pathname: 'agentsConfigurationMessage',
+        search: `?idConfiguration=${idConfiguration}`
+      }) 
+    })
   }
 
 
@@ -283,7 +349,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     timeWithoutRestrictionsSelect,
     timeWithoutRestrictionsInput,
     listConfigurationTime,
-    quarantineGroups,
+    quarantineGroups:updateInformationQuarantineGroups.length>0?updateInformationQuarantineGroups:quarantineGroups,
     isValid,
     fieldsToModal,
     configuration,

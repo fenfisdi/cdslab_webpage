@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core'
-import React, { useState }  from 'react'
+import React, { useState, Fragment }  from 'react'
 import Breadcrumbs from '../../../../components/Breadcrumbs'
 import { HELP_INFORMATION_NEW_SIMULATIONS } from '../../../../constants/helpInformation'
 import SupportComponent from '../../../../components/SupportComponent'
@@ -14,7 +14,6 @@ import { AgentsModalContainer } from '../../../../components/AgentsModels/Agents
 import { renderComponentChildre } from '../../../../utils/common'
 import CompartmentalButton from '../../../../components/CompartmentalModels/CompartmentalButton'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
-import { Fragment } from 'react'
 import { isEmpty } from 'lodash'
 import LoaderComponent from '../../../../components/ui/Loader'
 
@@ -56,8 +55,8 @@ const QuarantineRestrictionsPage = () => {
   })
 
 
-  const handlerConfiguration =({configuration})=>{    
-    setModalSettings({...modalSettings,item:configuration,open:true})
+  const handlerConfiguration =({configuration:configurationItem})=>{    
+    setModalSettings({...modalSettings,item:configurationItem,open:true})
   }
 
   return (
