@@ -151,7 +151,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
 
   const redirectToNaturalHistoryPage = () => {    
     history.push({
-      pathname: 'quarantineRestrictionsPage',
+      pathname: 'quarantineGroupsPage',
       search: `?idConfiguration=${idConfiguration}`
     })
   }

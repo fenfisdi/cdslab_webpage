@@ -1,7 +1,8 @@
 
 import { getQuarantineGroupsService, getQuarantineInformationService,saveQuarantineGroups, putQuarantineInformationService } from '../services/quarantineGroupsServices'
+import { QUARANTINE_GROUPS_ERROR, QUARANTINE_GROUPS_SAVE } from './types/quarantineGroupsTypes'
 
-export const useQuarantineActions = () => {
+export const useQuarantineActions = (dispatch) => {
 
   const getQuarantineGroupsAction =(idConfiguration)=>{
     return getQuarantineGroupsService(idConfiguration)
@@ -16,7 +17,13 @@ export const useQuarantineActions = () => {
   }
   
   const saveQuarantineGroupsForm =(quarantineGroups,idConfiguration)=>{
-    return saveQuarantineGroups(quarantineGroups,idConfiguration)
+    saveQuarantineGroups(quarantineGroups,idConfiguration).then(({data}) => {
+      dispatch({ type: QUARANTINE_GROUPS_SAVE, payload: data.data })
+    })
+      .catch((error) => {
+        const { response: { data } } = error
+        dispatch({ type: QUARANTINE_GROUPS_ERROR, payload: data.data })
+      })
   }
 
   return {
