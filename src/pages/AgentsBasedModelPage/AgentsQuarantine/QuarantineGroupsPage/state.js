@@ -71,7 +71,7 @@ export const useAgentsDiseaseStateGroups = ({showSnack, setShowSnack}) => {
       })
     }else if(!has_cyclic_restrictions && has_tracing_restrictions){
       history.push({
-        pathname: 'has_cyclic_restrictions',
+        pathname: 'quarantineTracingRestrictionsPage',
         search: `?idConfigurationsss=${idConfiguration}`
       })
     }else{
@@ -88,8 +88,8 @@ export const useAgentsDiseaseStateGroups = ({showSnack, setShowSnack}) => {
   }
 
   const handleSaveQuarantineGroups = ({body},QuarantineGroups) => {
-    const has_cyclic_restrictions = true
-    const has_tracing_restrictions = false
+    const has_cyclic_restrictions = false
+    const has_tracing_restrictions = true
     const shemaQuarantineGroups = {
       'quarantine_groups': QuarantineGroups,
       'has_cyclic_restrictions': has_cyclic_restrictions,
