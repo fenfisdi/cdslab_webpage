@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const SelectComponent = ({
+  name='',
   xs,
   value,
   options = [],
@@ -47,6 +48,7 @@ export const SelectComponent = ({
       >
         <InputLabel htmlFor="selectComponent">{title}</InputLabel>
         <Select
+          name={name}
           label={title}
           id={`selectComponent-simple-${title}`}
           value={value || ''}

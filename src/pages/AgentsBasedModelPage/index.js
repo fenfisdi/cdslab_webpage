@@ -18,6 +18,7 @@ const AgentsBasedModelPage = () => {
   const AgentsDiseaseStateGroupsPage = React.lazy(()=> import('./AgentsDiseaseStateGroupsPage'))
   const AgentsConfigurationMessageExecution = React.lazy(()=> import('./AgentsConfigurationMessageExecution'))
   const QuarantineRestrictionsPage = React.lazy(()=> import('./AgentsQuarantine/QuarantineRestrictionsPage'))
+  const InitialPopulationSetUpPage = React.lazy(()=>import('./AgentsInitialPopulation/InitialPopulationSetUpPage'))
   const tabs = [
     {
       id: 1,
@@ -59,6 +60,7 @@ const AgentsBasedModelPage = () => {
             <Route path={`${match.path}/agentsDiseaseStateGroupsPage`} exact component={AgentsDiseaseStateGroupsPage} />
             <Route path={`${match.path}/agentsConfigurationMessage`} exact component={AgentsConfigurationMessageExecution} />
             <Route path={`${match.path}/quarantineRestrictionsPage`} exact component={QuarantineRestrictionsPage} />
+            <Route path={`${match.path}/initialPopulationSetUpPage`} exact component={InitialPopulationSetUpPage} />
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>
