@@ -8,6 +8,12 @@ import { useHistory } from 'react-router-dom'
 export const useQuarantineTracingRestrictions = ({showSnack, setShowSnack}) => {
 
   const {
+    state: {      
+      quarantineGroups: {
+        dataTracing,
+        error
+      }
+    },
     dispatch
   } = useStore()
 
@@ -16,7 +22,7 @@ export const useQuarantineTracingRestrictions = ({showSnack, setShowSnack}) => {
   const [idConfiguration, setIdConfiguration] = useState('')
 
   const{
-    saveQuarantineGroupsForm
+    getQuarantineTracingAction
   } = useQuarantineActions(dispatch)
 
   useEffect(()=>{
@@ -31,7 +37,7 @@ export const useQuarantineTracingRestrictions = ({showSnack, setShowSnack}) => {
     'name': 'Hola',
   }
  
-  const initialItems = [{name:'Hola'},{name:'variable 2'}]
+  const initialItems = [{...schemaItems}]
 
   const tableColumns = [
     { title: 'Quarantine by Tracing Variables', att: 'name', type: 'label',inputProps: { fullWidth: true }  },
@@ -48,17 +54,26 @@ export const useQuarantineTracingRestrictions = ({showSnack, setShowSnack}) => {
     }
   },[items])
 
+  useEffect(()=>{  
+    console.log('entro',dataTracing,error,idConfiguration)   
+    if(dataTracing == null && !error && idConfiguration!=''){
+      getQuarantineTracingAction()
+      console.log('dataTracingNull',dataTracing)
+    }else if(dataTracing != null && !isEmpty(dataTracing) && !error){    
+      setItems(convertDataTracing(dataTracing))
+      console.log('dataTracing',convertDataTracing(dataTracing))
+    }
+  },[dataTracing,error,idConfiguration])
 
-
-  const handleSaveQuarantineGroups = ({body},QuarantineGroups) => {
-    const has_cyclic_restrictions = true
-    const has_tracing_restrictions = false
-    const shemaQuarantineGroups = {
-      'quarantine_groups': QuarantineGroups,
-      'has_cyclic_restrictions': has_cyclic_restrictions,
-      'has_tracing_restrictions': has_tracing_restrictions,
-    }  
-    saveQuarantineGroupsForm(shemaQuarantineGroups,idConfiguration)
+  const convertDataTracing = (data) =>{
+    let dataT = []
+    for (const property in data) {
+      dataT.push({
+        'name': data[property],
+        'variable': property
+      })
+    }
+    return dataT
   }
 
   return {
@@ -67,7 +82,6 @@ export const useQuarantineTracingRestrictions = ({showSnack, setShowSnack}) => {
     schemaItems,
     setItems,
     isValid,
-    handleSaveQuarantineGroups
   }
 
 }

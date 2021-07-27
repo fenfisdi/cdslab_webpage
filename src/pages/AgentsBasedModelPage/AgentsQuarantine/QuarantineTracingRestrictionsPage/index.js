@@ -35,7 +35,9 @@ const QuarantineTracingRestrictionsPage = () => {
         xs={10}>
         <AgentsTableConfiguration
           showConfig={true}
-          showCheck={true}            
+          showCheck={true}
+          showAddButton={false}
+          showDelete={false}            
           columns={tableColumns}
           initialItems={items}
           setItems={setItems}
