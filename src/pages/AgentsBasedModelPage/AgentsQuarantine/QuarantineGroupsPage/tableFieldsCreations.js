@@ -19,7 +19,8 @@ const fieldsToQuarantineGroups = ({
           label:'',            
           props:{              
             title:'',
-            ...cyclicField
+            ...cyclicField,
+            handleChange : cyclicField.onChange
           } 
         }
       },
@@ -34,7 +35,8 @@ const fieldsToQuarantineGroups = ({
           label:'',            
           props:{              
             title:'',
-            ...tracingField
+            ...tracingField,
+            handleChange : tracingField.onChange
           } 
         }
       },            

@@ -36,7 +36,6 @@ export const useAgentsDiseaseStateGroups = ({showSnack, setShowSnack}) => {
   } = modalsFields
 
   const fields = fieldsToQuarantineGroups({cyclicField,tracingField})
-
   const schemaItems={
     'name': '',
   }
@@ -71,25 +70,30 @@ export const useAgentsDiseaseStateGroups = ({showSnack, setShowSnack}) => {
       })
     }else if(!has_cyclic_restrictions && has_tracing_restrictions){
       history.push({
-        pathname: 'has_cyclic_restrictions',
-        search: `?idConfigurationsss=${idConfiguration}`
+        pathname: 'quarantineTracingRestrictionsPage',
+        search: `?idConfiguration=${idConfiguration}`
       })
     }else{
-      setShowSnack(
-        {
-          ...showSnack,
-          show: true,
-          success: false,
-          error: true,
-          errorMessage: 'Select a quarantine restriction'
-        }
-      )
+      showSnackMessage(true,false,true,'Select a quarantine restriction')
     }
   }
 
+  const showSnackMessage = (showS,success,error,errorMessage) => {
+    setShowSnack(
+      {
+        ...showSnack,
+        show: showS,
+        success: success,
+        error: error,
+        errorMessage: errorMessage
+      }
+    )
+  }
+
+
   const handleSaveQuarantineGroups = ({body},QuarantineGroups) => {
-    const has_cyclic_restrictions = true
-    const has_tracing_restrictions = false
+    const has_cyclic_restrictions = body[0].value?.props?.checked
+    const has_tracing_restrictions = body[1].value?.props?.checked
     const shemaQuarantineGroups = {
       'quarantine_groups': QuarantineGroups,
       'has_cyclic_restrictions': has_cyclic_restrictions,
