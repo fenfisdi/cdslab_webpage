@@ -71,6 +71,7 @@ export default function InitialPopulationTable({tableFields,itemsTable,optionsBy
                             <ComponentElement.container                              
                               {...optionsByItem[indexItemTable][itemHeader.attr]}
                               {...itemElement?.props}
+                              itemTable={itemTable}
                               value={itemTable?.values[itemHeader.attr]}
                               onChange={(event)=>{                                 
                                 itemElement?.props.onChange({event,itemTable,indexItemTable,propHeader:itemHeader})

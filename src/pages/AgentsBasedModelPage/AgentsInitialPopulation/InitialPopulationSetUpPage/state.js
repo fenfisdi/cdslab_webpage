@@ -4,7 +4,9 @@ import { useHistory } from 'react-router'
 import { useInitialPopulationActions } from '../../../../actions/InitialPopulationActions'
 import { useStore } from '../../../../store/storeContext'
 import { getStateWithQueryparams } from '../../../CompartmentalModelPage/common'
-
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
+import CheckIcon from '@material-ui/icons/Check'
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 
 export  const useInitialPopulationSetUpState = () => {
   const history = useHistory()
@@ -45,7 +47,7 @@ export  const useInitialPopulationSetUpState = () => {
     headers:[
       {label:'',attr:'consecutive'},
       {label:'Variables to configure',attr:'var'},     
-      {label:'actions ',attr:'actions'},
+      {label:'',attr:'actionZoneInitialPopulation'},
     ],
     body:{ 
       consecutive:{
@@ -71,8 +73,35 @@ export  const useInitialPopulationSetUpState = () => {
           }        
         }           
       },
-      actions:{
-        type:'',
+      actionZoneInitialPopulation:{
+        type:'actionZoneInitialPopulation',
+        props:{
+          options:[    
+            {
+              onClick: e => console.log(e),
+              isCheckable:true,
+              className: 'option-button-setting',
+              children: SettingsOutlinedIcon,
+              validation:(itemValue)=>{
+                return itemValue.values.var!=''
+              }
+            },
+            {
+              onClick: e => console.log(e),
+              isCheckable:true,
+              className: 'option-button-check',
+              children:CheckIcon,
+              validation:(itemValue)=>{
+                return itemValue.name!=''
+              }
+            },
+            {
+              onClick: e => console.log(e),
+              className: 'option-button-delete',
+              children:DeleteOutlineIcon
+            }
+          ]
+        }
       }        
     },                     
   }
@@ -131,7 +160,7 @@ export  const useInitialPopulationSetUpState = () => {
     idConfiguration,
     fieldsToTable,
     itemsTable,
-    optionsByItem,
+    optionsByItem,    
     getListAllowedVariablesAction,
     handlerAddOption
   }

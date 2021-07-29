@@ -5,12 +5,13 @@ import { HELP_INFORMATION_AGE_MODELS } from '../../../../constants/helpInformati
 import SupportComponent from '../../../../components/SupportComponent'
 import InitialPopulationTable from './children/InitialPopulationTable'
 import { useInitialPopulationSetUpState } from './state'
+import ActionZoneInitialPopulation from './children/ActionZone'
 
 const InitialPopulationSetUpPage = () => {
   const {    
     fieldsToTable,
     itemsTable,
-    optionsByItem,    
+    optionsByItem,
     handlerAddOption
   } = useInitialPopulationSetUpState()
   
@@ -35,7 +36,9 @@ const InitialPopulationSetUpPage = () => {
           tableFields={fieldsToTable} 
           itemsTable={itemsTable}
           optionsByItem={optionsByItem}
-          handlerAddOption={handlerAddOption}/>     
+          handlerAddOption={handlerAddOption}
+          actionZone={ActionZoneInitialPopulation}
+        />     
       </Grid>
       
     </Grid>

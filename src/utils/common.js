@@ -10,6 +10,7 @@ import { Input } from '../components/ui/Input'
 import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/TableInput/Slider'
 import { SelectComponent } from '../components/ui/Select'
 import { QuarantineModalRestrictions } from '../components/AgentsModels/AgentsModalContainer/QuarantineModalRestrictions'
+import ActionZoneInitialPopulation from '../pages/AgentsBasedModelPage/AgentsInitialPopulation/InitialPopulationSetUpPage/children/ActionZone'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -148,6 +149,11 @@ export const renderComponentElement = (typeComponent) => {
   case 'select':
     return {
       container:SelectComponent,
+      props:{}
+    }
+  case 'actionZoneInitialPopulation':
+    return {
+      container:ActionZoneInitialPopulation,
       props:{}
     }
   default:
