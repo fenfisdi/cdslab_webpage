@@ -6,10 +6,14 @@ const useFieldsCreation = ()=>{
   
   const cyclicField	= useSwitchInputValue(false,[],{
     name:'cyclicField',
+    label:'cyclicField',
+    title:'cyclicField'
   })
 
   const tracingField = useSwitchInputValue(false,[],{
     name:'tracingField',
+    label:'tracingField',
+    title:'tracingField'
   })
   return {
     cyclicField,

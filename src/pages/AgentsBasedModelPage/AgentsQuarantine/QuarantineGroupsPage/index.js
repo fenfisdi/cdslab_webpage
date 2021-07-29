@@ -52,14 +52,7 @@ const QuarantineGroupsPage = () => {
           columns={tableColumns}
           initialItems={items}
           setItems={setItems}
-          schemaItems={schemaItems}
-          handleSettings={({index,item})=>{              
-            console.log(item)          
-          }}  
-          handleItemDeleted={({index,item})=>{
-            items.splice(index,1)
-            setItems([...items])       
-          }}             
+          schemaItems={schemaItems}         
         />  
       </Grid>
 
