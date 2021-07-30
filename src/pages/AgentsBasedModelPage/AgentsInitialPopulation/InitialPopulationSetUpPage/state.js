@@ -96,7 +96,14 @@ export  const useInitialPopulationSetUpState = () => {
               }
             },
             {
-              onClick: e => console.log(e),
+              onClick: (_,{option,itemTable,indexItem}) => {
+                console.log(option,itemTable,indexItem)
+                if(itemsTable.length>1){                  
+                  const itemsCopy = [...itemsTable]
+                  itemsCopy.splice(indexItem, 1)                  
+                  setItemTable(itemsCopy)
+                }
+              },
               className: 'option-button-delete',
               children:DeleteOutlineIcon
             }

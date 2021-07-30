@@ -4,10 +4,9 @@ import React from 'react'
 
 const ActionZoneInitialPopulation =({
   options,
-  itemTable
-}) => {
-  console.log('options::::>',options)
-  console.log('itemTable:>',itemTable)
+  itemTable,
+  indexItem
+}) => {  
   return (
     <div className="panel__options">
       {options &&
@@ -19,7 +18,9 @@ const ActionZoneInitialPopulation =({
               {...option}
               onClick={e =>
                 onClick(e, {
-                  option
+                  option,
+                  itemTable,
+                  indexItem
                 })
               }>
               {<Children style={{  color: option.isCheckable && option.validation(itemTable) ? '#66c2c1' :'rgba(0, 0, 0, 0.26)' }}/>}
