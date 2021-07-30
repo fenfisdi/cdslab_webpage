@@ -20,3 +20,11 @@ export const putQuarantineInformationService = async (idConfiguration,data) => {
     data
   ) 
 }
+
+export const saveQuarantineGroups = async (data,idConfiguration) => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/quarantine`,
+    'POST',
+    data
+  ) 
+}

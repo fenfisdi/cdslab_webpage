@@ -34,7 +34,6 @@ export const useAgentsModalNumpyState = (initialValues,multiple, currentMultiple
     let fields = []
     for (let params of parameters) {
       for (let paramsValue of params['values']){
-        console.log('parameters======>', paramsValue['name'])
         fields.push({
           parameter : params['parameter'],
           name: paramsValue['name'],
