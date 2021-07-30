@@ -20,24 +20,32 @@ export  const useInitialPopulationSetUpState = () => {
 
   const [idConfiguration, setIdConfiguration] = useState('')
  
-  const schemaItems= {
-    name: '',
-    distribution: {
-      'type':'',
-      'kwargs': {},
-      'numpy_type':''
-    },     
-    state: '',
-    values:{
-      var:''
-    }   
+
+  const schemaPopuletionConfigure = {
+    'variable': '',
+    'chain': [
+      'age'
+    ],
+    'values': {
+      'joven': {
+        'susceptibility 1': 0.1,
+        'susceptibility 2': 0.3,
+        'susceptibility 3': 0.6
+      },
+      'adulto': {
+        'susceptibility 1': 0.1,
+        'susceptibility 2': 0.3,
+        'susceptibility 3': 0.6
+      }
+    },
+    'state':''
   }
 
   const schemaOptions = {
-    var:{options:[]}
+    variable:{options:[]}
   }
 
-  const [itemsTable,setItemTable]= useState([{...schemaItems}])
+  const [itemsTable,setItemTable]= useState([{...schemaPopuletionConfigure}])
   
   const [optionsByItem,setOptionsByItem]= useState({
     0:{...Object.assign({}, schemaOptions)}
@@ -46,7 +54,7 @@ export  const useInitialPopulationSetUpState = () => {
   const fieldsToTable = {
     headers:[
       {label:'',attr:'consecutive'},
-      {label:'Variables to configure',attr:'var'},     
+      {label:'Variables to configure',attr:'variable'},     
       {label:'',attr:'actionZoneInitialPopulation'},
     ],
     body:{ 
@@ -55,10 +63,10 @@ export  const useInitialPopulationSetUpState = () => {
           return `# ${index}`
         }
       },       
-      var:{        
+      variable:{        
         type:'select',
         props:{
-          name:'var',
+          name:'variable',
           label:'',
           disabled:false,
           required:true,
@@ -68,7 +76,7 @@ export  const useInitialPopulationSetUpState = () => {
           onChange:({event,indexItemTable,propHeader})=>{            
             const value = event.target ? event.target.value : ''    
             const itemsCopy = [...itemsTable]
-            itemsCopy[indexItemTable] = { ...itemsCopy[indexItemTable], values: {...itemsCopy[indexItemTable].values,[propHeader.attr]:value} }            
+            itemsCopy[indexItemTable] = { ...itemsCopy[indexItemTable], [propHeader.attr]:value }  
             setItemTable(itemsCopy)            
           }        
         }           
@@ -83,7 +91,7 @@ export  const useInitialPopulationSetUpState = () => {
               className: 'option-button-setting',
               children: SettingsOutlinedIcon,
               validation:(itemValue)=>{
-                return itemValue.values.var!=''
+                return itemValue.variable!=''
               }
             },
             {
@@ -92,7 +100,7 @@ export  const useInitialPopulationSetUpState = () => {
               className: 'option-button-check',
               children:CheckIcon,
               validation:(itemValue)=>{
-                return itemValue.name!=''
+                return !isEmpty(itemValue.values) && itemValue.chain.length>0
               }
             },
             {
@@ -135,10 +143,10 @@ export  const useInitialPopulationSetUpState = () => {
   },[history])
 
   useEffect(()=>{
-    if(idConfiguration!='' && optionsByItem[0].var.options.length == 0){
+    if(idConfiguration!='' && optionsByItem[0].variable.options.length == 0){
       getListAllowedVariablesAction(idConfiguration).then((response)=>{        
         const newOptionByItems =Object.assign({}, optionsByItem[0])
-        newOptionByItems.var.options = parseInformationOptionsByItem(response.data.data)
+        newOptionByItems.variable.options = parseInformationOptionsByItem(response.data.data)
         setOptionsByItem({...optionsByItem,[0]:newOptionByItems})
       })
     }
@@ -155,9 +163,9 @@ export  const useInitialPopulationSetUpState = () => {
   const handlerAddOption =()=>{
     const newSchemaOtion = Object.assign({}, schemaOptions)
     getListAllowedVariablesAction(idConfiguration).then((response)=>{
-      newSchemaOtion.var.options = parseInformationOptionsByItem(response.data.data)
+      newSchemaOtion.variable.options = parseInformationOptionsByItem(response.data.data)
       setOptionsByItem({...optionsByItem,[itemsTable.length]:newSchemaOtion})
-      setItemTable([...itemsTable,schemaItems])
+      setItemTable([...itemsTable,schemaPopuletionConfigure])
     })    
   }
 

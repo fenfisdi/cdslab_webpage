@@ -73,7 +73,7 @@ export default function InitialPopulationTable({tableFields,itemsTable,optionsBy
                               {...itemElement?.props}
                               itemTable={itemTable}
                               indexItem={indexItemTable}
-                              value={itemTable?.values[itemHeader.attr]}
+                              value={itemTable[itemHeader.attr]}
                               onChange={(event)=>{                                 
                                 itemElement?.props.onChange({event,itemTable,indexItemTable,propHeader:itemHeader})
                               }}
