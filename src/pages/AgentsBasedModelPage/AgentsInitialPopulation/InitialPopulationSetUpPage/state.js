@@ -24,6 +24,18 @@ export  const useInitialPopulationSetUpState = () => {
   const schemaPopuletionConfigure = {
     'variable': '',
     'chain': [
+    
+    ],
+    'values': {
+      
+    },
+    'state':''
+  }
+
+
+  /* const schemaPopuletionConfigure = {
+    'variable': '',
+    'chain': [
       'age'
     ],
     'values': {
@@ -39,7 +51,7 @@ export  const useInitialPopulationSetUpState = () => {
       }
     },
     'state':''
-  }
+  } */
 
   const schemaOptions = {
     variable:{options:[]}
