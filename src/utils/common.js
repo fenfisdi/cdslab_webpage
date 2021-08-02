@@ -11,6 +11,7 @@ import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/Tab
 import { SelectComponent } from '../components/ui/Select'
 import { QuarantineModalRestrictions } from '../components/AgentsModels/AgentsModalContainer/QuarantineModalRestrictions'
 import ActionZoneInitialPopulation from '../pages/AgentsBasedModelPage/AgentsInitialPopulation/InitialPopulationSetUpPage/children/ActionZone'
+import AgentsInitialPopulation  from '../components/AgentsModels/AgentsModalContainer/AgentsInitialPopulation'
 export const replaceStringInRange =(string,start,length,substitute)=>{
   return  string.substr(0,start)+substitute+string.substr(length)
 }
@@ -118,6 +119,13 @@ export const renderComponentChildre = (componentChildren,props) => {
   case OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS:
     return {
       container:QuarantineModalRestrictions,
+      props,
+      width:'80%',
+      height:'80%'
+    }
+  case OPTIONS_MODAL.INITIALPOPULATION:
+    return {
+      container:AgentsInitialPopulation,
       props,
       width:'80%',
       height:'80%'

@@ -93,7 +93,7 @@ const QuarantineRestrictionsPage = () => {
                 lenguaje="es"
                 id='initial'
                 placeholder="dd/mm/yyyy"
-                minDate={configuration?.interval_date?.end}
+                minDate={configuration?.interval_date?.start}
                 maxDate={configuration?.interval_date?.end}        
               />            
             </RestrictionsItem>

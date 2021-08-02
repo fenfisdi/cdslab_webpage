@@ -8,7 +8,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import CheckIcon from '@material-ui/icons/Check'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 
-export  const useInitialPopulationSetUpState = () => {
+export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}) => {
   const history = useHistory()
   const {   
     dispatch
@@ -98,7 +98,11 @@ export  const useInitialPopulationSetUpState = () => {
         props:{
           options:[    
             {
-              onClick: e => console.log(e),
+              onClick: (_,{itemTable,indexItem}) => { 
+                if(itemTable.variable!=''){
+                  setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                }                
+              },
               isCheckable:true,
               className: 'option-button-setting',
               children: SettingsOutlinedIcon,
@@ -116,8 +120,7 @@ export  const useInitialPopulationSetUpState = () => {
               }
             },
             {
-              onClick: (_,{option,itemTable,indexItem}) => {
-                console.log(option,itemTable,indexItem)
+              onClick: (_,{indexItem}) => {                
                 if(itemsTable.length>1){                  
                   const itemsCopy = [...itemsTable]
                   itemsCopy.splice(indexItem, 1)                  

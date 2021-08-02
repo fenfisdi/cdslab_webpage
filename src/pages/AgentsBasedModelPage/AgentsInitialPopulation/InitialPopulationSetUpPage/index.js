@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, { useState }  from 'react'
 import { Grid } from '@material-ui/core'
 import Breadcrumbs from '../../../../components/Breadcrumbs'
 import { HELP_INFORMATION_AGE_MODELS } from '../../../../constants/helpInformation'
@@ -6,14 +6,31 @@ import SupportComponent from '../../../../components/SupportComponent'
 import InitialPopulationTable from './children/InitialPopulationTable'
 import { useInitialPopulationSetUpState } from './state'
 import ActionZoneInitialPopulation from './children/ActionZone'
+import { renderComponentChildre } from '../../../../utils/common'
+import { OPTIONS_MODAL } from '../../../../constants/agents'
+import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
 
 const InitialPopulationSetUpPage = () => {
+  const [modalSettings,setModalSettings] = useState({
+    open:false,
+    item:{},
+    index:0
+  })
+
   const {    
     fieldsToTable,
     itemsTable,
     optionsByItem,
     handlerAddOption
-  } = useInitialPopulationSetUpState()
+  } = useInitialPopulationSetUpState({modalSettings,setModalSettings})
+
+  console.log('modalSettings>',modalSettings)
+
+  const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
+    modalSettings,  
+    setModalSettings,
+    hanldeDone:()=>{},
+  })
   
  
   return (
@@ -40,6 +57,14 @@ const InitialPopulationSetUpPage = () => {
           actionZone={ActionZoneInitialPopulation}
         />     
       </Grid>
+      <AgentsModalContainer
+        modalTitle=''       
+        open={modalSettings.open}
+        handleClose={()=>{
+          setModalSettings({...modalSettings,open:false})
+        }}          
+        render={Component}
+      />
       
     </Grid>
   )
