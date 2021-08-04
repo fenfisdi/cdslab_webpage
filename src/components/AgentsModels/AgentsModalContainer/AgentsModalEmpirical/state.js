@@ -7,6 +7,7 @@ import { SelectComponent } from '../../../ui/Select'
 import { useUploadButtonValue } from '../../../ui/UploadButton/useUploadButtonValue'
 import { useSwitchInputValue } from '../../../ui/SwitchInput/useSwitchInputValue'
 import { SwitchInput } from '../../../ui/SwitchInput'
+import { isEmpty } from 'lodash'
 
 
 
@@ -14,14 +15,32 @@ import { SwitchInput } from '../../../ui/SwitchInput'
 export const useAgentsModalEmpiricalState = () => {
 
   const uploadButton = useUploadButtonValue(null, { accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' })
-  const fieldsFormat = (valueSet,parameters) => {
+  
+  const handleKwargsReturn =(initialValues,default_value,multiple,currentMultipleName,parameter,type)=>{
+    if(multiple){      
+      return  !isEmpty(initialValues.distributions) && initialValues.distributions[currentMultipleName.name] ? 
+        typeBooleanKwargsMultiple(initialValues,currentMultipleName,parameter,type)
+        : default_value
+    }else if(!isEmpty(initialValues.distribution.kwargs)){      
+      return type == 'boolean' && initialValues.distribution.kwargs[parameter] ? 'True' :initialValues.distribution.kwargs[parameter]
+    }else {
+      return default_value
+    }
+  }
+  
+  const typeBooleanKwargsMultiple = (initialValues,currentMultipleName,parameter,type) => {
+    return (type == 'boolean' && initialValues.distributions[currentMultipleName.name]?.kwargs[parameter] ? 'True' :initialValues.distributions[currentMultipleName.name]?.kwargs[parameter])
+  }
+
+
+  const fieldsFormat = (valueSet,parameters,multiple, currentMultipleName) => {
     let fields = {}
     for (let params of parameters) {
       let field ={}
       const { parameter='',type='',default_value = '',values =[] }=params     
       field['label']=parameter
       field['type']=type                               
-      field['input'] = renderInput(type,values,parameter,default_value)
+      field['input'] = renderInput(type,values,parameter,handleKwargsReturn(valueSet,default_value,multiple,currentMultipleName,parameter,type))
       fields[parameter]=field     
     }
     return fields

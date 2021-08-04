@@ -7,6 +7,13 @@ export const requestListConfiguration = async () => {
   ) 
 }
 
+export const getConfigurationService = async (idConfiguration) => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}`,
+    'GET',
+  ) 
+}
+
 export const requestAddConfiguration = async (configurationForm) => {
   return request(
     `${process.env.REACT_APP_AGENTS}/configuration`,
