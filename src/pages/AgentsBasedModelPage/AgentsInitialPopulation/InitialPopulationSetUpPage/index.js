@@ -26,11 +26,18 @@ const InitialPopulationSetUpPage = () => {
 
   console.log('modalSettings>',modalSettings)
 
+
+  const getDataFilters = (data)=>{
+    console.log('getDataFilters:::>',data)
+  }
+
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
     modalSettings,  
     setModalSettings,
     hanldeDone:()=>{},
+    getDataFilters
   })
+  
   
  
   return (

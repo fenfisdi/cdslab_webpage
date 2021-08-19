@@ -4,15 +4,12 @@ import { Container} from './styles'
 const AgentsInitialPopulation = ({
   modalSettings,
   setModalSettings,
-  hanldeDone
+  hanldeDone,
+  getDataFilters
 }) => {
 
   const[isValid,setIsValid] = useState(false)
-  
-  const getDataFilters = (data)=>{
-    console.log('getDataFilters:::>',data)
-  }
-
+    
   return (
     <Container>
       <span style={{color:'#006064', fontSize:'19px', fontWeight:'500'}}>
