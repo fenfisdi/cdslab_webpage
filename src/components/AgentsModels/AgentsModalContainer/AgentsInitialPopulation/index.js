@@ -18,7 +18,7 @@ const AgentsInitialPopulation = ({
       <span style={{color:'#006064', fontSize:'19px', fontWeight:'500'}}>
         {modalSettings?.item?.variable.toUpperCase()}
       </span>
-      <NavNewVariable eventEmmiter={getDataFilters}/>
+      <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
   
     </Container>    
   )
