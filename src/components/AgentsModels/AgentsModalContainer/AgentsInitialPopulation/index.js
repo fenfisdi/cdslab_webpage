@@ -1,10 +1,6 @@
-import { Typography, Grid  } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NavNewVariable from './childrens/navNewVariable'
-
-
-
-
+import { Container} from './styles'
 const AgentsInitialPopulation = ({
   modalSettings,
   setModalSettings,
@@ -12,14 +8,19 @@ const AgentsInitialPopulation = ({
 }) => {
 
   const[isValid,setIsValid] = useState(false)
-  return (
-    <div>
-      <Grid container item xs={12} justify='center' alignItems='center'>
-        <p>Hola AgentsInitialPopulation </p>
-        <NavNewVariable />
   
-      </Grid>
-    </div>
+  const getDataFilters = (data)=>{
+    console.log('getDataFilters:::>',data)
+  }
+
+  return (
+    <Container>
+      <span style={{color:'#006064', fontSize:'19px', fontWeight:'500'}}>
+        {modalSettings?.item?.variable.toUpperCase()}
+      </span>
+      <NavNewVariable eventEmmiter={getDataFilters}/>
+  
+    </Container>    
   )
 
 }

@@ -62,8 +62,8 @@ const AgentsBasedModelPage = () => {
             <Route path={`${match.path}/agentsDiseaseStateGroupsPage`} exact component={AgentsDiseaseStateGroupsPage} />
             <Route path={`${match.path}/agentsConfigurationMessage`} exact component={AgentsConfigurationMessageExecution} />
             <Route path={`${match.path}/quarantineRestrictionsPage`} exact component={QuarantineRestrictionsPage} />
-            <Route path={`${match.path}/initialPopulationSetUpPage`} exact component={InitialPopulationSetUpPage} />
             <Route path={`${match.path}/quarantineGroupsPage`} exact component={QuarantineGroupsPage} />
+            <Route path={`${match.path}/initialPopulationSetUpPage`} exact component={InitialPopulationSetUpPage} />            
           </Switch>
         </Suspense>
       </AgentsModelPageContainer>
