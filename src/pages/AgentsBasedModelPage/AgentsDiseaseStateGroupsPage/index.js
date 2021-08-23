@@ -144,7 +144,7 @@ const AgentsDiseaseStateGroupsPage = () => {
           onClick={()=>{
             handleClickSaveDiseaseStateGroups(items)
           }}
-          disabled={!isValid?true:false}
+          disabled={isValid?true:false}
         />                
       </Grid>}
       {isEmpty(parameterList) &&  <LoaderComponent width="100px" height={100} marginTop="100px" />}   

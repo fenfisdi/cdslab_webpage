@@ -117,6 +117,8 @@ export const renderComponentChildre = (componentChildren, props) => {
   case OPTIONS_MODAL.VULNERABILITYGROUP:
     return{
       container:VulnerabilityGroup,
+      width:'80%',
+      height:'80%'
     }
 
   case OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS:

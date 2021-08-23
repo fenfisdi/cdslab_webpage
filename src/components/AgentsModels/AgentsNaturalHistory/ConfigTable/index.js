@@ -11,7 +11,6 @@ import TableInput from './TableInput'
 import { renderComponentChildre } from '../../../../utils/common'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
-import CompartmentalButton from '../../../CompartmentalModels/CompartmentalButton/'
 
 
 const ConfigTable = ({
@@ -87,7 +86,7 @@ const ConfigTable = ({
         open={openSettings}
         handleClose={handleCloseSettings}           
         render={Component}
-      />  
+      />
     </>
   )
 }
