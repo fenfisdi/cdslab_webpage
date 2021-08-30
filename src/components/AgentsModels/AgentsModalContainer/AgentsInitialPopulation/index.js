@@ -1,26 +1,25 @@
-import { Typography, Grid  } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import { Typography, Grid  } from '@material-ui/core'
 import AcordionItems from './childrens/acordionItems'
 import NavNewVariable from './childrens/navNewVariable'
-
-
-
-
+import { Container} from './styles'
 const AgentsInitialPopulation = ({
   modalSettings,
   setModalSettings,
-  hanldeDone
+  hanldeDone,
+  getDataFilters
 }) => {
 
   const[isValid,setIsValid] = useState(false)
+    
   return (
-    <div>
-      <Grid container item xs={12} justify='center' alignItems='center'>
-        <p>Hola AgentsInitialPopulation </p>
-        <NavNewVariable />
-        <AcordionItems />
-      </Grid>
-    </div>
+    <Container>
+      <span style={{color:'#006064', fontSize:'19px', fontWeight:'500'}}>
+        {modalSettings?.item?.variable.toUpperCase()}
+      </span>
+      <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
+      <AcordionItems />
+    </Container>    
   )
 
 }

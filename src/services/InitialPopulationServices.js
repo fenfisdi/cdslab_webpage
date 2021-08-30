@@ -5,3 +5,17 @@ export const getListAllowedVariablesService = async (idConfiguration) => {
     'GET',
   ) 
 }
+
+export const getListAllowedGroupsService = async (idConfiguration,variables='') => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/population/group${variables}`,
+    'GET'
+  ) 
+}
+
+export const getListAllowedValuesService = async (idConfiguration,value='') => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/population/value?variable=${value}`,
+    'GET',
+  ) 
+}
