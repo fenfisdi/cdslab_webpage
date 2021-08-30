@@ -1,5 +1,6 @@
 import { Typography, Grid  } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import AcordionItems from './childrens/acordionItems'
 import NavNewVariable from './childrens/navNewVariable'
 
 
@@ -17,7 +18,7 @@ const AgentsInitialPopulation = ({
       <Grid container item xs={12} justify='center' alignItems='center'>
         <p>Hola AgentsInitialPopulation </p>
         <NavNewVariable />
-  
+        <AcordionItems />
       </Grid>
     </div>
   )
