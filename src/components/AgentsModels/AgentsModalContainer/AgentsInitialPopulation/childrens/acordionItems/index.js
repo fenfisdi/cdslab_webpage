@@ -29,58 +29,27 @@ const AcordionItems = () => {
       ['hombre','mujer']
     ]
 
-    var arregloModificado  = [
-      [
-        {
-          name: 'adultos',
-          children: [
-            {
-              name : 'alto',
-              children : [
-                {
-                  name: 'hombre',
-                },
-                {
-                  name: 'mujer',
-                }
-              ]
-            },
-            {
-              name : 'medio',
-              children : [
-                {
-                  name: 'hombre',
-                },
-                {
-                  name: 'mujer',
-                }
-              ]
-            },
-            {
-              name : 'bajo',
-              children : [
-                {
-                  name: 'hombre',
-                },
-                {
-                  name: 'mujer',
-                }
-              ]
-            }
-          ]
-        } 
-      ]
-    ]
-    
-    for(var i = 0; i < var1.length; i++){
-      for(var j = 0; j < var1[i].length; j++){
-        arregloFormat.push({
-          name : var1[i][j],
-          children: var1[i+1]
-        })
+    recursive(var1,0)
+  }
+
+  const recursive = (dataArray, pos) => {
+    var jsonList = []
+    for (let i = 0; i < dataArray[pos].length; i++) {
+      var jsonRes = {
+        'name' : dataArray[pos][i]
+      }
+      jsonList.push(jsonRes)
+    }
+
+    if((pos + 1) < dataArray.length){
+      var child = recursive(dataArray,(pos + 1))
+      for (let i = 0; i < jsonList.length; i++) {
+        jsonList[i]['children'] = child
       }
     }
-    console.log(arregloFormat)
+
+    console.log(jsonList)
+    return jsonList
   }
 
 
