@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { AccordionSummary,Accordion,AccordionDetails, Button,makeStyles } from '@material-ui/core'
-import { Typography, Grid  } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Grid, makeStyles } from '@material-ui/core'
+import AccordionContainer from './accordionContainer'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -12,31 +11,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const AcordionItems = () => {
+const AcordionItems = ({configurationList,setConfigurationList}) => {
 
   const classes = useStyles()
+  const [groupsArray, setGroupsArray] = useState([])
 
-  const[isValid,setIsValid] = useState(false)
 
-  
-  let arregloFormat = []
+  useEffect(()=>{
+    if(configurationList.length>0){            
+      const [first, ...rest] = configurationList
+      const arr = [...rest,first]
+      recursive(arr,0)
+    }
+  },[configurationList])
 
-  const format = (children) =>{
-    const var1 = 
-    [
-      ['Adultos','Jovenes','Niños'],
-      ['alto','medio','bajo'],
-      ['hombre','mujer']
-    ]
-
-    recursive(var1,0)
-  }
 
   const recursive = (dataArray, pos) => {
     var jsonList = []
+    console.log('dataarray',dataArray)
     for (let i = 0; i < dataArray[pos].length; i++) {
       var jsonRes = {
-        'name' : dataArray[pos][i]
+        'name' : dataArray[pos][i].name
       }
       jsonList.push(jsonRes)
     }
@@ -47,8 +42,7 @@ const AcordionItems = () => {
         jsonList[i]['children'] = child
       }
     }
-
-    console.log(jsonList)
+    setGroupsArray(jsonList)
     return jsonList
   }
 
@@ -56,46 +50,13 @@ const AcordionItems = () => {
   return (
     <div>
       <Grid container item xs={12} justify='center' alignItems='center'>
-        <Button onClick={format}>asdasd</Button>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>Accordion 1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>Accordion 2</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion disabled>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography className={classes.heading}>Disabled Accordion</Typography>
-          </AccordionSummary>
-        </Accordion>
+        {
+          groupsArray.map((element,i) => {
+            return (
+              <AccordionContainer key={i} element={element} configurationList={configurationList} setConfigurationList={setConfigurationList} />
+            )
+          })
+        }
       </Grid>
     </div>
   )

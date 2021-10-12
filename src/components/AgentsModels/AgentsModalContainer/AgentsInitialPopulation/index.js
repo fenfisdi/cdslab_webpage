@@ -5,7 +5,9 @@ import NavNewVariable from './childrens/navNewVariable'
 import { Container} from './styles'
 const AgentsInitialPopulation = ({
   modalSettings,
-  getDataFilters
+  getDataFilters,
+  configurationList,
+  setConfigurationList
 }) => {
 
     
@@ -15,7 +17,7 @@ const AgentsInitialPopulation = ({
         {modalSettings?.item?.variable.toUpperCase()}
       </span>
       <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
-      <AcordionItems />
+      <AcordionItems configurationList={configurationList} setConfigurationList={setConfigurationList} />
     </Container>    
   )
 

@@ -27,24 +27,22 @@ const InitialPopulationSetUpPage = () => {
   } = useInitialPopulationSetUpState({modalSettings,setModalSettings})
 
   const getDataFilters = (data=[])=>{
-    const variableNestingList  = data.map((variableNesting)=>variableNesting?.name)
+    const variableNestingList  = data.map((variableNesting)=>{
+      return {
+        name : variableNesting?.name
+      } 
+    })
     setConfigurationList([...configurationList,variableNestingList])    
   }
 
-  useEffect(()=>{
-    if(configurationList.length>0){            
-      const [first, ...rest] = configurationList
-      const arr = [...rest,first]
-      console.log('configurationList:::::::::>',configurationList)
-      console.log('newArray::>',arr)
-    }
-  },[configurationList])
 
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
     modalSettings,  
     setModalSettings,
     hanldeDone:()=>{},
-    getDataFilters
+    getDataFilters,
+    configurationList,
+    setConfigurationList
   })
   
   

@@ -81,7 +81,13 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
               onClick: (_,{itemTable,indexItem}) => { 
                 if(itemTable.variable!=''){                                    
                   getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
-                    const variableNestingList  = groupInformation.data.data.map((variableNesting)=>variableNesting?.name)
+                    const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
+                      return {
+                        name : variableNesting?.name,
+                        value : 0
+                      } 
+                    })
+                    console.log(variableNestingList)
                     setConfigurationList([[...variableNestingList]])
                     setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
                   })
