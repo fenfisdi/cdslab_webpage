@@ -54,7 +54,7 @@ export const useAgentsAgeGroups = () => {
 
   const checkCounterPopulationList = (agesGroupsList)=>{    
     let counter = 0
-    console.log(agesGroupsList)
+    
     agesGroupsList.forEach((item) => {      
       counter = counter + item.population_percentage       
     })
@@ -109,7 +109,7 @@ export const useAgentsAgeGroups = () => {
   
   const handleClickSaveAgentsAgeModel =(information)=>{   
     const isValidPopulation = checkCounterPopulationList(information) 
-    console.log(isValidPopulation)
+    
     if(!isValidPopulation){
       setCounterPopulation(true)
     }else{

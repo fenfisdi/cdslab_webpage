@@ -21,7 +21,7 @@ export const useAdjustParametersState = ({ handleClickAdjustParameters }) => {
   }
 
   const sendForm = () => {
-    console.log('enviear el formualrio')
+    
   }
 
   return {

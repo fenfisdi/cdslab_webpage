@@ -131,7 +131,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     if(data == null && !error && idConfiguration!=''){
       getDiseaseStateGroupsInformation(idConfiguration)
     }else if(data != null && data.length > 0 && !error){
-      console.log('ARRAYR DiseaseStateGroups::::::::::::::::::::::>',data)      
+        
       setItems(parseInformationDiseaseStateGroupsModel(data))
     }
   },[data,error,idConfiguration])
@@ -192,7 +192,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
     
     if(isFile){      
       const formData = new FormData()
-      console.log(file)
+      
       formData.append('file',file)
       updateDiseaseStateGroupsItemAction(idConfiguration,schemaUpdate.identifier,schemaUpdate).then(()=>{        
         saveDiseaseStateGroupsItemFile(idConfiguration,schemaUpdate.identifier,formData,diseaseState['name']).then((diseaseStateGroupItemResponse)=>{ 

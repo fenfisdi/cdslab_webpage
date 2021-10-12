@@ -33,7 +33,7 @@ const QuarantineGroupsPage = () => {
         justify='flex-start'
         alignItems='center'
         container
-        style= {{'padding-bottom  ': '40px'}} 
+        style= {{'paddingBottom  ': '40px'}} 
         item 
         xs={12}>
         <AgentsTable

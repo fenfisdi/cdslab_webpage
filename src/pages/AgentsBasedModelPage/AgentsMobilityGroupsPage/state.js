@@ -101,7 +101,7 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnac
     if(data == null && !error && idConfiguration!=''){
       getMobilityGroupsInformation(idConfiguration)
     }else if(data != null && data.length > 0 && !error){
-      console.log('ARRAYR MOBILITIYGROUPS::::::::::::::::::::::>',data)      
+         
       setItems(parseInformationMobilityGroupsModel(data))
     }
   },[data,error,idConfiguration])
@@ -123,7 +123,7 @@ export const useAgentsMobilityGroups = ({modalSettings,setModalSettings,showSnac
     const idMobilityGroup = mobilityGroup?.identifier
     if(isFile){      
       const formData = new FormData()
-      console.log(file)
+      
       formData.append('file',file)
       updateMobilityGroupsItemAction(idConfiguration,idMobilityGroup,mobilityGroup).then(()=>{
         saveMobilityGroupsItemFile(idConfiguration,idMobilityGroup,formData).then(()=>{ 
