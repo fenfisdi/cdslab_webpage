@@ -15,11 +15,12 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
   } = useStore()
 
   const { 
-    getListAllowedVariablesAction
+    getListAllowedVariablesAction,
+    getListAllowedValuessAction
   } = useInitialPopulationActions(dispatch)
 
   const [idConfiguration, setIdConfiguration] = useState('')
- 
+  const [configurationList, setConfigurationList] = useState([])
 
   const schemaPopuletionConfigure = {
     'variable': '',
@@ -31,27 +32,6 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     },
     'state':''
   }
-
-
-  /* const schemaPopuletionConfigure = {
-    'variable': '',
-    'chain': [
-      'age'
-    ],
-    'values': {
-      'joven': {
-        'susceptibility 1': 0.1,
-        'susceptibility 2': 0.3,
-        'susceptibility 3': 0.6
-      },
-      'adulto': {
-        'susceptibility 1': 0.1,
-        'susceptibility 2': 0.3,
-        'susceptibility 3': 0.6
-      }
-    },
-    'state':''
-  } */
 
   const schemaOptions = {
     variable:{options:[]}
@@ -99,8 +79,12 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
           options:[    
             {
               onClick: (_,{itemTable,indexItem}) => { 
-                if(itemTable.variable!=''){
-                  setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                if(itemTable.variable!=''){                                    
+                  getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
+                    const variableNestingList  = groupInformation.data.data.map((variableNesting)=>variableNesting?.name)
+                    setConfigurationList([[...variableNestingList]])
+                    setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                  })
                 }                
               },
               isCheckable:true,
@@ -167,13 +151,6 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     }
   },[idConfiguration])
 
-  useEffect(()=>{
-    console.log('itemsTable',itemsTable)
-  },[itemsTable])
-
-  useEffect(()=>{
-    console.log('optionsByItem',optionsByItem)
-  },[optionsByItem])
 
   const handlerAddOption =()=>{
     const newSchemaOtion = Object.assign({}, schemaOptions)
@@ -184,13 +161,13 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     })    
   }
 
-
-  
   return {
     idConfiguration,
     fieldsToTable,
     itemsTable,
-    optionsByItem,    
+    optionsByItem,
+    configurationList,    
+    setConfigurationList,    
     getListAllowedVariablesAction,
     handlerAddOption
   }

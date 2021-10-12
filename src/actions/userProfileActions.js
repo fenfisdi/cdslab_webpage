@@ -12,7 +12,7 @@ export const userProfileActions = (dispatch) =>{
 
     getUserDataService()
       .then((response)=>{
-        console.log(response)
+        
         dispatch({
           type: USER_DATA_SUCCESS,
           payload: response.data.data

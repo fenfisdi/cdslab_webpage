@@ -67,11 +67,11 @@ const useNavNewVariableState =({eventEmmiter})=>{
   }
 
   const addNewGroup=()=>{
-    console.log(':::::::::>items',items)
+    
     const variablesConfigurated = generateVariablesPath(items)
     const newSchemaOtion = Object.assign({}, schemaSelectsConfigure)    
     getListAllowedGroupsAction(idConfiguration,variablesConfigurated).then((response)=>{
-      console.log(generateOptions(response.data.data))
+      
       newSchemaOtion.options = generateOptions(response.data.data)
       setItems([...items,newSchemaOtion])
     })        

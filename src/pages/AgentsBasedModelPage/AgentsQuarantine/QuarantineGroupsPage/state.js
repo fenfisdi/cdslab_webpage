@@ -99,8 +99,9 @@ export const useAgentsDiseaseStateGroups = ({showSnack, setShowSnack}) => {
       'has_cyclic_restrictions': has_cyclic_restrictions,
       'has_tracing_restrictions': has_tracing_restrictions,
     }  
-    saveQuarantineGroupsForm(shemaQuarantineGroups,idConfiguration)
-    redirectQuarantineGroups(has_cyclic_restrictions,has_tracing_restrictions)
+    saveQuarantineGroupsForm(shemaQuarantineGroups,idConfiguration).then(()=>{
+      redirectQuarantineGroups(has_cyclic_restrictions,has_tracing_restrictions)
+    })
   }
 
   return {

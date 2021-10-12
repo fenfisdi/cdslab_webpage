@@ -223,6 +223,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
           cloneFound.state = 'CONFIGURED'
           return cloneFound
         }
+        return {}
       })
      
       newArray.forEach(newElement=>{
@@ -333,8 +334,8 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
     const newVariables = schemaQuarantineGroups(quarantineGroupsToSave)
     newCycle.variables = convertArrayToObject(newVariables,'identifier')    
     putQuarantineInformationAction(idConfiguration,
-      {...quarantineConfig,cyclic_restrictions:newCycle}).then((response)=>{
-      console.log(response.data.data)
+      {...quarantineConfig,cyclic_restrictions:newCycle}).then(()=>{
+      
       history.push({
         pathname: 'agentsConfigurationMessage',
         search: `?idConfiguration=${idConfiguration}`

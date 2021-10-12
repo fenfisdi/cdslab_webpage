@@ -36,25 +36,21 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
         {loading && <LoaderComponent width="100p%" height={80} marginTop="20px" />}
         {!loading && <Fragment>
           <TitleComponent
-            justify={'center'}
-            alignItems={'center'}
+            justify='center'
+            alignItems='center'
             title={messageTitle}
-            variant={'h6'}
+            variant='h6'
           />
           <Grid
             item
             container
             xs={12}
-            spacing={1}
-            direction="column"
-            justify="center"
-            alignItems="center"
             className={classes.formEmail}
           >
             <Grid item container xs={12}>
               <p>{messageBody}</p>
             </Grid>
-            <Grid item container xs={12}>
+            <Grid item container xs={6}>
               <Input
                 disabled={false}
                 required
@@ -73,7 +69,6 @@ const AccountRecoveryEmailForm = ({ loading, handleClick, messageBody, messageTi
                 onClick={handleClickButton}
                 variant="contained"
                 color="primary"
-                className={{}}
                 disabled={ !isValid ? false : true }
               >
                 {t('common.continueButton')}

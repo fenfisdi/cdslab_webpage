@@ -100,7 +100,7 @@ export const useAgentSusceptibilityGroups = ({modalSettings,setModalSettings,sho
     if(data == null && !error && idConfiguration!=''){
       getSusceptibilityGroupsInformation(idConfiguration)
     }else if(data != null && data.length > 0 && !error){
-      console.log('ARRAYR SusceptibilityGroups::::::::::::::::::::::>',data)      
+          
       setItems(parseInformationSusceptibilityGroupsModel(data))
     }
   },[data,error,idConfiguration])
@@ -121,7 +121,7 @@ export const useAgentSusceptibilityGroups = ({modalSettings,setModalSettings,sho
     const idSusceptibilityGroups = susceptibilityGroups?.identifier
     if(isFile){      
       const formData = new FormData()
-      console.log(file)
+      
       formData.append('file',file)
       updateSusceptibilityGroupsItemAction(idConfiguration,idSusceptibilityGroups,susceptibilityGroups).then(()=>{        
         saveSusceptibilityGroupsItemFile(idConfiguration,idSusceptibilityGroups,formData).then(()=>{ 
