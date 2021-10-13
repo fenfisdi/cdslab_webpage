@@ -7,8 +7,8 @@ const defaultValueLabelFormat = (value) => `${value}`
 const defaultMinMaxFormat = (value) => `${value}`
 
 export default function TableSlider({
-  styles,
-  name,
+  styles={},
+  name='',
   min = 0,
   max = 1,
   step = 0.1,

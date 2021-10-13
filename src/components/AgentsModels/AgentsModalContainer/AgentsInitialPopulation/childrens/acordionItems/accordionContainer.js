@@ -27,38 +27,47 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const AccordionContainer = ({element,configurationList,setConfigurationList}) => {
+const AccordionContainer = ({element,arrayGroup,parent,setGroupsArray}) => {
   const classes = useStyles()
 
-  const handleItemChanged = (i, event, child) => {
-    //child.value = event?.slider?.value
-    console.log('configurationList',configurationList)
+  const handleItemChanged = ({i, event,child,element}) => {
+    
+    const newElment = Object.assign({}, element)
+    console.log('element',newElment)    
     console.log('child',child)
     console.log('event',event)
     console.log('i',i)
+    console.log(':::::arrayGroup>',arrayGroup)
+    newElment.children[i].value = event?.slider?.value    
+    const newArrayGroup = [...arrayGroup]
+    setGroupsArray(newArrayGroup)
 
-    configurationList[0][i].value = event?.slider?.value
-    setConfigurationList(configurationList)
+    /* configurationList[0][i].value = event?.slider?.value
+    setConfigurationList(configurationList) */
   }
 
-  
   const formatChildren = () => {
     return element?.children?.map((child, i) => {
       
       if(child.children){
         
-        return (<AccordionContainer className={classes.accordionCard} element={child} key={i} />
+        return (<AccordionContainer 
+          element={child} 
+          key={i} 
+          arrayGroup={arrayGroup}
+          parent={i}
+          setGroupsArray={setGroupsArray}
+        />
         ) 
       }else{
         return (<TableSlider
           key={i}
-          name={child.name}
-          id={i}
+          name={child.name}          
           value={child.value}
           min={0}
           max={100}
           step={1}
-          onChange={(event) => handleItemChanged(i, event,child)}
+          onChange={(event) => handleItemChanged({i, event,child,element})}
         />)
       }
     }) 
