@@ -51,6 +51,7 @@ const AccordionContainer = ({element,configurationList,setConfigurationList}) =>
         ) 
       }else{
         return (<TableSlider
+          key={i}
           name={child.name}
           id={i}
           value={child.value}

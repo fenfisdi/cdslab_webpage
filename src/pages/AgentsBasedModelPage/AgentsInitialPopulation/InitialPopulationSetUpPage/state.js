@@ -81,7 +81,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
                     const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
                       return {
                         name : variableNesting?.name,
-                        value : 1
+                        value : 0
                       } 
                     })
                     setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    

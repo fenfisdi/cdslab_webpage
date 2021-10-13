@@ -23,7 +23,8 @@ const AcordionItems = ({configurationList,setConfigurationList}) => {
     
     for (let i = 0; i < dataArray[pos].length; i++) {
       var jsonRes = {
-        'name' : dataArray[pos][i].name
+        'name' : dataArray[pos][i].name,
+        'value' : dataArray[pos][i]?.value
       }
       jsonList.push(jsonRes)
     }
