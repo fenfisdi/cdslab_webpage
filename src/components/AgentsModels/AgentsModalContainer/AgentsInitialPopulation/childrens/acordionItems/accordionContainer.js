@@ -52,7 +52,6 @@ const AccordionContainer = ({element,configurationList,setConfigurationList}) =>
       }else{
         return (<TableSlider
           name={child.name}
-          className={classes.accordion}
           id={i}
           value={child.value}
           min={0}
