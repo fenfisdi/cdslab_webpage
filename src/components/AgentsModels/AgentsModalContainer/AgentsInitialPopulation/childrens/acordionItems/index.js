@@ -53,7 +53,7 @@ const AcordionItems = ({configurationList,setConfigurationList}) => {
         {
           groupsArray.map((element,i) => {
             return (
-              <AccordionContainer key={i} element={element} configurationList={configurationList} setConfigurationList={setConfigurationList} />
+              <AccordionContainer className="col-md-12" key={i} element={element} configurationList={configurationList} setConfigurationList={setConfigurationList} />
             )
           })
         }

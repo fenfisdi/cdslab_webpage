@@ -84,7 +84,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
                     const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
                       return {
                         name : variableNesting?.name,
-                        value : 0
+                        value : 1
                       } 
                     })
                     console.log(variableNestingList)
