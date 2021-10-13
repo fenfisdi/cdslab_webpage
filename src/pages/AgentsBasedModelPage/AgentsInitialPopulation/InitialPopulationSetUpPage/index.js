@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useState }  from 'react'
 import { Grid } from '@material-ui/core'
 import Breadcrumbs from '../../../../components/Breadcrumbs'
 import { HELP_INFORMATION_AGE_MODELS } from '../../../../constants/helpInformation'
@@ -21,27 +21,34 @@ const InitialPopulationSetUpPage = () => {
     fieldsToTable,
     itemsTable,
     optionsByItem,
-    configurationList,    
+    configurationList, 
+    objectRequest,
+    setObjectRequest,   
     setConfigurationList,
     handlerAddOption,
   } = useInitialPopulationSetUpState({modalSettings,setModalSettings})
 
-  const getDataFilters = (data=[])=>{
+  const getDataFilters = (data=[],valueSlected)=>{
     const variableNestingList  = data.map((variableNesting)=>{
       return {
         name : variableNesting?.name
       } 
     })
+    setObjectRequest({...objectRequest,chain:[...objectRequest.chain,valueSlected]})
     setConfigurationList([...configurationList,variableNestingList])    
   }
 
+  console.log('::::::::::::::::::::>configurationList',configurationList)
+  console.log('::::::::::::::::::::>objectRequest',objectRequest)
 
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
-    modalSettings,  
+    modalSettings,
+    objectRequest,
+    configurationList,
+    setObjectRequest,
     setModalSettings,
     hanldeDone:()=>{},
     getDataFilters,
-    configurationList,
     setConfigurationList
   })
   

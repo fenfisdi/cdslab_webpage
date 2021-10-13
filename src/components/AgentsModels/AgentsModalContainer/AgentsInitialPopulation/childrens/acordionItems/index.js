@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, makeStyles } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import AccordionContainer from './accordionContainer'
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}))
+
 
 const AcordionItems = ({configurationList,setConfigurationList}) => {
 
-  const classes = useStyles()
+  
   const [groupsArray, setGroupsArray] = useState([])
 
 
@@ -28,7 +20,7 @@ const AcordionItems = ({configurationList,setConfigurationList}) => {
 
   const recursive = (dataArray, pos) => {
     var jsonList = []
-    console.log('dataarray',dataArray)
+    
     for (let i = 0; i < dataArray[pos].length; i++) {
       var jsonRes = {
         'name' : dataArray[pos][i].name
@@ -45,20 +37,33 @@ const AcordionItems = ({configurationList,setConfigurationList}) => {
     setGroupsArray(jsonList)
     return jsonList
   }
-
+  console.log(':::::::::::::::::groupsArray>',groupsArray)
 
   return (
-    <div>
-      <Grid container item xs={12} justify='center' alignItems='center'>
-        {
-          groupsArray.map((element,i) => {
-            return (
-              <AccordionContainer className="col-md-12" key={i} element={element} configurationList={configurationList} setConfigurationList={setConfigurationList} />
-            )
-          })
-        }
-      </Grid>
-    </div>
+    
+    <Grid 
+      container 
+      item 
+      xs={12} 
+      justify='center' 
+      alignItems='center' 
+      style={{ width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap'}}>
+      {
+        groupsArray.map((element,i) => {
+          return (
+            <AccordionContainer  
+              key={i} 
+              element={element} 
+              configurationList={configurationList} 
+              setConfigurationList={setConfigurationList} />
+          )
+        })
+      }
+    </Grid>
+    
   )
   
 }

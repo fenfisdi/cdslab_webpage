@@ -24,12 +24,8 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   const schemaPopuletionConfigure = {
     'variable': '',
-    'chain': [
-    
-    ],
-    'values': {
-      
-    },
+    'chain': [],
+    'values': {},
     'state':''
   }
 
@@ -38,7 +34,8 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
   }
 
   const [itemsTable,setItemTable]= useState([{...schemaPopuletionConfigure}])
-  
+  const [objectRequest,setObjectRequest] = useState(schemaPopuletionConfigure)
+
   const [optionsByItem,setOptionsByItem]= useState({
     0:{...Object.assign({}, schemaOptions)}
   })
@@ -87,7 +84,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
                         value : 1
                       } 
                     })
-                    console.log(variableNestingList)
+                    setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
                     setConfigurationList([[...variableNestingList]])
                     setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
                   })
@@ -172,10 +169,13 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     fieldsToTable,
     itemsTable,
     optionsByItem,
-    configurationList,    
+    configurationList,
+    objectRequest,
+    setObjectRequest,
     setConfigurationList,    
     getListAllowedVariablesAction,
-    handlerAddOption
+    handlerAddOption,
+    setItemTable
   }
 
 }

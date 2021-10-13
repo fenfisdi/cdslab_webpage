@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { AccordionSummary,Accordion,AccordionDetails, Button,makeStyles } from '@material-ui/core'
+import React from 'react'
+import { AccordionSummary,Accordion,AccordionDetails,makeStyles } from '@material-ui/core'
 import { Typography, Grid  } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import TableInput from '../../../../AgentsTableConfiguration/TableInput'
 import TableSlider from '../../../../AgentsTableConfiguration/TableInput/Slider'
 
 const useStyles = makeStyles((theme) => ({
@@ -14,9 +13,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
   accordion : {
-    display: 'block',
+    display: 'flex',
     'min-width': '760px',
-    padding: '10px'
+    padding: '10px',
+    'flex-direction': 'column',
+  },
+  accordionCard : {
+    display: 'flex',    
+    'flex-direction': 'column',
+    width: '100%',
   }
   
 }))
@@ -36,15 +41,13 @@ const AccordionContainer = ({element,configurationList,setConfigurationList}) =>
     setConfigurationList(configurationList)
   }
 
-  console.log(configurationList)
+  
   const formatChildren = () => {
     return element?.children?.map((child, i) => {
       
       if(child.children){
         
-        return (<div className="col-md-12 container">
-          <AccordionContainer className="col-md-12" element={child} key={i} />
-        </div>
+        return (<AccordionContainer className={classes.accordionCard} element={child} key={i} />
         ) 
       }else{
         return (<TableSlider
@@ -62,29 +65,25 @@ const AccordionContainer = ({element,configurationList,setConfigurationList}) =>
   }
 
   return (
-    <div>
-      <Grid container item xs={12} justify='center' alignItems='center' className={classes.accordion}>
-        <Accordion className="col-md-12">
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}> {element.name} </Typography>
-          </AccordionSummary>
-          <AccordionDetails className="col-md-12">
-            {/* <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-            </Typography> */}
-            {
-              formatChildren() 
-            }
-          </AccordionDetails>
-        </Accordion>
+    
+    <Grid container item xs={12} className={classes.accordion}>
+      <Accordion className={classes.accordionCard}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}> {element.name} </Typography>
+        </AccordionSummary>
+        <AccordionDetails className={classes.accordionCard}>
+          {
+            formatChildren() 
+          }
+        </AccordionDetails>
+      </Accordion>
       
-      </Grid>
-    </div>
+    </Grid>
+    
   )
   
 }

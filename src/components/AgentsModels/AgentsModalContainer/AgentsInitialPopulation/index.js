@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Grid  } from '@material-ui/core'
+import React from 'react'
 import AcordionItems from './childrens/acordionItems'
 import NavNewVariable from './childrens/navNewVariable'
 import { Container} from './styles'

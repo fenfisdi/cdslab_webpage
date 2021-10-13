@@ -26,7 +26,7 @@ const useNavNewVariableState =({eventEmmiter})=>{
       itemsCopy[index] = { ...itemsCopy[index], value }
       getListAllowedValuessAction(idConfiguration,value).then((responseAllowedValues)=>{ 
         const dataFilter = responseAllowedValues.data.data
-        eventEmmiter(dataFilter)
+        eventEmmiter(dataFilter,value)
         setItemsCurrent(itemsCopy)  
       })      
     }
