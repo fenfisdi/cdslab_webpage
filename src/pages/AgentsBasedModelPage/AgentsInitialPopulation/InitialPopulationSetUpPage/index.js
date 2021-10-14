@@ -28,6 +28,108 @@ const InitialPopulationSetUpPage = () => {
     handlerAddOption,
   } = useInitialPopulationSetUpState({modalSettings,setModalSettings})
 
+  const informationFired = [
+    {
+      'name': 'age david 1', 
+      'value': 'undefined', 
+      'children': 
+      [
+        {
+          'name': 'age david 1', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 2', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 3', 
+          'value': 'undefined', 
+          'children': [
+          {'name': 'vulnerability david 1', 'value': 0},
+          {'name': 'vulnerability david 2', 'value': 0}
+         ]
+        }
+      ]
+    },
+    {
+      'name': 'age david 2', 
+      'value': 'undefined', 
+      'children': 
+      [
+        {
+          'name': 'age david 1', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 2', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 3', 
+          'value': 'undefined', 
+          'children': [
+          {'name': 'vulnerability david 1', 'value': 0},
+          {'name': 'vulnerability david 2', 'value': 0}
+         ]
+        }
+      ]
+    },
+    {
+      'name': 'age david 3', 
+      'value': 'undefined', 
+      'children': 
+      [
+        {
+          'name': 'age david 1', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 2', 
+          'value': 'undefined', 
+          'children':[
+            {'name': 'vulnerability david 1', 'value': 0},
+            {'name': 'vulnerability david 2', 'value': 0}
+           ]
+        },
+        {
+          'name': 'age david 3', 
+          'value': 'undefined', 
+          'children': [
+          {'name': 'vulnerability david 1', 'value': 0},
+          {'name': 'vulnerability david 2', 'value': 0}
+         ]
+        }
+      ]
+    }
+  ]
+
+  const infomationArrayMock = [
+    [{name:'age 1'}, {name:'age 2'}],
+    [{name:'age 1'}, {name:'age 2'}],
+    [{name:'vul1',value:0}, {name:'vul2',value:0}]
+  ]
+
   const [groupsArray, setGroupsArray] = useState([])
 
   const getDataFilters = (data=[],valueSlected)=>{
@@ -40,12 +142,18 @@ const InitialPopulationSetUpPage = () => {
     setConfigurationList([...configurationList,variableNestingList])    
   }
 
+  /* useEffect(() => {
+    if(infomationArrayMock.length>0 && groupsArray.length==0){
+      setGroupsArray(recursive(infomationArrayMock,0))      
+    }
+  },[infomationArrayMock]) */
+
   useEffect(()=>{
     console.log('::::::::::::::::::::>configurationList',configurationList)
     if(configurationList.length>0){            
       const [first, ...rest] = configurationList
       const arr = [...rest,first]
-      recursive(arr,0)
+      setGroupsArray(recursive(arr,0))
     }
   },[configurationList])
 
@@ -55,10 +163,10 @@ const InitialPopulationSetUpPage = () => {
 
 
   const recursive = (dataArray, pos) => {
-    var jsonList = []
+    let jsonList = []
     
     for (let i = 0; i < dataArray[pos].length; i++) {
-      var jsonRes = {
+      const jsonRes = {
         'name' : dataArray[pos][i].name,
         'value' : dataArray[pos][i]?.value
       }
@@ -66,12 +174,11 @@ const InitialPopulationSetUpPage = () => {
     }
 
     if((pos + 1) < dataArray.length){
-      var child = recursive(dataArray,(pos + 1))
+      const child = recursive(dataArray,(pos + 1))
       for (let i = 0; i < jsonList.length; i++) {
-        jsonList[i]['children'] = child
+        jsonList[i]['children'] = [...child]
       }
     }
-    setGroupsArray(jsonList)
     return jsonList
   }
 

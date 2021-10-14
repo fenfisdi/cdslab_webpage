@@ -13,7 +13,7 @@ const AgentsInitialPopulation = ({
   return (
     <Container>
       <span style={{color:'#006064', fontSize:'19px', fontWeight:500}}>
-        {modalSettings?.item?.variable.toUpperCase()}
+        {modalSettings?.item?.variable?.toUpperCase()}
       </span>
       <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
       <AcordionItems groupsArray={groupsArray} setGroupsArray={setGroupsArray} />

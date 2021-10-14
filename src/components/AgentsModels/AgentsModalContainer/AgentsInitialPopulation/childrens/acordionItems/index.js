@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import AccordionContainer from './accordionContainer'
+import cloneDeep from 'lodash.clonedeep'
 
 
 const AcordionItems = ({groupsArray,setGroupsArray}) => {
@@ -20,13 +21,14 @@ const AcordionItems = ({groupsArray,setGroupsArray}) => {
         flexWrap: 'wrap'}}>
       {
         groupsArray.map((element,i) => {
+          const newElment = cloneDeep(element)
           return (
             <AccordionContainer  
-              key={i} 
-              element={element}
+              key={`parent-${i}`} 
+              element={newElment}
               arrayGroup={groupsArray}
               setGroupsArray={setGroupsArray}
-              parent={i} 
+              parent={`${i}`} 
             />
           )
         })

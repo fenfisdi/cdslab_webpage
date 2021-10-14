@@ -12,7 +12,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    indent: ['error', 2],
+    'template-curly-spacing' : 'off',
+    indent : 'off',
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
     'react/prop-types': 'off',
