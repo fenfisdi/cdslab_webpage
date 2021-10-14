@@ -102,7 +102,6 @@ const AccordionContainer = ({element,arrayGroup,parent,setGroupsArray}) => {
           }
         </AccordionDetails>
       </Accordion>
-      
     </Grid>
     
   )

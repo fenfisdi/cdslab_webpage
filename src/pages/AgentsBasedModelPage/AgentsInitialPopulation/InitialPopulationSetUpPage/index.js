@@ -30,12 +30,12 @@ const InitialPopulationSetUpPage = () => {
 
   const informationFired = [
     {
-      'name': 'age david 1', 
+      'name': 'age', 
       'value': 'undefined', 
       'children': 
       [
         {
-          'name': 'age david 1', 
+          'name': 'david 1', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -43,7 +43,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 2', 
+          'name': 'david 2', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -51,7 +51,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 3', 
+          'name': 'david 3', 
           'value': 'undefined', 
           'children': [
           {'name': 'vulnerability david 1', 'value': 0},
@@ -61,12 +61,12 @@ const InitialPopulationSetUpPage = () => {
       ]
     },
     {
-      'name': 'age david 2', 
+      'name': 'age2', 
       'value': 'undefined', 
       'children': 
       [
         {
-          'name': 'age david 1', 
+          'name': 'david 4', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -74,7 +74,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 2', 
+          'name': 'david 5', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -82,7 +82,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 3', 
+          'name': 'david 6', 
           'value': 'undefined', 
           'children': [
           {'name': 'vulnerability david 1', 'value': 0},
@@ -92,12 +92,12 @@ const InitialPopulationSetUpPage = () => {
       ]
     },
     {
-      'name': 'age david 3', 
+      'name': 'age3', 
       'value': 'undefined', 
       'children': 
       [
         {
-          'name': 'age david 1', 
+          'name': 'david 1', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -105,7 +105,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 2', 
+          'name': 'david 2', 
           'value': 'undefined', 
           'children':[
             {'name': 'vulnerability david 1', 'value': 0},
@@ -113,7 +113,7 @@ const InitialPopulationSetUpPage = () => {
            ]
         },
         {
-          'name': 'age david 3', 
+          'name': 'david 3', 
           'value': 'undefined', 
           'children': [
           {'name': 'vulnerability david 1', 'value': 0},
@@ -125,9 +125,9 @@ const InitialPopulationSetUpPage = () => {
   ]
 
   const infomationArrayMock = [
-    [{name:'age 1'}, {name:'age 2'}],
-    [{name:'age 1'}, {name:'age 2'}],
-    [{name:'vul1',value:0}, {name:'vul2',value:0}]
+    [{name:'age 1'}, {name:'age 2'}, {name:'age 2'}],
+    [{name:'david 1'}, {name:'david 2'}],
+    [{name:'vul1',value:14}, {name:'vul2',value:34}]
   ]
 
   const [groupsArray, setGroupsArray] = useState([])
@@ -159,6 +159,8 @@ const InitialPopulationSetUpPage = () => {
 
   useEffect(()=>{
     console.log('useEffe groupsArray::::::::::::>',groupsArray)
+    console.log('useEffec objectRequest:::::>',objectRequest)
+    console.log('::::::::::::::::::::>configurationList',configurationList)
   },[groupsArray])
 
 
@@ -182,10 +184,24 @@ const InitialPopulationSetUpPage = () => {
     return jsonList
   }
 
+  const formatInfoRecursive = (dataArray) => {
+    let jsonList = {}
+    for (let i = 0; i < dataArray.length; i++) {
+        if(Object.prototype.hasOwnProperty.call(dataArray[i], 'children')){
+          jsonList[dataArray[i]['name']] = formatInfoRecursive(dataArray[i]['children'])
+        }else{
+          jsonList[dataArray[i]['name']] = dataArray[i]['value']
+        }
+    }
+    return jsonList
+  }
+
   
-  useEffect(()=>{
-    console.log('useEffec objectRequest:::::>',objectRequest)
-  },[objectRequest])
+  const handleSaveInfo = () => {
+    
+    console.log(formatInfoRecursive(groupsArray, 0))
+
+  }
 
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
     modalSettings,
@@ -197,8 +213,10 @@ const InitialPopulationSetUpPage = () => {
     setModalSettings,
     hanldeDone:()=>{},
     getDataFilters,
-    setConfigurationList
+    setConfigurationList,
+    handleSaveInfo
   })
+
   
   
  

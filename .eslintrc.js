@@ -5,11 +5,13 @@ module.exports = {
     es2021: true,
     jest: true
   },
+
   parser: 'babel-eslint',
   extends: ['eslint:recommended', 'plugin:react/recommended'],
   parserOptions: {
     ecmaVersion: 12
   },
+
   plugins: ['react'],
   rules: {
     'template-curly-spacing' : 'off',
@@ -21,6 +23,7 @@ module.exports = {
       'warn',
       { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
     ],
-    'no-return-await': ['error']
+    'no-return-await': ['error'],
+    'no-debugger':'off'
   }
 }

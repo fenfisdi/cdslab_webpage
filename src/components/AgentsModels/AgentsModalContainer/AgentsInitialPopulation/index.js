@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core'
 import React from 'react'
 import AcordionItems from './childrens/acordionItems'
 import NavNewVariable from './childrens/navNewVariable'
@@ -6,10 +7,10 @@ const AgentsInitialPopulation = ({
   modalSettings,
   getDataFilters,
   groupsArray,
-  setGroupsArray
+  setGroupsArray,
+  handleSaveInfo
 }) => {
 
-    
   return (
     <Container>
       <span style={{color:'#006064', fontSize:'19px', fontWeight:500}}>
@@ -17,6 +18,8 @@ const AgentsInitialPopulation = ({
       </span>
       <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
       <AcordionItems groupsArray={groupsArray} setGroupsArray={setGroupsArray} />
+      
+      <Button onClick={() => handleSaveInfo()}>Cancel</Button>
     </Container>    
   )
 
