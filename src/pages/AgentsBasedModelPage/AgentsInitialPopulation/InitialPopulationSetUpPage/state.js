@@ -8,7 +8,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import CheckIcon from '@material-ui/icons/Check'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 
-export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}) => {
+export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings,groupsArray,setGroupsArray}) => {
   const history = useHistory()
   const {   
     dispatch
@@ -16,7 +16,9 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   const { 
     getListAllowedVariablesAction,
-    getListAllowedValuessAction
+    getListAllowedValuessAction,
+    postPopulation,
+    getPopulation
   } = useInitialPopulationActions(dispatch)
 
   const [idConfiguration, setIdConfiguration] = useState('')
@@ -57,7 +59,9 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
         props:{
           name:'variable',
           label:'',
-          disabled:false,
+          onDisabled:({itemTable})=>{                        
+            return itemTable.state != ''?true:false
+          },
           required:true,
           fullWidth:false,
           variant:'outlined',            
@@ -84,6 +88,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
                         value : 0
                       } 
                     })
+                    setGroupsArray([])
                     setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
                     setConfigurationList([[...variableNestingList]])
                     setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
@@ -103,7 +108,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
               className: 'option-button-check',
               children:CheckIcon,
               validation:(itemValue)=>{
-                return !isEmpty(itemValue.values) && itemValue.chain.length>0
+                return itemValue.state!=''
               }
             },
             {
@@ -146,11 +151,32 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   useEffect(()=>{
     if(idConfiguration!='' && optionsByItem[0].variable.options.length == 0){
-      getListAllowedVariablesAction(idConfiguration).then((response)=>{        
-        const newOptionByItems =Object.assign({}, optionsByItem[0])
-        newOptionByItems.variable.options = parseInformationOptionsByItem(response.data.data)
-        setOptionsByItem({...optionsByItem,[0]:newOptionByItems})
-      })
+      getPopulation(idConfiguration).then((response)=>{        
+        const arrayToListConfigurated = response.data.data
+        if(arrayToListConfigurated.length>0){
+          let valuesToOptions={}
+          let valuesToItemsTable=[]
+          arrayToListConfigurated.map((populationSaved,index)=>{            
+            const newOptionByItems =JSON.parse(JSON.stringify(schemaOptions))
+            newOptionByItems.variable.options = [{label:populationSaved,value:populationSaved}]
+            valuesToOptions[index]=newOptionByItems
+            valuesToItemsTable.push({
+              'variable': populationSaved,
+              'chain': [],
+              'values': {},
+              'state':'Configured'
+            })            
+          })          
+          setOptionsByItem({...valuesToOptions})
+          setItemTable(valuesToItemsTable)
+        }else{
+          getListAllowedVariablesAction(idConfiguration).then((response)=>{    
+            const newOptionByItems =Object.assign({}, optionsByItem[0])
+            newOptionByItems.variable.options = parseInformationOptionsByItem(response.data.data)
+            setOptionsByItem({...optionsByItem,[0]:newOptionByItems})
+          })
+        }     
+      })      
     }
   },[idConfiguration])
 
@@ -175,7 +201,8 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     setConfigurationList,    
     getListAllowedVariablesAction,
     handlerAddOption,
-    setItemTable
+    setItemTable,
+    postPopulation
   }
 
 }

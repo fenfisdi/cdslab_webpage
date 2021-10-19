@@ -19,7 +19,7 @@ const AgentsInitialPopulation = ({
       <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
       <AcordionItems groupsArray={groupsArray} setGroupsArray={setGroupsArray} />
       
-      <Button onClick={() => handleSaveInfo()}>Cancel</Button>
+      <Button onClick={() => handleSaveInfo()}>Guardar</Button>
     </Container>    
   )
 

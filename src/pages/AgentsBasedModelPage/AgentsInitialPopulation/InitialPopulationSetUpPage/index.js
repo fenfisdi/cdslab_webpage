@@ -5,7 +5,6 @@ import { HELP_INFORMATION_AGE_MODELS } from '../../../../constants/helpInformati
 import SupportComponent from '../../../../components/SupportComponent'
 import InitialPopulationTable from './children/InitialPopulationTable'
 import { useInitialPopulationSetUpState } from './state'
-import ActionZoneInitialPopulation from './children/ActionZone'
 import { renderComponentChildre } from '../../../../utils/common'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
@@ -17,120 +16,26 @@ const InitialPopulationSetUpPage = () => {
     index:0
   })
 
+  const [groupsArray, setGroupsArray] = useState([])
+
   const {    
     fieldsToTable,
     itemsTable,
     optionsByItem,
     configurationList, 
     objectRequest,
+    idConfiguration,
     setObjectRequest,   
     setConfigurationList,
     handlerAddOption,
-  } = useInitialPopulationSetUpState({modalSettings,setModalSettings})
+    postPopulation,
+    setItemTable
+  } = useInitialPopulationSetUpState({
+    modalSettings,
+    setModalSettings,
+    groupsArray,
+    setGroupsArray})
 
-  const informationFired = [
-    {
-      'name': 'age', 
-      'value': 'undefined', 
-      'children': 
-      [
-        {
-          'name': 'david 1', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 2', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 3', 
-          'value': 'undefined', 
-          'children': [
-          {'name': 'vulnerability david 1', 'value': 0},
-          {'name': 'vulnerability david 2', 'value': 0}
-         ]
-        }
-      ]
-    },
-    {
-      'name': 'age2', 
-      'value': 'undefined', 
-      'children': 
-      [
-        {
-          'name': 'david 4', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 5', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 6', 
-          'value': 'undefined', 
-          'children': [
-          {'name': 'vulnerability david 1', 'value': 0},
-          {'name': 'vulnerability david 2', 'value': 0}
-         ]
-        }
-      ]
-    },
-    {
-      'name': 'age3', 
-      'value': 'undefined', 
-      'children': 
-      [
-        {
-          'name': 'david 1', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 2', 
-          'value': 'undefined', 
-          'children':[
-            {'name': 'vulnerability david 1', 'value': 0},
-            {'name': 'vulnerability david 2', 'value': 0}
-           ]
-        },
-        {
-          'name': 'david 3', 
-          'value': 'undefined', 
-          'children': [
-          {'name': 'vulnerability david 1', 'value': 0},
-          {'name': 'vulnerability david 2', 'value': 0}
-         ]
-        }
-      ]
-    }
-  ]
-
-  const infomationArrayMock = [
-    [{name:'age 1'}, {name:'age 2'}, {name:'age 2'}],
-    [{name:'david 1'}, {name:'david 2'}],
-    [{name:'vul1',value:14}, {name:'vul2',value:34}]
-  ]
-
-  const [groupsArray, setGroupsArray] = useState([])
 
   const getDataFilters = (data=[],valueSlected)=>{
     const variableNestingList  = data.map((variableNesting)=>{
@@ -142,33 +47,22 @@ const InitialPopulationSetUpPage = () => {
     setConfigurationList([...configurationList,variableNestingList])    
   }
 
-  /* useEffect(() => {
-    if(infomationArrayMock.length>0 && groupsArray.length==0){
-      setGroupsArray(recursive(infomationArrayMock,0))      
-    }
-  },[infomationArrayMock]) */
 
   useEffect(()=>{
-    console.log('::::::::::::::::::::>configurationList',configurationList)
-    if(configurationList.length>0){            
+    if(configurationList.length>1){            
       const [first, ...rest] = configurationList
       const arr = [...rest,first]
       setGroupsArray(recursive(arr,0))
     }
   },[configurationList])
 
-  useEffect(()=>{
-    console.log('useEffe groupsArray::::::::::::>',groupsArray)
-    console.log('useEffec objectRequest:::::>',objectRequest)
-    console.log('::::::::::::::::::::>configurationList',configurationList)
-  },[groupsArray])
 
 
   const recursive = (dataArray, pos) => {
     let jsonList = []
     
     for (let i = 0; i < dataArray[pos].length; i++) {
-      const jsonRes = {
+      let jsonRes = {
         'name' : dataArray[pos][i].name,
         'value' : dataArray[pos][i]?.value
       }
@@ -176,12 +70,12 @@ const InitialPopulationSetUpPage = () => {
     }
 
     if((pos + 1) < dataArray.length){
-      const child = recursive(dataArray,(pos + 1))
+      let child = [...recursive([...dataArray],(pos + 1))]
       for (let i = 0; i < jsonList.length; i++) {
-        jsonList[i]['children'] = [...child]
+        jsonList[i]['children'] = JSON.parse(JSON.stringify(child))
       }
     }
-    return jsonList
+    return [...jsonList]
   }
 
   const formatInfoRecursive = (dataArray) => {
@@ -199,8 +93,30 @@ const InitialPopulationSetUpPage = () => {
   
   const handleSaveInfo = () => {
     
-    console.log(formatInfoRecursive(groupsArray, 0))
-
+    const requestObject={
+      'variable': objectRequest.variable,
+      'chain':objectRequest.chain,
+      'values':formatInfoRecursive(groupsArray),
+      'state':'Configured'
+      }            
+    
+    postPopulation(idConfiguration,requestObject).then((response)=>{
+      console.log(response)
+      setObjectRequest({
+        'variable': '',
+      'chain': [],
+      'values': {},
+      'state':''
+      })
+      let newItemsTable = [...itemsTable]
+      newItemsTable[modalSettings.index] = requestObject
+      setItemTable([...newItemsTable])
+      setModalSettings({
+        open:false,
+        item:{},
+        index:0
+      })
+    }) 
   }
 
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
@@ -219,7 +135,7 @@ const InitialPopulationSetUpPage = () => {
 
   
   
- 
+
   return (
     <Grid container xs={12} direction='column'>
       <Grid container item xs={12}
@@ -241,7 +157,6 @@ const InitialPopulationSetUpPage = () => {
           itemsTable={itemsTable}
           optionsByItem={optionsByItem}
           handlerAddOption={handlerAddOption}
-          actionZone={ActionZoneInitialPopulation}
         />     
       </Grid>
       <AgentsModalContainer

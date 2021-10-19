@@ -19,3 +19,19 @@ export const getListAllowedValuesService = async (idConfiguration,value='') => {
     'GET',
   ) 
 }
+
+export const postPopulationService = async (idConfiguration,value) => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/population`,
+    'PUT',
+    value
+  ) 
+}
+
+
+export const getPopulationService = async (idConfiguration) => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/population/configured`,
+    'GET'
+  ) 
+}

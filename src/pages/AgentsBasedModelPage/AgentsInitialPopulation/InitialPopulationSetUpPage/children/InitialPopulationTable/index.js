@@ -64,8 +64,7 @@ export default function InitialPopulationTable({tableFields,itemsTable,optionsBy
                     {headers.map((itemHeader,indexHeader)=>{ 
                       const Component = renderComponentElement(body[itemHeader.attr]?.type)  
                   
-                      const elementRow =(ComponentElement,itemElement)=>{                      
-                    
+                      const elementRow =(ComponentElement,itemElement)=>{                        
                         return ComponentElement!=null ?
                           <div style={{display:'flex',width:'100%',justifyContent:'center',alignItems:'center'}}>                            
                             <ComponentElement.container                              
@@ -77,6 +76,10 @@ export default function InitialPopulationTable({tableFields,itemsTable,optionsBy
                               onChange={(event)=>{                                 
                                 itemElement?.props.onChange({event,itemTable,indexItemTable,propHeader:itemHeader})
                               }}
+                              disabled={
+                                itemElement?.props?.onDisabled!=undefined ? 
+                                itemElement?.props?.onDisabled({itemTable,indexItemTable,propHeader:itemHeader}):
+                                false}
                             />                        
                           </div>
                           : (typeof itemElement?.label == 'function') ? <p style={{'color':'#006064'}}>{itemElement?.label(indexItemTable+1)}</p>: itemElement?.label

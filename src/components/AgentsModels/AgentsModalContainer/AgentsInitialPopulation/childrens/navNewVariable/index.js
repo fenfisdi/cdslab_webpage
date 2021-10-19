@@ -5,12 +5,13 @@ import useNavNewVariableState from './state'
 import { TitleContainer, Container, VariablesContainer, NestingContainer, NestingButton, FiltersContainer, LabelVariable } from './styles'
 
 const NavNewVariable = ({eventEmmiter,variableToConfig}) => {
+  
   const { 
     items,
     setItems,
     addNewGroup,
     validationNoTnullValueItems } =useNavNewVariableState({eventEmmiter})
-
+    
   return (          
     <Container>
 
