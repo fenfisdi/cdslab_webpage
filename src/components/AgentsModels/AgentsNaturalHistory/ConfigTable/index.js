@@ -36,12 +36,10 @@ const ConfigTable = ({
   })
   
   const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.VULNERABILITYGROUP)
-
   const Component = renderComponentChildre(componentChildren)
 
-
-  const renderRows = () =>
-    items.map((item, i) => (
+  const renderRows = () => 
+    initialItems.map((item, i) => (
       <TableRow key={'item-' + i}>
         {columns.map((column, j) => (
           <TableCell key={'cell-' + j}>
@@ -60,7 +58,7 @@ const ConfigTable = ({
             showConfig={showConfig}
             showCheck={showCheck}
             showDelete={showDelete}
-            itemsCount={items.length}
+            itemsCount={initialItems.length}
             index={i}
             isConfigured={item.state === 'CONFIGURED'}
             handleItemDeleted={handleItemDeleted}

@@ -1,49 +1,37 @@
-import { isEmpty } from 'lodash'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useStore } from '../../../store/storeContext'
+import { isEmpty } from 'lodash'
 import { getStateWithQueryparams } from '../../CompartmentalModelPage/common'
-import { useAgentsVulnerabilityGroupsActions } from '@actions/agentsVulnerabilityGroupsActions'
+import NestingContext from '../../../context/Nesting/nestingContext'
 
-export const useAgentsNaturalHistoryPageState = ()=>{
-
+export const useAgentsNaturalHistoryPageState = () => {
   const history = useHistory()
   const [idConfiguration, setIdConfiguration] = useState('')
-  const [isValid, setIsValid] = useState(false)
 
+  const nestingContext = useContext(NestingContext)
   const {
-    state: {
-      agentsVulnerabilityGroups: {
-        data,
-        error
-      }
-    },
-    dispatch
-  } = useStore()
+    vulnerabilityGroupDiseaseStates,
+    VulnerabilityGroupsInformation,
+    loadVulnerabilityGroupDiseaseState,
+    loadVulnerabilityGroupsInformation
+  } = nestingContext
 
-  const { 
-    saveVulnerabilityGroupsInformation, 
-    getVulnerabilityGroupsInformation 
-  } = useAgentsVulnerabilityGroupsActions(dispatch)
-
-  useEffect(()=>{
+  useEffect( () => {
     const params = getStateWithQueryparams(history)    
-    if(!isEmpty(params)){
+    if( !isEmpty(params) ){
       setIdConfiguration(params.idConfiguration)
     }
-  },[history])
+  }, [ history ])
 
-  useEffect(()=>{     
-    if(data == null && !error && idConfiguration!=''){
-      getVulnerabilityGroupsInformation(idConfiguration)
-      console.log(data) 
-    }else if(data != null && data.length > 0 && !error){
-      console.log('ARRAYR VulnerabilityGroups::::::::::::::::::::::>',data)      
-      /* setItems(parseInformationVulnerabilityGroupsModel(data)) */
+  useEffect(() => {
+    if (idConfiguration) {
+      loadVulnerabilityGroupsInformation(idConfiguration)
+      loadVulnerabilityGroupDiseaseState(idConfiguration)
     }
-  },[data,error,idConfiguration])
+  }, [idConfiguration])
 
-  return{
-    data
+  return {
+    VulnerabilityGroupsInformation,
+    vulnerabilityGroupDiseaseStates
   }
 }

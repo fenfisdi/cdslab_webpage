@@ -18,7 +18,7 @@ const AgentsBasedModelPage = () => {
   const AgentsDiseaseStateGroupsPage = React.lazy(()=> import('./AgentsDiseaseStateGroupsPage'))
   const AgentsConfigurationMessageExecution = React.lazy(()=> import('./AgentsConfigurationMessageExecution'))
   const QuarantineRestrictionsPage = React.lazy(()=> import('./AgentsQuarantine/QuarantineRestrictionsPage'))
-  const AgentsNaturalHistoryPage = React.lazy(() => import('./AgentsNaturalHistoryPage/index'))
+  const AgentsNaturalHistoryPage = React.lazy(() => import('./AgentsNaturalHistoryPage'))
   const QuarantineGroupsPage = React.lazy(()=> import('./AgentsQuarantine/QuarantineGroupsPage'))
 
   const tabs = [

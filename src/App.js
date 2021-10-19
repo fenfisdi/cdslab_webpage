@@ -18,6 +18,7 @@ import ModelSettingsPage from './pages/SimulationModelPage/ModelSettings'
 import { PathProvider } from './components/PathContext'
 import SysManagementState from './context/SysManagement/sysManagementState'
 import LoaderComponent from './components/ui/Loader'
+import NestingState from './context/Nesting/nestingState'
 
 const App = () => {
   const {
@@ -38,7 +39,6 @@ const App = () => {
   const UserManagementPage = React.lazy(() => import('./pages/UserManagementPage'))
   const AgentsBasedModelPage = React.lazy(() => import('./pages/AgentsBasedModelPage'))
 
-  const NestingComponent = React.lazy(() => import('./components/AgentsModels/AgentsNaturalHistory/NestingComponent'))
   // A wrapper for <Route> that redirects to the login
   // screen if you're not yet authenticated.
   // Dev enviroment
@@ -78,7 +78,7 @@ const App = () => {
                 />
                 <PrivateRoute
                   path="/agentsModels"
-                  component={<AgentsBasedModelPage />}
+                  component={<NestingState><AgentsBasedModelPage /></NestingState>}
                 />
                 <PrivateRoute
                   path="/simulationModels"
@@ -102,7 +102,6 @@ const App = () => {
                 <Route exact path="/register" component={RegisterPage} />
                 <Route exact path="/qr_code" component={QRrender} />
                 <Route exact path="/qr_validation" component={QRAuthentication} />
-                <Route exact path="/nesting" component={NestingComponent} />
                 <Route component={NotFoundPage} />
               </Switch>
             </Layout>

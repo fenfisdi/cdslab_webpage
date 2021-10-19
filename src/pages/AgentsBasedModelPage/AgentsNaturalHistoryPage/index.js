@@ -1,70 +1,19 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper'
-import {makeStyles} from '@material-ui/core/styles'
-import ConfigTable from '../../../components/AgentsModels/AgentsNaturalHistory/ConfigTable/index'   /* /ConfigTable/index */
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton' /* components */
+import { Paper, Table, TableBody, TableRow, TableCell, TableContainer, TableHead } from '@material-ui/core'
+
+import ConfigTable from '../../../components/AgentsModels/AgentsNaturalHistory/ConfigTable/index'
+import CompartmentalButton from '../../../components/CompartmentalModels/CompartmentalButton'
+
 import { useAgentsNaturalHistoryPageState } from './state'
+import naturalHistoryStyles from './styles'
 
+const AgentsNaturalHistoryPage = () => {
+  const classes = naturalHistoryStyles()
 
-const useStyles = makeStyles((theme)=>({
-  cell:{
-    backgroundColor: theme.palette.action.hover,
-  },
-  row:{
-    
-  },
-  head:{
-    padding: theme.spacing(2),
-    backgroundColor: theme.palette.action.focus
-  }
-}))
-
-const NestingComponent = () =>{
-
-  const {data} = useAgentsNaturalHistoryPageState()
-  console.log(':::::::::::::', data)
-  
-  const classes = useStyles()
-
-  const vulnerabilityGroups= [
-    {name: 'VulnerabilityGroup1'},
-    {name: 'VulnerabilityGroup2'},
-    {name: 'VulnerabilityGroup3'},
-    {name: 'VulnerabilityGroup4'},
-  
-  ]
-  const states=[
-    {
-      name: 'State 1',
-      state: ''
-    },
-    {
-      name: 'State 2',
-      state: ''
-    },
-    {
-      name: 'State 3',
-      state: ''
-    },
-    {
-      name: 'State 4',
-      state: ''
-    },
-    {
-      name: 'State 5',
-      state: ''
-    },
-    {
-      name: 'State 6',
-      state: ''
-    },
-  ]
+  const {
+    VulnerabilityGroupsInformation,
+    vulnerabilityGroupDiseaseStates
+  } = useAgentsNaturalHistoryPageState()
 
   const tableColumns4 = [
     {
@@ -73,9 +22,10 @@ const NestingComponent = () =>{
       type: 'label'
     }
   ]
-  const renderRows = ()=>
-    data.map((item)=> (
-      <TableRow className={classes.row} key={name}>
+
+  const renderRows = () => (
+    VulnerabilityGroupsInformation.map((item, index) => (
+      <TableRow className={classes.row} key={index}>
         <TableCell className={classes.cell} align="center">
           {item.name}
         </TableCell>
@@ -85,11 +35,12 @@ const NestingComponent = () =>{
             showAddButton={false}
             distributionType="Mobility Group"
             columns={tableColumns4}
-            initialItems={states} 
+            initialItems={vulnerabilityGroupDiseaseStates}
           />
         </TableCell>
       </TableRow>
     ))
+  )
   
   return(
     <TableContainer component={Paper}>
@@ -101,8 +52,8 @@ const NestingComponent = () =>{
           </TableRow>
         </TableHead>
         <TableBody>
-          {renderRows()}
-        </TableBody> 
+          { VulnerabilityGroupsInformation ? renderRows() : <h6>Cargando...</h6> }
+        </TableBody>
       </Table>
       
       <CompartmentalButton
@@ -116,4 +67,4 @@ const NestingComponent = () =>{
   )
 }
 
-export default NestingComponent
+export default AgentsNaturalHistoryPage

@@ -26,6 +26,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     item:{},
     index:0
   })
+
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -49,8 +50,6 @@ const AgentsDiseaseStateGroupsPage = () => {
     fieldsToDiseaseModal,
     updateDiseaseStateGroupsItem
   }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren,componentChildren, showSnack, setShowSnack })
-
-  
   
   const Component = renderComponentChildre(componentChildren,{
     optionsConfigured:items,

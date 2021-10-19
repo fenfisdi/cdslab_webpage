@@ -5,14 +5,14 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import CheckIcon from '@material-ui/icons/Check'
 import React from 'react'
 
-const OptionButtons = ({ showConfig = false, showCheck = false, showInfo = false }) => {
+const OptionButtons = ({ showConfig = false, showCheck = false, showInfo = false, configModal = '' }) => {
   return (
     <>
       <Grid container>
         { showConfig && (
           <Grid item xs={4}>
             <IconButton
-              onClick={() => ''}
+              onClick={configModal}
               color="primary"
               aria-label="Sttings"
               component="span"
