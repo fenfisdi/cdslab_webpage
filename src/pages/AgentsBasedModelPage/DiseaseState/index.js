@@ -72,7 +72,7 @@ export default function TableTextInput({ data }) {
         <Row key={idRow}>
           {row.map((item, idItem) => {
             switch (item.type) {
-            case 'label' || 'label-valid' && (viewState || item.show):
+            case 'label' || ('label-valid' && (viewState || item.show)):
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
