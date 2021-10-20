@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cdsTitleSvg from '../../../assets/images/ladingPage/Logo CDS.svg'
 import theme from '@styles/cdslabTheme'
 import { useHeaderStyles } from '../styles'
 import ModalCommon from '../../../components/ui/ModalCommon'
-import { useState } from 'react'
 import VulnerabilityGroup from '../../AgentsBasedModelPage/VulnerabilityGroup'
 
 const Header = () => {

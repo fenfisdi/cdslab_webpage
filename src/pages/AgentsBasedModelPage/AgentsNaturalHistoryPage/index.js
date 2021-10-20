@@ -60,7 +60,7 @@ const AgentsNaturalHistoryPage = () => {
         justify='flex-end'
         alignItems='center'
         text='Continue'
-        onClick={()=>{}}
+        onClick={''}
         disabled={false}
       />  
     </TableContainer>

@@ -1,5 +1,4 @@
-import { IconButton } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { IconButton, Grid } from '@material-ui/core'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import CheckIcon from '@material-ui/icons/Check'

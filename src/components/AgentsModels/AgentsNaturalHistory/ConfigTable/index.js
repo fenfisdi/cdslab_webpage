@@ -23,7 +23,6 @@ const ConfigTable = ({
   selectOptions,
 }) => {
   const {
-    items,
     handleItemChanged,
     handleItemDeleted,
     handleAddItem,
@@ -35,7 +34,7 @@ const ConfigTable = ({
     columns
   })
   
-  const [componentChildren, setComponentChildren] = useState(OPTIONS_MODAL.VULNERABILITYGROUP)
+  const [componentChildren] = useState(OPTIONS_MODAL.VULNERABILITYGROUP)
   const Component = renderComponentChildre(componentChildren)
 
   const renderRows = () => 

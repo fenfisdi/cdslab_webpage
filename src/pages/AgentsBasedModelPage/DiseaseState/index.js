@@ -24,10 +24,8 @@ import {
   ContentSelect
 } from './styles'
 
-export default function TableTextInput({ data, onchange }) {
+export default function TableTextInput({ data }) {
   const [state, setState] = useState()
-  const [valueChangeSelect, setValueChangeSelect] = useState(0)
-  const [valueChange, setValueChange] = useState(0)
   const [viewState, setViewState] = useState(false)
   const titles = data && data.length > 0 ? data[0] : []
   const rows = data && data.length > 0 ? data[1] : []
@@ -40,21 +38,6 @@ export default function TableTextInput({ data, onchange }) {
     }
   }
 
-  const clone = items => items.map(item => (Array.isArray(item) ? clone(item) : item))
-  const handleInput = (e, idRow, idItem) => {
-    const { value } = e.target
-    const newRows = clone(rows)
-    newRows[idRow][idItem].value = value
-    onchange([titles, newRows])
-  }
-
-  const handelChangeSelect = (e, value)=>{
-    setValueChangeSelect(value.props.value)
-  }
-
-  const handleSliderChange=(event, value)=>{
-    setValueChange(value)
-  }
   const useStyles = makeStyles((theme) => ({
     formControl: {
       width: '100%',
@@ -88,26 +71,22 @@ export default function TableTextInput({ data, onchange }) {
       {rows.map((row, idRow) => (
         <Row key={idRow}>
           {row.map((item, idItem) => {
-            if(item.type === 'label'){
+            switch (item.type) {
+            case 'label':
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
                 </Content>
               )
-            }
-
-            if(item.type === 'label-valid' && (viewState || item.show)){
+            
+            case 'label-valid' && (viewState || item.show):
               return (
                 <Content key={idItem}>
                   <RowLeft key={idItem}>{item.content}</RowLeft>
                 </Content>
               )
-            }
 
-            if(item.type === 'check'){
-              // if(item.value){
-              //   setState(item.value)
-              // }
+            case 'check':
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
@@ -125,9 +104,8 @@ export default function TableTextInput({ data, onchange }) {
                   </RowCenter>
                 </Content>
               )
-            }
 
-            if(item.type === 'input' && (viewState || item.show)){
+            case 'input' && (viewState || item.show):
               return (
                 <Content key={idItem}>
                   <RowCenter key={idItem}>
@@ -141,9 +119,8 @@ export default function TableTextInput({ data, onchange }) {
                   </RowCenter>
                 </Content>
               )
-            }
 
-            if (item.type === 'select' && (viewState || item.show)){
+            case 'select' && (viewState || item.show):
               return (
                 <ContentSelect key={idItem}>
                   <RowCenter key={idItem}>
@@ -173,10 +150,8 @@ export default function TableTextInput({ data, onchange }) {
                   </RowCenter>
                 </ContentSelect>
               )
-            }
 
-            if(item.type === 'slider' && (viewState || item.show)){
-              console.log(idItem)
+            case 'slider' && (viewState || item.show):
               return (
                 <Content key={`${idItem}${item.name}`}>
                   <Slider
@@ -198,8 +173,9 @@ export default function TableTextInput({ data, onchange }) {
                   />
                 </Content>
               )
-            }
-            if(item.type === 'component' && (viewState || item.show)){
+
+            case 'component' && (viewState || item.show):
+            {
               const { component } = item
               const Component = component[0]
               return (
@@ -207,6 +183,9 @@ export default function TableTextInput({ data, onchange }) {
                   <Component />
                 </Content>
               )
+            }
+            default:
+              break
             }
           })}
         </Row>

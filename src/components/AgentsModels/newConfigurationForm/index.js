@@ -254,7 +254,7 @@ export const NewConfigurationForm = ({ eventEmitter,listConfigurationDistance,li
           variant="contained"
           color="primary"
           className={classes.buttonSearch}
-          // disabled={isValid}
+          disabled={isValid}
         >
             Continue
         </Button>

@@ -1,5 +1,4 @@
-import { Breadcrumbs } from '@material-ui/core'
-import { Grid } from '@material-ui/core'
+import { Breadcrumbs, Grid } from '@material-ui/core'
 import React, { useContext, useState, Fragment } from 'react'
 import { AgentsModalContainer } from '../../../components/AgentsModels/AgentsModalContainer'
 import AgentsTableConfiguration from '../../../components/AgentsModels/AgentsTableConfiguration'
@@ -47,7 +46,7 @@ const DiseaseStateNamePage=()=>{
     setComponentChildren:setComponentChildren,
     setModalSettings:setModalSettings,
   })
-  const [items, setItems] = useState(initialItems)
+  const [,setItems] = useState(initialItems)
   const redirectToSusceptibilityGroupsPage = () => {
     history.push({
       pathname: 'DiseaseStetaName' 

@@ -103,7 +103,7 @@ const NestingComponent = () =>{
         justify='flex-end'
         alignItems='center'
         text='Continue'
-        onClick={()=>{}}
+        onClick={''}
         disabled={false}
       /> 
     </TableContainer>
