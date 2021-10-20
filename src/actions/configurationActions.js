@@ -29,22 +29,24 @@ export const useConfigurationActions = (dispatch) => {
   }
 
   const getListConfigurationDistance =  () => {
-    dispatch({ type: CONFIGURATION_LOADING })
-    requestListConfigurationDistance()
-      .then(({data}) => {
+    //dispatch({ type: CONFIGURATION_LOADING })
+    return requestListConfigurationDistance()
+      /*.then(({data}) => {
         const dataList = []
         for (const property in data.data) {
           dataList.push({value: data.data[property],label: data.data[property]})
         }
-        dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
+        return dataList
+        //dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
       })
       .catch(() => {
         dispathError()
-      })
+      })*/
   }
 
   const getListConfigurationTime =  () => {
-    dispatch({ type: CONFIGURATION_LOADING })
+    return requestListConfigurationTime()
+    /*dispatch({ type: CONFIGURATION_LOADING })
     requestListConfigurationTime()
       .then(({data}) => {
         const dataList = []
@@ -55,7 +57,7 @@ export const useConfigurationActions = (dispatch) => {
       })
       .catch(() => {
         dispathError()
-      })
+      })*/
   }
 
   const addConfiguration = (configurationForm) => {
