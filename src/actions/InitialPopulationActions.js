@@ -1,4 +1,10 @@
-import { getListAllowedGroupsService, getListAllowedValuesService, getListAllowedVariablesService, getPopulationService, postPopulationService } from '../services/InitialPopulationServices'
+import { 
+  deletePopulationService, 
+  getListAllowedGroupsService, 
+  getListAllowedValuesService, 
+  getListAllowedVariablesService, 
+  getPopulationService, 
+  postPopulationService } from '../services/InitialPopulationServices'
 
 
 export const useInitialPopulationActions = (dispatch) => {
@@ -22,13 +28,18 @@ export const useInitialPopulationActions = (dispatch) => {
   const getPopulation = (idConfiguration)=>{
     return getPopulationService(idConfiguration)
   }
+
+  const deletePopulation =(idConfiguration,value)=>{
+    return deletePopulationService(idConfiguration,value)
+  }
   
   return {
     getListAllowedVariablesAction,
     getListAllowedGroupsAction,
     getListAllowedValuessAction,
     postPopulation,
-    getPopulation
+    getPopulation,
+    deletePopulation
   }
   
 }

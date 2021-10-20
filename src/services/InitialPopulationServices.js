@@ -35,3 +35,11 @@ export const getPopulationService = async (idConfiguration) => {
     'GET'
   ) 
 }
+
+
+export const deletePopulationService = async (idConfiguration,variable='') => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/configuration/${idConfiguration}/population?variable=${variable}`,
+    'DELETE'
+  ) 
+}

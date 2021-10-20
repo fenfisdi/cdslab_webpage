@@ -337,7 +337,7 @@ export  const useQuarantineRestrictionsPageState = ({modalSettings,setModalSetti
       {...quarantineConfig,cyclic_restrictions:newCycle}).then(()=>{
       
       history.push({
-        pathname: 'agentsConfigurationMessage',
+        pathname: 'initialPopulationSetUpPage',
         search: `?idConfiguration=${idConfiguration}`
       }) 
     })

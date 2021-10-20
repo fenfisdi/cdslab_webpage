@@ -8,7 +8,12 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import CheckIcon from '@material-ui/icons/Check'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 
-export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings,groupsArray,setGroupsArray}) => {
+export  const useInitialPopulationSetUpState = ({
+  modalSettings,
+  setModalSettings,
+  setShowError,
+  setGroupsArray}) => {
+    
   const history = useHistory()
   const {   
     dispatch
@@ -18,7 +23,8 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings,
     getListAllowedVariablesAction,
     getListAllowedValuessAction,
     postPopulation,
-    getPopulation
+    getPopulation,
+    deletePopulation
   } = useInitialPopulationActions(dispatch)
 
   const [idConfiguration, setIdConfiguration] = useState('')
@@ -112,11 +118,15 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings,
               }
             },
             {
-              onClick: (_,{indexItem}) => {                
-                if(itemsTable.length>1){                  
-                  const itemsCopy = [...itemsTable]
-                  itemsCopy.splice(indexItem, 1)                  
-                  setItemTable(itemsCopy)
+              onClick: (_,{itemTable,indexItem}) => {                
+                if(itemTable.variable!=''){                          
+                  deletePopulation(idConfiguration,itemTable.variable).then(()=>{                    
+                    const itemsCopy = [...itemsTable]
+                    itemsCopy.splice(indexItem, 1)                  
+                    setItemTable(itemsCopy)
+                  }).catch(()=>{
+                    setShowError(true)
+                  })                  
                 }
               },
               className: 'option-button-delete',
@@ -164,7 +174,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings,
               'variable': populationSaved,
               'chain': [],
               'values': {},
-              'state':'Configured'
+              'state':'CONFIGURED'
             })            
           })          
           setOptionsByItem({...valuesToOptions})

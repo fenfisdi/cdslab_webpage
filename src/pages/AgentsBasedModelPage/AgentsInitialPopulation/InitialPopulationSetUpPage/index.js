@@ -8,6 +8,7 @@ import { useInitialPopulationSetUpState } from './state'
 import { renderComponentChildre } from '../../../../utils/common'
 import { OPTIONS_MODAL } from '../../../../constants/agents'
 import { AgentsModalContainer } from '../../../../components/AgentsModels/AgentsModalContainer'
+import SnackbarComponent from '@components/ui/Snackbars'
 
 const InitialPopulationSetUpPage = () => {
   const [modalSettings,setModalSettings] = useState({
@@ -17,6 +18,8 @@ const InitialPopulationSetUpPage = () => {
   })
 
   const [groupsArray, setGroupsArray] = useState([])
+
+  const [showError, setShowError] = useState(false)
 
   const {    
     fieldsToTable,
@@ -33,8 +36,8 @@ const InitialPopulationSetUpPage = () => {
   } = useInitialPopulationSetUpState({
     modalSettings,
     setModalSettings,
-    groupsArray,
-    setGroupsArray})
+    setGroupsArray,
+    setShowError})
 
 
   const getDataFilters = (data=[],valueSlected)=>{
@@ -97,7 +100,7 @@ const InitialPopulationSetUpPage = () => {
       'variable': objectRequest.variable,
       'chain':objectRequest.chain,
       'values':formatInfoRecursive(groupsArray),
-      'state':'Configured'
+      'state':'CONFIGURED'
       }            
     
     postPopulation(idConfiguration,requestObject).then((response)=>{
@@ -117,6 +120,10 @@ const InitialPopulationSetUpPage = () => {
         index:0
       })
     }) 
+  }
+
+  const handleCloseSnack =()=>{
+    setShowError(false)
   }
 
   const Component = renderComponentChildre(OPTIONS_MODAL.INITIALPOPULATION,{  
@@ -167,6 +174,12 @@ const InitialPopulationSetUpPage = () => {
         }}          
         render={Component}
       />
+
+{showError && <SnackbarComponent
+          snackDuration={3500}
+          handleCloseSnack={handleCloseSnack}
+          configData={{show:showError, error:showError}}                   
+          errorMessage={'No se puede eliminar configuracion verifique que no este usada en otra configuracion'} />}
       
     </Grid>
   )
