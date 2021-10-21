@@ -181,7 +181,7 @@ const InitialPopulationSetUpPage = () => {
           snackDuration={3500}
           handleCloseSnack={handleCloseSnack}
           configData={{show:showError, error:showError}}                   
-          errorMessage={'No se puede eliminar configuracion verifique que no este usada en otra configuracion'} />}
+          errorMessage={'No se puede eliminar esta configuracion, verifique que no este siendo usada en otra variable configurada'} />}
       
     </Grid>
   )
