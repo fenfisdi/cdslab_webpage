@@ -6,7 +6,7 @@ import DistributionsSettings from './DistributionsSettings'
 import CompartmentalButton from '../../CompartmentalModels/CompartmentalButton'
 
 export const AgentDiseaseState = ({modalSettings,fieldsToDiseaseModal,diseaseStateGroupsDistributions,handleDiseaseItem,handleDone}) => {
-  
+  console.log(diseaseStateGroupsDistributions, modalSettings.item)
   const diseaseStateCard = () => (
     
     <Grid container item xs={12} justify='center' alignItems='center'>

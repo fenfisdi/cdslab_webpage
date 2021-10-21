@@ -5,6 +5,7 @@ import { AgentsModalNumpy } from '../components/AgentsModels/AgentsModalContaine
 import { AgentsModalEmpirical } from '../components/AgentsModels/AgentsModalContainer/AgentsModalEmpirical'
 import { AgentsModalWeights } from '../components/AgentsModels/AgentsModalContainer/AgentsModalWeights'
 import { AgentDiseaseState } from '../components/AgentsModels/AgentDiseaseState'
+import VulnerabilityGroup from  '../pages/AgentsBasedModelPage/VulnerabilityGroup'
 import Switch from '../components/ui/Switch'
 import { Input } from '../components/ui/Input'
 import TableSlider from '../components/AgentsModels/AgentsTableConfiguration/TableInput/Slider'
@@ -69,7 +70,7 @@ export const formatYmd = date => date.toISOString().slice(0, 10)
 
 
 
-export const renderComponentChildre = (componentChildren,props) => {
+export const renderComponentChildre = (componentChildren, props) => {
   switch (componentChildren) {
   case OPTIONS_MODAL.DISTRIBUTION:
     return {
@@ -113,6 +114,12 @@ export const renderComponentChildre = (componentChildren,props) => {
       width:'80%',
       height:'80%'
     }
+  case OPTIONS_MODAL.VULNERABILITYGROUP:
+    return{
+      container:VulnerabilityGroup,
+      width:'80%',
+      height:'80%'
+    }
 
   case OPTIONS_MODAL.CYCLICQUARANTINERESTRICTIONS:
     return {
@@ -149,6 +156,13 @@ export const renderComponentElement = (typeComponent) => {
     return {
       container:SelectComponent,
       props:{}
+    }
+  case OPTIONS_MODAL.DISEASE_STATE:
+    return {
+      container:AgentDiseaseState,
+      props:{},
+      width:'30%',
+      height:'60%'
     }
   default:
     return null

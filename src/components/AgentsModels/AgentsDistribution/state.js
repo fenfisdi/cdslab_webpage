@@ -8,6 +8,6 @@ export const useAgentsDistributionState = () => {
   } = useStore()
 
   return {
-    distributionList,
+    distributionList
   }
 }

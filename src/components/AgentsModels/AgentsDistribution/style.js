@@ -15,3 +15,13 @@ justify-content: center;
 align-items: center;
 color:#006064;
 `
+export const Columm = styled.div`
+  flex: 50%;
+  padding: 10px;
+  height: 300px;
+  margin: 20px;
+`
+
+export const Row = styled.div`
+  display: flex;
+`
