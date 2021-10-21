@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash'
+import { find, isEmpty } from 'lodash'
 import {  useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useInitialPopulationActions } from '../../../../actions/InitialPopulationActions'
@@ -24,7 +24,8 @@ export  const useInitialPopulationSetUpState = ({
     getListAllowedValuessAction,
     postPopulation,
     getPopulation,
-    deletePopulation
+    deletePopulation,
+    getInformationByVariableConfiguredPopulation
   } = useInitialPopulationActions(dispatch)
 
   const [idConfiguration, setIdConfiguration] = useState('')
@@ -43,7 +44,7 @@ export  const useInitialPopulationSetUpState = ({
 
   const [itemsTable,setItemTable]= useState([{...schemaPopuletionConfigure}])
   const [objectRequest,setObjectRequest] = useState(schemaPopuletionConfigure)
-
+  const [chain,setChain] = useState([])
   const [optionsByItem,setOptionsByItem]= useState({
     0:{...Object.assign({}, schemaOptions)}
   })
@@ -86,8 +87,42 @@ export  const useInitialPopulationSetUpState = ({
           options:[    
             {
               onClick: (_,{itemTable,indexItem}) => { 
+                setConfigurationList([])
+                setChain([])
                 if(itemTable.variable!=''){                                    
-                  getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
+                  getInformationByVariableConfiguredPopulation(idConfiguration,itemTable.variable).then((responseVariableConfigurated)=>{
+                    if(responseVariableConfigurated.data?.data && 
+                      responseVariableConfigurated.data?.data?.values && responseVariableConfigurated.data?.data?.values.length>0){
+                      const chainToRecord = [itemTable?.variable,...responseVariableConfigurated.data?.data?.chain]
+                      generateChain(chainToRecord).then((records)=>{                        
+                        let orderChain = []
+                        chainToRecord.forEach((itemChaim)=>{
+                          const isFind = find(records,{'name':itemChaim})                          
+                          orderChain.push(isFind.data)
+                        })                        
+                        setConfigurationList(orderChain)
+                        setChain(responseVariableConfigurated.data?.data?.chain)
+                        setGroupsArray(responseVariableConfigurated.data?.data?.values)
+                        setObjectRequest({...objectRequest,chain:responseVariableConfigurated.data?.data?.chain,variable:itemTable.variable,values:{}})                        
+                        setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                      })
+                      
+                    }else{
+                      getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
+                        const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
+                          return {
+                            name : variableNesting?.name,
+                            value : 0
+                          } 
+                        })
+                        setGroupsArray([])
+                        setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
+                        setConfigurationList([[...variableNestingList]])
+                        setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                      })
+                    }
+                  })
+                  /* getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
                     const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
                       return {
                         name : variableNesting?.name,
@@ -98,7 +133,7 @@ export  const useInitialPopulationSetUpState = ({
                     setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
                     setConfigurationList([[...variableNestingList]])
                     setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
-                  })
+                  }) */
                 }                
               },
               isCheckable:true,
@@ -136,6 +171,26 @@ export  const useInitialPopulationSetUpState = ({
         }
       }        
     },                     
+  }
+
+
+  const generateChain = async (chains=[]) => {    
+    let newChainToRecord = []
+    return  new Promise((resolve,reject) => {
+      chains.forEach(async(itemChain) => {         
+        const response = await getListAllowedValuessAction(idConfiguration,itemChain).catch(()=>{
+          reject({})
+        })
+        const variableNestingList  = response.data.data.map((variableNesting)=>{ 
+          return {
+            name : variableNesting?.name,
+            value : 0
+          } 
+        })
+        newChainToRecord.push({name:itemChain,data:variableNestingList})
+        if (newChainToRecord.length == chains.length) resolve(newChainToRecord)      
+      })
+    })
   }
 
   const parseInformationOptionsByItem =(arrayOptions=[])=>{
@@ -207,6 +262,7 @@ export  const useInitialPopulationSetUpState = ({
     optionsByItem,
     configurationList,
     objectRequest,
+    chain,
     setObjectRequest,
     setConfigurationList,    
     getListAllowedVariablesAction,
