@@ -1,0 +1,1 @@
+export const AGENTS_REVIEW_INFO   = 'AGENTS_REVIEW_INFO'

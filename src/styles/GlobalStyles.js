@@ -61,4 +61,8 @@ export const GlobalStyles = createGlobalStyle`
         header{
            box-shadow: unset !important;
         }
+        
+        .MuiAppBar-colorPrimary-207{
+                background-color: rgb(0, 131, 143) !important;
+        }
         `

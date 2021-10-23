@@ -19,6 +19,7 @@ import { agentsSusceptibilityGroupsReducer, initialState as agentsSusceptibility
 import { agentsVulnerabilityGroupsReducer, initialState as agentsVulnerabilityGroupsInitialState } from './reducers/agentsVulnerabilityGroupsReducer'
 import { agentsDiseaseStatesGroupsReducer, initialState as agentsDiseaseStateGroupsInitialState } from './reducers/agentsDiseaseStatesGroupsReducer'
 import { quarantineGroupsReducer, initialState as quarantineGroupsInitialState } from './reducers/quarantineGroupsReducer'
+import { agentsReviewReducer, initialState as agentsReviewReducerInitialState } from './reducers/agentsReviewReducer'
 
 export const StoreContext = createContext()
 
@@ -43,7 +44,8 @@ export const StoreProvider = ({ children }) => {
       agentsSusceptibilityGroups:agentsSusceptibilityGroupsReducer,
       agentsVulnerabilityGroups:agentsVulnerabilityGroupsReducer,
       agentsDiseaseStateGroups:agentsDiseaseStatesGroupsReducer,
-      quarantineGroups: quarantineGroupsReducer
+      quarantineGroups: quarantineGroupsReducer,
+      agentsReview: agentsReviewReducer
     }),
     Object.assign(sessionInitialState, 
       simulationInitialState, 
@@ -64,7 +66,9 @@ export const StoreProvider = ({ children }) => {
       agentsSusceptibilityGroupsInitialState,
       agentsVulnerabilityGroupsInitialState,
       agentsDiseaseStateGroupsInitialState,
-      quarantineGroupsInitialState)
+      quarantineGroupsInitialState,
+      agentsReviewReducerInitialState
+      )
   )
   const value = { state, dispatch }
 

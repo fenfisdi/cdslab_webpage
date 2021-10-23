@@ -28,6 +28,7 @@ const ReviewSimulationSettings =({simulation,executeRequest, buttonText='', show
 
   const {t} = useContext(languageContext)
   const {handleDomParse } = useDomParse()
+  
   const displayParameters=(parameters)=>{
     return parameters.map( parameter => {
       return(
