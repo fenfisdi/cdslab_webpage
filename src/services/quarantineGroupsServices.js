@@ -28,3 +28,10 @@ export const saveQuarantineGroups = async (data,idConfiguration) => {
     data
   ) 
 }
+
+export const getQuarantineTracingService = async () => {
+  return  request(
+    `${process.env.REACT_APP_AGENTS}/quarantine/tracing`,
+    'GET'
+  ) 
+}
