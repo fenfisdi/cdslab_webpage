@@ -5,7 +5,7 @@ import { useInitialPopulationActions } from '../../../../../../actions/InitialPo
 import { getStateWithQueryparams } from '../../../../../../pages/CompartmentalModelPage/common'
 import { useStore } from '../../../../../../store/storeContext'
 
-const useNavNewVariableState =({eventEmmiter})=>{
+const useNavNewVariableState =({eventEmmiter,chain})=>{
   const history = useHistory()
   const {   
     dispatch
@@ -47,6 +47,19 @@ const useNavNewVariableState =({eventEmmiter})=>{
       addNewGroup()
     }
   },[items,idConfiguration])
+
+  useEffect(()=>{
+    if(chain.length>0){
+      let newOptions=[]      
+      chain.forEach((variables)=>{
+        const newSchemaOtion = JSON.parse(JSON.stringify(schemaSelectsConfigure))      
+        newSchemaOtion.options = generateOptions([variables])
+        newSchemaOtion.value = variables
+        newOptions.push(newSchemaOtion)
+      })      
+      setItems(newOptions)
+    }
+  },[chain])
 
 
   const generateOptions =(options=[])=>{

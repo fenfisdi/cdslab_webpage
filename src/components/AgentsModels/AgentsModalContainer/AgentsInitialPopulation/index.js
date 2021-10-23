@@ -8,7 +8,8 @@ const AgentsInitialPopulation = ({
   getDataFilters,
   groupsArray,
   setGroupsArray,
-  handleSaveInfo
+  handleSaveInfo,
+  chain
 }) => {
 
   return (
@@ -16,10 +17,10 @@ const AgentsInitialPopulation = ({
       <span style={{color:'#006064', fontSize:'19px', fontWeight:500}}>
         {modalSettings?.item?.variable?.toUpperCase()}
       </span>
-      <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable}/>
+      <NavNewVariable eventEmmiter={getDataFilters} variableToConfig={modalSettings?.item?.variable} chain={chain}/>
       <AcordionItems groupsArray={groupsArray} setGroupsArray={setGroupsArray} />
       
-      <Button onClick={() => handleSaveInfo()}>Cancel</Button>
+      <Button onClick={() => handleSaveInfo()}>Guardar</Button>
     </Container>    
   )
 

@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash'
+import { find, isEmpty } from 'lodash'
 import {  useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useInitialPopulationActions } from '../../../../actions/InitialPopulationActions'
@@ -8,7 +8,12 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import CheckIcon from '@material-ui/icons/Check'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 
-export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}) => {
+export  const useInitialPopulationSetUpState = ({
+  modalSettings,
+  setModalSettings,
+  setShowError,
+  setGroupsArray}) => {
+    
   const history = useHistory()
   const {   
     dispatch
@@ -16,7 +21,11 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   const { 
     getListAllowedVariablesAction,
-    getListAllowedValuessAction
+    getListAllowedValuessAction,
+    postPopulation,
+    getPopulation,
+    deletePopulation,
+    getInformationByVariableConfiguredPopulation
   } = useInitialPopulationActions(dispatch)
 
   const [idConfiguration, setIdConfiguration] = useState('')
@@ -35,7 +44,7 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   const [itemsTable,setItemTable]= useState([{...schemaPopuletionConfigure}])
   const [objectRequest,setObjectRequest] = useState(schemaPopuletionConfigure)
-
+  const [chain,setChain] = useState([])
   const [optionsByItem,setOptionsByItem]= useState({
     0:{...Object.assign({}, schemaOptions)}
   })
@@ -57,7 +66,9 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
         props:{
           name:'variable',
           label:'',
-          disabled:false,
+          onDisabled:({itemTable})=>{                        
+            return itemTable.state != ''?true:false
+          },
           required:true,
           fullWidth:false,
           variant:'outlined',            
@@ -76,18 +87,53 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
           options:[    
             {
               onClick: (_,{itemTable,indexItem}) => { 
+                setConfigurationList([])
+                setChain([])
                 if(itemTable.variable!=''){                                    
-                  getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
+                  getInformationByVariableConfiguredPopulation(idConfiguration,itemTable.variable).then((responseVariableConfigurated)=>{
+                    if(responseVariableConfigurated.data?.data && 
+                      responseVariableConfigurated.data?.data?.values && responseVariableConfigurated.data?.data?.values.length>0){
+                      const chainToRecord = [itemTable?.variable,...responseVariableConfigurated.data?.data?.chain]
+                      generateChain(chainToRecord).then((records)=>{                        
+                        let orderChain = []
+                        chainToRecord.forEach((itemChaim)=>{
+                          const isFind = find(records,{'name':itemChaim})                          
+                          orderChain.push(isFind.data)
+                        })                        
+                        setConfigurationList(orderChain)
+                        setChain(responseVariableConfigurated.data?.data?.chain)
+                        setGroupsArray(responseVariableConfigurated.data?.data?.values)
+                        setObjectRequest({...objectRequest,chain:responseVariableConfigurated.data?.data?.chain,variable:itemTable.variable,values:{}})                        
+                        setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                      })
+                      
+                    }else{
+                      getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
+                        const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
+                          return {
+                            name : variableNesting?.name,
+                            value : 0
+                          } 
+                        })
+                        setGroupsArray([])
+                        setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
+                        setConfigurationList([[...variableNestingList]])
+                        setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
+                      })
+                    }
+                  })
+                  /* getListAllowedValuessAction(idConfiguration,itemTable?.variable).then((groupInformation)=>{                    
                     const variableNestingList  = groupInformation.data.data.map((variableNesting)=>{ 
                       return {
                         name : variableNesting?.name,
                         value : 0
                       } 
                     })
+                    setGroupsArray([])
                     setObjectRequest({...objectRequest,chain:[],variable:itemTable.variable,values:{}})                    
                     setConfigurationList([[...variableNestingList]])
                     setModalSettings({...modalSettings,open:true,item:itemTable,index:indexItem})
-                  })
+                  }) */
                 }                
               },
               isCheckable:true,
@@ -103,15 +149,19 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
               className: 'option-button-check',
               children:CheckIcon,
               validation:(itemValue)=>{
-                return !isEmpty(itemValue.values) && itemValue.chain.length>0
+                return itemValue.state!=''
               }
             },
             {
-              onClick: (_,{indexItem}) => {                
-                if(itemsTable.length>1){                  
-                  const itemsCopy = [...itemsTable]
-                  itemsCopy.splice(indexItem, 1)                  
-                  setItemTable(itemsCopy)
+              onClick: (_,{itemTable,indexItem}) => {                
+                if(itemTable.variable!=''){                          
+                  deletePopulation(idConfiguration,itemTable.variable).then(()=>{                    
+                    const itemsCopy = [...itemsTable]
+                    itemsCopy.splice(indexItem, 1)                  
+                    setItemTable(itemsCopy)
+                  }).catch(()=>{
+                    setShowError(true)
+                  })                  
                 }
               },
               className: 'option-button-delete',
@@ -121,6 +171,26 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
         }
       }        
     },                     
+  }
+
+
+  const generateChain = async (chains=[]) => {    
+    let newChainToRecord = []
+    return  new Promise((resolve,reject) => {
+      chains.forEach(async(itemChain) => {         
+        const response = await getListAllowedValuessAction(idConfiguration,itemChain).catch(()=>{
+          reject({})
+        })
+        const variableNestingList  = response.data.data.map((variableNesting)=>{ 
+          return {
+            name : variableNesting?.name,
+            value : 0
+          } 
+        })
+        newChainToRecord.push({name:itemChain,data:variableNestingList})
+        if (newChainToRecord.length == chains.length) resolve(newChainToRecord)      
+      })
+    })
   }
 
   const parseInformationOptionsByItem =(arrayOptions=[])=>{
@@ -146,11 +216,32 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
 
   useEffect(()=>{
     if(idConfiguration!='' && optionsByItem[0].variable.options.length == 0){
-      getListAllowedVariablesAction(idConfiguration).then((response)=>{        
-        const newOptionByItems =Object.assign({}, optionsByItem[0])
-        newOptionByItems.variable.options = parseInformationOptionsByItem(response.data.data)
-        setOptionsByItem({...optionsByItem,[0]:newOptionByItems})
-      })
+      getPopulation(idConfiguration).then((response)=>{        
+        const arrayToListConfigurated = response.data.data
+        if(arrayToListConfigurated.length>0){
+          let valuesToOptions={}
+          let valuesToItemsTable=[]
+          arrayToListConfigurated.map((populationSaved,index)=>{            
+            const newOptionByItems =JSON.parse(JSON.stringify(schemaOptions))
+            newOptionByItems.variable.options = [{label:populationSaved,value:populationSaved}]
+            valuesToOptions[index]=newOptionByItems
+            valuesToItemsTable.push({
+              'variable': populationSaved,
+              'chain': [],
+              'values': {},
+              'state':'CONFIGURED'
+            })            
+          })          
+          setOptionsByItem({...valuesToOptions})
+          setItemTable(valuesToItemsTable)
+        }else{
+          getListAllowedVariablesAction(idConfiguration).then((response)=>{    
+            const newOptionByItems =Object.assign({}, optionsByItem[0])
+            newOptionByItems.variable.options = parseInformationOptionsByItem(response.data.data)
+            setOptionsByItem({...optionsByItem,[0]:newOptionByItems})
+          })
+        }     
+      })      
     }
   },[idConfiguration])
 
@@ -171,11 +262,13 @@ export  const useInitialPopulationSetUpState = ({modalSettings,setModalSettings}
     optionsByItem,
     configurationList,
     objectRequest,
+    chain,
     setObjectRequest,
     setConfigurationList,    
     getListAllowedVariablesAction,
     handlerAddOption,
-    setItemTable
+    setItemTable,
+    postPopulation
   }
 
 }

@@ -27,7 +27,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   const {
     state: {      
       agentsDiseaseStateGroups: { data, error },
-      configuration: { listConfigurationDistance, error:errorListConfigurationDistance }
+      configuration: { error:errorListConfigurationDistance }
     },
     dispatch
   } = useStore()
@@ -99,7 +99,7 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
   ]
 
   const [items, setItems] = useState(initialItems)
-
+  const [listConfigurationDistance,setListConfigurationDistance]=useState([])
 
   useEffect(()=>{
     
@@ -138,7 +138,13 @@ export const useAgentsDiseaseStateGroups = ({modalSettings,setModalSettings,show
 
   useEffect(() => {    
     if (listConfigurationDistance.length == 0 && errorListConfigurationDistance == null) {       
-      getListConfigurationDistance()
+      getListConfigurationDistance().then((response)=>{   
+        const dataList = []
+        for (const property in response.data.data) {
+          dataList.push({value: response.data.data[property],label: response.data.data[property]})
+        }        
+        setListConfigurationDistance(dataList)
+      })
     }
     if(isEmpty(diseaseStateGroupsDistributions)){
       getDiseaseStateGroupsDistributions().then((diseaseStateGroupsDistributionsResponse)=>{

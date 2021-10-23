@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useConfigurationActions } from '../../../actions/configurationActions'
 import { useStore } from '../../../store/storeContext'
@@ -13,7 +13,7 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
   const {
     state: {
-      configuration: { data,listConfigurationDistance,listConfigurationTime, loading,error },
+      configuration: { data, loading,error },
       agentsMobilityGroupsModel: {  data:agentsMobilityList },
       agentsAgeModel: { data:agentsAgeModelList },
       agentsSusceptibilityGroups: { data:agentsSusceptibilityGroupsList },
@@ -35,6 +35,10 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
   const { setResetDiseaseStateGroupsInformation } = useAgentsDiseaseStateGroupsActions(dispatch)
   const { setResetVulnerabilityGroupsInformation } = useAgentsVulnerabilityGroupsActions(dispatch)
 
+  const [listConfigurationDistance,setListConfigurationDistance]=useState([])
+
+  const [listConfigurationTime,setListConfigurationTime]= useState([])
+
   useEffect(()=>{
     if(agentsMobilityList!=null && agentsMobilityList.length>0){
       setResetMobilityGroupsInformation()
@@ -55,12 +59,24 @@ export const useAgentsModelsPageState = ({ showSnack, setShowSnack }) => {
 
   useEffect(() => {    
     if (listConfigurationDistance.length == 0 && error == null) { 
-      getListConfigurationDistance()
+      getListConfigurationDistance().then((response)=>{   
+        const dataList = []
+        for (const property in response.data.data) {
+          dataList.push({value: response.data.data[property],label: response.data.data[property]})
+        }        
+        setListConfigurationDistance(dataList)
+      })
     }
     if (listConfigurationTime.length == 0 && error == null) { 
-      getListConfigurationTime()
+      getListConfigurationTime().then((response)=>{ 
+        const dataList = []
+        for (const property in response.data.data) {
+          dataList.push({value: response.data.data[property],label: response.data.data[property]})
+        }
+        setListConfigurationTime(dataList)
+      })
     }
-  }, [listConfigurationDistance])
+  }, [listConfigurationDistance,listConfigurationTime])
 
   useEffect(() => {
     if (!isEmpty(data)) {
