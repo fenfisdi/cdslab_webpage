@@ -5,6 +5,7 @@ import {
   CONFIGURATION_SET_LIST,
   CONFIGURATION_DISTANCE_LIST,
   CONFIGURATION_TIME_LIST,
+  CONFIGURATION_DISEASE_STATE,
 } from './types/configurationTypes'
 
 import { 
@@ -14,6 +15,7 @@ import {
   requestAddConfiguration,
   getConfigurationService
 } from '../services/configurationServices'
+import ListDistance from '../helpers/useDataStateDimises'
 
 export const useConfigurationActions = (dispatch) => {
 
@@ -28,13 +30,17 @@ export const useConfigurationActions = (dispatch) => {
       })
   }
 
-  const getListConfigurationDistance =  () => {
+  const getListConfigurationDistance =  (listDiseaseState) => {
     dispatch({ type: CONFIGURATION_LOADING })
     requestListConfigurationDistance()
       .then(({data}) => {
-        const dataList = []
+        let dataList = []
         for (const property in data.data) {
           dataList.push({value: data.data[property],label: data.data[property]})
+        }
+        if(listDiseaseState){
+          dataList = ListDistance(dataList)
+          dispatch({ type: CONFIGURATION_DISEASE_STATE, payload: dataList })
         }
         dispatch({ type: CONFIGURATION_DISTANCE_LIST, payload: dataList })
       })

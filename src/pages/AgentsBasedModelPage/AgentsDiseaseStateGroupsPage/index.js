@@ -26,6 +26,7 @@ const AgentsDiseaseStateGroupsPage = () => {
     item:{},
     index:0
   })
+
   const [showSnack, setShowSnack] = useState({ show: false, success: false, error: false, successMessage: '', errorMessage: '' })
   const handleCloseSnack = () => {
     setShowSnack({ ...showSnack, show: false, success: false, error: false, successMessage: '', errorMessage: '' })
@@ -49,8 +50,6 @@ const AgentsDiseaseStateGroupsPage = () => {
     fieldsToDiseaseModal,
     updateDiseaseStateGroupsItem
   }= useAgentsDiseaseStateGroups({modalSettings,setModalSettings,setComponentChildren,componentChildren, showSnack, setShowSnack })
-
-  
   
   const Component = renderComponentChildre(componentChildren,{
     optionsConfigured:items,
@@ -144,7 +143,7 @@ const AgentsDiseaseStateGroupsPage = () => {
           onClick={()=>{
             handleClickSaveDiseaseStateGroups(items)
           }}
-          disabled={!isValid?true:false}
+          disabled={isValid?true:false}
         />                
       </Grid>}
       {isEmpty(parameterList) &&  <LoaderComponent width="100px" height={100} marginTop="100px" />}   

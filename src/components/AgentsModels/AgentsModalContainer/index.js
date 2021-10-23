@@ -30,7 +30,7 @@ export const AgentsModalContainer = (
   }) => {
   const Component  = render  
   const classes = useStyles({width:Component?.width,height:Component?.height})()
-
+  console.log(modalTitle)
   return (
     <Modal
       aria-labelledby="transition-modal-title"
